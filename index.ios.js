@@ -18,25 +18,26 @@ const ActionButton = require('./components/ActionButton');
 const ListItem = require('./components/ListItem');
 const { AppRegistry, Component, StyleSheet, Text, View, ListView, AlertIOS } = React;
 
+
+const FirebaseUrl = 'https://chaz1.firebaseio.com/';
+
 class chaz extends Component {
   constructor(props) {
     super(props);
-    this.itemsRef = new Firebase("https://chaz1.firebaseio.com/items");
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-    this.listenForItems(this.itemsRef);
+    this.itemsRef = this.getRef().child('items');
+  }
+  getRef() {
+   return new Firebase(FirebaseUrl);
   }
   // Called when the component has first been rendered
   // Probably a good place for tracking code
   componentDidMount() {
-
-
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
-    })
+    this.listenForItems(this.itemsRef);
   }
   _renderItem(item) {
     const onPress = () => {
@@ -89,6 +90,17 @@ class chaz extends Component {
     });
   }
   render() {
+    var ref = this.getRef();
+    ref.authWithPassword({
+  email    : "test1@kevinhabich.com",
+  password : "1"
+}, function(error, authData) {
+  if (error) {
+    console.log("Login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+  }
+});
     return (
       <View style={styles.container}>
 
