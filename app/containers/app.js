@@ -1,4 +1,4 @@
-import React, { Component, Text, View } from 'react-native';
+import React, { Component, Text, View, ActivityIndicatorIOS } from 'react-native';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'; // I guess this is middleware
@@ -19,7 +19,7 @@ const createStoreWithMiddleware = applyMiddleware(middleware,thunk)(createStore)
 // const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 // use this either storage or not
-const store = createStore(reducer);
+const store = createStoreWithMiddleware(reducer);
 
 
 // Use Local Storage
@@ -40,6 +40,16 @@ export default class App extends Component {
     // Redux initial state will always default to loading
     if(this.state.loading)
       load(store).then((newState) => this.setState({loading:false}));
+
+      if(this.state.loading){
+        return(
+          <ActivityIndicatorIOS
+          animating={this.state.loading}
+          style={{alignItems: 'center',justifyContent: 'center',height: 80}}
+          size="large"
+        />
+        )
+      }
     return(
     <Provider store={store}>
       <ChazApp />

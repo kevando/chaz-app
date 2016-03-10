@@ -2,12 +2,11 @@
 
 // Trying this router to see how it works
 import Router from 'react-native-simple-router';
-import React, { Component, Navigator, View, Styles, TouchableHighlight, Text, StyleSheet, ActivityIndicatorIOS } from 'react-native'; // need View in order to stack the Header with DufineApp
+import React, { Component, Navigator, View, Styles, TouchableHighlight, NavigatorIOS, Text, StyleSheet, ActivityIndicatorIOS } from 'react-native'; // need View in order to stack the Header with DufineApp
 import { bindActionCreators } from 'redux';
 
-// const Firebase = require('firebase');
 
-// import ListPage from '../containers/ListPage'; //
+import ListPage from './ListPage'; //
 // import Auth from './Auth';
 // import BackButton from '../components/BackButton'; //
 // import SearchAndCompose from '../components/icons/SearchAndCompose';
@@ -22,7 +21,12 @@ import * as styles from '../styles/styles.js';
 const Firebase = require("firebase");
 var fireRef = new Firebase('https://chaz1.firebaseio.com');
 
-
+const listRoute = {
+  name: 'Home',
+  component: ListPage,
+  // leftCorner: GetSettings,
+  // rightCorner: SearchAndCompose
+};
 
 
 class ChazApp extends Component {
@@ -106,20 +110,25 @@ class ChazApp extends Component {
     if (this.props.state.authData.token) { // this might be a bad way to do the conditional
       // console.log("User " + authData.uid + " is logged in with " + authData.provider);
       return (
-        <View style={styles.containerTmp}>
-          <Text>ChazApp You are logged in! Hello {this.props.state.authData.uid}</Text>
-        <TouchableHighlight onPress={this.attemptLogout} >
-          <Text>attemptLogout</Text>
-        </TouchableHighlight>
-        </View>
+        <NavigatorIOS
+        style={styles.navigatorContainer}
+          initialRoute={{
+            component: ListPage,
+              title: 'My init view',
+              passProps: { myProp: 'foo' },
+              leftButtonTitle: 'Logout',
+              onLeftButtonPress: this.attemptLogout,
+          }}
+        />
       );
     } else {
       // console.log("User is logged out");
       return (
-        <View style={styles.containerTmp}>
-          <Text>ChazApp Welcome</Text>
+        <View>
+          <Text style={{fontWeight:'500',fontSize:20,marginTop:120,textAlign:'center'}}>WELCOME TO CHAZ</Text>
+          <Text style={{fontWeight:'200',fontSize:15,margin:20,textAlign:'center'}}>Chaz helps you to develop deeper connections to the humans in your life by encouraging you follow up on their recommendations and advice.</Text>
         <TouchableHighlight onPress={this.attemptLogin} >
-          <Text>attemptLogin</Text>
+          <Text style={{backgroundColor:'blue',color:'white',padding:10,margin:30,textAlign:'center'}}>LOG IN AS TEST USER</Text>
         </TouchableHighlight>
         </View>
       );

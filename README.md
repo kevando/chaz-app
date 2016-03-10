@@ -14,6 +14,9 @@ logout feature
 0.2
 add in routes or navigator
 
+0.3
+let users create their own user
+
 probly just storing the auth token in the state
 
 chaz todo

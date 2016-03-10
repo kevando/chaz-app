@@ -66,12 +66,22 @@ var styles = StyleSheet.create({
   // chaz
   containerTmp: {
     // backgroundColor: 'red',
-    paddingTop:50
+    paddingTop:150
   },
   centering: {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  list:{
+    flex:1
+  },
+  line: {
+    marginTop:150,
+    flex:1
+  },
+  navigatorContainer:{
+    flex:1,
+  }
 })
 
 module.exports = styles
