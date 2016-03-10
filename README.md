@@ -1,10 +1,6 @@
 # chaz
 app called chaz for chazzy people
 
-Recent status:
- redux is working.
-
-
 
 goal: get version 0.1
 login screen with two test users
@@ -12,10 +8,9 @@ welcome page shows name
 logout feature
 
 0.2
-add in routes or navigator
-
-0.3
 let users create their own user
+add navigator to redux
+
 
 probly just storing the auth token in the state
 

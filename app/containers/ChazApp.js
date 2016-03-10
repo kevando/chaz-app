@@ -80,7 +80,7 @@ class ChazApp extends Component {
   attemptLogin() {
     this.setState({loading:true})
     fireRef.authWithPassword({
-      email    : 'test1@kevinhabich.com',
+      email    : 'test2@kevinhabich.com',
       password : '1'
     }, this.authHandler);
 
@@ -114,7 +114,7 @@ class ChazApp extends Component {
         style={styles.navigatorContainer}
           initialRoute={{
             component: ListPage,
-              title: 'My init view',
+              title: 'Chaz',
               passProps: { myProp: 'foo' },
               leftButtonTitle: 'Logout',
               onLeftButtonPress: this.attemptLogout,
@@ -128,7 +128,7 @@ class ChazApp extends Component {
           <Text style={{fontWeight:'500',fontSize:20,marginTop:120,textAlign:'center'}}>WELCOME TO CHAZ</Text>
           <Text style={{fontWeight:'200',fontSize:15,margin:20,textAlign:'center'}}>Chaz helps you to develop deeper connections to the humans in your life by encouraging you follow up on their recommendations and advice.</Text>
         <TouchableHighlight onPress={this.attemptLogin} >
-          <Text style={{backgroundColor:'blue',color:'white',padding:10,margin:30,textAlign:'center'}}>LOG IN AS TEST USER</Text>
+          <Text style={{backgroundColor:'blue',color:'white',padding:10,margin:30,textAlign:'center'}}>AUTHENTICATE AS TEST USER 2</Text>
         </TouchableHighlight>
         </View>
       );

@@ -1,4 +1,4 @@
-import React, { Component, StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import React, { Component, StyleSheet, View, Text, TouchableHighlight, ListView, AlertIOS } from 'react-native';
 
 // import DufineListItem from '../components/DufineListItem'; //
 // import DufineView from './DufineView'; //
@@ -12,30 +12,92 @@ import { bindActionCreators } from 'redux';
 import * as chazActions from '../actions/chazActions'; // not sure that i need this
 import { connect } from 'react-redux';
 
+const ActionButton = require('../components/ActionButton');
+const ListItem = require('../components/ListItem');
+
+const Firebase = require('firebase');
+
 import * as styles from '../styles/styles.js';
 
 class ListPage extends Component {
   constructor(props) {
     super(props);
+    this.itemsRef = new Firebase(`https://chaz1.firebaseio.com/itemsByUser/${this.props.state.authData.uid}`);
+    this.state = {
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      })
+    };
 
-    // this.goToDufine = this.goToDufine.bind(this);
-    this.attemptLogout = this.attemptLogout.bind(this);
+  }
+  // Called when the component has first been rendered
+  // Probably a good place for tracking code
+  componentDidMount() {
+    this.listenForItems(this.itemsRef);
+
+    // this.setState({
+    //   dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
+    // })
+  }
+  _renderItem(item) {
+    const onPress = () => {
+    AlertIOS.alert(
+        'Delete',
+        null,
+        [
+          {text: 'Complete', onPress: (text) => this.itemsRef.child(item._key).remove()},
+          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
+        ],
+      );
+    };
+
+    return (
+      <ListItem item={item} onPress={onPress} />
+    );
+  }
+  _addItem() {
+    AlertIOS.prompt(
+      'What did someone suggest?',
+      null,
+      [
+        {text: 'Cancel', onPress: (text) => console.log('Cancel')},
+        {text: 'Add', onPress: (text) => {this.itemsRef.push({ title: text })}},
+
+      ],
+    );
+  }
+  listenForItems(itemsRef) {
+    // console.log('listen for items?');
+    itemsRef.on('value', (snap) => {
+
+      // get children as an array
+      var items = [];
+      snap.forEach((child) => {
+        items.push({
+          title: child.val().title,
+          _key: child.key()
+        });
+      });
+      console.log('items',items);
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(items)
+      });
+    });
   }
 
-  attemptLogout() {
-    // fireRef.unauth(); // this does nothing, but why? i must have coded this weird
-    this.props.actions.setAuthData({});
-  }
 
   render() {
-    
+
 
     return(
-      <View style={styles.containerTmp}>
-        <Text>ChazApp You are logged in! Hello {this.props.state.authData.uid}</Text>
-      <TouchableHighlight onPress={this.attemptLogout} >
-        <Text>attemptLogout</Text>
-      </TouchableHighlight>
+      <View style={styles.container}>
+
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderItem.bind(this)}
+          style={styles.listview} />
+
+          <ActionButton title="Add Recommedation" onPress={this._addItem.bind(this)} />
       </View>
     );
     // return (
