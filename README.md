@@ -2,19 +2,6 @@
 app called chaz for chazzy people
 
 
-#### 0.1
-login screen with two test users
-welcome page shows name
-logout feature
-khabich@gmail internal tester
-
-0.2
-let users create their own user
-add navigator to redux
-
-0.3
-deploy using codepush
-
 
 probly just storing the auth token in the state
 

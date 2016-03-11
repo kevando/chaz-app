@@ -1,4 +1,4 @@
-import React, { Component, StyleSheet, View, Text, TouchableHighlight, ListView, AlertIOS } from 'react-native';
+import React, { Component, StyleSheet, View, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
 
 // import DufineListItem from '../components/DufineListItem'; //
 // import DufineView from './DufineView'; //
@@ -24,6 +24,7 @@ class ListPage extends Component {
     super(props);
     this.itemsRef = new Firebase(`https://chaz1.firebaseio.com/itemsByUser/${this.props.state.authData.uid}`);
     this.state = {
+      loading:true,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
@@ -42,22 +43,28 @@ class ListPage extends Component {
   _renderItem(item) {
     const onPress = () => {
     AlertIOS.alert(
-        'Delete',
+        'Grade this recommendation',
         null,
         [
-          {text: 'Complete', onPress: (text) => this.itemsRef.child(item._key).remove()},
+          {text: '0 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:0})},
+          {text: '1 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:1})},
+          {text: '2 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:2})},
+          {text: '3 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:3})},
+          {text: '4 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:4})},
+          {text: '5 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:5})},
+          {text: 'Delete Rec', onPress: (text) => this.itemsRef.child(item._key).remove()},
           {text: 'Cancel', onPress: (text) => console.log('Cancel')}
         ],
       );
     };
 
     return (
-      <ListItem item={item} onPress={onPress} />
+      <ListItem item={item} itemRef={this.itemsRef.child(item._key)} onPress={onPress} />
     );
   }
   _addItem() {
     AlertIOS.prompt(
-      'What did someone suggest?',
+      'What did someone recommend?',
       null,
       [
         {text: 'Cancel', onPress: (text) => console.log('Cancel')},
@@ -75,11 +82,14 @@ class ListPage extends Component {
       snap.forEach((child) => {
         items.push({
           title: child.val().title,
-          _key: child.key()
+          _key: child.key(),
+          recr: child.val().recr, // I feel like I shouldnt have to do this
+          grade: child.val().grade, // I feel like I shouldnt have to do this
         });
       });
       console.log('items',items);
       this.setState({
+        loading:false,
         dataSource: this.state.dataSource.cloneWithRows(items)
       });
     });
@@ -87,7 +97,6 @@ class ListPage extends Component {
 
 
   render() {
-
 
     return(
       <View style={styles.container}>
@@ -100,11 +109,7 @@ class ListPage extends Component {
           <ActionButton title="Add Recommedation" onPress={this._addItem.bind(this)} />
       </View>
     );
-    // return (
-    //   <ScrollView style={styles.container}>
-    //     {Dufines}
-    //   </ScrollView>
-    // );
+
   }
 }
 

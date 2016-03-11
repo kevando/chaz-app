@@ -8,6 +8,7 @@ var styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f2',
     flex: 1,
+    // marginTop:100 this is fucked up cause the loader
   },
   listview: {
     flex: 1,
@@ -20,13 +21,51 @@ var styles = StyleSheet.create({
     paddingLeft: 16,
     paddingTop: 14,
     paddingBottom: 16,
+    flexDirection:'row',
+    alignItems: 'stretch',
   },
   liContainer: {
-    flex: 2,
+    flex: 5,
+
   },
-  liText: {
+  liLeft: {
+
+    // backgroundColor: 'red',
+    flex:2
+  },
+  liRight: {
+
+
+    // flexDirection: 'row',
+    flex:1,
+
+  },
+  liTextRight: {
     color: '#333',
     fontSize: 16,
+    textAlign:'right',
+    marginRight:10
+  },
+  recListItemRecTitle: {
+    color: '#333',
+    fontSize: 17,
+    fontWeight:'500'
+  },
+  recListItemRecGradeMissing: {
+    color: '#aaa',
+    fontSize: 12,
+    fontWeight:'300',
+
+  },
+  recListItemRecHumanMissing: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight:'300',
+    textAlign: 'right',
+    backgroundColor:'blue',
+    flex:1,
+    padding:6,
+    textAlign:'center'
   },
   navbar: {
     alignItems: 'center',

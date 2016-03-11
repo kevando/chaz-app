@@ -2,7 +2,7 @@
 
 // Trying this router to see how it works
 import Router from 'react-native-simple-router';
-import React, { Component, Navigator, View, Styles, TouchableHighlight, NavigatorIOS, Text, StyleSheet, ActivityIndicatorIOS } from 'react-native'; // need View in order to stack the Header with DufineApp
+import React, { Component, Navigator, View, Styles, TouchableHighlight, NavigatorIOS, AlertIOS, Text, StyleSheet, ActivityIndicatorIOS } from 'react-native'; // need View in order to stack the Header with DufineApp
 import { bindActionCreators } from 'redux';
 
 
@@ -42,7 +42,9 @@ class ChazApp extends Component {
     this.attemptLogout = this.attemptLogout.bind(this);
     this.authDataCallback = this.authDataCallback.bind(this);
     this.authHandler = this.authHandler.bind(this);
-
+    this.openUsernamePopup = this.openUsernamePopup.bind(this);
+    this.attemptCreateUser = this.attemptCreateUser.bind(this);
+    this.handleCreateUser = this.handleCreateUser.bind(this);
     // im guessing a listener makes this easier, but im deactivating it for now
     // this.startListeningToAuth();
 
@@ -68,31 +70,56 @@ class ChazApp extends Component {
 
   authHandler(error, authData) {
     this.setState({loading:false})
-  if (error) {
-    console.log("Login Failed!", error);
-    // this.props.actions.setAuthData({});
+    if (error) {
+    console.log("Auth Failed!", error);
+
   } else {
     console.log("Authenticated successfully with payload:", authData);
     this.props.actions.setAuthData(authData);
   }
   // return 'kev'
 }
-  attemptLogin() {
+  attemptLogin(username) {
     this.setState({loading:true})
     fireRef.authWithPassword({
-      email    : 'test2@kevinhabich.com',
+      email    : username+'@kevinhabich.com',
       password : '1'
     }, this.authHandler);
 
   }
+  handleCreateUser(error, authData) {
+    if (error) {
+      console.log("Error creating user:", error);
+    } else {
+      console.log("Successfully created user account with user:", authData);
+      // console.log(username);
+      this.attemptLogin(this.state.username);
+    }
+  }
+  attemptCreateUser(username) {
+    this.setState({username:username});
+    fireRef.createUser({
+      email: username+"@kevinhabich.com",
+      password: "1"
+    }, this.handleCreateUser);
+  }
+
+  openUsernamePopup() {
+    AlertIOS.prompt(
+      'Enter your username',
+      null,
+      [
+        {text: 'Cancel', onPress: (text) => console.log('Cancel')},
+        {text: 'SignUp', onPress: (text) => {this.attemptCreateUser(text)}},
+        {text: 'LogIn', onPress: (text) => {this.attemptLogin(text)}},
+
+
+      ],
+    );
+  }
   attemptLogout() {
     fireRef.unauth(); // this does nothing, but why? i must have coded this weird
     this.props.actions.setAuthData({});
-  }
-
-  getFirstRoute() {
-
-    return authRoute;
   }
 
   render() {
@@ -124,11 +151,11 @@ class ChazApp extends Component {
     } else {
       // console.log("User is logged out");
       return (
-        <View>
-          <Text style={{fontWeight:'500',fontSize:20,marginTop:120,textAlign:'center'}}>WELCOME TO CHAZ</Text>
-          <Text style={{fontWeight:'200',fontSize:15,margin:20,textAlign:'center'}}>Chaz helps you to develop deeper connections to the humans in your life by encouraging you follow up on their recommendations and advice.</Text>
-        <TouchableHighlight onPress={this.attemptLogin} >
-          <Text style={{backgroundColor:'blue',color:'white',padding:10,margin:30,textAlign:'center'}}>AUTHENTICATE AS TEST USER 2</Text>
+        <View style={{backgroundColor:"#24CE84",flex:1}}>
+          <Text style={{color:"#fff", fontWeight:'500',fontSize:25,marginTop:120,textAlign:'center'}}>WELCOME TO CHAZ</Text>
+          <Text style={{color:'#fff', fontWeight:'400',fontSize:15,margin:20,textAlign:'center'}}>Chaz helps you to develop deeper connections to the humans in your life by encouraging you follow up on their recommendations and advice.</Text>
+        <TouchableHighlight onPress={this.openUsernamePopup} >
+          <Text style={{backgroundColor:'blue',color:'white',padding:10,margin:30,textAlign:'center'}}>GET STARTED</Text>
         </TouchableHighlight>
         </View>
       );
