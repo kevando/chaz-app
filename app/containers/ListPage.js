@@ -1,4 +1,4 @@
-import React, { Component, StyleSheet, View, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
+import React, { Component, StyleSheet, View, ScrollView, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
 
 // import DufineListItem from '../components/DufineListItem'; //
 // import DufineView from './DufineView'; //
@@ -22,23 +22,32 @@ import * as styles from '../styles/styles.js';
 class ListPage extends Component {
   constructor(props) {
     super(props);
-    this.itemsRef = new Firebase(`https://chaz1.firebaseio.com/itemsByUser/${this.props.state.authData.uid}`);
+    this.userRef = new Firebase(`https://chaz1.firebaseio.com/users/${this.props.state.authData.uid}`);
+    this.recsRef = this.userRef.child('recs');
     this.state = {
       loading:true,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
+    this.setDisplayList = this.setDisplayList.bind(this);
 
   }
   // Called when the component has first been rendered
   // Probably a good place for tracking code
   componentDidMount() {
-    this.listenForItems(this.itemsRef);
+    this.listenForItems(this.recsRef);
 
     // this.setState({
     //   dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
     // })
+  }
+  setDisplayList(recs) {
+    this.setState({
+      loading:false,
+      dataSource: this.state.dataSource.cloneWithRows(recs),
+    });
+
   }
   _renderItem(item) {
     const onPress = () => {
@@ -52,14 +61,14 @@ class ListPage extends Component {
           {text: '3 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:3})},
           {text: '4 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:4})},
           {text: '5 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:5})},
-          {text: 'Delete Rec', onPress: (text) => this.itemsRef.child(item._key).remove()},
+          {text: 'Delete Rec', onPress: (text) => this.recsRef.child(item._key).remove()},
           {text: 'Cancel', onPress: (text) => console.log('Cancel')}
         ],
       );
     };
 
     return (
-      <ListItem item={item} itemRef={this.itemsRef.child(item._key)} onPress={onPress} />
+      <ListItem item={item} itemRef={this.recsRef.child(item._key)} onPress={onPress} />
     );
   }
   _addItem() {
@@ -68,14 +77,14 @@ class ListPage extends Component {
       null,
       [
         {text: 'Cancel', onPress: (text) => console.log('Cancel')},
-        {text: 'Add', onPress: (text) => {this.itemsRef.push({ title: text })}},
+        {text: 'Add', onPress: (text) => {this.recsRef.push({ title: text, timestampCreated: Firebase.ServerValue.TIMESTAMP })}},
 
       ],
     );
   }
-  listenForItems(itemsRef) {
+  listenForItems(recsRef) {
     // console.log('listen for items?');
-    itemsRef.on('value', (snap) => {
+    recsRef.on('value', (snap) => {
 
       // get children as an array
       var items = [];
@@ -88,10 +97,7 @@ class ListPage extends Component {
         });
       });
       console.log('items',items);
-      this.setState({
-        loading:false,
-        dataSource: this.state.dataSource.cloneWithRows(items)
-      });
+      this.setDisplayList(items);
     });
   }
 
@@ -99,12 +105,24 @@ class ListPage extends Component {
   render() {
 
     return(
-      <View style={styles.container}>
+      <View style={styles.listContainer}>
+        <View style={{backgroundColor:'orange',marginTop:80}}>
+          <Text>Sort By:</Text>
+          <View style={{flex:1,flexDirection:'row'}}>
+          <TouchableHighlight >
+              <Text>Newest</Text>
+            </TouchableHighlight>
+            <TouchableHighlight >
+                <Text>Oldest</Text>
+              </TouchableHighlight>
+          </View>
+        </View>
 
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderItem.bind(this)}
-          style={styles.listview} />
+        <ScrollView
+
+          style={styles.listview} >
+            <ListItem />
+          </ScrollView>
 
           <ActionButton title="Add Recommedation" onPress={this._addItem.bind(this)} />
       </View>
