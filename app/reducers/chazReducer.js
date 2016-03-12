@@ -1,4 +1,5 @@
-// this def needs to not be named counter.js
+// reducers should always be instantaneous and free of side effects,
+//and simply react synchronously to an action notification just received.
 
 import * as types from '../actions/actionTypes';
 
@@ -30,6 +31,13 @@ export default function chaz(state = initialState, action = {}) {
 
         };
 
+    case types.UPDATE_RECS_LIST:
+      // New rec was added to then add it to the state tree
+      return {
+        ...state,
+        recs: action.payload
+
+      }
 
       // should probly also be a UI_SET_WORD
       // case types.SET_DEFINITION:

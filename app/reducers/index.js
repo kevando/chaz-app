@@ -1,4 +1,4 @@
-import chaz from './chaz';
+import chaz from './chazReducer';
 
 export {
   chaz

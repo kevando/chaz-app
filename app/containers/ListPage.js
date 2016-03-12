@@ -26,31 +26,22 @@ class ListPage extends Component {
     this.recsRef = this.userRef.child('recs');
     this.state = {
       loading:true,
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      })
+
     };
-    this.setDisplayList = this.setDisplayList.bind(this);
+
 
   }
-  // Called when the component has first been rendered
-  // Probably a good place for tracking code
+
   componentDidMount() {
-    this.listenForItems(this.recsRef);
-
-    // this.setState({
-    //   dataSource: this.state.dataSource.cloneWithRows([{ title: 'Pizza' }])
-    // })
-  }
-  setDisplayList(recs) {
-    this.setState({
-      loading:false,
-      dataSource: this.state.dataSource.cloneWithRows(recs),
-      recs: recs
-    });
+    // probly not the best way to pass in uid to create the firebase ref
+    this.props.actions.listenForRecs(this.props.state.authData.uid); 
 
   }
+
   onItemPress() {
+
+    // Commenting out while I test action creators returning functions
+
     AlertIOS.alert(
         'Grade this recommendation',
         null,
@@ -88,48 +79,30 @@ class ListPage extends Component {
       <ListItem item={item} itemRef={this.recsRef.child(item._key)} onPress={onPress} />
     );
   }
-  _addItem() {
+  onAddRecPress() {
+
     AlertIOS.prompt(
       'What did someone recommend?',
       null,
       [
-        {text: 'Cancel', onPress: (text) => console.log('Cancel')},
-        {text: 'Add', onPress: (text) => {this.recsRef.push({ title: text, timestampCreated: Firebase.ServerValue.TIMESTAMP })}},
+        { text: 'Cancel', onPress: () => console.log('Cancel') },
+        // {text: 'Add', onPress: (text) => {this.recsRef.push({ title: text, timestampCreated: Firebase.ServerValue.TIMESTAMP })}},
+        { text: 'Add', onPress: (textInput) => {this.props.actions.addRec(textInput)} },
 
       ],
     );
   }
-  listenForItems(recsRef) {
-    // console.log('listen for items?');
-    recsRef.on('value', (snap) => {
 
-      // get children as an array
-      var items = [];
-      snap.forEach((child) => {
-        items.push({
-          title: child.val().title,
-          _key: child.key(),
-          recr: child.val().recr, // I feel like I shouldnt have to do this
-          grade: child.val().grade, // I feel like I shouldnt have to do this
-        });
-      });
-      console.log('items',items);
-      this.setDisplayList(items);
-    });
-  }
 
 
   render() {
-    if(!this.state.loading){ // this code errors if state data not loaded im drunk
+    // console.log('listpage render state',this.props.state);
+    if(this.props.state.recs){ // this code errors if state data not loaded im drunk
 
-      console.log('dude',this.state)
-      const Recs = this.state.recs.map((rec) => {
-        // test var dufineData = state.dufines[0];
-        // adding key to stop the react-native child array error. probly dont want to use word cause it could be dup
-        // return <DufineListItem {...dufineData} onPress={this.goToRoute} goToDufine={this.goToDufine} key={dufineData.word }/>;
-        // <ListItem item={item} itemRef={this.recsRef.child(item._key)} onPress={onPress} />
-        // console.log(rec)
-        return <ListItem item={rec} itemRef={this.recsRef.child(rec._key)} onPress={this.onItemPress} />
+      // console.log('ListPage Render()',this.state)
+      const Recs = this.props.state.recs.map((rec) => {
+
+        return <ListItem key={rec._key} item={rec} itemRef={this.recsRef.child(rec._key)} onPress={this.onAddRecPress} />
       });
       return(
         <View style={styles.listContainer}>
@@ -149,16 +122,12 @@ class ListPage extends Component {
               {Recs}
             </ScrollView>
 
-            <ActionButton title="Add Recommedation" onPress={this._addItem.bind(this)} />
+            <ActionButton title="Add Recommedation" onPress={this.onAddRecPress.bind(this)} />
         </View>
       );
     } else {
       return(
-        <ActivityIndicatorIOS
-        animating={this.state.loading}
-        style={[styles.centering, {height: 80}]}
-        size="large"
-      />
+        <View style={{marginTop:200}}><Text>Loading Recs</Text></View>
     );
     }
   }

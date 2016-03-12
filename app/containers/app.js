@@ -11,8 +11,8 @@ import * as storage from 'redux-storage'; //
 const reducer = storage.reducer(combineReducers(reducers)); // this is new from stoage package
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');
-const middleware = storage.createMiddleware(engine);
-const createStoreWithMiddleware = applyMiddleware(middleware,thunk)(createStore);
+const reduxStorageMiddleware = storage.createMiddleware(engine);
+const createStoreWithMiddleware = applyMiddleware(thunk,reduxStorageMiddleware)(createStore);
 
 // do not use local storage
 // const reducer = combineReducers(reducers);

@@ -1,9 +1,14 @@
+Get thunk working, or somehow get the data firebase methods in reducers.
+Add auth to reducers
 
+And draw this out in the notebook
 
 
 
 ### 0.3
-This version sorts out all the data
+This version sets in place the data structure for the MVP
+
+
 
 Get the data looking how I want, then refactor it into redux
 

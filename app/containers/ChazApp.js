@@ -128,7 +128,7 @@ class ChazApp extends Component {
       />
       )
     }
-    console.log('ChazApp Render. redux state = ',this.props.state);
+    // console.log('ChazApp Render. redux state = ',this.props.state);
     // var authData = fireRef.getAuth();
     if (this.props.state.authData.token) { // this might be a bad way to do the conditional
       // console.log("User " + authData.uid + " is logged in with " + authData.provider);

@@ -22,7 +22,7 @@ class ListItem extends React.Component {
     );
   }
   render() {
-    console.log('listItem props',this.props)
+
     const rec = this.props.item;
     // console.log('render listitem',rec);
     return (
