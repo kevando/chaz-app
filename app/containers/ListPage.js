@@ -46,8 +46,25 @@ class ListPage extends Component {
     this.setState({
       loading:false,
       dataSource: this.state.dataSource.cloneWithRows(recs),
+      recs: recs
     });
 
+  }
+  onItemPress() {
+    AlertIOS.alert(
+        'Grade this recommendation',
+        null,
+        [
+          {text: '0 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:0})},
+          {text: '1 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:1})},
+          {text: '2 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:2})},
+          {text: '3 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:3})},
+          {text: '4 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:4})},
+          {text: '5 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:5})},
+          {text: 'Delete Rec', onPress: (text) => this.recsRef.child(item._key).remove()},
+          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
+        ],
+      );
   }
   _renderItem(item) {
     const onPress = () => {
@@ -103,31 +120,47 @@ class ListPage extends Component {
 
 
   render() {
+    if(!this.state.loading){ // this code errors if state data not loaded im drunk
 
-    return(
-      <View style={styles.listContainer}>
-        <View style={{backgroundColor:'orange',marginTop:80}}>
-          <Text>Sort By:</Text>
-          <View style={{flex:1,flexDirection:'row'}}>
-          <TouchableHighlight >
-              <Text>Newest</Text>
-            </TouchableHighlight>
+      console.log('dude',this.state)
+      const Recs = this.state.recs.map((rec) => {
+        // test var dufineData = state.dufines[0];
+        // adding key to stop the react-native child array error. probly dont want to use word cause it could be dup
+        // return <DufineListItem {...dufineData} onPress={this.goToRoute} goToDufine={this.goToDufine} key={dufineData.word }/>;
+        // <ListItem item={item} itemRef={this.recsRef.child(item._key)} onPress={onPress} />
+        // console.log(rec)
+        return <ListItem item={rec} itemRef={this.recsRef.child(rec._key)} onPress={this.onItemPress} />
+      });
+      return(
+        <View style={styles.listContainer}>
+          <View style={{backgroundColor:'orange',marginTop:80}}>
+            <Text>Sort By:</Text>
+            <View style={{flex:1,flexDirection:'row'}}>
             <TouchableHighlight >
-                <Text>Oldest</Text>
+                <Text>Newest</Text>
               </TouchableHighlight>
+              <TouchableHighlight >
+                  <Text>Oldest</Text>
+                </TouchableHighlight>
+            </View>
           </View>
+
+          <ScrollView style={styles.listview} >
+              {Recs}
+            </ScrollView>
+
+            <ActionButton title="Add Recommedation" onPress={this._addItem.bind(this)} />
         </View>
-
-        <ScrollView
-
-          style={styles.listview} >
-            <ListItem />
-          </ScrollView>
-
-          <ActionButton title="Add Recommedation" onPress={this._addItem.bind(this)} />
-      </View>
+      );
+    } else {
+      return(
+        <ActivityIndicatorIOS
+        animating={this.state.loading}
+        style={[styles.centering, {height: 80}]}
+        size="large"
+      />
     );
-
+    }
   }
 }
 

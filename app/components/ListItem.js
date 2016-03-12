@@ -22,9 +22,9 @@ class ListItem extends React.Component {
     );
   }
   render() {
-
+    console.log('listItem props',this.props)
     const rec = this.props.item;
-    console.log('render listitem',rec);
+    // console.log('render listitem',rec);
     return (
       <TouchableHighlight onPress={this.props.onPress}>
         <View style={styles.li}>
@@ -39,7 +39,7 @@ class ListItem extends React.Component {
           {( rec.recr != null
             ? <Text style={styles.liTextRight}>{rec.recr}</Text>
             : <TouchableHighlight onPress={this.onAddHumanPress}>
-                <Text style={styles.recListItemRecHumanMissing}>Add Human</Text>
+                <Text style={styles.recListItemRecHumanMissing}>+ Recommender</Text>
               </TouchableHighlight>
           )}
           </View>

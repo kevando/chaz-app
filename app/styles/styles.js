@@ -5,13 +5,16 @@ const constants = {
 };
 
 var styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#f2f2f2',
+  listContainer: {
+    // backgroundColor: '#f2f2f2',
+    backgroundColor: 'red',
     flex: 1,
     // marginTop:100 this is fucked up cause the loader
   },
   listview: {
+    backgroundColor:'#eee',
     flex: 1,
+    marginTop:10,
   },
   li: {
     backgroundColor: '#fff',
@@ -62,9 +65,9 @@ var styles = StyleSheet.create({
     fontSize: 12,
     fontWeight:'300',
     textAlign: 'right',
-    backgroundColor:'blue',
+    color:'blue',
     flex:1,
-    padding:6,
+    padding:2,
     textAlign:'center'
   },
   navbar: {

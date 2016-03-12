@@ -7,11 +7,7 @@ import { bindActionCreators } from 'redux';
 
 
 import ListPage from './ListPage'; //
-// import Auth from './Auth';
-// import BackButton from '../components/BackButton'; //
-// import SearchAndCompose from '../components/icons/SearchAndCompose';
-// import GetSettings from '../components/icons/GetSettings';
-// import AppSettings from '../components/AppSettings'
+
 
 import * as chazActions from '../actions/chazActions';
 import { connect } from 'react-redux';
@@ -149,7 +145,8 @@ class ChazApp extends Component {
         />
       );
     } else {
-      // console.log("User is logged out");
+      // User is logged out so show the login screen
+      // refactor todo this should be its own component
       return (
         <View style={{backgroundColor:"#24CE84",flex:1}}>
           <Text style={{color:"#fff", fontWeight:'500',fontSize:25,marginTop:120,textAlign:'center'}}>WELCOME TO CHAZ</Text>
