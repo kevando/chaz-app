@@ -1,9 +1,74 @@
 import * as types from './actionTypes';
 
 const Firebase = require('firebase');
-const fireRef = new Firebase('https://chaz1.firebaseio.com/users/');
+const fireRef = new Firebase('https://chaz1.firebaseio.com/');
+
+export function attemptCreateUser(username) {
+    return (dispatch) => {
+      fireRef.createUser({
+        email: username+"@kevinhabich.com",
+        password: "1"
+      }, function(error, authData) {
+        if (error) {
+          console.log("Error creating user:", error);
+        } else {
+          console.log("Successfully created user account with user:", authData);
+
+          // This should get handled by the listener?
+          // this.attemptLogin(this.state.username);
+        }
+      });
+    }
+}
+
+export function attemptLogin(username) {
+
+  return (dispatch, getState) => {
+    fireRef.authWithPassword({
+      email    : username+'@kevinhabich.com',
+      password : '1'
+    }, function(error, authData) { // previously
+      // this.setState({loading:false})
+      if (error) {
+      console.log("Auth Failed!", error);
+
+    } else {
+      console.log("Authenticated successfully with payload:", authData);
+      // dont think I need to do this if I add an auth listener
+      // dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+    }
+    // return 'kev'
+  });
+}
+
+}
+// This works for login and logout
+export function setAuthData(authData){
+  return {
+    type: types.SET_AUTH_DATA,
+    payload: authData
+  }
+}
 
 
+// Auth listener
+export function startListeningToAuth(username) {
+
+  return (dispatch, getState) => {
+    fireRef.onAuth(function(authData){
+      console.log('auth listener called')
+        if (authData){
+          dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+        } else {
+            // I wonder if LOGOUT should be an action type
+            dispatch(setAuthData({})); // sending empty object logs user out
+        }
+    });
+
+
+  }
+
+}
 
 export function addRec(recTitle) {
   // creating a listener makes tons of sense because now I just need to add a rec
@@ -16,7 +81,7 @@ export function addRec(recTitle) {
 export function listenForRecs(uid) { // I dont like passing in the uid here refactor todo
   // console.log('listen for recs action',this.state);
 
-  const recsRef = fireRef.child(`${uid}/recs`);
+  const recsRef = fireRef.child(`users/${uid}/recs`);
 
   return (dispatch, getState) => {
 
@@ -43,7 +108,7 @@ export function listenForRecs(uid) { // I dont like passing in the uid here refa
   }
 }
 
-function updateRecsList(recs) {
+export function updateRecsList(recs) {
   return {
     type: types.UPDATE_RECS_LIST,
     payload: recs

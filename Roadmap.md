@@ -6,19 +6,17 @@ And draw this out in the notebook
 
 
 ### 0.3
-This version sets in place the data structure for the MVP
-
-
-
-Get the data looking how I want, then refactor it into redux
-
-Ask Rob what our beta onboarding should be like (assuming YC)
-sort list reverse chronilogical
-change add human from button to bold link (with human color)
-  create a human color background
+Sets in place the data structure for the MVP
+Integrates GA tracking
+All firebase code is refactored into Redux format
 Create objects for recrs
 
-
-include notififications sooner than later
-
+### 0.4
+Address onboarding issues
+  Ask Rob what our beta onboarding should be like (assuming YC)
+Implement color coordinated design
 deploy using codepush
+
+
+
+Add notifications

@@ -34,70 +34,64 @@ class ChazApp extends Component {
     // Check auth state
     console.log('ChazApp Constructor!!!!!')
 
-    this.attemptLogin = this.attemptLogin.bind(this);
-    this.attemptLogout = this.attemptLogout.bind(this);
+    // this.attemptLogin = this.attemptLogin.bind(this);
+    // this.attemptLogout = this.attemptLogout.bind(this);
     this.authDataCallback = this.authDataCallback.bind(this);
-    this.authHandler = this.authHandler.bind(this);
+    // this.authHandler = this.authHandler.bind(this);
     this.openUsernamePopup = this.openUsernamePopup.bind(this);
     this.attemptCreateUser = this.attemptCreateUser.bind(this);
     this.handleCreateUser = this.handleCreateUser.bind(this);
-    // im guessing a listener makes this easier, but im deactivating it for now
-    // this.startListeningToAuth();
+
+    // This might be better in a mounted function, but im not quite sure why
+    this.props.actions.startListeningToAuth();
 
 
   }
   authDataCallback(authData) { // this listener gets called BEFORE authHandler receives callback
 
     // console.log('AUTH LISTENER',this.props);
-    if (authData) {
-      console.log("User " + authData.uid + " is logged in with " + authData.provider);
-      // Store token in redux state
-      this.props.actions.setAuthData(authData);
-    } else {
-      console.log("User is logged out");
-      this.props.actions.setAuthData({});
-    }
+    // if (authData) {
+    //   console.log("User " + authData.uid + " is logged in with " + authData.provider);
+    //   // Store token in redux state
+    //   this.props.actions.setAuthData(authData);
+    // } else {
+    //   console.log("User is logged out");
+    //   this.props.actions.setAuthData({});
+    // }
   }
 
 
   startListeningToAuth() {
-    fireRef.onAuth(this.authDataCallback);
+    // fireRef.onAuth(this.authDataCallback);
   }
 
   authHandler(error, authData) {
-    this.setState({loading:false})
-    if (error) {
-    console.log("Auth Failed!", error);
-
-  } else {
-    console.log("Authenticated successfully with payload:", authData);
-    this.props.actions.setAuthData(authData);
-  }
-  // return 'kev'
+  //   this.setState({loading:false})
+  //   if (error) {
+  //   console.log("Auth Failed!", error);
+  //
+  // } else {
+  //   console.log("Authenticated successfully with payload:", authData);
+  //   this.props.actions.setAuthData(authData);
+  // }
+  // // return 'kev'
 }
-  attemptLogin(username) {
-    this.setState({loading:true})
-    fireRef.authWithPassword({
-      email    : username+'@kevinhabich.com',
-      password : '1'
-    }, this.authHandler);
 
-  }
   handleCreateUser(error, authData) {
-    if (error) {
-      console.log("Error creating user:", error);
-    } else {
-      console.log("Successfully created user account with user:", authData);
-      // console.log(username);
-      this.attemptLogin(this.state.username);
-    }
+    // if (error) {
+    //   console.log("Error creating user:", error);
+    // } else {
+    //   console.log("Successfully created user account with user:", authData);
+    //   // console.log(username);
+    //   this.attemptLogin(this.state.username);
+    // }
   }
   attemptCreateUser(username) {
-    this.setState({username:username});
-    fireRef.createUser({
-      email: username+"@kevinhabich.com",
-      password: "1"
-    }, this.handleCreateUser);
+    // this.setState({username:username});
+    // fireRef.createUser({
+    //   email: username+"@kevinhabich.com",
+    //   password: "1"
+    // }, this.handleCreateUser);
   }
 
   openUsernamePopup() {
@@ -106,15 +100,14 @@ class ChazApp extends Component {
       null,
       [
         {text: 'Cancel', onPress: (text) => console.log('Cancel')},
-        {text: 'SignUp', onPress: (text) => {this.attemptCreateUser(text)}},
-        {text: 'LogIn', onPress: (text) => {this.attemptLogin(text)}},
+        {text: 'SignUp', onPress: (text) => {this.props.actions.attemptCreateUser(text)}},
+        {text: 'LogIn', onPress: (text) => {this.props.actions.attemptLogin(text)}},
 
 
       ],
     );
   }
   attemptLogout() {
-    fireRef.unauth(); // this does nothing, but why? i must have coded this weird
     this.props.actions.setAuthData({});
   }
 
