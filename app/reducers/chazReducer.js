@@ -12,6 +12,7 @@ const initialState = {
     // token: null,
     // uid: null,
   },
+  recSortOrder:'newest',
 };
 
 // i am still kind of confused why a reducer is the place to define an initial state
@@ -24,7 +25,7 @@ export default function chaz(state = initialState, action = {}) {
   switch (action.type) {
 
     case types.SET_AUTH_DATA:
-      
+
       return {
           ...state,
           authData: action.payload
@@ -37,6 +38,18 @@ export default function chaz(state = initialState, action = {}) {
         ...state,
         recs: action.payload
 
+      }
+    case types.SORT_REC_LIST:   // refactor todo. this seems like a bad way to sort this shit
+      var sortedRecs = state.recs;
+      sortedRecs.sort(function(a, b) {
+        if(action.payload == 'oldest')
+          return parseFloat(a.createdAt) - parseFloat(b.createdAt);
+        else // oldest
+          return parseFloat(b.createdAt) - parseFloat(a.createdAt);
+      });
+      return{
+        ...state,
+        recs: sortedRecs
       }
 
       // should probly also be a UI_SET_WORD

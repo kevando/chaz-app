@@ -9,12 +9,15 @@ var styles = StyleSheet.create({
     // backgroundColor: '#f2f2f2',
     backgroundColor: 'red',
     flex: 1,
+    paddingTop:0,
+    justifyContent: 'flex-start'
     // marginTop:100 this is fucked up cause the loader
   },
   listview: {
     backgroundColor:'#eee',
     flex: 1,
-    marginTop:10,
+    marginTop:0,
+    paddingTop:0,
   },
   li: {
     backgroundColor: '#fff',
@@ -25,7 +28,7 @@ var styles = StyleSheet.create({
     paddingTop: 14,
     paddingBottom: 16,
     flexDirection:'row',
-    alignItems: 'stretch',
+
   },
   liContainer: {
     flex: 5,
@@ -42,6 +45,17 @@ var styles = StyleSheet.create({
     // flexDirection: 'row',
     flex:1,
 
+  },
+  filterContainer: {
+    backgroundColor:'#ddd',
+    marginTop:0,
+    alignItems: 'center'
+  },
+  filterButton: {
+    paddingLeft:10,
+    paddingRight:10,
+    paddingBottom:2,
+    paddingTop:2,
   },
   liTextRight: {
     color: '#333',

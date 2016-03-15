@@ -1,9 +1,6 @@
-Get thunk working, or somehow get the data firebase methods in reducers.
-Add auth to reducers
 
-And draw this out in the notebook
-
-
+Figure out how to fucking load recs corretly
+sorting kinda works
 
 ### 0.3
 Sets in place the data structure for the MVP

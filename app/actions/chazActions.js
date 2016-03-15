@@ -66,20 +66,31 @@ export function addRec(recTitle) {
   // creating a listener makes tons of sense because now I just need to add a rec
   // to firebase, then the listener will catch it and add it to the state, then
   // the new state will cause the app to re-render. Booyah!
-
-  // this.recsRef.push({ title: text, timestampCreated: Firebase.ServerValue.TIMESTAMP })}},
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+    recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
+  }
+}
+export function removeRec(recKey){
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+    recsRef.child(recKey).remove()
+  }
 }
 
-export function listenForRecs(uid) { // I dont like passing in the uid here refactor todo
+export function listenForRecs() { // I dont like passing in the uid here refactor todo
   // console.log('listen for recs action',this.state);
 
-  const recsRef = fireRef.child(`users/${uid}/recs`);
-
   return (dispatch, getState) => {
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
 
     // I could do something with the state if I wanted to
     // Like here from a thunk counter example
     // const { counter } = getState(); doesnt work for some reason
+    //ref.orderByChild("height").startAt(3).on("child_added", function(snapshot) {
 
     recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
 
@@ -91,10 +102,11 @@ export function listenForRecs(uid) { // I dont like passing in the uid here refa
           _key: child.key(),
           recr: child.val().recr, // I feel like I shouldnt have to do this
           grade: child.val().grade, // I feel like I shouldnt have to do this
+          createdAt: child.val().createdAt,
         });
       });
 
-      // console.log(items);
+      // This then pushes the list of items to the state array
       dispatch(updateRecsList(items));
     });
   }
@@ -106,4 +118,11 @@ export function updateRecsList(recs) {
     payload: recs
   }
 
+}
+
+export function sortBy(orderBy){
+    return {
+      type: types.SORT_REC_LIST,
+      payload:orderBy
+    }
 }

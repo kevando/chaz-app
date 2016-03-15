@@ -31,7 +31,7 @@ class ChazApp extends Component {
   constructor(props) {
     super(props);
     this.state = {loading:false}
-    
+
     this.openUsernamePopup = this.openUsernamePopup.bind(this);
 
   }
@@ -57,7 +57,7 @@ class ChazApp extends Component {
 
 
   render() {
-    console.log('state in ChazApp',this.props.state)
+    // console.log('state in ChazApp',this.props.state)
     if(this.state.loading){
       return(
         <ActivityIndicatorIOS
