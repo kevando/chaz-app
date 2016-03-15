@@ -79,7 +79,32 @@ export function removeRec(recKey){
     recsRef.child(recKey).remove()
   }
 }
+export function setRecGrade(rec, grade){ // args dont feel right
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+    recsRef.child(rec._key).update({grade:grade});
+  }
+}
+export function assignRecr(recr, rec){ // args dont feel right
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
+    recrsRef.once("value", function(snapshot) {
+      var recrExists = snapshot.child("name").exists();
+      if(recrExists){
+        console.log('rec exists in db:',recr)
+      } else {
+        console.log('rec does not exist in db:',recr);
+      }
+});
 
+
+    // const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
+    // recsRef.child(rec._key).update({grade:grade});
+    // recsRef.push({ name: recr, createdAt: Firebase.ServerValue.TIMESTAMP });
+  }
+}
 export function listenForRecs() { // I dont like passing in the uid here refactor todo
   // console.log('listen for recs action',this.state);
 

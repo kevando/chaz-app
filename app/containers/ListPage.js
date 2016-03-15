@@ -23,14 +23,9 @@ import * as styles from '../styles/styles.js';
 class ListPage extends Component {
   constructor(props) {
     super(props);
-    this.userRef = new Firebase(`https://chaz1.firebaseio.com/users/${this.props.state.authData.uid}`);
-    this.recsRef = this.userRef.child('recs');
     this.state = {
       loading:true,
-
     };
-
-
   }
 
   componentDidMount() {
@@ -40,29 +35,20 @@ class ListPage extends Component {
   onItemPress(rec) {
 
     // Commenting out while I test action creators returning functions
-
+    const { setRecGrade, removeRec } = this.props.actions;
     AlertIOS.alert(
         'Grade this recommendation',
         null,
         [
-          {text: '0 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:0})},
-          {text: '1 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:1})},
-          {text: '2 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:2})},
-          {text: '3 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:3})},
-          {text: '4 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:4})},
-          {text: '5 Stars', onPress: (text) => this.itemsRef.child(item._key).update({grade:5})},
-          {text: 'Delete Rec', onPress: (text) => this.props.actions.removeRec(rec._key)},
+          {text: '1 Stars', onPress: (text) => setRecGrade(rec,1) },
+          {text: '2 Stars', onPress: (text) => setRecGrade(rec,2) },
+          {text: '3 Stars', onPress: (text) => setRecGrade(rec,3) },
+          {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
           {text: 'Cancel', onPress: (text) => console.log('Cancel')}
         ],
       );
   }
-  _renderItem(item) {
 
-
-    return (
-      <ListItem item={item} itemRef={this.recsRef.child(item._key)} onPress={onPress} />
-    );
-  }
   onAddRecPress() {
 
     AlertIOS.prompt(
@@ -78,7 +64,7 @@ class ListPage extends Component {
   }
   renderRecList() {
     const Recs = this.props.state.recs.map((rec) => {
-      return <ListItem key={rec._key} item={rec} itemRef={this.recsRef.child(rec._key)} onPress={this.onItemPress.bind(this,rec)} />
+      return <ListItem key={rec._key} rec={rec} assignRecrFunction={this.props.actions.assignRecr} onPress={this.onItemPress.bind(this,rec)} />
     });
 
     return Recs;
@@ -91,13 +77,11 @@ class ListPage extends Component {
 
     return(
       <View style={styles.listContainer}>
-
         <ScrollView style={styles.listview} >
           <FilterNav sortFunction={this.props.actions.sortBy} />
-
-            {this.renderRecList()}
-          </ScrollView>
-          <ActionButton title="Add Recommedation" onPress={this.onAddRecPress.bind(this)} />
+          {this.renderRecList()}
+        </ScrollView>
+        <ActionButton title="Add Recommedation" onPress={this.onAddRecPress.bind(this)} />
       </View>
     )
 

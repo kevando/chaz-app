@@ -16,14 +16,15 @@ class ListItem extends React.Component {
       null,
       [
         {text: 'Cancel', onPress: (text) => console.log('Cancel')},
-        {text: 'Add', onPress: (text) => {this.props.itemRef.update({recr: text})} },
+        {text: 'Addold', onPress: (text) => {this.props.itemRef.update({recr: text})} },
+        {text: 'Add', onPress: (recr) => {this.props.assignRecrFunction(recr,this.props.rec)} },
 
       ],
     );
   }
   render() {
 
-    const rec = this.props.item;
+    const rec = this.props.rec;
     // console.log('render listitem',rec);
     return (
       <TouchableHighlight onPress={this.props.onPress}>
