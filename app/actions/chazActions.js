@@ -28,16 +28,11 @@ export function attemptLogin(username) {
       email    : username+'@kevinhabich.com',
       password : '1'
     }, function(error, authData) { // previously
-      // this.setState({loading:false})
       if (error) {
-      console.log("Auth Failed!", error);
-
+        console.log("Auth Failed!", error);
     } else {
-      console.log("Authenticated successfully with payload:", authData);
-      // dont think I need to do this if I add an auth listener
-      // dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+      dispatch(setAuthData(authData)); // reminder this is only possible with thunk
     }
-    // return 'kev'
   });
 }
 
@@ -50,24 +45,21 @@ export function setAuthData(authData){
   }
 }
 
-
-// Auth listener
-export function startListeningToAuth(username) {
-
+// Run this function if auth ref changes
+export function startListeningToAuth() {
   return (dispatch, getState) => {
     fireRef.onAuth(function(authData){
-      console.log('auth listener called')
-        if (authData){
+        if (authData)
           dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-        } else {
-            // I wonder if LOGOUT should be an action type
-            dispatch(setAuthData({})); // sending empty object logs user out
-        }
     });
-
-
   }
+}
 
+export function logUserOut(){
+  return function(dispatch,getState){
+    dispatch(setAuthData({}));
+    fireRef.unauth();
+  };
 }
 
 export function addRec(recTitle) {

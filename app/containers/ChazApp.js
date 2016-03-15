@@ -31,68 +31,15 @@ class ChazApp extends Component {
   constructor(props) {
     super(props);
     this.state = {loading:false}
-    // Check auth state
-    console.log('ChazApp Constructor!!!!!')
-
-    // this.attemptLogin = this.attemptLogin.bind(this);
-    // this.attemptLogout = this.attemptLogout.bind(this);
-    this.authDataCallback = this.authDataCallback.bind(this);
-    // this.authHandler = this.authHandler.bind(this);
+    
     this.openUsernamePopup = this.openUsernamePopup.bind(this);
-    this.attemptCreateUser = this.attemptCreateUser.bind(this);
-    this.handleCreateUser = this.handleCreateUser.bind(this);
 
-    // This might be better in a mounted function, but im not quite sure why
+  }
+
+  componentDidMount() {
     this.props.actions.startListeningToAuth();
-
-
-  }
-  authDataCallback(authData) { // this listener gets called BEFORE authHandler receives callback
-
-    // console.log('AUTH LISTENER',this.props);
-    // if (authData) {
-    //   console.log("User " + authData.uid + " is logged in with " + authData.provider);
-    //   // Store token in redux state
-    //   this.props.actions.setAuthData(authData);
-    // } else {
-    //   console.log("User is logged out");
-    //   this.props.actions.setAuthData({});
-    // }
   }
 
-
-  startListeningToAuth() {
-    // fireRef.onAuth(this.authDataCallback);
-  }
-
-  authHandler(error, authData) {
-  //   this.setState({loading:false})
-  //   if (error) {
-  //   console.log("Auth Failed!", error);
-  //
-  // } else {
-  //   console.log("Authenticated successfully with payload:", authData);
-  //   this.props.actions.setAuthData(authData);
-  // }
-  // // return 'kev'
-}
-
-  handleCreateUser(error, authData) {
-    // if (error) {
-    //   console.log("Error creating user:", error);
-    // } else {
-    //   console.log("Successfully created user account with user:", authData);
-    //   // console.log(username);
-    //   this.attemptLogin(this.state.username);
-    // }
-  }
-  attemptCreateUser(username) {
-    // this.setState({username:username});
-    // fireRef.createUser({
-    //   email: username+"@kevinhabich.com",
-    //   password: "1"
-    // }, this.handleCreateUser);
-  }
 
   openUsernamePopup() {
     AlertIOS.prompt(
@@ -107,11 +54,10 @@ class ChazApp extends Component {
       ],
     );
   }
-  attemptLogout() {
-    this.props.actions.setAuthData({});
-  }
+
 
   render() {
+    console.log('state in ChazApp',this.props.state)
     if(this.state.loading){
       return(
         <ActivityIndicatorIOS
@@ -133,7 +79,7 @@ class ChazApp extends Component {
               title: 'Chaz',
               passProps: { myProp: 'foo' },
               leftButtonTitle: 'Logout',
-              onLeftButtonPress: this.attemptLogout,
+              onLeftButtonPress: this.props.actions.logUserOut,
           }}
         />
       );

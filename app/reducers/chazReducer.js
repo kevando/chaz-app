@@ -24,7 +24,7 @@ export default function chaz(state = initialState, action = {}) {
   switch (action.type) {
 
     case types.SET_AUTH_DATA:
-      // console.log('set auth token with payload',action.payload);
+      
       return {
           ...state,
           authData: action.payload
