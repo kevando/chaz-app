@@ -16,7 +16,7 @@ const ActionButton = require('../components/ActionButton');
 const FilterNav = require('../components/FilterNav');
 const ListItem = require('../components/ListItem');
 
-const Firebase = require('firebase');
+// const Firebase = require('firebase');
 
 import * as styles from '../styles/styles.js';
 
@@ -28,13 +28,10 @@ class ListPage extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.actions.listenForRecs();
-  }
+  
 
   onItemPress(rec) {
 
-    // Commenting out while I test action creators returning functions
     const { setRecGrade, removeRec } = this.props.actions;
     AlertIOS.alert(
         'Grade this recommendation',
@@ -64,16 +61,15 @@ class ListPage extends Component {
   }
   renderRecList() {
     const Recs = this.props.state.recs.map((rec) => {
-      return <ListItem key={rec._key} rec={rec} assignRecrFunction={this.props.actions.assignRecr} onPress={this.onItemPress.bind(this,rec)} />
+      return <ListItem key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
     });
 
     return Recs;
   }
 
   render() {
-    if(!this.props.state.recs){
+    if(!this.props.state.recs)
       return(<View style={{marginTop:200}}><Text>Loading Recs</Text></View>);
-    }
 
     return(
       <View style={styles.listContainer}>
