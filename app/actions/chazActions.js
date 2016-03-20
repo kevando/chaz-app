@@ -86,29 +86,70 @@ export function removeRec(recKey){
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-    recsRef.child(recKey).remove()
+    // const recrRecsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${recr._key}/recs`);
+    recsRef.child(recKey).remove();
+    // recrRecsRef.child(recKey).remove(); // probly should be a listener
   }
 }
 export function setRecGrade(rec, grade){ // args dont feel right
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+    const recrRecrRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${rec.recr._key}/recs/${rec._key}`);
     recsRef.child(rec._key).update({grade:grade});
-    // will also need to add it to recrs rec as well
+    // the following should probly be a listener
+    recrRecrRef.update({grade:grade}); // this will fire off a listener
+    // now also update the recr score
+    dispatch(updateRecrScore(rec.recr._key))
   }
 }
+export function updateRecrScore(recrKey) {
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recrRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${recrKey}`);
+    var score = 666; // never used
+    var totalGradedRecs = 0;
+    var recGradeSum = 0;
+    // calculate score (this needs to become its own function. this us a huge part of the app)
+
+    recrRef.child('recs').once("value", function(snapshot) {
+
+      snapshot.forEach(function(childSnapshot) {
+
+        var rec = childSnapshot.val();
+        console.log('rec',rec)
+        if(typeof rec.grade !== 'undefined'){
+          console.log('rec.grade',rec.grade)
+          totalGradedRecs++;
+          recGradeSum += rec.grade;
+        }
+      });
+    });
+    console.log('recGradeSum',recGradeSum);
+    console.log('totalGradedRecs',totalGradedRecs);
+    if(totalGradedRecs > 0)
+      score = recGradeSum/totalGradedRecs;
+    else
+      score = 'No Score';
+
+    recrRef.update({score: score});
+
+  }
+
+}
+
 export function assignExistingRecr(recr, rec){
 
   return function(dispatch, getState) {
     const currentState = getState();
-    const recrRecsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${recr._key}/recs`);
+    const recrRecsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${recr._key}/recs/${rec._key}`);
     const recRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs/${rec._key}`);
 
     console.log('recr',recr)
     // add the existing recr to rec
     recRef.update({recr: {name: recr.name, _key:recr._key } });
     // add the rec to the recrs reclist
-    recrRecsRef.push({title: rec.title,_key:rec._key}); // i would prefer to send this a whole object but not gonna worry about it for now
+    recrRecsRef.set( {title: rec.title,_key:rec._key}); // i would prefer to send this a whole object but not gonna worry about it for now
     // should these final commands should be dispatches?
 
   }
@@ -120,7 +161,6 @@ export function createNewRecr(recrName, rec){
     const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
 
     var newRecr = recrsRef.push({ name: recrName, createdAt: Firebase.ServerValue.TIMESTAMP, });
-    console.log('newRecr',newRecr)
     dispatch(assignExistingRecr({_key:newRecr.key(),name:recrName},rec));
 
   }
@@ -166,6 +206,7 @@ export function listenForRecrs() {
           name: child.val().name,
           _key: child.key(),
           recs: child.val().recs,
+          score: child.val().score
         });
       });
       dispatch(updateRecrsList(items));

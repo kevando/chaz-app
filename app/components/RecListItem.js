@@ -2,7 +2,8 @@
 var React = require('react-native');
 const styles = require('../styles/styles.js')
 const { View, TouchableHighlight, Text, AlertIOS } = React;
-class ListItem extends React.Component {
+
+class RecListItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -23,9 +24,13 @@ class ListItem extends React.Component {
   render() {
 
     const rec = this.props.rec;
-    // console.log('render listitem',rec);
+    var onPress = this.props.onPress;
+    if(rec.recr == null)
+      onPress = this.onAddHumanPress
+
     return (
-      <TouchableHighlight onPress={this.props.onPress}>
+      <TouchableHighlight onPress={onPress}>
+
         <View style={styles.li}>
           <View style={styles.liLeft}>
             <Text style={styles.recListItemRecTitle}>{rec.title}</Text>
@@ -47,4 +52,4 @@ class ListItem extends React.Component {
     );
   }
 }
-module.exports = ListItem;
+module.exports = RecListItem;

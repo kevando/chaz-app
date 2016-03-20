@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 
 const ActionButton = require('../components/ActionButton');
 const FilterNav = require('../components/FilterNav');
-const ListItem = require('../components/ListItem');
+const RecListItem = require('../components/RecListItem');
 
 // const Firebase = require('firebase');
 
@@ -57,7 +57,7 @@ class RecList extends Component {
   }
   renderRecList() {
     const Recs = this.props.state.recs.map((rec) => {
-      return <ListItem key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
+      return <RecListItem key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
     });
 
     return Recs;

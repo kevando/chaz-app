@@ -1,6 +1,7 @@
 'use strict';
 var React = require('react-native');
 const styles = require('../styles/styles.js')
+const _ = require('lodash');
 const { View, TouchableHighlight, Text, AlertIOS } = React;
 class RecrListItem extends React.Component {
 
@@ -25,23 +26,19 @@ class RecrListItem extends React.Component {
   render() {
 
     const recr = this.props.recr;
+    console.log(recr)
     // console.log('render listitem',rec);
     return (
       <TouchableHighlight onPress={this.props.onPress}>
         <View style={styles.li}>
           <View style={styles.liLeft}>
             <Text style={styles.recListItemRecTitle}>{recr.name}</Text>
-            {( recr.grade != null
-              ? <Text style={styles.recListItemRecGradeMissing}>{rec.grade} Stars</Text>
-              : <Text style={styles.recListItemRecGradeMissing}>No Grade</Text>
-            )}
+            <Text style={styles.recListItemRecGradeMissing}>Recommendations: {_.size(recr.recs)}</Text>
           </View>
           <View style={styles.liRight}>
-          {( recr.recr != null
-            ? <Text style={styles.liTextRight}>{recr.name}</Text>
-            : <TouchableHighlight onPress={this.onAddHumanPress}>
-                <Text style={styles.recListItemRecHumanMissing}>+ Recommender</Text>
-              </TouchableHighlight>
+          {( recr.score != null
+            ? <Text style={styles.liTextRight}>{recr.score}</Text>
+            : <Text style={styles.liTextRight}>No score</Text>
           )}
           </View>
         </View>
