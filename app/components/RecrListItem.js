@@ -37,7 +37,7 @@ class RecrListItem extends React.Component {
           </View>
           <View style={styles.liRight}>
           {( recr.score != null
-            ? <Text style={styles.liTextRight}>{recr.score}</Text>
+            ? <Text style={styles.liTextRight}>{recr.score}%</Text>
             : <Text style={styles.liTextRight}>No score</Text>
           )}
           </View>

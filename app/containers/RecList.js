@@ -40,6 +40,8 @@ class RecList extends Component {
           {text: '1 Stars', onPress: (text) => setRecGrade(rec,1) },
           {text: '2 Stars', onPress: (text) => setRecGrade(rec,2) },
           {text: '3 Stars', onPress: (text) => setRecGrade(rec,3) },
+          {text: '4 Stars', onPress: (text) => setRecGrade(rec,4) },
+          {text: '5 Stars', onPress: (text) => setRecGrade(rec,5) },
           {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
           {text: 'Cancel', onPress: (text) => console.log('Cancel')}
         ],

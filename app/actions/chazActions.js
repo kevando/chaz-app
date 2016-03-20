@@ -128,7 +128,7 @@ export function updateRecrScore(recrKey) {
     console.log('recGradeSum',recGradeSum);
     console.log('totalGradedRecs',totalGradedRecs);
     if(totalGradedRecs > 0)
-      score = recGradeSum/totalGradedRecs;
+      score = (recGradeSum/totalGradedRecs)*20;
     else
       score = 'No Score';
 
