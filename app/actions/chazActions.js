@@ -72,6 +72,16 @@ export function addRec(recTitle) {
     recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
   }
 }
+export function addRecWithRecr(recTitle,recr) {
+  // creating a listener makes tons of sense because now I just need to add a rec
+  // to firebase, then the listener will catch it and add it to the state, then
+  // the new state will cause the app to re-render. Booyah!
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+    recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,recr:{name: recr.name,_key:recr._key} });
+  }
+}
 export function removeRec(recKey){
   return function(dispatch, getState) {
     const currentState = getState();
@@ -84,41 +94,46 @@ export function setRecGrade(rec, grade){ // args dont feel right
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
     recsRef.child(rec._key).update({grade:grade});
+    // will also need to add it to recrs rec as well
   }
 }
-export function assignRecr(recr, rec){ // args dont feel right
+export function assignExistingRecr(recr, rec){
+
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recrRecsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${recr._key}/recs`);
+    const recRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs/${rec._key}`);
+
+    console.log('recr',recr)
+    // add the existing recr to rec
+    recRef.update({recr: {name: recr.name, _key:recr._key } });
+    // add the rec to the recrs reclist
+    recrRecsRef.push({title: rec.title,_key:rec._key}); // i would prefer to send this a whole object but not gonna worry about it for now
+    // should these final commands should be dispatches?
+
+  }
+
+}
+export function createNewRecr(recrName, rec){
   return function(dispatch, getState) {
     const currentState = getState();
     const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
-    recrsRef.once("value", function(snapshot) {
-      var recrExists = snapshot.child("name").exists();
-      if(recrExists){
-        console.log('rec exists in db:',recr)
-      } else {
-        console.log('rec does not exist in db:',recr);
-      }
-});
 
+    var newRecr = recrsRef.push({ name: recrName, createdAt: Firebase.ServerValue.TIMESTAMP, });
+    console.log('newRecr',newRecr)
+    dispatch(assignExistingRecr({_key:newRecr.key(),name:recrName},rec));
 
-    // const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
-    // recsRef.child(rec._key).update({grade:grade});
-    // recsRef.push({ name: recr, createdAt: Firebase.ServerValue.TIMESTAMP });
   }
 }
-export function listenForRecs() { // I dont like passing in the uid here refactor todo
+export function listenForRecs() {
   // console.log('listen for recs action',this.state);
 
   return (dispatch, getState) => {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
 
-    // I could do something with the state if I wanted to
-    // Like here from a thunk counter example
-    // const { counter } = getState(); doesnt work for some reason
-    //ref.orderByChild("height").startAt(3).on("child_added", function(snapshot) {
-
     recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
-
+      console.log('listenForRecs called')
       // get children as an array
       var items = [];
       snap.forEach((child) => {
@@ -128,11 +143,32 @@ export function listenForRecs() { // I dont like passing in the uid here refacto
           recr: child.val().recr, // I feel like I shouldnt have to do this
           grade: child.val().grade, // I feel like I shouldnt have to do this
           createdAt: child.val().createdAt,
+          recr: child.val().recr,
         });
       });
 
       // This then pushes the list of items to the state array
       dispatch(updateRecsList(items));
+    });
+  }
+}
+export function listenForRecrs() {
+  console.log('listen for Recrs')
+  return (dispatch, getState) => {
+    const currentState = getState();
+    const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
+
+    recrsRef.on('value', (snap) => {
+      // get children as an array
+      var items = [];
+      snap.forEach((child) => {
+        items.push({
+          name: child.val().name,
+          _key: child.key(),
+          recs: child.val().recs,
+        });
+      });
+      dispatch(updateRecrsList(items));
     });
   }
 }
@@ -142,7 +178,12 @@ export function updateRecsList(recs) {
     type: types.UPDATE_RECS_LIST,
     payload: recs
   }
-
+}
+export function updateRecrsList(recrs) {
+  return {
+    type: types.UPDATE_RECRS_LIST,
+    payload: recrs
+  }
 }
 
 export function sortBy(orderBy){

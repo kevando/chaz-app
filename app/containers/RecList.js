@@ -20,7 +20,7 @@ const ListItem = require('../components/ListItem');
 
 import * as styles from '../styles/styles.js';
 
-class ListPage extends Component {
+class RecList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,7 @@ class ListPage extends Component {
     };
   }
 
-  
+
 
   onItemPress(rec) {
 
@@ -47,17 +47,13 @@ class ListPage extends Component {
   }
 
   onAddRecPress() {
-
-    AlertIOS.prompt(
-      'What did someone recommend?',
-      null,
-      [
-        { text: 'Cancel', onPress: () => console.log('Cancel') },
-        // {text: 'Add', onPress: (text) => {this.recsRef.push({ title: text, timestampCreated: Firebase.ServerValue.TIMESTAMP })}},
-        { text: 'Add', onPress: (textInput) => {this.props.actions.addRec(textInput)} },
-
-      ],
-    );
+    var Options = Array();
+    Options.push({ text: 'Add New Recommendation', onPress: (textInput) => {this.props.actions.addRec(textInput)} })
+    var recrs = this.props.state.recrs.map((recr) => {
+      Options.push({text: `Recommended by ${recr.name}`, onPress: (textInput) => {this.props.actions.addRecWithRecr(textInput,recr)} });
+    });
+    Options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
+    AlertIOS.prompt('What did someone recommend?',null,Options);
   }
   renderRecList() {
     const Recs = this.props.state.recs.map((rec) => {
@@ -96,4 +92,4 @@ export default connect(state => ({
 (dispatch) => ({
   actions: bindActionCreators(chazActions, dispatch)
 })
-)(ListPage);
+)(RecList);

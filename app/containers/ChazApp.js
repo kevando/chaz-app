@@ -6,8 +6,8 @@ import React, { Component, Navigator, View, Styles, TouchableHighlight, Navigato
 import { bindActionCreators } from 'redux';
 
 
-import ListPage from './ListPage'; //
-
+import RecList from './RecList'; //
+import RecrList from './RecrList';
 
 import * as chazActions from '../actions/chazActions';
 import { connect } from 'react-redux';
@@ -17,12 +17,6 @@ import * as styles from '../styles/styles.js';
 const Firebase = require("firebase");
 var fireRef = new Firebase('https://chaz1.firebaseio.com');
 
-const listRoute = {
-  name: 'Home',
-  component: ListPage,
-  // leftCorner: GetSettings,
-  // rightCorner: SearchAndCompose
-};
 
 
 class ChazApp extends Component {
@@ -38,6 +32,8 @@ class ChazApp extends Component {
 
   componentDidMount() {
     this.props.actions.startListeningToAuth();
+    this.props.actions.listenForRecs();
+    this.props.actions.listenForRecrs(); // moving this here otherwise
   }
 
 
@@ -53,6 +49,12 @@ class ChazApp extends Component {
 
       ],
     );
+  }
+  onRightButtonPress() {
+    this.refs.nav.push({
+      title: 'Friends list',
+      component: RecrList
+    })
   }
 
 
@@ -73,13 +75,16 @@ class ChazApp extends Component {
       // console.log("User " + authData.uid + " is logged in with " + authData.provider);
       return (
         <NavigatorIOS
-        style={styles.navigatorContainer}
+          ref="nav"
+          style={styles.navigatorContainer}
           initialRoute={{
-            component: ListPage,
+            component: RecList,
               title: 'Chaz',
               passProps: { myProp: 'foo' },
               leftButtonTitle: 'Logout',
               onLeftButtonPress: this.props.actions.logUserOut,
+              rightButtonTitle: 'Friends',
+              onRightButtonPress: this.onRightButtonPress.bind(this)
           }}
         />
       );

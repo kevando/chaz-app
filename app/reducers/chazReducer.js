@@ -37,7 +37,12 @@ export default function chaz(state = initialState, action = {}) {
       return {
         ...state,
         recs: action.payload
-
+      }
+    case types.UPDATE_RECRS_LIST:
+      // New rec was added to then add it to the state tree
+      return {
+        ...state,
+        recrs: action.payload
       }
     case types.SORT_REC_LIST:   // refactor todo. this seems like a bad way to sort this shit
       var sortedRecs = state.recs;

@@ -1,3 +1,8 @@
+not sure that conditional works, but thats ok
+adding recr faisl
+
+how to determine recr grade
+
 # chaz
 app called chaz for chazzy people
 
@@ -27,3 +32,11 @@ beta onboarding idea:
 UI concepts
 horizontal scroll
 onDelete = this rec will self destruct in 5 seconds. your friend gets notified if it blows up
+
+
+
+data
+
+users/id/
+  recs(id,title,grade,recr_id,createdAt)
+  recrs(id,recs,)
