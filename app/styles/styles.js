@@ -56,6 +56,14 @@ var styles = StyleSheet.create({
     paddingRight:10,
     paddingBottom:2,
     paddingTop:2,
+    borderColor:'#fff',
+    borderWidth:1
+  },
+  filterRow: {
+    flex:1,
+    flexDirection:'row',
+    margin:5,
+
   },
   liTextRight: {
     color: '#333',

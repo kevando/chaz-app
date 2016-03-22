@@ -2,6 +2,7 @@
 //and simply react synchronously to an action notification just received.
 
 import * as types from '../actions/actionTypes';
+const _ = require('lodash');
 
 const initialState = {
   authData: {
@@ -13,6 +14,7 @@ const initialState = {
     // uid: null,
   },
   recSortOrder:'newest',
+  recFilterOrder:'all',
 };
 
 // i am still kind of confused why a reducer is the place to define an initial state
@@ -44,7 +46,7 @@ export default function chaz(state = initialState, action = {}) {
         ...state,
         recrs: action.payload
       }
-    case types.SORT_REC_LIST:   // refactor todo. this seems like a bad way to sort this shit
+    case types.SORT_REC_LIST:   // refactor todo. use lodash
       var sortedRecs = state.recs;
       sortedRecs.sort(function(a, b) {
         if(action.payload == 'oldest')
@@ -56,7 +58,19 @@ export default function chaz(state = initialState, action = {}) {
         ...state,
         recs: sortedRecs
       }
+      case types.FILTER_REC_LIST:
+        console.log('filtered list',state.recs)
+        var filteredRecs = state.recs;
 
+        if(action.payload == 'graded')
+          filteredRecs = _.filter(state.recs, function(rec) { return typeof rec.grade !== 'undefined'; }); //filteredRecs = _.filter(state.recs, ['grade', false]);
+        if(action.payload == 'ungraded')
+          filteredRecs = _.filter(state.recs, function(rec) { return typeof rec.grade === 'undefined'; }); //filteredRecs = _.filter(state.recs, ['grade', false]);
+
+        return{
+          ...state,
+          recs: filteredRecs
+        }
       // should probly also be a UI_SET_WORD
       // case types.SET_DEFINITION:
       //   return {

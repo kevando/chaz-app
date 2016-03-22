@@ -1,14 +1,16 @@
 'use strict';
 var React = require('react-native');
-const styles = require('../styles/styles.js')
+var _ = require('lodash');
+const styles = require('../styles/styles.js');
+const RecrView = require('./RecrView');
 const { View, TouchableHighlight, Text, AlertIOS } = React;
 
 class RecListItem extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.onAddHumanPress = this.onAddHumanPress.bind(this);
+    this.onRecrPress = this.onRecrPress.bind(this);
   }
 
   onAddHumanPress() {
@@ -20,6 +22,18 @@ class RecListItem extends React.Component {
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
 
     AlertIOS.prompt('Who recommended this?', null, options);
+  }
+  onRecrPress() {
+    const recrs = this.props.recrs;
+    var recr = this.props.rec.recr;
+    var recr = _.find(recrs, ['_key', recr._key]);
+    // console.log('calculated recr',recr)
+    var nav = this.props.navigator;
+    nav.push({
+      title: recr.name,
+      passProps: { recr: recr },
+      component: RecrView,
+    })
   }
   render() {
 
@@ -41,7 +55,10 @@ class RecListItem extends React.Component {
           </View>
           <View style={styles.liRight}>
           {( rec.recr != null
-            ? <Text style={styles.liTextRight}>{rec.recr.name}</Text>
+            ? <TouchableHighlight onPress={this.onRecrPress}>
+                <Text style={styles.liTextRight}>{rec.recr.name}</Text>
+              </TouchableHighlight>
+
             : <TouchableHighlight onPress={this.onAddHumanPress}>
                 <Text style={styles.recListItemRecHumanMissing}>+ Recommender</Text>
               </TouchableHighlight>

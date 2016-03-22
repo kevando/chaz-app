@@ -14,8 +14,8 @@ import { connect } from 'react-redux';
 
 import * as styles from '../styles/styles.js';
 
-const Firebase = require("firebase");
-var fireRef = new Firebase('https://chaz1.firebaseio.com');
+// const Firebase = require("firebase");
+// var fireRef = new Firebase('https://chaz1.firebaseio.com');
 
 
 
@@ -27,6 +27,7 @@ class ChazApp extends Component {
     this.state = {loading:false}
 
     this.openUsernamePopup = this.openUsernamePopup.bind(this);
+
 
   }
 
@@ -57,7 +58,6 @@ class ChazApp extends Component {
     })
   }
 
-
   render() {
     // console.log('state in ChazApp',this.props.state)
     if(this.state.loading){
@@ -80,7 +80,7 @@ class ChazApp extends Component {
           initialRoute={{
             component: RecList,
               title: 'Chaz',
-              passProps: { myProp: 'foo' },
+              passProps: { getNavigator: this.getNavigator },
               leftButtonTitle: 'Logout',
               onLeftButtonPress: this.props.actions.logUserOut,
               rightButtonTitle: 'Friends',

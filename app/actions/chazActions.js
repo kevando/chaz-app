@@ -173,7 +173,7 @@ export function listenForRecs() {
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
 
     recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
-      console.log('listenForRecs called')
+
       // get children as an array
       var items = [];
       snap.forEach((child) => {
@@ -183,10 +183,8 @@ export function listenForRecs() {
           recr: child.val().recr, // I feel like I shouldnt have to do this
           grade: child.val().grade, // I feel like I shouldnt have to do this
           createdAt: child.val().createdAt,
-          recr: child.val().recr,
         });
       });
-
       // This then pushes the list of items to the state array
       dispatch(updateRecsList(items));
     });
@@ -231,5 +229,11 @@ export function sortBy(orderBy){
     return {
       type: types.SORT_REC_LIST,
       payload:orderBy
+    }
+}
+export function filterBy(filterBy){
+    return {
+      type: types.FILTER_REC_LIST,
+      payload:filterBy
     }
 }

@@ -1,15 +1,9 @@
 import React, { Component, StyleSheet, View, ScrollView, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
 
-// import DufineListItem from '../components/DufineListItem'; //
-// import DufineView from './DufineView'; //
-// import TrashCan from './TrashCan'
-// import Welcome from './Welcome';
-// import Empty from '../components/Empty';
-
 // From the tweet app, this was a component, changing this to a container now so it has access to redux
 // at least i think thats how it works. here is the redux connection code
 import { bindActionCreators } from 'redux';
-import * as chazActions from '../actions/chazActions'; // not sure that i need this
+import * as chazActions from '../actions/chazActions';
 import { connect } from 'react-redux';
 
 const ActionButton = require('../components/ActionButton');
@@ -59,20 +53,21 @@ class RecList extends Component {
   }
   renderRecList() {
     const Recs = this.props.state.recs.map((rec) => {
-      return <RecListItem key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
+      return <RecListItem navigator={this.props.navigator} key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
     });
 
     return Recs;
   }
 
   render() {
+    console.log('state',this.props.state)
     if(!this.props.state.recs)
       return(<View style={{marginTop:200}}><Text>Loading Recs</Text></View>);
 
     return(
       <View style={styles.listContainer}>
         <ScrollView style={styles.listview} >
-          <FilterNav sortFunction={this.props.actions.sortBy} />
+          <FilterNav sortFunction={this.props.actions.sortBy} filterFunction={this.props.actions.filterBy} />
           {this.renderRecList()}
         </ScrollView>
         <ActionButton title="Add Recommedation" onPress={this.onAddRecPress.bind(this)} />
