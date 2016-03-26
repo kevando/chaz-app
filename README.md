@@ -11,3 +11,13 @@ iOS app written with React Native.
 `Run the xcode simulator`
 
 For more information about setting up a local dev environment, see the [React Native Documentation](https://facebook.github.io/react-native/docs/getting-started.html#content)
+
+## Screenshots
+
+#### Welcome Sceen: 
+![alt text][welcome]
+
+
+
+
+[welcome]: https://i.imgur.com/0rM849v.png "Welcome Screen"
