@@ -12,21 +12,24 @@ iOS app written with React Native.
 
 For more information about setting up a local dev environment, see the [React Native Documentation](https://facebook.github.io/react-native/docs/getting-started.html#content)
 
+## Deployment Steps
+
+
 ## Screenshots
 
-#### Welcome Sceen: 
+#### Welcome Sceen:
 ![alt text][welcome]
 
-#### Empty Sceen (no recommendations): 
+#### Empty Sceen (no recommendations):
 ![alt text][empty]
 
-#### Recomendation List (aka queue): 
+#### Recomendation List (aka queue):
 ![alt text][list]
 
-#### Add Rec (with quick add for recommender): 
+#### Add Rec (with quick add for recommender):
 ![alt text][add rec]
 
-#### Friend List (score value based only on graded recs): 
+#### Friend List (score value based only on graded recs):
 ![alt text][friend list]
 
 [welcome]: https://i.imgur.com/0rM849v.png "Welcome Screen"

@@ -19,10 +19,11 @@ class RecrView extends Component {
     //   console.log('dude')
     // });
     // const Recs = this.props.recr.recs.map((rec) => {
+    console.log('this.props.state.recrs',this.props.recr.recrs)
 
     var Recs = Array();
     _.forOwn(this.props.recr.recs, function(rec, key) {
-      Recs.push(<RecListItem key={rec._key} rec={rec} recrs={this.props.state.recrs} />)
+      // Recs.push(<RecListItem key={rec._key} rec={rec} recrs={this.props.recr.recrs} />)
 
     });
     console.log('Recs',Recs)
@@ -31,10 +32,11 @@ class RecrView extends Component {
 
 
   render() {
+    const recr = this.props.recr;
       return (
         <View style={styles.listContainer}>
           <ScrollView style={styles.listview} >
-
+            <View><Text>{recr.name}</Text></View>
             {this.renderRecList()}
           </ScrollView>
 

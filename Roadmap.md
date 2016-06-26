@@ -1,4 +1,17 @@
-### notes
+# Roadmap
+
+
+### Version 0.5
+#### Version I plan to push to people
+include app flow (dev doc)
+default to sort by newest
+i think filters have a bug
+add recs to recr view page
+fix auth flow. Manually create usernames. limits access
+refactor firebase database to correct names (create data versioning scheme)
+hopefully fix
+
+### notes ------------------
 
 
 probly just storing the auth token in the state
