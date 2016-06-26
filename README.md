@@ -1,18 +1,34 @@
 # chaz
 iOS app written with React Native.
 
-## Configure Development environment
-`git clone https://github.com/kevando/chaz.git`
+#### Configure Development environment
 
-`npm install`
-
-`npm start`
-
-`Run the xcode simulator`
+```sh
+$ karma start
+git clone https://github.com/kevando/chaz.git
+npm install
+npm start
+```
+Run xcode simulator
 
 For more information about setting up a local dev environment, see the [React Native Documentation](https://facebook.github.io/react-native/docs/getting-started.html#content)
 
 ## Deployment Steps
+### Build Steps
+ - update version
+ - do i need to bundle?
+ - uncomment line
+ - change to generic ios device
+ - product > archive
+
+### iTunes stuff
+ - validate (optional)
+ - upload to app store
+ - uncheck "include bitcode"
+
+### Distributing beta to new users (Internal Testing via Testflight)
+ - log into itunesconnect
+ - check latest build and distribute
 
 
 ## Screenshots
