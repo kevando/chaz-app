@@ -1,3 +1,4 @@
+
 'use strict';
 const React = require('react-native');
 const styles= require('../styles/styles.js');

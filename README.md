@@ -6,7 +6,7 @@ iOS app written with React Native.
 ```sh
 $ karma start
 git clone https://github.com/kevando/chaz.git
-npm install
+npm3 install
 npm start
 ```
 Run xcode simulator
@@ -18,6 +18,7 @@ For more information about setting up a local dev environment, see the [React Na
  - update version
  - do i need to bundle?
  - uncomment line
+ - Disable logging (I think)
  - change to generic ios device
  - product > archive
 

@@ -1,68 +1,32 @@
 # Roadmap
 
+installation is all fucked up.  fix this.
 
-### Version 0.5
-#### Version I plan to push to people
-include app flow (dev doc)
+### 0.6
 default to sort by newest
-i think filters have a bug
-add recs to recr view page
-fix auth flow. Manually create usernames. limits access
-refactor firebase database to correct names (create data versioning scheme)
-hopefully fix
-
-### notes ------------------
+change styling to more like podcasts/trello, consider ui improvement to add/edit flow
+  add friend % to rec list,  and improve some of the styling with emojis
+bug: rec list renders 3 times. need to squash that shiet
+recr view has list of their recs, sortable, filterable
+add recr % to global rec list
 
 
-probly just storing the auth token in the state
+### 0.7 (make ux more fun)
+add Rec View, make this editable (because people will make typos)
+add settings page with feedback form
+add analytics (try using segment and or mixpanel)
 
-chaz todo
+### Feature List
+ - more data (rec type, recr score by type)
+ - App notifications.
 
-username auth
-imsg onboarding
-start migrating ui/ux ideas from evernote to here
-
+### Onboarding Ideas
+use phone# + text message to confirm users
 
 beta onboarding idea:
- username > optional phone# to be a good beta tester
- "Chaz helps you remember the awesome things your friends tell you about" (this needs to be KILLER)
-  chaz encourages you to develop deeper/better relationships with the people in your life by helping you remember why the recommend things do you
-  giving us your phone number helps us communicate updates we make to your content
-    for example, if you write down "that jim carey movie where he is a pet detective, we want to change it to ace venture, but we want to make sure you get a heads up"
-
-  create user paths based on the "moment" in which they first open the app
-    rather than guessing what their moment is, ask!
 
 
 
-UI concepts
-horizontal scroll
+### UI/UX concepts
+Utilize horizontal scroll
 onDelete = this rec will self destruct in 5 seconds. your friend gets notified if it blows up
-
-
-
-data
-
-users/id/
-  recs(id,title,grade,recr_id,createdAt)
-  recrs(id,recs,)
-
-
-Figure out how to fucking load recs corretly
-sorting kinda works
-
-### 0.3
-Sets in place the data structure for the MVP
-Integrates GA tracking
-All firebase code is refactored into Redux format
-Create objects for recrs
-
-### 0.4
-Address onboarding issues
-  Ask Rob what our beta onboarding should be like (assuming YC)
-Implement color coordinated design
-deploy using codepush
-
-
-
-Add notifications

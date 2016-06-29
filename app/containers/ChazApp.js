@@ -4,31 +4,18 @@
 import Router from 'react-native-simple-router';
 import React, { Component, Navigator, View, Styles, TouchableHighlight, NavigatorIOS, AlertIOS, Text, StyleSheet, ActivityIndicatorIOS } from 'react-native'; // need View in order to stack the Header with DufineApp
 import { bindActionCreators } from 'redux';
-
-
 import RecList from './RecList'; //
 import RecrList from './RecrList';
-
 import * as chazActions from '../actions/chazActions';
 import { connect } from 'react-redux';
-
 import * as styles from '../styles/styles.js';
 
-// const Firebase = require("firebase");
-// var fireRef = new Firebase('https://chaz1.firebaseio.com');
-
-
-
 class ChazApp extends Component {
-
 
   constructor(props) {
     super(props);
     this.state = {loading:false}
-
     this.openUsernamePopup = this.openUsernamePopup.bind(this);
-
-
   }
 
   componentDidMount() {
@@ -44,8 +31,8 @@ class ChazApp extends Component {
       null,
       [
         {text: 'Cancel', onPress: (text) => console.log('Cancel')},
-        {text: 'SignUp', onPress: (text) => {this.props.actions.attemptCreateUser(text)}},
-        {text: 'LogIn', onPress: (text) => {this.props.actions.attemptLogin(text)}},
+        // {text: 'SignUp', onPress: (text) => {this.props.actions.attemptCreateUser(text)}},
+        {text: 'Log In', onPress: (text) => {this.props.actions.attemptLogin(text)}},
 
 
       ],

@@ -3,23 +3,24 @@ import * as types from './actionTypes';
 const Firebase = require('firebase');
 const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 
-export function attemptCreateUser(username) {
-    return (dispatch) => {
-      fireRef.createUser({
-        email: username+"@kevinhabich.com",
-        password: "1"
-      }, function(error, authData) {
-        if (error) {
-          console.log("Error creating user:", error);
-        } else {
-          console.log("Successfully created user account with user:", authData);
-
-          // This should get handled by the listener?
-          // this.attemptLogin(this.state.username);
-        }
-      });
-    }
-}
+// disabling new users for now
+// export function attemptCreateUser(username) {
+//     return (dispatch) => {
+//       fireRef.createUser({
+//         email: username+"@kevinhabich.com",
+//         password: "1"
+//       }, function(error, authData) {
+//         if (error) {
+//           console.log("Error creating user:", error);
+//         } else {
+//           console.log("Successfully created user account with user:", authData);
+//
+//           // This should get handled by the listener?
+//           // this.attemptLogin(this.state.username);
+//         }
+//       });
+//     }
+// }
 
 export function attemptLogin(username) {
 
@@ -30,8 +31,10 @@ export function attemptLogin(username) {
     }, function(error, authData) { // previously
       if (error) {
         console.log("Auth Failed!", error);
+        // todo handle invalid username
     } else {
       dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+      dispatch(getRecsList()); // on login, get new list of recs
     }
   });
 }
@@ -165,10 +168,38 @@ export function createNewRecr(recrName, rec){
 
   }
 }
+export function getRecsList() { // this function makes things a little better, but i still need to get this better
+  return (dispatch, getState) => {
+    console.log('getRectList');
+
+    const currentState = getState();
+
+    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+
+    recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
+
+      // get children as an array
+      var items = [];
+      snap.forEach((child) => {
+        items.push({
+          title: child.val().title,
+          _key: child.key(),
+          recr: child.val().recr, // I feel like I shouldnt have to do this
+          grade: child.val().grade, // I feel like I shouldnt have to do this
+          createdAt: child.val().createdAt,
+        });
+      });
+      // This then pushes the list of items to the state array
+      dispatch(updateRecsList(items));
+      dispatch(updateDisplayRecsList(items));
+
+    });
+  }
+}
 export function listenForRecs() {
-  // console.log('listen for recs action',this.state);
 
   return (dispatch, getState) => {
+    console.log('-chazActions listenForReces return',this.state);
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
 
@@ -187,6 +218,7 @@ export function listenForRecs() {
       });
       // This then pushes the list of items to the state array
       dispatch(updateRecsList(items));
+      dispatch(updateDisplayRecsList(items));
     });
   }
 }
@@ -218,6 +250,13 @@ export function updateRecsList(recs) {
     payload: recs
   }
 }
+export function updateDisplayRecsList(recs) {
+  return {
+    type: types.UPDATE_DISPLAY_RECS_LIST,
+    payload: recs
+  }
+}
+
 export function updateRecrsList(recrs) {
   return {
     type: types.UPDATE_RECRS_LIST,

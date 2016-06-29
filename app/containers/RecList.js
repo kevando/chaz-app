@@ -52,7 +52,7 @@ class RecList extends Component {
     AlertIOS.prompt('What did someone recommend?',null,Options);
   }
   renderRecList() {
-    const Recs = this.props.state.recs.map((rec) => {
+    const Recs = this.props.state.displayRecs.map((rec) => {
       return <RecListItem navigator={this.props.navigator} key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
     });
 
@@ -60,7 +60,7 @@ class RecList extends Component {
   }
 
   render() {
-    console.log('state',this.props.state)
+    console.log('RecList render',this.props.state)
     if(!this.props.state.recs)
       return(<View style={{marginTop:200}}><Text>Loading Recs</Text></View>);
 

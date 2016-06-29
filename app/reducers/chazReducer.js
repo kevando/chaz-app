@@ -15,6 +15,7 @@ const initialState = {
   },
   recSortOrder:'newest',
   recFilterOrder:'all',
+  // displayRecs: [] didnt work
 };
 
 // i am still kind of confused why a reducer is the place to define an initial state
@@ -40,6 +41,11 @@ export default function chaz(state = initialState, action = {}) {
         ...state,
         recs: action.payload
       }
+    case types.UPDATE_DISPLAY_RECS_LIST:
+      return {
+        ...state,
+        displayRecs: action.payload
+      }
     case types.UPDATE_RECRS_LIST:
       // New rec was added to then add it to the state tree
       return {
@@ -60,7 +66,7 @@ export default function chaz(state = initialState, action = {}) {
       }
       case types.FILTER_REC_LIST:
         console.log('filtered list',state.recs)
-        var filteredRecs = state.recs;
+        var filteredRecs = state.recs; // all
 
         if(action.payload == 'graded')
           filteredRecs = _.filter(state.recs, function(rec) { return typeof rec.grade !== 'undefined'; }); //filteredRecs = _.filter(state.recs, ['grade', false]);
@@ -69,7 +75,7 @@ export default function chaz(state = initialState, action = {}) {
 
         return{
           ...state,
-          recs: filteredRecs
+          displayRecs: filteredRecs
         }
       // should probly also be a UI_SET_WORD
       // case types.SET_DEFINITION:

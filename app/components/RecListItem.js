@@ -1,6 +1,8 @@
 'use strict';
 var React = require('react-native');
 var _ = require('lodash');
+var TimeAgo = require('react-native-timeago');
+var dateFormat = require('dateformat');
 const styles = require('../styles/styles.js');
 const RecrView = require('./RecrView');
 const { View, TouchableHighlight, Text, AlertIOS } = React;
@@ -35,6 +37,16 @@ class RecListItem extends React.Component {
       component: RecrView,
     })
   }
+  getDisplayDate(datetime) {
+    var displayDate = 'asdf';
+    var t = new Date(datetime);
+
+    //"2015-06-21T06:24:44.124Z"
+    // displayDate = dateFormat(t, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+    displayDate = dateFormat(t, "yyyy-MM-dd hh:MM.sss");
+
+    return t;
+  }
   render() {
 
     const rec = this.props.rec;
@@ -52,6 +64,9 @@ class RecListItem extends React.Component {
               ? <Text style={styles.recListItemRecGradeMissing}>{rec.grade} Stars</Text>
               : <Text style={styles.recListItemRecGradeMissing}>No Grade</Text>
             )}
+
+            <TimeAgo style={styles.recListItemRecGradeMissing} time={this.getDisplayDate(rec.createdAt) } />
+
           </View>
           <View style={styles.liRight}>
           {( rec.recr != null

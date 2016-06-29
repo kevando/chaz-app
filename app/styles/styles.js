@@ -24,9 +24,9 @@ var styles = StyleSheet.create({
     borderBottomColor: '#eee',
     borderColor: 'transparent',
     borderWidth: 1,
-    paddingLeft: 16,
-    paddingTop: 14,
-    paddingBottom: 16,
+    paddingLeft: 10,
+    paddingTop: 5,
+    paddingBottom: 5,
     flexDirection:'row',
 
   },
@@ -67,13 +67,13 @@ var styles = StyleSheet.create({
   },
   liTextRight: {
     color: '#333',
-    fontSize: 16,
+    fontSize: 13,
     textAlign:'right',
     marginRight:10
   },
   recListItemRecTitle: {
     color: '#333',
-    fontSize: 17,
+    fontSize: 14,
     fontWeight:'500'
   },
   recListItemRecGradeMissing: {
