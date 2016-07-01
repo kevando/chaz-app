@@ -2,7 +2,8 @@
 
 // Trying this router to see how it works
 import Router from 'react-native-simple-router';
-import React, { Component, Navigator, View, Styles, TouchableHighlight, NavigatorIOS, AlertIOS, Text, StyleSheet, ActivityIndicatorIOS } from 'react-native'; // need View in order to stack the Header with DufineApp
+import React, { Component } from 'react';
+import { Navigator, View, Styles, TouchableHighlight, NavigatorIOS, AlertIOS, Text, StyleSheet, ActivityIndicatorIOS } from 'react-native'; // need View in order to stack the Header with DufineApp
 import { bindActionCreators } from 'redux';
 import RecList from './RecList'; //
 import RecrList from './RecrList';

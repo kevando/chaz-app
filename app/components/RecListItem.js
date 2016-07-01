@@ -1,11 +1,11 @@
 'use strict';
-var React = require('react-native');
+import React, { Component } from 'react';
 var _ = require('lodash');
 var TimeAgo = require('react-native-timeago');
 var dateFormat = require('dateformat');
 const styles = require('../styles/styles.js');
-const RecrView = require('./RecrView');
-const { View, TouchableHighlight, Text, AlertIOS } = React;
+// const RecrView = require('./RecrView'); dont use for now
+import { StyleSheet, Text, View, TouchableHighlight, AlertIOS } from 'react-native';
 
 class RecListItem extends React.Component {
 

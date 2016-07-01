@@ -1,4 +1,5 @@
-import React, { Component, StyleSheet, View, ScrollView, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, ScrollView, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
 
 // From the tweet app, this was a component, changing this to a container now so it has access to redux
 // at least i think thats how it works. here is the redux connection code

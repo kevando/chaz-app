@@ -1,8 +1,9 @@
 'use strict';
-const React = require('react-native');
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 const styles= require('../styles/styles.js');
 const constants = styles.constants;
-const { StyleSheet, Component, Text, View, TouchableHighlight } = React;
+// const { StyleSheet, Text, View, TouchableHighlight } = React;
 
 class FilterNav extends Component {
 

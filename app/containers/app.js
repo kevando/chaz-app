@@ -1,4 +1,8 @@
-import React, { Component, Text, View, ActivityIndicatorIOS } from 'react-native';
+// import React, { Component, Text, View, ActivityIndicatorIOS } from 'react-native';
+
+import React, { Component } from 'react';
+import { View, Text, ActivityIndicatorIOS } from 'react-native';
+
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'; // I guess this is middleware
@@ -11,7 +15,7 @@ import * as storage from 'redux-storage'; //
 const reducer = storage.reducer(combineReducers(reducers)); // this is new from stoage package
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');
-const middleware = storage.createMiddleware(engine); 
+const middleware = storage.createMiddleware(engine);
 const createStoreWithMiddleware = applyMiddleware(thunk,middleware)(createStore);
 
 // do not use local storage
@@ -39,21 +43,21 @@ export default class App extends Component {
   render() {
     // Redux initial state will always default to loading
     if(this.state.loading)
-      load(store).then((newState) => this.setState({loading:false}));
+          load(store).then((newState) => this.setState({loading:false}));
 
-      if(this.state.loading){
+          if(this.state.loading){
+            return(
+              <ActivityIndicatorIOS
+              animating={this.state.loading}
+              style={{alignItems: 'center',justifyContent: 'center',height: 80}}
+              size="large"
+            />
+            )
+          }
         return(
-          <ActivityIndicatorIOS
-          animating={this.state.loading}
-          style={{alignItems: 'center',justifyContent: 'center',height: 80}}
-          size="large"
-        />
-        )
-      }
-    return(
-    <Provider store={store}>
-      <ChazApp />
-    </Provider>
-  );
+        <Provider store={store}>
+          <ChazApp />
+        </Provider>
+      );
   }
 }

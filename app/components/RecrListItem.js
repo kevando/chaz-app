@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react-native');
+// var React = require('react-native');
+import React, { Component } from 'react';
 const styles = require('../styles/styles.js')
 const _ = require('lodash');
 const { View, TouchableHighlight, Text, AlertIOS } = React;
