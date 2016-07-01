@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
-
-// From the tweet app, this was a component, changing this to a container now so it has access to redux
-// at least i think thats how it works. here is the redux connection code
 import { bindActionCreators } from 'redux';
 import * as chazActions from '../actions/chazActions'; // not sure that i need this
 import { connect } from 'react-redux';
@@ -10,8 +7,6 @@ import { connect } from 'react-redux';
 // const ActionButton = require('../components/ActionButton');
 // const FilterNav = require('../components/FilterNav');
 const RecrListItem = require('../components/RecrListItem');
-
-// const Firebase = require('firebase');
 
 import * as styles from '../styles/styles.js';
 

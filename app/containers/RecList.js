@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView, Text, TouchableHighlight, ListView, AlertIOS, ActivityIndicatorIOS } from 'react-native';
-
-// From the tweet app, this was a component, changing this to a container now so it has access to redux
-// at least i think thats how it works. here is the redux connection code
 import { bindActionCreators } from 'redux';
 import * as chazActions from '../actions/chazActions';
 import { connect } from 'react-redux';
@@ -10,8 +7,6 @@ import { connect } from 'react-redux';
 const ActionButton = require('../components/ActionButton');
 const FilterNav = require('../components/FilterNav');
 const RecListItem = require('../components/RecListItem');
-
-// const Firebase = require('firebase');
 
 import * as styles from '../styles/styles.js';
 
@@ -22,8 +17,6 @@ class RecList extends Component {
       loading:true,
     };
   }
-
-
 
   onItemPress(rec) {
 
@@ -52,6 +45,7 @@ class RecList extends Component {
     Options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
     AlertIOS.prompt('What did someone recommend?',null,Options);
   }
+
   renderRecList() {
     const Recs = this.props.state.displayRecs.map((rec) => {
       return <RecListItem navigator={this.props.navigator} key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
@@ -61,7 +55,7 @@ class RecList extends Component {
   }
 
   render() {
-    console.log('RecList render',this.props.state)
+    console.log('-- Render Rec List');
     if(!this.props.state.recs)
       return(<View style={{marginTop:200}}><Text>Loading Recs</Text></View>);
 
@@ -81,9 +75,8 @@ class RecList extends Component {
 }
 
 
-
-// export default ListPage;
 // I do not understand any of this..
+// this should probly change to limit scope
 export default connect(state => ({
   state: state.chaz // this grabs information from the reducer.
 }),

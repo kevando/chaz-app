@@ -12,6 +12,7 @@ import ChazApp from './ChazApp';
 
 // use local storage
 import * as storage from 'redux-storage'; //
+
 const reducer = storage.reducer(combineReducers(reducers)); // this is new from stoage package
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');

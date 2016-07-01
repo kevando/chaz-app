@@ -1,10 +1,10 @@
 
 'use strict';
-const React = require('react-native');
+import React, { Component } from 'react';
 const styles= require('../styles/styles.js');
 const RecListItem = require('./RecListItem');
 const constants = styles.constants;
-const { StyleSheet, Component, Text, View, TouchableHighlight,ScrollView } = React;
+import { StyleSheet, Text, View, TouchableHighlight,ScrollView } from 'react-native';
 
 class RecrView extends Component {
 
@@ -23,11 +23,11 @@ class RecrView extends Component {
     console.log('this.props.state.recrs',this.props.recr.recrs)
 
     var Recs = Array();
-    _.forOwn(this.props.recr.recs, function(rec, key) {
-      // Recs.push(<RecListItem key={rec._key} rec={rec} recrs={this.props.recr.recrs} />)
-
-    });
-    console.log('Recs',Recs)
+    // _.forOwn(this.props.recr.recs, function(rec, key) {
+    //   // Recs.push(<RecListItem key={rec._key} rec={rec} recrs={this.props.recr.recrs} />)
+    //
+    // });
+    // console.log('Recs',Recs)
     return Recs;
   }
 

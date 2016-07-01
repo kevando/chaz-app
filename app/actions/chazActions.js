@@ -66,9 +66,7 @@ export function logUserOut(){
 }
 
 export function addRec(recTitle) {
-  // creating a listener makes tons of sense because now I just need to add a rec
-  // to firebase, then the listener will catch it and add it to the state, then
-  // the new state will cause the app to re-render. Booyah!
+
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
@@ -76,13 +74,11 @@ export function addRec(recTitle) {
   }
 }
 export function addRecWithRecr(recTitle,recr) {
-  // creating a listener makes tons of sense because now I just need to add a rec
-  // to firebase, then the listener will catch it and add it to the state, then
-  // the new state will cause the app to re-render. Booyah!
+
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-    recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,recr:{name: recr.name,_key:recr._key} });
+    recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,recr:{name: recr.name,_key:recr._key},recrScore:recr.score });
   }
 }
 export function removeRec(recKey){
@@ -120,27 +116,48 @@ export function updateRecrScore(recrKey) {
       snapshot.forEach(function(childSnapshot) {
 
         var rec = childSnapshot.val();
-        console.log('rec',rec)
+        // console.log('rec',rec)
         if(typeof rec.grade !== 'undefined'){
-          console.log('rec.grade',rec.grade)
+          // console.log('rec.grade',rec.grade)
           totalGradedRecs++;
           recGradeSum += rec.grade;
         }
       });
     });
-    console.log('recGradeSum',recGradeSum);
-    console.log('totalGradedRecs',totalGradedRecs);
+    // console.log('recGradeSum',recGradeSum);
+    // console.log('totalGradedRecs',totalGradedRecs);
     if(totalGradedRecs > 0)
       score = (recGradeSum/totalGradedRecs)*20;
     else
       score = 'No Score';
 
     recrRef.update({score: score});
+    dispatch(updateRecRecrScore(recrKey,score));
 
   }
 
 }
+// adding recr score to all recs. this is where that gets updateDisplayRecsList
+// it gets dispatched after a new recr score is created
+export function updateRecRecrScore(recrKey, score) {
+  return function(dispatch, getState) {
+    console.log('updateRecRecrScore');
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+    recsRef.once("value", function(snapshot) {
 
+      snapshot.forEach(function(childSnapshot) {
+        var rec = childSnapshot.val();
+        if(rec.recr._key == recrKey){
+          var recRef = recsRef.child(childSnapshot.key())
+          recRef.update({recrScore: score})
+        }
+
+      });
+    });
+  }
+
+}
 export function assignExistingRecr(recr, rec){
 
   return function(dispatch, getState) {
@@ -187,6 +204,7 @@ export function getRecsList() { // this function makes things a little better, b
           recr: child.val().recr, // I feel like I shouldnt have to do this
           grade: child.val().grade, // I feel like I shouldnt have to do this
           createdAt: child.val().createdAt,
+          recrScore: child.val().recrScore
         });
       });
       // This then pushes the list of items to the state array
@@ -214,6 +232,7 @@ export function listenForRecs() {
           recr: child.val().recr, // I feel like I shouldnt have to do this
           grade: child.val().grade, // I feel like I shouldnt have to do this
           createdAt: child.val().createdAt,
+          recrScore: child.val().recrScore
         });
       });
       // This then pushes the list of items to the state array

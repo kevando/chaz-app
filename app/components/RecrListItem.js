@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 const styles = require('../styles/styles.js')
 const _ = require('lodash');
-const { View, TouchableHighlight, Text, AlertIOS } = React;
+import { View, TouchableHighlight, Text, AlertIOS } from 'react-native';
+
 class RecrListItem extends React.Component {
 
   constructor(props) {

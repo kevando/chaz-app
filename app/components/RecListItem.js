@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 var _ = require('lodash');
 var TimeAgo = require('react-native-timeago');
 var dateFormat = require('dateformat');
+// var Emoji = require('react-native-emoji');
+import Emoji from 'react-native-emoji'
 const styles = require('../styles/styles.js');
-// const RecrView = require('./RecrView'); dont use for now
+const RecrView = require('./RecrView');
 import { StyleSheet, Text, View, TouchableHighlight, AlertIOS } from 'react-native';
+
 
 class RecListItem extends React.Component {
 
@@ -37,14 +40,22 @@ class RecListItem extends React.Component {
       component: RecrView,
     })
   }
+  getDisplayGrade(grade) { // this should probly be its own component
+    if(grade == 0 || grade == null)
+      return;
+
+    var stars = [];
+    for (var i=0; i < grade; i++) {
+      stars.push(<Emoji key={i} name="star" />);
+    }
+    return <Text style={styles.recListItemRecGradeMissing}>{stars}</Text>;
+  }
+
+
   getDisplayDate(datetime) {
     var displayDate = 'asdf';
     var t = new Date(datetime);
-
-    //"2015-06-21T06:24:44.124Z"
-    // displayDate = dateFormat(t, "dddd, mmmm dS, yyyy, h:MM:ss TT");
     displayDate = dateFormat(t, "yyyy-MM-dd hh:MM.sss");
-
     return t;
   }
   render() {
@@ -60,18 +71,17 @@ class RecListItem extends React.Component {
         <View style={styles.li}>
           <View style={styles.liLeft}>
             <Text style={styles.recListItemRecTitle}>{rec.title}</Text>
-            {( rec.grade != null
-              ? <Text style={styles.recListItemRecGradeMissing}>{rec.grade} Stars</Text>
-              : <Text style={styles.recListItemRecGradeMissing}>No Grade</Text>
-            )}
-
+            {this.getDisplayGrade(rec.grade)}
             <TimeAgo style={styles.recListItemRecGradeMissing} time={this.getDisplayDate(rec.createdAt) } />
 
           </View>
           <View style={styles.liRight}>
           {( rec.recr != null
             ? <TouchableHighlight onPress={this.onRecrPress}>
-                <Text style={styles.liTextRight}>{rec.recr.name}</Text>
+                <View>
+                  <Text style={styles.liTextRight}>{rec.recr.name}</Text>
+                  <Text style={styles.liTextRight}>{rec.recrScore}%</Text>
+                </View>
               </TouchableHighlight>
 
             : <TouchableHighlight onPress={this.onAddHumanPress}>
