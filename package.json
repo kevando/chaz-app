@@ -6,17 +6,7 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "dateformat": "^1.0.12",
-    "firebase": "^2.4.1",
-    "lodash": "^4.6.1",
-    "react": "^15.1.0",
-    "react-native": "^0.21.0",
-    "react-native-simple-router": "^0.8.4",
-    "react-native-timeago": "^0.3.0",
-    "react-redux": "^4.4.0",
-    "redux": "^3.3.1",
-    "redux-storage": "^4.0.0",
-    "redux-storage-engine-reactnativeasyncstorage": "^1.0.0",
-    "redux-thunk": "^2.0.1"
+    "react": "15.1.0",
+    "react-native": "^0.28.0"
   }
 }
