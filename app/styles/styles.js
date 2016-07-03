@@ -1,7 +1,13 @@
 const React = require('react-native')
 const {StyleSheet} = React
 const constants = {
-  actionColor: '#24CE84'
+  actionColor: '#24CE84',
+
+    color1: '#772D8B',
+    color2: '#FE5F55',
+    color3: '#333745',
+    color4: '#777777', // light grey
+    color5: '#7A7978',
 };
 
 var styles = StyleSheet.create({
@@ -28,28 +34,21 @@ var styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     flexDirection:'row',
-
   },
   liContainer: {
     flex: 5,
-
   },
   liLeft: {
-
-    // backgroundColor: 'red',
     flex:2
   },
   liRight: {
-
-
-    // flexDirection: 'row',
     flex:1,
-
   },
   filterContainer: {
-    backgroundColor:'#ddd',
+    backgroundColor:constants.color4,
     marginTop:0,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop:65, // not sure why I have to add this, think it has something to do with loader
   },
   filterButton: {
     paddingLeft:10,
@@ -57,7 +56,8 @@ var styles = StyleSheet.create({
     paddingBottom:2,
     paddingTop:2,
     borderColor:'#fff',
-    borderWidth:1
+    borderWidth:1,
+    color:'#fff'
   },
   filterRow: {
     flex:1,
@@ -118,14 +118,21 @@ var styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     textAlign: 'center',
+    backgroundColor: constants.color2,
+    paddingTop:13,
+    paddingBottom: 13
+  },
+  actionTouch: {
+    backgroundColor: constants.color2,
+    padding:2
   },
   action: {
-    backgroundColor: constants.actionColor,
+
     borderColor: 'transparent',
-    borderWidth: 1,
-    paddingLeft: 16,
-    paddingTop: 14,
-    paddingBottom: 16,
+    borderWidth: 0,
+    paddingLeft: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   // chaz
   containerTmp: {
@@ -148,5 +155,16 @@ var styles = StyleSheet.create({
   }
 })
 
+function isSortActive(orderBy,recSort){
+  if(orderBy == recSort)
+    return {backgroundColor:'#fff',color:constants.color4}
+}
+function isFilterActive(filter,recFilter){
+  if(filter == recFilter)
+    return {backgroundColor:'#fff',color:constants.color4}
+}
+
 module.exports = styles
 module.exports.constants = constants;
+module.exports.isSortActive = isSortActive;
+module.exports.isFilterActive = isFilterActive;

@@ -21,9 +21,9 @@ class RecListItem extends React.Component {
   onAddHumanPress() {
     var options = Array();
     options.push({text: 'Add New',  onPress: (recr) => {this.props.createNewRecrFunction(recr,this.props.rec)}    });
-    var recrs = this.props.recrs.map((recr) => {
-      options.push({text: recr.name, onPress: () => {this.props.assignExistingRecrFunction(recr,this.props.rec)} });
-    });
+    // var recrs = this.props.recrs.map((recr) => {
+    //   options.push({text: recr.name, onPress: () => {this.props.assignExistingRecrFunction(recr,this.props.rec)} });
+    // });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
 
     AlertIOS.prompt('Who recommended this?', null, options);

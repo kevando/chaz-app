@@ -13,8 +13,8 @@ const initialState = {
     // token: null,
     // uid: null,
   },
-  recSortOrder:'newest',
-  recFilterOrder:'all',
+  recSort:'newest',
+  recFilter:'all',
   // displayRecs: [] didnt work
 };
 
@@ -28,12 +28,10 @@ export default function chaz(state = initialState, action = {}) {
   switch (action.type) {
 
     case types.SET_AUTH_DATA:
-
       return {
-          ...state,
-          authData: action.payload
-
-        };
+        ...state,
+        authData: action.payload
+      };
 
     case types.UPDATE_RECS_LIST:
       // New rec was added to then add it to the state tree
@@ -41,10 +39,40 @@ export default function chaz(state = initialState, action = {}) {
         ...state,
         recs: action.payload
       }
-    case types.UPDATE_DISPLAY_RECS_LIST:
+    case types.UPDATE_DISPLAY_RECS_FILTER:
       return {
         ...state,
-        displayRecs: action.payload
+        recFilter: action.payload
+      }
+    case types.UPDATE_DISPLAY_RECS_SORT:
+      return {
+        ...state,
+        recSort: action.payload
+      }
+
+    case types.UPDATE_DISPLAY_RECS_LIST:
+      // FILTER RECS
+      var displayRecs = state.recs; // all recs
+      if(state.recFilter == 'graded')
+        displayRecs = _.filter(state.recs, function(rec) { return typeof rec.grade !== 'undefined'; });
+      if(state.recFilter == 'ungraded')
+        displayRecs = _.filter(state.recs, function(rec) { return typeof rec.grade === 'undefined'; });
+
+      // SORT RECS
+      displayRecs.sort(function(a, b) {
+        if(state.recSort == 'oldest')
+          return parseFloat(a.createdAt) - parseFloat(b.createdAt);
+        if(state.recSort == 'newest')
+          return parseFloat(b.createdAt) - parseFloat(a.createdAt);
+        if(state.recSort == 'best'){
+          console.log('SORT BY BEST');
+          return parseFloat(b.recrScore) - parseFloat(a.recrScore);
+        }
+      });
+
+      return {
+        ...state,
+        displayRecs: displayRecs
       }
     case types.UPDATE_RECRS_LIST:
       // New rec was added to then add it to the state tree
@@ -52,112 +80,9 @@ export default function chaz(state = initialState, action = {}) {
         ...state,
         recrs: action.payload
       }
-    case types.SORT_REC_LIST:   // refactor todo. use lodash
-      var sortedRecs = state.recs;
-      sortedRecs.sort(function(a, b) {
-        if(action.payload == 'oldest')
-          return parseFloat(a.createdAt) - parseFloat(b.createdAt);
-        else // oldest
-          return parseFloat(b.createdAt) - parseFloat(a.createdAt);
-      });
-      return{
-        ...state,
-        recs: sortedRecs
-      }
-      case types.FILTER_REC_LIST:
-        console.log('filtered list',state.recs)
-        var filteredRecs = state.recs; // all
 
-        if(action.payload == 'graded')
-          filteredRecs = _.filter(state.recs, function(rec) { return typeof rec.grade !== 'undefined'; }); //filteredRecs = _.filter(state.recs, ['grade', false]);
-        if(action.payload == 'ungraded')
-          filteredRecs = _.filter(state.recs, function(rec) { return typeof rec.grade === 'undefined'; }); //filteredRecs = _.filter(state.recs, ['grade', false]);
 
-        return{
-          ...state,
-          displayRecs: filteredRecs
-        }
-      // should probly also be a UI_SET_WORD
-      // case types.SET_DEFINITION:
-      //   return {
-      //     ...state,
-      //     ui: {
-      //       dufine: {
-      //         word: "fresh",
-      //         definition: action.payload
-      //       }
-      //
-      //     }
-      //   }
-      //
-      // case types.CLEAR_ACTIVE_DUFINE:
-      //   return {
-      //     ...state,
-      //     ui: {
-      //       dufine: null // this might need to change if ui gets more objects
-      //     }
-      //   }
-      //   case types.SET_ACTIVE_DUFINE:
-      //     return {
-      //       ...state,
-      //       ui: {
-      //         dufine: action.payload
-      //       }
-      //     }
-      //
-      // //
-      // // When a user clicks save
-      // //
-      // case types.SAVE_DUFINE:
-      // GoogleAnalytics.trackEvent('Dufine','Added', { label: state.ui.dufine.definition.word } );
-      //   return {
-      //     ...state,
-      //     dufines: [
-      //       ...state.dufines,
-      //       {
-      //         word: state.ui.dufine.definition.word.toLowerCase(),
-      //         photo: state.ui.dufine.photo,
-      //         definition: state.ui.dufine.definition
-      //       }
-      //     ]
-      //   };
-      //
-      //   case types.DELETE_DUFINE:
-      //     GoogleAnalytics.trackEvent('Dufine','Deleted', { label: state.ui.dufine.definition.word } );
-      //     var elementPosition = state.dufines.map(function(dufine) {return dufine.definition.word; }).indexOf(state.ui.dufine.definition.word);
-      //     var firstHalf = state.dufines.slice(0, elementPosition);
-      //     var secondHalf = state.dufines.slice(elementPosition + 1)
-      //
-      //     return {
-      //       ...state,
-      //       dufines: [
-      //         ...firstHalf,
-      //         ...secondHalf
-      //       ],
-      //     }
-      //
-      // case types.CLEAR_WELCOME_FLAG:
-      //   return {
-      //     ...state,
-      //     showWelcome: false,
-      //   }
-      // //
-      // // When a user uploads a Photo
-      // //
-      // case types.SAVE_PHOTO: // change to this to set photo
-      //   return {
-      //     ...state,
-      //     ui: {
-      //       dufine: {
-      //         word: state.ui.dufine.word,
-      //         photo: action.payload,
-      //         definition: state.ui.dufine.definition
-      //       }
-      //
-      //     }
-      //   }
-      default:
-        // console.log('state, via reducer default catch all',state);
+      default: // catch all
         return state;
   };
 }

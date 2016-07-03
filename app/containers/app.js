@@ -1,11 +1,11 @@
-// import React, { Component, Text, View, ActivityIndicatorIOS } from 'react-native';
-
+// Core React
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicatorIOS } from 'react-native';
-
+import { View, Text } from 'react-native';
+// Redux stuff
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk'; // I guess this is middleware
+
+import thunk from 'redux-thunk'; // Middleware that lets us  return promises in redux (I think)
 
 import * as reducers from '../reducers';
 import ChazApp from './ChazApp';
@@ -13,15 +13,18 @@ import ChazApp from './ChazApp';
 // use local storage
 import * as storage from 'redux-storage'; //
 
-const reducer = storage.reducer(combineReducers(reducers)); // this is new from stoage package
+import createLogger from 'redux-logger';
+const logger = createLogger();
+
+//const reducer = storage.reducer(combineReducers(reducers)); // this is new from stoage package
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');
 const middleware = storage.createMiddleware(engine);
-const createStoreWithMiddleware = applyMiddleware(thunk,middleware)(createStore);
+// const createStoreWithMiddleware = applyMiddleware(thunk, middleware, logger)(createStore);
 
 // do not use local storage
-// const reducer = combineReducers(reducers);
-// const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const reducer = combineReducers(reducers);
+const createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore);
 
 // use this either storage or not
 const store = createStoreWithMiddleware(reducer);
@@ -48,11 +51,7 @@ export default class App extends Component {
 
           if(this.state.loading){
             return(
-              <ActivityIndicatorIOS
-              animating={this.state.loading}
-              style={{alignItems: 'center',justifyContent: 'center',height: 80}}
-              size="large"
-            />
+              <View><Text>Loading</Text></View>
             )
           }
         return(

@@ -1,26 +1,9 @@
 import * as types from './actionTypes';
 
-const Firebase = require('firebase');
+const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
 const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 
-// disabling new users for now
-// export function attemptCreateUser(username) {
-//     return (dispatch) => {
-//       fireRef.createUser({
-//         email: username+"@kevinhabich.com",
-//         password: "1"
-//       }, function(error, authData) {
-//         if (error) {
-//           console.log("Error creating user:", error);
-//         } else {
-//           console.log("Successfully created user account with user:", authData);
-//
-//           // This should get handled by the listener?
-//           // this.attemptLogin(this.state.username);
-//         }
-//       });
-//     }
-// }
+const _ = require('lodash');
 
 export function attemptLogin(username) {
 
@@ -32,12 +15,9 @@ export function attemptLogin(username) {
       if (error) {
         console.log("Auth Failed!", error);
         // todo handle invalid username
-    } else {
-      dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-      dispatch(getRecsList()); // on login, get new list of recs
-    }
-  });
-}
+      }
+    });
+  }
 
 }
 // This works for login and logout
@@ -52,8 +32,10 @@ export function setAuthData(authData){
 export function startListeningToAuth() {
   return (dispatch, getState) => {
     fireRef.onAuth(function(authData){
-        if (authData)
+        if (authData){
           dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+          dispatch(getRecList()); // consider putting the listener here.
+        }
     });
   }
 }
@@ -65,32 +47,32 @@ export function logUserOut(){
   };
 }
 
-export function addRec(recTitle) {
+//
+//  Begin REC functions
+//
 
+export function addRec(recTitle) {                  // ADD NEW REC
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
     recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
   }
 }
-export function addRecWithRecr(recTitle,recr) {
-
+export function addRecWithRecr(recTitle,recr) {     // ADD REC WITH REC
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
     recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,recr:{name: recr.name,_key:recr._key},recrScore:recr.score });
   }
 }
-export function removeRec(recKey){
+export function removeRec(recKey){                  // REMOVE REC
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-    // const recrRecsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${recr._key}/recs`);
-    recsRef.child(recKey).remove();
-    // recrRecsRef.child(recKey).remove(); // probly should be a listener
+    recsRef.child(recKey).remove(); // can this be a listenr?
   }
 }
-export function setRecGrade(rec, grade){ // args dont feel right
+export function setRecGrade(rec, grade){            // UPDATE REC GRADE
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
@@ -116,23 +98,25 @@ export function updateRecrScore(recrKey) {
       snapshot.forEach(function(childSnapshot) {
 
         var rec = childSnapshot.val();
-        // console.log('rec',rec)
+        console.log('recc',rec)
         if(typeof rec.grade !== 'undefined'){
           // console.log('rec.grade',rec.grade)
           totalGradedRecs++;
           recGradeSum += rec.grade;
         }
       });
-    });
-    // console.log('recGradeSum',recGradeSum);
-    // console.log('totalGradedRecs',totalGradedRecs);
-    if(totalGradedRecs > 0)
-      score = (recGradeSum/totalGradedRecs)*20;
-    else
-      score = 'No Score';
+      // console.log('1 recGradeSum',recGradeSum);
+      // console.log('1 totalGradedRecs',totalGradedRecs);
+      if(totalGradedRecs > 0)
+        score = (recGradeSum/totalGradedRecs)*20;
+      else
+        score = 'No Score';
 
-    recrRef.update({score: score});
-    dispatch(updateRecRecrScore(recrKey,score));
+      recrRef.update({score: score});
+      dispatch(updateRecRecrScore(recrKey,score));
+    });
+
+
 
   }
 
@@ -147,10 +131,14 @@ export function updateRecRecrScore(recrKey, score) {
     recsRef.once("value", function(snapshot) {
 
       snapshot.forEach(function(childSnapshot) {
+
         var rec = childSnapshot.val();
-        if(rec.recr._key == recrKey){
-          var recRef = recsRef.child(childSnapshot.key())
-          recRef.update({recrScore: score})
+        // this code is shit, but whatever.
+        if(rec.recr){ // shit bugs out when there is no recr
+          if(rec.recr._key == recrKey){
+            var recRef = recsRef.child(childSnapshot.key())
+            recRef.update({recrScore: score})
+          }
         }
 
       });
@@ -175,26 +163,49 @@ export function assignExistingRecr(recr, rec){
   }
 
 }
-export function createNewRecr(recrName, rec){
+export function createNewRecr(recrName, rec){   // this function should get refacctored later. data could be better arranged
   return function(dispatch, getState) {
     const currentState = getState();
     const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
 
-    var newRecr = recrsRef.push({ name: recrName, createdAt: Firebase.ServerValue.TIMESTAMP, });
-    dispatch(assignExistingRecr({_key:newRecr.key(),name:recrName},rec));
+    recrsRef.orderByChild("name").equalTo(recrName).on('value', (snapshot) => {
+
+      if(snapshot.exists()){
+
+        var recr = snapshot.val();
+        console.log('a recr by this name exists!',recr);
+        // this is so bad that I am doing it this way, but I cant fucking figure out how to get this damn key
+        _.findKey(recr, function(recr,recrKey) {
+          console.log(recrKey); // should only ever return once
+          dispatch(assignExistingRecr({_key:recrKey,name:recrName},rec));
+          // todo refactor this shit def needs to change
+          dispatch(updateRecRecrScore(recrKey,recr.score));
+        });
+
+
+
+
+      } else {
+        console.log('CREATE NEW RECR');
+        var newRecr = recrsRef.push({ name: recrName, createdAt: Firebase.ServerValue.TIMESTAMP, });
+        dispatch(assignExistingRecr({_key:newRecr.key(),name:recrName},rec));
+      }
+
+
+    });
+
+
+
 
   }
 }
-export function getRecsList() { // this function makes things a little better, but i still need to get this better
+export function getRecList() { // this probly bad,  not using anymore
   return (dispatch, getState) => {
     console.log('getRectList');
 
     const currentState = getState();
-
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-
     recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
-
       // get children as an array
       var items = [];
       snap.forEach((child) => {
@@ -208,36 +219,20 @@ export function getRecsList() { // this function makes things a little better, b
         });
       });
       // This then pushes the list of items to the state array
-      dispatch(updateRecsList(items));
-      dispatch(updateDisplayRecsList(items));
+      if(items.length > 0){
+        dispatch(updateRecsList(items));
+        dispatch(updateDisplayRecsList(items));
+      }
 
     });
   }
 }
 export function listenForRecs() {
-
   return (dispatch, getState) => {
-    console.log('-chazActions listenForReces return',this.state);
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-
-    recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
-
-      // get children as an array
-      var items = [];
-      snap.forEach((child) => {
-        items.push({
-          title: child.val().title,
-          _key: child.key(),
-          recr: child.val().recr, // I feel like I shouldnt have to do this
-          grade: child.val().grade, // I feel like I shouldnt have to do this
-          createdAt: child.val().createdAt,
-          recrScore: child.val().recrScore
-        });
-      });
-      // This then pushes the list of items to the state array
-      dispatch(updateRecsList(items));
-      dispatch(updateDisplayRecsList(items));
+    recsRef.on('value', (snap) => {
+        dispatch(getRecList());
     });
   }
 }
@@ -263,16 +258,29 @@ export function listenForRecrs() {
   }
 }
 
+// Display Rec list functions
+export function updateDisplayRecsFilter(filter) {
+  return {
+    type: types.UPDATE_DISPLAY_RECS_FILTER,
+    payload: filter
+  }
+}
+export function updateDisplayRecsSort(orderBy) {
+  return {
+    type: types.UPDATE_DISPLAY_RECS_SORT,
+    payload: orderBy
+  }
+}
 export function updateRecsList(recs) {
   return {
     type: types.UPDATE_RECS_LIST,
     payload: recs
   }
 }
-export function updateDisplayRecsList(recs) {
+export function updateDisplayRecsList() {
   return {
     type: types.UPDATE_DISPLAY_RECS_LIST,
-    payload: recs
+    // payload: recs
   }
 }
 
@@ -281,17 +289,4 @@ export function updateRecrsList(recrs) {
     type: types.UPDATE_RECRS_LIST,
     payload: recrs
   }
-}
-
-export function sortBy(orderBy){
-    return {
-      type: types.SORT_REC_LIST,
-      payload:orderBy
-    }
-}
-export function filterBy(filterBy){
-    return {
-      type: types.FILTER_REC_LIST,
-      payload:filterBy
-    }
 }

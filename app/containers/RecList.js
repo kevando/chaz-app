@@ -4,9 +4,11 @@ import { bindActionCreators } from 'redux';
 import * as chazActions from '../actions/chazActions';
 import { connect } from 'react-redux';
 
-const ActionButton = require('../components/ActionButton');
-const FilterNav = require('../components/FilterNav');
-const RecListItem = require('../components/RecListItem');
+import ActionButton from './ActionButton';
+import FilterNav from './FilterNav';
+import RecListItem from '../components/RecListItem';
+
+import Loading from '../components/Loading';
 
 import * as styles from '../styles/styles.js';
 
@@ -36,19 +38,17 @@ class RecList extends Component {
       );
   }
 
-  onAddRecPress() {
-    var Options = Array();
-    Options.push({ text: 'Add New Recommendation', onPress: (textInput) => {this.props.actions.addRec(textInput)} })
-    var recrs = this.props.state.recrs.map((recr) => {
-      Options.push({text: `Recommended by ${recr.name}`, onPress: (textInput) => {this.props.actions.addRecWithRecr(textInput,recr)} });
-    });
-    Options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-    AlertIOS.prompt('What did someone recommend?',null,Options);
-  }
+
 
   renderRecList() {
     const Recs = this.props.state.displayRecs.map((rec) => {
-      return <RecListItem navigator={this.props.navigator} key={rec._key} rec={rec} recrs={this.props.state.recrs} assignExistingRecrFunction={this.props.actions.assignExistingRecr}  createNewRecrFunction={this.props.actions.createNewRecr} onPress={this.onItemPress.bind(this,rec)} />
+      return <RecListItem
+        navigator={this.props.navigator}
+        key={rec._key} rec={rec}
+        recrs={this.props.state.recrs}
+        assignExistingRecrFunction={this.props.actions.assignExistingRecr}
+        createNewRecrFunction={this.props.actions.createNewRecr}
+        onPress={this.onItemPress.bind(this,rec)} />
     });
 
     return Recs;
@@ -56,16 +56,16 @@ class RecList extends Component {
 
   render() {
     console.log('-- Render Rec List');
-    if(!this.props.state.recs)
-      return(<View style={{marginTop:200}}><Text>Loading Recs</Text></View>);
+    if(!this.props.state.displayRecs)
+      return(<Loading text="Loading Display Recs" />);
 
     return(
       <View style={styles.listContainer}>
         <ScrollView style={styles.listview} >
-          <FilterNav sortFunction={this.props.actions.sortBy} filterFunction={this.props.actions.filterBy} />
+          <FilterNav />
           {this.renderRecList()}
         </ScrollView>
-        <ActionButton title="Add Recommedation" onPress={this.onAddRecPress.bind(this)} />
+        <ActionButton title="Add Recommedation" />
       </View>
     )
 
