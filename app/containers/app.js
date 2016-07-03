@@ -24,7 +24,7 @@ const middleware = storage.createMiddleware(engine);
 
 // do not use local storage
 const reducer = combineReducers(reducers);
-const createStoreWithMiddleware = applyMiddleware(thunk,logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
 // use this either storage or not
 const store = createStoreWithMiddleware(reducer);

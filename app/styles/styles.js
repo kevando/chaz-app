@@ -1,13 +1,20 @@
 const React = require('react-native')
 const {StyleSheet} = React
 const constants = {
-  actionColor: '#24CE84',
+  hearts: [
+    'green_heart',
+    'blue_heart',
+    'purple_heart',
+    'yellow_heart',
+  ],
+  colors: [
+    '#78B159',
+    '#5DADEC',
+    '#AA8ED6',
+    '#FFE550',
+    '#3F3F3F',
+  ],
 
-    color1: '#772D8B',
-    color2: '#FE5F55',
-    color3: '#333745',
-    color4: '#777777', // light grey
-    color5: '#7A7978',
 };
 
 var styles = StyleSheet.create({
@@ -45,7 +52,7 @@ var styles = StyleSheet.create({
     flex:1,
   },
   filterContainer: {
-    backgroundColor:constants.color4,
+    backgroundColor:constants.colors[4],
     marginTop:0,
     alignItems: 'center',
     marginTop:65, // not sure why I have to add this, think it has something to do with loader
@@ -82,6 +89,7 @@ var styles = StyleSheet.create({
     fontWeight:'300',
 
   },
+
   recListItemRecHumanMissing: {
     color: '#fff',
     fontSize: 12,
@@ -90,7 +98,8 @@ var styles = StyleSheet.create({
     color:'blue',
     flex:1,
     padding:2,
-    textAlign:'center'
+    textAlign:'center',
+    backgroundColor: 'red'
   },
   navbar: {
     alignItems: 'center',
@@ -118,12 +127,11 @@ var styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     textAlign: 'center',
-    backgroundColor: constants.color2,
     paddingTop:13,
     paddingBottom: 13
   },
   actionTouch: {
-    backgroundColor: constants.color2,
+    backgroundColor: constants.colors[1],
     padding:2
   },
   action: {
@@ -152,6 +160,22 @@ var styles = StyleSheet.create({
   },
   navigatorContainer:{
     flex:1,
+  },
+  loadingView: {
+    backgroundColor: 'red',
+
+
+    flex:1,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  loadingText: {
+    // flex:1,
+    width: 100,
+    textAlign: 'center',
+    backgroundColor:'blue',
+
   }
 })
 

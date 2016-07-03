@@ -35,6 +35,8 @@ export function startListeningToAuth() {
         if (authData){
           dispatch(setAuthData(authData)); // reminder this is only possible with thunk
           dispatch(getRecList()); // consider putting the listener here.
+          dispatch(getRecrList()); // consider putting the listener here.
+          // todo these should def be listeners
         }
     });
   }
@@ -201,33 +203,38 @@ export function createNewRecr(recrName, rec){   // this function should get refa
 }
 export function getRecList() { // this probly bad,  not using anymore
   return (dispatch, getState) => {
-    console.log('getRectList');
+
 
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
     recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
       // get children as an array
       var items = [];
-      snap.forEach((child) => {
-        items.push({
-          title: child.val().title,
-          _key: child.key(),
-          recr: child.val().recr, // I feel like I shouldnt have to do this
-          grade: child.val().grade, // I feel like I shouldnt have to do this
-          createdAt: child.val().createdAt,
-          recrScore: child.val().recrScore
+      // force a delay to watch the loading state
+      setTimeout(function(){
+        snap.forEach((child) => {
+          items.push({
+            title: child.val().title,
+            _key: child.key(),
+            recr: child.val().recr, // I feel like I shouldnt have to do this
+            grade: child.val().grade, // I feel like I shouldnt have to do this
+            createdAt: child.val().createdAt,
+            recrScore: child.val().recrScore
+          });
         });
-      });
-      // This then pushes the list of items to the state array
-      if(items.length > 0){
-        dispatch(updateRecsList(items));
-        dispatch(updateDisplayRecsList(items));
-      }
+        // This then pushes the list of items to the state array
+        if(items.length > 0){
+          dispatch(updateRecsList(items));
+          dispatch(updateDisplayRecsList(items));
+        }
+      },2000)
+
+
 
     });
   }
 }
-export function listenForRecs() {
+export function listenForRecs() { // this does nothing atm i guess
   return (dispatch, getState) => {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
@@ -236,16 +243,49 @@ export function listenForRecs() {
     });
   }
 }
-export function listenForRecrs() {
+export function getRecrList() { // this probly bad,  not using anymore
+  return (dispatch, getState) => {
+
+
+    const currentState = getState();
+    const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
+    recrsRef.on('value', (snap) => { // this function i am not sure what it does exactly
+      // get children as an array
+      var items = [];
+      // force a delay to watch the loading state
+      setTimeout(function(){
+        snap.forEach((child) => {
+          items.push({
+            name: child.val().name,
+            _key: child.key(),
+            recs: child.val().recs,
+            score: child.val().score
+          });
+        });
+        // This then pushes the list of items to the state array
+        if(items.length > 0){
+          // console.log('recrs list',items)
+          dispatch(updateRecrsList(items));
+
+        }
+      },2000)
+
+
+
+    });
+  }
+}
+export function listenForRecrs() { // does nothing i guess
   console.log('listen for Recrs')
   return (dispatch, getState) => {
     const currentState = getState();
-    const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
+    const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
 
     recrsRef.on('value', (snap) => {
       // get children as an array
       var items = [];
       snap.forEach((child) => {
+        console.log('CHILD',child)
         items.push({
           name: child.val().name,
           _key: child.key(),
@@ -253,8 +293,10 @@ export function listenForRecrs() {
           score: child.val().score
         });
       });
-      dispatch(updateRecrsList(items));
+      console.log('1update recrs',items);
+      // dispatch(updateRecrsList(items));
     });
+    // console.log('2update recrs',items);
   }
 }
 

@@ -46,7 +46,7 @@ class RecListItem extends React.Component {
 
     var stars = [];
     for (var i=0; i < grade; i++) {
-      stars.push(<Emoji key={i} name="star" />);
+      stars.push(<Emoji key={i} name="blue_heart" />);
     }
     return <Text style={styles.recListItemRecGradeMissing}>{stars}</Text>;
   }

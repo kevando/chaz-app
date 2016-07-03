@@ -41,10 +41,12 @@ class RecList extends Component {
 
 
   renderRecList() {
+    
     const Recs = this.props.state.displayRecs.map((rec) => {
       return <RecListItem
         navigator={this.props.navigator}
-        key={rec._key} rec={rec}
+        key={rec._key}
+        rec={rec}
         recrs={this.props.state.recrs}
         assignExistingRecrFunction={this.props.actions.assignExistingRecr}
         createNewRecrFunction={this.props.actions.createNewRecr}
@@ -55,7 +57,7 @@ class RecList extends Component {
   }
 
   render() {
-    console.log('-- Render Rec List');
+    // console.log('-- Render Rec List');
     if(!this.props.state.displayRecs)
       return(<Loading text="Loading Display Recs" />);
 

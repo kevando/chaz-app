@@ -19,7 +19,7 @@ class RecrList extends Component {
   }
 
   renderRecrList() {
-    console.log(this.props.state)
+    // console.log(this.props.state)
     const Recrs = this.props.state.recrs.map((recr) => {
       return <RecrListItem key={recr._key} recr={recr}  />
     });
@@ -29,7 +29,8 @@ class RecrList extends Component {
 
 
   render() {
-    if(!this.props.state.recs){
+
+    if(!this.props.state.recrs){
       return(<View style={{marginTop:200}}><Text>Loading friends</Text></View>);
     }
 

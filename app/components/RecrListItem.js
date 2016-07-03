@@ -5,25 +5,23 @@ const styles = require('../styles/styles.js')
 const _ = require('lodash');
 import { View, TouchableHighlight, Text, AlertIOS } from 'react-native';
 
+//tmp
+import RecList from '../containers/RecList';
+
 class RecrListItem extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.onAddHumanPress = this.onAddHumanPress.bind(this);
+    this.onPress = this.onPress.bind(this);
   }
 
-  onAddHumanPress() {
-    AlertIOS.prompt(
-      'Who recommended this?',
-      null,
-      [
-        {text: 'Cancel', onPress: (text) => console.log('Cancel')},
-        {text: 'Addold', onPress: (text) => {this.props.itemRef.update({recr: text})} },
-        {text: 'Add', onPress: (recr) => {this.props.assignRecrFunction(recr,this.props.rec)} },
-
-      ],
-    );
+  onPress() {
+    // this.refs.nav.push({
+    // this.props.navigator.push({
+    //   title: 'asdf list',
+    //   component: RecrList
+    // })
   }
   render() {
 
@@ -31,7 +29,7 @@ class RecrListItem extends React.Component {
     console.log(recr)
     // console.log('render listitem',rec);
     return (
-      <TouchableHighlight onPress={this.props.onPress}>
+      <TouchableHighlight onPress={this.onPress}>
         <View style={styles.li}>
           <View style={styles.liLeft}>
             <Text style={styles.recListItemRecTitle}>{recr.name}</Text>

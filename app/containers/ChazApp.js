@@ -30,8 +30,8 @@ class ChazApp extends Component {
   componentDidMount() {
     console.log('kev',this.props.actions)
     this.props.actions.startListeningToAuth();
-    this.props.actions.listenForRecs();
-    this.props.actions.listenForRecrs();
+    // this.props.actions.listenForRecs(); no idea how this is working w this commented out
+    // this.props.actions.listenForRecrs();
   }
 
 
