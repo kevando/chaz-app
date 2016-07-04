@@ -2,19 +2,24 @@
 
 
 
-### 0.7 (make ux more fun, friend list)
-update colors
+### 0.7 (make data proper)
+right now adding recr is weird and it bugs, because of recr score
+consider moving to where recr is an object within rec
+fix all data in for recs, this is currently sorta fucked up
+  im going to need to map this out better than i have
+
+fixing data, then go back to recList
+
 
 go back to list item and improve
-
 add rec is not a pop up
-
 probly want to make it so rec and recr uses listener. i like that flow
 
 
  - Loading state is pulsing heart, with random color
 
-### 0.8
+### 0.8 (improve ui)
+update colors
 this is the first version with recr view and rec view
   aka REFACTOR ROUTER SHIT!!
 now that i have friend lists, refactor the firebase/state data so it makes more sense

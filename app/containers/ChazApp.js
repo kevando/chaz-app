@@ -15,9 +15,10 @@ import * as styles from '../styles/styles.js';
 import Loading from '../components/Loading';
 import Welcome from '../containers/Welcome';
 
-import RecList from './RecList';
+import RecList from './RecList'; // not used
 import RecrList from './RecrList';
 
+import RecsView from '../containers/RecsView';
 
 class ChazApp extends Component {
 
@@ -30,7 +31,7 @@ class ChazApp extends Component {
   componentDidMount() {
     console.log('kev',this.props.actions)
     this.props.actions.startListeningToAuth();
-    // this.props.actions.listenForRecs(); no idea how this is working w this commented out
+    // this.props.actions.listenForRecs(); //no idea how this is working w this commented out
     // this.props.actions.listenForRecrs();
   }
 
@@ -58,7 +59,7 @@ class ChazApp extends Component {
           ref="nav"
           style={styles.navigatorContainer}
           initialRoute={{
-            component: RecList,
+            component: RecsView,
               title: 'Chaz',
               passProps: { getNavigator: this.getNavigator },
               leftButtonTitle: 'Logout',

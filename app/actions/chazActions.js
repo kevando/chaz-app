@@ -2,10 +2,9 @@ import * as types from './actionTypes';
 
 const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
 const fireRef = new Firebase('https://chaz1.firebaseio.com/');
-
 const _ = require('lodash');
 
-export function attemptLogin(username) {
+export function attemptLogin(username) {    // TMP way to handle logins
 
   return (dispatch, getState) => {
     fireRef.authWithPassword({
@@ -34,8 +33,8 @@ export function startListeningToAuth() {
     fireRef.onAuth(function(authData){
         if (authData){
           dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-          dispatch(getRecList()); // consider putting the listener here.
-          dispatch(getRecrList()); // consider putting the listener here.
+          dispatch(listenForRecs()); // consider putting the listener here.
+          dispatch(listenForRecrs()); // consider putting the listener here.
           // todo these should def be listeners
         }
     });
@@ -71,18 +70,30 @@ export function removeRec(recKey){                  // REMOVE REC
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-    recsRef.child(recKey).remove(); // can this be a listenr?
+    var recRef = recsRef.child(recKey);
+    recRef.once("value", function(snapshot) {
+      var rec = snapshot.val();
+      // remove rec from recr rec list
+      const recrRecrRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${rec.recr._key}/recs`);
+      recrRecrRef.child(recKey).remove();
+    });
+    // Then delete it from the master rec list
+    recsRef.child(recKey).remove();
+    // todo dispatch upgrade recr score and recs recr score
   }
 }
 export function setRecGrade(rec, grade){            // UPDATE REC GRADE
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-    const recrRecrRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${rec.recr._key}/recs/${rec._key}`);
+    const recrRecrRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs/${rec.recr._key}/recs`);
+
     recsRef.child(rec._key).update({grade:grade});
     // the following should probly be a listener
-    recrRecrRef.update({grade:grade}); // this will fire off a listener
+    recrRecrRef.child(rec._key).update({grade:grade}); // this will fire off a listener
     // now also update the recr score
+
+    // grade problem has nothing to do with this
     dispatch(updateRecrScore(rec.recr._key))
   }
 }
@@ -107,14 +118,16 @@ export function updateRecrScore(recrKey) {
           recGradeSum += rec.grade;
         }
       });
-      // console.log('1 recGradeSum',recGradeSum);
-      // console.log('1 totalGradedRecs',totalGradedRecs);
+      console.log('1 recGradeSum',recGradeSum);
+      console.log('1 totalGradedRecs',totalGradedRecs);
       if(totalGradedRecs > 0)
         score = (recGradeSum/totalGradedRecs)*20;
       else
         score = 'No Score';
 
+      console.log('score',score)
       recrRef.update({score: score});
+
       dispatch(updateRecRecrScore(recrKey,score));
     });
 
@@ -138,6 +151,7 @@ export function updateRecRecrScore(recrKey, score) {
         // this code is shit, but whatever.
         if(rec.recr){ // shit bugs out when there is no recr
           if(rec.recr._key == recrKey){
+            console.log('score',score)
             var recRef = recsRef.child(childSnapshot.key())
             recRef.update({recrScore: score})
           }
@@ -170,7 +184,7 @@ export function createNewRecr(recrName, rec){   // this function should get refa
     const currentState = getState();
     const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
 
-    recrsRef.orderByChild("name").equalTo(recrName).on('value', (snapshot) => {
+    recrsRef.orderByChild("name").equalTo(recrName).once('value', (snapshot) => {
 
       if(snapshot.exists()){
 
@@ -201,17 +215,12 @@ export function createNewRecr(recrName, rec){   // this function should get refa
 
   }
 }
-export function getRecList() { // this probly bad,  not using anymore
+export function getRecList(recsRef) { // runs after basically any change to any rec
   return (dispatch, getState) => {
 
-
-    const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
     recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
       // get children as an array
       var items = [];
-      // force a delay to watch the loading state
-      setTimeout(function(){
         snap.forEach((child) => {
           items.push({
             title: child.val().title,
@@ -223,58 +232,24 @@ export function getRecList() { // this probly bad,  not using anymore
           });
         });
         // This then pushes the list of items to the state array
-        if(items.length > 0){
-          dispatch(updateRecsList(items));
-          dispatch(updateDisplayRecsList(items));
-        }
-      },2000)
-
-
+        // if(items.length > 0){
+          dispatch(updateRecsList(items)); // reducer call
+          dispatch(updateDisplayRecsList(items)); // reducer all
+        // }
 
     });
   }
 }
-export function listenForRecs() { // this does nothing atm i guess
+export function listenForRecs() {
   return (dispatch, getState) => {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
     recsRef.on('value', (snap) => {
-        dispatch(getRecList());
+        dispatch(getRecList(recsRef));
     });
   }
 }
-export function getRecrList() { // this probly bad,  not using anymore
-  return (dispatch, getState) => {
 
-
-    const currentState = getState();
-    const recrsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recrs`);
-    recrsRef.on('value', (snap) => { // this function i am not sure what it does exactly
-      // get children as an array
-      var items = [];
-      // force a delay to watch the loading state
-      setTimeout(function(){
-        snap.forEach((child) => {
-          items.push({
-            name: child.val().name,
-            _key: child.key(),
-            recs: child.val().recs,
-            score: child.val().score
-          });
-        });
-        // This then pushes the list of items to the state array
-        if(items.length > 0){
-          // console.log('recrs list',items)
-          dispatch(updateRecrsList(items));
-
-        }
-      },2000)
-
-
-
-    });
-  }
-}
 export function listenForRecrs() { // does nothing i guess
   console.log('listen for Recrs')
   return (dispatch, getState) => {
@@ -294,7 +269,7 @@ export function listenForRecrs() { // does nothing i guess
         });
       });
       console.log('1update recrs',items);
-      // dispatch(updateRecrsList(items));
+      dispatch(updateRecrsList(items));
     });
     // console.log('2update recrs',items);
   }

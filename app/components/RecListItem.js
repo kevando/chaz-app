@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 var _ = require('lodash');
 var TimeAgo = require('react-native-timeago');
 var dateFormat = require('dateformat');
-// var Emoji = require('react-native-emoji');
+
 import Emoji from 'react-native-emoji'
 const styles = require('../styles/styles.js');
-const RecrView = require('./RecrView');
+const RecrView = require('../containers/RecrView');
+const RecrList = require('../containers/RecrList');
 import { StyleSheet, Text, View, TouchableHighlight, AlertIOS } from 'react-native';
 
 
@@ -29,15 +30,16 @@ class RecListItem extends React.Component {
     AlertIOS.prompt('Who recommended this?', null, options);
   }
   onRecrPress() {
-    const recrs = this.props.recrs;
-    var recr = this.props.rec.recr;
-    var recr = _.find(recrs, ['_key', recr._key]);
-    // console.log('calculated recr',recr)
-    var nav = this.props.navigator;
-    nav.push({
+    const recr = this.props.recr;
+    console.log('PROPS',this.props)
+    // var recr = this.props.rec.recr;
+    // var recr = _.find(recrs, ['_key', recr._key]);
+
+
+    this.props.navigator.push({
       title: recr.name,
       passProps: { recr: recr },
-      component: RecrView,
+      component: RecrList,
     })
   }
   getDisplayGrade(grade) { // this should probly be its own component

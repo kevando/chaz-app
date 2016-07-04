@@ -40,14 +40,14 @@ class RecList extends Component {
 
 
 
-  renderRecList() { // probly want to change how all these functions get passed
+  renderRecList() {
 
-    const Recs = this.props.recs.map((rec) => {
+    const Recs = this.props.state.displayRecs.map((rec) => {
       return <RecListItem
         navigator={this.props.navigator}
         key={rec._key}
         rec={rec}
-        recr={rec.recr}
+        recrs={this.props.state.recrs}
         assignExistingRecrFunction={this.props.actions.assignExistingRecr}
         createNewRecrFunction={this.props.actions.createNewRecr}
         onPress={this.onItemPress.bind(this,rec)} />
@@ -57,10 +57,17 @@ class RecList extends Component {
   }
 
   render() {
+    // console.log('-- Render Rec List');
+    if(!this.props.state.displayRecs)
+      return(<Loading text="Loading Display Recs" />);
 
     return(
       <View style={styles.listContainer}>
+        <ScrollView style={styles.listview} >
+          <FilterNav />
           {this.renderRecList()}
+        </ScrollView>
+        <ActionButton title="Add Recommedation" />
       </View>
     )
 
@@ -68,8 +75,6 @@ class RecList extends Component {
 
 
 }
-
-// does this need to be redux?
 
 
 // I do not understand any of this..
