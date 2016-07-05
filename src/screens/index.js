@@ -9,6 +9,8 @@ import PushedScreen from './PushedScreen';
 import RecsScreen from './RecsScreen';
 import RecViewScreen from './RecViewScreen';
 import SettingsScreen from './SettingsScreen';
+import RecAddScreen from './RecAddScreen';
+import RecrsScreen from './RecrsScreen';
 
 // register all screens of the app (including internal ones)
 export function registerScreens(store, Provider) {
@@ -21,4 +23,6 @@ export function registerScreens(store, Provider) {
   Navigation.registerComponent('chaz.RecsScreen', () => RecsScreen, store, Provider);
   Navigation.registerComponent('chaz.RecViewScreen', () => RecViewScreen, store, Provider);
   Navigation.registerComponent('chaz.SettingsScreen', () => SettingsScreen, store, Provider);
+  Navigation.registerComponent('chaz.RecAddScreen', () => RecAddScreen, store, Provider);
+  Navigation.registerComponent('chaz.RecrsScreen', () => RecrsScreen, store, Provider);
 }

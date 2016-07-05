@@ -26,11 +26,12 @@ class LoginScreen extends Component {
   }
 
   render() {
-
+    this.props.dispatch(appActions.login('bro'))
     if(this.state.loading)
       return <Loading message="Logging In" />
 
     return (
+
       <View style={{flex: 1, padding: 20}}>
       <Text style={styles.text}>
         <Text style={{fontWeight: '500'}}>Welcome to chaz</Text>
@@ -64,7 +65,7 @@ class LoginScreen extends Component {
   }
   onLoginPress() {
     // this.setState({loading:true})
-    this.props.dispatch(appActions.login());
+    this.props.dispatch(appActions.login('bro'));
   }
 }
 

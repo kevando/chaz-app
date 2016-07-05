@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 // import * as counterActions from '../reducers/counter/actions';
-import * as recActions from '../reducers/rec/actions';
-import ListItem from '../components/rec/ListItem';
+import * as recrActions from '../reducers/recr/actions';
+import ListItem from '../components/recr/ListItem';
 
 let navBarVisiable = true;
 
 // this is a traditional React component connected to the redux store
-class RecsScreen extends Component {
+class RecrsScreen extends Component {
   static navigatorStyle = {
     statusBarColor: '#303F9F',
     toolBarColor: '#3F51B5',
@@ -31,58 +31,58 @@ class RecsScreen extends Component {
       //   title: 'Edit',
       //   id: 'edit'
       // },
-      {
-        icon: require('../../img/navicon_add.png'),
-        title: 'Add',
-        id: 'add'
-      }
+      // {
+      //   icon: require('../../img/navicon_add.png'),
+      //   title: 'Add',
+      //   id: 'add'
+      // }
     ]
   };
 
   constructor(props) {
     super(props);
     // if you want to listen on navigator events, set this up
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    // this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
   onNavigatorEvent(event) {
-    switch (event.id) {
-      case 'edit':
-        Alert.alert('NavBar', 'Edit button pressed');
-        break;
-
-      case 'add':
-        this.onShowModalPress()
-        break;
-
-      default:
-        console.log('Unhandled event ' + event.id);
-        break;
-    }
+    // switch (event.id) {
+    //   case 'edit':
+    //     Alert.alert('NavBar', 'Edit button pressed');
+    //     break;
+    //
+    //   case 'add':
+    //     this.onShowModalPress()
+    //     break;
+    //
+    //   default:
+    //     console.log('Unhandled event ' + event.id);
+    //     break;
+    // }
   }
   componentDidMount() {
-    this.props.dispatch(recActions.listenForRecs());
+    this.props.dispatch(recrActions.listenForRecrs());
   }
 
   render() {
-
-    if(!this.props.rec.all)
-      return (<View><Text>No visible recs yet</Text></View>)
+    console.log('ASDFASDFa',this.props)
+    if(!this.props.recr.all)
+      return (<View><Text>No visible recrs yet</Text></View>)
 
     return (
       <View style={{flex: 1, padding: 20}}>
-        {this.renderRecList(this.props.navigator)}
+        {this.renderRecrList(this.props.navigator)}
       </View>
     );
   }
 
 
-  renderRecList(navigator) { // not sure if passing nav is a good idea but it works
-    var recs = Array();
-    this.props.rec.all.forEach(function(rec) {
-      recs.push(<ListItem key={rec._key} rec={rec} navigator={navigator} />);
+  renderRecrList(navigator) { // not sure if passing nav is a good idea but it works
+    var recrs = Array();
+    this.props.recr.all.forEach(function(recr) {
+      recrs.push(<ListItem key={recr._key} recr={recr} navigator={navigator} />);
     });
-    return recs;
+    return recrs;
   }
 
 //   onIncrementPress() {
@@ -157,9 +157,8 @@ const styles = StyleSheet.create({
 // kevin is not super sure about this
 function mapStateToProps(state) {
   return {
-    rec: state.rec,
-    // counter: state.counter // this is like the entire folder level shit
+    recr: state.recr,
   };
 }
 
-export default connect(mapStateToProps)(RecsScreen);
+export default connect(mapStateToProps)(RecrsScreen);

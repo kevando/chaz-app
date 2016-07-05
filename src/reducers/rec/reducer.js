@@ -2,10 +2,9 @@ import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
-  visible: [
-    {_key: 'asdfa',title: 'great gatsby'},
-    {_key: 'asdfafsda',title: 'shawshank redemption'}
-  ]
+  all: [],
+  visible: [], // 
+
 });
 
 export default function counter(state = initialState, action = {}) {
@@ -14,9 +13,13 @@ export default function counter(state = initialState, action = {}) {
       return state.merge({
         count: state.count + 1
       });
-    case types.DECREMENT:
+    case types.UPDATE_REC_LIST:
       return state.merge({
-        count: state.count - 1
+        all: action.payload
+      });
+    case types.UPDATE_CURRENT_REC:
+      return state.merge({
+        current: action.rec
       });
     default:
       return state;

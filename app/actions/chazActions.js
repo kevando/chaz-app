@@ -4,61 +4,61 @@ const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w
 const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 const _ = require('lodash');
 
-export function attemptLogin(username) {    // TMP way to handle logins
+// export function attemptLogin(username) {    // TMP way to handle logins
+//
+//   return (dispatch, getState) => {
+//     fireRef.authWithPassword({
+//       email    : username+'@kevinhabich.com',
+//       password : '1'
+//     }, function(error, authData) { // previously
+//       if (error) {
+//         console.log("Auth Failed!", error);
+//         // todo handle invalid username
+//       }
+//     });
+//   }
+//
+// }
+// // This works for login and logout
+// export function setAuthData(authData){
+//   return {
+//     type: types.SET_AUTH_DATA,
+//     payload: authData
+//   }
+// }
+//
+// // Run this function if auth ref changes
+// export function startListeningToAuth() {
+//   return (dispatch, getState) => {
+//     fireRef.onAuth(function(authData){
+//         if (authData){
+//           dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+//           dispatch(listenForRecs()); // consider putting the listener here.
+//           dispatch(listenForRecrs()); // consider putting the listener here.
+//           // todo these should def be listeners
+//         }
+//     });
+//   }
+// }
 
-  return (dispatch, getState) => {
-    fireRef.authWithPassword({
-      email    : username+'@kevinhabich.com',
-      password : '1'
-    }, function(error, authData) { // previously
-      if (error) {
-        console.log("Auth Failed!", error);
-        // todo handle invalid username
-      }
-    });
-  }
-
-}
-// This works for login and logout
-export function setAuthData(authData){
-  return {
-    type: types.SET_AUTH_DATA,
-    payload: authData
-  }
-}
-
-// Run this function if auth ref changes
-export function startListeningToAuth() {
-  return (dispatch, getState) => {
-    fireRef.onAuth(function(authData){
-        if (authData){
-          dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-          dispatch(listenForRecs()); // consider putting the listener here.
-          dispatch(listenForRecrs()); // consider putting the listener here.
-          // todo these should def be listeners
-        }
-    });
-  }
-}
-
-export function logUserOut(){
-  return function(dispatch,getState){
-    dispatch(setAuthData({}));
-    fireRef.unauth();
-  };
-}
+// export function logUserOut(){
+//   return function(dispatch,getState){
+//     dispatch(setAuthData({}));
+//     fireRef.unauth();
+//   };
+// }
 
 //
 //  Begin REC functions
 //
 
-export function addRec(recTitle) {                  // ADD NEW REC
-  return function(dispatch, getState) {
-    const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-    recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
-  }
-}
+// export function addRec(recTitle) {                  // ADD NEW REC
+//   return function(dispatch, getState) {
+//     const currentState = getState();
+//     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+//     recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
+//   }
+// }
 export function addRecWithRecr(recTitle,recr) {     // ADD REC WITH REC
   return function(dispatch, getState) {
     const currentState = getState();
@@ -215,40 +215,40 @@ export function createNewRecr(recrName, rec){   // this function should get refa
 
   }
 }
-export function getRecList(recsRef) { // runs after basically any change to any rec
-  return (dispatch, getState) => {
-
-    recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
-      // get children as an array
-      var items = [];
-        snap.forEach((child) => {
-          items.push({
-            title: child.val().title,
-            _key: child.key(),
-            recr: child.val().recr, // I feel like I shouldnt have to do this
-            grade: child.val().grade, // I feel like I shouldnt have to do this
-            createdAt: child.val().createdAt,
-            recrScore: child.val().recrScore
-          });
-        });
-        // This then pushes the list of items to the state array
-        // if(items.length > 0){
-          dispatch(updateRecsList(items)); // reducer call
-          dispatch(updateDisplayRecsList(items)); // reducer all
-        // }
-
-    });
-  }
-}
-export function listenForRecs() {
-  return (dispatch, getState) => {
-    const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
-    recsRef.on('value', (snap) => {
-        dispatch(getRecList(recsRef));
-    });
-  }
-}
+// export function getRecList(recsRef) { // runs after basically any change to any rec
+//   return (dispatch, getState) => {
+//
+//     recsRef.on('value', (snap) => { // this function i am not sure what it does exactly
+//       // get children as an array
+//       var items = [];
+//         snap.forEach((child) => {
+//           items.push({
+//             title: child.val().title,
+//             _key: child.key(),
+//             recr: child.val().recr, // I feel like I shouldnt have to do this
+//             grade: child.val().grade, // I feel like I shouldnt have to do this
+//             createdAt: child.val().createdAt,
+//             recrScore: child.val().recrScore
+//           });
+//         });
+//         // This then pushes the list of items to the state array
+//         // if(items.length > 0){
+//           dispatch(updateRecsList(items)); // reducer call
+//           dispatch(updateDisplayRecsList(items)); // reducer all
+//         // }
+//
+//     });
+//   }
+// }
+// export function listenForRecs() {
+//   return (dispatch, getState) => {
+//     const currentState = getState();
+//     const recsRef = fireRef.child(`users/${currentState.chaz.authData.uid}/recs`);
+//     recsRef.on('value', (snap) => {
+//         dispatch(getRecList(recsRef));
+//     });
+//   }
+// }
 
 export function listenForRecrs() { // does nothing i guess
   console.log('listen for Recrs')
@@ -288,18 +288,18 @@ export function updateDisplayRecsSort(orderBy) {
     payload: orderBy
   }
 }
-export function updateRecsList(recs) {
-  return {
-    type: types.UPDATE_RECS_LIST,
-    payload: recs
-  }
-}
-export function updateDisplayRecsList() {
-  return {
-    type: types.UPDATE_DISPLAY_RECS_LIST,
-    // payload: recs
-  }
-}
+// export function updateRecsList(recs) {
+//   return {
+//     type: types.UPDATE_RECS_LIST,
+//     payload: recs
+//   }
+// }
+// export function updateDisplayRecsList() {
+//   return {
+//     type: types.UPDATE_DISPLAY_RECS_LIST,
+//     // payload: recs
+//   }
+// }
 
 export function updateRecrsList(recrs) {
   return {

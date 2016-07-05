@@ -2,12 +2,16 @@
 
 
 
-### 0.7 (make data proper)
-got exampleRedux router working in this directory
-change name to chaz
+### 0.7 (make data proper. DEPLOY & DISTRIBUTE THIS. try with and without async storage)
+view rec, add recr conditionally show grade input
 
-consider taking this time to update the launch screen.
-at least document how to change it
+create rec add, update display
+
+probly need to look more into immutable
+
+recList,recView,filter/sort
+
+add "logging in" state
 
 right now adding recr is weird and it bugs, because of recr score
 consider moving to where recr is an object within rec
@@ -25,9 +29,12 @@ probly want to make it so rec and recr uses listener. i like that flow
  - Loading state is pulsing heart, with random color
 
 ### 0.8 (improve ui)
-update colors
+update colors to scheme, probly want to create style sheet
+add filter back in
 this is the first version with recr view and rec view
-  aka REFACTOR ROUTER SHIT!!
+GIANT BUTTONS, like yo
+
+try to indicate something is new or recently added, or updated UI trick here (emoji)
 now that i have friend lists, refactor the firebase/state data so it makes more sense
 friend score as emoji scale. make this part of the improved design shit
 add Rec View, make this editable (because people will make typos)
@@ -46,10 +53,17 @@ use emoji's for the categories, user score, grades, (more data)
 animate log in, fun screen when there is no, or few recs
 
 ### 0.9
-Your rec list is basically your chat list
+Your rec list is basically your chat list. but chat is super duper limited.
+  keep the absolute core of empathy only here
 
 
 ### 1.0
  - Spend 2 days with spencer and refactor redux and firebase to a meteor server, refactor router, redesign data, add chat. possibly make this app like a tutorial app for spencer. open source it
  - more data (rec type, recr score by type)
  - App notifications.
+change load screen
+ ios/chaz/base/launchscreen.xib (line 21)
+
+
+### KNOWN CONCERNS
+ - Currently and rec change re-populates/renders entire rec list in state

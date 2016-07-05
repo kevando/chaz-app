@@ -5,12 +5,13 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  Alert
+  Alert,
+  AlertIOS
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as counterActions from '../reducers/counter/actions';
-import * as recsActions from '../reducers/recs/actions';
-import ListItem from '../components/recs/ListItem';
+import * as recActions from '../reducers/rec/actions';
+
 
 let navBarVisiable = true;
 
@@ -43,49 +44,59 @@ class RecViewScreen extends Component {
     super(props);
     // if you want to listen on navigator events, set this up
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
+    //Before doing anything, lets try something. lets make this an active rec or something
+    console.log('setting active rec');
+    this.props.dispatch(recActions.setCurrentRec(this.props.rec)); // maybe just do the key here
   }
 
   onNavigatorEvent(event) {
-    switch (event.id) {
-      case 'edit':
-        Alert.alert('NavBar', 'Edit button pressed');
-        break;
-
-      case 'add':
-        Alert.alert('NavBar', 'Add button pressed');
-        break;
-
-      default:
-        console.log('Unhandled event ' + event.id);
-        break;
-    }
+    // switch (event.id) {
+    //   case 'edit':
+    //     Alert.alert('NavBar', 'Edit button pressed');
+    //     break;
+    //
+    //   case 'add':
+    //     Alert.alert('NavBar', 'Add button pressed');
+    //     break;
+    //
+    //   default:
+    //     console.log('Unhandled event ' + event.id);
+    //     break;
+    // }
   }
 
   render() {
+    const rec = this.props.rec.current;
+
+    if(!rec)
+      return(<View><Text>Something went wrong and no current rec was set</Text></View>);
+
     return (
       <View style={{flex: 1, padding: 20}}>
 
         <Text style={styles.text}>
-          <Text style={{fontWeight: '500'}}>Same Counter: </Text> {this.props.counter.count}
+          <Text style={{fontWeight: '500'}}>{rec.title}</Text>
         </Text>
 
-        <TouchableOpacity onPress={ this.onIncrementPress.bind(this) }>
-          <Text style={styles.button}>Increment Counter</Text>
+        <Text style={styles.text}>
+          <Text style={{fontWeight: '500'}}>rec: {rec.grade}</Text>
+        </Text>
+
+        <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
+          <Text style={styles.button}>Who Recommended this?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={ this.onPushPress.bind(this) }>
-          <Text style={styles.button}>Push Screen</Text>
+
+        <Text style={styles.text}>
+          <Text style={{fontWeight: '500'}}>grade: {rec.grade}</Text>
+        </Text>
+
+        <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
+          <Text style={styles.button}>Grade this</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={ this.onShowModalPress.bind(this) }>
-          <Text style={styles.button}>Modal Screen</Text>
-        </TouchableOpacity>
 
-        <TouchableOpacity onPress={ this.onToggleNavBarPress.bind(this) }>
-          <Text style={styles.button}>Toggle NavBar</Text>
-        </TouchableOpacity>
-
-        {this.renderRecList(this.props.navigator)}
 
 
 
@@ -93,16 +104,34 @@ class RecViewScreen extends Component {
     );
   }
 
-  renderRecList(navigator) { // not sure if passing nav is a good idea but it works
-    var recs = Array();
-    this.props.recs.visible.forEach(function(rec) {
-      recs.push(<ListItem rec={rec} navigator={navigator} />);
-    });
-    return recs;
-  }
 
-  onIncrementPress() {
-    this.props.dispatch(counterActions.increment());
+
+  onAddGradePress(rec) {
+    // const setRecGrade = this.props.dispatch(recActions.setRecGrade(rec,1));
+    // const { setRecGrade, removeRec } = this.props.actions;
+    AlertIOS.alert(
+        'Grade this recommendation',
+        null,
+        [
+          {text: '1 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,1)) },
+          {text: '2 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,2)) },
+          {text: '3 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,3)) },
+          {text: '4 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,4)) },
+          {text: '5 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,5)) },
+          // {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
+          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
+        ],
+      );
+  }
+  onAddRecrPress() {
+    var options = Array();
+    options.push({text: 'Add New',  onPress: (recr) => { this.props.dispatch(recActions.setRecRecr(rec,recr)) }    });
+    // var recrs = this.props.recrs.map((recr) => {
+    //   options.push({text: recr.name, onPress: () => {this.props.assignExistingRecrFunction(recr,this.props.rec)} });
+    // });
+    options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
+
+    AlertIOS.prompt('Who recommended this?', null, options);
   }
 
   onPushPress() {
@@ -172,8 +201,7 @@ const styles = StyleSheet.create({
 // kevin is not super sure about this
 function mapStateToProps(state) {
   return {
-    recs: state.recs,
-    counter: state.counter // this is like the entire folder level shit
+    rec: state.rec,
   };
 }
 

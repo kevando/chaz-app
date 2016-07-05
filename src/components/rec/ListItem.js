@@ -10,14 +10,14 @@ export default class ListItem extends Component {
   }
   render() {
     return (
-      <TouchableOpacity onPress={ this.onPushPress.bind(this) }>
+      <TouchableOpacity onPress={ this.onRecPress.bind(this) }>
         <Text>{this.props.rec.title}</Text>
       </TouchableOpacity>
     );
   }
 
   // chaz
-  onPushPress() {
+  onRecPress() {
     this.props.navigator.push({
       title: "Rec",
       screen: "chaz.RecViewScreen",

@@ -2,10 +2,12 @@ import app from './app/reducer';
 import counter from './counter/reducer';
 
 // chaz
-import recs from './recs/reducer';
+import rec from './rec/reducer'; // refactor this
+import recr from './recr/reducer';
 
 export {
   app,
   counter,
-  recs
+  rec,
+  recr
 };

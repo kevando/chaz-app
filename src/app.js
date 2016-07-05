@@ -76,6 +76,14 @@ export default class App {
               navigatorStyle: {},
             },
             {
+              label: 'Recrs',
+              screen: 'chaz.RecrsScreen',
+              icon: require('../img/one.png'),
+              selectedIcon: require('../img/one_selected.png'),
+              title: 'Recrs',
+              navigatorStyle: {},
+            },
+            {
               label: 'One',
               screen: 'example.FirstTabScreen',
               icon: require('../img/one.png'),

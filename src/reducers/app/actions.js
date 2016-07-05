@@ -18,7 +18,6 @@ export function changeAppRoot(root) {
 
 export function login(username) {
   return async function(dispatch, getState) {
-    username = 'bro';
     fireRef.authWithPassword({
       email    : username+'@kevinhabich.com',
       password : '1'
