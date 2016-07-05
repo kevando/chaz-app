@@ -9,7 +9,7 @@ import {
   AlertIOS
 } from 'react-native';
 import { connect } from 'react-redux';
-import * as counterActions from '../reducers/counter/actions';
+import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
 
 
@@ -45,9 +45,9 @@ class RecViewScreen extends Component {
     // if you want to listen on navigator events, set this up
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
 
-    //Before doing anything, lets try something. lets make this an active rec or something
-    console.log('setting active rec');
-    this.props.dispatch(recActions.setCurrentRec(this.props.rec)); // maybe just do the key here
+  }
+  componentDidMount() {
+    this.props.dispatch(recActions.setCurrentRec(this.props.currentRec)); // maybe just do the key here
   }
 
   onNavigatorEvent(event) {
@@ -76,25 +76,28 @@ class RecViewScreen extends Component {
       <View style={{flex: 1, padding: 20}}>
 
         <Text style={styles.text}>
-          <Text style={{fontWeight: '500'}}>{rec.title}</Text>
+          <Text style={{fontWeight: '500'}}>Title: {rec.title}</Text>
         </Text>
 
-        <Text style={styles.text}>
-          <Text style={{fontWeight: '500'}}>rec: {rec.grade}</Text>
-        </Text>
+        {( rec.recr != null
 
-        <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
-          <Text style={styles.button}>Who Recommended this?</Text>
-        </TouchableOpacity>
+          ?
+
+          <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
+            <Text style={styles.button}>{rec.recr.name}</Text>
+          </TouchableOpacity>
 
 
-        <Text style={styles.text}>
-          <Text style={{fontWeight: '500'}}>grade: {rec.grade}</Text>
-        </Text>
 
-        <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
-          <Text style={styles.button}>Grade this</Text>
-        </TouchableOpacity>
+          : <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
+            <Text style={styles.button}>who Recommended?</Text>
+          </TouchableOpacity>
+        )}
+
+
+
+
+
 
 
 
@@ -105,33 +108,20 @@ class RecViewScreen extends Component {
   }
 
 
-
-  onAddGradePress(rec) {
-    // const setRecGrade = this.props.dispatch(recActions.setRecGrade(rec,1));
-    // const { setRecGrade, removeRec } = this.props.actions;
-    AlertIOS.alert(
-        'Grade this recommendation',
-        null,
-        [
-          {text: '1 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,1)) },
-          {text: '2 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,2)) },
-          {text: '3 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,3)) },
-          {text: '4 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,4)) },
-          {text: '5 Stars', onPress: (text) => this.props.dispatch(recActions.setRecGrade(rec,5)) },
-          // {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
-          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
-        ],
-      );
-  }
   onAddRecrPress() {
     var options = Array();
-    options.push({text: 'Add New',  onPress: (recr) => { this.props.dispatch(recActions.setRecRecr(rec,recr)) }    });
+    options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
     // var recrs = this.props.recrs.map((recr) => {
     //   options.push({text: recr.name, onPress: () => {this.props.assignExistingRecrFunction(recr,this.props.rec)} });
     // });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
 
     AlertIOS.prompt('Who recommended this?', null, options);
+  }
+  addRecr(recrName) {
+    // create new recr if new
+    // update current with updated rec info
+    this.props.dispatch(recrActions.createRecr(recrName));
   }
 
   onPushPress() {
@@ -202,6 +192,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     rec: state.rec,
+    recr: state.recr
   };
 }
 

@@ -62,10 +62,11 @@ class RecrsScreen extends Component {
   }
   componentDidMount() {
     this.props.dispatch(recrActions.listenForRecrs());
+    // this.props.dispatch(recrActions.listenForNewRecrs()); // i dont really like multiple listeners like this cant do this i guess wtf
   }
 
   render() {
-    console.log('ASDFASDFa',this.props)
+
     if(!this.props.recr.all)
       return (<View><Text>No visible recrs yet</Text></View>)
 
@@ -158,6 +159,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     recr: state.recr,
+    // counter: state.counter // this is like the entire folder level shit
   };
 }
 

@@ -21,7 +21,7 @@ export default class ListItem extends Component {
     this.props.navigator.push({
       title: "Rec",
       screen: "chaz.RecViewScreen",
-      passProps: { rec: this.props.rec }
+      passProps: { currentRec: this.props.rec }
     });
   }
 }

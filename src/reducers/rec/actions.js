@@ -14,17 +14,27 @@ export function listenForRecs() {
 }
 export function getRecList(snap) { // runs after basically any change to any rec
   return (dispatch, getState) => {
+    const currentState = getState();
+
 
       var items = [];
       snap.forEach((child) => {
-        items.push({
+        var recObject = {
           title: child.val().title,
           _key: child.key(),
           recr: child.val().recr,
           grade: child.val().grade,
           createdAt: child.val().createdAt,
           recrScore: child.val().recrScore
-        });
+        }
+        items.push(recObject);
+        // update current rec with new data
+        if(currentState.rec.current){
+          if(currentState.rec.current._key == child.key()){
+            console.log('updating current rec with fresh data');
+            dispatch(setCurrentRec(recObject));
+          }
+        }
       });
         // console.log('items',items);
       dispatch(updateRecList(items)); // reducer call
@@ -41,6 +51,7 @@ export function updateRecList(recs) {
 
 export function addRec(recTitle) {                  // ADD NEW REC
   return function(dispatch, getState) {
+
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
     recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });

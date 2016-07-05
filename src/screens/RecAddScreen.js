@@ -53,7 +53,7 @@ class RecAddScreen extends Component {
           value={this.state.recTitle}
         />
 
-        <TouchableOpacity onPress={ this.addRec.bind(this) }>
+        <TouchableOpacity onPress={ this.onAddRecPress.bind(this) }>
           <Text style={styles.button}>Add Rec</Text>
         </TouchableOpacity>
 
@@ -65,8 +65,9 @@ class RecAddScreen extends Component {
     );
   }
 
-  addRec() {
+  onAddRecPress() {
     this.props.dispatch(recActions.addRec(this.state.recTitle));
+    this.props.navigator.dismissModal();
   }
 
 
