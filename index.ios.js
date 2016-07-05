@@ -1,6 +1,3 @@
-'use strict';
+import App from './src/app';
 
-import React, { AppRegistry } from 'react-native';
-import App from './app/containers/app';
-
-AppRegistry.registerComponent('chaz', () => App);
+const app = new App();

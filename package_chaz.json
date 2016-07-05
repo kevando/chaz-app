@@ -1,0 +1,29 @@
+{
+  "name": "chaz",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start_og": "node_modules/react-native/packager/packager.sh",
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "dateformat": "^1.0.12",
+    "firebase": "^2.4.1",
+    "lodash": "^4.13.1",
+    "moment": "^2.13.0",
+    "react": "15.1.0",
+    "react-native": "^0.28.0",
+    "react-native-emoji": "^1.2.0",
+    "react-native-navigation": "^1.0.21",
+    "react-native-simple-router": "^0.10.0",
+    "react-native-timeago": "^0.3.0",
+    "react-redux": "^4.4.5",
+    "react-timer-mixin": "^0.13.3",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-storage": "^4.0.1",
+    "redux-storage-engine-reactnativeasyncstorage": "^1.0.1",
+    "redux-thunk": "^2.1.0",
+    "seamless-immutable": "^6.1.1"
+  }
+}

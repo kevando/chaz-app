@@ -24,6 +24,7 @@ always seem to ruin suprises.
 
 ## yc questions
 
+### What about attention?
 
 add shit from old evernote here
 ..review chaz bookmarks for inspiration here

@@ -3,6 +3,12 @@
 
 
 ### 0.7 (make data proper)
+got exampleRedux router working in this directory
+change name to chaz
+
+consider taking this time to update the launch screen.
+at least document how to change it
+
 right now adding recr is weird and it bugs, because of recr score
 consider moving to where recr is an object within rec
 fix all data in for recs, this is currently sorta fucked up
@@ -10,7 +16,7 @@ fix all data in for recs, this is currently sorta fucked up
 
 fixing data, then go back to recList
 
-
+change where delay is on loading data
 go back to list item and improve
 add rec is not a pop up
 probly want to make it so rec and recr uses listener. i like that flow
