@@ -19,7 +19,7 @@ export default class App {
   constructor() {
     // since react-redux only works on components, we need to subscribe this class manually
     store.subscribe(this.onStoreUpdate.bind(this));
-    store.dispatch(appActions.appInitialized());
+    store.dispatch(appActions.appInitialized()); // kick off auth listener
   }
 
   onStoreUpdate() {
@@ -68,6 +68,14 @@ export default class App {
         Navigation.startTabBasedApp({
           tabs: [
             {
+              label: 'Recs',
+              screen: 'chaz.RecsScreen',
+              icon: require('../img/one.png'),
+              selectedIcon: require('../img/one_selected.png'),
+              title: 'Recs',
+              navigatorStyle: {},
+            },
+            {
               label: 'One',
               screen: 'example.FirstTabScreen',
               icon: require('../img/one.png'),
@@ -81,6 +89,14 @@ export default class App {
               icon: require('../img/two.png'),
               selectedIcon: require('../img/two_selected.png'),
               title: 'Screen Two',
+              navigatorStyle: {},
+            },
+            {
+              label: 'Settings',
+              screen: 'chaz.SettingsScreen',
+              icon: require('../img/two.png'),
+              selectedIcon: require('../img/two_selected.png'),
+              title: 'Settings',
               navigatorStyle: {},
             }
           ],

@@ -9,6 +9,7 @@ import {
 import { connect } from 'react-redux';
 import * as counterActions from '../reducers/counter/actions';
 import * as appActions from '../reducers/app/actions';
+import Loading from '../components/LoadingComponent';
 
 // this is a traditional React component connected to the redux store
 class LoginScreen extends Component {
@@ -21,12 +22,19 @@ class LoginScreen extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {loading: false, authResponse: 'f'}
   }
 
   render() {
+
+    if(this.state.loading)
+      return <Loading message="Logging In" />
+
     return (
       <View style={{flex: 1, padding: 20}}>
-
+      <Text style={styles.text}>
+        <Text style={{fontWeight: '500'}}>Welcome to chaz</Text>
+      </Text>
         <Text style={styles.text}>
           <Text style={{fontWeight: '500'}}>Counter: </Text> {this.props.counter.count}
         </Text>
@@ -38,6 +46,9 @@ class LoginScreen extends Component {
         <TouchableOpacity onPress={ this.onLoginPress.bind(this) }>
           <Text style={styles.button}>Login</Text>
         </TouchableOpacity>
+        <Text style={styles.text}>
+          <Text style={{fontWeight: '100',color:'red'}}>{this.props.app.authError}</Text>
+        </Text>
 
         <Text style={{fontWeight: '500'}}>String prop: {this.props.str}</Text>
         <Text style={{fontWeight: '500'}}>Number prop: {this.props.num}</Text>
@@ -52,6 +63,7 @@ class LoginScreen extends Component {
     this.props.dispatch(counterActions.increment());
   }
   onLoginPress() {
+    // this.setState({loading:true})
     this.props.dispatch(appActions.login());
   }
 }
@@ -75,7 +87,8 @@ const styles = StyleSheet.create({
 // which props do we want to inject, given the global state?
 function mapStateToProps(state) {
   return {
-    counter: state.counter
+    counter: state.counter,
+    app: state.app
   };
 }
 
