@@ -99,3 +99,17 @@ export function listenForNewRecrs() {
     });
   }
 }
+
+export function setCurrentRecrByKey(recrKey) {                  // SET CURRENT REC
+  return(dispatch,getState) => {
+    const currentState = getState();
+    const recrRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${recrKey}`);
+    recrRef.once('value', (snapshot) => {
+      dispatch(setCurrentRecr(snapshot.val() ) );
+    });
+  };
+}
+
+export function setCurrentRecr(recr) {                  // SET CURRENT REC
+  return { type: types.UPDATE_CURRENT_RECR, recr: recr }
+}

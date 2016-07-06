@@ -13,9 +13,9 @@ export default function counter(state = initialState, action = {}) {
       return state.merge({
         all: action.payload
       });
-    case types.UPDATE_CURRENT_REC:
+    case types.UPDATE_CURRENT_RECR:
       return state.merge({
-        current: action.rec
+        current: action.recr
       });
     default:
       return state;

@@ -31,7 +31,7 @@ export default class ListItem extends Component {
     this.props.navigator.push({
       title: "Recr",
       screen: "chaz.RecrViewScreen",
-      passProps: { recr: this.props.recr }
+      passProps: { recrKey: this.props.recr._key }
     });
   }
 }

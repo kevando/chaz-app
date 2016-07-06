@@ -12,10 +12,10 @@ export default class ListItem extends Component {
     return (
       <TouchableOpacity onPress={ this.onRecPress.bind(this) }>
         <Text>
-          {this.props.rec.title}
-          [recr: {this.getRecrName()}]
-          [grade: {this.props.rec.grade}]
-          [score: {this.getRecrScore()}]
+          <Text style={{fontSize:15,fontWeight:'500'}}>
+            [ {this.props.rec.title} ({this.props.rec.grade}) ]
+            </Text>
+            [ {this.getRecrName()} ({this.getRecrScore()})]
         </Text>
       </TouchableOpacity>
     );

@@ -27,10 +27,6 @@ class RecsScreen extends Component {
 
   static navigatorButtons = {
     rightButtons: [
-      // {
-      //   title: 'Edit',
-      //   id: 'edit'
-      // },
       {
         icon: require('../../img/navicon_add.png'),
         title: 'Add',
@@ -47,14 +43,9 @@ class RecsScreen extends Component {
 
   onNavigatorEvent(event) {
     switch (event.id) {
-      case 'edit':
-        Alert.alert('NavBar', 'Edit button pressed');
-        break;
-
       case 'add':
         this.onShowModalPress()
         break;
-
       default:
         console.log('Unhandled event ' + event.id);
         break;
@@ -80,62 +71,20 @@ class RecsScreen extends Component {
   renderRecList(navigator) { // not sure if passing nav is a good idea but it works
     var recs = Array();
     this.props.rec.all.forEach(function(rec) {
-      
+
       recs.push(<ListItem key={rec._key} rec={rec} navigator={navigator} />);
     });
     return recs;
   }
 
-//   onIncrementPress() {
-//     this.props.dispatch(counterActions.increment());
-//   }
-//
-//   onPushPress() {
-//     this.props.navigator.push({
-//       title: "More",
-//       screen: "example.PushedScreen",
-//       passProps: {
-//         str: 'This is a prop passed in \'navigator.push()\'!',
-//         obj: {
-//           str: 'This is a prop passed in an object!',
-//           arr: [
-//             {
-//               str: 'This is a prop in an object in an array in an object!'
-//             }
-//           ]
-//         },
-//         num: 1234
-//       }
-//     });
-//   }
-//
   onShowModalPress() {
-    console.log('show modal');
     this.props.navigator.showModal({
       title: "Add NEW rec",
       screen: "chaz.RecAddScreen",
-      passProps: {
-        str: 'This is a prop passed in \'navigator.showModal()\'!',
-        obj: {
-          str: 'This is a prop passed in an object!',
-          arr: [
-            {
-              str: 'This is a prop in an object in an array in an object!'
-            }
-          ]
-        },
-        num: 1234
-      }
+      passProps: { }
     });
   }
-//
-//   onToggleNavBarPress() {
-//     navBarVisiable = !navBarVisiable;
-//     this.props.navigator.toggleNavBar({
-//       to: navBarVisiable ? 'shown' : 'hidden',
-//       animated: true
-//     });
-//   }
+
 }
 
 const styles = StyleSheet.create({

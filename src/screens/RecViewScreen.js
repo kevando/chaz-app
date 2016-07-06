@@ -26,45 +26,19 @@ class RecViewScreen extends Component {
     tabIndicatorColor: '#FFA000'
   };
 
-  static navigatorButtons = {
-    rightButtons: [
-      {
-        title: 'Edit',
-        id: 'edit'
-      },
-      {
-        icon: require('../../img/navicon_add.png'),
-        title: 'Add',
-        id: 'add'
-      }
-    ]
-  };
 
   constructor(props) {
     super(props);
     // if you want to listen on navigator events, set this up
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    // this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
 
   }
   componentDidMount() {
     this.props.dispatch(recActions.setCurrentRec(this.props.currentRec)); // maybe just do the key here
+    // this.props.dispatch(recrActions.setCurrentRecr(this.props.currentRec.recr));
   }
 
-  onNavigatorEvent(event) {
-    // switch (event.id) {
-    //   case 'edit':
-    //     Alert.alert('NavBar', 'Edit button pressed');
-    //     break;
-    //
-    //   case 'add':
-    //     Alert.alert('NavBar', 'Add button pressed');
-    //     break;
-    //
-    //   default:
-    //     console.log('Unhandled event ' + event.id);
-    //     break;
-    // }
-  }
+
 
   render() {
     const rec = this.props.rec.current;
@@ -100,13 +74,6 @@ class RecViewScreen extends Component {
 
 
 
-
-
-
-
-
-
-
       </View>
     );
   }
@@ -115,11 +82,7 @@ class RecViewScreen extends Component {
   onAddRecrPress() {
     var options = Array();
     options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
-    // var recrs = this.props.recrs.map((recr) => {
-    //   options.push({text: recr.name, onPress: () => {this.props.assignExistingRecrFunction(recr,this.props.rec)} });
-    // });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-
     AlertIOS.prompt('Who recommended this?', null, options);
   }
   addRecr(recrName) {
@@ -132,15 +95,14 @@ class RecViewScreen extends Component {
     var options = Array();
     options.push({text: 'Submit',  onPress: (title) => { this.props.dispatch(recActions.updateTitle(title)); }    });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-
-    AlertIOS.prompt('Change Title', null, options);
+    AlertIOS.prompt('Change Title', null, options,'plain-text',this.props.rec.current.title);
   }
 
   onRecrPress() {
     this.props.navigator.push({
       title: "Recr",
       screen: "chaz.RecrViewScreen",
-      passProps: {recr:this.props.rec.current.recr }
+      passProps: {recrKey:this.props.rec.current.recr._key }
     });
   }
 

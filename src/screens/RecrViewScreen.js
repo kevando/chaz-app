@@ -11,7 +11,7 @@ import {
 import { connect } from 'react-redux';
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
-
+import ListItem from '../components/rec/ListItem';
 
 let navBarVisiable = true;
 
@@ -26,19 +26,6 @@ class RecrViewScreen extends Component {
     tabIndicatorColor: '#FFA000'
   };
 
-  static navigatorButtons = {
-    rightButtons: [
-      {
-        title: 'Edit',
-        id: 'edit'
-      },
-      {
-        icon: require('../../img/navicon_add.png'),
-        title: 'Add',
-        id: 'add'
-      }
-    ]
-  };
 
   constructor(props) {
     super(props);
@@ -47,28 +34,16 @@ class RecrViewScreen extends Component {
 
   }
   componentDidMount() {
-    // this.props.dispatch(recActions.setCurrentRec(this.props.currentRec)); // maybe just do the key here
+    this.props.dispatch(recrActions.setCurrentRecrByKey(this.props.recrKey));
   }
 
-  onNavigatorEvent(event) {
-    // switch (event.id) {
-    //   case 'edit':
-    //     Alert.alert('NavBar', 'Edit button pressed');
-    //     break;
-    //
-    //   case 'add':
-    //     Alert.alert('NavBar', 'Add button pressed');
-    //     break;
-    //
-    //   default:
-    //     console.log('Unhandled event ' + event.id);
-    //     break;
-    // }
-  }
+
 
   render() {
-    const recr = this.props.recr;
+    const recr = this.props.recr.current;
 
+    if(!recr)
+      return(<View><Text>Something went wrong and no current rec was set</Text></View>);
 
 
     return (
@@ -79,12 +54,7 @@ class RecrViewScreen extends Component {
         </Text>
 
 
-        {this.renderRecList()}
-
-
-
-
-
+        {this.renderRecList(this.props.navigator)}
 
       </View>
     );
@@ -92,11 +62,12 @@ class RecrViewScreen extends Component {
 
   renderRecList(navigator) { // not sure if passing nav is a good idea but it works
     var recs = Array();
-    // this.props.recr.recs.forEach(function(rec) {
-    for (var key in this.props.recr.recs) {
 
-      // recs.push(<ListItem key={rec._key} rec={rec} navigator={navigator} />);
-      recs.push(<Text>{this.props.recr.recs[key].title}</Text>);
+    // this.props.recr.current.recs.forEach(function(rec) {
+    for (var key in this.props.recr.current.recs) {
+
+      recs.push(<ListItem key={this.props.recr.current.recs[key]._key} rec={this.props.recr.current.recs[key]} navigator={navigator} />);
+      // recs.push(<Text>{this.props.recr.recs[key].title}</Text>);
     };
     return recs;
   }
@@ -185,7 +156,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     // rec: state.rec,
-    // recr: state.recr
+    recr: state.recr
   };
 }
 
