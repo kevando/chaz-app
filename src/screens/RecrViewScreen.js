@@ -50,7 +50,13 @@ class RecrViewScreen extends Component {
       <View style={{flex: 1, padding: 20}}>
 
         <Text style={styles.text}>
-          <Text style={{fontWeight: '500'}}>recrname: {recr.name}</Text>
+          <Text style={{fontWeight: '500',marginBottom:30}}>{recr.name}</Text>
+        </Text>
+        <Text style={styles.text}>
+          Total Recs: <Text style={{fontWeight: '500'}}>4</Text>
+        </Text>
+        <Text style={styles.text}>
+          Score: <Text style={{fontWeight: '500'}}>48</Text>
         </Text>
 
 
@@ -137,13 +143,13 @@ class RecrViewScreen extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 18,
     marginBottom: 10,
     marginTop:10
   },
   button: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 18,
     marginBottom: 10,
     marginTop:10,

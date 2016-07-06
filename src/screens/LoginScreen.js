@@ -26,7 +26,7 @@ class LoginScreen extends Component {
   }
 
   render() {
-    this.props.dispatch(appActions.login('bro'))
+    // this.props.dispatch(appActions.login('bro'))
     if(this.state.loading)
       return <Loading message="Logging In" />
 

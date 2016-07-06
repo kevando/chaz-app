@@ -22,9 +22,9 @@ class RecAddScreen extends Component {
   };
 
   static propTypes = {
-    str: PropTypes.string.isRequired,
-    obj: PropTypes.object.isRequired,
-    num: PropTypes.number.isRequired
+    // str: PropTypes.string.isRequired,
+    // obj: PropTypes.object.isRequired,
+    // num: PropTypes.number.isRequired
   };
 
   constructor(props) {

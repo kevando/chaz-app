@@ -3,43 +3,28 @@
 
 
 ### 0.7 (make data proper. DEPLOY & DISTRIBUTE THIS. try with and without async storage)
-grade data to rec listitem
-conditionally show grade input
-friend page with recs data and score
 
-edit title, change recr
-add comments to recs
+ / deploy make sure it builds
 
+ - totally refactored with new router
+ - Add Rec is now a page
+ - Improved listitem
 
-create rec add, update display
-
-probly need to look more into immutable
-
-recList,recView,filter/sort
-
+### 0.8 (improve ui/ux)
+add rec comments
+better rec view page
+create some sort of style guide
+friend page has friend data
+probly need to look more into immutable, so data isnt sucha  bitch to work with
 add "logging in" state
-
-right now adding recr is weird and it bugs, because of recr score
-consider moving to where recr is an object within rec
-fix all data in for recs, this is currently sorta fucked up
-  im going to need to map this out better than i have
-
-fixing data, then go back to recList
-
-change where delay is on loading data
-go back to list item and improve
-add rec is not a pop up
-probly want to make it so rec and recr uses listener. i like that flow
-
-
- - Loading state is pulsing heart, with random color
-
-### 0.8 (improve ui)
-update colors to scheme, probly want to create style sheet
+incorp color scheme
+mp tracking
+Loading state is pulsing heart, with random color
+ update colors to scheme, probly want to create style sheet
 add filter back in
 this is the first version with recr view and rec view
 GIANT BUTTONS, like yo
-
+fun loading states that make sense based on how data goes in
 try to indicate something is new or recently added, or updated UI trick here (emoji)
 now that i have friend lists, refactor the firebase/state data so it makes more sense
 friend score as emoji scale. make this part of the improved design shit

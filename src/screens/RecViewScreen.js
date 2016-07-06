@@ -58,12 +58,31 @@ class RecViewScreen extends Component {
           ?
           <View>
           <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }>
-            <Text style={styles.button}>{rec.recr.name}</Text>
+            <Text>Friend: <Text style={styles.button}>{rec.recr.name}</Text></Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
             <Text style={styles.button}>Change Recr</Text>
           </TouchableOpacity>
+
+          {( rec.grade != null
+
+            ?
+            <View>
+
+            <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
+              <Text style={styles.button}>Grade: {rec.grade}</Text>
+              </TouchableOpacity>
+
+            </View>
+
+
+            : <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
+              <Text style={styles.button}>Grade this</Text>
+            </TouchableOpacity>
+          )}
+
+
           </View>
 
 
@@ -105,7 +124,22 @@ class RecViewScreen extends Component {
       passProps: {recrKey:this.props.rec.current.recr._key }
     });
   }
-
+  onAddGradePress(rec) {
+    // const { setRecGrade, removeRec } = this.props.actions;
+    AlertIOS.alert(
+        'Grade this recommendation',
+        null,
+        [
+          {text: '1 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,1)) },
+          {text: '2 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,2)) },
+          {text: '3 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,3)) },
+          {text: '4 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,4)) },
+          {text: '5 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,5)) },
+          // {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
+          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
+        ],
+      );
+  }
   onShowModalPress() {
     this.props.navigator.showModal({
       title: "Modal Screen",

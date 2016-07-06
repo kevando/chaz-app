@@ -62,7 +62,9 @@ class RecsScreen extends Component {
 
     return (
       <View style={{flex: 1, padding: 20}}>
+      <ScrollView>
         {this.renderRecList(this.props.navigator)}
+        </ScrollView>
       </View>
     );
   }
