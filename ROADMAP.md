@@ -3,7 +3,13 @@
 
 
 ### 0.7 (make data proper. DEPLOY & DISTRIBUTE THIS. try with and without async storage)
-view rec, add recr conditionally show grade input
+grade data to rec listitem
+conditionally show grade input
+friend page with recs data and score
+
+edit title, change recr
+add comments to recs
+
 
 create rec add, update display
 

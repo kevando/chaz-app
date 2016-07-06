@@ -80,6 +80,7 @@ class RecsScreen extends Component {
   renderRecList(navigator) { // not sure if passing nav is a good idea but it works
     var recs = Array();
     this.props.rec.all.forEach(function(rec) {
+      
       recs.push(<ListItem key={rec._key} rec={rec} navigator={navigator} />);
     });
     return recs;

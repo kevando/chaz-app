@@ -9,7 +9,35 @@ export function listenForRecs() {
     const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
     recsRef.on('value', (snap) => {
         dispatch(getRecList(snap));
+        dispatch(syncRecrList(snap));
     });
+  }
+}
+export function syncRecrList(snap) { // fuck yeah if this works
+  return (dispatch, getState) => {
+    const currentState = getState();
+      var items = [];
+      snap.forEach((child) => {
+        var recObject = {
+          title: child.val().title,
+          _key: child.key(),
+          recr: child.val().recr,
+          // grade: child.val().grade,
+          createdAt: child.val().createdAt,
+          // recrScore: child.val().recrScore
+        }
+        if(recObject.recr){
+          const recrsRecRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${recObject.recr._key}/recs/${recObject._key}`);
+          recrsRecRef.once("value", function(snapshot) { // probly way over kill but idgaf
+            if(snapshot.exists()){
+              recrsRecRef.update(recObject);
+            }
+          });
+
+      }
+
+    });
+
   }
 }
 export function getRecList(snap) { // runs after basically any change to any rec
@@ -35,6 +63,7 @@ export function getRecList(snap) { // runs after basically any change to any rec
             dispatch(setCurrentRec(recObject));
           }
         }
+
       });
         // console.log('items',items);
       dispatch(updateRecList(items)); // reducer call
@@ -55,6 +84,14 @@ export function addRec(recTitle) {                  // ADD NEW REC
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
     recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
+  }
+}
+export function updateTitle(recTitle) {                  // ADD NEW REC
+  return function(dispatch, getState) {
+
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs/${currentState.rec.current._key}`);
+    recsRef.update({ title: recTitle });
   }
 }
 export function setRecGrade(rec, grade) {                  // ADD NEW REC

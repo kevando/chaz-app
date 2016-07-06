@@ -9,19 +9,29 @@ export default class ListItem extends Component {
     super(props);
   }
   render() {
+    // console.log('RECR',this.props.recr.recs.length)
     return (
       <TouchableOpacity onPress={ this.onRecPress.bind(this) }>
-        <Text>{this.props.recr.name}</Text>
+        <Text>{this.props.recr.name}({this.getRecCount(this.props.recr.recs)})</Text>
       </TouchableOpacity>
     );
+  }
+  getRecCount(recs) {
+    if(!recs)
+      return 0;
+      var count = 0;
+    for (var key in recs) {
+      count++;
+    }
+    return count;
   }
 
   // chaz
   onRecPress() {
     this.props.navigator.push({
-      title: "Rec",
-      screen: "chaz.RecViewScreen",
-      passProps: { rec: this.props.rec }
+      title: "Recr",
+      screen: "chaz.RecrViewScreen",
+      passProps: { recr: this.props.recr }
     });
   }
 }

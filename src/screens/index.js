@@ -11,6 +11,7 @@ import RecViewScreen from './RecViewScreen';
 import SettingsScreen from './SettingsScreen';
 import RecAddScreen from './RecAddScreen';
 import RecrsScreen from './RecrsScreen';
+import RecrViewScreen from './RecrViewScreen';
 
 // register all screens of the app (including internal ones)
 export function registerScreens(store, Provider) {
@@ -25,4 +26,5 @@ export function registerScreens(store, Provider) {
   Navigation.registerComponent('chaz.SettingsScreen', () => SettingsScreen, store, Provider);
   Navigation.registerComponent('chaz.RecAddScreen', () => RecAddScreen, store, Provider);
   Navigation.registerComponent('chaz.RecrsScreen', () => RecrsScreen, store, Provider);
+  Navigation.registerComponent('chaz.RecrViewScreen', () => RecrViewScreen, store, Provider);
 }
