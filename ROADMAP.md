@@ -1,16 +1,22 @@
 # Roadmap
 
 
-### 0.7.1
+### 0.7.2
+Change all the name from chaz beta to chaz. change icon to purple
 clean all the display code
 document clicks
 add very minimal color scheming with emoji likes (this should help structure mp)
 add mixpanel
-consider adding back in
+enable proper log in with logging in state
+consider dropping bottom nav bar
+look at phone screenshots for design help
 
-### 0.7.2 (dist this to auten, rob)
+### 0.7.3 (ui/ux mvp.. dist this to auten, rob)
 Create document that denotes colors and actions. Each tap should be documented here
-### 0.8 (improve ui/ux) -- split this into 2 parts. go very mvp with this. work only towards something deployable
+add back in list filters
+add userfeedback in settings (will be cool to turn this into a rec type. reward users with good quality feedback)
+
+### 0.8 (improve ui/ux)
 
 add rec comments
 make login very much like snapchat
@@ -40,6 +46,7 @@ change styling to more like podcasts/trello, consider ui improvement to add/edit
 
 recr view has list of their recs, sortable, filterable
 add recr % to global rec list
+people like clearing the red app notification number so use this to get users to complete recs
 
 
 ### 0.9 (Improve onboarding)
