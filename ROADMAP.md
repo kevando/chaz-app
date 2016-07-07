@@ -1,17 +1,20 @@
 # Roadmap
 
 
+### 0.7.1
+clean all the display code
+document clicks
+add very minimal color scheming with emoji likes (this should help structure mp)
+add mixpanel
+consider adding back in
 
-### 0.7 (make data proper. DEPLOY & DISTRIBUTE THIS. try with and without async storage)
+### 0.7.2 (dist this to auten, rob)
+Create document that denotes colors and actions. Each tap should be documented here
+### 0.8 (improve ui/ux) -- split this into 2 parts. go very mvp with this. work only towards something deployable
 
- / deploy make sure it builds
-
- - totally refactored with new router
- - Add Rec is now a page
- - Improved listitem
-
-### 0.8 (improve ui/ux)
 add rec comments
+make login very much like snapchat
+all data entry should operate like that (input,add,keyboard)
 better rec view page
 create some sort of style guide
 friend page has friend data

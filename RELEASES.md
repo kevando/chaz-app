@@ -1,3 +1,10 @@
+### 0.7.1
+ / deploy make sure it builds
+ - totally refactored with new router
+ - Add Rec is now a page
+ - Improved listitem
+
+ 
 ### 0.6
  - Fixed sort/filter & added sort by best
  - Added some emoji stuff and updated react and all the modules, except firebase.
