@@ -14,6 +14,7 @@
     "lodash": "^4.13.1",
     "react": "0.14.5",
     "react-native": "0.25.1",
+    "react-native-mixpanel": "0.0.10",
     "react-native-navigation": "file:../",
     "react-redux": "^4.0.6",
     "redux": "^3.0.5",

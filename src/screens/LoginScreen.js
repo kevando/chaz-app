@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component } from 'react';
 import {
   Text,
   View,
@@ -7,42 +7,45 @@ import {
   StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-import * as counterActions from '../reducers/counter/actions';
+
 import * as appActions from '../reducers/app/actions';
-import Loading from '../components/LoadingComponent';
+// import Loading from '../components/LoadingComponent';
 
 // this is a traditional React component connected to the redux store
 class LoginScreen extends Component {
 
-  static propTypes = {
-    str: PropTypes.string.isRequired,
-    obj: PropTypes.object.isRequired,
-    num: PropTypes.number.isRequired
+  static navigatorStyle = {
+    statusBarColor: 'red',
+    toolBarColor: '#3F51B5',
+    navigationBarColor: '#303F9F',
+    tabSelectedTextColor: '#FFA000',
+    tabNormalTextColor: 'red',
+    tabIndicatorColor: 'red'
   };
 
   constructor(props) {
     super(props);
     this.state = {loading: false, authResponse: 'f'}
+    this.props.navigator.toggleNavBar({
+      to: 'hidden',
+      animated: false
+    });
   }
 
   render() {
-    // this.props.dispatch(appActions.login('bro'))
-    if(this.state.loading)
-      return <Loading message="Logging In" />
+    // For testing
+    this.props.dispatch(appActions.login('bro'));
+
+    // if(this.state.loading)
+    //   return <Loading message="Logging In" />
 
     return (
 
-      <View style={{flex: 1, padding: 20}}>
+      <View style={{flex: 1, paddingTop: 120,}}>
       <Text style={styles.text}>
-        <Text style={{fontWeight: '500'}}>Welcome to chaz</Text>
+        <Text style={{fontWeight: '500'}}>CHAZ</Text>
       </Text>
-        <Text style={styles.text}>
-          <Text style={{fontWeight: '500'}}>Counter: </Text> {this.props.counter.count}
-        </Text>
 
-        <TouchableOpacity onPress={ this.onIncrementPress.bind(this) }>
-          <Text style={styles.button}>Increment Counter</Text>
-        </TouchableOpacity>
 
         <TouchableOpacity onPress={ this.onLoginPress.bind(this) }>
           <Text style={styles.button}>Login</Text>
@@ -51,18 +54,11 @@ class LoginScreen extends Component {
           <Text style={{fontWeight: '100',color:'red'}}>{this.props.app.authError}</Text>
         </Text>
 
-        <Text style={{fontWeight: '500'}}>String prop: {this.props.str}</Text>
-        <Text style={{fontWeight: '500'}}>Number prop: {this.props.num}</Text>
-        <Text style={{fontWeight: '500'}}>Object prop: {this.props.obj.str}</Text>
-        <Text style={{fontWeight: '500'}}>Array prop: {this.props.obj.arr[0].str}</Text>
-        <Text style={{fontWeight: '500'}}>Array of arrays prop: {JSON.stringify(this.props.obj.arr2)}</Text>
 
       </View>
     );
   }
-  onIncrementPress() {
-    this.props.dispatch(counterActions.increment());
-  }
+
   onLoginPress() {
     // this.setState({loading:true})
     this.props.dispatch(appActions.login('bro'));

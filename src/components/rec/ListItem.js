@@ -3,39 +3,49 @@ import {
   Text,
   View,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  AlertIOS
 } from 'react-native';
-
+import RecGrade from './RecGrade'
 export default class ListItem extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
       <TouchableOpacity style={styles.row} onPress={ this.onRecPress.bind(this) }>
-        <View style={styles.right}>
-          <Text style={styles.title} >{this.props.rec.title}</Text>
-          <Text style={styles.grade} >{this.props.rec.grade}</Text>
-        </View>
         <View style={styles.left}>
-          <Text style={styles.recr} >{this.getRecrName()}</Text>
-          <Text style={styles.score} >{this.getRecrScore()}</Text>
+          <Text style={styles.title} >{this.props.rec.title}</Text>
+          <RecGrade grade={this.props.rec.grade} />
+        </View>
+        <View style={styles.right}>
+          {this.getRecrDisplay()}
         </View>
       </TouchableOpacity>
     );
   }
-  renderr() {
-    return (
-      <TouchableOpacity style={styles.row} onPress={ this.onRecPress.bind(this) }>
-        <Text>
-          <Text style={{fontSize:15,fontWeight:'500'}}>
-            [ {this.props.rec.title} ({this.props.rec.grade}) ]
-            </Text>
-            [ {this.getRecrName()} ({this.getRecrScore()})]
-        </Text>
-      </TouchableOpacity>
-    );
+
+  getRecrDisplay() {
+    const recr = this.props.rec.recr;
+    if(recr){
+      return (
+        <TouchableOpacity onPress={ this.onRecrPress.bind(this) }>
+          <Text>{recr.name}</Text>
+        </TouchableOpacity>
+
+      )
+    } else {
+      return (
+        <TouchableOpacity style={styles.addRecr} onPress={ this.props.onAddRecrPress }>
+          <Text style={styles.addRecrText}>+</Text>
+        </TouchableOpacity>
+      );
+    }
   }
+
+
+
   getRecrName() {
     if(this.props.rec.recr)
       return this.props.rec.recr.name
@@ -53,27 +63,42 @@ export default class ListItem extends Component {
       passProps: { currentRec: this.props.rec }
     });
   }
+
+  onRecrPress() {
+    this.props.navigator.push({
+      title: "Recr",
+      screen: "chaz.RecrViewScreen",
+      passProps: {recrKey:this.props.rec.recr._key }
+    });
+  }
+
 }
+
+
 const styles = StyleSheet.create({
   row: {
-    backgroundColor: '#eee',
+    backgroundColor: '#fff',
     borderBottomWidth:1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#ddd',
     height:50,
     flexDirection: 'row',
-    padding:5,
+    paddingTop:5,
+    paddingBottom:5,
+    paddingLeft:10
   },
   right: {
     flex:1,
-    // backgroundColor: 'blue'
+    justifyContent: 'center', // vertical middle
+
   },
   left: {
-    flex:1,
-    // backgroundColor: 'yellow'
+    flex:3,
+
   },
   title: {
     textAlign: 'left',
-    fontSize: 15,
+    fontSize: 13,
+    fontWeight: '500'
   },
   grade: {
     textAlign: 'left',
@@ -83,6 +108,23 @@ const styles = StyleSheet.create({
   recr: {
     textAlign: 'right',
     fontSize: 14,
+  },
+  addRecr: {
+    flex:1,
+    flexDirection: 'row',
+    // backgroundColor: 'red',
+
+    justifyContent: 'center' // vertical middle
+
+  },
+  addRecrText: {
+    color: '#fff',
+    textAlign: 'center',
+    width:40,
+    backgroundColor: 'blue',
+    fontSize: 26,
+    marginTop:0,
+    marginBottom:0
   },
   score: {
     textAlign: 'right',

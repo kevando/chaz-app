@@ -5,12 +5,14 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  Alert
+  AlertIOS
 } from 'react-native';
 import { connect } from 'react-redux';
-// import * as counterActions from '../reducers/counter/actions';
+import AddRecButton from '../components/rec/AddRecButton';
 import * as recActions from '../reducers/rec/actions';
+import * as recrActions from '../reducers/recr/actions';
 import ListItem from '../components/rec/ListItem';
+import * as Style from '../style/Style';
 
 let navBarVisiable = true;
 
@@ -18,33 +20,30 @@ let navBarVisiable = true;
 class RecsScreen extends Component {
   static navigatorStyle = {
     statusBarColor: '#303F9F',
-    toolBarColor: '#3F51B5',
-    navigationBarColor: '#303F9F',
-    tabSelectedTextColor: '#FFA000',
-    tabNormalTextColor: '#FFC107',
-    tabIndicatorColor: '#FFA000'
+    navBarBackgroundColor: Style.constants.colors[0],
+    navBarTextColor: Style.constants.colors[1],
+    navBarButtonColor: '#fff',
   };
 
   static navigatorButtons = {
-    rightButtons: [
-      {
-        icon: require('../../img/navicon_add.png'),
-        title: 'Add',
-        id: 'add'
-      }
-    ]
+    rightButtons: [{title: 'Friends',id: 'friends'}],
+    leftButtons: [ {title: 'Settings',id: 'settings'}]
   };
 
   constructor(props) {
     super(props);
     // if you want to listen on navigator events, set this up
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.onAddRecrPress = this.onAddRecrPress.bind(this);
   }
 
   onNavigatorEvent(event) {
     switch (event.id) {
-      case 'add':
-        this.onShowModalPress()
+      case 'friends':
+        this.onShowFriendsPress()
+        break;
+      case 'settings':
+        this.onShowSettingsPress()
         break;
       default:
         console.log('Unhandled event ' + event.id);
@@ -61,30 +60,59 @@ class RecsScreen extends Component {
       return (<View><Text>No visible recs yet</Text></View>)
 
     return (
-      <View style={{flex: 1, padding: 20}}>
+      <View style={{flex: 1, padding: 0}}>
       <ScrollView>
-        {this.renderRecList(this.props.navigator)}
+        {this.renderRecList(this.props.navigator,this.onAddRecrPress)}
         </ScrollView>
+        <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
   }
 
-
-  renderRecList(navigator) { // not sure if passing nav is a good idea but it works
+  addRecr(recrName) {
+    // create new recr if new
+    // update current with updated rec info
+    this.props.dispatch(recrActions.createRecr(recrName));
+  }
+  renderRecList(navigator,onAddRecrPress) { // not sure if passing nav is a good idea but it works
     var recs = Array();
     this.props.rec.all.forEach(function(rec) {
 
-      recs.push(<ListItem key={rec._key} rec={rec} navigator={navigator} />);
+      recs.push(<ListItem key={rec._key} rec={rec} navigator={navigator} onAddRecrPress={onAddRecrPress.bind(this,rec)} />);
     });
     return recs;
   }
 
-  onShowModalPress() {
+  onAddRecPress() { // add
     this.props.navigator.showModal({
-      title: "Add NEW rec",
+      title: "",
       screen: "chaz.RecAddScreen",
       passProps: { }
     });
+  }
+  onShowSettingsPress() {
+    this.props.navigator.push({
+      title: "Settings",
+      screen: "chaz.SettingsScreen",
+    });
+  }
+  onShowFriendsPress() {
+    this.props.navigator.push({ screen: "chaz.RecrsScreen"});
+  }
+  onAddRecrPress(itemRec) {
+    // Before adding recr name, set this listItem Rec to current.
+    // this is not the best place for this, but its needed to add recr
+    this.props.dispatch(recActions.setCurrentRec(itemRec));
+
+    var options = Array();
+    options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
+    options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
+    AlertIOS.prompt('Who is recommending this?', null, options);
+  }
+  addRecr(recrName) {
+    // create new recr if new
+    // update current with updated rec info
+    this.props.dispatch(recrActions.createRecr(recrName));
   }
 
 }
@@ -110,7 +138,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     rec: state.rec,
-    // counter: state.counter // this is like the entire folder level shit
+    // recr: state.recr,
   };
 }
 

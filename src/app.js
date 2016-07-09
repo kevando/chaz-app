@@ -41,30 +41,20 @@ export default class App {
             title: 'Login',
             navigatorStyle: {}
           },
-          passProps: {
-            str: 'This is a prop passed in \'startSingleScreenApp()\'!',
-            obj: {
-              str: 'This is a prop passed in an object!',
-              arr: [
-                {
-                  str: 'This is a prop in an object in an array in an object!'
-                }
-              ],
-              arr2: [
-                [
-                  'array of strings',
-                  'with two strings'
-                ],
-                [
-                  1, 2, 3
-                ]
-              ]
-            },
-            num: 1234
-          }
+          passProps: {}
         });
         return;
       case 'after-login':
+        Navigation.startSingleScreenApp({
+          screen: {
+            screen: 'chaz.RecsScreen',
+            title: '',
+            navigatorStyle: {}
+          },
+          passProps: {}
+        });
+        return;
+      case 'after-login_old':
         Navigation.startTabBasedApp({
           tabs: [
             {
@@ -72,7 +62,7 @@ export default class App {
               screen: 'chaz.RecsScreen',
               icon: require('../img/one.png'),
               selectedIcon: require('../img/one_selected.png'),
-              title: 'Recs',
+              title: '',
               navigatorStyle: {},
             },
             {

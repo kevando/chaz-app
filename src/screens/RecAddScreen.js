@@ -9,43 +9,40 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as recActions from '../reducers/rec/actions';
+import * as Style from '../style/Style';
 
 // this is a traditional React component connected to the redux store
 class RecAddScreen extends Component {
   static navigatorStyle = {
-    // statusBarColor: '#303F9F',
-    // toolBarColor: '#3F51B5',
-    // navigationBarColor: '#303F9F',
-    // tabSelectedTextColor: '#FFA000',
-    // tabNormalTextColor: '#FFC107',
-    // tabIndicatorColor: '#FF4081'
+    statusBarColor: '#303F9F',
+    navBarBackgroundColor: Style.constants.colors[1],
+    navBarButtonColor: '#fff',
   };
 
-  static propTypes = {
-    // str: PropTypes.string.isRequired,
-    // obj: PropTypes.object.isRequired,
-    // num: PropTypes.number.isRequired
+  static navigatorButtons = {
+    rightButtons: [{title: 'Cancel',id: 'cancel'}],
   };
+
 
   constructor(props) {
     super(props);
-    this.bgColor = this.getRandomColor();
     this.state = {recTitle:'dude'}
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
-
-  getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-      color += letters[Math.floor(Math.random() * 16)];
+  onNavigatorEvent(event) {
+    switch (event.id) {
+      case 'cancel':
+        this.onCancelPress()
+        break;
+      default:
+        console.log('Unhandled event ' + event.id);
+        break;
     }
-    return color;
   }
 
   render() {
     return (
-      <View style={{flex: 1, padding: 20, backgroundColor: this.bgColor}}>
-
+      <View style={{flex: 1, padding: 20}}>
 
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
@@ -54,12 +51,9 @@ class RecAddScreen extends Component {
         />
 
         <TouchableOpacity onPress={ this.onAddRecPress.bind(this) }>
-          <Text style={styles.button}>Add Rec</Text>
+          <Text style={styles.button}>Save Recommendation</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={ this.onDismissModal.bind(this) }>
-          <Text style={styles.button}>Cancel</Text>
-        </TouchableOpacity>
 
       </View>
     );
@@ -71,7 +65,7 @@ class RecAddScreen extends Component {
   }
 
 
-  onDismissModal() {
+  onCancelPress() {
     this.props.navigator.dismissModal();
   }
 
@@ -90,7 +84,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     marginTop:10,
-    color: 'blue'
+    color: Style.constants.colors[1]
   }
 });
 

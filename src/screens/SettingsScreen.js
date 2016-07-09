@@ -14,11 +14,6 @@ import Loading from '../components/LoadingComponent';
 // this is a traditional React component connected to the redux store
 class SettingsScreen extends Component {
 
-  static propTypes = {
-    str: PropTypes.string.isRequired,
-    obj: PropTypes.object.isRequired,
-    num: PropTypes.number.isRequired
-  };
 
   constructor(props) {
     super(props);

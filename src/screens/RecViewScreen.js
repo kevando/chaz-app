@@ -104,11 +104,7 @@ class RecViewScreen extends Component {
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
     AlertIOS.prompt('Who recommended this?', null, options);
   }
-  addRecr(recrName) {
-    // create new recr if new
-    // update current with updated rec info
-    this.props.dispatch(recrActions.createRecr(recrName));
-  }
+
 
   onTitlePress() {
     var options = Array();
