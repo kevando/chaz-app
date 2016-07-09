@@ -5,6 +5,7 @@ import {
   View,
   StyleSheet
 } from 'react-native';
+import Style from '../../style/Style';
 
 export default class ListItem extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ export default class ListItem extends Component {
   // chaz
   onRecPress() {
     this.props.navigator.push({
-      title: "Recr",
+      title: "",
       screen: "chaz.RecrViewScreen",
       passProps: { recrKey: this.props.recr._key }
     });
@@ -44,33 +45,62 @@ export default class ListItem extends Component {
 }
 const styles = StyleSheet.create({
   row: {
-    backgroundColor: '#eee',
+    backgroundColor: '#fff',
     borderBottomWidth:1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#ddd',
     height:50,
     flexDirection: 'row',
-    padding:5,
+    paddingTop:5,
+    paddingBottom:5,
+    paddingLeft:10,
+    paddingRight:10
   },
   right: {
     flex:1,
-    // backgroundColor: 'blue'
+    justifyContent: 'center', // vertical middle
+    flexDirection: 'row'
   },
   left: {
-    flex:1,
-    // backgroundColor: 'yellow'
+    flex:3,
+
   },
   title: {
     textAlign: 'left',
-    fontSize: 15,
+    fontSize: 13,
+    fontWeight: '500'
   },
   grade: {
     textAlign: 'left',
     fontSize: 14,
     color:'#444',
   },
-  recr: {
-    textAlign: 'right',
+  recrButton: {
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end' ,
+
+  },
+  recrText: {
+    justifyContent: 'flex-end' ,
     fontSize: 14,
+    fontWeight: '700',
+    color: Style.constants.colors[2]
+  },
+  addRecr: {
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end' ,
+    width:40
+
+  },
+  addRecrText: {
+    color: '#fff',
+    textAlign: 'center',
+    width:40,
+    backgroundColor: Style.constants.colors[2],
+    fontSize: 26,
+    marginTop:0,
+    marginBottom:0
   },
   score: {
     textAlign: 'right',

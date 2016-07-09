@@ -6,7 +6,8 @@ import {
   StyleSheet,
   AlertIOS
 } from 'react-native';
-import RecGrade from './RecGrade'
+import RecGrade from './RecGrade';
+import Style from '../../style/Style';
 export default class ListItem extends Component {
   constructor(props) {
     super(props);
@@ -30,8 +31,8 @@ export default class ListItem extends Component {
     const recr = this.props.rec.recr;
     if(recr){
       return (
-        <TouchableOpacity onPress={ this.onRecrPress.bind(this) }>
-          <Text>{recr.name}</Text>
+        <TouchableOpacity style={styles.recrButton} onPress={ this.onRecrPress.bind(this) }>
+          <Text style={styles.recrText}>{recr.name}</Text>
         </TouchableOpacity>
 
       )
@@ -58,7 +59,7 @@ export default class ListItem extends Component {
   // chaz
   onRecPress() {
     this.props.navigator.push({
-      title: "Rec",
+      title: "",
       screen: "chaz.RecViewScreen",
       passProps: { currentRec: this.props.rec }
     });
@@ -66,7 +67,7 @@ export default class ListItem extends Component {
 
   onRecrPress() {
     this.props.navigator.push({
-      title: "Recr",
+      title: "",
       screen: "chaz.RecrViewScreen",
       passProps: {recrKey:this.props.rec.recr._key }
     });
@@ -84,12 +85,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop:5,
     paddingBottom:5,
-    paddingLeft:10
+    paddingLeft:10,
+    paddingRight:10
   },
   right: {
     flex:1,
     justifyContent: 'center', // vertical middle
-
+    flexDirection: 'row'
   },
   left: {
     flex:3,
@@ -105,23 +107,30 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color:'#444',
   },
-  recr: {
-    textAlign: 'right',
+  recrButton: {
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end' ,
+
+  },
+  recrText: {
+    justifyContent: 'flex-end' ,
     fontSize: 14,
+    fontWeight: '700',
+    color: Style.constants.colors[2]
   },
   addRecr: {
     flex:1,
     flexDirection: 'row',
-    // backgroundColor: 'red',
-
-    justifyContent: 'center' // vertical middle
+    justifyContent: 'flex-end' ,
+    width:40
 
   },
   addRecrText: {
     color: '#fff',
     textAlign: 'center',
     width:40,
-    backgroundColor: 'blue',
+    backgroundColor: Style.constants.colors[2],
     fontSize: 26,
     marginTop:0,
     marginBottom:0

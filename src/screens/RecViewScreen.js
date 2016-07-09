@@ -11,9 +11,8 @@ import {
 import { connect } from 'react-redux';
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
-
-
-let navBarVisiable = true;
+import * as Style from '../style/Style';
+import RecGrade from '../components/rec/RecGrade'
 
 // this is a traditional React component connected to the redux store
 class RecViewScreen extends Component {
@@ -23,7 +22,8 @@ class RecViewScreen extends Component {
     navigationBarColor: '#303F9F',
     tabSelectedTextColor: '#FFA000',
     tabNormalTextColor: '#FFC107',
-    tabIndicatorColor: '#FFA000'
+    tabIndicatorColor: '#FFA000',
+    navBarBackgroundColor: Style.constants.colors[1],
   };
 
 
@@ -38,7 +38,41 @@ class RecViewScreen extends Component {
     // this.props.dispatch(recrActions.setCurrentRecr(this.props.currentRec.recr));
   }
 
+  getDisplayGrade(rec) {
+    if(rec.recr != null){
+      if(rec.grade != null) {
+        return(
+          <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
+            <RecGrade grade={rec.grade} />
+          </TouchableOpacity>);
+      } else {
+        return(
+          <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
+            <Text style={styles.button}>Grade this</Text>
+          </TouchableOpacity>
+        );
+      }
+    }
+  }
+  getDisplayRecr(rec){
+    if(rec.recr != null){
+      return (
+        <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }>
+          <Text style={styles.button}>{rec.recr.name}</Text>
+          <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
+            <Text style={styles.button}>Change</Text>
+          </TouchableOpacity>
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
+          <Text style={styles.button}>Add Recommender</Text>
+        </TouchableOpacity>
+      )
+    }
 
+  }
 
   render() {
     const rec = this.props.rec.current;
@@ -49,49 +83,18 @@ class RecViewScreen extends Component {
     return (
       <View style={{flex: 1, padding: 20}}>
 
-      <TouchableOpacity onPress={ this.onTitlePress.bind(this,rec) }>
-        <Text>Title: <Text style={styles.button}>{rec.title}</Text></Text>
-      </TouchableOpacity>
-
-        {( rec.recr != null
-
-          ?
-          <View>
-          <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }>
-            <Text>Friend: <Text style={styles.button}>{rec.recr.name}</Text></Text>
+        <Text>Recommendation: </Text>
+        <View style={{paddingLeft:15}}>
+          <TouchableOpacity onPress={ this.onTitlePress.bind(this,rec) }>
+            <Text style={styles.button}>{rec.title}</Text>
           </TouchableOpacity>
+          {this.getDisplayGrade(rec)}
+        </View>
 
-          <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
-            <Text style={styles.button}>Change Recr</Text>
-          </TouchableOpacity>
-
-          {( rec.grade != null
-
-            ?
-            <View>
-
-            <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
-              <Text style={styles.button}>Grade: {rec.grade}</Text>
-              </TouchableOpacity>
-
-            </View>
-
-
-            : <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
-              <Text style={styles.button}>Grade this</Text>
-            </TouchableOpacity>
-          )}
-
-
-          </View>
-
-
-          : <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
-            <Text style={styles.button}>who Recommended?</Text>
-          </TouchableOpacity>
-        )}
-
-
+        <Text>Recommended by: </Text>
+        <View style={{paddingLeft:15}}>
+          {this.getDisplayRecr(rec)}
+        </View>
 
       </View>
     );
@@ -103,6 +106,13 @@ class RecViewScreen extends Component {
     options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
     AlertIOS.prompt('Who recommended this?', null, options);
+  }
+
+  // not sure why i need to add this now?
+  addRecr(recrName) {
+    // create new recr if new
+    // update current with updated rec info
+    this.props.dispatch(recrActions.createRecr(recrName));
   }
 
 
@@ -136,32 +146,7 @@ class RecViewScreen extends Component {
         ],
       );
   }
-  onShowModalPress() {
-    this.props.navigator.showModal({
-      title: "Modal Screen",
-      screen: "example.PushedScreen",
-      passProps: {
-        str: 'This is a prop passed in \'navigator.showModal()\'!',
-        obj: {
-          str: 'This is a prop passed in an object!',
-          arr: [
-            {
-              str: 'This is a prop in an object in an array in an object!'
-            }
-          ]
-        },
-        num: 1234
-      }
-    });
-  }
 
-  onToggleNavBarPress() {
-    navBarVisiable = !navBarVisiable;
-    this.props.navigator.toggleNavBar({
-      to: navBarVisiable ? 'shown' : 'hidden',
-      animated: true
-    });
-  }
 }
 
 const styles = StyleSheet.create({
@@ -173,9 +158,9 @@ const styles = StyleSheet.create({
   },
   button: {
     textAlign: 'left',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
+    fontSize: 15,
+    marginBottom: 2,
+    marginTop:2,
     color: 'blue'
   }
 });

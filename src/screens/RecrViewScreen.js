@@ -5,25 +5,21 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   AlertIOS
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
 import ListItem from '../components/rec/ListItem';
-
+import Style from '../style/Style';
 let navBarVisiable = true;
 
 // this is a traditional React component connected to the redux store
 class RecrViewScreen extends Component {
   static navigatorStyle = {
-    statusBarColor: '#303F9F',
-    toolBarColor: '#3F51B5',
-    navigationBarColor: '#303F9F',
-    tabSelectedTextColor: '#FFA000',
-    tabNormalTextColor: '#FFC107',
-    tabIndicatorColor: '#FFA000'
+    navBarBackgroundColor: Style.constants.colors[2],
+    navBarTextColor: Style.constants.colors[1],
+    navBarButtonColor: '#fff',
   };
 
 
@@ -49,21 +45,35 @@ class RecrViewScreen extends Component {
     return (
       <View style={{flex: 1, padding: 20}}>
 
-        <Text style={styles.text}>
+        <Text style={styles.nameText}>
           <Text style={{fontWeight: '500',marginBottom:30}}>{recr.name}</Text>
         </Text>
         <Text style={styles.text}>
-          Total Recs: <Text style={{fontWeight: '500'}}>4</Text>
+          Total Recs: <Text style={{fontWeight: '500'}}>{this.getTotalRecs()}</Text>
         </Text>
         <Text style={styles.text}>
-          Score: <Text style={{fontWeight: '500'}}>48</Text>
+          Score: <Text style={{fontWeight: '500'}}>{this.getScore()}</Text>
         </Text>
 
-
-        {this.renderRecList(this.props.navigator)}
+        <ScrollView style={{borderTopWidth:2,borderTopColor:'#ccc',marginTop:20}}>
+          {this.renderRecList(this.props.navigator)}
+        </ScrollView>
 
       </View>
     );
+  }
+  getTotalRecs() {
+    var totalRecs = 0;
+    for (var key in this.props.recr.current.recs) {
+      totalRecs++;
+    };
+    return totalRecs;
+  }
+  getScore() {
+    console.log('recr',this.props.recr.current)
+    var score = this.props.recr.current.score;
+
+    return score;
   }
 
   renderRecList(navigator) { // not sure if passing nav is a good idea but it works
@@ -94,55 +104,18 @@ class RecrViewScreen extends Component {
     this.props.dispatch(recrActions.createRecr(recrName));
   }
 
-  onPushPress() {
-    this.props.navigator.push({
-      title: "More",
-      screen: "example.PushedScreen",
-      passProps: {
-        str: 'This is a prop passed in \'navigator.push()\'!',
-        obj: {
-          str: 'This is a prop passed in an object!',
-          arr: [
-            {
-              str: 'This is a prop in an object in an array in an object!'
-            }
-          ]
-        },
-        num: 1234
-      }
-    });
-  }
 
-  onShowModalPress() {
-    this.props.navigator.showModal({
-      title: "Modal Screen",
-      screen: "example.PushedScreen",
-      passProps: {
-        str: 'This is a prop passed in \'navigator.showModal()\'!',
-        obj: {
-          str: 'This is a prop passed in an object!',
-          arr: [
-            {
-              str: 'This is a prop in an object in an array in an object!'
-            }
-          ]
-        },
-        num: 1234
-      }
-    });
-  }
 
-  onToggleNavBarPress() {
-    navBarVisiable = !navBarVisiable;
-    this.props.navigator.toggleNavBar({
-      to: navBarVisiable ? 'shown' : 'hidden',
-      animated: true
-    });
-  }
 }
 
 const styles = StyleSheet.create({
   text: {
+    textAlign: 'left',
+    fontSize: 14,
+    marginBottom: 5,
+    marginTop:5
+  },
+  nameText: {
     textAlign: 'left',
     fontSize: 18,
     marginBottom: 10,

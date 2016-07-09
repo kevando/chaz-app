@@ -2,7 +2,7 @@
 
 
 ### 0.7.2
-style rec then clean kitchen
+
 style recr
 style recr list
 add rec to recr view
@@ -16,6 +16,7 @@ add mixpanel logging
  Rec Added {rec title}
 
  - Removed bottom tabs, added rec button
+ - Improved reclistitem,recview
 
 ### 0.7.3 (ui/ux mvp.. dist this to auten, rob)
 Create document that denotes colors and actions. Each tap should be documented here
