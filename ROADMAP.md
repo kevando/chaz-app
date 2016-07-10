@@ -1,32 +1,27 @@
 # Roadmap
 
 
-### 0.7.2
 
-style recr
-style recr list
-add rec to recr view
-go back and fix style on rec item
-clean all the display code
-add very minimal color scheming with emoji likes (this should help structure mp)
-look at phone screenshots for design help
-change icon to purple
 
-add mixpanel logging
+### 0.7.3
+check out austen's account see how she is doing
+add mixpanel logging via middleware
+write own middleware or consider  using existing. explore custom middleware though
+ this could be very helpful
+ logged in
  Rec Added {rec title}
 
- - Removed bottom tabs, added rec button
- - Improved reclistitem,recview
 
-### 0.7.3 (ui/ux mvp.. dist this to auten, rob)
+### 0.7.4
 Create document that denotes colors and actions. Each tap should be documented here
-add back in list filters
+
+add deleteRec back
 enable proper log in with logging in state
 add userfeedback in settings (will be cool to turn this into a rec type. reward users with good quality feedback)
 
 
 ### 0.8 (improve ui/ux)
-
+add back in list filters
 add rec comments
 profile page with our own rec/recrs/grade score
 make login very much like snapchat

@@ -2,7 +2,7 @@ import React, {Component } from 'react';
 import {
   Text,
   View,
-  ScrollView,
+  AlertIOS,
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
@@ -10,18 +10,11 @@ import { connect } from 'react-redux';
 
 import * as appActions from '../reducers/app/actions';
 // import Loading from '../components/LoadingComponent';
+import Style from '../style/Style';
 
 // this is a traditional React component connected to the redux store
 class LoginScreen extends Component {
 
-  static navigatorStyle = {
-    statusBarColor: 'red',
-    toolBarColor: '#3F51B5',
-    navigationBarColor: '#303F9F',
-    tabSelectedTextColor: '#FFA000',
-    tabNormalTextColor: 'red',
-    tabIndicatorColor: 'red'
-  };
 
   constructor(props) {
     super(props);
@@ -34,16 +27,16 @@ class LoginScreen extends Component {
 
   render() {
     // For testing
-    this.props.dispatch(appActions.login('bro'));
+    // this.props.dispatch(appActions.login('bro'));
 
     // if(this.state.loading)
     //   return <Loading message="Logging In" />
 
     return (
 
-      <View style={{flex: 1, paddingTop: 120,}}>
+      <View style={{flex: 1, paddingTop: 120,backgroundColor: Style.constants.colors[0]}}>
       <Text style={styles.text}>
-        <Text style={{fontWeight: '500'}}>CHAZ</Text>
+        <Text style={{fontWeight: '500',color:'#fff'}}>CHAZ</Text>
       </Text>
 
 
@@ -61,7 +54,12 @@ class LoginScreen extends Component {
 
   onLoginPress() {
     // this.setState({loading:true})
-    this.props.dispatch(appActions.login('bro'));
+    // this.props.dispatch(appActions.login('bro'));
+
+    var options = Array();
+    options.push({text: 'LOG IN',  onPress: (username) => { this.props.dispatch(appActions.login(username)) }    });
+    options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
+    AlertIOS.prompt('Enter your beta access code', null, options);
   }
 }
 
