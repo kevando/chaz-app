@@ -5,8 +5,10 @@ import thunk from 'redux-thunk';
 import * as reducers from './reducers';
 import * as appActions from './reducers/app/actions';
 
+import analyticsMiddleware from './middleware/analyticsMiddleware'
+
 // redux related book keeping
-const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const createStoreWithMiddleware = applyMiddleware(analyticsMiddleware,thunk)(createStore);
 const reducer = combineReducers(reducers);
 const store = createStoreWithMiddleware(reducer);
 

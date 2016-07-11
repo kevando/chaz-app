@@ -74,15 +74,24 @@ export function updateRecList(recs) {
 
 export function addRec(recTitle) {                  // ADD NEW REC
   return function(dispatch, getState) {
-
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
     recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
+    dispatch(trackRecAdded(recTitle))
+  }
+}
+export function trackRecAdded(recTitle){
+  return {
+    type: 'TRACK_EVENT',
+    track: {
+      category: 'Rec',
+      action: 'Rec Added',
+      values: {title:recTitle}
+    }
   }
 }
 export function updateTitle(recTitle) {                  // ADD NEW REC
   return function(dispatch, getState) {
-
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs/${currentState.rec.current._key}`);
     recsRef.update({ title: recTitle });
