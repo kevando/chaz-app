@@ -4,6 +4,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
+  ActionSheetIOS,
   StyleSheet,
   AlertIOS
 } from 'react-native';
@@ -59,6 +60,7 @@ class RecrViewScreen extends Component {
           {this.renderRecList(this.props.navigator)}
         </ScrollView>
 
+
       </View>
     );
   }
@@ -78,14 +80,18 @@ class RecrViewScreen extends Component {
 
   renderRecList(navigator) { // not sure if passing nav is a good idea but it works
     var recs = Array();
-
-    // this.props.recr.current.recs.forEach(function(rec) {
     for (var key in this.props.recr.current.recs) {
-
       recs.push(<ListItem key={this.props.recr.current.recs[key]._key} rec={this.props.recr.current.recs[key]} navigator={navigator} />);
-      // recs.push(<Text>{this.props.recr.recs[key].title}</Text>);
     };
-    return recs;
+    if(recs.length){
+      return recs;
+    } else {
+      return(
+        <TouchableOpacity onPress={ this.onDeleteRecrPress.bind(this) }>
+          <Text style={{color:'red'}}>Delete this friend</Text>
+        </TouchableOpacity>
+      )
+    }
   }
 
   onAddRecrPress() {
@@ -103,8 +109,26 @@ class RecrViewScreen extends Component {
     // update current with updated rec info
     this.props.dispatch(recrActions.createRecr(recrName));
   }
+  onDeleteRecrPress() {
+    var recr = this.props.recr.current;
+    var props = this.props;
+    var navigator = this.props.navigator
 
-
+    ActionSheetIOS.showActionSheetWithOptions({
+      title: 'Are you sure?',
+      options: ['Delete '+recr.name, 'Cancel'],
+      cancelButtonIndex: 1,
+      destructiveButtonIndex: 0,
+    },
+    (buttonIndex) => {
+      if(buttonIndex == 0){
+        props.dispatch(recrActions.removeRecr(recr._key));
+        navigator.pop({
+          animated: true
+        });
+      }
+    });
+  }
 
 }
 

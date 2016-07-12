@@ -6,17 +6,17 @@ var analyticsMiddleware = function(middlewareAPI){
 
     return function(next){
         return function(action){
-          console.log('ANALYTICS',action);
+          //console.log('ANALYTICS',action);
           if(action.track){ // only run this if action has track object
-              console.log('Middleware Logging action',action);
+            //  console.log('Middleware Logging action',action);
               switch (action.type) {
 
                 case 'SET_USER':
-                  console.log('authDAta',action.track.authData)
+                //  console.log('authDAta',action.track.authData)
                   GoogleAnalytics.setUser(action.track.authData.uid);
 
                 case 'TRACK_EVENT':
-                  console.log('track',action.track);
+                //  console.log('track',action.track);
                   GoogleAnalytics.trackEvent(action.track.category, action.track.action, action.track.values);
 
               } // switch

@@ -12,17 +12,12 @@ import { connect } from 'react-redux';
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
 import * as Style from '../style/Style';
-import RecGrade from '../components/rec/RecGrade'
+import RecGrade from '../components/rec/RecGrade';
+import AddRecr from '../containers/rec/AddRecr';
 
 // this is a traditional React component connected to the redux store
 class RecViewScreen extends Component {
   static navigatorStyle = {
-    statusBarColor: '#303F9F',
-    toolBarColor: '#3F51B5',
-    navigationBarColor: '#303F9F',
-    tabSelectedTextColor: '#FFA000',
-    tabNormalTextColor: '#FFC107',
-    tabIndicatorColor: '#FFA000',
     navBarBackgroundColor: Style.constants.colors[1],
   };
 
@@ -54,21 +49,27 @@ class RecViewScreen extends Component {
       }
     }
   }
-  getDisplayRecr(rec){
+  getDisplayRecrRight(rec){
+    if(rec.recr != null){
+      return (
+        <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
+          <Text style={{color:'red'}}>Change</Text>
+        </TouchableOpacity>
+
+      )
+    }
+
+  }
+  getDisplayRecrLeft(rec){
     if(rec.recr != null){
       return (
         <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }>
           <Text style={styles.button}>{rec.recr.name}</Text>
-          <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
-            <Text style={styles.button}>Change</Text>
-          </TouchableOpacity>
         </TouchableOpacity>
       )
     } else {
       return (
-        <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
-          <Text style={styles.button}>Add Recommender</Text>
-        </TouchableOpacity>
+        <AddRecr text="Add Recommender" rec={rec}/>
       )
     }
 
@@ -81,20 +82,31 @@ class RecViewScreen extends Component {
       return(<View><Text>Something went wrong and no current rec was set</Text></View>);
 
     return (
-      <View style={{flex: 1, padding: 20}}>
-
-        <Text>Recommendation: </Text>
-        <View style={{paddingLeft:15}}>
-          <TouchableOpacity onPress={ this.onTitlePress.bind(this,rec) }>
-            <Text style={styles.button}>{rec.title}</Text>
-          </TouchableOpacity>
-          {this.getDisplayGrade(rec)}
+      <View style={{flex: 1, paddingTop: 20,backgroundColor:'#eee'}}>
+        <View style={styles.row}>
+          <View style={styles.left}>
+            <Text style={{fontSize:20}}>{rec.title}</Text>
+          </View>
+          <View style={styles.right}>
+            <TouchableOpacity onPress={ this.onTitlePress.bind(this,rec) }>
+              <Text style={{color:'red'}}>Edit</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.left}>
+            {this.getDisplayGrade(rec)}
+          </View>
+        </View>
+        <View style={styles.row}>
+          <View style={styles.left}>
+            {this.getDisplayRecrLeft(rec)}
+          </View>
+          <View style={styles.right}>
+            {this.getDisplayRecrRight(rec)}
+          </View>
         </View>
 
-        <Text>Recommended by: </Text>
-        <View style={{paddingLeft:15}}>
-          {this.getDisplayRecr(rec)}
-        </View>
 
       </View>
     );
@@ -150,19 +162,26 @@ class RecViewScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  text: {
-    textAlign: 'left',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10
+  row: {
+    backgroundColor: '#fff',
+    borderBottomWidth:1,
+    borderBottomColor: '#ddd',
+
+    flexDirection: 'row',
+    paddingTop:10,
+    paddingBottom:10,
+    paddingLeft:10,
+    paddingRight:10
   },
-  button: {
-    textAlign: 'left',
-    fontSize: 15,
-    marginBottom: 2,
-    marginTop:2,
-    color: 'blue'
-  }
+  right: {
+    flex:1,
+    justifyContent: 'center', // vertical middle
+    flexDirection: 'row'
+  },
+  left: {
+    flex:3,
+
+  },
 });
 
 // which props do we want to inject, given the global state?

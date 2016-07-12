@@ -1,3 +1,7 @@
+### 0.7.3
+ - Added google analytics tracking through custom middleware
+
+
 ### 0.7.2 (dist to austen)
  - Removed bottom tabs, added rec button
  - Improved reclistitem,recview,recrview

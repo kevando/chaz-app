@@ -5,7 +5,8 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  AlertIOS
+  AlertIOS,
+  ActionSheetIOS
 } from 'react-native';
 import { connect } from 'react-redux';
 import AddRecButton from '../components/rec/AddRecButton';
@@ -51,7 +52,8 @@ class RecsScreen extends Component {
     }
   }
   componentDidMount() {
-    this.props.dispatch(recActions.listenForRecs());
+    this.props.dispatch(recActions.listenForRecs()); // again i dont like this code here
+    this.props.dispatch(recrActions.listenForRecrs());
   }
 
   render() {
@@ -102,12 +104,34 @@ class RecsScreen extends Component {
   onAddRecrPress(itemRec) {
     // Before adding recr name, set this listItem Rec to current.
     // this is not the best place for this, but its needed to add recr
-    this.props.dispatch(recActions.setCurrentRec(itemRec));
+    // this.props.dispatch(recActions.setCurrentRec(itemRec));
+    //
+    // var options = Array();
+    // options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
+    // options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
+    // AlertIOS.prompt('Who is recommending this?', null, options);
+    console.log(this.props)
+    var BUTTONS = [
+  'Option 0',
+  'Option 1',
+  'Option 2',
+  'Delete',
+  'Cancel',
+];
+var DESTRUCTIVE_INDEX = 3;
+var CANCEL_INDEX = 2;
+ActionSheetIOS.showActionSheetWithOptions({
+      title: 'title',
+      message: 'message',
+      options: BUTTONS,
+      cancelButtonIndex: CANCEL_INDEX,
+      destructiveButtonIndex: DESTRUCTIVE_INDEX,
+      tintColor: 'green',
+    },
+    (buttonIndex) => {
+      this.setState({ clicked: BUTTONS[buttonIndex] });
+    });
 
-    var options = Array();
-    options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
-    options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-    AlertIOS.prompt('Who is recommending this?', null, options);
   }
   addRecr(recrName) {
     // create new recr if new
@@ -138,7 +162,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     rec: state.rec,
-    // recr: state.recr,
+    recr: state.recr,
   };
 }
 

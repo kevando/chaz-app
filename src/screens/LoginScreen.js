@@ -27,16 +27,16 @@ class LoginScreen extends Component {
 
   render() {
     // For testing
-    // this.props.dispatch(appActions.login('bro'));
+    this.props.dispatch(appActions.login('bro'));
 
     // if(this.state.loading)
     //   return <Loading message="Logging In" />
 
     return (
 
-      <View style={{flex: 1, paddingTop: 120,backgroundColor: Style.constants.colors[0]}}>
+      <View style={{flex: 1, paddingTop: 150,backgroundColor: Style.constants.colors[0]}}>
       <Text style={styles.text}>
-        <Text style={{fontWeight: '500',color:'#fff'}}>CHAZ</Text>
+        <Text style={{fontWeight: '500',color:'#fff',fontSize:90}}>chaz</Text>
       </Text>
 
 

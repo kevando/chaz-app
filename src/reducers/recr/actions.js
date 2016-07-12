@@ -61,6 +61,17 @@ export function createRecr(recrName) {
   }
 
 }
+export function removeRecr(recrKey){                  // REMOVE REC
+  return function(dispatch, getState) {
+    console.log('remove recr',recrKey)
+    const currentState = getState();
+    const recrsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
+    recrsRef.child(recrKey).remove();
+    // todo dispatch upgrade recr score and recs recr score
+    // consider if I need to do any other checks
+    // I feel like properly structred data would help alot here
+  }
+}
 
 export function assignRecr(recr) {
   // console.log('DUDE',recr);
@@ -105,7 +116,9 @@ export function setCurrentRecrByKey(recrKey) {                  // SET CURRENT R
     const currentState = getState();
     const recrRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${recrKey}`);
     recrRef.once('value', (snapshot) => {
-      dispatch(setCurrentRecr(snapshot.val() ) );
+      var recr = snapshot.val();
+      recr._key = snapshot.key();
+      dispatch(setCurrentRecr(recr ) );
     });
   };
 }

@@ -21,17 +21,10 @@ class RecrsScreen extends Component {
     navBarButtonColor: '#fff',
   };
 
-
-
   constructor(props) {
     super(props);
     // if you want to listen on navigator events, set this up
     // this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-  }
-
-  componentDidMount() {
-    this.props.dispatch(recrActions.listenForRecrs());
-    // this.props.dispatch(recrActions.listenForNewRecrs()); // i dont really like multiple listeners like this cant do this i guess wtf
   }
 
   render() {
@@ -79,7 +72,6 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     recr: state.recr,
-    // counter: state.counter // this is like the entire folder level shit
   };
 }
 

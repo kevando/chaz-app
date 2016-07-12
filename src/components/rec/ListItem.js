@@ -7,6 +7,7 @@ import {
   AlertIOS
 } from 'react-native';
 import RecGrade from './RecGrade';
+import AddRecr from '../../containers/rec/AddRecr';
 import Style from '../../style/Style';
 export default class ListItem extends Component {
   constructor(props) {
@@ -38,9 +39,7 @@ export default class ListItem extends Component {
       )
     } else {
       return (
-        <TouchableOpacity style={styles.addRecr} onPress={ this.props.onAddRecrPress }>
-          <Text style={styles.addRecrText}>+</Text>
-        </TouchableOpacity>
+        <AddRecr text="+" rec={this.props.rec}/>
       );
     }
   }
