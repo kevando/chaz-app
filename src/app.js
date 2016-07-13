@@ -39,7 +39,7 @@ export default class App {
       case 'login':
         Navigation.startSingleScreenApp({
           screen: {
-            screen: 'example.LoginScreen',
+            screen: 'chaz.LoginScreen',
             title: 'Login',
             navigatorStyle: {}
           },
@@ -54,66 +54,6 @@ export default class App {
             navigatorStyle: {}
           },
           passProps: {}
-        });
-        return;
-      case 'after-login_old':
-        Navigation.startTabBasedApp({
-          tabs: [
-            {
-              label: 'Recs',
-              screen: 'chaz.RecsScreen',
-              icon: require('../img/one.png'),
-              selectedIcon: require('../img/one_selected.png'),
-              title: '',
-              navigatorStyle: {},
-            },
-            {
-              label: 'Recrs',
-              screen: 'chaz.RecrsScreen',
-              icon: require('../img/one.png'),
-              selectedIcon: require('../img/one_selected.png'),
-              title: 'Recrs',
-              navigatorStyle: {},
-            },
-            {
-              label: 'One',
-              screen: 'example.FirstTabScreen',
-              icon: require('../img/one.png'),
-              selectedIcon: require('../img/one_selected.png'),
-              title: 'Screen One',
-              navigatorStyle: {},
-            },
-            {
-              label: 'Two',
-              screen: 'example.SecondTabScreen',
-              icon: require('../img/two.png'),
-              selectedIcon: require('../img/two_selected.png'),
-              title: 'Screen Two',
-              navigatorStyle: {},
-            },
-            {
-              label: 'Settings',
-              screen: 'chaz.SettingsScreen',
-              icon: require('../img/two.png'),
-              selectedIcon: require('../img/two_selected.png'),
-              title: 'Settings',
-              navigatorStyle: {},
-            }
-          ],
-          passProps: {
-            str: 'This is a prop passed in \'startTabBasedApp\'!',
-            obj: {
-              str: 'This is a prop passed in an object!',
-              arr: [
-                {
-                  str: 'This is a prop in an object in an array in an object!'
-                }
-              ]
-            },
-            num: 1234
-          },
-          animationType: 'slide-down',
-          title: 'Redux Example'
         });
         return;
       default:

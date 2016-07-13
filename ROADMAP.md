@@ -1,16 +1,15 @@
 # Roadmap
 
-### 0.7.4 (finish july 13 and ship)
 
+### 0.7.5
+remove dude from input
+add feedback to profile page. have badge all ready
 recr view: make score bigger, and fix rec list on recr view bug
 add date to rec view and rec list
 recr screen with score large like
 bug: changing recr adds new recr
 add tracking for data events,
 
- - Allows recr assign from a list
- - Delete Recr if he has no recs
- - Improved rec view
 
 ### 0.8
 add back filters
@@ -41,7 +40,8 @@ add basic chat feature. focus on empathy
  - more data (rec type, recr score by type, grade by type)
  - User tracking
  - pitch open sourcing this for his class
-
+ - explore this..  https://github.com/FaridSafi/react-native-gifted-messenger
+ - chaz integrate w podcasts somehow
 
 
 

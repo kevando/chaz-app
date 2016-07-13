@@ -9,30 +9,38 @@ import {
 import { connect } from 'react-redux';
 import * as counterActions from '../reducers/counter/actions';
 import * as appActions from '../reducers/app/actions';
-import Loading from '../components/LoadingComponent';
+import Badge from '../components/feedback/Badge';
+
+var DeviceInfo = require('react-native-device-info');
 
 // this is a traditional React component connected to the redux store
-class SettingsScreen extends Component {
+class ProfileScreen extends Component {
 
 
   constructor(props) {
     super(props);
     // this.state = {loading: false, authResponse: 'f'}
+    this.props.navigator.setTitle({
+      title: "chaz " +  DeviceInfo.getVersion()
+    });
   }
 
   render() {
 
-
+    var email = this.props.app.authData.password.email;
+    var atIndex = email.indexOf('@');
+    var username = email.substring(0,atIndex);
     return (
-      <View style={{flex: 1, padding: 20}}>
+      <View style={{flex: 1, padding: 20,backgroundColor:'#ddd'}}>
       <Text style={styles.text}>
-        <Text style={{fontWeight: '500'}}>Settings</Text>
+        <Text style={{fontWeight: '500'}}>username: { username }</Text>
       </Text>
 
 
         <TouchableOpacity onPress={ this.onLogoutPress.bind(this) }>
           <Text style={{fontWeight: '100',color:'red'}}>Logout</Text>
         </TouchableOpacity>
+
 
 
 
@@ -47,13 +55,11 @@ class SettingsScreen extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    textAlign: 'center',
     fontSize: 18,
     marginBottom: 10,
     marginTop:10,
   },
   button: {
-    textAlign: 'center',
     fontSize: 18,
     marginBottom: 10,
     marginTop:10,
@@ -69,4 +75,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SettingsScreen);
+export default connect(mapStateToProps)(ProfileScreen);

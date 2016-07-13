@@ -54,3 +54,9 @@ For more information about setting up a local dev environment, see the [React Na
 [list]: https://i.imgur.com/bTAd5Ib.png "Rec List"
 [add rec]: https://i.imgur.com/Rey2jLN.png "Rec Add"
 [friend list]: https://i.imgur.com/nelxzjt.png "Friend List"
+
+
+
+### Libs & Resources
+https://github.com/wix/react-native-navigation
+https://medium.com/@spencer_carli

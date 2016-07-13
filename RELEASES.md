@@ -1,3 +1,9 @@
+### 0.7.4 (dist: Rob and Anna)
+ - Allows recr assign from a list
+ - Delete Recr if he has no recs
+ - Improved rec view
+ - Changed settings to profile
+
 ### 0.7.3
  - Added google analytics tracking through custom middleware
 

@@ -28,7 +28,7 @@ class RecsScreen extends Component {
 
   static navigatorButtons = {
     rightButtons: [{title: 'Friends',id: 'friends'}],
-    leftButtons: [ {title: 'Settings',id: 'settings'}]
+    leftButtons: [ {title: 'Profile',id: 'settings'}]
   };
 
   constructor(props) {
@@ -94,8 +94,8 @@ class RecsScreen extends Component {
   }
   onShowSettingsPress() {
     this.props.navigator.push({
-      title: "Settings",
-      screen: "chaz.SettingsScreen",
+      title: "Profile",
+      screen: "chaz.ProfileScreen",
     });
   }
   onShowFriendsPress() {

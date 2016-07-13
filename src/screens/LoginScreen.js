@@ -27,21 +27,21 @@ class LoginScreen extends Component {
 
   render() {
     // For testing
-    this.props.dispatch(appActions.login('bro'));
+    // this.props.dispatch(appActions.login('bro'));
 
     // if(this.state.loading)
     //   return <Loading message="Logging In" />
 
     return (
 
-      <View style={{flex: 1, paddingTop: 150,backgroundColor: Style.constants.colors[0]}}>
+      <View style={{flex: 1, paddingTop: 130,backgroundColor: Style.constants.colors[0],alignItems:'center'}}>
       <Text style={styles.text}>
-        <Text style={{fontWeight: '500',color:'#fff',fontSize:90}}>chaz</Text>
+        <Text style={{fontWeight: '500',color:'#fff',fontSize:100}}>chaz</Text>
       </Text>
 
 
-        <TouchableOpacity onPress={ this.onLoginPress.bind(this) }>
-          <Text style={styles.button}>Login</Text>
+        <TouchableOpacity style={styles.button} onPress={ this.onLoginPress.bind(this) }>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <Text style={styles.text}>
           <Text style={{fontWeight: '100',color:'red'}}>{this.props.app.authError}</Text>
@@ -71,11 +71,20 @@ const styles = StyleSheet.create({
     marginTop:10,
   },
   button: {
+    backgroundColor: '#fff',
+    width: 130,
+    flexDirection: 'column',
+    justifyContent: 'center',
+
+    marginTop:40,
+  },
+  buttonText: {
     textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
-    color: 'blue'
+    fontSize: 16,
+    paddingTop:15,
+    paddingBottom:15,
+    color: Style.constants.colors[0],
+
   }
 });
 
