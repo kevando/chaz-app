@@ -21,13 +21,41 @@ class RecViewScreen extends Component {
     navBarBackgroundColor: Style.constants.colors[1],
   };
 
-
   constructor(props) {
     super(props);
     // if you want to listen on navigator events, set this up
-    // this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
+  static navigatorButtons = {
+    rightButtons: [{title: 'Delete',id: 'delete'}]
+  }
+  onNavigatorEvent(event) {
+    switch (event.id) {
+      case 'delete':
+        this.onDeletePress()
+        break;
+      default:
+        console.log('Unhandled event ' + event.id);
+        break;
+    }
+  }
+  onDeletePress(){
+    AlertIOS.alert(
+        'Are you sure you want to delete this?',
+        null,
+        [
+          {text: 'Delete', onPress: (text) => this.removeRec()},
+          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
+        ],
+      );
+  }
+  removeRec() {
+    this.props.dispatch(recActions.removeRec(this.props.currentRec._key));
+    this.props.navigator.pop({
+      animated: true
+    });
+  }
+
   componentDidMount() {
     this.props.dispatch(recActions.setCurrentRec(this.props.currentRec)); // maybe just do the key here
     // this.props.dispatch(recrActions.setCurrentRecr(this.props.currentRec.recr));
@@ -60,16 +88,25 @@ class RecViewScreen extends Component {
     }
 
   }
+  displayComment(rec){
+    if(rec.comment != null){
+      return (<View>
+          <Text style={{color:'#000',fontWeight:'700'}}>Comment: <Text style={{color:'#222',fontWeight:'300'}}>{rec.comment}</Text></Text>
+          </View>
+      )
+    }
+
+  }
   getDisplayRecrLeft(rec){
     if(rec.recr != null){
       return (
         <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }>
-          <Text style={styles.button}>{rec.recr.name}</Text>
+          <Text>Recommended by: <Text style={styles.recrText}>{rec.recr.name}</Text></Text>
         </TouchableOpacity>
       )
     } else {
       return (
-        <AddRecr text="Add Recommender" rec={rec}/>
+        <AddRecr rec={rec}/>
       )
     }
 
@@ -105,6 +142,9 @@ class RecViewScreen extends Component {
           <View style={styles.right}>
             {this.getDisplayRecrRight(rec)}
           </View>
+        </View>
+        <View style={styles.row}>
+            {this.displayComment(rec)}
         </View>
 
 
@@ -153,6 +193,7 @@ class RecViewScreen extends Component {
           {text: '3 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,3)) },
           {text: '4 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,4)) },
           {text: '5 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,5)) },
+          {text: 'Remove Grade', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,null)) },
           // {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
           {text: 'Cancel', onPress: (text) => console.log('Cancel')}
         ],
@@ -182,6 +223,9 @@ const styles = StyleSheet.create({
     flex:3,
 
   },
+  recrText: {
+    color: Style.constants.colors[2]
+  }
 });
 
 // which props do we want to inject, given the global state?

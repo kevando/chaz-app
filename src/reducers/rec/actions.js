@@ -46,6 +46,7 @@ export function getRecList(snap) { // runs after basically any change to any rec
           _key: child.key(),
           recr: child.val().recr,
           grade: child.val().grade,
+          comment: child.val().comment,
           createdAt: child.val().createdAt,
           recrScore: child.val().recrScore
         }
@@ -76,8 +77,10 @@ export function addRec(recTitle) {                  // ADD NEW REC
   return function(dispatch, getState) {
     const currentState = getState();
     const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
-    recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
-    dispatch(trackRecAdded(recTitle))
+    var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
+    dispatch(trackRecAdded(recTitle));
+    // the following is added for pushing to the next screen
+    dispatch(setCurrentRec({ _key:newRec.key(), title:recTitle,createdAt: Firebase.ServerValue.TIMESTAMP } ));
   }
 }
 export function trackRecAdded(recTitle){
@@ -88,6 +91,16 @@ export function trackRecAdded(recTitle){
       action: 'Rec Added',
       values: {title:recTitle}
     }
+  }
+}
+export function removeRec(recKey){                  // REMOVE REC
+  return function(dispatch, getState) {
+    const currentState = getState();
+    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
+    recsRef.child(recKey).remove();
+    // todo dispatch upgrade recr score and recs recr score
+    // consider if I need to do any other checks
+    // I feel like properly structred data would help alot here
   }
 }
 export function updateTitle(recTitle) {                  // ADD NEW REC

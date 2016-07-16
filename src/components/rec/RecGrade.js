@@ -12,10 +12,8 @@ export default class RecGrade extends Component {
 
   render() {
     return (
-
         <View>
           {this.getDisplayGrade(this.props.grade)}
-
         </View>
     );
   }
@@ -28,20 +26,14 @@ export default class RecGrade extends Component {
     for (var i=0; i < grade; i++) {
       stars.push(<Emoji key={i} name="blue_heart" />);
     }
-    return <Text style={styles.recListItemRecGradeMissing}>{stars}</Text>;
+    return <Text style={styles.recListItemRecGrade}>{stars}</Text>;
   }
 }
 
 const styles = StyleSheet.create({
-  gradee: {
-    backgroundColor: '#fff',
-    borderBottomWidth:1,
-    borderBottomColor: '#ddd',
-    height:50,
-    flexDirection: 'row',
-    paddingTop:5,
-    paddingBottom:5,
-    paddingLeft:10
+  recListItemRecGrade: {
+    fontSize:11,
+    paddingTop:3
   },
 
 });

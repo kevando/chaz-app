@@ -15,6 +15,8 @@ import * as recrActions from '../reducers/recr/actions';
 import ListItem from '../components/rec/ListItem';
 import * as Style from '../style/Style';
 
+var DeviceInfo = require('react-native-device-info');
+
 let navBarVisiable = true;
 
 // this is a traditional React component connected to the redux store
@@ -22,12 +24,12 @@ class RecsScreen extends Component {
   static navigatorStyle = {
     statusBarColor: '#303F9F',
     navBarBackgroundColor: Style.constants.colors[0],
-    navBarTextColor: Style.constants.colors[1],
+    navBarTextColor: '#fff',
     navBarButtonColor: '#fff',
   };
 
   static navigatorButtons = {
-    rightButtons: [{title: 'Friends',id: 'friends'}],
+    // rightButtons: [{title: 'Friends',id: 'friends'}],
     leftButtons: [ {title: 'Profile',id: 'settings'}]
   };
 
@@ -36,6 +38,10 @@ class RecsScreen extends Component {
     // if you want to listen on navigator events, set this up
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.onAddRecrPress = this.onAddRecrPress.bind(this);
+
+    this.props.navigator.setTitle({
+      title: "chaz " +  DeviceInfo.getVersion()
+    });
   }
 
   onNavigatorEvent(event) {

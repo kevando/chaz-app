@@ -11,7 +11,7 @@ import {
 import { connect } from 'react-redux';
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
-import ListItem from '../components/rec/ListItem';
+import RecListItem from '../components/recr/RecListItem';
 import Style from '../style/Style';
 let navBarVisiable = true;
 
@@ -81,7 +81,7 @@ class RecrViewScreen extends Component {
   renderRecList(navigator) { // not sure if passing nav is a good idea but it works
     var recs = Array();
     for (var key in this.props.recr.current.recs) {
-      recs.push(<ListItem key={this.props.recr.current.recs[key]._key} rec={this.props.recr.current.recs[key]} navigator={navigator} />);
+      recs.push(<RecListItem key={this.props.recr.current.recs[key]._key} rec={this.props.recr.current.recs[key]} navigator={navigator} />);
     };
     if(recs.length){
       return recs;

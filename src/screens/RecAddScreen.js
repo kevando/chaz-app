@@ -26,8 +26,12 @@ class RecAddScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {recTitle:'dude'}
+    this.state = {recTitle:''}
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+  componentDidMount() {
+    console.log('componentdidmount')
+    this.refs.TextInput.focus(true);
   }
   onNavigatorEvent(event) {
     switch (event.id) {
@@ -41,6 +45,7 @@ class RecAddScreen extends Component {
   }
 
   render() {
+    console.log('render')
     return (
       <View style={{flex: 1, padding: 20}}>
 
@@ -48,6 +53,8 @@ class RecAddScreen extends Component {
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(recTitle) => this.setState({recTitle})}
           value={this.state.recTitle}
+          ref="TextInput"
+
         />
 
         <TouchableOpacity onPress={ this.onAddRecPress.bind(this) }>
@@ -61,11 +68,18 @@ class RecAddScreen extends Component {
 
   onAddRecPress() {
     this.props.dispatch(recActions.addRec(this.state.recTitle));
-    this.props.navigator.dismissModal();
+    this.props.navigator.push({
+      title: "",
+      screen: "chaz.RecViewScreen",
+      passProps: { currentRec: this.props.rec.current }
+    });
+    // this.props.navigator.dismissModal();
   }
 
 
   onCancelPress() {
+    // would like to clear keyboard here first,
+    // then used the onfocus event to dismiss the modal
     this.props.navigator.dismissModal();
   }
 
@@ -91,7 +105,7 @@ const styles = StyleSheet.create({
 // which props do we want to inject, given the global state?
 function mapStateToProps(state) {
   return {
-    recs: state.recs
+    rec: state.rec
   };
 }
 

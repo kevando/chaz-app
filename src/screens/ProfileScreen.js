@@ -11,8 +11,6 @@ import * as counterActions from '../reducers/counter/actions';
 import * as appActions from '../reducers/app/actions';
 import Badge from '../components/feedback/Badge';
 
-var DeviceInfo = require('react-native-device-info');
-
 // this is a traditional React component connected to the redux store
 class ProfileScreen extends Component {
 
@@ -20,13 +18,12 @@ class ProfileScreen extends Component {
   constructor(props) {
     super(props);
     // this.state = {loading: false, authResponse: 'f'}
-    this.props.navigator.setTitle({
-      title: "chaz " +  DeviceInfo.getVersion()
-    });
+
   }
 
   render() {
-
+    if(!this.props.app.authData)
+      return (<Text>Logged out</Text>);
     var email = this.props.app.authData.password.email;
     var atIndex = email.indexOf('@');
     var username = email.substring(0,atIndex);

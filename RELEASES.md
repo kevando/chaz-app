@@ -1,3 +1,11 @@
+### 0.7.5 (focus on phase 1)
+ - Remove dude from rec input, auto pull up keyboard
+ - Fixed log out bug
+ - Remove grade, delete rec
+ - redirect to rec view after adding rec
+ - improved reclistItem style
+ - Removed friend list screen
+
 ### 0.7.4 (dist: Rob and Anna)
  - Allows recr assign from a list
  - Delete Recr if he has no recs

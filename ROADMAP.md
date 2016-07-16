@@ -1,24 +1,26 @@
 # Roadmap
 
 
-### 0.7.5
-remove dude from input
-add feedback to profile page. have badge all ready
-recr view: make score bigger, and fix rec list on recr view bug
-add date to rec view and rec list
-recr screen with score large like
-bug: changing recr adds new recr
-add tracking for data events,
-
-
-### 0.8
+### 0.7.6 (focus on phase 2)
 add back filters
-rec comment
+make recr better display, list and view
+also lots of bugs
+add date to rec view and rec list
+improve profile page a bit, also make swiping the right direction, you are the yellow
+be more considerate about what props each component needs, and where/when to send them
 recr comments
-add deleteRec back
-add userfeedback in settings (will be cool to turn this into a rec type. reward users with good quality feedback)
+add rec from recr page
 add rec button to recr view
-try and integrate notifications
+add "alert me" option to recs
+integrate notifications
+
+### 0.7.7 (phase 3)
+sorting be recr score.. really just improve recr score and recr list now
+sort by recrs
+major bugs on add/edit/remove grade
+ask recr for more recs
+give recr feedback
+
 
 ### 0.9
 profile page with our own rec/recrs/grade score
@@ -29,7 +31,7 @@ you can store recs you send
 ### 1.0
 Release this version to the app store or external testing
 add basic chat feature. focus on empathy
-
+option to send "Started watching" to friend that gave rec
 
 
 
@@ -37,7 +39,7 @@ add basic chat feature. focus on empathy
 ### 2.0 (Visit Spencer)
  - Spend 2 days with spencer and refactor redux and firebase to a meteor server, refactor router, redesign data, add chat. possibly make this app like a tutorial app for spencer. open source it
  - Talk to spencer about
- - more data (rec type, recr score by type, grade by type)
+ - more data (rec type, recr score by type, grade by type, "why I liked it" aspect of the grade)
  - User tracking
  - pitch open sourcing this for his class
  - explore this..  https://github.com/FaridSafi/react-native-gifted-messenger

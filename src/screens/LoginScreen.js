@@ -59,7 +59,7 @@ class LoginScreen extends Component {
     var options = Array();
     options.push({text: 'LOG IN',  onPress: (username) => { this.props.dispatch(appActions.login(username)) }    });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-    AlertIOS.prompt('Enter your beta access code', null, options);
+    AlertIOS.prompt('What is your Name?', null, options);
   }
 }
 
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     marginTop:10,
   },
   button: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     width: 130,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingTop:15,
     paddingBottom:15,
-    color: Style.constants.colors[0],
+    color: '#fff',//Style.constants.colors[0],
 
   }
 });

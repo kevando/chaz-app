@@ -31,6 +31,20 @@ For more information about setting up a local dev environment, see the [React Na
  - log into itunesconnect
  - check latest build and distribute
 
+ Add iTunes Connect User
+ anna got email
+
+ clicked ok to terms
+ has to log into itunes connect
+
+ she now shows up as admin under users
+
+ add her to internal tester list under app
+ save it, and she gets notified via email
+
+ she checks email on phone
+ she has to download testflight
+ and enter the app code (she didnt have to do this)
 
 ## Screenshots
 

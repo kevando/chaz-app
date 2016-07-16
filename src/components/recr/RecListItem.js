@@ -6,9 +6,9 @@ import {
   StyleSheet,
   AlertIOS
 } from 'react-native';
-import RecGrade from './RecGrade';
+import RecGrade from '../rec/RecGrade';
 import AddRecr from '../../containers/rec/AddRecr';
-import RecType from './RecType';
+import RecType from '../rec/RecType';
 import Style from '../../style/Style';
 export default class ListItem extends Component {
   constructor(props) {
@@ -25,8 +25,8 @@ export default class ListItem extends Component {
         </View>
         <View style={styles.middle}>
           <Text style={styles.title} >{rec.title}</Text>
-            {this.displayRecrDisplay()}
-            {this.displayRecComment()}
+
+
         </View>
         <View style={styles.right}>
         <RecGrade grade={this.props.rec.grade} />
@@ -57,6 +57,7 @@ export default class ListItem extends Component {
               </TouchableOpacity>
           </View>
         </View>
+        
 
       )
     } else {

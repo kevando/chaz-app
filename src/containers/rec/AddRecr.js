@@ -25,9 +25,17 @@ class addRecr extends Component {
 
   render() {
       return (
-        <TouchableOpacity onPress={ this.onAddRecrPress }>
-          <Text>{this.props.text}</Text>
-        </TouchableOpacity>
+
+        <View style={styles.recrTextContainer}>
+          <View style={styles.recomendContainer}>
+            <Text style={styles.recommended} >Recommended by </Text>
+          </View>
+          <View style={styles.recrTextContainer}>
+            <TouchableOpacity style={styles.recrButton} onPress={ this.onAddRecrPress  }>
+              <Text style={styles.recrText} >who?</Text>
+              </TouchableOpacity>
+          </View>
+        </View>
       )
   }
 
@@ -80,6 +88,50 @@ class addRecr extends Component {
     this.props.dispatch(recrActions.createRecr(recrName));
   }
 }
+const styles = StyleSheet.create({
+  recrText: {
+    justifyContent: 'flex-start' ,
+    fontSize: 14,
+    fontWeight: '600',
+    color: Style.constants.colors[2]
+  },
+  recomendContainer: {
+    flexDirection:'row',
+    // backgroundColor:'blue'
+  },
+  recrTextContainer: {
+    flexDirection:'row',
+    // backgroundColor:'red'
+  },
+  recrText: {
+    justifyContent: 'flex-start' ,
+    fontSize: 14,
+    fontWeight: '500',
+    color: Style.constants.colors[2],
+    flexDirection:'row'
+
+  },
+  recommended: {
+    flexDirection:'row',
+    color:'#aaa'
+  },
+  addRecr: {
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end' ,
+    width:40
+
+  },
+  addRecrText: {
+    color: '#fff',
+    textAlign: 'center',
+    width:40,
+    backgroundColor: Style.constants.colors[2],
+    fontSize: 26,
+    marginTop:0,
+    marginBottom:0
+  },
+});
 
 function mapStateToProps(state) {
   return {
