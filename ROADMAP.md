@@ -1,7 +1,17 @@
 # Roadmap
 
 
-### 0.7.6 (focus on phase 2)
+### 0.7.6
+add back async storage
+way better venmo style add rec
+MP tracking FOR REAL
+
+
+define phases in the onboardin doc and clear some evernote shit
+way better data validation, not case sensitive, no empty strings
+modal does not dismiss on addRec
+update recr does not pull from list
+change login to yellow heart
 add back filters
 make recr better display, list and view
 also lots of bugs
@@ -13,6 +23,7 @@ add rec from recr page
 add rec button to recr view
 add "alert me" option to recs
 integrate notifications
+update readme and reply to doorbell
 
 ### 0.7.7 (phase 3)
 sorting be recr score.. really just improve recr score and recr list now
@@ -21,6 +32,7 @@ major bugs on add/edit/remove grade
 ask recr for more recs
 give recr feedback
 
+### 0.8 introduce friends list feature
 
 ### 0.9
 profile page with our own rec/recrs/grade score
@@ -44,6 +56,7 @@ option to send "Started watching" to friend that gave rec
  - pitch open sourcing this for his class
  - explore this..  https://github.com/FaridSafi/react-native-gifted-messenger
  - chaz integrate w podcasts somehow
+ - Get it ready for useronboarding.com
 
 
 
