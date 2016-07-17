@@ -19,6 +19,9 @@
 		0AB42CE51D333D7400B33CE2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE41D333D7400B33CE2 /* libz.tbd */; };
 		0AB42CE71D333D8100B33CE2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE61D333D8100B33CE2 /* libsqlite3.0.tbd */; };
 		0AB42CEE1D3341EA00B33CE2 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CED1D3341D800B33CE2 /* libRCTGoogleAnalyticsBridge.a */; };
+		0AD224C11D3C1F2000038895 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD224BF1D3C1F2000038895 /* Fabric.framework */; };
+		0AD224C21D3C1F2000038895 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD224C01D3C1F2000038895 /* Crashlytics.framework */; };
+		0AD224C91D3C22A700038895 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD224C81D3C22A300038895 /* libSMXCrashlytics.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -88,6 +91,13 @@
 			remoteGlobalIDString = A79185C61C30694E001236A6;
 			remoteInfo = RCTGoogleAnalyticsBridge;
 		};
+		0AD224C71D3C22A300038895 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D8D9DB831C6D03DB009FBC0E;
+			remoteInfo = SMXCrashlytics;
+		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
@@ -148,6 +158,9 @@
 		0AB42CE41D333D7400B33CE2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0AB42CE61D333D8100B33CE2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		0AB42CE81D3341D800B33CE2 /* RCTGoogleAnalyticsBridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGoogleAnalyticsBridge.xcodeproj; path = "../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/RCTGoogleAnalyticsBridge.xcodeproj"; sourceTree = "<group>"; };
+		0AD224BF1D3C1F2000038895 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		0AD224C01D3C1F2000038895 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* chaz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chaz.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,11 +188,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AD224C91D3C22A700038895 /* libSMXCrashlytics.a in Frameworks */,
 				0A82CF0E1D359A5C0018294F /* libRNDeviceInfo.a in Frameworks */,
 				0AB42CEE1D3341EA00B33CE2 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
+				0AD224C21D3C1F2000038895 /* Crashlytics.framework in Frameworks */,
 				0AB42CE71D333D8100B33CE2 /* libsqlite3.0.tbd in Frameworks */,
 				0AB42CE51D333D7400B33CE2 /* libz.tbd in Frameworks */,
 				0AB42CE31D333D6400B33CE2 /* SystemConfiguration.framework in Frameworks */,
+				0AD224C11D3C1F2000038895 /* Fabric.framework in Frameworks */,
 				0AB42CE11D333D5800B33CE2 /* CoreData.framework in Frameworks */,
 				CCCF23211C9C238500455574 /* libReactNativeControllers.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -271,6 +287,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0AD224C41D3C22A300038895 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0AD224C81D3C22A300038895 /* libSMXCrashlytics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +344,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */,
 				0A82CEFC1D359A370018294F /* RNDeviceInfo.xcodeproj */,
 				0AB42CE81D3341D800B33CE2 /* RCTGoogleAnalyticsBridge.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -348,6 +373,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				0AD224BF1D3C1F2000038895 /* Fabric.framework */,
+				0AD224C01D3C1F2000038895 /* Crashlytics.framework */,
 				0AB42CE61D333D8100B33CE2 /* libsqlite3.0.tbd */,
 				0AB42CE41D333D7400B33CE2 /* libz.tbd */,
 				0AB42CE21D333D6400B33CE2 /* SystemConfiguration.framework */,
@@ -407,6 +434,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				0AD224B01D3C1E5E00038895 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -423,7 +451,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -499,6 +527,10 @@
 					ProductGroup = 0A82CEFD1D359A370018294F /* Products */;
 					ProjectRef = 0A82CEFC1D359A370018294F /* RNDeviceInfo.xcodeproj */;
 				},
+				{
+					ProductGroup = 0AD224C41D3C22A300038895 /* Products */;
+					ProjectRef = 0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -556,6 +588,13 @@
 			fileType = archive.ar;
 			path = libRCTGoogleAnalyticsBridge.a;
 			remoteRef = 0AB42CEC1D3341D800B33CE2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0AD224C81D3C22A300038895 /* libSMXCrashlytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSMXCrashlytics.a;
+			remoteRef = 0AD224C71D3C22A300038895 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {
@@ -636,6 +675,19 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		0AD224B01D3C1E5E00038895 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 6f8c3009d1fd2908681f11b2f8578d38fa4787ba a827748e0a74f4e5aa6034c96ff9693d515ec6198411f4ae4d82031cf8735ea8";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -694,6 +746,7 @@
 				INFOPLIST_FILE = chazTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chaz.app/chaz";
 			};
@@ -711,6 +764,7 @@
 				INFOPLIST_FILE = chazTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/chaz.app/chaz";
 			};
@@ -723,6 +777,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -732,6 +790,7 @@
 				INFOPLIST_FILE = chaz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = chaz;
 			};
 			name = Debug;
@@ -742,6 +801,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -751,6 +814,7 @@
 				INFOPLIST_FILE = chaz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = chaz;
 			};
 			name = Release;
@@ -775,6 +839,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;

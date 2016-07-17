@@ -23,6 +23,7 @@ class LoginScreen extends Component {
       to: 'hidden',
       animated: false
     });
+
   }
 
   render() {

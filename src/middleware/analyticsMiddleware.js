@@ -1,6 +1,9 @@
 import GoogleAnalytics from 'react-native-google-analytics-bridge';
 GoogleAnalytics.setTrackerId('UA-74407622-2');
 
+import Fabric from 'react-native-fabric';
+var { Crashlytics, Answers } = Fabric;
+
 
 var analyticsMiddleware = function(middlewareAPI){
 
@@ -14,6 +17,7 @@ var analyticsMiddleware = function(middlewareAPI){
                 case 'SET_USER':
                 //  console.log('authDAta',action.track.authData)
                   GoogleAnalytics.setUser(action.track.authData.uid);
+                  Answers.logLogin('Beta', true);
 
                 case 'TRACK_EVENT':
                 //  console.log('track',action.track);
