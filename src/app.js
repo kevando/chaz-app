@@ -101,32 +101,16 @@ registerScreens(store, Provider);
 export default class App {
   constructor() {
     // since react-redux only works on components, we need to subscribe this class manually
-    var root = store.getState().app.get('root');
-
 
     store.subscribe(this.onStoreUpdate.bind(this));
     // store.dispatch(appActions.appInitialized()); // kick off auth listener
 
-
     load(store)
-        .then((newState) => {
+      .then((newState) => {
+        var authData = newState.app.authData;
+        console.log('auth data in load',authData);
 
-          console.log('Loaded state:', newState);
-          console.log('Loaded state authData:', newState.app.authData);
-          var authData = newState.app.authData;
-          if(!authData) // otherwise, dont init - app root should be after-login
-            store.dispatch(appActions.appInitialized());
-
-          // but if there is auth data, lets log in yo
-          if(authData) // otherwise, dont init - app root should be after-login
-            store.dispatch(appActions.changeAppRoot('after-login'));
-
-
-
-          // if(authData) // otherwise, dont init - app root should be after-login
-          //   store.dispatch(appActions.setFirebaseAuthToken(authData));
-
-
+        store.dispatch(appActions.appInitialized());
 
         })
         .catch(() => console.log('Failed to load previous state'));
@@ -134,22 +118,16 @@ export default class App {
 
 
   onStoreUpdate() {
-
     const root = store.getState().app.get('root');
-    console.log('onStoreUpdate root=',root);
     // handle a root change
     // if your app doesn't change roots in runtime, you can remove onStoreUpdate() altogether
-
-
     if (this.currentRoot != root) {
-      // console.log('UPDATE ROOT!',root);
       this.currentRoot = root;
       this.startApp(root);
     }
   }
 
   startApp(root) {
-
     switch (root) {
       case 'init':
         Navigation.startSingleScreenApp({

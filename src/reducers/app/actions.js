@@ -10,9 +10,15 @@ export function appInitialized() {
   return async function(dispatch, getState) {
     // since all business logic should be inside redux actions
     // this is a good place to put your app initialization code
+    var authData = getState().app.get('authData');
+    console.log('auth data in action',authData);
 
-    dispatch(changeAppRoot('login'));
-    // dispatch(startListeningToAuth());
+    if(authData) //
+      dispatch(changeAppRoot('after-login'));
+
+    if(!authData)
+      dispatch(changeAppRoot('login'));
+
   };
 }
 
@@ -33,7 +39,7 @@ export function login(name) {
         console.log("Login Failed!", error);
       } else {
         console.log("Login Succeeded!", authData); // this used to be a listener
-        dispatch(changeAppRoot('after-login'));
+        dispatch(changeAppRoot('after-login')); // moving this to the screen
         dispatch(setAuthData(authData)); // reminder this is only possible with thunk
 
       }
@@ -57,21 +63,7 @@ export function setAuthData(authData){
   return { type: types.SET_AUTH_DATA, authData: authData }
 }
 
-export function setFirebaseAuthToken(authData) {
-  return (dispatch, getState) => {
-    fireRef.authWithCustomToken(authData.token, function(error, result) {
-    if (error) {
-      console.log("Authentication Failed!", error);
-    } else {
-      console.log("Authenticated successfully with payload:", result.auth);
-      console.log("Auth expires at:", new Date(result.expires * 1000));
-    }
-  });
-}
-
-}
-
-export function startListeningToAuth() { // fuck this function NOT USED
+export function startListeningToAuth() { // fuck this function NOT USED aNYMORE
   return (dispatch, getState) => {
     fireRef.onAuth(function(authData){
       console.log('auth data listened',authData);

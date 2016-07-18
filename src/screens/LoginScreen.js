@@ -35,11 +35,7 @@ class LoginScreen extends Component {
 
   }
   componentDidMount() {
-    var thisTmp = this;
-    setTimeout(function(){
-        // thisTmp.startPulse();
-    },3000)
-
+    // this.startPulse();
   }
   componentDidUpdate(prevProps) {
     if (!prevProps.hasPulse && this.props.hasPulse) {
@@ -54,15 +50,15 @@ class LoginScreen extends Component {
     Animated.sequence([
       Animated.timing(this.state.pulse, {
         toValue: this.props.growTo,
-        duration: 300,
-        delay: 400,
+        duration: 200,
+        delay: 300,
       }),
       Animated.timing(this.state.pulse, {
         toValue: 1,
         easing: Easing.easeOut,
-        duration: 700,
+        duration: 500,
       }),
-      Animated.delay(3000),
+      Animated.delay(300),
     ]).start(this.startPulse.bind(this));
   }
 
@@ -95,6 +91,9 @@ class LoginScreen extends Component {
         <Text style={styles.text}>
           <Text style={{fontWeight: '100',color:'red'}}>{this.props.app.authError}</Text>
         </Text>
+        <Text style={styles.text}>
+          <Text style={{fontWeight: '100',color:'red'}}>{this.state.authResponse}</Text>
+        </Text>
 
         <Text style={styles.text}>
           <Text style={{fontWeight: '500'}}>Current Count: </Text> {this.props.counter.count}
@@ -119,13 +118,25 @@ class LoginScreen extends Component {
   }
 
   onLoginPress() {
-    // this.setState({loading:true})
-    // this.props.dispatch(appActions.login('bro'));
-
     var options = Array();
-    options.push({text: 'Continue',  onPress: (username) => { this.props.dispatch(appActions.login(username)) }    });
+    options.push({text: 'Continue',  onPress: (name) => { this.onContinuePress(name) }    });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
     AlertIOS.prompt('What is your Name?', null, options);
+  }
+  onContinuePress(name){
+    var This = this;
+    if(name == '' || !name){
+      this.setState({authResponse: 'A real name, please.'});
+      return;
+    }
+    // tmp loading state
+    this.startPulse();
+    var loadingTimer = setTimeout(function(){
+      clearTimeout(loadingTimer);
+      This.setState({authResponse: 'Something went wrong.'});
+    }, 10000);
+
+    this.props.dispatch(appActions.login(name))
   }
 }
 
@@ -164,7 +175,7 @@ function mapStateToProps(state) {
 }
 LoginScreen.defaultProps = {
   hasPulse: true,
-  growTo: 1.4,
+  growTo: 1.1,
 }
 
 export default connect(mapStateToProps)(LoginScreen);

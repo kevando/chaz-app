@@ -3,23 +3,15 @@
 
 ### 0.7.6
 
-make app data immutable, then rec, recr in 0.7.7
+make app/rec/recr data immutable
 rec/r actions wont work in the meantime
 
-auth is working better, have heart beat on login :)
-
-add device info to auth data. remove that from recs screen
-dont let people enter empty names
-add a login timeout, to the loading state
-
-add back async storage
 way better venmo style add rec
 way better data validation, not case sensitive, no empty strings
 modal does not dismiss on addRec
 update recr does not pull from list
-change login to yellow heart
 add back filters
-make recr better display, list and view
+
 also lots of bugs
 add date to rec view and rec list
 improve profile page a bit, also make swiping the right direction, you are the yellow
@@ -31,6 +23,8 @@ update readme and reply to doorbell, also update onboarding with funnel thoughts
 
  - added fabric tracking to analytics middleware
  - changed login button to a yellow heart
+ - removed auth listener, changed auth to custom device token
+ - added back in redux storage
 
 ### 0.7.7
 sorting be recr score.. really just improve recr score and recr list now
