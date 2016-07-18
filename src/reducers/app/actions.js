@@ -8,8 +8,9 @@ export function appInitialized() {
   return async function(dispatch, getState) {
     // since all business logic should be inside redux actions
     // this is a good place to put your app initialization code
-    dispatch(changeAppRoot('login')); // init app to login page
-    dispatch(startListeningToAuth()); // listen for auth changes
+
+    dispatch(changeAppRoot('init')); // init app to login page. now handled in initial state
+    // dispatch(startListeningToAuth()); // listen for auth changes
   };
 }
 
@@ -25,12 +26,14 @@ export function login(username) {
     }, function(error, authData) { // previously
       if (error)
         dispatch(setAuthErrorMessage(error.toString()));
+      else {
+        console.log('login auth data',authData);
+      }
     });
   };
 }
 export function logout(){
   return function(dispatch,getState){
-    // dispatch(setAuthData({}));
     fireRef.unauth();
   };
 }
@@ -41,23 +44,29 @@ export function setAuthErrorMessage(message) {
 export function setAuthData(authData){
   return { type: types.SET_AUTH_DATA, authData: authData }
 }
-export function setUser(authData){ // used only for analytics tracking
-  return {
-    type: 'SET_USER',
-    track: {
-      authData: authData
+
+export function setFirebaseAuthToken(authData) {
+  return (dispatch, getState) => {
+    fireRef.authWithCustomToken(authData.token, function(error, result) {
+    if (error) {
+      console.log("Authentication Failed!", error);
+    } else {
+      console.log("Authenticated successfully with payload:", result.auth);
+      console.log("Auth expires at:", new Date(result.expires * 1000));
     }
-  }
+  });
+}
+
 }
 
 export function startListeningToAuth() {
   return (dispatch, getState) => {
     fireRef.onAuth(function(authData){
+      console.log('auth data listened',authData);
         if (authData){  // LOGIN
-          dispatch(setUser(authData))
           dispatch(changeAppRoot('after-login'));
           dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-        } else { // LOGOUT
+        } else { //
           dispatch(changeAppRoot('login'));
           dispatch(setAuthData(authData)); // reminder this is only possible with thunk
         }

@@ -19,7 +19,7 @@ import Style from '../style/Style';
 import Emoji from 'react-native-emoji';
 
 // this is a traditional React component connected to the redux store
-class LoginScreen extends Component {
+class InitScreen extends Component {
 
 
   constructor(props) {
@@ -80,9 +80,9 @@ class LoginScreen extends Component {
 
     return (
 
-      <View style={{flex: 1, paddingTop: 100,backgroundColor: Style.constants.colors[0],alignItems:'center'}}>
+      <View style={{flex: 1, paddingTop: 100,backgroundColor: Style.constants.colors[1],alignItems:'center'}}>
       <Text style={styles.text}>
-        <Text style={{fontWeight: '500',color:'#fff',fontSize:100}}>chaz</Text>
+        <Text style={{fontWeight: '500',color:'#fff',fontSize:100}}>INIT</Text>
       </Text>
 
 
@@ -162,9 +162,9 @@ function mapStateToProps(state) {
     app: state.app
   };
 }
-LoginScreen.defaultProps = {
+InitScreen.defaultProps = {
   hasPulse: true,
   growTo: 1.4,
 }
 
-export default connect(mapStateToProps)(LoginScreen);
+export default connect(mapStateToProps)(InitScreen);

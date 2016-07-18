@@ -6,7 +6,10 @@ const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 export function listenForRecs() {
   return (dispatch, getState) => {
     const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
+
+    const uid = currentState.app.getIn(["authData","uid"]);
+
+    const recsRef = fireRef.child(`users/${uid}/recs`);
     recsRef.on('value', (snap) => {
         dispatch(getRecList(snap));
         dispatch(syncRecrList(snap));
@@ -16,13 +19,14 @@ export function listenForRecs() {
 export function syncRecrList(snap) { // fuck yeah if this works
   return (dispatch, getState) => {
     const currentState = getState();
+    const uid = currentState.app.getIn(["authData","uid"]);
       var items = [];
       snap.forEach((child) => {
         var recObject = child.val(); // doing this cause firebase cant handle undefined
         recObject._key = child.key()
 
         if(recObject.recr){
-          const recrsRecRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${recObject.recr._key}/recs/${recObject._key}`);
+          const recrsRecRef = fireRef.child(`users/${uid}/recrs/${recObject.recr._key}/recs/${recObject._key}`);
           recrsRecRef.once("value", function(snapshot) { // probly way over kill but idgaf
             if(snapshot.exists()){
               recrsRecRef.update(recObject);
@@ -76,7 +80,8 @@ export function updateRecList(recs) {
 export function addRec(recTitle) {                  // ADD NEW REC
   return function(dispatch, getState) {
     const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
+    const uid = currentState.app.getIn(["authData","uid"]);
+    const recsRef = fireRef.child(`users/${uid}/recs`);
     var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
     dispatch(trackRecAdded(recTitle));
     // the following is added for pushing to the next screen
@@ -96,7 +101,8 @@ export function trackRecAdded(recTitle){
 export function removeRec(recKey){                  // REMOVE REC
   return function(dispatch, getState) {
     const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs`);
+    const uid = currentState.app.getIn(["authData","uid"]);
+    const recsRef = fireRef.child(`users/${uid}/recs`);
     recsRef.child(recKey).remove();
     // todo dispatch upgrade recr score and recs recr score
     // consider if I need to do any other checks

@@ -7,7 +7,8 @@ const _ = require('lodash');
 export function listenForRecrs() {
   return (dispatch, getState) => {
     const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
+    const uid = currentState.app.getIn(["authData","uid"]);
+    const recsRef = fireRef.child(`users/${uid}/recrs`);
     recsRef.on('value', (snap) => {
       console.log('listen FOR RECRS')
         dispatch(getRecrList(snap));

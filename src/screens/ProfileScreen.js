@@ -22,9 +22,12 @@ class ProfileScreen extends Component {
   }
 
   render() {
-    if(!this.props.app.authData)
+    var authData = this.props.app.get('authData'); // immutable
+    console.log('auth data',authData);
+    if(!authData)
       return (<Text>Logged out</Text>);
-    var email = this.props.app.authData.password.email;
+
+    var email = authData.getIn(['password','email']);
     var atIndex = email.indexOf('@');
     var username = email.substring(0,atIndex);
     return (

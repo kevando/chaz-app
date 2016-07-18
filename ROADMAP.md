@@ -2,12 +2,12 @@
 
 
 ### 0.7.6
+
+make app data immutable, then rec, recr
+rec/r actions wont work in the meantime
+
 add back async storage
 way better venmo style add rec
-MP tracking FOR REAL
-
-
-define phases in the onboardin doc and clear some evernote shit
 way better data validation, not case sensitive, no empty strings
 modal does not dismiss on addRec
 update recr does not pull from list
@@ -18,26 +18,37 @@ also lots of bugs
 add date to rec view and rec list
 improve profile page a bit, also make swiping the right direction, you are the yellow
 be more considerate about what props each component needs, and where/when to send them
-recr comments
+recr comments aka reminder
 add rec from recr page
 add rec button to recr view
-add "alert me" option to recs
-integrate notifications
-update readme and reply to doorbell
+update readme and reply to doorbell, also update onboarding with funnel thoughts
 
-### 0.7.7 (phase 3)
+ - added fabric tracking to analytics middleware
+ - changed login button to a yellow heart
+
+### 0.7.7
 sorting be recr score.. really just improve recr score and recr list now
 sort by recrs
 major bugs on add/edit/remove grade
 ask recr for more recs
 give recr feedback
+add "alert me" option to recs
+integrate notifications
 
-### 0.8 introduce friends list feature
+### 0.7.8
+refactor stuff for better tracking
+
+### 0.8
+introduce friends list feature
+
 
 ### 0.9
+sorting by friend grades
+
 profile page with our own rec/recrs/grade score
 ability to store recs i send (ui can be like yo login screen)
 you can store recs you send
+get a chaz bitly url (chaz.co or wahtever)
 
 
 ### 1.0

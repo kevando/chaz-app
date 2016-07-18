@@ -9,6 +9,9 @@ var analyticsMiddleware = function(middlewareAPI){
 
     return function(next){
         return function(action){
+
+          return next(action); // DISABLED FOR DEV
+
           //console.log('ANALYTICS',action);
           if(action.track){ // only run this if action has track object
             //  console.log('Middleware Logging action',action);

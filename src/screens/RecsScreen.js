@@ -58,11 +58,12 @@ class RecsScreen extends Component {
     }
   }
   componentDidMount() {
-    this.props.dispatch(recActions.listenForRecs()); // again i dont like this code here
-    this.props.dispatch(recrActions.listenForRecrs());
+    // this.props.dispatch(recActions.listenForRecs()); // again i dont like this code here
+    // this.props.dispatch(recrActions.listenForRecrs());
   }
 
   render() {
+    console.log('app state in recs render',this.props.app);
 
     if(!this.props.rec.all)
       return (<View><Text>No visible recs yet</Text></View>)
@@ -169,6 +170,7 @@ function mapStateToProps(state) {
   return {
     rec: state.rec,
     recr: state.recr,
+    app: state.app,
   };
 }
 

@@ -12,12 +12,13 @@ import ProfileScreen from './ProfileScreen';
 import RecAddScreen from './RecAddScreen';
 import RecrsScreen from './RecrsScreen';
 import RecrViewScreen from './RecrViewScreen';
+import InitScreen from './InitScreen';
 
 // register all screens of the app (including internal ones)
 export function registerScreens(store, Provider) {
 
-  // Navigation.registerComponent('example.FirstTabScreen', () => FirstTabScreen, store, Provider);
-  // Navigation.registerComponent('example.SecondTabScreen', () => SecondTabScreen, store, Provider);
+  Navigation.registerComponent('example.FirstTabScreen', () => FirstTabScreen, store, Provider);
+  Navigation.registerComponent('example.SecondTabScreen', () => SecondTabScreen, store, Provider);
   // Navigation.registerComponent('example.PushedScreen', () => PushedScreen, store, Provider);
 
   // Chaz
@@ -28,4 +29,5 @@ export function registerScreens(store, Provider) {
   Navigation.registerComponent('chaz.RecAddScreen', () => RecAddScreen, store, Provider);
   Navigation.registerComponent('chaz.RecrsScreen', () => RecrsScreen, store, Provider);
   Navigation.registerComponent('chaz.RecrViewScreen', () => RecrViewScreen, store, Provider);
+  Navigation.registerComponent('chaz.InitScreen', () => InitScreen, store, Provider);
 }
