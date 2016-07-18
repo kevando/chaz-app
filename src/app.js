@@ -117,7 +117,11 @@ export default class App {
           if(!authData) // otherwise, dont init - app root should be after-login
             store.dispatch(appActions.appInitialized());
 
-          store.dispatch(appActions.startListeningToAuth()); // this could probly go outside load
+          // but if there is auth data, lets log in yo
+          if(authData) // otherwise, dont init - app root should be after-login
+            store.dispatch(appActions.changeAppRoot('after-login'));
+
+
 
           // if(authData) // otherwise, dont init - app root should be after-login
           //   store.dispatch(appActions.setFirebaseAuthToken(authData));

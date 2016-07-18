@@ -22,14 +22,16 @@ class ProfileScreen extends Component {
   }
 
   render() {
-    var authData = this.props.app.get('authData'); // immutable
-    console.log('auth data',authData);
-    if(!authData)
-      return (<Text>Logged out</Text>);
+    // var authData = this.props.app.get('authData'); // immutable
+    // console.log('auth data',authData);
+    // if(!authData)
+    //   return (<Text>Logged out</Text>);
+    //
+    // var email = authData.getIn(['password','email']);
+    // var atIndex = email.indexOf('@');
+    // var username = email.substring(0,atIndex);
 
-    var email = authData.getIn(['password','email']);
-    var atIndex = email.indexOf('@');
-    var username = email.substring(0,atIndex);
+    var username = 'tmp';
     return (
       <View style={{flex: 1, padding: 20,backgroundColor:'#ddd'}}>
       <Text style={styles.text}>

@@ -3,8 +3,14 @@
 
 ### 0.7.6
 
-make app data immutable, then rec, recr
+make app data immutable, then rec, recr in 0.7.7
 rec/r actions wont work in the meantime
+
+auth is working better, have heart beat on login :)
+
+add device info to auth data. remove that from recs screen
+dont let people enter empty names
+add a login timeout, to the loading state
 
 add back async storage
 way better venmo style add rec
