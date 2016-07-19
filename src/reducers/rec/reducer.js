@@ -17,6 +17,8 @@ const initialState = Immutable.Map({
 
 
 export default function counter(state = initialState, action = {}) {
+  console.log('RecReducer State',state);
+  console.log('RecReducer action',action)
   switch (action.type) {
 
     case types.SET_LOADED:

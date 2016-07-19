@@ -77,3 +77,12 @@ https://medium.com/@spencer_carli
 https://github.com/michaelcontento/redux-storage
 https://facebook.github.io/react-native/docs/flexbox.html
 https://docs.fabric.io/apple/beta/beta-walkthrough.html
+
+
+### Development guidelines
+function prefixes
+ render(functions that return renderable object)
+ on(callbacks for events, most likely a user click)
+
+
+[attempting] immutable variables have uppercase

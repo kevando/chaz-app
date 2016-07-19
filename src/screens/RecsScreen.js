@@ -69,6 +69,7 @@ class RecsScreen extends Component {
   }
 
   render() {
+    // return(<View><Text>tmp rec screen</Text></View>);
 
     var recsLoaded = this.props.rec.get('loaded');
 
@@ -89,19 +90,6 @@ class RecsScreen extends Component {
         <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
-    // return (
-    //   <View style={{flex: 1, padding: 0}}>
-    //     <ScrollView>
-    //       {( !recList
-    //         ? <Text>Dude</Text>
-    //         : this.renderRecList(this.props.navigator,this.onAddRecrPress)
-    //
-    //       )}
-    //
-    //     </ScrollView>
-    //     <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />
-    //   </View>
-    // );
   }
 
   addRecr(recrName) {

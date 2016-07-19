@@ -15,12 +15,18 @@ based on your friend's score. Easier said than done!
 The user needs to put in quite a bit of work in order to get there, so chaz is
 designed to make that process as smooth and fun as possible.
 
+Your data belongs to you, and unless it improves your experience as a user, chaz
+does not mandate any user info. Users are prompted to provide only the following
+info: name & phone#. this is so we can help you recover your recs in the event
+you lose or break your phone. Also chaz gonna text you late at night.
+
 ### chaz onboarding overview
 
-phases. Each phase represents a task (or series of tasks) that end with a goal
-that goal concludes that "phase" and user embarks on the next phase
- - give us your name
- - store 5(?) recs with recr
+ - Open app
+ - transcribe..
+
+
+
  - get reminder, consume rec
  - give rec a grade (hooray!)
  - now recr has a score, user must see this

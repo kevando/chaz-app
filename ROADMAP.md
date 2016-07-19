@@ -36,6 +36,7 @@ add rec from recr page
 add rec button to recr view
 update readme and reply to doorbell, also update onboarding with funnel thoughts
 
+logout doesnt work
 change initial root to undefined (which should work), and figure out why its acting weird. check load(store)
 clean up as much code as possible esp app.js
 re-enable fabric tracking

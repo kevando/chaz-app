@@ -13,7 +13,8 @@ export function appInitialized() {
     var authData = getState().app.get('authData');
     console.log('auth data in action',authData);
 
-    if(authData) { // user is logged in
+    if(authData.size > 0) { // user is logged in
+      console.log('this should not be firing',authData);
       dispatch(changeAppRoot('after-login'));
       // tried adding fireRef to the store
       // const uid = authData.get('uid');
