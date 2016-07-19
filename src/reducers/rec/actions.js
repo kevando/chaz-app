@@ -3,16 +3,20 @@ import * as types from './actionTypes';
 const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
 const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 
-export function listenForRecs() {
+export function listenForRecs() { //fetch
   return (dispatch, getState) => {
+    console.log('LISTENFOR RECS CALLED');
     const currentState = getState();
 
     const uid = currentState.app.getIn(["authData","uid"]);
 
+    // console.log(`users/${uid}/recs`)
     const recsRef = fireRef.child(`users/${uid}/recs`);
     recsRef.on('value', (snap) => {
-        dispatch(getRecList(snap));
-        dispatch(syncRecrList(snap));
+      console.log('fireRef listened, now change loaded to true',snap);
+      dispatch({type: types.SET_LOADED, loaded: true});
+      dispatch(getRecList(snap));
+        // dispatch(syncRecrList(snap));
     });
   }
 }
@@ -64,7 +68,7 @@ export function getRecList(snap) { // runs after basically any change to any rec
         }
 
       });
-        // console.log('items',items);
+        console.log('items',items);
       dispatch(updateRecList(items)); // reducer call
       // dispatch(updateVisibleRecList(items)); // reducer all removing for now
   }

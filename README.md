@@ -74,3 +74,6 @@ For more information about setting up a local dev environment, see the [React Na
 ### Libs & Resources
 https://github.com/wix/react-native-navigation
 https://medium.com/@spencer_carli
+https://github.com/michaelcontento/redux-storage
+https://facebook.github.io/react-native/docs/flexbox.html
+https://docs.fabric.io/apple/beta/beta-walkthrough.html

@@ -13,7 +13,11 @@ import AddRecButton from '../components/rec/AddRecButton';
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
 import ListItem from '../components/rec/ListItem';
+import Loading from '../components/LoadingComponent';
+import Onboarding from '../components/Onboarding';
+import RecList from '../components/rec/RecList';
 import * as Style from '../style/Style';
+
 
 var DeviceInfo = require('react-native-device-info');
 
@@ -42,6 +46,7 @@ class RecsScreen extends Component {
     this.props.navigator.setTitle({
       title: "chaz " +  DeviceInfo.getVersion()
     });
+
   }
 
   onNavigatorEvent(event) {
@@ -58,24 +63,45 @@ class RecsScreen extends Component {
     }
   }
   componentDidMount() {
-    // this.props.dispatch(recActions.listenForRecs()); // again i dont like this code here
+    this.props.dispatch({type: 'SET_LOADED', loaded: false}); // reset the app awareness that listener is off
+    this.props.dispatch(recActions.listenForRecs()); // again i dont like this code here. but it works well
     // this.props.dispatch(recrActions.listenForRecrs());
   }
 
   render() {
-    console.log('app state in recs render',this.props.app);
 
-    if(!this.props.rec.all)
-      return (<View><Text>No visible recs yet</Text></View>)
+    var recsLoaded = this.props.rec.get('loaded');
 
-    return (
+    if(!recsLoaded){
+      console.log('Recs are NOT loading from firebase into redux');
+      return (<Loading message="Loading Recs from Firebase" />);
+    }
+
+    var recList = this.props.rec.getIn(['all']);
+    console.log('recList',recList);
+
+    return ( // gotta add scrollview back in
       <View style={{flex: 1, padding: 0}}>
-      <ScrollView>
-        {this.renderRecList(this.props.navigator,this.onAddRecrPress)}
-        </ScrollView>
+        {( recList.size == 0
+          ? <Onboarding notify="You have no recs" guide="Press the button below to get started"/>
+          : <ScrollView><RecList recList={recList} /></ScrollView>
+        )}
         <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
+    // return (
+    //   <View style={{flex: 1, padding: 0}}>
+    //     <ScrollView>
+    //       {( !recList
+    //         ? <Text>Dude</Text>
+    //         : this.renderRecList(this.props.navigator,this.onAddRecrPress)
+    //
+    //       )}
+    //
+    //     </ScrollView>
+    //     <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />
+    //   </View>
+    // );
   }
 
   addRecr(recrName) {
@@ -83,12 +109,17 @@ class RecsScreen extends Component {
     // update current with updated rec info
     this.props.dispatch(recrActions.createRecr(recrName));
   }
-  renderRecList(navigator,onAddRecrPress) { // not sure if passing nav is a good idea but it works
-    var recs = Array();
-    this.props.rec.all.forEach(function(rec) {
-
-      recs.push(<ListItem key={rec._key} rec={rec} navigator={navigator} onAddRecrPress={onAddRecrPress.bind(this,rec)} />);
+  renderRecList(navigator,onAddRecrPress) {
+    // not sure if passing nav is a good idea but it works
+    // Also, this should probly be its own component. change that when i add the visible recs thing
+    var recList = this.props.rec.getIn(['all']);
+    // console.log('recList',recList);
+    var recs = recList.map((Rec) => {
+      var rec = Rec.toJS();
+      return ((<ListItem key={rec._key} rec={rec} navigator={navigator} onAddRecrPress={onAddRecrPress.bind(this,rec)} />))
     });
+
+    console.log('recs',recs)
     return recs;
   }
 

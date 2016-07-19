@@ -13,13 +13,23 @@ export function appInitialized() {
     var authData = getState().app.get('authData');
     console.log('auth data in action',authData);
 
-    if(authData) //
+    if(authData) { // user is logged in
       dispatch(changeAppRoot('after-login'));
+      // tried adding fireRef to the store
+      // const uid = authData.get('uid');
+      // const firebaseRef = fireRef.child(`users/${uid}`);
+      // dispatch(setFirebaseRef(fireRef));
+
+    }
 
     if(!authData)
       dispatch(changeAppRoot('login'));
 
   };
+}
+
+export function setFirebaseRef(firebaseRef) { // remove
+  return {type: types.SET_FIREBASE_REF, firebaseRef: firebaseRef};
 }
 
 export function changeAppRoot(root) {

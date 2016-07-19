@@ -2,12 +2,20 @@ Draw this out
 
 # Onboarding
 
-Apple has taught everyone to expect the most frictionless experiences
-and we love it. Part of that frictionless experience is showing people
-how to use the app through a guided as the first open the app.
+Users need to know how to use your product in order to use it.
+Teaching them should be fun, interactive, and feel totally natural.
 
 
-## Here is a look at how we think about the onboarding process
+## chaz onboarding process
+
+According to [name,link] from facebook, all products should lead users to that
+magic "aha" moment. For chaz, that moment is when you decide what suggestion
+based on your friend's score. Easier said than done!
+
+The user needs to put in quite a bit of work in order to get there, so chaz is
+designed to make that process as smooth and fun as possible.
+
+### chaz onboarding overview
 
 phases. Each phase represents a task (or series of tasks) that end with a goal
 that goal concludes that "phase" and user embarks on the next phase
@@ -16,7 +24,7 @@ that goal concludes that "phase" and user embarks on the next phase
  - get reminder, consume rec
  - give rec a grade (hooray!)
  - now recr has a score, user must see this
- 
+
 
 
 

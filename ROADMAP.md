@@ -3,8 +3,23 @@
 
 ### 0.7.6
 
-make app/rec/recr data immutable
-rec/r actions wont work in the meantime
+
+remove name from loginscreen, also remove pulse code
+add some sort of timeout to loading recs from firebase
+fix bug where add rec modal is not dismissed on load state
+consider building a more sophisticated onboarding messaging system
+add this to the onboarding doc, and implement it in redux State
+also watch ui video at this point
+
+Do a fabric deploy, possibly as a different app name so not to overwrite
+
+loading recs for the first time shouldnt need to happen. the app should be aware
+there are no recs after the first login
+
+make rec data immutable, get this working solid. load recs from visible List
+
+consider updating firebase npm and adding ref to state
+https://github.com/erikras/react-redux-universal-hot-example/issues/252
 
 way better venmo style add rec
 way better data validation, not case sensitive, no empty strings
@@ -21,10 +36,15 @@ add rec from recr page
 add rec button to recr view
 update readme and reply to doorbell, also update onboarding with funnel thoughts
 
+change initial root to undefined (which should work), and figure out why its acting weird. check load(store)
+clean up as much code as possible esp app.js
+re-enable fabric tracking
+
  - added fabric tracking to analytics middleware
  - changed login button to a yellow heart
  - removed auth listener, changed auth to custom device token
  - added back in redux storage
+ - added rec loading state, and move rec display to RecList component
 
 ### 0.7.7
 sorting be recr score.. really just improve recr score and recr list now

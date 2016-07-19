@@ -1,19 +1,31 @@
 import * as types from './actionTypes';
-import Immutable from 'seamless-immutable';
+// import Immutable from 'seamless-immutable';
 
-const initialState = Immutable({
+// const initialState = Immutable({
+//   all: [],
+//   visible: [], //
+//
+// });
+
+import * as Immutable from 'immutable';
+
+const initialState = Immutable.Map({
+  loaded: false,
   all: [],
-  visible: [], // 
 
 });
 
+
 export default function counter(state = initialState, action = {}) {
   switch (action.type) {
-    case types.INCREMENT:
-      return state.merge({
-        count: state.count + 1
-      });
+
+    case types.SET_LOADED:
+      return state.set( 'loaded', action.loaded );
+
     case types.UPDATE_REC_LIST:
+    console.log('action',action.type)
+    console.log('payload',action.payload);
+    console.log('state',state);
       return state.merge({
         all: action.payload
       });

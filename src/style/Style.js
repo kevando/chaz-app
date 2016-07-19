@@ -12,8 +12,8 @@ const constants = {
     '#AA8ED6', // Purple / App
     '#5DADEC', // Blue / Rec
     '#78B159', // Green / Recr
-    '#ccc',
-    '#ccc',
+    '#FFE550', // Yellow
+    '#EFEFEF', // Grey
   ],
 
 };
@@ -58,6 +58,9 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     marginTop:65, // not sure why I have to add this, think it has something to do with loader
   },
+
+
+
 
 })
 

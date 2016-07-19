@@ -103,17 +103,17 @@ export default class App {
     // since react-redux only works on components, we need to subscribe this class manually
 
     store.subscribe(this.onStoreUpdate.bind(this));
-    // store.dispatch(appActions.appInitialized()); // kick off auth listener
+    // store.dispatch(appActions.appInitialized()); // do this elsewhere now
 
     load(store)
       .then((newState) => {
-        var authData = newState.app.authData;
-        console.log('auth data in load',authData);
+        console.log('newState',newState);
 
+        // does this do anything?
         store.dispatch(appActions.appInitialized());
 
         })
-        .catch(() => console.log('Failed to load previous state'));
+        .catch(() => console.warn('Failed to load previous state'));
   }
 
 
