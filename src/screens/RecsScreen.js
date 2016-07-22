@@ -13,7 +13,8 @@ import AddRecButton from '../components/rec/AddRecButton';
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
 import Loading from '../components/LoadingComponent';
-import Onboarding from '../components/Onboarding';
+import Onboarding from '../containers/Onboarding';
+import FilterNav from '../containers/rec/FilterNav';
 import RecList from '../components/rec/RecList';
 import * as Style from '../style/Style';
 
@@ -80,8 +81,9 @@ class RecsScreen extends Component {
 
     return (
       <View style={{flex: 1, padding: 0}}>
+        <FilterNav />
         {( recList.size == 0
-          ? <Onboarding notify="You have no recs" guide="Press the button below to get started"/>
+          ? <Onboarding notify="You have no recs" guide="Press the button below to get started" />
           : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
         )}
         <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />

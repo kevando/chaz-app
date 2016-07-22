@@ -6,6 +6,13 @@ const initialState = Immutable.Map({
   authError: '', // remove
   authData: {},
   firebaseRef: {},
+  // onboarding: {}
+  // filters: [
+  //   {
+  //     default: 'all',
+  //     options: ['all','graded','ungraded']
+  //   }
+  // ]
 });
 
 export default function app(state = initialState, action = {}) {

@@ -1,13 +1,14 @@
 # Roadmap
 Link to trello board
 
-### 0.7.6
+### 0.7
 Goal here is to create easy process to user getting first grade
+
+### 0.7.6
 
 change initial root to undefined (which should work), and figure out why its acting weird. check load(store)
 clean up as much code as possible esp app.js
 re-enable fabric tracking
-
 merge back in previous data
 
  - added fabric tracking to analytics middleware

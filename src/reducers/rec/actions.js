@@ -77,6 +77,14 @@ export function updateRecList(recs) {
   }
 
 }
+export function updateFilter(filter){
+  return function(dispatch, getState) {
+    dispatch({type: types.UPDATE_REC_FILTER, filter:filter});
+    dispatch({type: types.UPDATE_VISIBLE_REC_LIST }); // i always want to do this, right?
+  }
+
+  // return {type: types.UPDATE_REC_FILTER, filter:filter}
+}
 // TMP REMOVING
 // export function updateVisibleRecList(recs) {
 //   return { type: types.UPDATE_VISIBLE_REC_LIST, payload: recs }
