@@ -25,6 +25,37 @@ class RecViewScreen extends Component {
     super(props);
     // if you want to listen on navigator events, set this up
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.state = {rec: {} }
+  }
+  componentWillMount() { // fires on rec view load
+    this.setRecFromRecList(this.props.rec.getIn(['all']));
+  }
+  componentWillReceiveProps(nextProps) { // this fires when redux updates
+    this.setRecFromRecList(nextProps.rec.getIn(['all']));
+  }
+
+  setRecFromRecList(recList) {
+    const recKey = this.props.recKey;
+    var Rec = recList.find(function(rec) { return rec.get('_key') === recKey; });
+    if(Rec)
+      this.setState({rec:  Rec.toJS()});
+  }
+
+  render() {
+
+    console.log('review RENDER',this.state.rec);
+
+    return (
+      <View style={{flex: 1, paddingTop: 20,backgroundColor:'#eee'}}>
+        <View style={styles.row}>
+          <View style={styles.left}>
+            <TouchableOpacity onPress={this.onTitlePress.bind(this)}>
+              <Text style={{fontSize:20}}>{this.state.rec.title}</Text>
+              </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
   }
   static navigatorButtons = {
     rightButtons: [{title: 'Delete',id: 'delete'}]
@@ -50,16 +81,12 @@ class RecViewScreen extends Component {
       );
   }
   removeRec() {
-    this.props.dispatch(recActions.removeRec(this.props.currentRec._key));
+    this.props.dispatch(recActions.removeRec(this.props.recKey));
     this.props.navigator.pop({
       animated: true
     });
   }
 
-  componentDidMount() {
-    this.props.dispatch(recActions.setCurrentRec(this.props.currentRec)); // maybe just do the key here
-    // this.props.dispatch(recrActions.setCurrentRecr(this.props.currentRec.recr));
-  }
 
   getDisplayGrade(rec) {
     if(rec.recr != null){
@@ -98,9 +125,10 @@ class RecViewScreen extends Component {
 
   }
   getDisplayRecrLeft(rec){
+    // <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }> removing this for now
     if(rec.recr != null){
       return (
-        <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }>
+        <TouchableOpacity>
           <Text>Recommended by: <Text style={styles.recrText}>{rec.recr.name}</Text></Text>
         </TouchableOpacity>
       )
@@ -112,76 +140,38 @@ class RecViewScreen extends Component {
 
   }
 
-  render() {
-    const rec = this.props.rec.current;
 
-    if(!rec)
-      return(<View><Text>Something went wrong and no current rec was set</Text></View>);
-
-    return (
-      <View style={{flex: 1, paddingTop: 20,backgroundColor:'#eee'}}>
-        <View style={styles.row}>
-          <View style={styles.left}>
-            <Text style={{fontSize:20}}>{rec.title}</Text>
-          </View>
-          <View style={styles.right}>
-            <TouchableOpacity onPress={ this.onTitlePress.bind(this,rec) }>
-              <Text style={{color:'red'}}>Edit</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.left}>
-            {this.getDisplayGrade(rec)}
-          </View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.left}>
-            {this.getDisplayRecrLeft(rec)}
-          </View>
-          <View style={styles.right}>
-            {this.getDisplayRecrRight(rec)}
-          </View>
-        </View>
-        <View style={styles.row}>
-            {this.displayComment(rec)}
-        </View>
-
-
-      </View>
-    );
-  }
 
 
   onAddRecrPress() {
     var options = Array();
-    options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
+    options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(rec,recrName) }    });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
     AlertIOS.prompt('Who recommended this?', null, options);
   }
 
   // not sure why i need to add this now?
-  addRecr(recrName) {
+  assignRecr(rec,recrName) {
     // create new recr if new
     // update current with updated rec info
-    this.props.dispatch(recrActions.createRecr(recrName));
+    this.props.dispatch(recrActions.assignRecr(rec,recrName));
   }
 
 
   onTitlePress() {
     var options = Array();
-    options.push({text: 'Submit',  onPress: (title) => { this.props.dispatch(recActions.updateTitle(title)); }    });
+    options.push({text: 'Submit',  onPress: (title) => { this.props.dispatch(recActions.updateRecTitle(this.state.rec,title)); }    });
     options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-    AlertIOS.prompt('Change Title', null, options,'plain-text',this.props.rec.current.title);
+    AlertIOS.prompt('Change Title', null, options,'plain-text',this.state.rec.title);
   }
 
-  onRecrPress() {
-    this.props.navigator.push({
-      title: "Recr",
-      screen: "chaz.RecrViewScreen",
-      passProps: {recrKey:this.props.rec.current.recr._key }
-    });
-  }
+  // onRecrPress() {
+  //   this.props.navigator.push({
+  //     title: "Recr",
+  //     screen: "chaz.RecrViewScreen",
+  //     passProps: {recrKey:this.props.rec.current.recr._key }
+  //   });
+  // }
   onAddGradePress(rec) {
     // const { setRecGrade, removeRec } = this.props.actions;
     AlertIOS.alert(
@@ -232,7 +222,7 @@ const styles = StyleSheet.create({
 // kevin is not super sure about this
 function mapStateToProps(state) {
   return {
-    rec: state.rec,
+    rec: state.rec, // not sure I want to do this
     recr: state.recr
   };
 }

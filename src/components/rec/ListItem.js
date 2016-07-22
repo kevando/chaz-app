@@ -7,13 +7,17 @@ import {
   AlertIOS
 } from 'react-native';
 import RecGrade from './RecGrade';
+import RecDate from './RecDate';
 import AddRecr from '../../containers/rec/AddRecr';
 import RecType from './RecType';
 import Style from '../../style/Style';
 export default class ListItem extends Component {
+
   constructor(props) {
     super(props);
   }
+
+
 
   render() {
 
@@ -25,25 +29,24 @@ export default class ListItem extends Component {
         </View>
         <View style={styles.middle}>
           <Text style={styles.title} >{rec.title}</Text>
-            {this.displayRecrDisplay()}
-            {this.displayRecComment()}
+            {this.renderRecrDisplay()}
+            {this.renderRecComment()}
         </View>
         <View style={styles.right}>
         <RecGrade grade={this.props.rec.grade} />
+        <RecDate timestamp={rec.createdAt} />
         </View>
       </TouchableOpacity>
     );
   }
 
-  displayRecComment() {
+  renderRecComment() {
     if(this.props.rec.comment)
     return(<Text>{this.props.rec.comment}</Text>);
   }
 
-  displayRecrDisplay() {
-    // <TouchableOpacity style={styles.recrButton} onPress={ this.onRecrPress.bind(this) }>
-    //   <Text style={{color:'#ccc'}}>Recommended by <Text style={styles.recrText}>{recr.name}</Text></Text>
-    // </TouchableOpacity>
+  renderRecrDisplay() {
+
     const recr = this.props.rec.recr;
     if(recr){
       return (
@@ -66,8 +69,6 @@ export default class ListItem extends Component {
     }
   }
 
-
-
   getRecrName() {
     if(this.props.rec.recr)
       return this.props.rec.recr.name
@@ -77,12 +78,15 @@ export default class ListItem extends Component {
       return this.props.rec.recrScore
   }
 
-  // chaz
   onRecPress() {
+    var rec = this.props.rec;
+    var recKey = this.props.rec._key;
+
+    // passed in via props, not redux. how can i make the view page auto refresh
     this.props.navigator.push({
       title: "",
       screen: "chaz.RecViewScreen",
-      passProps: { currentRec: this.props.rec }
+      passProps: { currentRec: rec,recKey }
     });
   }
 

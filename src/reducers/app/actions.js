@@ -16,7 +16,7 @@ export function appInitialized() {
     if(authData.size > 0) { // user is logged in
       console.log('this should not be firing',authData);
       dispatch(changeAppRoot('after-login'));
-      // tried adding fireRef to the store
+      // tried adding fireRef to the store. didnt work but still want to try this
       // const uid = authData.get('uid');
       // const firebaseRef = fireRef.child(`users/${uid}`);
       // dispatch(setFirebaseRef(fireRef));

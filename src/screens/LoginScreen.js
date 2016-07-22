@@ -21,7 +21,7 @@ class LoginScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {loading: false, authResponse: 'f'}
+    this.state = {loading: false, authResponse: ''}
     this.props.navigator.toggleNavBar({
       to: 'hidden',
       animated: false
@@ -42,19 +42,19 @@ class LoginScreen extends Component {
             {this.renderHeart()}
         </TouchableOpacity>
 
-        <Text style={styles.text}>
+        <Text style={styles.purpleText}>
           <Text style={{fontWeight: '100',color:'red'}}>{this.state.authResponse}</Text>
         </Text>
 
-        <Text style={styles.text}>
+        <Text style={styles.purpleText}>
           <Text style={{fontWeight: '500'}}>Current Count: </Text> {this.props.counter.count}
         </Text>
-        <Text style={styles.text}>
+        <Text style={styles.purpleText}>
           <Text style={{fontWeight: '500'}}>Get Current Count: </Text> {count}
         </Text>
 
         <TouchableOpacity onPress={ this.onIncrementPress.bind(this) }>
-          <Text style={styles.button}>Increment Counter</Text>
+          <Text style={styles.purpleText}>Increment Counter</Text>
         </TouchableOpacity>
 
       </View>
@@ -79,6 +79,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     marginTop:10,
+  },
+  purpleText: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 10,
+    marginTop:10,
+    color:Style.constants.colors[0]
   },
   heartButton: {
     // backgroundColor: 'red',

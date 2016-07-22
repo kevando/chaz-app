@@ -5,12 +5,9 @@ const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 
 export function listenForRecs() { //fetch
   return (dispatch, getState) => {
-    console.log('LISTENFOR RECS CALLED');
+    // console.log('LISTENFOR RECS CALLED');
     const currentState = getState();
-
     const uid = currentState.app.getIn(["authData","uid"]);
-
-    // console.log(`users/${uid}/recs`)
     const recsRef = fireRef.child(`users/${uid}/recs`);
     recsRef.on('value', (snap) => {
       console.log('fireRef listened, now change loaded to true',snap);
@@ -70,11 +67,15 @@ export function getRecList(snap) { // runs after basically any change to any rec
       });
         console.log('items',items);
       dispatch(updateRecList(items)); // reducer call
-      // dispatch(updateVisibleRecList(items)); // reducer all removing for now
+
   }
 }
 export function updateRecList(recs) {
-  return { type: types.UPDATE_REC_LIST,payload: recs }
+  return function(dispatch, getState) {
+    dispatch({ type: types.UPDATE_REC_LIST,payload: recs });
+    dispatch({ type: types.UPDATE_VISIBLE_REC_LIST,payload: recs }); // i always want to do this, right?
+  }
+
 }
 // TMP REMOVING
 // export function updateVisibleRecList(recs) {
@@ -113,11 +114,12 @@ export function removeRec(recKey){                  // REMOVE REC
     // I feel like properly structred data would help alot here
   }
 }
-export function updateTitle(recTitle) {                  // ADD NEW REC
+export function updateRecTitle(rec,title) {                  // UPDATE REC TITLE
   return function(dispatch, getState) {
     const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recs/${currentState.rec.current._key}`);
-    recsRef.update({ title: recTitle });
+    const uid = currentState.app.getIn(["authData","uid"]);
+    const recsRef = fireRef.child(`users/${uid}/recs/${rec._key}`);
+    recsRef.update({ title: title });
   }
 }
 export function setGrade(rec, grade) {                  // ADD NEW REC

@@ -12,12 +12,10 @@ import { connect } from 'react-redux';
 import AddRecButton from '../components/rec/AddRecButton';
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
-import ListItem from '../components/rec/ListItem';
 import Loading from '../components/LoadingComponent';
 import Onboarding from '../components/Onboarding';
 import RecList from '../components/rec/RecList';
 import * as Style from '../style/Style';
-
 
 var DeviceInfo = require('react-native-device-info');
 
@@ -34,7 +32,7 @@ class RecsScreen extends Component {
 
   static navigatorButtons = {
     // rightButtons: [{title: 'Friends',id: 'friends'}],
-    leftButtons: [ {title: 'Profile',id: 'settings'}]
+    leftButtons: [ {title: 'Exit',id: 'settings'}]
   };
 
   constructor(props) {
@@ -71,21 +69,20 @@ class RecsScreen extends Component {
   render() {
     // return(<View><Text>tmp rec screen</Text></View>);
 
+    // Might want to take this out of the render function
     var recsLoaded = this.props.rec.get('loaded');
 
     if(!recsLoaded){
-      console.log('Recs are NOT loading from firebase into redux');
       return (<Loading message="Loading Recs from Firebase" />);
     }
 
-    var recList = this.props.rec.getIn(['all']);
-    console.log('recList',recList);
+    var recList = this.props.rec.getIn(['visible']);
 
-    return ( // gotta add scrollview back in
+    return (
       <View style={{flex: 1, padding: 0}}>
         {( recList.size == 0
           ? <Onboarding notify="You have no recs" guide="Press the button below to get started"/>
-          : <ScrollView><RecList recList={recList} /></ScrollView>
+          : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
         )}
         <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />
       </View>
@@ -96,19 +93,6 @@ class RecsScreen extends Component {
     // create new recr if new
     // update current with updated rec info
     this.props.dispatch(recrActions.createRecr(recrName));
-  }
-  renderRecList(navigator,onAddRecrPress) {
-    // not sure if passing nav is a good idea but it works
-    // Also, this should probly be its own component. change that when i add the visible recs thing
-    var recList = this.props.rec.getIn(['all']);
-    // console.log('recList',recList);
-    var recs = recList.map((Rec) => {
-      var rec = Rec.toJS();
-      return ((<ListItem key={rec._key} rec={rec} navigator={navigator} onAddRecrPress={onAddRecrPress.bind(this,rec)} />))
-    });
-
-    console.log('recs',recs)
-    return recs;
   }
 
   onAddRecPress() { // add

@@ -9,22 +9,16 @@ const initialState = Immutable.Map({
 });
 
 export default function app(state = initialState, action = {}) {
-  console.log('AppReducer State root',state.get('root'))
-  console.log('AppReducer action',action)
+
   switch (action.type) {
 
     case types.ROOT_CHANGED:
       return state.set( 'root', action.root );
 
-
-      case types.SET_AUTH_ERROR_MESSAGE:
-        return state.merge({
-          authError: action.message
-        });
-        case types.SET_AUTH_DATA:
-          return state.merge({
-            authData: action.authData
-          });
+    case types.SET_AUTH_DATA:
+      return state.merge({
+        authData: action.authData
+      });
     default:
       return state;
   }

@@ -22,8 +22,11 @@ you lose or break your phone. Also chaz gonna text you late at night.
 
 ### chaz onboarding overview
 
+#### Stages
  - Open app
- - transcribe..
+ - Record Rec
+ - Assign Recr
+ - Grade a Rec (stage 1 complete)
 
 
 
@@ -32,7 +35,13 @@ you lose or break your phone. Also chaz gonna text you late at night.
  - now recr has a score, user must see this
 
 
+### How chaz implements this
+link to ui video.
 
+chaz expands into several steps, each with two messages:
+ a notification of the current state
+ what to do next
+also, "wheres what you just did" messages
 
 
 ### Phase 1

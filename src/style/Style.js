@@ -9,7 +9,7 @@ const constants = {
     'yellow_heart',
   ],
   colors: [
-    '#AA8ED6', // Purple / App
+    '#D066E8', // Purple / App
     '#5DADEC', // Blue / Rec
     '#78B159', // Green / Recr
     '#FFE550', // Yellow

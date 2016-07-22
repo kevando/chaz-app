@@ -38,7 +38,9 @@ export function createRecr(recrName) {
   return(dispatch,getState) => {
 
     const currentState = getState();
-    const recrsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
+    const uid = currentState.app.getIn(["authData","uid"]);
+    const recrsRef = fireRef.child(`users/${uid}/recrs`);
+
     // FIRST CHECK if recr exists
     recrsRef.orderByChild("name").equalTo(recrName).once('value', (snapshot) => {
       if(snapshot.exists()){

@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
 
 Loading.defaultProps = {
   hasPulse: true,
-  growTo: 2.1,
+  growTo:1.8,
 }
 
 

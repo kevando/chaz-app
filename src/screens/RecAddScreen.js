@@ -30,7 +30,7 @@ class RecAddScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   componentDidMount() {
-    console.log('componentdidmount')
+    console.log('componentdidmount, set textInput focus true');
     this.refs.TextInput.focus(true);
   }
   onNavigatorEvent(event) {
@@ -68,12 +68,14 @@ class RecAddScreen extends Component {
 
   onAddRecPress() {
     this.props.dispatch(recActions.addRec(this.state.recTitle));
-    this.props.navigator.push({
-      title: "",
-      screen: "chaz.RecViewScreen",
-      passProps: { currentRec: this.props.rec.current }
-    });
-    // this.props.navigator.dismissModal();
+    // tmp disabling for now. 
+    // this.props.navigator.push({
+    //   title: "",
+    //   screen: "chaz.RecViewScreen",
+    //   passProps: { currentRec: this.props.rec.current },
+    //   animated:false
+    // });
+    this.props.navigator.dismissModal();
   }
 
 

@@ -1,53 +1,35 @@
 # Roadmap
-
+Link to trello board
 
 ### 0.7.6
+Goal here is to create easy process to user getting first grade
 
-
-remove name from loginscreen, also remove pulse code
-add some sort of timeout to loading recs from firebase
-fix bug where add rec modal is not dismissed on load state
-consider building a more sophisticated onboarding messaging system
-add this to the onboarding doc, and implement it in redux State
-also watch ui video at this point
-
-Do a fabric deploy, possibly as a different app name so not to overwrite
-
-loading recs for the first time shouldnt need to happen. the app should be aware
-there are no recs after the first login
-
-make rec data immutable, get this working solid. load recs from visible List
-
-consider updating firebase npm and adding ref to state
-https://github.com/erikras/react-redux-universal-hot-example/issues/252
-
-way better venmo style add rec
-way better data validation, not case sensitive, no empty strings
-modal does not dismiss on addRec
-update recr does not pull from list
-add back filters
-
-also lots of bugs
-add date to rec view and rec list
-improve profile page a bit, also make swiping the right direction, you are the yellow
-be more considerate about what props each component needs, and where/when to send them
-recr comments aka reminder
-add rec from recr page
-add rec button to recr view
-update readme and reply to doorbell, also update onboarding with funnel thoughts
-
-logout doesnt work
 change initial root to undefined (which should work), and figure out why its acting weird. check load(store)
 clean up as much code as possible esp app.js
 re-enable fabric tracking
+
+merge back in previous data
 
  - added fabric tracking to analytics middleware
  - changed login button to a yellow heart
  - removed auth listener, changed auth to custom device token
  - added back in redux storage
  - added rec loading state, and move rec display to RecList component
+ - Removed step name from login
+ - Add Rec modal dismisses
+ - Removed currentRec (for now) and recView loads from redux list
 
 ### 0.7.7
+Add these notes to Trello for Austen to see
+timeout to loading recs from firebase/login to give app a sense of caedance (ux/onboarding)
+
+consider building a more sophisticated onboarding messaging system
+with messages living in redux to let user know how they are progressing (watch ui vid)
+that includes feedback like 'your first rec!' this could solve some of the ux issues
+
+consider updating firebase npm and adding ref to state
+https://github.com/erikras/react-redux-universal-hot-example/issues/252
+
 sorting be recr score.. really just improve recr score and recr list now
 sort by recrs
 major bugs on add/edit/remove grade
@@ -76,6 +58,7 @@ get a chaz bitly url (chaz.co or wahtever)
 Release this version to the app store or external testing
 add basic chat feature. focus on empathy
 option to send "Started watching" to friend that gave rec
+remove dependency on internet access.
 
 
 

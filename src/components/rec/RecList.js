@@ -13,6 +13,7 @@ export default class RecList extends Component {
     super(props);
   }
 
+
   render() {
     // possible handler for an empty RecList
     return (
@@ -22,16 +23,13 @@ export default class RecList extends Component {
     );
   }
 
-  renderRecList(navigator,onAddRecrPress) {
-
+  renderRecList(onAddRecrPress) {
     // Rec List is now passed in via props
     var recList = this.props.recList;
-    console.log('recList',recList);
+
     var recs = recList.map((Rec) => {
-      console.log('Rec',Rec);
       var rec = Rec.toJS();
-      console.log('rec',rec);
-      return (<ListItem key={rec._key} rec={rec}  />)
+      return (<ListItem key={rec._key} rec={rec} navigator={this.props.navigator} />)
     });
     return recs;
   }
