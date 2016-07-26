@@ -79,6 +79,7 @@ class RecsScreen extends Component {
     }
 
     var recList = this.props.rec.getIn(['visible']);
+    console.log('rec props',this.props.rec);
     var activeType = this.props.rec.getIn(['filters','type','active']);
 
     return (

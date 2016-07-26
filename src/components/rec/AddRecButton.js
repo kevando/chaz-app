@@ -11,7 +11,6 @@ export default class AddRecButton extends Component {
     super(props);
   }
   renderType(){
-    console.log('add button type',this.props.activeType);
     return (this.props.activeType != 'all' ? this.props.activeType : '');
   }
   render() {

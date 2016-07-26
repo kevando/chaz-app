@@ -20,6 +20,8 @@ export default class ListItem extends Component {
 
 
   render() {
+    // removing add recr for now
+    // {this.renderRecrDisplay()}
 
     var rec = this.props.rec;
     console.log('REC',rec)
@@ -30,7 +32,7 @@ export default class ListItem extends Component {
         </View>
         <View style={styles.middle}>
           <Text style={styles.title} >{rec.title}</Text>
-            {this.renderRecrDisplay()}
+
             {this.renderRecComment()}
         </View>
         <View style={styles.right}>

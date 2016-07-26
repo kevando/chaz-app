@@ -6,11 +6,6 @@ Goal here is to create easy process to user getting first grade
 
 ### 0.7.6
 
-change initial root to undefined (which should work), and figure out why its acting weird. check load(store)
-clean up as much code as possible esp app.js
-re-enable fabric tracking
-merge back in previous data
-
  - added fabric tracking to analytics middleware
  - changed login button to a yellow heart
  - removed auth listener, changed auth to custom device token
@@ -21,6 +16,12 @@ merge back in previous data
  - Removed currentRec (for now) and recView loads from redux list
 
 ### 0.7.7
+This version will focus on better data in
+better rec/recr/grade adds that work with the onboarding
+
+look into migrating firebase data, adding firebase analytics too
+
+
 Add these notes to Trello for Austen to see
 timeout to loading recs from firebase/login to give app a sense of caedance (ux/onboarding)
 
@@ -40,7 +41,7 @@ add "alert me" option to recs
 integrate notifications
 
 ### 0.7.8
-refactor stuff for better tracking
+add back in "grade rec"
 
 ### 0.8
 introduce friends list feature
@@ -78,3 +79,5 @@ remove dependency on internet access.
 
 ### KNOWN CONCERNS
  - Currently and rec change re-populates/renders entire rec list in state
+ - consider changing filter code so that each "filter" is its own screen, with its own RecList
+ -

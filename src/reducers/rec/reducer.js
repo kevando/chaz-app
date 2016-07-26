@@ -12,11 +12,20 @@ const initialState = Immutable.Map({
   filters: Immutable.Map({
     type: Immutable.Map({
       active: 'all',
-      queries: Immutable.Map({all:['book','video','audio','default'],book:['book'],video:['video'],audio:['audio']})
+      queries: Immutable.Map({
+        all: Immutable.List.of('book','video','audio','default'),
+        book: Immutable.List.of('book'),
+        video: Immutable.List.of('video'),
+        audio: Immutable.List.of('audio')
+      })
     }),
     grade: Immutable.Map({
       active: 'all',
-      queries: Immutable.Map({all:[0,1,2,3,4,5,undefined],graded:[0,1,2,3,4,5],ungraded:[undefined]})
+      queries: Immutable.Map({
+        all: Immutable.List.of(0,1,2,3,4,5,undefined),
+        graded: Immutable.List.of(0,1,2,3,4,5),
+        ungraded: Immutable.List.of(undefined),
+      })
     }),
   }),
   // typeFilter: Immutable.Map({

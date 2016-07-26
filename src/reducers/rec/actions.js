@@ -57,13 +57,7 @@ export function getRecList(snap) { // runs after basically any change to any rec
           type: child.val().type,
         }
         items.push(recObject);
-        // update current rec with new data
-        if(currentState.rec.current){
-          if(currentState.rec.current._key == child.key()){
-            console.log('updating current rec with fresh data');
-            dispatch(setCurrentRec(recObject));
-          }
-        }
+
 
       });
         console.log('items',items);
@@ -92,24 +86,37 @@ export function updateVisibleRecList() {
   return function(dispatch, getState) {
     const state = getState();
     const recList = state.rec.get('all');
+    console.log('all rec list',recList)
 
 
     // Set type filter from redux
     var activeTypeFilter = state.rec.getIn(['filters','type','active']);
     var activeTypeFilterQuery = state.rec.getIn(['filters','type','queries',activeTypeFilter]);
 
+    console.log('activeTypeFilter',activeTypeFilter);
+    console.log('activeTypeFilterQuery',activeTypeFilterQuery);
+    console.log(activeTypeFilter.includes("book"));
+    // activeTypeFilter = activeTypeFilter.toJS();
+
+
     // seperately get the grade filter settings
     var activeGradeFilter = state.rec.getIn(['filters','grade','active']);
     var activeGradeFilterQuery = state.rec.getIn(['filters','grade','queries',activeGradeFilter]);
+    console.log('activeGradeFilter',activeGradeFilter);
+    console.log('activeGradeFilterQuery',activeGradeFilterQuery);
+    console.log(activeGradeFilterQuery.includes(null));
+    // fml firebase doesnt do null and immutable doesnt do undefined
+    // FUCK THIS
 
     const filteredList = recList.filter(function(rec) {
-      // console.log('type',rec.get('type'));
+      console.log('GRADE: ',rec.get('grade'));
       return (
-        activeGradeFilterQuery.indexOf(rec.get('grade')) != -1 &&
-        activeTypeFilterQuery.indexOf(rec.get('type')) != -1
+        // activeGradeFilterQuery.includes(rec.get('grade')) &&
+        activeTypeFilterQuery.includes(rec.get('type'))
       )
 
     });
+    console.log('filtered list',filteredList)
 
     dispatch({ type: types.UPDATE_VISIBLE_REC_LIST, recs: filteredList });
   }

@@ -20,6 +20,9 @@ class FilterNav extends Component {
 
 
   render() {
+    // tmp commenting this out
+    // {this.renderFilter('grade')}
+
     var rec = this.props.rec;
     // console.log('RENDER REDUX REC PROPS',rec);
 
@@ -27,7 +30,7 @@ class FilterNav extends Component {
       <View style={styles.filtersContainer}>
         <Text style={{fontSize:15,color:'#444'}}>Filters:</Text>
         {this.renderFilter('type')}
-        {this.renderFilter('grade')}
+
       </View>
     )
   }
@@ -69,7 +72,7 @@ class FilterNav extends Component {
 const styles = StyleSheet.create({
   filtersContainer: {
     backgroundColor:'#ccc',
-    height:100,
+    height:60,
     // flex:1,
     flexDirection:'column',
     alignItems:'center',
