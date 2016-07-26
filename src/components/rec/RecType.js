@@ -5,6 +5,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import Emoji from 'react-native-emoji'
+
+const emojiList = {
+  default: "page_with_curl",
+  book: "book",
+  movie: "film_projector"
+
+}
+
 export default class RecType extends Component {
   constructor(props) {
     super(props);
@@ -18,11 +26,8 @@ export default class RecType extends Component {
     );
   }
 
-  getDisplayType() { // this should probly be its own component
-
-      return(<Emoji name="page_with_curl" />);
-
-
+  getDisplayType() {
+      return(<Emoji name={emojiList[this.props.type]} />);
   }
 }
 

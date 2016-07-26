@@ -22,10 +22,11 @@ export default class ListItem extends Component {
   render() {
 
     var rec = this.props.rec;
+    console.log('REC',rec)
     return (
       <TouchableOpacity style={styles.row} onPress={ this.onRecPress.bind(this) }>
         <View style={styles.left}>
-          <RecType style={styles.recType} type="default" />
+          <RecType style={styles.recType} type={rec.type} />
         </View>
         <View style={styles.middle}>
           <Text style={styles.title} >{rec.title}</Text>

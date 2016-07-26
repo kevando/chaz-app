@@ -6,18 +6,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Emoji from 'react-native-emoji'
-export default class FilterRow extends Component {
+export default class FilterItem extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    var filter = this.props.filter;
+    var {option,active,onPress} = this.props;
     return (
-        <View style={styles.filterRow}>
-          {this.renderFilterItems()}
-        </View>
-    );
+      <TouchableOpacity style={[styles.filterButton]} onPress={onPress}>
+        <Text style={[styles.option]}>{option} : {active}</Text>
+        </TouchableOpacity>
+     );
   }
   renderFilterItems() {
     var filters = this.props.filters;
@@ -55,13 +55,7 @@ export default class FilterRow extends Component {
 
 const styles = StyleSheet.create({
 
-  filterRow: { // makes it horizontal despite multiple text elemnts
-    flex:1,
-    flexDirection:'row',
-    margin:5,
-    borderWidth: 1,
-    borderColor: 'black'
-  },
+
   filterContainer: {
     borderWidth: 2,
     borderColor: '#555'

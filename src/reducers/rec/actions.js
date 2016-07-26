@@ -53,7 +53,8 @@ export function getRecList(snap) { // runs after basically any change to any rec
           grade: child.val().grade,
           comment: child.val().comment,
           createdAt: child.val().createdAt,
-          recrScore: child.val().recrScore
+          recrScore: child.val().recrScore,
+          type: child.val().type,
         }
         items.push(recObject);
         // update current rec with new data
@@ -73,22 +74,45 @@ export function getRecList(snap) { // runs after basically any change to any rec
 export function updateRecList(recs) {
   return function(dispatch, getState) {
     dispatch({ type: types.UPDATE_REC_LIST,payload: recs });
-    dispatch({ type: types.UPDATE_VISIBLE_REC_LIST,payload: recs }); // i always want to do this, right?
+    dispatch(updateVisibleRecList(recs)); // i always want to do this, right?
   }
 
 }
-export function updateFilter(filter){
+export function updateTypeFilter(option){
   return function(dispatch, getState) {
-    dispatch({type: types.UPDATE_REC_FILTER, filter:filter});
-    dispatch({type: types.UPDATE_VISIBLE_REC_LIST }); // i always want to do this, right?
+    dispatch({type: types.UPDATE_REC_FILTER, option:option});
+    dispatch(updateVisibleRecList()); // i always want to do this, right?
   }
 
   // return {type: types.UPDATE_REC_FILTER, filter:filter}
 }
-// TMP REMOVING
-// export function updateVisibleRecList(recs) {
-//   return { type: types.UPDATE_VISIBLE_REC_LIST, payload: recs }
-// }
+
+
+export function updateVisibleRecList() {
+  return function(dispatch, getState) {
+    const state = getState();
+    const recList = state.rec.get('all');
+
+
+
+
+    // Set type filter from redux
+    var activeTypeFilter = state.rec.getIn(['filters','type','active']);
+    console.log('activeTypeFilter',activeTypeFilter)
+    var activeTypeFilterQuery = state.rec.getIn(['filters','type','queries',activeTypeFilter]);
+    console.log('activeTypeFilterQuery',activeTypeFilterQuery)
+    const filteredList = recList.filter(function(rec) {
+      // console.log('type',rec.get('type'));
+      return (
+        // rec.get('grade') == undefined &&
+        activeTypeFilterQuery.indexOf(rec.get('type')) != -1
+      )
+
+    });
+
+    dispatch({ type: types.UPDATE_VISIBLE_REC_LIST, recs: filteredList });
+  }
+}
 
 export function addRec(recTitle) {                  // ADD NEW REC
   return function(dispatch, getState) {
@@ -98,7 +122,7 @@ export function addRec(recTitle) {                  // ADD NEW REC
     var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
     dispatch(trackRecAdded(recTitle));
     // the following is added for pushing to the next screen
-    dispatch(setCurrentRec({ _key:newRec.key(), title:recTitle,createdAt: Firebase.ServerValue.TIMESTAMP } ));
+    dispatch(setCurrentRec({ _key:newRec.key(), title:recTitle,createdAt: Firebase.ServerValue.TIMESTAMP,type:"default" } ));
   }
 }
 export function trackRecAdded(recTitle){
