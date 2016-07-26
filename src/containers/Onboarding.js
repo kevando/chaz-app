@@ -19,9 +19,19 @@ class Onboarding extends Component {
 
   render() {
     // display onboarding messages and alerts from state
+    // For now this is just going to be the onboarding message for RecList
+    // I will probably want to expand this later
+
+    // dont display the word all
+    var activeGradeFilter = (this.props.filters.getIn(['grade','active']) != 'all' ? this.props.filters.getIn(['grade','active']) : '');
+    var activeTypeFilter = (this.props.filters.getIn(['type','active']) != 'all' ? this.props.filters.getIn(['type','active']) : '');
     return (
       <View style={styles.loadingContainer}>
-        <Text style={{fontSize:15,color:'#444'}}>woah</Text>
+        <Text style={{fontSize:15,color:'#444',textAlign:'center'}}>
+
+        You have not saved any {activeGradeFilter} {activeTypeFilter} recommendations.
+
+        </Text>
 
       </View>
     )
@@ -37,8 +47,6 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   },
   animationContainer: {
-    // borderWidth:1,
-    // borderColor:'red',
     height:50,
 
   }
@@ -47,6 +55,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     app: state.app, // depending how I do this. I probably only need onboarding here
+    filters: state.rec.get('filters'),
   }
 }
 

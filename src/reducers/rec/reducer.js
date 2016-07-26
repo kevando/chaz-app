@@ -11,14 +11,18 @@ const initialState = Immutable.Map({
 
   filters: Immutable.Map({
     type: Immutable.Map({
-      active: 'book',
-      queries: Immutable.Map({all:['book','movie','default'],book:['book']})
+      active: 'all',
+      queries: Immutable.Map({all:['book','video','audio','default'],book:['book'],video:['video'],audio:['audio']})
+    }),
+    grade: Immutable.Map({
+      active: 'all',
+      queries: Immutable.Map({all:[0,1,2,3,4,5,undefined],graded:[0,1,2,3,4,5],ungraded:[undefined]})
     }),
   }),
-  typeFilter: Immutable.Map({
-    active: 'book',
-    queries: Immutable.Map({all:['book','movie','default'],book:['book']})
-  }),
+  // typeFilter: Immutable.Map({
+  //   active: 'book',
+  //   queries: Immutable.Map({all:['book','movie','default'],book:['book']})
+  // }),
 
 
 
@@ -38,7 +42,7 @@ export default function counter(state = initialState, action = {}) {
       });
 
     case types.UPDATE_REC_FILTER:
-      return state.setIn( ['filters','type','active'], action.option );
+      return state.setIn( ['filters',action.filter,'active'], action.option );
 
 
     case types.UPDATE_VISIBLE_REC_LIST: //

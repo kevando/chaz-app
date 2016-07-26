@@ -9,7 +9,8 @@ import Emoji from 'react-native-emoji'
 const emojiList = {
   default: "page_with_curl",
   book: "book",
-  movie: "film_projector"
+  video: "film_projector",
+  audio: "minidisc"
 
 }
 

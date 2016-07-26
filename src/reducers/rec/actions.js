@@ -78,9 +78,9 @@ export function updateRecList(recs) {
   }
 
 }
-export function updateTypeFilter(option){
+export function updateFilter(filter,option){
   return function(dispatch, getState) {
-    dispatch({type: types.UPDATE_REC_FILTER, option:option});
+    dispatch({type: types.UPDATE_REC_FILTER, filter:filter, option:option});
     dispatch(updateVisibleRecList()); // i always want to do this, right?
   }
 
@@ -94,17 +94,18 @@ export function updateVisibleRecList() {
     const recList = state.rec.get('all');
 
 
-
-
     // Set type filter from redux
     var activeTypeFilter = state.rec.getIn(['filters','type','active']);
-    console.log('activeTypeFilter',activeTypeFilter)
     var activeTypeFilterQuery = state.rec.getIn(['filters','type','queries',activeTypeFilter]);
-    console.log('activeTypeFilterQuery',activeTypeFilterQuery)
+
+    // seperately get the grade filter settings
+    var activeGradeFilter = state.rec.getIn(['filters','grade','active']);
+    var activeGradeFilterQuery = state.rec.getIn(['filters','grade','queries',activeGradeFilter]);
+
     const filteredList = recList.filter(function(rec) {
       // console.log('type',rec.get('type'));
       return (
-        // rec.get('grade') == undefined &&
+        activeGradeFilterQuery.indexOf(rec.get('grade')) != -1 &&
         activeTypeFilterQuery.indexOf(rec.get('type')) != -1
       )
 
@@ -119,10 +120,11 @@ export function addRec(recTitle) {                  // ADD NEW REC
     const currentState = getState();
     const uid = currentState.app.getIn(["authData","uid"]);
     const recsRef = fireRef.child(`users/${uid}/recs`);
-    var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP });
+    const recType = (currentState.rec.getIn(['filters','type','active']) != 'all' ? currentState.rec.getIn(['filters','type','active']) : 'default');
+    var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,type:recType });
     dispatch(trackRecAdded(recTitle));
     // the following is added for pushing to the next screen
-    dispatch(setCurrentRec({ _key:newRec.key(), title:recTitle,createdAt: Firebase.ServerValue.TIMESTAMP,type:"default" } ));
+    // dispatch(setCurrentRec({ _key:newRec.key(), title:recTitle,createdAt: Firebase.ServerValue.TIMESTAMP } ));
   }
 }
 export function trackRecAdded(recTitle){

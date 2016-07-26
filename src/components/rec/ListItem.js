@@ -87,6 +87,7 @@ export default class ListItem extends Component {
     this.props.navigator.push({
       title: "",
       screen: "chaz.RecViewScreen",
+      backButtonTitle: 'Back',
       passProps: { currentRec: rec,recKey }
     });
   }

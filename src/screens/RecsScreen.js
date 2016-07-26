@@ -72,12 +72,14 @@ class RecsScreen extends Component {
 
     // Might want to take this out of the render function
     var recsLoaded = this.props.rec.get('loaded');
+    // console.log('recs',this.props.rec.get('visible'));
 
     if(!recsLoaded){
       return (<Loading message="Loading Recs from Firebase" />);
     }
 
     var recList = this.props.rec.getIn(['visible']);
+    var activeType = this.props.rec.getIn(['filters','type','active']);
 
     return (
       <View style={{flex: 1, padding: 0}}>
@@ -86,7 +88,7 @@ class RecsScreen extends Component {
           ? <Onboarding notify="You have no recs" guide="Press the button below to get started" />
           : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
         )}
-        <AddRecButton text="Add Recommendation" onPress={this.onAddRecPress.bind(this)} />
+        <AddRecButton activeType={activeType} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
   }

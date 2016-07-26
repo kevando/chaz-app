@@ -10,10 +10,14 @@ export default class AddRecButton extends Component {
   constructor(props) {
     super(props);
   }
+  renderType(){
+    console.log('add button type',this.props.activeType);
+    return (this.props.activeType != 'all' ? this.props.activeType : '');
+  }
   render() {
     return (
       <TouchableOpacity style={styles.button} onPress={ this.props.onPress }>
-        <Text style={styles.buttonText}>{this.props.text}</Text>
+        <Text style={styles.buttonText}>Add {this.renderType()} Recommendation</Text>
       </TouchableOpacity>
     );
   }
