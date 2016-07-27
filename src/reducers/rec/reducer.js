@@ -9,14 +9,18 @@ const initialState = Immutable.Map({
   visible: [],
   sort: 'newest',
 
-  filters: Immutable.Map({
+  filters: Immutable.Map({ // chill spots, apps, docuemtaries, websites
     type: Immutable.Map({
       active: 'all',
       queries: Immutable.Map({
-        all: Immutable.List.of('book','video','audio','default'),
+        all: Immutable.List.of('book','movie','tv','music','food','podcast','default'),
         book: Immutable.List.of('book'),
-        video: Immutable.List.of('video'),
-        audio: Immutable.List.of('audio')
+        tv: Immutable.List.of('tv'),
+        movie: Immutable.List.of('movie'),
+        music: Immutable.List.of('music'),
+        food: Immutable.List.of('food'),
+        podcast: Immutable.List.of('podcast'),
+        default: Immutable.List.of('default'),
       })
     }),
     grade: Immutable.Map({

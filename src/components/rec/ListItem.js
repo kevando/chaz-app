@@ -17,18 +17,16 @@ export default class ListItem extends Component {
     super(props);
   }
 
-
-
   render() {
-    // removing add recr for now
+    // removing add recr until 0.7.7
     // {this.renderRecrDisplay()}
 
     var rec = this.props.rec;
-    console.log('REC',rec)
+
     return (
       <TouchableOpacity style={styles.row} onPress={ this.onRecPress.bind(this) }>
         <View style={styles.left}>
-          <RecType style={styles.recType} type={rec.type} />
+          <RecType type={rec.type} size={25} />
         </View>
         <View style={styles.middle}>
           <Text style={styles.title} >{rec.title}</Text>
@@ -107,34 +105,38 @@ export default class ListItem extends Component {
 
 const styles = StyleSheet.create({
   row: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderBottomWidth:1,
     borderBottomColor: '#ddd',
 
     flexDirection: 'row',
-    paddingTop:6,
-    paddingBottom:20,
-    paddingLeft:10,
-    paddingRight:10
+    paddingTop:3,
+    paddingBottom:3,
+    paddingLeft:3,
+    paddingRight:3
   },
   left: {
-    flex:1,
+    flex:2,
     justifyContent: 'center', // vertical middle
-    flexDirection: 'row'
+    flexDirection: 'column',
+    // backgroundColor: 'yellow'
   },
   middle: {
-    flex:7,
+    flex:12,
+    flexDirection: 'column',
+    // backgroundColor: 'blue',
+    justifyContent: 'center', // vertical middle
   },
   right: {
-    flex:3,
-    justifyContent: 'flex-end', // vertical middle
-    flexDirection: 'row',
+    flex:4,
+    justifyContent: 'center', // vertical middle
+    flexDirection: 'column',
     // backgroundColor:'yellow'
   },
   title: {
     textAlign: 'left',
-    fontSize: 18,
-    fontWeight: '600'
+    fontSize: 16,
+    fontWeight: '500'
   },
 
   recrButton: {

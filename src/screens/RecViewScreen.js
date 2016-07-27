@@ -14,6 +14,7 @@ import * as recActions from '../reducers/rec/actions';
 import * as Style from '../style/Style';
 import RecGrade from '../components/rec/RecGrade';
 import AddRecr from '../containers/rec/AddRecr';
+import RecType from '../components/rec/RecType';
 
 // this is a traditional React component connected to the redux store
 class RecViewScreen extends Component {
@@ -50,7 +51,7 @@ class RecViewScreen extends Component {
         <View style={styles.row}>
           <View style={styles.left}>
             <TouchableOpacity onPress={this.onTitlePress.bind(this)}>
-              <Text style={{fontSize:20}}>{this.state.rec.title}</Text>
+              <Text style={{fontSize:20}}><RecType type={this.state.rec.type} />{this.state.rec.title}</Text>
               </TouchableOpacity>
           </View>
         </View>

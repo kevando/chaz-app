@@ -43,7 +43,7 @@ class RecsScreen extends Component {
     this.onAddRecrPress = this.onAddRecrPress.bind(this);
 
     this.props.navigator.setTitle({
-      title: "chaz " +  DeviceInfo.getVersion()
+      title: "chaz (v" +  DeviceInfo.getVersion() +")"
     });
 
   }
@@ -85,10 +85,12 @@ class RecsScreen extends Component {
     return (
       <View style={{flex: 1, padding: 0}}>
         <FilterNav />
-        {( recList.size == 0
-          ? <Onboarding notify="You have no recs" guide="Press the button below to get started" />
-          : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
-        )}
+        <View style={{flex:9}} >
+          {( recList.size == 0
+            ? <Onboarding notify="You have no recs" guide="Press the button below to get started" />
+            : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
+          )}
+        </View>
         <AddRecButton activeType={activeType} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );

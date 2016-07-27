@@ -5,7 +5,8 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import Emoji from 'react-native-emoji'
+import RecType from '../../components/rec/RecType';
+const GlobalStyle = require('../../style/Style');
 export default class FilterItem extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +16,8 @@ export default class FilterItem extends Component {
     var {option,active,onPress} = this.props;
     var isActive = (active == option ? styles.active : null);
     return (
-      <TouchableOpacity style={[styles.filterButton]} onPress={onPress}>
-        <Text style={[styles.option,isActive]}>{option}</Text>
+      <TouchableOpacity style={[styles.filterButton,isActive]} onPress={onPress}>
+        <RecType type={option} size={20} />
         </TouchableOpacity>
      );
   }
@@ -26,26 +27,21 @@ export default class FilterItem extends Component {
 
 const styles = StyleSheet.create({
 
-
-  filterContainer: {
-    borderWidth: 2,
-    borderColor: '#555'
-  },
   filterButton: {
 
-    borderWidth:1,
-    borderColor:'black',
-  },
-  option: {
-    paddingTop:2,
-    paddingBottom:2,
+
+    borderRightWidth:2,
+    borderRightColor:GlobalStyle.constants.colors[1],
+    borderLeftWidth:2,
+    borderLeftColor:GlobalStyle.constants.colors[1],
+    paddingTop:4,
+    paddingBottom:4,
     paddingLeft:8,
     paddingRight:8,
-    color: 'black'
   },
   active: {
-    backgroundColor:'black',
-    color:'#ccc'
+    backgroundColor:GlobalStyle.constants.colors[1]
   }
+
 
 })

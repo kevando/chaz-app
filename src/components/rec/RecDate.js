@@ -14,29 +14,11 @@ export default class RecDate extends Component {
   render() {
     return (
         <View>
-          <Text style={{color:'#999'}}>
+          <Text style={{color:'#999',fontSize:12,textAlign:'right'}}>
             <TimeAgo time={this.props.timestamp} />
             </Text>
         </View>
     );
   }
 
-  getDisplayGrade(grade) { // this should probly be its own component
-    if(grade == 0 || grade == null)
-      return;
-
-    var stars = [];
-    for (var i=0; i < grade; i++) {
-      stars.push(<Emoji key={i} name="blue_heart" />);
-    }
-    return <Text style={styles.recListItemRecGrade}>{stars}</Text>;
-  }
 }
-
-const styles = StyleSheet.create({
-  recListItemRecGrade: {
-    fontSize:11,
-    paddingTop:3
-  },
-
-});

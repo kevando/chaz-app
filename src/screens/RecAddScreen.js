@@ -5,9 +5,12 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
-  TextInput
+  TextInput,
+  Dimensions,
+  DeviceEventEmitter
 } from 'react-native';
 import { connect } from 'react-redux';
+import Emoji from 'react-native-emoji';
 import * as recActions from '../reducers/rec/actions';
 import * as Style from '../style/Style';
 
@@ -26,12 +29,29 @@ class RecAddScreen extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {recTitle:''}
+    this.state = {
+      recTitle:'',
+      visibleHeight: Dimensions.get('window').height
+    }
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   componentDidMount() {
     console.log('componentdidmount, set textInput focus true');
     this.refs.TextInput.focus(true);
+
+    // keyboard shit
+    DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this))
+    DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this))
+  }
+  keyboardWillShow (e) {                                         // minus nav height
+    let newSize = Dimensions.get('window').height - e.endCoordinates.height-65
+    this.setState({visibleHeight: newSize})
+    console.log('keyboardWillShow with height',newSize)
+  }
+
+  keyboardWillHide (e) {
+    this.setState({visibleHeight: Dimensions.get('window').height})
+    console.log('keyboardWillHide with height',Dimensions.get('window').height)
   }
   onNavigatorEvent(event) {
     switch (event.id) {
@@ -45,30 +65,35 @@ class RecAddScreen extends Component {
   }
 
   render() {
-    console.log('render')
+
     return (
-      <View style={{flex: 1, padding: 20}}>
+      <View style={{padding: 20,height: this.state.visibleHeight}}>
 
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          style={{height: 40, borderColor: 'gray', borderWidth: 1,paddingLeft:10}}
           onChangeText={(recTitle) => this.setState({recTitle})}
           value={this.state.recTitle}
+          placeholder="What was recommended?"
           ref="TextInput"
 
         />
-
-        <TouchableOpacity onPress={ this.onAddRecPress.bind(this) }>
-          <Text style={styles.button}>Save Recommendation</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer} >
+          <TouchableOpacity style={styles.saveButton} onPress={ this.onAddRecPress.bind(this) }>
+            <Text style={styles.saveText}><Emoji name="floppy_disk" /> Recommendation</Text>
+          </TouchableOpacity>
+        </View>
 
 
       </View>
     );
   }
+  onInputChange() {
+
+  }
 
   onAddRecPress() {
     this.props.dispatch(recActions.addRec(this.state.recTitle));
-    // tmp disabling for now. 
+    // tmp disabling for now.
     // this.props.navigator.push({
     //   title: "",
     //   screen: "chaz.RecViewScreen",
@@ -89,18 +114,28 @@ class RecAddScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  text: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10
+  buttonContainer: {
+    flex:1,
+    flexDirection:'column',
+    justifyContent: 'flex-end',
+    // backgroundColor: 'yellow',
+    // height:100,
+    // position:'absolute'
   },
-  button: {
+  saveButton: {
+    // flex:1,
+    // flexDirection:'column',
+    // justifyContent: 'flex-end',
+    backgroundColor: Style.constants.colors[1],
+    // height:100,
+    // position:'absolute'
+  },
+  saveText: {
     textAlign: 'center',
     fontSize: 18,
     marginBottom: 10,
     marginTop:10,
-    color: Style.constants.colors[1]
+    color: "#fff"
   }
 });
 

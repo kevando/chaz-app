@@ -7,10 +7,18 @@ import {
 import Emoji from 'react-native-emoji'
 
 const emojiList = {
+  all: "earth_americas",
   default: "page_with_curl",
   book: "book",
   video: "film_projector",
-  audio: "minidisc"
+  music: "minidisc",
+  food: "ramen",
+  video: "ramen",
+  audio: "ramen",
+  podcast: "radio",
+  tv: "tv",
+  movie: "vhs",
+  location:"repeat"
 
 }
 
@@ -21,27 +29,10 @@ export default class RecType extends Component {
 
   render() {
     return (
-        <View>
-          {this.getDisplayType()}
-        </View>
+      <Text style={{fontSize:this.props.size,flexDirection:'row',textAlign:'center'}}>
+        <Emoji name={emojiList[this.props.type]} />
+      </Text>
     );
   }
 
-  getDisplayType() {
-      return(<Emoji name={emojiList[this.props.type]} />);
-  }
 }
-
-const styles = StyleSheet.create({
-  gradee: {
-    backgroundColor: '#fff',
-    borderBottomWidth:1,
-    borderBottomColor: '#ddd',
-    height:50,
-    flexDirection: 'row',
-    paddingTop:5,
-    paddingBottom:5,
-    paddingLeft:10
-  },
-
-});
