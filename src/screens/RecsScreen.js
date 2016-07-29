@@ -72,19 +72,20 @@ class RecsScreen extends Component {
 
     // Might want to take this out of the render function
     var recsLoaded = this.props.rec.get('loaded');
-    // console.log('recs',this.props.rec.get('visible'));
+
 
     if(!recsLoaded){
       return (<Loading message="Loading Recs from Firebase" />);
     }
 
     var recList = this.props.rec.getIn(['visible']);
+    // console.log('recList',recList);
     var activeType = this.props.rec.getIn(['filters','type','active']);
 
     return (
       <View style={{flex: 1, padding: 0}}>
         <FilterNav />
-        <View style={{flex:9}} >
+        <View style={{flex:7}} >
           {( recList.size == 0
             ? <Onboarding notify="You have no recs" guide="Press the button below to get started" />
             : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
@@ -101,7 +102,7 @@ class RecsScreen extends Component {
     this.props.dispatch(recrActions.createRecr(recrName));
   }
 
-  onAddRecPress() { // add
+  onAddRecPress() {
     this.props.navigator.showModal({
       title: "",
       screen: "chaz.RecAddScreen",

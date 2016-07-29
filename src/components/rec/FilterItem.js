@@ -17,7 +17,7 @@ export default class FilterItem extends Component {
     var isActive = (active == option ? styles.active : null);
     return (
       <TouchableOpacity style={[styles.filterButton,isActive]} onPress={onPress}>
-        <RecType type={option} size={20} />
+        <RecType type={option} size={35} />
         </TouchableOpacity>
      );
   }
@@ -28,16 +28,18 @@ export default class FilterItem extends Component {
 const styles = StyleSheet.create({
 
   filterButton: {
-
+    backgroundColor:'#ddd',
+    flexDirection:'column',
+    justifyContent:'center', //vertical align
 
     borderRightWidth:2,
     borderRightColor:GlobalStyle.constants.colors[1],
     borderLeftWidth:2,
     borderLeftColor:GlobalStyle.constants.colors[1],
-    paddingTop:4,
-    paddingBottom:4,
-    paddingLeft:8,
-    paddingRight:8,
+    paddingTop:0,
+    paddingBottom:0,
+    paddingLeft:12,
+    paddingRight:12,
   },
   active: {
     backgroundColor:GlobalStyle.constants.colors[1]

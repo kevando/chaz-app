@@ -13,6 +13,7 @@ import RecAddScreen from './RecAddScreen';
 import RecrsScreen from './RecrsScreen';
 import RecrViewScreen from './RecrViewScreen';
 import InitScreen from './InitScreen';
+import OnboardPopup from './OnboardPopup';
 
 // register all screens of the app (including internal ones)
 export function registerScreens(store, Provider) {
@@ -30,4 +31,5 @@ export function registerScreens(store, Provider) {
   Navigation.registerComponent('chaz.RecrsScreen', () => RecrsScreen, store, Provider);
   Navigation.registerComponent('chaz.RecrViewScreen', () => RecrViewScreen, store, Provider);
   Navigation.registerComponent('chaz.InitScreen', () => InitScreen, store, Provider);
+  Navigation.registerComponent('chaz.OnboardPopup', () => OnboardPopup, store, Provider);
 }

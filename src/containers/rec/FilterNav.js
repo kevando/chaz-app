@@ -24,7 +24,6 @@ class FilterNav extends Component {
 
       <ScrollView horizontal={true} contentContainerStyle={{backgroundColor:'#ccc',flex:1,flexDirection:'row',}}>
       <View style={styles.filtersContainer} >
-
         {this.renderFilter('type')}
 
         </View>
@@ -69,19 +68,16 @@ class FilterNav extends Component {
 
 const styles = StyleSheet.create({
   filtersContainer: {
-    backgroundColor:'#ddd',
-
-    flexDirection:'row',
-    justifyContent:'center',
-    alignItems:'center',
     borderTopWidth:4,
     borderTopColor:GlobalStyle.constants.colors[1],
     borderBottomWidth:4,
     borderBottomColor:GlobalStyle.constants.colors[1],
   },
   filterRow: { // makes it horizontal despite multiple text elemnts
-    // flex:1,
+    flex:1,
     flexDirection:'row',
+    // justifyContent:'center',
+    alignItems:'stretch',
     margin:0,
     borderRightWidth: 2,
     borderRightColor: GlobalStyle.constants.colors[1],

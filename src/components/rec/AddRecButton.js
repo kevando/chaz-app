@@ -13,12 +13,14 @@ export default class AddRecButton extends Component {
   }
   renderTypeEmoji(){
     if(this.props.activeType != "all")
-    return <RecType type={this.props.activeType} size={22} />
+      return <Text> <RecType type={this.props.activeType} size={22} /> </Text>
+    else
+      return <Text style={{fontSize:22}}> </Text>;
   }
   render() {
     return (
       <TouchableOpacity style={styles.button} onPress={ this.props.onPress }>
-        <Text style={styles.buttonText}>{this.renderTypeEmoji()} New Recommendation</Text>
+        <Text style={styles.buttonText}>New{this.renderTypeEmoji()}Recommendation</Text>
       </TouchableOpacity>
     );
   }
@@ -35,7 +37,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 17,
     fontWeight: '500',
-    letterSpacing:1.3
+    letterSpacing:1.3,
+    height:30,
+    justifyContent:'center'
   },
 
 });

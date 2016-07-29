@@ -13,15 +13,16 @@ const initialState = Immutable.Map({
     type: Immutable.Map({
       active: 'all',
       queries: Immutable.Map({
-        all: Immutable.List.of('book','movie','tv','music','food','podcast','default'),
+        all: Immutable.List.of('default','book','movie','tv','music','food','podcast','app','place'),
+        default: Immutable.List.of('default'),
         book: Immutable.List.of('book'),
+        movie: Immutable.List.of('movie'),
         tv: Immutable.List.of('tv'),
-        movie: Immutable.List.of('movie'),    // can probly refactor this
         music: Immutable.List.of('music'),
         food: Immutable.List.of('food'),
-        // bird: Immutable.List.of('podcast'),
-        // dolphin: Immutable.List.of('podcast'),
-        default: Immutable.List.of('default'),
+        podcast: Immutable.List.of('podcast'),
+        app: Immutable.List.of('app'),
+        place: Immutable.List.of('place'),
       })
     }),
     grade: Immutable.Map({ // not used just yet
@@ -45,7 +46,7 @@ export default function counter(state = initialState, action = {}) {
       return state.set( 'loaded', action.loaded );
 
     case types.UPDATE_REC_LIST:
-      return state.set({
+      return state.merge({
         all: action.payload
       });
 
