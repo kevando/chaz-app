@@ -43,7 +43,7 @@ class RecsScreen extends Component {
     this.onAddRecrPress = this.onAddRecrPress.bind(this);
 
     this.props.navigator.setTitle({
-      title: "chaz (v" +  DeviceInfo.getVersion() +")"
+      title: "chaz (v" +  DeviceInfo.getReadableVersion() +")"
     });
 
   }
@@ -70,6 +70,9 @@ class RecsScreen extends Component {
   render() {
     // return(<View><Text>tmp rec screen</Text></View>);
 
+    console.log(DeviceInfo.getUniqueID());
+
+
     // Might want to take this out of the render function
     var recsLoaded = this.props.rec.get('loaded');
     // console.log('recs',this.props.rec.get('visible'));
@@ -91,6 +94,7 @@ class RecsScreen extends Component {
             : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
           )}
         </View>
+        <View><Text>{DeviceInfo.getUniqueID()}</Text></View>
         <AddRecButton activeType={activeType} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );

@@ -1,3 +1,15 @@
+### 0.7.6
+ - added fabric tracking to analytics middleware
+ - changed login button to a yellow heart
+ - removed auth listener, changed auth to custom device token
+ - added back in redux async storage
+ - added rec loading state, and move rec display to RecList component
+ - Removed step name from login, now authenticates by device ID
+ - Add Rec modal dismisses
+ - Removed currentRec and recView loads from redux list
+ - Removed recr and grade for now to focus on ux simplicity
+ - Added recType and some filters
+
 ### 0.7.5 (focus on phase 1)
  - Remove dude from rec input, auto pull up keyboard
  - Fixed log out bug
