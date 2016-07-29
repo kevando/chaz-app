@@ -38,12 +38,12 @@ export function changeAppRoot(root) {
 }
 
 
-export function login(name) {
+export function login() {
+
   var deviceId = DeviceInfo.getUniqueID();
   var FirebaseTokenGenerator = require("firebase-token-generator");
   var tokenGenerator = new FirebaseTokenGenerator(constants.SECRET);
-  var token = tokenGenerator.createToken({ uid: deviceId, name: name });
-
+  var token = tokenGenerator.createToken({ uid: deviceId});
   return async function(dispatch, getState) {
     fireRef.authWithCustomToken(token, function(error, authData) {
       if (error) {
@@ -62,7 +62,8 @@ export function login(name) {
 export function logout(){
   return function(dispatch,getState){
     fireRef.unauth();
-    dispatch(setAuthData(undefined));
+    // dispatch(setAuthData(undefined));
+    dispatch({type: types.USER_LOGOUT});
     dispatch(changeAppRoot('login'));
   };
 }

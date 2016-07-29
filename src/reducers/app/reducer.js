@@ -26,6 +26,8 @@ export default function app(state = initialState, action = {}) {
       return state.merge({
         authData: action.authData
       });
+
+
     default:
       return state;
   }

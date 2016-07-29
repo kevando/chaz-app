@@ -7,6 +7,7 @@ import {
   StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
+import DeviceInfo from 'react-native-device-info';
 import * as counterActions from '../reducers/counter/actions';
 import * as appActions from '../reducers/app/actions';
 import Badge from '../components/feedback/Badge';
@@ -31,11 +32,10 @@ class ProfileScreen extends Component {
     // var atIndex = email.indexOf('@');
     // var username = email.substring(0,atIndex);
 
-    var username = 'tmp';
     return (
       <View style={{flex: 1, padding: 20,backgroundColor:'#ddd'}}>
       <Text style={styles.text}>
-        <Text style={{fontWeight: '500'}}>username: { username }</Text>
+        <Text style={{fontWeight: '400',fontSize:14}}>{ DeviceInfo.getUniqueID() }</Text>
       </Text>
 
 

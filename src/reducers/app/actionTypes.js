@@ -5,3 +5,5 @@ export const SET_AUTH_DATA = 'SET_AUTH_DATA';
 export const SET_FIREBASE_REF = 'SET_FIREBASE_REF';
 
 export const FIREBASE_URL = 'https://chaz1.firebaseio.com/'; // move this to hidden file
+
+export const USER_LOGOUT = 'USER_LOGOUT';

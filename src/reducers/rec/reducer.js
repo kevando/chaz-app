@@ -16,14 +16,15 @@ const initialState = Immutable.Map({
         all: Immutable.List.of('book','movie','tv','music','food','podcast','default'),
         book: Immutable.List.of('book'),
         tv: Immutable.List.of('tv'),
-        movie: Immutable.List.of('movie'),
+        movie: Immutable.List.of('movie'),    // can probly refactor this
         music: Immutable.List.of('music'),
         food: Immutable.List.of('food'),
-        podcast: Immutable.List.of('podcast'),
+        // bird: Immutable.List.of('podcast'),
+        // dolphin: Immutable.List.of('podcast'),
         default: Immutable.List.of('default'),
       })
     }),
-    grade: Immutable.Map({
+    grade: Immutable.Map({ // not used just yet
       active: 'all',
       queries: Immutable.Map({
         all: Immutable.List.of(0,1,2,3,4,5,undefined),
@@ -32,12 +33,6 @@ const initialState = Immutable.Map({
       })
     }),
   }),
-  // typeFilter: Immutable.Map({
-  //   active: 'book',
-  //   queries: Immutable.Map({all:['book','movie','default'],book:['book']})
-  // }),
-
-
 
 
 });
@@ -50,23 +45,18 @@ export default function counter(state = initialState, action = {}) {
       return state.set( 'loaded', action.loaded );
 
     case types.UPDATE_REC_LIST:
-      return state.merge({
+      return state.set({
         all: action.payload
       });
 
     case types.UPDATE_REC_FILTER:
       return state.setIn( ['filters',action.filter,'active'], action.option );
 
-
     case types.UPDATE_VISIBLE_REC_LIST: //
-
-
-
       var updatedList = action.recs.sort(function(a,b) {
         return b.get('createdAt') - a.get('createdAt');
       });
       return state.set( 'visible', updatedList );
-
 
     default:
       return state;

@@ -37,12 +37,14 @@ class FilterNav extends Component {
     this.props.dispatch(recActions.updateFilter(filter,option));
   }
 
-  renderFilter(filterType) { //
+  renderFilter(filterType) { // these variables are not named very well
     var onPress = this.onFilterPress;
 
     var filterQuery = this.props.rec.getIn(['filters',filterType,'queries']);
-    var filters = filterQuery.keySeq().toArray()
-    var activeFilter = this.props.rec.getIn(['filters',filterType,'active'])
+    var filters = filterQuery.keySeq().toArray();
+    var activeFilter = this.props.rec.getIn(['filters',filterType,'active']);
+
+    // console.log('filter list',filters);
 
     return(
       <View style={styles.filterRow}>

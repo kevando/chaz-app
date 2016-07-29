@@ -70,9 +70,6 @@ class RecsScreen extends Component {
   render() {
     // return(<View><Text>tmp rec screen</Text></View>);
 
-    console.log(DeviceInfo.getUniqueID());
-
-
     // Might want to take this out of the render function
     var recsLoaded = this.props.rec.get('loaded');
     // console.log('recs',this.props.rec.get('visible'));
@@ -82,7 +79,6 @@ class RecsScreen extends Component {
     }
 
     var recList = this.props.rec.getIn(['visible']);
-    console.log('rec props',this.props.rec);
     var activeType = this.props.rec.getIn(['filters','type','active']);
 
     return (
@@ -94,7 +90,6 @@ class RecsScreen extends Component {
             : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
           )}
         </View>
-        <View><Text>{DeviceInfo.getUniqueID()}</Text></View>
         <AddRecButton activeType={activeType} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
@@ -117,6 +112,7 @@ class RecsScreen extends Component {
     this.props.navigator.push({
       title: "Profile",
       screen: "chaz.ProfileScreen",
+      backButtonTitle: 'Back',
     });
   }
   onShowFriendsPress() {

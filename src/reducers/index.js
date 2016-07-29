@@ -1,13 +1,24 @@
+import { combineReducers } from 'redux'
+
 import app from './app/reducer';
 import counter from './counter/reducer';
-
-// chaz
-import rec from './rec/reducer'; // refactor this
+import rec from './rec/reducer'; 
 import recr from './recr/reducer';
 
-export {
+const reducers = {
   app,
-  counter,
+  counter, // still used for some light testing
   rec,
   recr
 };
+
+const appReducer = combineReducers(reducers);
+
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_LOGOUT') {
+    state = undefined // Totally clear state when user logs out
+  }
+  return appReducer(state, action)
+}
+
+export default rootReducer;

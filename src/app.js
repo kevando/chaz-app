@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import thunk from 'redux-thunk';
-import * as reducers from './reducers';
+// import * as reducers from './reducers';
 import * as appActions from './reducers/app/actions';
 import * as counterActions from './reducers/counter/actions';
 import analyticsMiddleware from './middleware/analyticsMiddleware'
@@ -22,9 +22,11 @@ import * as storage from 'redux-storage'
 // Note: A cusom merger function can be passed as second argument
 
 import merger from 'redux-storage-merger-immutablejs';
-const reducer = storage.reducer(combineReducers(reducers),merger);
 
-// const reducer = storage.reducer(reducer, merger);
+// changing this up to add better "log out" functionality (per dan abramov)
+import rootReducer from './reducers'; // this now combines the reducers
+
+const reducer = storage.reducer(rootReducer,merger);
 
 // Now it's time to decide which storage engine should be used
 //

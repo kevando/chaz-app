@@ -8,12 +8,9 @@ import {
   PropTypes,
 } from 'react-native';
 import { connect } from 'react-redux';
-
 import * as appActions from '../reducers/app/actions';
 import * as counterActions from '../reducers/counter/actions';
-// import Loading from '../components/LoadingComponent';
 import Style from '../style/Style';
-
 import Emoji from 'react-native-emoji';
 
 // this is a traditional React component connected to the redux store
@@ -67,7 +64,6 @@ class LoginScreen extends Component {
   renderHeart(){
     return <Text style={{fontSize: 50,textAlign:'center'}}><Emoji name="yellow_heart" /></Text>
   }
-
   onHeartPress(){
     this.props.dispatch(appActions.login())
   }

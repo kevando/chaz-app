@@ -18,7 +18,11 @@ const emojiList = {
   podcast: "radio",
   tv: "tv",
   movie: "vhs",
-  location:"repeat"
+  location:"repeat",
+  fresh: "dolphin",
+  dude: "koala",
+  bird: "bird",
+  dolphin: "dolphin",
 
 }
 
@@ -28,6 +32,7 @@ export default class RecType extends Component {
   }
 
   render() {
+    console.log(this.props.type)
     return (
       <Text style={{fontSize:this.props.size,flexDirection:'row',textAlign:'center'}}>
         <Emoji name={emojiList[this.props.type]} />
