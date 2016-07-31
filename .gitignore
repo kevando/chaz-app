@@ -40,5 +40,10 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
-# tmp for beta login
+# Ignore for beta login
 src/reducers/app/constants.js
+
+# Cleaning up july31
+.buckconfig
+.flowconfig
+.watchmanconfig
