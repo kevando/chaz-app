@@ -30,7 +30,7 @@ class OnboardPopup extends Component {
             Nice Job!
           </Text>
           <Text style={styles.text}>
-            You added your first recommendation.
+            You just saved your first recommendation.
           </Text>
           <Text style={styles.text}>
             Things only get better from here..

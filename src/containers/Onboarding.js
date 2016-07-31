@@ -41,7 +41,7 @@ class Onboarding extends Component {
           <Text style={{fontSize:32,color:'#222',textAlign:'center',marginBottom:10}}>
           Welcome to Chaz
           </Text>
-          <Text style={{fontSize:22,color:'#222',textAlign:'center',marginBottom:10}}>
+          <Text style={{fontSize:22,color:'#222',textAlign:'center',margin:10}}>
           Use this app when people recommend things to you.
           </Text>
 
@@ -54,8 +54,8 @@ class Onboarding extends Component {
       <Text style={{fontSize:85,color:'#444',textAlign:'center',marginBottom:20}}>
       <Emoji name="open_file_folder" />
       </Text>
-        <Text style={{fontSize:22,color:'#222',textAlign:'center',marginBottom:10}}>
-        You have not saved any {activeTypeFilter} recommendations yet.
+        <Text style={{fontSize:22,color:'#222',textAlign:'center',margin:10}}>
+        You have not saved any <Text style={{fontWeight:'600'}}>{activeTypeFilter}</Text> recommendations yet.
         </Text>
 
       </View>

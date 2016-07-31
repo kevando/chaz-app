@@ -29,7 +29,7 @@ class LoginScreen extends Component {
     const count = this.props.counter.get('count'); // dev
 
     return (
-      <View style={{flex: 1, paddingTop: 110,backgroundColor: Style.constants.colors[0],alignItems:'center'}}>
+      <View style={{flex: 1, paddingTop: 130,backgroundColor: Style.constants.colors[0],alignItems:'center'}}>
 
         <Text style={styles.text}>
           <Text style={{fontWeight: '500',color:'#fff',fontSize:100}}>chaz</Text>
@@ -62,7 +62,7 @@ class LoginScreen extends Component {
     this.props.dispatch(counterActions.increment());
   }
   renderHeart(){
-    return <Text style={{fontSize: 50,textAlign:'center'}}><Emoji name="yellow_heart" /></Text>
+    return <Text style={{fontSize: 90,textAlign:'center'}}><Emoji name="yellow_heart" /></Text>
   }
   onHeartPress(){
     this.props.dispatch(appActions.login())
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // textAlign: 'center',
 
-    marginTop:20,
+    marginTop:50,
   },
   buttonText: {
     textAlign: 'center',

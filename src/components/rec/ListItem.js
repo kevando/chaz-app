@@ -110,10 +110,10 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
 
     flexDirection: 'row',
-    paddingTop:3,
-    paddingBottom:3,
-    paddingLeft:3,
-    paddingRight:3
+    paddingTop:5,
+    paddingBottom:5,
+    paddingLeft:5,
+    paddingRight:5
   },
   left: {
     flex:2,
@@ -135,8 +135,9 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '500'
+    fontSize: 18,
+    fontWeight: '500',
+    letterSpacing:1.3
   },
 
   recrButton: {

@@ -105,7 +105,7 @@ class RecAddScreen extends Component {
     // figure out a better way to have this pop up
     // def have this much more intelligent, not conditionals
 
-    if(this.props.rec.getIn(['all']).size == 1) {
+    if(true) {
     this.props.navigator.showLightBox({
       screen: "chaz.OnboardPopup", // unique ID registered with Navigation.registerScreen
         style: {
