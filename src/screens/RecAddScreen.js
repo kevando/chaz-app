@@ -105,9 +105,9 @@ class RecAddScreen extends Component {
     // figure out a better way to have this pop up
     // def have this much more intelligent, not conditionals
 
-    if(true) {
-    this.props.navigator.showLightBox({
-      screen: "chaz.OnboardPopup", // unique ID registered with Navigation.registerScreen
+    if(this.props.rec.getIn(['all']).size == 1) {
+      this.props.navigator.showLightBox({
+        screen: "chaz.OnboardPopup", // unique ID registered with Navigation.registerScreen
         style: {
           backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
           backgroundColor: "#ffffff30", // tint color for the background, you can specify alpha here (optional)
