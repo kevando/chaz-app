@@ -7,7 +7,8 @@
 #import <asl.h>
 #import "RCTLog.h"
 
-
+// manual install
+#import "Mixpanel/Mixpanel.h"
 
 // **********************************************
 // *** DON'T MISS: THE NEXT LINE IS IMPORTANT ***
@@ -30,6 +31,9 @@
   RCTSetLogThreshold(RCTLogLevelInfo);
   RCTSetLogFunction(CrashlyticsReactLogFunction);
 
+
+  // from manual install
+  [Mixpanel sharedInstanceWithToken:@"9b9622cd380a69a91ac1b9b9e1cd6423"]; // local
 
   NSURL *jsCodeLocation;
   jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
