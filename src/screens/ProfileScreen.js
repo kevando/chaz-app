@@ -8,45 +8,41 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import DeviceInfo from 'react-native-device-info';
-import * as counterActions from '../reducers/counter/actions';
 import * as appActions from '../reducers/app/actions';
 import Badge from '../components/feedback/Badge';
+import * as GlobalStyle from '../style/Style';
 
 // this is a traditional React component connected to the redux store
 class ProfileScreen extends Component {
 
-
   constructor(props) {
     super(props);
-    // this.state = {loading: false, authResponse: 'f'}
-
+    this.state = { // eventually pull this from firebase
+      message: "Hey guys, I hope you like the updates. I think I will have a better way to manage this going forward. Adios for now."
+    }
   }
 
   render() {
-    // var authData = this.props.app.get('authData'); // immutable
-    // console.log('auth data',authData);
-    // if(!authData)
-    //   return (<Text>Logged out</Text>);
-    //
-    // var email = authData.getIn(['password','email']);
-    // var atIndex = email.indexOf('@');
-    // var username = email.substring(0,atIndex);
 
     return (
       <View style={{flex: 1, padding: 20,backgroundColor:'#ddd'}}>
-      <Text style={styles.text}>
-        <Text style={{fontWeight: '400',fontSize:14}}>{ DeviceInfo.getUniqueID() }</Text>
-        <Text>Now here is a cool new display for the profile page</Text>
-      </Text>
+        <Text style={GlobalStyle.styles.title}>
+          A message from Kevando:
+        </Text>
 
+        <View style={{borderColor:'#ccc',borderWidth:1,backgroundColor:'#eee',padding:10,marginTop:5}} >
+          <Text style={GlobalStyle.styles.text}>
+            {this.state.message}
+          </Text>
+        </View>
 
-        <TouchableOpacity onPress={ this.onLogoutPress.bind(this) }>
-          <Text style={{fontWeight: '100',color:'red'}}>Logout</Text>
-        </TouchableOpacity>
-
-
-
-
+        <View style={{marginTop:30}}>
+          <Text>Device ID:</Text>
+          <Text style={{fontWeight: '400',fontSize:14}}>{ DeviceInfo.getUniqueID() }</Text>
+          <TouchableOpacity onPress={ this.onLogoutPress.bind(this) }>
+            <Text style={{fontWeight: '100',color:'red'}}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -54,26 +50,12 @@ class ProfileScreen extends Component {
   onLogoutPress() {
     this.props.dispatch(appActions.logout());
   }
-}
 
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
-  },
-  button: {
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
-    color: 'blue'
-  }
-});
+}
 
 // which props do we want to inject, given the global state?
 function mapStateToProps(state) {
   return {
-    // counter: state.counter,
     app: state.app
   };
 }
