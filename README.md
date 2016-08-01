@@ -1,88 +1,51 @@
 # chaz
-iOS app written with React Native.
 
-#### Configure Development environment
+#### iOS app written with React Native.
+chaz is a place to save recommendations.
 
-```sh
-$ karma start
-git clone https://github.com/kevando/chaz.git
-npm3 install
-npm start
-```
-Run xcode simulator
+## Update (2016.07.31)
+chaz is currently in private beta and has about 4 people using it. Open an issue in this repo if you would like to beta test chaz.
 
-For more information about setting up a local dev environment, see the [React Native Documentation](https://facebook.github.io/react-native/docs/getting-started.html#content)
+## Latest Version (2016.07.29)
+#### 0.7.8
+ - added fabric tracking to analytics middleware
+ - changed login button to a yellow heart
+ - removed auth listener, changed auth to custom device token
+ - added back in redux async storage
+ - added rec loading state, and move rec display to RecList component
+ - Removed step name from login, now authenticates by device ID
+ - Add Rec modal dismisses
+ - Removed currentRec and recView loads from redux list
+ - Removed recr and grade for now to focus on ux simplicity
+ - Added recType and some filters
 
-## Deployment Steps
-### Build Steps
- - update version
- - do i need to bundle?
- - uncomment line
- - Disable logging (I think)
- - change to generic ios device
- - product > archive
+[Full Release History]
 
-### iTunes stuff
- - validate (optional)
- - upload to app store
- - uncheck "include bitcode"
+[Full Release History]: <https://github.com/kevando/chaz/blob/master/documentation/RELEASES.md>
 
-### Distributing beta to new users (Internal Testing via Testflight)
- - log into itunesconnect
- - check latest build and distribute
+## Roadmap
+chaz is in active development and has a very dynamic and aggresive list of features. View the entire [Product Roadmap] here. Open an issue if you'd like to add a feature to the pipeline.
 
- Add iTunes Connect User
- anna got email
-
- clicked ok to terms
- has to log into itunes connect
-
- she now shows up as admin under users
-
- add her to internal tester list under app
- save it, and she gets notified via email
-
- she checks email on phone
- she has to download testflight
- and enter the app code (she didnt have to do this)
-
+[Product Roadmap]: https://github.com/kevando/chaz/blob/master/documentation/ROADMAP.md
 ## Screenshots
-
-#### Welcome Sceen:
+Here are some selected iPhone6 screens from the latest version.
+### Welcome Sceen:
 ![alt text][welcome]
-
-#### Empty Sceen (no recommendations):
+### Opening Screen (no recommendations):
 ![alt text][empty]
+### Pop up after saving 1st rec
+![alt text][first popup]
+### One Generic Rec Added
+![alt text][rec added]
+### Empty Screen for TV shows
+![alt text][empty tv list]
 
-#### Recomendation List (aka queue):
-![alt text][list]
-
-#### Add Rec (with quick add for recommender):
-![alt text][add rec]
-
-#### Friend List (score value based only on graded recs):
-![alt text][friend list]
-
-[welcome]: https://i.imgur.com/0rM849v.png "Welcome Screen"
-[empty]: https://i.imgur.com/ONu91qL.png "Empty Screen"
+[welcome]: https://i.imgur.com/QxLSRpB.png "Welcome Screen"
+[empty]: https://i.imgur.com/tcSGj5s.png "Empty Screen"
+[first popup]: https://i.imgur.com/w8kfeiL.png "Popup"
 [list]: https://i.imgur.com/bTAd5Ib.png "Rec List"
-[add rec]: https://i.imgur.com/Rey2jLN.png "Rec Add"
-[friend list]: https://i.imgur.com/nelxzjt.png "Friend List"
+[rec added]: https://i.imgur.com/8DaqHMH.png "Rec Added"
+[empty tv list]: https://i.imgur.com/nmfn4vo.png "Empty List"
 
 
-
-### Libs & Resources
-https://github.com/wix/react-native-navigation
-https://medium.com/@spencer_carli
-https://github.com/michaelcontento/redux-storage
-https://facebook.github.io/react-native/docs/flexbox.html
-https://docs.fabric.io/apple/beta/beta-walkthrough.html
-
-
-### Development guidelines
-function prefixes
- render(functions that return renderable object)
- on(callbacks for events, most likely a user click)
-
-
-[attempting] immutable variables have uppercase
+Cheers, Kevando

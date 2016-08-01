@@ -1,40 +1,20 @@
-# Roadmap
+# Product Roadmap
+Here is a grouped list of planned features, broken out by version. To understand why it's done like this, check out the onboarding doc.
 
-### 0.7.7 (minor fixes pre 0.8 launch)
+### Version 0.8
+ - Significantly improve the onboarding
+ - Introduce the recommender
 
+### Version 0.9
+ - Introduce Rec grades
 
-### 0.8.0
-Create onboarding
-ability to add recr
-consider updating firebase npm and adding ref to state
-https://github.com/erikras/react-redux-universal-hot-example/issues/252
+### Version 1.0 (Release to app store)
+ - Add Friend List page
+ - Add a profile page that displays user's rec/recr/grade/score data
+ - Add ability to save recs that I give people
+ - Remove dependency on internet access.
 
-
-### 0.9
-ability to grade recs
-
-### 1.0
-Friend list and sort recs by recr score
-profile page with our own rec/recrs/grade score
-Store recs that I send
-Chat feature
-option to send "Started watching" to friend that gave rec
-remove dependency on internet access.
-
-
-### 2.0 (Visit Spencer)
- - Spend 2 days with spencer and refactor redux and firebase to a meteor server, refactor router, redesign data, add chat. possibly make this app like a tutorial app for spencer. open source it
- - Talk to spencer about
- - more data (rec type, recr score by type, grade by type, "why I liked it" aspect of the grade)
- - User tracking
- - pitch open sourcing this for his class
- - explore this..  https://github.com/FaridSafi/react-native-gifted-messenger
- - chaz integrate w podcasts somehow
+### Version 1.x
+ - Chat feature
+ - option to send "Started watching" to friend that gave rec
  - Get it ready for useronboarding.com
-
-
-
-### KNOWN CONCERNS
- - Currently and rec change re-populates/renders entire rec list in state
- - consider changing filter code so that each "filter" is its own screen, with its own RecList
- -
