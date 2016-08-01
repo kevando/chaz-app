@@ -36,6 +36,7 @@ class ProfileScreen extends Component {
       <View style={{flex: 1, padding: 20,backgroundColor:'#ddd'}}>
       <Text style={styles.text}>
         <Text style={{fontWeight: '400',fontSize:14}}>{ DeviceInfo.getUniqueID() }</Text>
+        <Text>Now here is a cool new display for the profile page</Text>
       </Text>
 
 
