@@ -22,7 +22,7 @@ export default function app(state = initialState, action = {}) {
     case types.ROOT_CHANGED:
       return state.set( 'root', action.root );
 
-    case types.SET_AUTH_DATA:
+    case types.USER_LOGIN:
       return state.merge({
         authData: action.authData
       });

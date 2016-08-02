@@ -13,7 +13,16 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* chazTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* chazTests.m */; };
+		0A63A30E1D4F017F00BE954F /* Mixpanel in Resources */ = {isa = PBXBuildFile; fileRef = 0A63A30D1D4F017F00BE954F /* Mixpanel */; };
+		0A63A3151D4F027100BE954F /* libRNMixpanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A63A3141D4F025800BE954F /* libRNMixpanel.a */; };
+		0A63A3361D4F077300BE954F /* libMixpanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A63A3351D4F077300BE954F /* libMixpanel.a */; };
 		0AAB78EC1D4AF54F00ABD915 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AAB78E71D4AF53400ABD915 /* libRNDeviceInfo.a */; };
+		0AB12B7D1D4EF0D300BAAEDA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B7C1D4EF0D300BAAEDA /* UIKit.framework */; };
+		0AB12B7F1D4EF0DA00BAAEDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B7E1D4EF0D900BAAEDA /* Foundation.framework */; };
+		0AB12B811D4EF0E500BAAEDA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B801D4EF0E500BAAEDA /* CoreTelephony.framework */; };
+		0AB12B831D4EF0EA00BAAEDA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B821D4EF0EA00BAAEDA /* Accelerate.framework */; };
+		0AB12B851D4EF0F000BAAEDA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B841D4EF0F000BAAEDA /* CoreGraphics.framework */; };
+		0AB12B871D4EF0F600BAAEDA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B861D4EF0F600BAAEDA /* QuartzCore.framework */; };
 		0AB42CE11D333D5800B33CE2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE01D333D5800B33CE2 /* CoreData.framework */; };
 		0AB42CE31D333D6400B33CE2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE21D333D6400B33CE2 /* SystemConfiguration.framework */; };
 		0AB42CE51D333D7400B33CE2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE41D333D7400B33CE2 /* libz.tbd */; };
@@ -30,6 +39,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		347D11E181797B118D14690C /* libPods-chaz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 347705F1F90E41459CFDB729 /* libPods-chaz.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		CCCF23211C9C238500455574 /* libReactNativeControllers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCF23201C9C236100455574 /* libReactNativeControllers.a */; };
 /* End PBXBuildFile section */
@@ -76,6 +86,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = chaz;
+		};
+		0A63A3131D4F025800BE954F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FDC64AF01BF1690D0044C1B4;
+			remoteInfo = RNMixpanel;
 		};
 		0AAB78E61D4AF53400ABD915 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -152,7 +169,16 @@
 		00E356EE1AD99517003FC87E /* chazTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chazTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* chazTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chazTests.m; sourceTree = "<group>"; };
+		0A63A30D1D4F017F00BE954F /* Mixpanel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mixpanel; sourceTree = "<group>"; };
+		0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNMixpanel.xcodeproj; path = "../node_modules/react-native-mixpanel/RNMixpanel.xcodeproj"; sourceTree = "<group>"; };
+		0A63A3351D4F077300BE954F /* libMixpanel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMixpanel.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/chaz-hdrqhdbuqcdllbhishsjlpdtoyta/Build/Products/Debug-iphonesimulator/Mixpanel/libMixpanel.a"; sourceTree = "<group>"; };
 		0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
+		0AB12B7C1D4EF0D300BAAEDA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0AB12B7E1D4EF0D900BAAEDA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0AB12B801D4EF0E500BAAEDA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		0AB12B821D4EF0EA00BAAEDA /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		0AB12B841D4EF0F000BAAEDA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0AB12B861D4EF0F600BAAEDA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0AB42CE01D333D5800B33CE2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0AB42CE21D333D6400B33CE2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0AB42CE41D333D7400B33CE2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -171,9 +197,12 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = chaz/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = chaz/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		347705F1F90E41459CFDB729 /* libPods-chaz.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-chaz.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		B2885216B6E11EBC62EB8F32 /* Pods-chaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chaz/Pods-chaz.debug.xcconfig"; sourceTree = "<group>"; };
 		CCCF23111C9C236100455574 /* ReactNativeControllers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeControllers.xcodeproj; path = "../node_modules/react-native-controllers/ios/ReactNativeControllers.xcodeproj"; sourceTree = "<group>"; };
+		FE496490627F96E7DF4CC30D /* Pods-chaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-chaz/Pods-chaz.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,13 +217,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A63A3361D4F077300BE954F /* libMixpanel.a in Frameworks */,
+				0A63A3151D4F027100BE954F /* libRNMixpanel.a in Frameworks */,
+				0AB12B871D4EF0F600BAAEDA /* QuartzCore.framework in Frameworks */,
+				0AB12B851D4EF0F000BAAEDA /* CoreGraphics.framework in Frameworks */,
+				0AB12B831D4EF0EA00BAAEDA /* Accelerate.framework in Frameworks */,
+				0AB12B811D4EF0E500BAAEDA /* CoreTelephony.framework in Frameworks */,
+				0AB42CE31D333D6400B33CE2 /* SystemConfiguration.framework in Frameworks */,
+				0AB12B7F1D4EF0DA00BAAEDA /* Foundation.framework in Frameworks */,
+				0AB12B7D1D4EF0D300BAAEDA /* UIKit.framework in Frameworks */,
 				0AAB78EC1D4AF54F00ABD915 /* libRNDeviceInfo.a in Frameworks */,
 				0AD224C91D3C22A700038895 /* libSMXCrashlytics.a in Frameworks */,
 				0AB42CEE1D3341EA00B33CE2 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 				0AD224C21D3C1F2000038895 /* Crashlytics.framework in Frameworks */,
 				0AB42CE71D333D8100B33CE2 /* libsqlite3.0.tbd in Frameworks */,
 				0AB42CE51D333D7400B33CE2 /* libz.tbd in Frameworks */,
-				0AB42CE31D333D6400B33CE2 /* SystemConfiguration.framework in Frameworks */,
 				0AD224C11D3C1F2000038895 /* Fabric.framework in Frameworks */,
 				0AB42CE11D333D5800B33CE2 /* CoreData.framework in Frameworks */,
 				CCCF23211C9C238500455574 /* libReactNativeControllers.a in Frameworks */,
@@ -208,6 +245,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				347D11E181797B118D14690C /* libPods-chaz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +309,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0A63A3101D4F025800BE954F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A63A3141D4F025800BE954F /* libRNMixpanel.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0AAB78D71D4AF53400ABD915 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +360,7 @@
 		13B07FAE1A68108700A75B9A /* chaz */ = {
 			isa = PBXGroup;
 			children = (
+				0A63A30D1D4F017F00BE954F /* Mixpanel */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -344,6 +391,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */,
 				0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */,
 				0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */,
 				0AB42CE81D3341D800B33CE2 /* RCTGoogleAnalyticsBridge.xcodeproj */,
@@ -373,6 +421,12 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				0AB12B861D4EF0F600BAAEDA /* QuartzCore.framework */,
+				0AB12B841D4EF0F000BAAEDA /* CoreGraphics.framework */,
+				0AB12B821D4EF0EA00BAAEDA /* Accelerate.framework */,
+				0AB12B801D4EF0E500BAAEDA /* CoreTelephony.framework */,
+				0AB12B7E1D4EF0D900BAAEDA /* Foundation.framework */,
+				0AB12B7C1D4EF0D300BAAEDA /* UIKit.framework */,
 				0AD224BF1D3C1F2000038895 /* Fabric.framework */,
 				0AD224C01D3C1F2000038895 /* Crashlytics.framework */,
 				0AB42CE61D333D8100B33CE2 /* libsqlite3.0.tbd */,
@@ -383,6 +437,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* chazTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				AB8056FBFEE576523F162619 /* Pods */,
+				CA983AB2AFF0CF880E78588C /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -395,6 +451,24 @@
 				00E356EE1AD99517003FC87E /* chazTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AB8056FBFEE576523F162619 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B2885216B6E11EBC62EB8F32 /* Pods-chaz.debug.xcconfig */,
+				FE496490627F96E7DF4CC30D /* Pods-chaz.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CA983AB2AFF0CF880E78588C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A63A3351D4F077300BE954F /* libMixpanel.a */,
+				347705F1F90E41459CFDB729 /* libPods-chaz.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CCCF23121C9C236100455574 /* Products */ = {
@@ -430,11 +504,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "chaz" */;
 			buildPhases = (
+				40528FC3A408C426809E6628 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				0AD224B01D3C1E5E00038895 /* ShellScript */,
+				44F6C1D057855DF38C923908 /* [CP] Embed Pods Frameworks */,
+				074ED6691293452A1143D6D6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -528,6 +605,10 @@
 					ProjectRef = 0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */;
 				},
 				{
+					ProductGroup = 0A63A3101D4F025800BE954F /* Products */;
+					ProjectRef = 0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */;
+				},
+				{
 					ProductGroup = 0AD224C41D3C22A300038895 /* Products */;
 					ProjectRef = 0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */;
 				},
@@ -574,6 +655,13 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0A63A3141D4F025800BE954F /* libRNMixpanel.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNMixpanel.a;
+			remoteRef = 0A63A3131D4F025800BE954F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0AAB78E71D4AF53400ABD915 /* libRNDeviceInfo.a */ = {
@@ -653,6 +741,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A63A30E1D4F017F00BE954F /* Mixpanel in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -675,6 +764,21 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		074ED6691293452A1143D6D6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chaz/Pods-chaz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		0AD224B01D3C1E5E00038895 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -687,6 +791,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 6f8c3009d1fd2908681f11b2f8578d38fa4787ba a827748e0a74f4e5aa6034c96ff9693d515ec6198411f4ae4d82031cf8735ea8";
+		};
+		40528FC3A408C426809E6628 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		44F6C1D057855DF38C923908 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chaz/Pods-chaz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -772,6 +906,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2885216B6E11EBC62EB8F32 /* Pods-chaz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -789,7 +924,10 @@
 				);
 				INFOPLIST_FILE = chaz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-licucore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = chaz;
 			};
@@ -797,6 +935,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE496490627F96E7DF4CC30D /* Pods-chaz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -813,7 +952,10 @@
 				);
 				INFOPLIST_FILE = chaz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-licucore",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = chaz;
 			};

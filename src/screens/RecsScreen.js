@@ -67,6 +67,7 @@ class RecsScreen extends Component {
     // this.props.dispatch(recrActions.listenForRecrs());
   }
 
+
   render() {
     // return(<View><Text>tmp rec screen</Text></View>);
 
@@ -81,6 +82,9 @@ class RecsScreen extends Component {
     var recList = this.props.rec.getIn(['visible']);
     // console.log('recList',recList);
     var activeType = this.props.rec.getIn(['filters','type','active']);
+
+    // probly not the best place, but all life cycle methods ran pre-mature
+    this.props.navigator.setTitle({title: activeType+ ' ('+recList.size+')'});
 
     return (
       <View style={{flex: 1, padding: 0}}>
