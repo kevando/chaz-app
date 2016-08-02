@@ -51,8 +51,7 @@ export function login() {
       } else {
         console.log("Login Succeeded!", authData); // this used to be a listener
         dispatch(changeAppRoot('after-login')); // moving this to the screen
-        dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-
+        dispatch({ type: types.USER_LOGIN, authData: authData });
       }
     });
   };
@@ -62,7 +61,6 @@ export function login() {
 export function logout(){
   return function(dispatch,getState){
     fireRef.unauth();
-    // dispatch(setAuthData(undefined));
     dispatch({type: types.USER_LOGOUT});
     dispatch(changeAppRoot('login'));
   };
@@ -70,22 +68,18 @@ export function logout(){
 export function setAuthErrorMessage(message) {
   return {type: types.SET_AUTH_ERROR_MESSAGE, message: message};
 }
-// This works for login and logout
-export function setAuthData(authData){
-  return { type: types.SET_AUTH_DATA, authData: authData }
-}
 
 export function startListeningToAuth() { // fuck this function NOT USED aNYMORE
-  return (dispatch, getState) => {
-    fireRef.onAuth(function(authData){
-      console.log('auth data listened',authData);
-        if (authData){  // LOGIN
-          dispatch(changeAppRoot('after-login'));
-          dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-        } else { //
-          // dispatch(changeAppRoot('login'));
-          dispatch(setAuthData(authData)); // reminder this is only possible with thunk
-        }
-    });
-  }
+  // return (dispatch, getState) => {
+  //   fireRef.onAuth(function(authData){
+  //     console.log('auth data listened',authData);
+  //       if (authData){  // LOGIN
+  //         dispatch(changeAppRoot('after-login'));
+  //         dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+  //       } else { //
+  //         // dispatch(changeAppRoot('login'));
+  //         dispatch(setAuthData(authData)); // reminder this is only possible with thunk
+  //       }
+  //   });
+  // }
 }
