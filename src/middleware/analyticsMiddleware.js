@@ -1,33 +1,34 @@
-import GoogleAnalytics from 'react-native-google-analytics-bridge';
-GoogleAnalytics.setTrackerId('UA-74407622-2');
+// import GoogleAnalytics from 'react-native-google-analytics-bridge';
+// GoogleAnalytics.setTrackerId('UA-74407622-2');
 
-import Fabric from 'react-native-fabric';
-var { Crashlytics, Answers } = Fabric;
+// import Fabric from 'react-native-fabric';
+// var { Crashlytics, Answers } = Fabric;
 
+//Require the module
+var Mixpanel = require('react-native-mixpanel');
+
+//Init Mixpanel SDK with your project token
+Mixpanel.sharedInstanceWithToken('9b9622cd380a69a91ac1b9b9e1cd6423');
 
 var analyticsMiddleware = function(middlewareAPI){
 
     return function(next){
         return function(action){
+          switch (action.type) {
 
-          return next(action); // DISABLED FOR DEV
+            case 'USER_LOGIN': // only used for login
+              Mixpanel.track("Logged in");
+              Mixpanel.identify(action.authData.uid);
+              Mixpanel.set({"$device": action.authData.uid});
 
-          //console.log('ANALYTICS',action);
-          if(action.track){ // only run this if action has track object
-            //  console.log('Middleware Logging action',action);
-              switch (action.type) {
+            case 'TRACK_REC_ADDED':
+              Mixpanel.trackWithProperties('Rec Added', {title: action.payload.recTitle, type: action.payload.recType,recsTotal:action.payload.recsTotal});
+              Mixpanel.set({"Total Recs" : action.payload.recsTotal });
 
-                case 'SET_USER':
-                //  console.log('authDAta',action.track.authData)
-                  GoogleAnalytics.setUser(action.track.authData.uid);
-                  Answers.logLogin('Beta', true);
-
-                case 'TRACK_EVENT':
-                //  console.log('track',action.track);
-                  GoogleAnalytics.trackEvent(action.track.category, action.track.action, action.track.values);
+            case 'TRACK_REC_DELETED':
+               Mixpanel.track('Rec Deleted');
 
               } // switch
-          }
 
             return next(action);
         }

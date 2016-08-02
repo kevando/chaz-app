@@ -129,18 +129,17 @@ export function addRec(recTitle) {                  // ADD NEW REC
     const recsRef = fireRef.child(`users/${uid}/recs`);
     const recType = (currentState.rec.getIn(['filters','type','active']) != 'all' ? currentState.rec.getIn(['filters','type','active']) : 'default');
     var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,type:recType });
-    dispatch(trackRecAdded(recTitle));
-    // the following is added for pushing to the next screen
-    // dispatch(setCurrentRec({ _key:newRec.key(), title:recTitle,createdAt: Firebase.ServerValue.TIMESTAMP } ));
+    dispatch(trackRecAdded(recTitle,recType,currentState.rec.get('all').size));
+
   }
 }
-export function trackRecAdded(recTitle){
+export function trackRecAdded(recTitle,recType,recsTotal){
   return {
-    type: 'TRACK_EVENT',
-    track: {
-      category: 'Rec',
-      action: 'Rec Added',
-      values: {title:recTitle}
+    type: 'TRACK_REC_ADDED',
+    payload: {
+      recTitle: recTitle,
+      recType: recType,
+      recsTotal: recsTotal
     }
   }
 }
@@ -153,6 +152,7 @@ export function removeRec(recKey){                  // REMOVE REC
     // todo dispatch upgrade recr score and recs recr score
     // consider if I need to do any other checks
     // I feel like properly structred data would help alot here
+    dispatch({type: 'TRACK_REC_DELETED'});
   }
 }
 export function updateRecTitle(rec,title) {                  // UPDATE REC TITLE

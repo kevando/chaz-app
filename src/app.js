@@ -41,11 +41,15 @@ const engine = createEngine('async-data-v1');
 // Note: You can provide a list of action types as second argument, those
 //       actions will be filtered and WON'T trigger calls to `engine.save`!
 
+
+// const createStoreWithMiddleware = applyMiddleware(analyticsMiddleware,thunk)(createStore);
+
+
 const middleware = storage.createMiddleware(engine);
 // const middleware = storage.createMiddleware(engine,['ROOT_CHANGED']);
 
 // As everything is prepared, we can go ahead and combine all parts as usual
-const createStoreWithMiddleware = applyMiddleware(thunk,middleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk,middleware,analyticsMiddleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
 // At this stage the whole system is in place and every action will trigger
