@@ -9,6 +9,7 @@ import {
   Dimensions,
   DeviceEventEmitter
 } from 'react-native';
+import dismissKeyboard from 'dismissKeyboard'; // might not be safe
 import { connect } from 'react-redux';
 import Emoji from 'react-native-emoji';
 import * as recActions from '../reducers/rec/actions';
@@ -26,7 +27,6 @@ class RecAddScreen extends Component {
     rightButtons: [{title: 'Cancel',id: 'cancel'}],
   };
 
-
   constructor(props) {
     super(props);
     this.state = {
@@ -36,22 +36,22 @@ class RecAddScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   componentDidMount() {
-    console.log('componentdidmount, set textInput focus true');
     this.refs.TextInput.focus(true);
-
     // keyboard shit
-    DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this))
+    DeviceEventEmitter.addListener('keyboardDidShow', this.keyboardDidShow.bind(this))
     DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this))
+    DeviceEventEmitter.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
   }
-  keyboardWillShow (e) {                                         // minus nav height
+  keyboardDidShow (e) {                                         // minus nav height
     let newSize = Dimensions.get('window').height - e.endCoordinates.height-65
     this.setState({visibleHeight: newSize})
-    console.log('keyboardWillShow with height',newSize)
   }
 
   keyboardWillHide (e) {
     this.setState({visibleHeight: Dimensions.get('window').height})
-    console.log('keyboardWillHide with height',Dimensions.get('window').height)
+  }
+  componentWillUnmount () {
+    DeviceEventEmitter.removeAllListeners();
   }
   onNavigatorEvent(event) {
     switch (event.id) {
@@ -87,9 +87,6 @@ class RecAddScreen extends Component {
       </View>
     );
   }
-  onInputChange() {
-
-  }
 
   onAddRecPress() {
     this.props.dispatch(recActions.addRec(this.state.recTitle));
@@ -118,8 +115,10 @@ class RecAddScreen extends Component {
 
 
   onCancelPress() {
-    // would like to clear keyboard here first,
-    // then used the onfocus event to dismiss the modal
+    dismissKeyboard();
+  }
+
+  keyboardDidHide() {
     this.props.navigator.dismissModal();
   }
 
