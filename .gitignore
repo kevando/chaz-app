@@ -47,6 +47,3 @@ src/reducers/app/constants.js
 .buckconfig
 .flowconfig
 .watchmanconfig
-
-# Attempting to create process for doc files
-documentation/*

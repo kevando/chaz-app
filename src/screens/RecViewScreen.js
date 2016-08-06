@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
-  AlertIOS
+  AlertIOS,
+  TextInput
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as recrActions from '../reducers/recr/actions';
@@ -44,15 +45,38 @@ class RecViewScreen extends Component {
 
   render() {
 
-    console.log('review RENDER',this.state.rec);
+    // console.log('review RENDER',this.state.rec);
 
     return (
-      <View style={{flex: 1, paddingTop: 20,backgroundColor:'#eee'}}>
-        <View style={styles.row}>
-          <View style={styles.left}>
-            <TouchableOpacity onPress={this.onTitlePress.bind(this)}>
-              <Text style={{fontSize:20}}><RecType type={this.state.rec.type} />{this.state.rec.title}</Text>
-              </TouchableOpacity>
+      <View style={{flex: 1, paddingTop: 0,backgroundColor:'#eee'}}>
+        <View style={{backgroundColor:'#fff',padding:10}}>
+          <View style={styles.row}>
+            <View style={styles.left}>
+                  <RecType type={this.state.rec.type} size={40} />
+            </View>
+            <View style={styles.right}>
+              <TouchableOpacity onPress={this.onTitlePress.bind(this)}>
+                  <Text style={{fontSize:20}}>{this.state.rec.title}</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{padding:15}}>
+          {( this.state.rec.note
+            ? <Text><Text style={{fontWeight:'600',fontSize:15}}>Note:</Text>{this.state.rec.note}</Text>
+            : <TextInput
+              style={{fontSize:15,height: 40,paddingLeft:10}}
+              onChangeText={(recNote) => this.setState({recNote})}
+              onSubmitEditing={(recNote) => this.props.dispatch(recActions.updateRecTitle(this.state.rec,recNote))}
+              value={this.state.recNote}
+              returnKeyType={'done'}
+              placeholder="Add a note..."
+              ref="NoteInput"
+
+            />
+          )}
+
+
+
           </View>
         </View>
       </View>
@@ -65,6 +89,10 @@ class RecViewScreen extends Component {
     switch (event.id) {
       case 'delete':
         this.onDeletePress()
+        break;
+      case 'pop': // This is only for when Rec Viewed after inital add
+        this.props.navigator.dismissModal({ animationType: 'slide-down' });
+        this.props.navigator.popToRoot({ animated: true });
         break;
       default:
         console.log('Unhandled event ' + event.id);
@@ -89,33 +117,33 @@ class RecViewScreen extends Component {
   }
 
 
-  getDisplayGrade(rec) {
-    if(rec.recr != null){
-      if(rec.grade != null) {
-        return(
-          <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
-            <RecGrade grade={rec.grade} />
-          </TouchableOpacity>);
-      } else {
-        return(
-          <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
-            <Text style={styles.button}>Grade this</Text>
-          </TouchableOpacity>
-        );
-      }
-    }
-  }
-  getDisplayRecrRight(rec){
-    if(rec.recr != null){
-      return (
-        <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
-          <Text style={{color:'red'}}>Change</Text>
-        </TouchableOpacity>
-
-      )
-    }
-
-  }
+  // getDisplayGrade(rec) {
+  //   if(rec.recr != null){
+  //     if(rec.grade != null) {
+  //       return(
+  //         <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
+  //           <RecGrade grade={rec.grade} />
+  //         </TouchableOpacity>);
+  //     } else {
+  //       return(
+  //         <TouchableOpacity onPress={ this.onAddGradePress.bind(this,rec) }>
+  //           <Text style={styles.button}>Grade this</Text>
+  //         </TouchableOpacity>
+  //       );
+  //     }
+  //   }
+  // }
+  // getDisplayRecrRight(rec){
+  //   if(rec.recr != null){
+  //     return (
+  //       <TouchableOpacity onPress={ this.onAddRecrPress.bind(this,rec) }>
+  //         <Text style={{color:'red'}}>Change</Text>
+  //       </TouchableOpacity>
+  //
+  //     )
+  //   }
+  //
+  // }
   displayComment(rec){
     if(rec.comment != null){
       return (<View>
@@ -125,38 +153,38 @@ class RecViewScreen extends Component {
     }
 
   }
-  getDisplayRecrLeft(rec){
-    // <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }> removing this for now
-    if(rec.recr != null){
-      return (
-        <TouchableOpacity>
-          <Text>Recommended by: <Text style={styles.recrText}>{rec.recr.name}</Text></Text>
-        </TouchableOpacity>
-      )
-    } else {
-      return (
-        <AddRecr rec={rec}/>
-      )
-    }
-
-  }
-
-
+  // getDisplayRecrLeft(rec){
+  //   // <TouchableOpacity onPress={ this.onRecrPress.bind(this,rec) }> removing this for now
+  //   if(rec.recr != null){
+  //     return (
+  //       <TouchableOpacity>
+  //         <Text>Recommended by: <Text style={styles.recrText}>{rec.recr.name}</Text></Text>
+  //       </TouchableOpacity>
+  //     )
+  //   } else {
+  //     return (
+  //       <AddRecr rec={rec}/>
+  //     )
+  //   }
+  //
+  // }
 
 
-  onAddRecrPress() {
-    var options = Array();
-    options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(rec,recrName) }    });
-    options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-    AlertIOS.prompt('Who recommended this?', null, options);
-  }
+
+
+  // onAddRecrPress() {
+  //   var options = Array();
+  //   options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(rec,recrName) }    });
+  //   options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
+  //   AlertIOS.prompt('Who recommended this?', null, options);
+  // }
 
   // not sure why i need to add this now?
-  assignRecr(rec,recrName) {
-    // create new recr if new
-    // update current with updated rec info
-    this.props.dispatch(recrActions.assignRecr(rec,recrName));
-  }
+  // assignRecr(rec,recrName) {
+  //   // create new recr if new
+  //   // update current with updated rec info
+  //   this.props.dispatch(recrActions.assignRecr(rec,recrName));
+  // }
 
 
   onTitlePress() {
@@ -173,45 +201,45 @@ class RecViewScreen extends Component {
   //     passProps: {recrKey:this.props.rec.current.recr._key }
   //   });
   // }
-  onAddGradePress(rec) {
-    // const { setRecGrade, removeRec } = this.props.actions;
-    AlertIOS.alert(
-        'Grade this recommendation',
-        null,
-        [
-          {text: '1 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,1)) },
-          {text: '2 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,2)) },
-          {text: '3 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,3)) },
-          {text: '4 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,4)) },
-          {text: '5 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,5)) },
-          {text: 'Remove Grade', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,null)) },
-          // {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
-          {text: 'Cancel', onPress: (text) => console.log('Cancel')}
-        ],
-      );
-  }
+  // onAddGradePress(rec) {
+  //   // const { setRecGrade, removeRec } = this.props.actions;
+  //   AlertIOS.alert(
+  //       'Grade this recommendation',
+  //       null,
+  //       [
+  //         {text: '1 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,1)) },
+  //         {text: '2 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,2)) },
+  //         {text: '3 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,3)) },
+  //         {text: '4 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,4)) },
+  //         {text: '5 Stars', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,5)) },
+  //         {text: 'Remove Grade', onPress: (text) => this.props.dispatch(recActions.setGrade(rec,null)) },
+  //         // {text: 'Delete Rec', onPress: (text) => removeRec(rec._key)},
+  //         {text: 'Cancel', onPress: (text) => console.log('Cancel')}
+  //       ],
+  //     );
+  // }
 
 }
 
 const styles = StyleSheet.create({
   row: {
     backgroundColor: '#fff',
-    borderBottomWidth:1,
-    borderBottomColor: '#ddd',
+    // borderBottomWidth:1,
+    // borderBottomColor: '#ddd',
 
     flexDirection: 'row',
-    paddingTop:10,
-    paddingBottom:10,
-    paddingLeft:10,
-    paddingRight:10
+    paddingTop:0,
+    paddingBottom:0,
+    paddingLeft:0,
+    paddingRight:0
   },
   right: {
-    flex:1,
+    flex:5,
     justifyContent: 'center', // vertical middle
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   left: {
-    flex:3,
+    flex:1,
 
   },
   recrText: {

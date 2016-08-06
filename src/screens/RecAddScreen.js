@@ -31,18 +31,20 @@ class RecAddScreen extends Component {
     super(props);
     this.state = {
       recTitle:'',
+      recNote:'',
       visibleHeight: Dimensions.get('window').height
     }
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
   componentDidMount() {
-    this.refs.TextInput.focus(true);
+    this.refs.TitleInput.focus(true);
     // keyboard shit
-    DeviceEventEmitter.addListener('keyboardDidShow', this.keyboardDidShow.bind(this))
-    DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this))
-    DeviceEventEmitter.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
+    DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
+    // Disabling these 2 events for now, not sure if I need them at all
+    // DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this))
+    // DeviceEventEmitter.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
   }
-  keyboardDidShow (e) {                                         // minus nav height
+  keyboardWillShow (e) {                                         // minus nav height
     let newSize = Dimensions.get('window').height - e.endCoordinates.height-65
     this.setState({visibleHeight: newSize})
   }
@@ -67,16 +69,26 @@ class RecAddScreen extends Component {
   render() {
 
     return (
-      <View style={{padding: 20,height: this.state.visibleHeight}}>
+      <View style={{padding: 0,height: this.state.visibleHeight}}>
 
         <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1,paddingLeft:10}}
+          style={{height: 40, paddingLeft:10}}
           onChangeText={(recTitle) => this.setState({recTitle})}
           value={this.state.recTitle}
           placeholder="What was recommended?"
-          ref="TextInput"
+          ref="TitleInput"
 
         />
+        <View style={{borderTopColor:'#ccc',borderTopWidth:1}}>
+        <TextInput
+          style={{fontSize:15,height: 40,paddingLeft:10}}
+          onChangeText={(recNote) => this.setState({recNote})}
+          value={this.state.recNote}
+          placeholder="Add a note..."
+          ref="NoteInput"
+
+        />
+        </View>
         <View style={styles.buttonContainer} >
           <TouchableOpacity style={styles.saveButton} onPress={ this.onAddRecPress.bind(this) }>
             <Text style={styles.saveText}><Emoji name="floppy_disk" /> Recommendation</Text>
@@ -89,17 +101,9 @@ class RecAddScreen extends Component {
   }
 
   onAddRecPress() {
-    this.props.dispatch(recActions.addRec(this.state.recTitle));
-    // tmp disabling for now.
-    // this.props.navigator.push({
-    //   title: "",
-    //   screen: "chaz.RecViewScreen",
-    //   passProps: { currentRec: this.props.rec.current },
-    //   animated:false
-    // });
-    this.props.navigator.dismissModal();
+    this.props.dispatch(recActions.addRec(this.state.recTitle,this.state.recNote));
 
-    // figure out a better way to have this pop up
+    // figure out a better way to have this onboarding pop up
     // def have this much more intelligent, not conditionals
 
     if(this.props.rec.getIn(['all']).size == 1) {
@@ -111,11 +115,24 @@ class RecAddScreen extends Component {
         }
       });
     }
+
+    // get recKey of most recent rec, the last one added just here
+    var recList = this.props.rec.get('all');
+    var lastRecKey = recList.last().get('_key'); // need key of most recent rec
+
+    this.props.navigator.push({
+      title: "Recommendation",
+      screen: "chaz.RecViewScreen",
+      passProps: { recKey: lastRecKey },
+      animated:true,
+      navigatorButtons: {leftButtons: [{title: 'Back',id: 'pop'}]},
+    });
   }
 
 
-  onCancelPress() {
+  onCancelPress() { // might reconsider how this is done
     dismissKeyboard();
+    this.props.navigator.dismissModal();
   }
 
   keyboardDidHide() {

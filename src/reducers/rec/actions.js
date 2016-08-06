@@ -55,6 +55,7 @@ export function getRecList(snap) { // runs after basically any change to any rec
           createdAt: child.val().createdAt,
           recrScore: child.val().recrScore,
           type: child.val().type,
+          note: child.val().note,
         }
         items.push(recObject);
 
@@ -122,13 +123,13 @@ export function updateVisibleRecList() {
   }
 }
 
-export function addRec(recTitle) {                  // ADD NEW REC
+export function addRec(recTitle,recNote) {                  // ADD NEW REC
   return function(dispatch, getState) {
     const currentState = getState();
     const uid = currentState.app.getIn(["authData","uid"]);
     const recsRef = fireRef.child(`users/${uid}/recs`);
     const recType = (currentState.rec.getIn(['filters','type','active']) != 'all' ? currentState.rec.getIn(['filters','type','active']) : 'default');
-    var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,type:recType });
+    var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,type:recType,note:recNote });
     dispatch(trackRecAdded(recTitle,recType,currentState.rec.get('all').size));
 
   }

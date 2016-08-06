@@ -31,7 +31,7 @@ export default class ListItem extends Component {
         <View style={styles.middle}>
           <Text style={styles.title} >{rec.title}</Text>
 
-            {this.renderRecComment()}
+            {this.renderRecNote()}
         </View>
         <View style={styles.right}>
         <RecGrade grade={this.props.rec.grade} />
@@ -41,9 +41,9 @@ export default class ListItem extends Component {
     );
   }
 
-  renderRecComment() {
-    if(this.props.rec.comment)
-    return(<Text>{this.props.rec.comment}</Text>);
+  renderRecNote() {
+    if(this.props.rec.note)
+    return(<Text>{this.props.rec.note}</Text>);
   }
 
   renderRecrDisplay() {
@@ -85,10 +85,10 @@ export default class ListItem extends Component {
 
     // passed in via props, not redux. how can i make the view page auto refresh
     this.props.navigator.push({
-      title: "",
+      title: "Recommendation",
       screen: "chaz.RecViewScreen",
       backButtonTitle: 'Back',
-      passProps: { currentRec: rec,recKey }
+      passProps: { recKey }
     });
   }
 
