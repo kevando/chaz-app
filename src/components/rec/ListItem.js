@@ -50,7 +50,7 @@ export default class ListItem extends Component {
 
   renderRecNote() { // dont give spacing for note if its not there
     if(this.props.rec.note)
-    return(<Text>{this.props.rec.note}</Text>);
+    return(<Text style={styles.note}>{this.props.rec.note}</Text>);
   }
 
   // renderRecrDisplay() {
@@ -153,10 +153,11 @@ const styles = StyleSheet.create({
   },
   note: {
     textAlign: 'left',
-    fontSize: 11,
+    fontSize: 13,
     fontWeight: '300',
     color: "#666",
-    letterSpacing:1.0
+    letterSpacing:1.0,
+    marginTop:5
   }
 
 });
