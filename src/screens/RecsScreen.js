@@ -29,7 +29,7 @@ class RecsScreen extends Component {
     navBarTextColor: '#fff',
     navBarBackgroundColor: GlobalStyle.constants.colors[0],
     navBarButtonColor: '#fff',
-    statusBarTextColorScheme: 'light' 
+    statusBarTextColorScheme: 'light'
   };
 
   static navigatorButtons = {
@@ -44,7 +44,7 @@ class RecsScreen extends Component {
     this.onAddRecrPress = this.onAddRecrPress.bind(this);
 
     this.props.navigator.setTitle({
-      title: "chaz (v" +  DeviceInfo.getReadableVersion() +")"
+      title: "chaz (v" +  DeviceInfo.getVersion() +")"
     });
 
   }

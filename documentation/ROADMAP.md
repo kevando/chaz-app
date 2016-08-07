@@ -3,31 +3,14 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.8 workspace ------------------------------------------------------------
 
-validate add rec, also rec note return bugs it out
 
-break note into its own component and complete following style goal
-better way to style the note
-clicking note should let user edit it. make this look cool
-
-note listitem looks weird, need to consolidate this
-
-
-
-consider refactoring add rec screen to be more of a abstract add data screen
 assign emoji faces to recrs, give it some order or random
-bug: fix how recView uses component state. its not quite right i dont think
-revisit navbar style settings
-create a redux array or something to create recType title or something
-  use in add rec placeholder and title
-add an updatedAt timestamp as well, with tracking here.
+
 
 list style, focus on making look good for all situations (w recr)
   yik yak for inspiration
-
-more informative titles
 this screen says alot. very confusing... https://i.imgur.com/7hvrZdy.png
 
-look at how other apps do multiline input
 
 # /0.8 workspace ------------------------------------------------------------
 

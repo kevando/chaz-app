@@ -91,7 +91,9 @@ class RecAddScreen extends Component {
           value={this.state.recTitle}
           placeholder={"What "+ this.state.type +" being recommended?"}
           ref="TitleInput"
-
+          enablesReturnKeyAutomatically={true}
+          returnKeyType={'done'}
+          onSubmitEditing={this.onAddRecPress.bind(this)}
         />
         <View style={{borderTopColor:'#ccc',borderTopWidth:1}}>
         <TextInput
@@ -100,14 +102,22 @@ class RecAddScreen extends Component {
           value={this.state.recNote}
           placeholder="Add a note about this moment..."
           ref="NoteInput"
-
+          returnKeyType={'done'}
+          onSubmitEditing={this.onAddRecPress.bind(this)}
         />
         </View>
+        {( this.state.recTitle == ''
+        ?
+        null
+        :
         <View style={styles.buttonContainer} >
           <TouchableOpacity style={styles.saveButton} onPress={ this.onAddRecPress.bind(this) }>
             <Text style={styles.saveText}><Emoji name="floppy_disk" /> Recommendation</Text>
           </TouchableOpacity>
         </View>
+
+        )}
+
 
 
       </View>
