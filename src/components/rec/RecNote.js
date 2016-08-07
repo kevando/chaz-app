@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import dismissKeyboard from 'dismissKeyboard'; // might not be safe
 import timer from 'react-native-timer';
-
+import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
 export default class RecNote extends Component {
 
   constructor(props) {
@@ -18,57 +18,54 @@ export default class RecNote extends Component {
       rec: this.props.rec,
       note: this.props.rec.note,
       color: "#333",
-      borderColor:'#000',
-      displayHeight:100, // tmp, this will be a problem with recr on rec view
-      inputHeight:100, // tmp, this will be a problem with recr on rec view
-      editHeight:200,
+      borderColor:'#fff',
       showButton: false,
       message:''
     }
   }
 
-  componentDidMount() {
-    console.log('noteinput measure layout',this.refs.NoteInput)
-    // console.log('get height?',this.refs.NoteInput)
+  componentWillReceiveProps(nextProps) {
+    this.setState({rec:nextProps.rec}); // cause we use previous rec state
+  }
 
-    // inputHeight: event.nativeEvent.contentSize.height
+  componentWillUnmount() {
+    timer.clearTimeout('message');
   }
 
   render() {
     return (
       <View>
-      <Text>{this.state.message}</Text>
-      <TextInput
-          style={[styles.noteInput, { height: this.state.displayHeight, borderColor: this.state.borderColor, color: this.state.color}]}
+      <AutoGrowingTextInput
+          style={[styles.noteInput, { borderColor: this.state.borderColor, color: this.state.color}]}
           onChangeText={(note) => this.setState({note: note})}
           value={this.state.note}
           placeholder="Add a note..."
           ref="NoteInput"
           multiline={true}
-          onChange={ (event) => this.onChange(event) }
           onBlur={ (event) => this.onBlur(event) }
           onFocus={ (event) => this.onFocus(event) }
 
         />
 
+        <View style={{flex:1,flexDirection:'row',height:15}}>
         {( this.state.showButton // in case we want to do something if note is there
           ?
 
-          <View style={{flex:1,flexDirection:'row'}}>
+          <View style={{flex:1,flexDirection:'row',height:40}}>
             <TouchableOpacity onPress={this.onSavePress.bind(this)}>
-              <Text style={styles.button}>Save Note</Text>
+              <Text style={styles.button}>Save</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={this.onDismissPress.bind(this)}>
-              <Text style={styles.dismiss}>Dismiss Keyboard</Text>
+              <Text style={styles.dismiss}>Dismiss</Text>
             </TouchableOpacity>
           </View>
 
           : null
         )}
-
-
-</View>
+        <Text>{this.state.message}</Text>
+      </View>
+    </View>
 
     );
   }
@@ -85,19 +82,12 @@ export default class RecNote extends Component {
     this.renderMessage('');
   }
 
-  onChange(event) {
-    this.setState({
-      // displayHeight: Math.min(135, event.nativeEvent.contentSize.height+20),
-      inputHeight: event.nativeEvent.contentSize.height
-    });
-  }
 
   onFocus(event) {
     this.setState({
       borderColor: '#ededed',
       showButton: true,
-      message:'Editing...',
-      displayHeight: this.state.editHeight
+      // message:'Editing...',
     })
   }
 
@@ -105,16 +95,15 @@ export default class RecNote extends Component {
     this.setState({
       borderColor: '#fff',
       showButton: false,
-      displayHeight: this.state.inputHeight
     });
   }
 
   renderMessage(message){
     this.setState({message:message})
-    timer.setTimeout( 'loginTimeout',
+    timer.setTimeout( 'message',
       () => {
         this.setState({message:''})
-      },2000
+      },3000
     );
 
   }
@@ -131,13 +120,12 @@ const styles = StyleSheet.create({
     borderWidth:1,
   },
   button: {
-    backgroundColor:'blue',
-    color:"#fff",
-    padding:10
+    fontSize:12,
+    color:'blue',
+    marginRight:10
   },
   dismiss: {
-
-    textAlign:'right',
+    fontSize:11,
     color:'red',
   }
 });

@@ -13,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* chazTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* chazTests.m */; };
+		0A2AEDB41D572BAB001F2AA2 /* libAutoGrowTextInput.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2AEDA41D572B9B001F2AA2 /* libAutoGrowTextInput.a */; };
 		0A63A30E1D4F017F00BE954F /* Mixpanel in Resources */ = {isa = PBXBuildFile; fileRef = 0A63A30D1D4F017F00BE954F /* Mixpanel */; };
 		0A63A3151D4F027100BE954F /* libRNMixpanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A63A3141D4F025800BE954F /* libRNMixpanel.a */; };
 		0A63A3361D4F077300BE954F /* libMixpanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A63A3351D4F077300BE954F /* libMixpanel.a */; };
@@ -86,6 +87,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = chaz;
+		};
+		0A2AEDA31D572B9B001F2AA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A2AED9F1D572B9B001F2AA2 /* AutoGrowTextInput.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D81C36501CDB667F00777FB9;
+			remoteInfo = AutoGrowTextInput;
 		};
 		0A63A3131D4F025800BE954F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -169,6 +177,7 @@
 		00E356EE1AD99517003FC87E /* chazTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = chazTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* chazTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chazTests.m; sourceTree = "<group>"; };
+		0A2AED9F1D572B9B001F2AA2 /* AutoGrowTextInput.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AutoGrowTextInput.xcodeproj; path = "../node_modules/react-native-autogrow-textinput/ios/AutoGrowTextInput.xcodeproj"; sourceTree = "<group>"; };
 		0A63A30D1D4F017F00BE954F /* Mixpanel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mixpanel; sourceTree = "<group>"; };
 		0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNMixpanel.xcodeproj; path = "../node_modules/react-native-mixpanel/RNMixpanel.xcodeproj"; sourceTree = "<group>"; };
 		0A63A3351D4F077300BE954F /* libMixpanel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMixpanel.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/chaz-hdrqhdbuqcdllbhishsjlpdtoyta/Build/Products/Debug-iphonesimulator/Mixpanel/libMixpanel.a"; sourceTree = "<group>"; };
@@ -217,6 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2AEDB41D572BAB001F2AA2 /* libAutoGrowTextInput.a in Frameworks */,
 				0A63A3361D4F077300BE954F /* libMixpanel.a in Frameworks */,
 				0A63A3151D4F027100BE954F /* libRNMixpanel.a in Frameworks */,
 				0AB12B871D4EF0F600BAAEDA /* QuartzCore.framework in Frameworks */,
@@ -309,6 +319,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0A2AEDA01D572B9B001F2AA2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A2AEDA41D572B9B001F2AA2 /* libAutoGrowTextInput.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0A63A3101D4F025800BE954F /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +409,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0A2AED9F1D572B9B001F2AA2 /* AutoGrowTextInput.xcodeproj */,
 				0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */,
 				0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */,
 				0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */,
@@ -553,6 +572,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 0A2AEDA01D572B9B001F2AA2 /* Products */;
+					ProjectRef = 0A2AED9F1D572B9B001F2AA2 /* AutoGrowTextInput.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -655,6 +678,13 @@
 			fileType = archive.ar;
 			path = libRCTVibration.a;
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0A2AEDA41D572B9B001F2AA2 /* libAutoGrowTextInput.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAutoGrowTextInput.a;
+			remoteRef = 0A2AEDA31D572B9B001F2AA2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0A63A3141D4F025800BE954F /* libRNMixpanel.a */ = {

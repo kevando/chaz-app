@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import dismissKeyboard from 'dismissKeyboard'; // might not be safe
 import timer from 'react-native-timer';
+import {AutoGrowingTextInput} from 'react-native-autogrow-textinput';
 
 export default class RecTitle extends Component {
 
@@ -18,31 +19,36 @@ export default class RecTitle extends Component {
       rec: this.props.rec,
       title: this.props.rec.title,
       color: "#333",
-      borderColor:'#000',
+      borderColor:'#fff',
       showButton: false,
-      message:'first'
+      message:''
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({rec:nextProps.rec}); // cause we use previous rec state
+  }
+
+  componentWillUnmount() {
+    timer.clearTimeout('message');
   }
 
   render() {
     return (
       <View>
-      <Text style={styles.message}>{this.state.message}</Text>
-      <TextInput
+      <AutoGrowingTextInput
           style={[styles.titleInput, { borderColor: this.state.borderColor, color: this.state.color}]}
           onChangeText={(title) => this.setState({title})}
           value={this.state.title}
           placeholder="Add a title...?"
           ref="TitleInput"
-          onChange={ (event) => this.onChange(event) }
           onBlur={ (event) => this.onBlur(event) }
           onFocus={ (event) => this.onFocus(event) }
 
         />
-
+        <View style={{flex:1,flexDirection:'row',height:10}}>
         {( this.state.showButton // in case we want to do something if note is there
           ?
-
           <View style={{flex:1,flexDirection:'row'}}>
             <TouchableOpacity onPress={this.onSavePress.bind(this)}>
               <Text style={styles.button}>Update</Text>
@@ -51,13 +57,12 @@ export default class RecTitle extends Component {
             <TouchableOpacity onPress={this.onDismissPress.bind(this)}>
               <Text style={styles.dismiss}>Dismiss</Text>
             </TouchableOpacity>
-          </View>
-
+            </View>
           : null
         )}
-
-
-</View>
+        <Text>{this.state.message}</Text>
+      </View>
+    </View>
 
     );
   }
@@ -74,19 +79,11 @@ export default class RecTitle extends Component {
     this.renderMessage('');
   }
 
-  onChange(event) {
-    this.setState({
-      // displayHeight: Math.min(135, event.nativeEvent.contentSize.height+20),
-      // inputHeight: event.nativeEvent.contentSize.height
-    });
-  }
-
   onFocus(event) {
     this.setState({
       borderColor: '#ededed',
       showButton: true,
-      message:'Editing...',
-      // displayHeight: this.state.editHeight
+      // message:'Editing...',
     })
   }
 
@@ -94,21 +91,18 @@ export default class RecTitle extends Component {
     this.setState({
       borderColor: '#fff',
       showButton: false,
-      // displayHeight: this.state.inputHeight
     });
   }
 
   renderMessage(message){
     this.setState({message:message})
-    timer.setTimeout( 'loginTimeout',
+    timer.setTimeout( 'message',
       () => {
         this.setState({message:''})
-      },2000
+      },3000
     );
 
   }
-
-
 
 }
 
@@ -131,9 +125,5 @@ const styles = StyleSheet.create({
     fontSize:11,
     color:'red',
   },
-  message:{
-    position:'absolute',
-    top:1,
-    right:1,
-  }
+
 });
