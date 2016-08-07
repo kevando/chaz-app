@@ -9,21 +9,33 @@ const initialState = Immutable.Map({
   visible: [],
   sort: 'newest',
 
-  filters: Immutable.Map({ // chill spots, apps, docuemtaries, websites
+  filters: Immutable.Map({ // chill spots, docuemtaries, websites
     type: Immutable.Map({
       active: 'all',
-      queries: Immutable.Map({
-        all: Immutable.List.of('default','book','movie','tv','music','food','podcast','app','place'),
-        default: Immutable.List.of('default'),
-        book: Immutable.List.of('book'),
-        movie: Immutable.List.of('movie'),
-        tv: Immutable.List.of('tv'),
-        music: Immutable.List.of('music'),
-        food: Immutable.List.of('food'),
-        podcast: Immutable.List.of('podcast'),
-        app: Immutable.List.of('app'),
-        place: Immutable.List.of('place'),
-      })
+      list: Immutable.Map({
+        all: Immutable.Map({ title: 'All', query: Immutable.List.of('default','book','movie','tv','music','food','podcast','app','place')}),
+        default: Immutable.Map({ title: "Random", query: Immutable.List.of('default')}),
+        book: Immutable.Map({ title: "Books", query: Immutable.List.of('book')}),
+        movie: Immutable.Map({ title: "Movies", query: Immutable.List.of('movie')}),
+        tv: Immutable.Map({ title: "TV Shows", query: Immutable.List.of('tv')}),
+        music: Immutable.Map({ title: "Music", query: Immutable.List.of('music')}),
+        food: Immutable.Map({ title: "Food", query: Immutable.List.of('food')}),
+        podcast: Immutable.Map({ title: "Podcasts", query: Immutable.List.of('podcast')}),
+        app: Immutable.Map({ title: "Apps", query: Immutable.List.of('app')}),
+        place: Immutable.Map({ title: "Places", query: Immutable.List.of('place')}),
+      }),
+      // queries: Immutable.Map({
+      //   all: Immutable.List.of('default','book','movie','tv','music','food','podcast','app','place'),
+      //   default: Immutable.List.of('default'),
+      //   book: Immutable.List.of('book'),
+      //   movie: Immutable.List.of('movie'),
+      //   tv: Immutable.List.of('tv'),
+      //   music: Immutable.List.of('music'),
+      //   food: Immutable.List.of('food'),
+      //   podcast: Immutable.List.of('podcast'),
+      //   app: Immutable.List.of('app'),
+      //   place: Immutable.List.of('place'),
+      // })
     }),
     grade: Immutable.Map({ // not used just yet
       active: 'all',

@@ -14,7 +14,7 @@ export default class RecDate extends Component {
   render() {
     return (
         <View>
-          <Text style={{color:'#999',fontSize:12,textAlign:'right'}}>
+          <Text style={{color:'#333',fontSize:13,fontWeight:'400',textAlign:'right'}}>
             <TimeAgo time={this.props.timestamp} />
             </Text>
         </View>

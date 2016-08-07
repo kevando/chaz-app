@@ -19,8 +19,14 @@ import RecType from '../components/rec/RecType';
 
 // this is a traditional React component connected to the redux store
 class RecViewScreen extends Component {
+
   static navigatorStyle = {
-    navBarBackgroundColor: Style.constants.colors[1],
+    navBarTextColor: '#fff', // change the text color of the title (remembered across pushes)
+    navBarBackgroundColor: Style.constants.colors[1], // change the background color of the nav bar (remembered across pushes)
+    navBarButtonColor: '#fff', // change the button colors of the nav bar (eg. the back button) (remembered across pushes)
+    navBarHideOnScroll: false, // make the nav bar hidden only after the user starts to scroll
+    navBarTransparent: false, // make the nav bar transparent, works best with drawUnderNavBar:true
+    drawUnderNavBar: false, // draw the screen content under the nav bar, works best with navBarTranslucent:true
   };
 
   constructor(props) {
