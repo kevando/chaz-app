@@ -13,6 +13,7 @@ Here are some resources and notes about the development of chaz.
 - https://facebook.github.io/react-native/docs/flexbox.html
 - https://docs.fabric.io/apple/beta/beta-walkthrough.html
 - [Chat UI]: https://github.com/FaridSafi/react-native-gifted-chat
+- [Hot Push]: https://github.com/Microsoft/react-native-code-push
 
 ## Configure Development environment*
 

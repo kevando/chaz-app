@@ -18,87 +18,93 @@ export default class ListItem extends Component {
   }
 
   render() {
-    // removing add recr until 0.7.7
+    // removing add recr until 0.8
     // {this.renderRecrDisplay()}
 
     var rec = this.props.rec;
 
     return (
-      <TouchableOpacity style={styles.row} onPress={ this.onRecPress.bind(this) }>
-        <View style={styles.left}>
-          <RecType type={rec.type} size={25} />
-        </View>
-        <View style={styles.middle}>
-          <Text style={styles.title} >{rec.title}</Text>
+      <TouchableOpacity onPress={ this.onRecPress.bind(this) }>
 
-            {this.renderRecComment()}
+        <View style={styles.row} >
+
+          <View style={styles.innerRowTop}>
+            <View style={styles.left} >
+              <RecType type={rec.type} size={30} />
+            </View>
+            <View style={styles.right} >
+              <Text style={styles.title} >{rec.title}</Text>
+              { this.renderRecNote() }
+            </View>
+          </View>
+
+          <View style={styles.innerRowBottom}>
+            <RecDate timestamp={rec.createdAt} />
+          </View>
+
         </View>
-        <View style={styles.right}>
-        <RecGrade grade={this.props.rec.grade} />
-        <RecDate timestamp={rec.createdAt} />
-        </View>
+
       </TouchableOpacity>
     );
   }
 
-  renderRecComment() {
-    if(this.props.rec.comment)
-    return(<Text>{this.props.rec.comment}</Text>);
+  renderRecNote() { // dont give spacing for note if its not there
+    if(this.props.rec.note)
+    return(<Text>{this.props.rec.note}</Text>);
   }
 
-  renderRecrDisplay() {
+  // renderRecrDisplay() {
+  //
+  //   const recr = this.props.rec.recr;
+  //   if(recr){
+  //     return (
+  //       <View style={styles.recrTextContainer}>
+  //         <View style={styles.recomendContainer}>
+  //           <Text style={styles.recommended} >Recommended by </Text>
+  //         </View>
+  //         <View style={styles.recrTextContainer}>
+  //           <TouchableOpacity style={styles.recrButton} onPress={ this.onRecrPress.bind(this) }>
+  //             <Text style={styles.recrText} >{recr.name}</Text>
+  //             </TouchableOpacity>
+  //         </View>
+  //       </View>
+  //
+  //     )
+  //   } else {
+  //     return (
+  //       <AddRecr rec={this.props.rec}/>
+  //     );
+  //   }
+  // }
 
-    const recr = this.props.rec.recr;
-    if(recr){
-      return (
-        <View style={styles.recrTextContainer}>
-          <View style={styles.recomendContainer}>
-            <Text style={styles.recommended} >Recommended by </Text>
-          </View>
-          <View style={styles.recrTextContainer}>
-            <TouchableOpacity style={styles.recrButton} onPress={ this.onRecrPress.bind(this) }>
-              <Text style={styles.recrText} >{recr.name}</Text>
-              </TouchableOpacity>
-          </View>
-        </View>
-
-      )
-    } else {
-      return (
-        <AddRecr rec={this.props.rec}/>
-      );
-    }
-  }
-
-  getRecrName() {
-    if(this.props.rec.recr)
-      return this.props.rec.recr.name
-  }
-  getRecrScore() {
-    if(this.props.rec.recr)
-      return this.props.rec.recrScore
-  }
+  // getRecrName() {
+  //   if(this.props.rec.recr)
+  //     return this.props.rec.recr.name
+  // }
+  // getRecrScore() {
+  //   if(this.props.rec.recr)
+  //     return this.props.rec.recrScore
+  // }
 
   onRecPress() {
-    var rec = this.props.rec;
     var recKey = this.props.rec._key;
 
-    // passed in via props, not redux. how can i make the view page auto refresh
+    // passed in via props, not redux.
     this.props.navigator.push({
-      title: "",
+      title: "Recommendation",
       screen: "chaz.RecViewScreen",
       backButtonTitle: 'Back',
-      passProps: { currentRec: rec,recKey }
+      passProps: { recKey }
     });
   }
 
-  onRecrPress() {
-    this.props.navigator.push({
-      title: "",
-      screen: "chaz.RecrViewScreen",
-      passProps: {recrKey:this.props.rec.recr._key }
-    });
-  }
+  // onRecrPress() {
+  //   this.props.navigator.push({
+  //     title: "",
+  //     screen: "chaz.RecrViewScreen",
+  //     passProps: {recrKey:this.props.rec.recr._key }
+  //   });
+  // }
 
 }
 
@@ -108,93 +114,49 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomWidth:1,
     borderBottomColor: '#ddd',
-
-    flexDirection: 'row',
+    flexDirection: 'column', // inner rows on top of each other
     paddingTop:5,
     paddingBottom:5,
     paddingLeft:5,
     paddingRight:5
   },
+  innerRowTop: {
+    backgroundColor:'#fff',
+    flexDirection: 'row',
+    flex:1,
+  },
+  innerRowBottom: {
+    backgroundColor:'#fff',
+    flexDirection: 'row',
+    flex:1,
+    paddingLeft: 10, // trying to align w emoji
+    paddingTop: 7, // Swarm did this, so I am too
+  },
   left: {
     flex:2,
     justifyContent: 'center', // vertical middle
     flexDirection: 'column',
-    // backgroundColor: 'yellow'
-  },
-  middle: {
-    flex:12,
-    flexDirection: 'column',
-    // backgroundColor: 'blue',
-    justifyContent: 'center', // vertical middle
+    backgroundColor: '#fff'
   },
   right: {
-    flex:4,
+    flex:14,
     justifyContent: 'center', // vertical middle
     flexDirection: 'column',
-    // backgroundColor:'yellow'
+    backgroundColor:'#fff',
+    paddingLeft:5
   },
   title: {
     textAlign: 'left',
-    fontSize: 18,
-    fontWeight: '500',
-    letterSpacing:1.3
+    fontSize: 16,
+    fontWeight: '400',
+    letterSpacing:1.1
   },
-
-  recrButton: {
-    flex:1,
-    flexDirection: 'row',
-    justifyContent: 'flex-start' ,
-    paddingLeft:2,
-    paddingTop:1
-
-
-  },
-  recrGrade: {
-    flexDirection:'row',
-    justifyContent:'flex-end',
-    textAlign:'right'
-  },
-
-  recomendContainer: {
-    flexDirection:'row',
-    // backgroundColor:'blue'
-  },
-  recrTextContainer: {
-    flexDirection:'row',
-    // backgroundColor:'red'
-  },
-  recrText: {
-    justifyContent: 'flex-start' ,
-    fontSize: 14,
-    fontWeight: '500',
-    color: Style.constants.colors[2],
-    flexDirection:'row'
-
-  },
-  recommended: {
-    flexDirection:'row',
-    color:'#aaa'
-  },
-  addRecr: {
-    flex:1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end' ,
-    width:40
-
-  },
-  addRecrText: {
-    color: '#fff',
-    textAlign: 'center',
-    width:40,
-    backgroundColor: Style.constants.colors[2],
-    fontSize: 26,
-    marginTop:0,
-    marginBottom:0
-  },
-  score: {
-    textAlign: 'right',
-    fontSize: 14,
-    color:'#444',
-  },
+  note: {
+    textAlign: 'left',
+    fontSize: 11,
+    fontWeight: '300',
+    color: "#666",
+    letterSpacing:1.0
+  }
 
 });

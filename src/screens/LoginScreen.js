@@ -10,8 +10,11 @@ import {
 import { connect } from 'react-redux';
 import * as appActions from '../reducers/app/actions';
 import * as counterActions from '../reducers/counter/actions';
-import Style from '../style/Style';
+import GlobalStyle from '../style/Style';
 import Emoji from 'react-native-emoji';
+
+// const timer = require('react-native-timer');
+import timer from 'react-native-timer';
 
 // this is a traditional React component connected to the redux store
 class LoginScreen extends Component {
@@ -24,12 +27,15 @@ class LoginScreen extends Component {
       animated: false
     });
   }
+  componentWillUnmount() {
+    timer.clearTimeout('loginTimeout');
+  }
 
   render() {
     const count = this.props.counter.get('count'); // dev
 
     return (
-      <View style={{flex: 1, paddingTop: 130,backgroundColor: Style.constants.colors[0],alignItems:'center'}}>
+      <View style={{flex: 1, paddingTop: 130,backgroundColor: GlobalStyle.constants.colors[0],alignItems:'center'}}>
 
         <Text style={styles.text}>
           <Text style={{fontWeight: '500',color:'#fff',fontSize:100}}>chaz</Text>
@@ -64,9 +70,16 @@ class LoginScreen extends Component {
   renderHeart(){
     return <Text style={{fontSize: 90,textAlign:'center'}}><Emoji name="yellow_heart" /></Text>
   }
+
   onHeartPress(){
+    timer.setTimeout( 'loginTimeout',
+      () => {
+        this.setState({authResponse:'something went wrong, probably no internet'})
+      },5000
+    );
     this.props.dispatch(appActions.login())
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -81,7 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
     marginTop:10,
-    color:Style.constants.colors[0]
+    color:GlobalStyle.constants.colors[0]
   },
   heartButton: {
     // backgroundColor: 'red',

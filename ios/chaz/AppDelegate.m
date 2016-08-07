@@ -32,8 +32,8 @@
   RCTSetLogFunction(CrashlyticsReactLogFunction);
 
 
-  // from manual install
-  [Mixpanel sharedInstanceWithToken:@"9b9622cd380a69a91ac1b9b9e1cd6423"]; // local
+  // I guess I don't need this
+  // [Mixpanel sharedInstanceWithToken:@"9b9622cd380a69a91ac1b9b9e1cd6423"]; // local
 
   NSURL *jsCodeLocation;
   jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
