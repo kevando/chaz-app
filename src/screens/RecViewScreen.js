@@ -16,6 +16,7 @@ import * as Style from '../style/Style';
 import RecGrade from '../components/rec/RecGrade';
 import AddRecr from '../containers/rec/AddRecr';
 import RecType from '../components/rec/RecType';
+import RecNote from '../components/rec/RecNote';
 
 // this is a traditional React component connected to the redux store
 class RecViewScreen extends Component {
@@ -35,10 +36,13 @@ class RecViewScreen extends Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
     this.state = {rec: {} }
   }
-  componentWillMount() { // fires on rec view load
+  componentWillMount() {
+    // fires on initial rec view load
     this.setRecFromRecList(this.props.rec.getIn(['all']));
   }
-  componentWillReceiveProps(nextProps) { // this fires when redux updates
+  componentWillReceiveProps(nextProps) {
+    // this fires when redux updates
+    // I think I use this for updating title and such
     this.setRecFromRecList(nextProps.rec.getIn(['all']));
   }
 
@@ -46,11 +50,11 @@ class RecViewScreen extends Component {
     const recKey = this.props.recKey;
     var Rec = recList.find(function(rec) { return rec.get('_key') === recKey; });
     if(Rec)
-      this.setState({rec:  Rec.toJS()});
+      this.setState({rec: Rec.toJS()});
   }
 
-  render() {
 
+  render() {
     // console.log('review RENDER',this.state.rec);
 
     return (
@@ -67,27 +71,13 @@ class RecViewScreen extends Component {
             </View>
           </View>
           <View style={{padding:15}}>
-          {( this.state.rec.note
-            ? <Text><Text style={{fontWeight:'600',fontSize:15}}>Note:</Text>{this.state.rec.note}</Text>
-            : <TextInput
-              style={{fontSize:15,height: 40,paddingLeft:10}}
-              onChangeText={(recNote) => this.setState({recNote})}
-              onSubmitEditing={(recNote) => this.props.dispatch(recActions.updateRecTitle(this.state.rec,recNote))}
-              value={this.state.recNote}
-              returnKeyType={'done'}
-              placeholder="Add a note..."
-              ref="NoteInput"
-
-            />
-          )}
-
-
-
+            <RecNote rec={this.state.rec} onSubmitFunction={this.onSubmitNote.bind(this)}  />
           </View>
         </View>
       </View>
     );
   }
+
   static navigatorButtons = {
     rightButtons: [{title: 'Delete',id: 'delete'}]
   }
@@ -105,6 +95,10 @@ class RecViewScreen extends Component {
         break;
     }
   }
+  onSubmitNote(note){ // passed into the RecNote component
+    this.props.dispatch(recActions.updateRecNote(this.state.rec,note));
+  }
+
   onDeletePress(){
     AlertIOS.alert(
         'Are you sure you want to delete this?',
@@ -248,9 +242,7 @@ const styles = StyleSheet.create({
     flex:1,
 
   },
-  recrText: {
-    color: Style.constants.colors[2]
-  }
+
 });
 
 // which props do we want to inject, given the global state?

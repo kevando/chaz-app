@@ -162,6 +162,17 @@ export function updateRecTitle(rec,title) {                  // UPDATE REC TITLE
     recsRef.update({ title: title });
   }
 }
+export function updateRecNote(rec,note) {                  // UPDATE REC NOTE
+  return function(dispatch, getState) {
+    console.log('rec',rec);
+    console.log('note',note)
+    const currentState = getState();
+    const uid = currentState.app.getIn(["authData","uid"]);
+    const recsRef = fireRef.child(`users/${uid}/recs/${rec._key}`);
+    recsRef.update({ note: note });
+  }
+}
+
 // export function setGrade(rec, grade) {                  // ADD NEW REC
 //   return function(dispatch, getState) {
 //     const currentState = getState();

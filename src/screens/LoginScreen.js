@@ -13,7 +13,8 @@ import * as counterActions from '../reducers/counter/actions';
 import GlobalStyle from '../style/Style';
 import Emoji from 'react-native-emoji';
 
-const timer = require('react-native-timer');
+// const timer = require('react-native-timer');
+import timer from 'react-native-timer';
 
 // this is a traditional React component connected to the redux store
 class LoginScreen extends Component {
