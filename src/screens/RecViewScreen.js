@@ -18,6 +18,7 @@ import AddRecr from '../containers/rec/AddRecr';
 import RecType from '../components/rec/RecType';
 import RecNote from '../components/rec/RecNote';
 import RecTitle from '../components/rec/RecTitle';
+import AddRecrButton from '../components/recr/AddRecrButton';
 
 // this is a traditional React component connected to the redux store
 class RecViewScreen extends Component {
@@ -63,6 +64,11 @@ class RecViewScreen extends Component {
           </View>
           <View style={{padding:15}}>
             <RecNote rec={this.state.rec} onSubmitFunction={this.onSubmitNote.bind(this)}  />
+          </View>
+          <View style={{padding:15}}>
+
+            <AddRecrButton onPress={this.onAddRecrPress.bind(this)} />
+
           </View>
         </View>
       </View>
@@ -114,6 +120,14 @@ class RecViewScreen extends Component {
     this.props.dispatch(recActions.removeRec(this.props.recKey));
     this.props.navigator.pop({
       animated: true
+    });
+  }
+
+  onAddRecrPress() {
+    this.props.navigator.showModal({
+      title: "",
+      screen: "chaz.RecrAddScreen",
+      passProps: { }
     });
   }
 
@@ -170,15 +184,6 @@ class RecViewScreen extends Component {
   //
   // }
 
-
-
-
-  // onAddRecrPress() {
-  //   var options = Array();
-  //   options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(rec,recrName) }    });
-  //   options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-  //   AlertIOS.prompt('Who recommended this?', null, options);
-  // }
 
   // not sure why i need to add this now?
   // assignRecr(rec,recrName) {

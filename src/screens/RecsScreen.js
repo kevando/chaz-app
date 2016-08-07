@@ -29,7 +29,8 @@ class RecsScreen extends Component {
     navBarTextColor: '#fff',
     navBarBackgroundColor: GlobalStyle.constants.colors[0],
     navBarButtonColor: '#fff',
-    statusBarTextColorScheme: 'light'
+    statusBarTextColorScheme: 'light',
+    navBarTransparent: true,
   };
 
   static navigatorButtons = {
