@@ -15,6 +15,7 @@ import Emoji from 'react-native-emoji';
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
 import * as Style from '../style/Style';
+import PopularRecrs from '../components/recr/PopularRecrs';
 
 // this is a traditional React component connected to the redux store
 class RecrAddScreen extends Component {
@@ -35,7 +36,10 @@ class RecrAddScreen extends Component {
       visibleHeight: Dimensions.get('window').height
     }
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
   }
+
+
   static navigatorStyle = {
     navBarTextColor: '#000000', // change the text color of the title (remembered across pushes)
     navBarBackgroundColor: '#f7f7f7', // change the background color of the nav bar (remembered across pushes)
@@ -43,7 +47,7 @@ class RecrAddScreen extends Component {
     navBarHidden: false, // make the nav bar hidden
   };
   componentDidMount() {
-    this.refs.TitleInput.focus(true);
+    this.refs.NameInput.focus(true);
     // keyboard shit
     DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
     // Disabling these 2 events for now, not sure if I need them at all
@@ -51,8 +55,8 @@ class RecrAddScreen extends Component {
     // DeviceEventEmitter.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
 
     // set recType
-    const recType = (this.props.rec.getIn(['filters','type','active']) != 'all' ? this.props.rec.getIn(['filters','type','active']) : 'default');
-    this.setState({type: recType})
+    // const recType = (this.props.rec.getIn(['filters','type','active']) != 'all' ? this.props.rec.getIn(['filters','type','active']) : 'default');
+    // this.setState({type: recType})
     this.props.navigator.setTitle({
       title: "New Recr" // the new title of the screen as appears in the nav bar
     });
@@ -88,14 +92,15 @@ class RecrAddScreen extends Component {
           style={{height: 40, paddingLeft:10}}
           onChangeText={(name) => this.setState({name})}
           value={this.state.name}
-          placeholder={"Who recommended? the thing"}
-          ref="RecrInput"
+          placeholder={"Who recommended "+this.props.recTitle+"?"}
+          ref="NameInput"
           enablesReturnKeyAutomatically={true}
           returnKeyType={'done'}
           onSubmitEditing={this.onAddRecrPress.bind(this)}
         />
         <View style={{borderTopColor:'#ccc',borderTopWidth:1}}>
-
+          <Text>Or select from one of your friends:</Text>
+          <PopularRecrs recrList={this.props.recr.getIn(['all'])} limit={5} onPress={this.onAssignExistingRecr.bind(this)} />
         </View>
         {( this.state.name == ''
         ?
@@ -108,41 +113,21 @@ class RecrAddScreen extends Component {
         </View>
 
         )}
-
-
-
       </View>
     );
   }
 
+  onAssignExistingRecr(recr){
+    this.props.dispatch(recrActions.assignRecr(this.props.recKey,recr.toJS()));
+    this.props.navigator.dismissModal();
+  }
+
   onAddRecrPress() {
-    this.props.dispatch(recrActions.addRecr(this.state.name));
 
-    // figure out a better way to have this onboarding pop up
-    // def have this much more intelligent, not conditionals
+    // check this person does not already exist TODO
+    this.props.dispatch(recrActions.addRecr(this.state.name,this.props.recKey));
 
-    // if(this.props.rec.getIn(['all']).size == 1) {
-    //   this.props.navigator.showLightBox({
-    //     screen: "chaz.OnboardPopup", // unique ID registered with Navigation.registerScreen
-    //     style: {
-    //       backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-    //       backgroundColor: "#ffffff30", // tint color for the background, you can specify alpha here (optional)
-    //     }
-    //   });
-    // }
-
-    // get recKey of most recent rec, the last one added just here
-    // var recList = this.props.rec.get('all');
-    // var lastRecKey = recList.last().get('_key'); // need key of most recent rec
-
-    // this.props.navigator.push({
-    //   title: "Recommendation",
-    //   screen: "chaz.RecViewScreen",
-    //   passProps: { recKey: lastRecKey },
-    //   animated:true,
-    //   navigatorButtons: {leftButtons: [{title: 'Done',id: 'pop'}]},
-    // });
-    // this.props.navigator.dismissModal();
+    this.props.navigator.dismissModal();
   }
 
 

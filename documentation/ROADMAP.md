@@ -3,13 +3,19 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.8 workspace ------------------------------------------------------------
 
+validate recr does not already exists
+
 
 assign emoji faces to recrs, give it some order or random
 
+need ability to CRUD recrs
 
+improve styling across the board, while i build onboarding
 list style, focus on making look good for all situations (w recr)
   yik yak for inspiration
 this screen says alot. very confusing... https://i.imgur.com/7hvrZdy.png
+
+get this ready to deploy to fabric, I want to test asap how grading will work
 
 
 # /0.8 workspace ------------------------------------------------------------

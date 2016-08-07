@@ -66,7 +66,7 @@ class RecsScreen extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'SET_LOADED', loaded: false}); // reset the app awareness that listener is off
     this.props.dispatch(recActions.listenForRecs()); // again i dont like this code here. but it works well
-    // this.props.dispatch(recrActions.listenForRecrs());
+    this.props.dispatch(recrActions.listenForRecrs()); // meh
   }
 
   render() {

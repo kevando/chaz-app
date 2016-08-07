@@ -2,15 +2,15 @@ import * as types from './actionTypes';
 
 const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
 const fireRef = new Firebase('https://chaz1.firebaseio.com/');
-const _ = require('lodash');
+// const _ = require('lodash');
 
-export function listenForRecrs() {
+export function listenForRecrs() { // called from RecsScreen
   return (dispatch, getState) => {
     const currentState = getState();
     const uid = currentState.app.getIn(["authData","uid"]);
     const recsRef = fireRef.child(`users/${uid}/recrs`);
     recsRef.on('value', (snap) => {
-      console.log('listen FOR RECRS')
+      console.log('listened FOR RECRS');
         dispatch(getRecrList(snap));
     });
   }
@@ -34,32 +34,45 @@ export function updateRecrList(recrs) {
   return { type: types.UPDATE_RECR_LIST,payload: recrs }
 }
 
-export function createRecr(recrName) {
+export function addRecr(name,recKey) {
   return(dispatch,getState) => {
 
     const currentState = getState();
     const uid = currentState.app.getIn(["authData","uid"]);
     const recrsRef = fireRef.child(`users/${uid}/recrs`);
 
-    // FIRST CHECK if recr exists
-    recrsRef.orderByChild("name").equalTo(recrName).once('value', (snapshot) => {
-      if(snapshot.exists()){
-        var recr = snapshot.val();
-        console.log('EXISTING RECR');
-        _.findKey(recr, function(recr,recrKey) {
-          console.log(recrKey); // should only ever return once
-          dispatch(assignRecr({_key:recrKey,name:recrName}));
-        });
-      } else {
-        console.log('CREATE NEW RECR');
-        var newRecr = recrsRef.push({ name: recrName, createdAt: Firebase.ServerValue.TIMESTAMP, });
+    // Name should have already been validated by this point
+    console.log('CREATE NEW RECR');
+    var newRecr = recrsRef.push({ name: name, createdAt: Firebase.ServerValue.TIMESTAMP, });
+    console.log('newRecr',newRecr)
+    if(recKey) {
+      // Also assign this new recr to the rec
+      // in both the recs and recrs firebase list
+      // console.log('now assign recr to recKey',recKey)
+      dispatch(assignRecr(recKey,{_key:newRecr.key(),name:name}));
+    }
 
-        // I would like a listener to hear this push, but i dont think thats possible
-        // dispatch this new recr and add it to the rec
-        dispatch(assignRecr({_key:newRecr.key(),name:recrName}));
-      }
 
-    });
+
+    // OLD Code
+    // recrsRef.orderByChild("name").equalTo(recrName).once('value', (snapshot) => {
+    //   if(snapshot.exists()){
+    //     var recr = snapshot.val();
+    //     console.log('EXISTING RECR');
+    //     _.findKey(recr, function(recr,recrKey) {
+    //       console.log(recrKey); // should only ever return once
+    //       dispatch(assignRecr({_key:recrKey,name:recrName}));
+    //     });
+    //   } else {
+    //     console.log('CREATE NEW RECR');
+    //     var newRecr = recrsRef.push({ name: recrName, createdAt: Firebase.ServerValue.TIMESTAMP, });
+    //
+    //     // I would like a listener to hear this push, but i dont think thats possible
+    //     // dispatch this new recr and add it to the rec
+    //     dispatch(assignRecr({_key:newRecr.key(),name:recrName}));
+    //   }
+    //
+    // });
 
   }
 
@@ -76,29 +89,25 @@ export function removeRecr(recrKey){                  // REMOVE REC
   }
 }
 
-export function assignRecr(recr) {
-  // console.log('DUDE',recr);
-  // this does three things
-  // 1) recr to rec in list, rec to recr
+export function assignRecr(recKey,recr) {
+  console.log('recKey',recKey)
+  console.log('recr',recr);
+  // Firebase bugs out with undefined data, but its probly good to
+  // clear recs from recr before assigning it to rec list
+  delete recr.recs; // this works even if recs is not there
+
   return(dispatch,getState) => {
     const currentState = getState();
-    var rec = currentState.rec.current;
-    // before doing anything, remove any rec from previous recr (if so)
-    if(currentState.rec.current.recr){
-      console.log('then we gotta clear an old recr')
-      const prevRecrRecsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${currentState.rec.current.recr._key}/recs/${rec._key}`);
-      prevRecrRecsRef.remove();
-    }
+    const uid = currentState.app.getIn(["authData","uid"]);
 
-    const recrRecsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${recr._key}/recs/${rec._key}`);
-    const recRef = fireRef.child(`users/${currentState.app.authData.uid}/recs/${rec._key}`);
+    // 1 assign recKey to recr recs list
+    const recrRecsRef = fireRef.child(`users/${uid}/recrs/${recr._key}/recs/${recKey}`);
+    recrRecsRef.set( {recKey:recKey}); // set entire rec objrect?
 
+    // 2 assign recr to rec
+    const recRef = fireRef.child(`users/${uid}/recs/${recKey}`);
+    recRef.update({recr: recr });
 
-
-    // 1 Assign Recr to rec in list (fires listener that also updates current rec display)
-    recRef.update({recr: {name: recr.name, _key:recr._key } });
-    // 2 add the rec to the recrs reclist
-    recrRecsRef.set( {title: rec.title,_key:rec._key});
   }
 
 }

@@ -56,7 +56,7 @@ class RecViewScreen extends Component {
         <View style={{backgroundColor:'#fff',padding:10}}>
           <View style={styles.row}>
             <View style={styles.left}>
-              <RecType type={this.state.rec.type} size={40} />
+              <RecType type={this.state.rec.type} size={41} />
             </View>
             <View style={styles.right}>
               <RecTitle rec={this.state.rec} onSubmitFunction={this.onSubmitTitle.bind(this)}  />
@@ -66,8 +66,13 @@ class RecViewScreen extends Component {
             <RecNote rec={this.state.rec} onSubmitFunction={this.onSubmitNote.bind(this)}  />
           </View>
           <View style={{padding:15}}>
-
-            <AddRecrButton onPress={this.onAddRecrPress.bind(this)} />
+          {(
+            this.state.rec.recr
+            ?
+              <Text>Recommended by: {this.state.rec.recr.name}</Text>
+            :
+              <AddRecrButton onPress={this.onAddRecrPress.bind(this)} />
+          )}
 
           </View>
         </View>
@@ -127,7 +132,7 @@ class RecViewScreen extends Component {
     this.props.navigator.showModal({
       title: "",
       screen: "chaz.RecrAddScreen",
-      passProps: { }
+      passProps: { recKey: this.state.rec._key, recTitle: this.state.rec.title }
     });
   }
 
@@ -250,7 +255,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     rec: state.rec, // not sure I want to do this
-    recr: state.recr
+    // recr: state.recr
   };
 }
 

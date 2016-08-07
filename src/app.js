@@ -115,7 +115,8 @@ export default class App {
       .then((newState) => {
         console.log('newState',newState);
 
-        // does this do anything?
+        // This will set correct initial root
+        // probably a good place to include the "app opened" tracking
         store.dispatch(appActions.appInitialized());
 
         })
@@ -134,7 +135,7 @@ export default class App {
   }
 
   startApp(root) {
-    switch (root) {
+    switch (root) { // not used
       case 'init':
         Navigation.startSingleScreenApp({
           screen: {
