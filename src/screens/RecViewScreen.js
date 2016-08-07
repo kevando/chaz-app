@@ -17,6 +17,7 @@ import RecGrade from '../components/rec/RecGrade';
 import AddRecr from '../containers/rec/AddRecr';
 import RecType from '../components/rec/RecType';
 import RecNote from '../components/rec/RecNote';
+import RecTitle from '../components/rec/RecTitle';
 
 // this is a traditional React component connected to the redux store
 class RecViewScreen extends Component {
@@ -46,14 +47,6 @@ class RecViewScreen extends Component {
     this.setRecFromRecList(nextProps.rec.getIn(['all']));
   }
 
-  setRecFromRecList(recList) {
-    const recKey = this.props.recKey;
-    var Rec = recList.find(function(rec) { return rec.get('_key') === recKey; });
-    if(Rec)
-      this.setState({rec: Rec.toJS()});
-  }
-
-
   render() {
     // console.log('review RENDER',this.state.rec);
 
@@ -62,12 +55,10 @@ class RecViewScreen extends Component {
         <View style={{backgroundColor:'#fff',padding:10}}>
           <View style={styles.row}>
             <View style={styles.left}>
-                  <RecType type={this.state.rec.type} size={40} />
+              <RecType type={this.state.rec.type} size={40} />
             </View>
             <View style={styles.right}>
-              <TouchableOpacity onPress={this.onTitlePress.bind(this)}>
-                  <Text style={{fontSize:20}}>{this.state.rec.title}</Text>
-                </TouchableOpacity>
+              <RecTitle rec={this.state.rec} onSubmitFunction={this.onSubmitTitle.bind(this)}  />
             </View>
           </View>
           <View style={{padding:15}}>
@@ -94,6 +85,16 @@ class RecViewScreen extends Component {
         console.log('Unhandled event ' + event.id);
         break;
     }
+  }
+  setRecFromRecList(recList) {
+    const recKey = this.props.recKey;
+    var Rec = recList.find(function(rec) { return rec.get('_key') === recKey; });
+    if(Rec)
+      this.setState({rec: Rec.toJS()});
+  }
+
+  onSubmitTitle(title) {
+    this.props.dispatch(recActions.updateRecTitle(this.state.rec,title));
   }
   onSubmitNote(note){ // passed into the RecNote component
     this.props.dispatch(recActions.updateRecNote(this.state.rec,note));
@@ -187,12 +188,6 @@ class RecViewScreen extends Component {
   // }
 
 
-  onTitlePress() {
-    var options = Array();
-    options.push({text: 'Submit',  onPress: (title) => { this.props.dispatch(recActions.updateRecTitle(this.state.rec,title)); }    });
-    options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-    AlertIOS.prompt('Change Title', null, options,'plain-text',this.state.rec.title);
-  }
 
   // onRecrPress() {
   //   this.props.navigator.push({
