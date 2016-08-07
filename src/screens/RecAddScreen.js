@@ -32,10 +32,17 @@ class RecAddScreen extends Component {
     this.state = {
       recTitle:'',
       recNote:'',
+      recType: '',
       visibleHeight: Dimensions.get('window').height
     }
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
+  static navigatorStyle = {
+    navBarTextColor: '#000000', // change the text color of the title (remembered across pushes)
+    navBarBackgroundColor: '#f7f7f7', // change the background color of the nav bar (remembered across pushes)
+    navBarButtonColor: '#DB4049', // change the button colors of the nav bar (eg. the back button) (remembered across pushes)
+    navBarHidden: false, // make the nav bar hidden
+  };
   componentDidMount() {
     this.refs.TitleInput.focus(true);
     // keyboard shit
@@ -43,6 +50,13 @@ class RecAddScreen extends Component {
     // Disabling these 2 events for now, not sure if I need them at all
     // DeviceEventEmitter.addListener('keyboardWillHide', this.keyboardWillHide.bind(this))
     // DeviceEventEmitter.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
+
+    // set recType
+    const recType = (this.props.rec.getIn(['filters','type','active']) != 'all' ? this.props.rec.getIn(['filters','type','active']) : 'default');
+    this.setState({type: recType})
+    this.props.navigator.setTitle({
+      title: "New Recommendation" // the new title of the screen as appears in the nav bar
+    });
   }
   keyboardWillShow (e) {                                         // minus nav height
     let newSize = Dimensions.get('window').height - e.endCoordinates.height-65
@@ -75,7 +89,7 @@ class RecAddScreen extends Component {
           style={{height: 40, paddingLeft:10}}
           onChangeText={(recTitle) => this.setState({recTitle})}
           value={this.state.recTitle}
-          placeholder="What was recommended?"
+          placeholder={"What "+ this.state.type +" being recommended?"}
           ref="TitleInput"
 
         />
@@ -84,7 +98,7 @@ class RecAddScreen extends Component {
           style={{fontSize:15,height: 40,paddingLeft:10}}
           onChangeText={(recNote) => this.setState({recNote})}
           value={this.state.recNote}
-          placeholder="Add a note..."
+          placeholder="Add a note about this moment..."
           ref="NoteInput"
 
         />
@@ -125,7 +139,7 @@ class RecAddScreen extends Component {
       screen: "chaz.RecViewScreen",
       passProps: { recKey: lastRecKey },
       animated:true,
-      navigatorButtons: {leftButtons: [{title: 'Back',id: 'pop'}]},
+      navigatorButtons: {leftButtons: [{title: 'Done',id: 'pop'}]},
     });
   }
 

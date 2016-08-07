@@ -13,11 +13,16 @@ export default class FilterItem extends Component {
   }
 
   render() {
-    var {option,active,onPress} = this.props;
-    var isActive = (active == option ? styles.active : null);
+    var {filter,active,onPress,filterObject,recCount} = this.props;
+    var activeButtonStyle = (active == filter ? styles.activeButton : null);
+    var activeTextStyle = (active == filter ? styles.activeText : null);
     return (
-      <TouchableOpacity style={[styles.filterButton,isActive]} onPress={onPress}>
-        <RecType type={option} size={35} />
+      <TouchableOpacity style={[styles.filterButton,activeButtonStyle]} onPress={onPress}>
+        <RecType type={filter} size={25} />
+        <Text style={[styles.filterText,activeTextStyle]}>{filterObject.get('title')}</Text>
+        <View style={styles.countContainer}>
+          <Text style={[styles.count,activeTextStyle]}>{recCount}</Text>
+        </View>
         </TouchableOpacity>
      );
   }
@@ -28,22 +33,44 @@ export default class FilterItem extends Component {
 const styles = StyleSheet.create({
 
   filterButton: {
-    backgroundColor:'#ddd',
+    backgroundColor:'#fff',
     flexDirection:'column',
     justifyContent:'center', //vertical align
-
-    borderRightWidth:2,
-    borderRightColor:GlobalStyle.constants.colors[1],
-    borderLeftWidth:2,
-    borderLeftColor:GlobalStyle.constants.colors[1],
+    borderRightWidth:1,
+    borderRightColor:"#ccc",//GlobalStyle.constants.colors[1],
+    borderLeftWidth:1,
+    borderLeftColor:"#ccc",//GlobalStyle.constants.colors[1],
     paddingTop:0,
     paddingBottom:0,
-    paddingLeft:12,
-    paddingRight:12,
+    paddingLeft:5,
+    paddingRight:5,
+    width:70
   },
-  active: {
-    backgroundColor:GlobalStyle.constants.colors[1]
+  activeButton: {
+    backgroundColor: GlobalStyle.constants.colors[1],
+  },
+  filterText: {
+    color:"#555",
+    fontSize:10,
+    fontWeight:'400',
+    textAlign:'center',
+  },
+  activeText: {
+    color:"#fff"
+  },
+  countContainer:{
+    height:10,
+    width:10,
+    position:'absolute',
+    top:2,
+    right:11,
+    flexDirection:'column',
+    justifyContent:'center', //vertical align
+  },
+  count: {
+    fontSize:7,
+    color:'#111',
+    textAlign:'center',
+    backgroundColor:'rgba(0,0,0,0)', //clear
   }
-
-
 })
