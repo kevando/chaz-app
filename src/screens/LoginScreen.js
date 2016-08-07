@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux';
 import * as appActions from '../reducers/app/actions';
 import * as counterActions from '../reducers/counter/actions';
+import * as onboardActions from '../reducers/onboard/actions';
 import GlobalStyle from '../style/Style';
 import Emoji from 'react-native-emoji';
 
@@ -31,8 +32,14 @@ class LoginScreen extends Component {
     timer.clearTimeout('loginTimeout');
   }
 
+  componentWillReceiveProps(nextProps) {
+    // this fires when redux updates
+    // I think I use this for updating title and such
+    console.log('new props. should have the auth data',nextProps)
+  }
+
   render() {
-    const count = this.props.counter.get('count'); // dev
+
 
     return (
       <View style={{flex: 1, paddingTop: 130,backgroundColor: GlobalStyle.constants.colors[0],alignItems:'center'}}>
@@ -46,38 +53,50 @@ class LoginScreen extends Component {
         </TouchableOpacity>
 
         <Text style={styles.purpleText}>
-          <Text style={{fontWeight: '100',color:'red'}}>{this.state.authResponse}</Text>
+          <Text style={{fontWeight: '100',color:'#fff'}}>{this.state.authResponse}</Text>
         </Text>
 
-        <Text style={styles.purpleText}>
-          <Text style={{fontWeight: '500'}}>Current Count: </Text> {this.props.counter.count}
-        </Text>
-        <Text style={styles.purpleText}>
-          <Text style={{fontWeight: '500'}}>Get Current Count: </Text> {count}
-        </Text>
-
-        <TouchableOpacity onPress={ this.onIncrementPress.bind(this) }>
-          <Text style={styles.purpleText}>Increment Counter</Text>
-        </TouchableOpacity>
 
       </View>
     );
   }
 
-  onIncrementPress() {
-    this.props.dispatch(counterActions.increment());
-  }
   renderHeart(){
     return <Text style={{fontSize: 90,textAlign:'center'}}><Emoji name="yellow_heart" /></Text>
   }
 
   onHeartPress(){
+    this.setState({authResponse:'Authenticating...'});
+
     timer.setTimeout( 'loginTimeout',
       () => {
-        this.setState({authResponse:'something went wrong, probably no internet'})
-      },5000
+        this.setState({authResponse:'Something went wrong, probably no internet'})
+      }, 7000
     );
-    this.props.dispatch(appActions.login())
+
+    this.props.dispatch(appActions.login());
+
+    // now run an interval of the pulsing heart, every second
+    // check each second if I am authenticated and can change ROOT
+
+
+
+    //
+    // // Check if we should show onboarding message
+    // if(this.props.onboard.get('currentStep') == 0){
+    //   // then increment the step, so we see a pop up
+    //   this.props.dispatch(onboardActions.increment());
+    // }
+
+
+
+
+    // timer.setTimeout( 'loginTimeout',
+    //   () => {
+    //     this.setState({authResponse:'something went wrong, probably no internet'})
+    //   },5000
+    // );
+
   }
 
 }
@@ -119,7 +138,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     counter: state.counter,
-    app: state.app
+    app: state.app,
+    onboard: state.onboard
   };
 }
 
