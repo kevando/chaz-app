@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 // import * as reducers from './reducers';
 import * as appActions from './reducers/app/actions';
 import * as counterActions from './reducers/counter/actions';
+import * as onboardActions from './reducers/onboard/actions';
 import analyticsMiddleware from './middleware/analyticsMiddleware'
 
 import { registerScreens } from './screens';
@@ -66,7 +67,7 @@ const load = storage.createLoader(engine);
 
 // load(store); // comment this out to not run async
 
-// engine.save({}); // This clears the state from local storage
+engine.save({}); // This clears the state from local storage
 
 // Notice that our load function will return a promise that can also be used
 // to respond to the restore event.
@@ -109,7 +110,10 @@ export default class App {
     // since react-redux only works on components, we need to subscribe this class manually
 
     store.subscribe(this.onStoreUpdate.bind(this));
-    // store.dispatch(appActions.appInitialized()); // do this elsewhere now
+
+    // Onboarding
+    store.subscribe(this.onStoreUpdateForOnboard.bind(this));
+
 
     load(store)
       .then((newState) => {
@@ -119,10 +123,36 @@ export default class App {
         // probably a good place to include the "app opened" tracking
         store.dispatch(appActions.appInitialized());
 
+
+
         })
         .catch(() => console.warn('Failed to load previous state'));
   }
 
+
+  onStoreUpdateForOnboard() {
+
+    // ONBOARDING STUFF. put in own function
+    const step = store.getState().onboard.get('step');
+    const currentStep = store.getState().onboard.get('currentStep');
+    console.log('step',step)
+    console.log('currentStep',currentStep)
+
+    if (currentStep != step) {
+      // immediately reconcile step so this doesnt repeat
+      // consider not doing increment to avoid eve getting out of sync
+      store.dispatch(onboardActions.incrementStep());
+
+      onboardingStepProps = store.getState().onboard.get('steps').get(currentStep);
+      // console.log('onboardingStepProps',onboardingStepProps)
+
+      Navigation.showLightBox({
+        screen: "chaz.OnboardPopup",
+        passProps: onboardingStepProps,
+        style: {backgroundBlur: "none", backgroundColor: onboardingStepProps.backgroundColor, }
+      });
+    }
+  }
 
   onStoreUpdate() {
     const root = store.getState().app.get('root');

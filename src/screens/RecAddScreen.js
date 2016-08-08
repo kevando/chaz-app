@@ -44,7 +44,14 @@ class RecAddScreen extends Component {
     navBarHidden: false, // make the nav bar hidden
   };
   componentDidMount() {
-    this.refs.TitleInput.focus(true);
+
+    // consider a better way to do this onboard conditional here
+    if(this.props.onboard.get('currentStep') == 1)
+      this.props.dispatch({type: 'INCREMENT_CURRENT_STEP'}); // Show tutorial message
+    else {
+      this.refs.TitleInput.focus(true); // dont auto show keyboard with popup
+    }
+
     // keyboard shit
     DeviceEventEmitter.addListener('keyboardWillShow', this.keyboardWillShow.bind(this));
     // Disabling these 2 events for now, not sure if I need them at all
@@ -57,6 +64,9 @@ class RecAddScreen extends Component {
     this.props.navigator.setTitle({
       title: "New Recommendation" // the new title of the screen as appears in the nav bar
     });
+
+
+
   }
   keyboardWillShow (e) {                                         // minus nav height
     let newSize = Dimensions.get('window').height - e.endCoordinates.height-65
@@ -130,15 +140,10 @@ class RecAddScreen extends Component {
     // figure out a better way to have this onboarding pop up
     // def have this much more intelligent, not conditionals
 
-    if(this.props.rec.getIn(['all']).size == 1) {
-      this.props.navigator.showLightBox({
-        screen: "chaz.OnboardPopup", // unique ID registered with Navigation.registerScreen
-        style: {
-          backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
-          backgroundColor: "#ffffff30", // tint color for the background, you can specify alpha here (optional)
-        }
-      });
-    }
+    // if(this.props.rec.getIn(['all']).size == 1) {
+    if(this.props.onboard.get('currentStep') == 2)
+      this.props.dispatch({type: 'INCREMENT_CURRENT_STEP'}); // Show tutorial message
+
 
     // get recKey of most recent rec, the last one added just here
     var recList = this.props.rec.get('all');
@@ -189,7 +194,8 @@ const styles = StyleSheet.create({
 // which props do we want to inject, given the global state?
 function mapStateToProps(state) {
   return {
-    rec: state.rec
+    rec: state.rec,
+    onboard: state.onboard
   };
 }
 

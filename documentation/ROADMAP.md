@@ -3,12 +3,21 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.8 workspace ------------------------------------------------------------
 
+
+
+created the initial onboarding (first 3 steps)
+kinda janky but i think it should work great once i get the wording better
+probably should store the conditions to move to the next step in the onboarding
+
+store onboard status in firebase
+then go through evernote, clean notes and get ui ideas
+
+edit rec type
+
+add onboarding progress to profile screen with current process
+
 validate recr does not already exists
-
-
 assign emoji faces to recrs, give it some order or random
-
-need ability to CRUD recrs
 
 improve styling across the board, while i build onboarding
 list style, focus on making look good for all situations (w recr)
@@ -16,7 +25,8 @@ list style, focus on making look good for all situations (w recr)
 this screen says alot. very confusing... https://i.imgur.com/7hvrZdy.png
 
 get this ready to deploy to fabric, I want to test asap how grading will work
-
+login is pretty much set now how I want it. Code is janky as fuck tho. so fix that
+need to be careful about onboarding getting out of sync. how to protect?
 
 # /0.8 workspace ------------------------------------------------------------
 

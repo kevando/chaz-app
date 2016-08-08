@@ -20,7 +20,7 @@ export default class AddRecButton extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.button} onPress={ this.props.onPress }>
-        <Text style={styles.buttonText}>New{this.renderTypeEmoji()}Recommendation</Text>
+        <Text style={styles.buttonText}>Add{this.renderTypeEmoji()}Recommendation</Text>
       </TouchableOpacity>
     );
   }

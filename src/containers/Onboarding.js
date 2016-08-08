@@ -39,10 +39,10 @@ class Onboarding extends Component {
         <Emoji name="raised_hands" />
         </Text>
           <Text style={{fontSize:32,color:'#222',textAlign:'center',marginBottom:10}}>
-          Welcome to Chaz
+          Thanks for trying chaz
           </Text>
           <Text style={{fontSize:22,color:'#222',textAlign:'center',margin:10}}>
-          Use this app when people recommend things to you.
+          Your app for storing recommendations.
           </Text>
 
         </View>

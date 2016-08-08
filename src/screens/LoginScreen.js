@@ -111,25 +111,27 @@ class LoginScreen extends Component {
     if(this.state.authResponse == 'Authenticating...')
       return;
 
-    this.pulseOnce();
     this.setState({authResponse:'Authenticating...'});
-    //
-    timer.setTimeout( this, 'loginTimeout', () => {
-      this.setState({authResponse:'Something went wrong, probably no internet'});
-      timer.clearInterval(this,'pulseInterval');
-    } , 10000);
-
-    timer.setTimeout( this, 'minimumWait', () => {
-      this.setState({canProceedToLogin:true});
-    } , 3000);
-
     this.props.dispatch(appActions.login());
 
-    // Now pulse at least 2 times before proceeding to the login page
-    timer.setInterval(this, 'pulseInterval', () => {
-      this.pulseOnce();
-      // console.log('Pulse Interval')
-    } , 3000);
+    this.setState({canProceedToLogin:true});
+
+    // this.pulseOnce();
+    // //
+    // timer.setTimeout( this, 'loginTimeout', () => {
+    //   this.setState({authResponse:'Something went wrong, probably no internet'});
+    //   timer.clearInterval(this,'pulseInterval');
+    // } , 10000);
+    //
+    // timer.setTimeout( this, 'minimumWait', () => {
+    //   this.setState({canProceedToLogin:true});
+    // } , 3000);
+    //
+    // // Now pulse at least 2 times before proceeding to the login page
+    // timer.setInterval(this, 'pulseInterval', () => {
+    //   this.pulseOnce();
+    //   // console.log('Pulse Interval')
+    // } , 3000);
 
   }
 
