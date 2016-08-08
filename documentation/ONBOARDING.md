@@ -1,10 +1,11 @@
 Draw this out
 
+
 # Onboarding
 
-Users need to know how to use your product in order to use it.
-Teaching them should be fun, interactive, and feel totally natural.
-
+Learning how to use a new product should be fun, engaging, leave no room for
+confusion, so chaz holds your hand ever step of the way. It should also feel
+very natural, so there is an extensive guide. NO OPTING OUT!
 
 ## chaz onboarding process
 
@@ -12,8 +13,16 @@ According to [name,link] from facebook, all products should lead users to that
 magic "aha" moment. For chaz, that moment is when you decide what suggestion
 based on your friend's score. Easier said than done!
 
+
 The user needs to put in quite a bit of work in order to get there, so chaz is
-designed to make that process as smooth and fun as possible.
+designed to make that process smooth and fun. It takes time, so we broke the
+process into stages:
+
+ - Add rec with new recr
+ - Repeat
+ - Grade a Rec
+ - Repeat
+ - Ask user to create account
 
 Your data belongs to you, and unless it improves your experience as a user, chaz
 does not mandate any user info. Users are prompted to provide only the following
@@ -22,11 +31,7 @@ you lose or break your phone. Also chaz gonna text you late at night.
 
 ### chaz onboarding overview
 
-#### Stages
- - Open app
- - Record Rec
- - Assign Recr
- - Grade a Rec (stage 1 complete)
+
 
 
 

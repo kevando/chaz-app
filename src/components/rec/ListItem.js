@@ -35,6 +35,7 @@ export default class ListItem extends Component {
             <View style={styles.right} >
               <Text style={styles.title} >{rec.title}</Text>
               { this.renderRecNote() }
+              { this.renderRecr() }
             </View>
           </View>
 
@@ -53,38 +54,10 @@ export default class ListItem extends Component {
     return(<Text style={styles.note}>{this.props.rec.note}</Text>);
   }
 
-  // renderRecrDisplay() {
-  //
-  //   const recr = this.props.rec.recr;
-  //   if(recr){
-  //     return (
-  //       <View style={styles.recrTextContainer}>
-  //         <View style={styles.recomendContainer}>
-  //           <Text style={styles.recommended} >Recommended by </Text>
-  //         </View>
-  //         <View style={styles.recrTextContainer}>
-  //           <TouchableOpacity style={styles.recrButton} onPress={ this.onRecrPress.bind(this) }>
-  //             <Text style={styles.recrText} >{recr.name}</Text>
-  //             </TouchableOpacity>
-  //         </View>
-  //       </View>
-  //
-  //     )
-  //   } else {
-  //     return (
-  //       <AddRecr rec={this.props.rec}/>
-  //     );
-  //   }
-  // }
-
-  // getRecrName() {
-  //   if(this.props.rec.recr)
-  //     return this.props.rec.recr.name
-  // }
-  // getRecrScore() {
-  //   if(this.props.rec.recr)
-  //     return this.props.rec.recrScore
-  // }
+  renderRecr() {
+    if(this.props.rec.recr)
+      return(<Text style={styles.recr}>Recommended by {this.props.rec.recr.name}</Text>);
+  }
 
   onRecPress() {
     var recKey = this.props.rec._key;
@@ -97,14 +70,6 @@ export default class ListItem extends Component {
       passProps: { recKey }
     });
   }
-
-  // onRecrPress() {
-  //   this.props.navigator.push({
-  //     title: "",
-  //     screen: "chaz.RecrViewScreen",
-  //     passProps: {recrKey:this.props.rec.recr._key }
-  //   });
-  // }
 
 }
 

@@ -50,7 +50,9 @@ export function login() {
         console.log("Login Failed!", error);
       } else {
         console.log("Login Succeeded!", authData); // this used to be a listener
-        dispatch(changeAppRoot('after-login')); // moving this to the screen
+
+        // dispatch(changeAppRoot('after-login')); // moving this to the screen
+
         dispatch({ type: types.USER_LOGIN, authData: authData });
       }
     });

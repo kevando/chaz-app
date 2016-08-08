@@ -6,8 +6,8 @@ import {
   StyleSheet
 } from 'react-native';
 import * as Style from '../../style/Style';
-import RecType from './RecType';
-export default class AddRecButton extends Component {
+// import RecType from './RecType';
+export default class AddRecrButton extends Component {
   constructor(props) {
     super(props);
   }
@@ -20,14 +20,14 @@ export default class AddRecButton extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.button} onPress={ this.props.onPress }>
-        <Text style={styles.buttonText}>Add{this.renderTypeEmoji()}Recommendation</Text>
+        <Text style={styles.buttonText}>Who recrd this?</Text>
       </TouchableOpacity>
     );
   }
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Style.constants.colors[1],
+    backgroundColor: Style.constants.colors[2],
     paddingTop:17,
     paddingBottom:17,
   },
