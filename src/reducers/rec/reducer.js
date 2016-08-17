@@ -1,11 +1,20 @@
 import * as types from './actionTypes';
 import * as Immutable from 'immutable';
 
+// cut down on syntax
+// import { List, Map } from 'immutable';
+
 var update = require('react/lib/update');
+
+// succinct hack for generating passable unique ids
+// const uid = () => Math.random().toString(34).slice(2);
+
+// DO I WANT A REC REDUCER???
+
 
 const initialState = Immutable.Map({
   loaded: false,
-  all: [],
+  all: Immutable.List(),
   visible: [],
   sort: 'newest',
 
@@ -70,6 +79,16 @@ export default function counter(state = initialState, action = {}) {
         return b.get('createdAt') - a.get('createdAt');
       });
       return state.set( 'visible', updatedList );
+
+    case types.ADD_REC:
+    // console.log
+      var rec = Immutable.Map({title: action.title});
+      // return state.mergeIn(['all']).push(rec);
+      var newAll = state.get('all').push(rec)
+      return state.merge({
+        all: newAll
+      });
+
 
     default:
       return state;

@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
-const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
-const fireRef = new Firebase('https://chaz1.firebaseio.com/');
+// const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
+// const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 
 export function listenForRecs() { //fetch
   return (dispatch, getState) => {
@@ -121,16 +121,19 @@ export function updateVisibleRecList() {
   }
 }
 
-export function addRec(recTitle,recNote) {                  // ADD NEW REC
-  return function(dispatch, getState) {
-    const currentState = getState();
-    const uid = currentState.app.getIn(["authData","uid"]);
-    const recsRef = fireRef.child(`users/${uid}/recs`);
-    const recType = (currentState.rec.getIn(['filters','type','active']) != 'all' ? currentState.rec.getIn(['filters','type','active']) : 'default');
-    var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,type:recType,note:recNote });
-    dispatch(trackRecAdded(recTitle,recType,currentState.rec.get('all').size));
+export function addRec(title,recNote) {
 
-  }
+  return { type: types.ADD_REC, title: title };
+
+  // return function(dispatch, getState) {
+  //   const currentState = getState();
+  //   const uid = currentState.app.getIn(["authData","uid"]);
+  //   const recsRef = fireRef.child(`users/${uid}/recs`);
+  //   const recType = (currentState.rec.getIn(['filters','type','active']) != 'all' ? currentState.rec.getIn(['filters','type','active']) : 'default');
+  //   var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,type:recType,note:recNote });
+  //   dispatch(trackRecAdded(recTitle,recType,currentState.rec.get('all').size));
+  //
+  // }
 }
 export function trackRecAdded(recTitle,recType,recsTotal){
   return {

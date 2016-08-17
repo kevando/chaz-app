@@ -1,204 +1,108 @@
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import { Navigation } from 'react-native-navigation';
-import thunk from 'redux-thunk';
-// import * as reducers from './reducers';
+import React, {
+  Component,
+} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+
 import * as appActions from './reducers/app/actions';
-import * as counterActions from './reducers/counter/actions';
-import * as onboardActions from './reducers/onboard/actions';
-import analyticsMiddleware from './middleware/analyticsMiddleware'
+import * as firebaseActions from './reducers/firebase/actions';
 
-import { registerScreens } from './screens';
+import Chaz from './scenes/Chaz';
 
-/// ------------------------------------------------------
-import * as storage from 'redux-storage'
 
-// Import redux and all your reducers as usual
+//  redux STUFF
+import * as storage from 'redux-storage';
+import merger from 'redux-storage-merger-immutablejs'; // i forget what this does
+import { connect } from 'react-redux';
+import { createStore, applyMiddleware, bindActionCreators } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
-// We need to wrap the base reducer, as this is the place where the loaded
-// state will be injected.
-//
-// Note: The reducer does nothing special! It just listens for the LOAD
-//       action and merge in the provided state :)
-// Note: A cusom merger function can be passed as second argument
-
-import merger from 'redux-storage-merger-immutablejs';
-
-// changing this up to add better "log out" functionality (per dan abramov)
-import rootReducer from './reducers'; // this now combines the reducers
-
+import rootReducer from './reducers';
 const reducer = storage.reducer(rootReducer,merger);
 
-// Now it's time to decide which storage engine should be used
-//
-// Note: The arguments to `createEngine` are different for every engine!
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');
 
-// And with the engine we can create our middleware function. The middleware
-// is responsible for calling `engine.save` with the current state afer
-// every dispatched action.
-//
-// Note: You can provide a list of action types as second argument, those
-//       actions will be filtered and WON'T trigger calls to `engine.save`!
-
-
-// const createStoreWithMiddleware = applyMiddleware(analyticsMiddleware,thunk)(createStore);
-
-
 const middleware = storage.createMiddleware(engine);
-// const middleware = storage.createMiddleware(engine,['ROOT_CHANGED']);
 
-// As everything is prepared, we can go ahead and combine all parts as usual
-const createStoreWithMiddleware = applyMiddleware(thunk,middleware,analyticsMiddleware)(createStore);
+
+const createStoreWithMiddleware = applyMiddleware(thunk,middleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
-// At this stage the whole system is in place and every action will trigger
-// a save operation.
-//
-// BUT (!) an existing old state HAS NOT been restored yet! It's up to you to
-// decide when this should happen. Most of the times you can/should do this
-// right after the store object has been created.
-
-// To load the previous state we create a loader function with our prepared
-// engine. The result is a function that can be used on any store object you
-// have at hand :)
 const load = storage.createLoader(engine);
+// load(store); // I now call this in the constructor
 
-// load(store); // comment this out to not run async
-
-engine.save({}); // This clears the state from local storage
-
-// Notice that our load function will return a promise that can also be used
-// to respond to the restore event.
-// load(store)
-//     .then((newState) => {
-//       console.log('Loaded state:', newState.counter.count);
-//       // var registerScreens = require('./screens');
-//       // registerScreens(store, Provider);
-//       // store.subscribe(App.onStoreUpdate.bind(this));
-//       App.afterReduxStoreLoaded();
-//     })
-//     .catch(() => console.log('Failed to load previous state'));
-
-
-/// -------------------------------------------------------
-
-
-// redux related book keeping (DEFAULT SHIT)
-// const createStoreWithMiddleware = applyMiddleware(analyticsMiddleware,thunk)(createStore);
-// const reducer = combineReducers(reducers);
-// const store = createStoreWithMiddleware(reducer);
-
-
-// ----------------------------------------------------------
-
-// screen related book keeping
-
-registerScreens(store, Provider);
+// engine.save({}); // This clears the state from local storage
 
 
 
+class App extends Component {
 
-
-
-
-
-// notice that this is just a simple class, it's not a React component
-export default class App {
-  constructor() {
-    // since react-redux only works on components, we need to subscribe this class manually
+  constructor(props) {
+    super(props);
+    this.state = {loading: true};
 
     store.subscribe(this.onStoreUpdate.bind(this));
-
-    // Onboarding
-    store.subscribe(this.onStoreUpdateForOnboard.bind(this));
-
+    // could probly also plug this into the REDUX_SAVE action
 
     load(store)
       .then((newState) => {
         console.log('newState',newState);
+        // If newState is empty, the user is opening app for the first time
+        // Otherwise it will return user data from redux
+        // REDUX_LOAD action  gets call that triggers this .then statement (i think)
+        // And that causses onStoreUpdate to run BEFORE the following code.
+        // not sure if that fucks anything up
 
-        // This will set correct initial root
-        // probably a good place to include the "app opened" tracking
-        store.dispatch(appActions.appInitialized());
+        if(Object.keys(newState).length === 0){ // newState = {}
+          //no user data, so create one
+          // but make sure user is not in firebase with data
+          store.dispatch(firebaseActions.checkForAppUser()); // dispatches CREATE_USER
 
+          // otherwise onStoreUpdate will run and set the route
+        } else {
+          store.dispatch({type:'SET_WELCOME_MESSAGE',message:'0: User was previously found in redux'})
+        }
+      })
+      .catch(() => console.warn('Failed to load previous state'));
 
-
-        })
-        .catch(() => console.warn('Failed to load previous state'));
   }
-
-
-  onStoreUpdateForOnboard() {
-
-    // ONBOARDING STUFF. put in own function
-    const step = store.getState().onboard.get('step');
-    const currentStep = store.getState().onboard.get('currentStep');
-    console.log('step',step)
-    console.log('currentStep',currentStep)
-
-    if (currentStep != step) {
-      // immediately reconcile step so this doesnt repeat
-      // consider not doing increment to avoid eve getting out of sync
-      store.dispatch(onboardActions.incrementStep());
-
-      onboardingStepProps = store.getState().onboard.get('steps').get(currentStep);
-      // console.log('onboardingStepProps',onboardingStepProps)
-
-      Navigation.showLightBox({
-        screen: "chaz.OnboardPopup",
-        passProps: onboardingStepProps,
-        style: {backgroundBlur: "none", backgroundColor: onboardingStepProps.backgroundColor, }
-      });
-    }
-  }
-
   onStoreUpdate() {
-    const root = store.getState().app.get('root');
-    // handle a root change
-    // if your app doesn't change roots in runtime, you can remove onStoreUpdate() altogether
-    if (this.currentRoot != root) {
-      this.currentRoot = root;
-      this.startApp(root);
+    // Dispatch to the route the first time we notice user data in state
+    const user = store.getState().app.get('user');
+    console.log('USER in onStoreUpdate',user);
+
+    // Only continue if User object is not empty
+    if(Object.keys(user).length === 0)
+      return;
+
+    if (this.currentUser != user) {
+      console.log('This is our first time hearing about user data! APP IS GOOD TO GO!');
+      this.currentUser = user;
+      this.setState({loading:false});
     }
   }
 
-  startApp(root) {
-    switch (root) { // not used
-      case 'init':
-        Navigation.startSingleScreenApp({
-          screen: {
-            screen: 'chaz.InitScreen',
-            title: 'Initlializing',
-            navigatorStyle: {}
-          },
-          passProps: {}
-        });
-        return;
+  getInitialRoute(){
+    return 'recList';
+  }
 
-      case 'login':
-        Navigation.startSingleScreenApp({
-          screen: {
-            screen: 'chaz.LoginScreen',
-            title: 'Login',
-            navigatorStyle: {}
-          },
-          passProps: {}
-        });
-        return;
-      case 'after-login':
-        Navigation.startSingleScreenApp({
-          screen: {
-            screen: 'chaz.RecsScreen',
-            title: '',
-            navigatorStyle: {}
-          },
-          passProps: {}
-        });
-        return;
-      default:
-        console.error('Unknown app root');
-    }
+  render() {
+    // I think I dont want to render anything until I have user data in Redux state
+    if(this.state.loading)
+      return(<View><Text>LOADING APP PLEASE WAIT</Text></View>)
+
+    return (
+      <Provider store={store}>
+        <Chaz initialRoute={ this.getInitialRoute() } />
+      </Provider>
+    );
   }
 }
+
+
+export default App;

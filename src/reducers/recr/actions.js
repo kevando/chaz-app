@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
-const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
-const fireRef = new Firebase('https://chaz1.firebaseio.com/');
+// const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
+// const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 // const _ = require('lodash');
 
 export function listenForRecrs() { // called from RecsScreen
