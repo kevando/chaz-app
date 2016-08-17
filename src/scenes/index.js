@@ -35,69 +35,23 @@ import RecList from './Rec/List';
 import RecAdd from './Rec/Add';
 import RecView from './Rec/View';
 import Profile from './Profile/Profile'
+import Welcome from './Welcome'
 
-const Right = () => (
-  <Text
-    style={{
-      width: 80,
-      height: 37,
-      position: 'absolute',
-      bottom: 4,
-      right: 2,
-      padding: 8,
-    }}
-  >Right</Text>
-);
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: 'transparent', justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tabBarStyle: {
-    backgroundColor: '#eee',
-  },
-  tabBarSelectedItemStyle: {
-    backgroundColor: '#ddd',
-  },
-});
-
-
-// let currentSwitchPage = 'text1';
-
-// const SwitcherPage = (props) => (
-//   <View>
-//     <Text style={{ marginTop: 100, textAlign: 'center' }}>current page: {props.text}</Text>
-//     <Button
-//       onPress={() => {
-//         currentSwitchPage = currentSwitchPage === 'text1' ? 'text2' : 'text1';
-//         Actions.refresh({ key: 'switcher' });
-//       }}
-//     >
-//       Switch!
-//     </Button>
-//     <Button
-//       onPress={() => {
-//         Actions.launch({ type: ActionConst.RESET });
-//       }}
-//     >
-//       Exit
-//     </Button>
-//   </View>
-// );
 
 export const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} >
     <Scene key="root" hideTabBar>
 
-      <Scene key="recList" component={RecList} title="Recs Screen"  />
+      <Scene key="welcome" component={Welcome} title="Welcome"  />
+      <Scene key="recList" component={RecList} title="Recs Screen" type={ActionConst.REPLACE} />
       <Scene key="recAdd" component={RecAdd} title="Add Rec" direction="vertical" />
       <Scene key="recView" component={RecView} title="View Rec" />
       <Scene key="profile" component={Profile} title="Profile" />
 
 
 
-      <Scene key="register" component={Register} title="Register" />
+      <Scene key="register" component={Register} title="Register"  />
 
       <Scene key="register2" component={Register} title="Register2" duration={1} />
       <Scene key="home" component={Home} title="Replace" type={ActionConst.REPLACE} />
