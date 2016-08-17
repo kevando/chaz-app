@@ -16,7 +16,11 @@ const styles = StyleSheet.create({
   }
 });
 
-class RecView extends Component {
+// TMP
+import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
+const engine = createEngine('async-data-v1');
+
+class Profile extends Component {
 
 
   componentDidMount() {
@@ -29,10 +33,8 @@ class RecView extends Component {
   render(){
     return (
       <View {...this.props}  style={styles.container}>
-        <Text>Rec View: </Text>
-        <Text>------------------------</Text>
-        <Text>profile page</Text>
-        
+
+        <Button onPress={this.clearStorage} style={{fontSize:30}}>engine.save()</Button>
       </View>
     );
   }
@@ -48,7 +50,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(RecView);
+export default connect(mapStateToProps)(Profile);
 
 //
 // module.exports = Launch;

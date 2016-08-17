@@ -9,14 +9,14 @@ import {
   Dimensions,
   DeviceEventEmitter
 } from 'react-native';
-import dismissKeyboard from 'dismissKeyboard'; // might not be safe
+// import dismissKeyboard from 'dismissKeyboard'; // might not be safe
 import { connect } from 'react-redux';
 import Emoji from 'react-native-emoji';
-import * as recActions from '../../reducers/rec/actions';
-import * as Style from '../../style/Style';
+import * as recActions from '../reducers/rec/actions';
+import * as Style from '../style/Style';
 
 // this is a traditional React component connected to the redux store
-class RecAdd extends Component {
+class RecommendationAdd extends Component {
   // static navigatorStyle = {
   //   statusBarColor: '#303F9F',
   //   navBarBackgroundColor: Style.constants.colors[1],
@@ -59,8 +59,8 @@ class RecAdd extends Component {
     // DeviceEventEmitter.addListener('keyboardDidHide', this.keyboardDidHide.bind(this))
 
     // set recType
-    const recType = (this.props.rec.getIn(['filters','type','active']) != 'all' ? this.props.rec.getIn(['filters','type','active']) : 'default');
-    this.setState({type: recType})
+    // const recType = (this.props.rec.getIn(['filters','type','active']) != 'all' ? this.props.rec.getIn(['filters','type','active']) : 'default');
+    // this.setState({type: recType})
     // this.props.navigator.setTitle({
     //   title: "New Recommendation" // the new title of the screen as appears in the nav bar
     // });
@@ -70,11 +70,11 @@ class RecAdd extends Component {
   }
   keyboardWillShow (e) {                                         // minus nav height
     let newSize = Dimensions.get('window').height - e.endCoordinates.height-65
-    this.setState({visibleHeight: newSize})
+    // this.setState({visibleHeight: newSize})
   }
 
   keyboardWillHide (e) {
-    this.setState({visibleHeight: Dimensions.get('window').height})
+    // this.setState({visibleHeight: Dimensions.get('window').height})
   }
   componentWillUnmount () {
     DeviceEventEmitter.removeAllListeners();
@@ -200,4 +200,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(RecAdd);
+export default connect(mapStateToProps)(RecommendationAdd);

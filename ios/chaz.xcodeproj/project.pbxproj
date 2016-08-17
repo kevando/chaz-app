@@ -14,8 +14,6 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* chazTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* chazTests.m */; };
 		0A63A30E1D4F017F00BE954F /* Mixpanel in Resources */ = {isa = PBXBuildFile; fileRef = 0A63A30D1D4F017F00BE954F /* Mixpanel */; };
-		0A63A3151D4F027100BE954F /* libRNMixpanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A63A3141D4F025800BE954F /* libRNMixpanel.a */; };
-		0A63A3361D4F077300BE954F /* libMixpanel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A63A3351D4F077300BE954F /* libMixpanel.a */; };
 		0AAB78EC1D4AF54F00ABD915 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AAB78E71D4AF53400ABD915 /* libRNDeviceInfo.a */; };
 		0AB12B7D1D4EF0D300BAAEDA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B7C1D4EF0D300BAAEDA /* UIKit.framework */; };
 		0AB12B7F1D4EF0DA00BAAEDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB12B7E1D4EF0D900BAAEDA /* Foundation.framework */; };
@@ -27,7 +25,6 @@
 		0AB42CE31D333D6400B33CE2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE21D333D6400B33CE2 /* SystemConfiguration.framework */; };
 		0AB42CE51D333D7400B33CE2 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE41D333D7400B33CE2 /* libz.tbd */; };
 		0AB42CE71D333D8100B33CE2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CE61D333D8100B33CE2 /* libsqlite3.0.tbd */; };
-		0AB42CEE1D3341EA00B33CE2 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB42CED1D3341D800B33CE2 /* libRCTGoogleAnalyticsBridge.a */; };
 		0AD224C11D3C1F2000038895 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD224BF1D3C1F2000038895 /* Fabric.framework */; };
 		0AD224C21D3C1F2000038895 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD224C01D3C1F2000038895 /* Crashlytics.framework */; };
 		0AD224C91D3C22A700038895 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD224C81D3C22A300038895 /* libSMXCrashlytics.a */; };
@@ -41,7 +38,6 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		347D11E181797B118D14690C /* libPods-chaz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 347705F1F90E41459CFDB729 /* libPods-chaz.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		CCCF23211C9C238500455574 /* libReactNativeControllers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CCCF23201C9C236100455574 /* libReactNativeControllers.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,26 +83,12 @@
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = chaz;
 		};
-		0A63A3131D4F025800BE954F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FDC64AF01BF1690D0044C1B4;
-			remoteInfo = RNMixpanel;
-		};
 		0AAB78E61D4AF53400ABD915 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
 			remoteInfo = RNDeviceInfo;
-		};
-		0AB42CEC1D3341D800B33CE2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0AB42CE81D3341D800B33CE2 /* RCTGoogleAnalyticsBridge.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A79185C61C30694E001236A6;
-			remoteInfo = RCTGoogleAnalyticsBridge;
 		};
 		0AD224C71D3C22A300038895 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -150,13 +132,6 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		CCCF231F1C9C236100455574 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCCF23111C9C236100455574 /* ReactNativeControllers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D8AFADBD1BEE6F3F00A4592D;
-			remoteInfo = ReactNativeControllers;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -170,7 +145,6 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* chazTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chazTests.m; sourceTree = "<group>"; };
 		0A63A30D1D4F017F00BE954F /* Mixpanel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mixpanel; sourceTree = "<group>"; };
-		0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNMixpanel.xcodeproj; path = "../node_modules/react-native-mixpanel/RNMixpanel.xcodeproj"; sourceTree = "<group>"; };
 		0A63A3351D4F077300BE954F /* libMixpanel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMixpanel.a; path = "../../../../../../Library/Developer/Xcode/DerivedData/chaz-hdrqhdbuqcdllbhishsjlpdtoyta/Build/Products/Debug-iphonesimulator/Mixpanel/libMixpanel.a"; sourceTree = "<group>"; };
 		0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		0AB12B7C1D4EF0D300BAAEDA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -183,7 +157,6 @@
 		0AB42CE21D333D6400B33CE2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0AB42CE41D333D7400B33CE2 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		0AB42CE61D333D8100B33CE2 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		0AB42CE81D3341D800B33CE2 /* RCTGoogleAnalyticsBridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGoogleAnalyticsBridge.xcodeproj; path = "../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/RCTGoogleAnalyticsBridge.xcodeproj"; sourceTree = "<group>"; };
 		0AD224BF1D3C1F2000038895 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		0AD224C01D3C1F2000038895 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
@@ -201,7 +174,6 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		B2885216B6E11EBC62EB8F32 /* Pods-chaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chaz/Pods-chaz.debug.xcconfig"; sourceTree = "<group>"; };
-		CCCF23111C9C236100455574 /* ReactNativeControllers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeControllers.xcodeproj; path = "../node_modules/react-native-controllers/ios/ReactNativeControllers.xcodeproj"; sourceTree = "<group>"; };
 		FE496490627F96E7DF4CC30D /* Pods-chaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-chaz/Pods-chaz.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,8 +189,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A63A3361D4F077300BE954F /* libMixpanel.a in Frameworks */,
-				0A63A3151D4F027100BE954F /* libRNMixpanel.a in Frameworks */,
 				0AB12B871D4EF0F600BAAEDA /* QuartzCore.framework in Frameworks */,
 				0AB12B851D4EF0F000BAAEDA /* CoreGraphics.framework in Frameworks */,
 				0AB12B831D4EF0EA00BAAEDA /* Accelerate.framework in Frameworks */,
@@ -228,13 +198,11 @@
 				0AB12B7D1D4EF0D300BAAEDA /* UIKit.framework in Frameworks */,
 				0AAB78EC1D4AF54F00ABD915 /* libRNDeviceInfo.a in Frameworks */,
 				0AD224C91D3C22A700038895 /* libSMXCrashlytics.a in Frameworks */,
-				0AB42CEE1D3341EA00B33CE2 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 				0AD224C21D3C1F2000038895 /* Crashlytics.framework in Frameworks */,
 				0AB42CE71D333D8100B33CE2 /* libsqlite3.0.tbd in Frameworks */,
 				0AB42CE51D333D7400B33CE2 /* libz.tbd in Frameworks */,
 				0AD224C11D3C1F2000038895 /* Fabric.framework in Frameworks */,
 				0AB42CE11D333D5800B33CE2 /* CoreData.framework in Frameworks */,
-				CCCF23211C9C238500455574 /* libReactNativeControllers.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -309,26 +277,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0A63A3101D4F025800BE954F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0A63A3141D4F025800BE954F /* libRNMixpanel.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		0AAB78D71D4AF53400ABD915 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				0AAB78E71D4AF53400ABD915 /* libRNDeviceInfo.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		0AB42CE91D3341D800B33CE2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0AB42CED1D3341D800B33CE2 /* libRCTGoogleAnalyticsBridge.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -391,10 +343,8 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */,
 				0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */,
 				0AD224C31D3C22A300038895 /* SMXCrashlytics.xcodeproj */,
-				0AB42CE81D3341D800B33CE2 /* RCTGoogleAnalyticsBridge.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -405,7 +355,6 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-				CCCF23111C9C236100455574 /* ReactNativeControllers.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -469,14 +418,6 @@
 				347705F1F90E41459CFDB729 /* libPods-chaz.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CCCF23121C9C236100455574 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CCCF23201C9C236100455574 /* libReactNativeControllers.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -561,10 +502,6 @@
 					ProjectRef = 00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */;
 				},
 				{
-					ProductGroup = 0AB42CE91D3341D800B33CE2 /* Products */;
-					ProjectRef = 0AB42CE81D3341D800B33CE2 /* RCTGoogleAnalyticsBridge.xcodeproj */;
-				},
-				{
 					ProductGroup = 00C302BC1ABCB91800DB3ED1 /* Products */;
 					ProjectRef = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
 				},
@@ -597,16 +534,8 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = CCCF23121C9C236100455574 /* Products */;
-					ProjectRef = CCCF23111C9C236100455574 /* ReactNativeControllers.xcodeproj */;
-				},
-				{
 					ProductGroup = 0AAB78D71D4AF53400ABD915 /* Products */;
 					ProjectRef = 0AAB78D61D4AF53400ABD915 /* RNDeviceInfo.xcodeproj */;
-				},
-				{
-					ProductGroup = 0A63A3101D4F025800BE954F /* Products */;
-					ProjectRef = 0A63A30F1D4F025800BE954F /* RNMixpanel.xcodeproj */;
 				},
 				{
 					ProductGroup = 0AD224C41D3C22A300038895 /* Products */;
@@ -657,25 +586,11 @@
 			remoteRef = 00C302E31ABCB9EE00DB3ED1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		0A63A3141D4F025800BE954F /* libRNMixpanel.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNMixpanel.a;
-			remoteRef = 0A63A3131D4F025800BE954F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		0AAB78E71D4AF53400ABD915 /* libRNDeviceInfo.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNDeviceInfo.a;
 			remoteRef = 0AAB78E61D4AF53400ABD915 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0AB42CED1D3341D800B33CE2 /* libRCTGoogleAnalyticsBridge.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTGoogleAnalyticsBridge.a;
-			remoteRef = 0AB42CEC1D3341D800B33CE2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0AD224C81D3C22A300038895 /* libSMXCrashlytics.a */ = {
@@ -718,13 +633,6 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CCCF23201C9C236100455574 /* libReactNativeControllers.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactNativeControllers.a;
-			remoteRef = CCCF231F1C9C236100455574 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

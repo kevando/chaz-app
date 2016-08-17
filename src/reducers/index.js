@@ -2,14 +2,14 @@ import { combineReducers } from 'redux'
 
 import app from './app/reducer';
 import counter from './counter/reducer';
-import rec from './rec/reducer';
+import recs from './rec/reducer';
 import recr from './recr/reducer';
 import onboard from './onboard/reducer';
 
 const reducers = {
   app,
   counter, // still used for some light testing
-  rec,
+  recs,
   recr,
   onboard,
 };

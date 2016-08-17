@@ -6,17 +6,19 @@ import {
   StyleSheet,
   AlertIOS
 } from 'react-native';
-import RecGrade from './RecGrade';
-import RecDate from './RecDate';
-import AddRecr from '../../containers/rec/AddRecr';
-import RecType from './RecType';
-import Style from '../../style/Style';
+
+import {Actions} from "react-native-router-flux";
+
+// import RecGrade from './RecGrade';
+// import RecDate from './RecDate';
+// import AddRecr from '../../containers/rec/AddRecr';
+// import RecType from './RecType';
+import Style from '../style/Style';
 export default class ListItem extends Component {
 
   constructor(props) {
     super(props);
   }
-
   render() {
     // removing add recr until 0.8
     // {this.renderRecrDisplay()}
@@ -24,29 +26,49 @@ export default class ListItem extends Component {
     var rec = this.props.rec;
 
     return (
-      <TouchableOpacity onPress={ this.onRecPress.bind(this) }>
-
-        <View style={styles.row} >
-
-          <View style={styles.innerRowTop}>
-            <View style={styles.left} >
-              <RecType type={rec.type} size={30} />
-            </View>
-            <View style={styles.right} >
-              <Text style={styles.title} >{rec.title}</Text>
-              { this.renderRecNote() }
-              { this.renderRecr() }
-            </View>
-          </View>
-
-          <View style={styles.innerRowBottom}>
-            <RecDate timestamp={rec.createdAt} />
-          </View>
+      <TouchableOpacity onPress={this.onItemPress.bind(this)}>
+      <View style={{padding:10}}>
+        <Text><Text style={{fontWeight:'700'}}>ID: </Text>{rec.id}</Text>
+        <Text><Text style={{fontWeight:'700'}}>Title: </Text>{rec.title}</Text>
 
         </View>
 
       </TouchableOpacity>
     );
+  }
+  onItemPress() {
+    Actions.recommendation(this.props.rec);
+  }
+  render_og() {
+    // // removing add recr until 0.8
+    // // {this.renderRecrDisplay()}
+    //
+    // var rec = this.props.rec;
+    //
+    // return (
+    //   <TouchableOpacity onPress={ this.onRecPress.bind(this) }>
+    //
+    //     <View style={styles.row} >
+    //
+    //       <View style={styles.innerRowTop}>
+    //         <View style={styles.left} >
+    //           <RecType type={rec.type} size={30} />
+    //         </View>
+    //         <View style={styles.right} >
+    //           <Text style={styles.title} >{rec.title}</Text>
+    //           { this.renderRecNote() }
+    //           { this.renderRecr() }
+    //         </View>
+    //       </View>
+    //
+    //       <View style={styles.innerRowBottom}>
+    //         <RecDate timestamp={rec.createdAt} />
+    //       </View>
+    //
+    //     </View>
+    //
+    //   </TouchableOpacity>
+    // );
   }
 
   renderRecNote() { // dont give spacing for note if its not there

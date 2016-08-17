@@ -12,8 +12,8 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 
-// #import <Fabric/Fabric.h>
-// #import <Crashlytics/Crashlytics.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 // @import Firebase;
 
@@ -44,7 +44,7 @@
 
 
   // [FIRApp configure];
-  // [Fabric with:@[[Crashlytics class]]];
+  [Fabric with:@[[Crashlytics class]]];
 
   return YES;
 }

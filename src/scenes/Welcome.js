@@ -24,20 +24,24 @@ class Welcome extends Component {
 
   constructor(props){
     super(props);
+
+    const {dispatch, subscribe} = this.props.store; // Redux passed in app.js
+    dispatch(firebaseActions.checkForAppUser()); // dispatches CREATE_USER
+    let unsubscribe = subscribe(this.onStoreUpdate.bind(this));
+
     this.state = {
-      status: 'idk',uid: 'none',loading:true
+      status: 'idk',uid: 'none',loading:true, unsubscribe:unsubscribe
     }
   }
 
-  componentDidMount() {
-    const {dispatch, subscribe} = this.props.store; // Redux passed in app.js
-
-    dispatch(firebaseActions.checkForAppUser()); // dispatches CREATE_USER
-    subscribe(this.onStoreUpdate.bind(this));
+  componentWillUnmount() {
+      console.log('Probably a better way to unsubscribe here...')
+      this.state.unsubscribe();
   }
 
   // redux store
   onStoreUpdate() {
+    console.log('ON STOPRE UPDATE I NEED TO UNSUBSCRIBE!!!!')
     // Dispatch to the route the first time we notice user data in state
     // const user = this.props.store.getState().app.get('user');
     var uid = this.props.store.getState().app.getIn(['user','uid']);
@@ -58,7 +62,7 @@ class Welcome extends Component {
           ?
           <Text>Loading from server</Text>
           :
-          <Button onPress={Actions.recList}>Go to Rec List Screen</Button>
+          <Button onPress={Actions.recommendations}>Go to Rec List Screen</Button>
         )}
 
       </View>

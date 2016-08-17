@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 // Might need to make this a container
-import ListItem from './ListItem';
+import ListItem from './RecListItem';
 
 export default class RecList extends Component {
   constructor(props) {
@@ -15,24 +15,20 @@ export default class RecList extends Component {
 
 
   render() {
-    // possible handler for an empty RecList
+
+    var recs = this.props.recs;
+
     return (
       <View>
-        {this.renderRecList()}
+        {
+          recs.map(rec => (
+             <ListItem key={rec.get('id')} rec={rec.toJS()} />
+          ))}
       </View>
     );
   }
 
-  renderRecList(onAddRecrPress) {
-    // Rec List is now passed in via props
-    var recList = this.props.recList;
 
-    var recs = recList.map((Rec) => {
-      var rec = Rec.toJS();
-      return (<ListItem key={rec._key} rec={rec} navigator={this.props.navigator} />)
-    });
-    return recs;
-  }
 }
 
 const styles = StyleSheet.create({

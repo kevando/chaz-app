@@ -20,11 +20,6 @@ import {
 
 import {Scenes} from './scenes';
 
-
-import * as appActions from './reducers/app/actions';
-import * as firebaseActions from './reducers/firebase/actions';
-
-
 //  redux STUFF
 import * as storage from 'redux-storage';
 import merger from 'redux-storage-merger-immutablejs'; // i forget what this does
@@ -48,7 +43,7 @@ const store = createStoreWithMiddleware(reducer);
 const load = storage.createLoader(engine);
 // load(store); // I now call this in the constructor
 
-engine.save({}); // This clears the state from local storage
+// engine.save({}); // This clears the state from local storage
 
 // I guess this is required to get the nav dimensions right?
 //
@@ -114,7 +109,7 @@ class App extends Component {
           // not sure if that fucks anything up
           // store.dispatch({type:'SET_WELCOME_MESSAGE',message:'0: User was previously found in redux'});
 
-          Scenes['recList'].initial = true;
+          Scenes['recommendations'].initial = true;
           this.setState({loading:false});
         }
       })
@@ -122,19 +117,19 @@ class App extends Component {
 
   }
   onStoreUpdate() {
-    // Dispatch to the route the first time we notice user data in state
-    const user = store.getState().app.get('user');
-    console.log('USER in onStoreUpdate',user);
-
-    // Only continue if User object is not empty
-    if(Object.keys(user).length === 0)
-      return;
-
-    if (this.currentUser != user) {
-      console.log('This is our first time hearing about user data! APP IS GOOD TO GO!');
-      this.currentUser = user;
-      this.setState({loading:false});
-    }
+    // // Dispatch to the route the first time we notice user data in state
+    // const user = store.getState().app.get('user');
+    // console.log('USER in onStoreUpdate',user);
+    //
+    // // Only continue if User object is not empty
+    // if(Object.keys(user).length === 0)
+    //   return;
+    //
+    // if (this.currentUser != user) {
+    //   console.log('This is our first time hearing about user data! APP IS GOOD TO GO!');
+    //   this.currentUser = user;
+    //   this.setState({loading:false});
+    // }
   }
 
   render() {

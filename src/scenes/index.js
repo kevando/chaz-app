@@ -31,10 +31,10 @@ import EchoView from '../nav_components/EchoView';
 import NavigationDrawer from '../nav_components/NavigationDrawer';
 import Button from 'react-native-button';
 
-import RecList from './Rec/List';
-import RecAdd from './Rec/Add';
-import RecView from './Rec/View';
-import Profile from './Profile/Profile'
+import Recommendations from './Recommendations';
+import RecommendationAdd from './RecommendationAdd';
+import Recommendation from './Recommendation';
+import Profile from './Profile'
 import Welcome from './Welcome'
 
 
@@ -44,9 +44,9 @@ export const Scenes = Actions.create(
     <Scene key="root" hideTabBar>
 
       <Scene key="welcome" component={Welcome} title="Welcome"  />
-      <Scene key="recList" component={RecList} title="Recs Screen" type={ActionConst.REPLACE} />
-      <Scene key="recAdd" component={RecAdd} title="Add Rec" direction="vertical" />
-      <Scene key="recView" component={RecView} title="View Rec" />
+      <Scene key="recommendations" component={Recommendations} title="Recommendationss" type={ActionConst.REPLACE} onLeft={()=>Actions.profile()} leftTitle="Exit" />
+      <Scene key="recommendationAdd" component={RecommendationAdd} title="Add Rec" direction="vertical" />
+      <Scene key="recommendation" component={Recommendation} title="View Rec" />
       <Scene key="profile" component={Profile} title="Profile" />
 
 
