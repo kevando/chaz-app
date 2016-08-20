@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import Emoji from 'react-native-emoji';
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
-import * as Style from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 import PopularRecrs from '../components/recr/PopularRecrs';
 
 // this is a traditional React component connected to the redux store

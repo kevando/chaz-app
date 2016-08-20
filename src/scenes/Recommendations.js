@@ -13,7 +13,7 @@ import RecAddButton from '../components/RecAddButton';
 // import Onboarding from '../../containers/Onboarding';
 // import FilterNav from '../containers/rec/FilterNav';
 import RecList from '../components/RecList';
-import * as GlobalStyle from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 
 
 // const Register = () => (

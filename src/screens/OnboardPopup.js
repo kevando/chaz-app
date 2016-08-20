@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import * as onboardActions from '../reducers/onboard/actions';
-import * as GlobalStyle from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 
 
 class OnboardPopup extends Component {

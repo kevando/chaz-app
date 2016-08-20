@@ -20,7 +20,7 @@ class RecrItem extends Component {
     this.state = {name: this.props.rec.name}
   }
   render() {
-    console.log('recr props',this.props.recr)
+    // console.log('recr props',this.props.recr)
     var recr = this.props.rec.recr;
     if(recr)
       return (<Text>{recr.name}</Text>)

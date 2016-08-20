@@ -12,7 +12,7 @@ import {
 import { connect } from 'react-redux';
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
-import * as Style from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 import RecGrade from '../components/rec/RecGrade';
 import AddRecr from '../containers/rec/AddRecr';
 import RecType from '../components/rec/RecType';

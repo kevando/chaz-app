@@ -72,7 +72,7 @@ class Chaz extends Component {
   onStoreUpdate() {
     var {store} = this.props;
     var onboard = store.getState().onboard;
-    console.log('onStoreUpdate onboard JS',onboard.toJS());
+    // console.log('onStoreUpdate onboard JS',onboard.toJS());
 
     if (onboard.get('showPopup')) {
       var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);

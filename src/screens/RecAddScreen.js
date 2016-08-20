@@ -13,7 +13,7 @@ import dismissKeyboard from 'dismissKeyboard'; // might not be safe
 import { connect } from 'react-redux';
 import Emoji from 'react-native-emoji';
 import * as recActions from '../reducers/rec/actions';
-import * as Style from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 
 // this is a traditional React component connected to the redux store
 class RecAddScreen extends Component {

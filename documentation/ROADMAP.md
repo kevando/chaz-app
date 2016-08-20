@@ -6,7 +6,7 @@ Here is a grouped list of planned features, broken out by version. To understand
 look at popup animated and try to understand how this works
 
 onboarding mvp is there!
-work on transitions
+work on transitions, profile page with onboard status, logout button
 
 
 / ui improvements

@@ -13,7 +13,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {Actions} from "react-native-router-flux";
 import { connect } from 'react-redux';
 import * as recActions from '../reducers/rec/actions';
-import * as Style from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 
 // this is a traditional React component connected to the redux store
 class RecommendationAdd extends Component {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
 
   },
   saveButton: {
-    backgroundColor: Style.constants.colors[1],
+    backgroundColor: GlobalStyle.constants.colors[1],
 
   },
   saveText: {

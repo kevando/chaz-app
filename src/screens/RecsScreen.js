@@ -16,7 +16,7 @@ import Loading from '../components/LoadingComponent';
 import Onboarding from '../containers/Onboarding';
 import FilterNav from '../containers/rec/FilterNav';
 import RecList from '../components/rec/RecList';
-import * as GlobalStyle from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 
 var DeviceInfo = require('react-native-device-info');
 

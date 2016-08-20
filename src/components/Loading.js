@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Animated, PropTypes, Easing } from 'react-native';
 import Emoji from 'react-native-emoji';
-const GlobalStyle = require('../style/Style');
+const GlobalStyle = require('../style/Global');
 
 // Not totally sure how all this works, but it looks great and I can
 // figure it out later

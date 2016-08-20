@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
-import * as Style from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 // import RecType from './RecType';
 export default class AddRecButton extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class AddRecButton extends Component {
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Style.constants.colors[1],
+    backgroundColor: GlobalStyle.constants.colors[1],
     paddingTop:17,
     paddingBottom:17,
   },

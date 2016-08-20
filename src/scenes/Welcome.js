@@ -4,6 +4,7 @@ import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
 import {connect} from 'react-redux';
 import * as firebaseActions from '../reducers/firebase/actions';
+import * as GlobalStyle from '../style/Global';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderWidth: 2,
     borderColor: 'red',
+    backgroundColor: GlobalStyle.constants.colors[0],
   }
 });
 
@@ -26,7 +28,7 @@ class Welcome extends Component {
     this.state = { status: 'idk',uid: 'none',loading:true }
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate(nextProps) { //todo change this after auth is improved
     var user = this.props.app.get('user');
     if(user && this.state.loading){ // Refresh screen with auth data
       var uid = user.get('uid');

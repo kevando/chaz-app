@@ -13,7 +13,7 @@ import {Actions} from "react-native-router-flux";
 // import RecDate from './RecDate';
 // import AddRecr from '../../containers/rec/AddRecr';
 // import RecType from './RecType';
-import Style from '../style/Style';
+import GlobalStyle from '../style/Global';
 export default class ListItem extends Component {
 
   constructor(props) {
@@ -24,7 +24,6 @@ export default class ListItem extends Component {
     // {this.renderRecrDisplay()}
 
     var rec = this.props.rec;
-    console.log('rec',rec)
 
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
