@@ -5,7 +5,10 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 look at popup animated and try to understand how this works
 
-onboarding
+onboarding mvp is there!
+work on transitions
+
+
 / ui improvements
 recrs (create popup for when there are many recrs to choose from)
 

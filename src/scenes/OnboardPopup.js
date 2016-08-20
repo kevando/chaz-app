@@ -44,6 +44,7 @@ class OnboardPopup extends Component {
     }
 
     render(){
+      console.log('props',this.props);
         return (
             <Animated.View style={[styles.container, {backgroundColor:"rgba(52,52,52,0.5)"},
                                   {transform: [{translateY: this.state.offset}]}]}>
@@ -52,7 +53,8 @@ class OnboardPopup extends Component {
                                 justifyContent: "center",
                                 alignItems: "center",
                                 backgroundColor:"white" }}>
-                    <Text>{this.props.data}</Text>
+                    <Text>{this.props.title}</Text>
+                    <Text>{this.props.instructions}</Text>
                     <Button onPress={this.closeModal.bind(this)}>Close</Button>
                 </View>
             </Animated.View>

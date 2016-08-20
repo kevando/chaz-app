@@ -2,14 +2,20 @@ import * as types from './actionTypes';
 import {Map,List} from 'immutable';
 
 const initialState = Map({
-  step: 0,
-  currentStep: 0,
+  step: 1666, // Step we should be at
+  currentStep: 1, // step we are are currently at
   queue: '',
+  showPopup: false,
   steps: List.of(
     // 0 Not used
     {title: 'I should never be seen'},
     // 1
     {
+      condition: function(state){
+        console.log('I AM A PASSED CONDTION FUNCTION',state);
+        return (state.recs.size == 0 ? true : false);
+      },
+      trigger: 'ADD_REC',
       title: 'Welcome to chaz',
       caption: 'The best way to save recommendations.', //tagline
       instructions:'Lets get started by adding a rec. click the blue button below',
@@ -59,13 +65,13 @@ export default function counter(onboard = initialState, action = {}) {
       return onboard.merge({
         currentStep: onboard.get('currentStep') + 1
       });
-      case types.INCREMENT_STEP: // only dispatched in app.js
-
+      case types.SHOW_ONBOARD_POPUP: // only dispatched in app.js
+        console.log('show pop up')
         return onboard.merge({
-          step: onboard.get('step') + 1
+          showPopup: action.payload
         });
 
-      case types.SET_QUEUE: // preps app for next onboarding step
+      case types.SET_ACTION_QUEUE: // preps app for next onboarding step
         return onboard.merge({
           queue: action.payload
         });
