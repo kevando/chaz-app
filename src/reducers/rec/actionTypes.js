@@ -5,3 +5,5 @@ export const SET_LOADED = 'SET_LOADED';
 export const UPDATE_REC_FILTER = 'UPDATE_REC_FILTER';
 
 export const ADD_REC = 'ADD_REC';
+export const UPDATE_REC = 'UPDATE_REC';
+export const DELETE_REC = 'DELETE_REC';

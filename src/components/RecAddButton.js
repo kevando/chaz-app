@@ -5,8 +5,8 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
-import * as Style from '../../style/Style';
-import RecType from './RecType';
+import * as Style from '../style/Style';
+// import RecType from './RecType';
 export default class AddRecButton extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ export default class AddRecButton extends Component {
   render() {
     return (
       <TouchableOpacity style={styles.button} onPress={ this.props.onPress }>
-        <Text style={styles.buttonText}>Add{this.renderTypeEmoji()}Recommendation</Text>
+        <Text style={styles.buttonText}>Add New Recommendation</Text>
       </TouchableOpacity>
     );
   }

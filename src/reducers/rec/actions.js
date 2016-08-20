@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-
+var uuid = require('react-native-uuid');
 // const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
 // const fireRef = new Firebase('https://chaz1.firebaseio.com/');
 
@@ -122,73 +122,44 @@ import * as types from './actionTypes';
 // }
 
 
-// succinct hack for generating passable unique ids
-// const uid = () => Math.random().toString(34).slice(2);
 
-var uuid = require('react-native-uuid');
-
-export function addRec(title,recNote) {
-
+export function addRec(title,note) {
   return {
     type: types.ADD_REC,
     payload: {
       id: uuid.v1(),
       title: title,
-      // will have a note soon
+      note: note,
     }
   };
+}
+export function updateRec(rec) {
+  return {
+    type: types.UPDATE_REC,
+    payload: rec
+  };
+}
+
+export function deleteRec(recId){                  // REMOVE REC
+  return {
+    type: types.DELETE_REC,
+    payload: {
+      id: recId,
+    }
+  }
 
   // return function(dispatch, getState) {
   //   const currentState = getState();
   //   const uid = currentState.app.getIn(["authData","uid"]);
   //   const recsRef = fireRef.child(`users/${uid}/recs`);
-  //   const recType = (currentState.rec.getIn(['filters','type','active']) != 'all' ? currentState.rec.getIn(['filters','type','active']) : 'default');
-  //   var newRec = recsRef.push({ title: recTitle, createdAt: Firebase.ServerValue.TIMESTAMP,type:recType,note:recNote });
-  //   dispatch(trackRecAdded(recTitle,recType,currentState.rec.get('all').size));
-  //
+  //   recsRef.child(recKey).remove();
+  //   // todo dispatch upgrade recr score and recs recr score
+  //   // consider if I need to do any other checks
+  //   // I feel like properly structred data would help alot here
+  //   dispatch({type: 'TRACK_REC_DELETED'});
   // }
 }
 
-// export function trackRecAdded(recTitle,recType,recsTotal){
-//   return {
-//     type: 'TRACK_REC_ADDED',
-//     payload: {
-//       recTitle: recTitle,
-//       recType: recType,
-//       recsTotal: recsTotal
-//     }
-//   }
-// }
-export function removeRec(recKey){                  // REMOVE REC
-  return function(dispatch, getState) {
-    const currentState = getState();
-    const uid = currentState.app.getIn(["authData","uid"]);
-    const recsRef = fireRef.child(`users/${uid}/recs`);
-    recsRef.child(recKey).remove();
-    // todo dispatch upgrade recr score and recs recr score
-    // consider if I need to do any other checks
-    // I feel like properly structred data would help alot here
-    dispatch({type: 'TRACK_REC_DELETED'});
-  }
-}
-export function updateRecTitle(rec,title) {                  // UPDATE REC TITLE
-  return function(dispatch, getState) {
-    const currentState = getState();
-    const uid = currentState.app.getIn(["authData","uid"]);
-    const recsRef = fireRef.child(`users/${uid}/recs/${rec._key}`);
-    recsRef.update({ title: title });
-  }
-}
-export function updateRecNote(rec,note) {                  // UPDATE REC NOTE
-  return function(dispatch, getState) {
-    console.log('rec',rec);
-    console.log('note',note)
-    const currentState = getState();
-    const uid = currentState.app.getIn(["authData","uid"]);
-    const recsRef = fireRef.child(`users/${uid}/recs/${rec._key}`);
-    recsRef.update({ note: note });
-  }
-}
 
 // export function setGrade(rec, grade) {                  // ADD NEW REC
 //   return function(dispatch, getState) {

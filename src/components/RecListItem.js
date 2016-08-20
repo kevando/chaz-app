@@ -24,12 +24,13 @@ export default class ListItem extends Component {
     // {this.renderRecrDisplay()}
 
     var rec = this.props.rec;
+    console.log('rec',rec)
 
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
-      <View style={{padding:10}}>
-        <Text><Text style={{fontWeight:'700'}}>ID: </Text>{rec.id}</Text>
-        <Text><Text style={{fontWeight:'700'}}>Title: </Text>{rec.title}</Text>
+      <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
+        <Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text>
+        <Text style={{fontWeight:'400',fontSize:15,color:'#ccc'}}>{rec.note}</Text>
 
         </View>
 
@@ -37,7 +38,8 @@ export default class ListItem extends Component {
     );
   }
   onItemPress() {
-    Actions.recommendation(this.props.rec);
+
+    Actions.recommendation({rec: this.props.rec});
   }
   render_og() {
     // // removing add recr until 0.8

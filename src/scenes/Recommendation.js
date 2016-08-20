@@ -2,52 +2,41 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
-
+import { bindActionCreators } from 'redux'
+import * as recActions from '../reducers/rec/actions';
+import RecNote from '../components/RecNote';
 import {connect} from 'react-redux';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent",
-    borderWidth: 2,
-    borderColor: 'red',
-  }
-});
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class RecView extends Component {
 
-
-  componentDidMount() {
-    // put this somewhere more universal
-    // console.log('IM SO COOL IM A POPUP');
-    // Actions.popup(this.props.app.get('welcomeMessage'));
-
-  }
-
   render(){
-    console.log('REC',this.props)
-    return (
-      <View {...this.props}  style={styles.container}>
-        <Text>Rec View: </Text>
-        <Text>------------------------</Text>
-        <Text>profile page</Text>
+    let { dispatch } = this.props;
+    let boundActionCreators = bindActionCreators(recActions, dispatch)
 
+    var {rec} = this.props;
+    return (
+      <View  style={{flex:1}}>
+        <Text>{rec.title}</Text>
+        <RecNote rec={rec} {...boundActionCreators} />
+        <Text>------------------------</Text>
+        <Button onPress={this.deleteRec.bind(this)}>Delete Rec</Button>
+
+        <KeyboardSpacer />
       </View>
     );
   }
 
+  deleteRec(){
+    var id = this.props.id;
+    this.props.dispatch(recActions.deleteRec(id));
+    Actions.pop();
+  }
 }
-
 
 function mapStateToProps(state) {
   return {
     app: state.app,
   };
 }
-
 export default connect(mapStateToProps)(RecView);
-
-//
-// module.exports = Launch;

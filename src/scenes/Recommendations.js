@@ -9,7 +9,7 @@ import * as firebaseActions from '../reducers/firebase/actions';
 
 
 import { connect } from 'react-redux';
-import AddRecButton from '../components/rec/AddRecButton';
+import RecAddButton from '../components/RecAddButton';
 // import Onboarding from '../../containers/Onboarding';
 // import FilterNav from '../containers/rec/FilterNav';
 import RecList from '../components/RecList';
@@ -47,7 +47,7 @@ class Recommendations extends Component {
           <ScrollView><RecList recs={recList} /></ScrollView>
 
         </View>
-        <AddRecButton activeType={"default"} onPress={Actions.recommendationAdd} />
+        <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
       </View>
     );
   }

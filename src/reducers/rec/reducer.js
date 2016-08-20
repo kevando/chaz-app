@@ -79,23 +79,21 @@ export default function counter(recs = initialState, action = {}) {
     //   });
     //   return state.set( 'visible', updatedList );
 
-    case 'ADD_TODO':
-      return todos.push(Map(action.payload));
-
     case types.ADD_REC:
-      // console.log
       return recs.push(Map(action.payload));
 
+    case types.UPDATE_REC:
+      // Find rec by index, and update entire object in recs List
+      return recs.update(
+        recs.findIndex(function(rec) {
+          return rec.get("id") === action.payload.id;
+        }), function(rec) {
+          return Map(action.payload); // return entire rec
+        }
+      );
 
-    case 'addd_rec_old':
-    // console.log
-      var rec = Map({title: action.title});
-      // return state.mergeIn(['all']).push(rec);
-      var newAll = state.get('all').push(rec)
-      return state.merge({
-        all: newAll
-      });
-
+    case types.DELETE_REC:
+      return recs.filterNot(rec => rec.get('id') == action.payload.id)
 
     default:
       return recs;

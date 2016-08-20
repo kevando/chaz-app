@@ -5,34 +5,20 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 back to original xcode project
 
-set timeout on auth in case firebase never responds
+Get app functional again, then work on transitions, then ui
 
-Get it working with type ui, then 
+edit rec
 
-consider how to better store recs more like TODO example
-that have local uid and such
+type ui
 
-bring app back to usable status
-then work on firebase sync
+---
+Cleanup
+app.js code add comments from app_old.js
+do something better w app loading scene and appcheckuser
+consider better file structure
 
-can i connect the router to redux. i think thats a good way to pass props
-firebase action creators will likely benefit from bindActionCreators
-
-
-clean up app.js code add comments from app_old.js
-do something better w app loading scene
-
-
-add mixpanel back
-remember to migrate user data, can I merge this back into the other project?
-
-change the icon to purple and deploy
-
-https://github.com/aksonov/react-native-router-flux/blob/master/package.json
-
-try to create local/dev/beta for each based on my bundle
-
-probly should refactor checkForAppUser
+add mixpanel back, WITH VERSIONING
+remember to migrate user data
 
  - refactored app so its offline by default and syncs with firebase
  - Changed navigator API

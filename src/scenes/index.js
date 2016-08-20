@@ -45,7 +45,10 @@ export const Scenes = Actions.create(
 
       <Scene key="welcome" component={Welcome} title="Welcome"  />
       <Scene key="recommendations" component={Recommendations} title="Recommendationss" type={ActionConst.REPLACE} onLeft={()=>Actions.profile()} leftTitle="Exit" />
-      <Scene key="recommendationAdd" component={RecommendationAdd} title="Add Rec" direction="vertical" />
+      <Scene key="recommendationAdd" component={RecommendationAdd} title="Add Rec" hideBackImage={true} backButtonTextStyle={{color:'red'}} backTitle="Cancel" direction="vertical" />
+      <Scene key="recommendationFromAdd" component={Recommendation} title="View Recy" type={ActionConst.REPLACE} />
+
+
       <Scene key="recommendation" component={Recommendation} title="View Rec" />
       <Scene key="profile" component={Profile} title="Profile" />
 
