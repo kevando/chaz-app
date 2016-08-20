@@ -25,33 +25,25 @@ class Welcome extends Component {
   constructor(props){
     super(props);
 
-    const {dispatch, subscribe} = this.props.store; // Redux passed in app.js
-    dispatch(firebaseActions.checkForAppUser()); // dispatches CREATE_USER
-    let unsubscribe = subscribe(this.onStoreUpdate.bind(this));
+    this.props.dispatch(firebaseActions.checkForAppUser()); // dispatches CREATE_USER
 
     this.state = {
-      status: 'idk',uid: 'none',loading:true, unsubscribe:unsubscribe
+      status: 'idk',uid: 'none',loading:true
     }
   }
 
-  componentWillUnmount() {
-      console.log('Probably a better way to unsubscribe here...')
-      this.state.unsubscribe();
-  }
-
-  // redux store
-  onStoreUpdate() {
-    console.log('ON STOPRE UPDATE I NEED TO UNSUBSCRIBE!!!!')
-    // Dispatch to the route the first time we notice user data in state
-    // const user = this.props.store.getState().app.get('user');
-    var uid = this.props.store.getState().app.getIn(['user','uid']);
-    var welcomeMessage = this.props.store.getState().app.get('welcomeMessage');
-
-    this.setState({status:welcomeMessage,uid:uid,loading:false});
-
+  componentDidUpdate(nextProps) {
+    var user = this.props.app.get('user');
+    if(user && this.state.loading){ // Refresh screen with auth data
+      var uid = user.get('uid');
+      var welcomeMessage = nextProps.app.get('welcomeMessage');
+      this.setState({status:welcomeMessage,uid:uid,loading:false});
+    }
   }
 
   render(){
+
+    console.log('this.props in RENDER',this.props);
 
     return (
       <View style={styles.container}>
@@ -72,6 +64,11 @@ class Welcome extends Component {
 }
 
 
+// which props do we want to inject, given the global state?
+function mapStateToProps(state) {
+  return {
+    app: state.app,
+  };
+}
 
-//
-module.exports = Welcome;
+export default connect(mapStateToProps)(Welcome);

@@ -3,10 +3,14 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.9 workspace ------------------------------------------------------------
 
+clean up app.js and chaz.js
 recrs (create popup for when there are many recrs to choose from)
 onboarding / ui improvements
 analytics middleware with firebase sync
 and thats a release
+
+better rec keyboard
+better edit text status and onComplete feedback
 
 ---
 Cleanup
@@ -21,7 +25,7 @@ remember to migrate user data
 
 
 
- - refactored app so its offline by default and syncs with firebase
+ - refactored app so its offline by default
  - Changed navigator API
 
 =---

@@ -21,7 +21,7 @@ const rootReducer = (state, action) => {
   //   state = undefined // Totally clear state when user logs out
   // }
   console.log('%c REDUX STATE:', 'color: blue',state);
-  console.log('%c REDUX ACTION:', 'color: blue',action)
+  console.log('%c REDUX ACTION:', 'color: blue',action);
   return appReducer(state, action)
 }
 
