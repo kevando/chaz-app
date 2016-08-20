@@ -18,6 +18,7 @@ and thats a release
 
 better rec keyboard
 better edit text status and onComplete feedback
+look at origami for ui ideas
 
 ---
 Cleanup
@@ -34,6 +35,7 @@ remember to migrate user data
 
  - refactored app so its offline by default
  - Changed navigator API
+ - Added some janky animation to welcome page
 
 =---
 

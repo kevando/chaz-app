@@ -14,6 +14,7 @@ Here are some resources and notes about the development of chaz.
 - https://docs.fabric.io/apple/beta/beta-walkthrough.html
 - [Chat UI]: https://github.com/FaridSafi/react-native-gifted-chat
 - [Hot Push]: https://github.com/Microsoft/react-native-code-push
+- [Tinder Swipe example]: https://github.com/brentvatne/react-native-animated-demo-tinder
 
 ## Configure Development environment*
 

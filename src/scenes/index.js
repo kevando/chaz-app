@@ -38,13 +38,21 @@ import Popup from './Popup';
 import OnboardPopup from './OnboardPopup';
 
 
+// not totally sure how all this works, I guess this is just a list of
+// scene transitions.
+
 export const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} >
     <Scene key="root" hideTabBar>
 
-      <Scene key="welcome" component={Welcome} title="Welcome"  />
+      <Scene key="welcome" component={Welcome} title="Welcome" hideNavBar  />
+
+
       <Scene key="recommendations" component={Recommendations} title="Recommendationss" type={ActionConst.REPLACE} onLeft={()=>Actions.profile()} leftTitle="Exit" />
+
+
+
       <Scene key="recommendationAdd" component={RecommendationAdd} title="Add Rec" hideBackImage={true} backButtonTextStyle={{color:'red'}} backTitle="Cancel" direction="vertical" />
       <Scene key="recommendationFromAdd" component={Recommendation} title="View Recy" type={ActionConst.REPLACE} />
 
