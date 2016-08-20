@@ -3,10 +3,14 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.9 workspace ------------------------------------------------------------
 
-clean up app.js and chaz.js
+look at popup animated and try to understand how this works
+
+onboarding
+/ ui improvements
 recrs (create popup for when there are many recrs to choose from)
-onboarding / ui improvements
-analytics middleware with firebase sync
+
+firebase sync: fix welcome message and how it pulls from fb on "auth" and where it sets initial scene
+analytics middleware
 and thats a release
 
 better rec keyboard

@@ -22,13 +22,9 @@ import {
   ActionConst,
   NavBar
 } from 'react-native-router-flux';
-// import Error from '../nav_components/Error';
-import Popup from './Popup'; // kev
-// import Home from '../nav_components/Home';
-// import TabView from '../nav_components/TabView';
-// import TabIcon from '../nav_components/TabIcon';
-// import EchoView from '../nav_components/EchoView';
-// import NavigationDrawer from '../nav_components/NavigationDrawer';
+
+
+
 import Button from 'react-native-button';
 
 import Recommendations from './Recommendations';
@@ -37,6 +33,9 @@ import Recommendation from './Recommendation';
 import Profile from './Profile'
 import Welcome from './Welcome'
 import RecommenderAdd from './RecommenderAdd';
+
+import Popup from './Popup';
+import OnboardPopup from './OnboardPopup';
 
 
 export const Scenes = Actions.create(
@@ -61,24 +60,8 @@ export const Scenes = Actions.create(
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
     <Scene key="recommenderAdd" component={RecommenderAdd} />
+    <Scene key="onboardPopup" component={OnboardPopup} />
   </Scene>
 
 
 );
-
-
-
-// Does this need to be redux?
-//
-// function mapStateToProps(state) {
-//   return {
-//     rec: state.rec,
-//     recr: state.recr,
-//     app: state.app,
-//     onboard: state.onboard
-//   };
-// }
-//
-// export default connect(mapStateToProps)(RouterContainer);
-
-// export default Chaz;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import Button from "react-native-button";
-// import {Actions} from "react-native-router-flux";
+
 
 import {
   // Scene,
@@ -14,11 +14,10 @@ import {
 } from 'react-native-router-flux';
 
 import {Scenes} from './';
-
 import {connect} from 'react-redux';
 
-import * as appActions from '../reducers/app/actions';
-import * as firebaseActions from '../reducers/firebase/actions';
+// import * as appActions from '../reducers/app/actions';
+import * as onboardActions from '../reducers/onboard/actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -61,55 +60,78 @@ class Chaz extends Component {
 
   constructor(props){
     super(props);
+    this.state = {loading: true};
+    // console.log('chaz props',this.props)
 
-    // const {dispatch, subscribe} = this.props.store; // Redux passed in app.js
-    // store.subscribe(this.onStoreUpdate.bind(this));
+    this.props.store.subscribe(this.onStoreUpdate.bind(this));
 
 
   }
+
+  // FOR ONBOARDING LOGIC
   onStoreUpdate() {
-    // // Dispatch to the route the first time we notice user data in state
-    // const user = store.getState().app.get('user');
-    // console.log('USER in onStoreUpdate',user);
+    var {store} = this.props;
+    var onboard = store.getState().onboard;
+    console.log('onStoreUpdate onboard JS',onboard.toJS());
+
+    // Check the current onboarding step's conditions to proceed
+    // If they are met, add next ACTION to the onboard action queue
+    // fn()
+    var recs = store.getState().recs;
+    console.log(recs.size);
+    if(recs.size == 0 && onboard.get('queue') == ''){
+      console.log('there are no recs, set ADD_REC to the ob queue')
+      store.dispatch(onboardActions.setQueue('ADD_REC'))
+
+    }
+
+    // now check if onboard steps are staggered because that means we need
+    // to show user a popup with the pertinant onboarding information
+
+    // Def want to make these names, currentStep something better
+    if (onboard.get('currentStep') != onboard.get('step')) {
+      console.log('Onboard is out of sync, so lets show the user some info and reconcile it!');
+      store.dispatch({type: 'INCREMENT_STEP'}); // I think this will fuck with things
+      this.setState({loading:false});
+      Actions.onboardPopup('You added your first rec!');
+    }
+
+    // If there is an action in the onboard queue and it matches the current action
+
+    // Actions.popup();
+  // // Dispatch to the route the first time we notice user data in state
+  // const user = store.getState().app.get('user');
+  // console.log('USER in onStoreUpdate',user);
+  //
+  // // Only continue if User object is not empty
+  // if(Object.keys(user).length === 0)
+  //   return;
+  //
+  // if (this.currentUser != user) {
+  //   console.log('This is our first time hearing about user data! APP IS GOOD TO GO!');
+  //   this.currentUser = user;
+  //   this.setState({loading:false});
+  // }
+}
 
 
+  componentDidUpdate(nextProps) {
+    // console.log('DidUpdate in chaz.js')
+    // if(this.state.loading){ // Refresh screen with auth data
+    //   // var uid = user.get('uid');
+    //   // var welcomeMessage = nextProps.app.get('welcomeMessage');
+    //   this.setState({loading:false});
+    // }
   }
 
-  componentWillUnmount() {
-      console.log('Probably a better way to unsubscribe here...')
-      // this.state.unsubscribe();
-  }
-
-  // redux store
-  onStoreUpdate() {
-    console.log('ON STOPRE UPDATE I NEED TO UNSUBSCRIBE!!!!')
-    // Dispatch to the route the first time we notice user data in state
-    // const user = this.props.store.getState().app.get('user');
-    // var uid = this.props.store.getState().app.getIn(['user','uid']);
-    // var welcomeMessage = this.props.store.getState().app.get('welcomeMessage');
-    //
-    // this.setState({status:welcomeMessage,uid:uid,loading:false});
-
-  }
-  componentWillReceiveProps(nextProps) {
-    // console.log('nextProps',nextProps);
-    // This gets invoked after ADD_REC updates the state tree
-    // Now pop router to recView
-    // var rec = nextProps.recs.last();
-    // Actions.recommendationFromAdd({rec:rec.toJS()});
-  }
 
   render(){
-
-    // dont think i want redux store in here. idk maybe. refactor welcome and remove it
     return (
-
       <Router
         createReducer={reducerCreate}
         scenes={Scenes}
         getSceneStyle={getSceneStyle}
       />
-
     );
   }
 

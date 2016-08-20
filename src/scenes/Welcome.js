@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
-
 import {connect} from 'react-redux';
-
-import * as appActions from '../reducers/app/actions';
 import * as firebaseActions from '../reducers/firebase/actions';
 
 const styles = StyleSheet.create({
@@ -24,12 +21,9 @@ class Welcome extends Component {
 
   constructor(props){
     super(props);
-
-    this.props.dispatch(firebaseActions.checkForAppUser()); // dispatches CREATE_USER
-
-    this.state = {
-      status: 'idk',uid: 'none',loading:true
-    }
+    // dispatches CREATE_APP_USER
+    this.props.dispatch(firebaseActions.checkForAppUser());
+    this.state = { status: 'idk',uid: 'none',loading:true }
   }
 
   componentDidUpdate(nextProps) {
@@ -42,8 +36,6 @@ class Welcome extends Component {
   }
 
   render(){
-
-    console.log('this.props in RENDER',this.props);
 
     return (
       <View style={styles.container}>
@@ -62,7 +54,6 @@ class Welcome extends Component {
   }
 
 }
-
 
 // which props do we want to inject, given the global state?
 function mapStateToProps(state) {

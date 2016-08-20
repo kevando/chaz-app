@@ -19,6 +19,8 @@ export function checkForAppUser() { // This dispatches CREATE_USER either way.
     var usersRef = fireRef.child('users');
     var userRef = usersRef.child(uid);
 
+    // fix this and add a timeout, and fix welcome message when this pulls from firebase on the else
+
     userRef.once("value", function(snapshot) {
       if(!snapshot.exists()){ // then lets create the user in firebase !
 

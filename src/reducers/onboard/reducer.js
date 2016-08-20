@@ -1,10 +1,11 @@
 import * as types from './actionTypes';
-import * as Immutable from 'immutable';
+import {Map,List} from 'immutable';
 
-const initialState = Immutable.Map({
+const initialState = Map({
   step: 0,
   currentStep: 0,
-  steps: Immutable.List.of(
+  queue: '',
+  steps: List.of(
     // 0 Not used
     {title: 'I should never be seen'},
     // 1
@@ -50,18 +51,26 @@ const initialState = Immutable.Map({
 
 });
 
-export default function counter(state = initialState, action = {}) {
+export default function counter(onboard = initialState, action = {}) {
 
   switch (action.type) {
     case types.INCREMENT_CURRENT_STEP:
-      return state.merge({
-        currentStep: state.get('currentStep') + 1
+      console.log('I WAS CALLED FROM ONBOARD MIDDLWARE!!')
+      return onboard.merge({
+        currentStep: onboard.get('currentStep') + 1
       });
       case types.INCREMENT_STEP: // only dispatched in app.js
-        return state.merge({
-          step: state.get('step') + 1
+
+        return onboard.merge({
+          step: onboard.get('step') + 1
         });
+
+      case types.SET_QUEUE: // preps app for next onboarding step
+        return onboard.merge({
+          queue: action.payload
+        });
+
     default:
-      return state;
+      return onboard;
   }
 }

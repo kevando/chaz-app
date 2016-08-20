@@ -2,59 +2,75 @@ import React, {
   Component,
 } from 'react';
 
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-
-import {
-  // Scene,
-  Reducer,
-  Router,
-  Switch,
-  // Modal,
-  Actions,
-  ActionConst,
-} from 'react-native-router-flux';
-
-import {Scenes} from './scenes';
 import Chaz from './scenes/Chaz'; // Container
-
+import Loading from './components/Loading';
+//
 //  redux STUFF
+//
 import * as storage from 'redux-storage';
-import merger from 'redux-storage-merger-immutablejs'; // i forget what this does
-import { connect } from 'react-redux';
 import { createStore, applyMiddleware, bindActionCreators } from 'redux';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import thunk from 'redux-thunk';
 
+// Show redux-storage how to deal with immutablejs objects
+import merger from 'redux-storage-merger-immutablejs';
+// We need to wrap the base reducer, as this is the place where the loaded
+// state will be injected.
+//
+// Note: The reducer does nothing special! It just listens for the LOAD
+//       action and merge in the provided state :)
+// Note: A cusom merger function can be passed as second argument
 import rootReducer from './reducers';
 const reducer = storage.reducer(rootReducer,merger);
 
+// Now it's time to decide which storage engine should be used
+//
+// Note: The arguments to `createEngine` are different for every engine!
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');
 
+// And with the engine we can create our middleware function. The middleware
+// is responsible for calling `engine.save` with the current state afer
+// every dispatched action.
+//
+// Note: You can provide a list of action types as second argument, those
+//       actions will be filtered and WON'T trigger calls to `engine.save`!
+
+import onboardMiddleware from './middleware/onboardMiddleware';
+
 const middleware = storage.createMiddleware(engine);
 
-
-const createStoreWithMiddleware = applyMiddleware(thunk,middleware)(createStore);
+// As everything is prepared, we can go ahead and combine all parts as usual
+const createStoreWithMiddleware = applyMiddleware(thunk,middleware,onboardMiddleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
+// At this stage the whole system is in place and every action will trigger
+// a save operation.
+//
+// BUT (!) an existing old state HAS NOT been restored yet! It's up to you to
+// decide when this should happen. Most of the times you can/should do this
+// right after the store object has been created.
+
+// To load the previous state we create a loader function with our prepared
+// engine. The result is a function that can be used on any store object you
+// have at hand :)
 const load = storage.createLoader(engine);
+
 // load(store); // I now call this in the constructor
 
 engine.save({}); // This clears the state from local storage
 
+// Notice that our load function will return a promise that can also be used
+// to respond to the restore event.
+
+
+import {Scenes} from './scenes'; // remove this after puttin init scene somewhere else todo
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {loading: true}; // Always do this before getting auth info
-
-    // store.subscribe(this.onStoreUpdate.bind(this));
-    // could probly also plug this into the REDUX_SAVE action
 
     load(store)
       .then((newState) => {
@@ -86,13 +102,13 @@ class App extends Component {
   }
 
   render() {
-    // I think I dont want to render anything until I have user data in Redux state
+    // Dont render the app until I have user data in Redux state
     if(this.state.loading)
-      return(<View style={{paddingTop:200}}><Text>LOADING APP PLEASE WAIT</Text></View>)
+      return(<Loading message="Loading the redux state" />)
 
     return (
       <Provider store={store}>
-        <Chaz />
+        <Chaz store={store} />
       </Provider>
     );
   }

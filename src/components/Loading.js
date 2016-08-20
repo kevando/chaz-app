@@ -3,13 +3,13 @@ import { StyleSheet, Text, View, Animated, PropTypes, Easing } from 'react-nativ
 import Emoji from 'react-native-emoji';
 const GlobalStyle = require('../style/Style');
 
+// Not totally sure how all this works, but it looks great and I can
+// figure it out later
+
 class Loading extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      pulse: new Animated.Value(1)
-    };
+    this.state = { pulse: new Animated.Value(1) };
   }
 
   componentDidMount() {
@@ -17,7 +17,6 @@ class Loading extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('when am i called?');
     if (!prevProps.hasPulse && this.props.hasPulse) {
       this.startPulse();
     }
@@ -46,11 +45,6 @@ class Loading extends Component {
     var heartIndex = Math.floor((Math.random() * 4));
     return <Emoji name={GlobalStyle.constants.hearts[heartIndex]} />
   }
-  getRandomBackgroundColor(){
-    var bgIndex = Math.floor((Math.random() * 4));
-    return {backgroundColor: GlobalStyle.constants.colors[bgIndex]}
-  }
-
 
   render() {
     let { pulse } = this.state;
@@ -63,7 +57,7 @@ class Loading extends Component {
             {this.getRandomHeart()}
           </Animated.View>
         </View>
-        <Text style={{fontSize:10,color:'#888'}}>{this.props.message}</Text>
+        <Text style={{fontSize:14,color:'#888'}}>{this.props.message}</Text>
       </View>
     )
   }
@@ -81,7 +75,6 @@ const styles = StyleSheet.create({
     // borderWidth:1,
     // borderColor:'red',
     height:50,
-
   }
 })
 
@@ -89,7 +82,5 @@ Loading.defaultProps = {
   hasPulse: true,
   growTo:1.8,
 }
-
-
 
 module.exports = Loading;
