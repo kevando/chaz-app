@@ -7,11 +7,11 @@ import {
   Text,
   View,
 } from 'react-native';
-import Launch from '../nav_components/Launch';
-import Register from '../nav_components/Register';
-import Login from '../nav_components/Login';
-import Login2 from '../nav_components/Login2';
-import Login3 from '../nav_components/Login3';
+// import Launch from '../nav_components/Launch';
+// import Register from '../nav_components/Register';
+// import Login from '../nav_components/Login';
+// import Login2 from '../nav_components/Login2';
+// import Login3 from '../nav_components/Login3';
 import {
   Scene,
   Reducer,
@@ -22,13 +22,13 @@ import {
   ActionConst,
   NavBar
 } from 'react-native-router-flux';
-import Error from '../nav_components/Error';
-import Popup from '../nav_components/Popup'; // kev
-import Home from '../nav_components/Home';
-import TabView from '../nav_components/TabView';
-import TabIcon from '../nav_components/TabIcon';
-import EchoView from '../nav_components/EchoView';
-import NavigationDrawer from '../nav_components/NavigationDrawer';
+// import Error from '../nav_components/Error';
+import Popup from './Popup'; // kev
+// import Home from '../nav_components/Home';
+// import TabView from '../nav_components/TabView';
+// import TabIcon from '../nav_components/TabIcon';
+// import EchoView from '../nav_components/EchoView';
+// import NavigationDrawer from '../nav_components/NavigationDrawer';
 import Button from 'react-native-button';
 
 import Recommendations from './Recommendations';
@@ -36,6 +36,7 @@ import RecommendationAdd from './RecommendationAdd';
 import Recommendation from './Recommendation';
 import Profile from './Profile'
 import Welcome from './Welcome'
+import RecommenderAdd from './RecommenderAdd';
 
 
 export const Scenes = Actions.create(
@@ -54,34 +55,12 @@ export const Scenes = Actions.create(
 
 
 
-      <Scene key="register" component={Register} title="Register"  />
 
-      <Scene key="register2" component={Register} title="Register2" duration={1} />
-      <Scene key="home" component={Home} title="Replace" type={ActionConst.REPLACE} />
-      <Scene key="launch" component={Launch} title="Launch"  uid={'connecct this to redux some how'} />
-      <Scene key="login" direction="vertical" >
-        <Scene key="loginModal" direction="vertical" component={Login} title="Login" />
-        <Scene
-          key="loginModal2"
-          hideNavBar
-          component={Login2}
-          title="Login2"
-          panHandlers={null}
-          duration={1}
-        />
-        <Scene
-          key="loginModal3"
-          hideNavBar
-          component={Login3}
-          title="Login3"
-          panHandlers={null}
-          duration={1}
-        />
-      </Scene>
 
     </Scene>
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
+    <Scene key="recommenderAdd" component={RecommenderAdd} />
   </Scene>
 
 

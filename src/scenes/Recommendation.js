@@ -7,6 +7,7 @@ import * as recActions from '../reducers/rec/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
+import RecrItem from '../components/RecrItem';
 import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
@@ -35,6 +36,15 @@ class RecView extends Component {
           </View>
           <View style={styles.right}>
             <RecNote rec={rec} {...boundActionCreators} />
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.left}>
+
+          </View>
+          <View style={styles.right}>
+            <RecrItem rec={rec} {...boundActionCreators} />
           </View>
         </View>
 

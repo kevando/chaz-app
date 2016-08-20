@@ -84,6 +84,7 @@ export default function counter(recs = initialState, action = {}) {
 
     case types.UPDATE_REC:
       // Find rec by index, and update entire object in recs List
+      console.log('UPDATEREC',action.payload);
       return recs.update(
         recs.findIndex(function(rec) {
           return rec.get("id") === action.payload.id;
@@ -93,7 +94,10 @@ export default function counter(recs = initialState, action = {}) {
       );
 
     case types.DELETE_REC:
-      return recs.filterNot(rec => rec.get('id') == action.payload.id)
+      return recs.filterNot(rec => rec.get('id') == action.payload.id);
+
+    // case types.ASSIGN_RECR:
+
 
     default:
       return recs;

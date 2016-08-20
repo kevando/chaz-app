@@ -1,127 +1,5 @@
 import * as types from './actionTypes';
 var uuid = require('react-native-uuid');
-// const Firebase = require('firebase'); // v 2.4.1  (i guess v3 doesnt work well w rn)
-// const fireRef = new Firebase('https://chaz1.firebaseio.com/');
-
-// export function listenForRecs() { //fetch
-//   return (dispatch, getState) => {
-//     // console.log('LISTENFOR RECS CALLED');
-//     const currentState = getState();
-//     const uid = currentState.app.getIn(["authData","uid"]);
-//     const recsRef = fireRef.child(`users/${uid}/recs`);
-//     recsRef.on('value', (snap) => {
-//       console.log('fireRef listened, now change loaded to true',snap);
-//       dispatch({type: types.SET_LOADED, loaded: true});
-//       dispatch(getRecList(snap));
-//         // dispatch(syncRecrList(snap));
-//     });
-//   }
-// }
-// export function syncRecrList(snap) { // fuck yeah if this works
-//   return (dispatch, getState) => {
-//     const currentState = getState();
-//     const uid = currentState.app.getIn(["authData","uid"]);
-//       var items = [];
-//       snap.forEach((child) => {
-//         var recObject = child.val(); // doing this cause firebase cant handle undefined
-//         recObject._key = child.key()
-//
-//         if(recObject.recr){
-//           const recrsRecRef = fireRef.child(`users/${uid}/recrs/${recObject.recr._key}/recs/${recObject._key}`);
-//           recrsRecRef.once("value", function(snapshot) { // probly way over kill but idgaf
-//             if(snapshot.exists()){
-//               recrsRecRef.update(recObject);
-//             }
-//           });
-//       }
-//
-//     });
-//
-//   }
-// }
-// export function getRecList(snap) { // runs after basically any change to any rec
-//   return (dispatch, getState) => {
-//     const currentState = getState();
-//
-//
-//       var items = [];
-//       snap.forEach((child) => {
-//         var recObject = {
-//           title: child.val().title,
-//           _key: child.key(),
-//           recr: child.val().recr,
-//           grade: child.val().grade,
-//           comment: child.val().comment,
-//           createdAt: child.val().createdAt,
-//           recrScore: child.val().recrScore,
-//           type: child.val().type,
-//           note: child.val().note,
-//         }
-//         items.push(recObject);
-//
-//
-//       });
-//         // console.log('items',items);
-//       dispatch(updateRecList(items)); // reducer call
-//
-//   }
-// }
-// export function updateRecList(recs) {
-//   return function(dispatch, getState) {
-//     dispatch({ type: types.UPDATE_REC_LIST,payload: recs });
-//     dispatch(updateVisibleRecList(recs)); // i always want to do this, right?
-//   }
-//
-// }
-// export function updateFilter(filter,option){
-//   return function(dispatch, getState) {
-//     dispatch({type: types.UPDATE_REC_FILTER, filter:filter, option:option});
-//     dispatch(updateVisibleRecList()); // i always want to do this, right?
-//   }
-//
-//   // return {type: types.UPDATE_REC_FILTER, filter:filter}
-// }
-//
-//
-// export function updateVisibleRecList() {
-//   return function(dispatch, getState) {
-//     const state = getState();
-//     const recList = state.rec.get('all');
-//     // console.log('all rec list',recList)
-//
-//     // Set type filter from redux
-//     var activeTypeFilter = state.rec.getIn(['filters','type','active']);
-//     var activeTypeFilterQuery = state.rec.getIn(['filters','type','list',activeTypeFilter,'query']);
-//
-//     // console.log('activeTypeFilter',activeTypeFilter);
-//     // console.log('activeTypeFilterQuery',activeTypeFilterQuery);
-//     // activeTypeFilter = activeTypeFilter.toJS();
-//
-//
-//     // seperately get the grade filter settings
-//     // var activeGradeFilter = state.rec.getIn(['filters','grade','active']);
-//     // var activeGradeFilterQuery = state.rec.getIn(['filters','grade','queries',activeGradeFilter]);
-//     // console.log('activeGradeFilter',activeGradeFilter);
-//     // console.log('activeGradeFilterQuery',activeGradeFilterQuery);
-//     // console.log(activeGradeFilterQuery.includes(null));
-//     // fml firebase doesnt do null and immutable doesnt do undefined
-//     // FUCK THIS
-//
-//     const filteredList = recList.filter(function(rec) {
-//       // console.log('GRADE: ',rec.get('grade'));
-//       return (
-//         // activeGradeFilterQuery.includes(rec.get('grade')) &&
-//         activeTypeFilterQuery.includes(rec.get('type'))
-//       )
-//
-//     });
-//     // console.log('filtered list',filteredList)
-//
-//     dispatch({ type: types.UPDATE_VISIBLE_REC_LIST, recs: filteredList });
-//   }
-// }
-
-
 
 export function addRec(title,note) {
   return {
@@ -148,17 +26,16 @@ export function deleteRec(recId){                  // REMOVE REC
       id: recId,
     }
   }
+}
 
-  // return function(dispatch, getState) {
-  //   const currentState = getState();
-  //   const uid = currentState.app.getIn(["authData","uid"]);
-  //   const recsRef = fireRef.child(`users/${uid}/recs`);
-  //   recsRef.child(recKey).remove();
-  //   // todo dispatch upgrade recr score and recs recr score
-  //   // consider if I need to do any other checks
-  //   // I feel like properly structred data would help alot here
-  //   dispatch({type: 'TRACK_REC_DELETED'});
-  // }
+export function assignRecr(rec,recr){                  // REMOVE REC
+  console.log('assign rec',rec)
+  console.log('assign recr',recr)
+  rec.recr = recr.toJS(); // simply add recr
+  return {
+    type: types.UPDATE_REC, // I can do this cause im not editing recr tree yet
+    payload: rec
+  }
 }
 
 

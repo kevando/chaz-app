@@ -33,6 +33,7 @@ you lose or break your phone. Also chaz gonna text you late at night.
 
 
 getting filter options is a step in the onboarding
+acheivements, n recs/rs rec types get you filter, adding timer. 
 
 
  - get reminder, consume rec

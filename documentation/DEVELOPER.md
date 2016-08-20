@@ -1,82 +1,82 @@
-# Product Roadmap
-Here is a grouped list of planned features, broken out by version. To understand why it's done like this, check out the onboarding doc.
+# Developers
+Here are some resources and notes about the development of chaz.
 
-# 0.9 workspace ------------------------------------------------------------
-
-back to original xcode project
-
-Get app functional again, then work on transitions, then ui
-
-recrs
-then onboarding
+### Development guidelines
+ - function prefixes
+ - render(functions that return renderable object)
+ - on(callbacks for events, most likely a user click)
 
 
----
-Cleanup
-app.js code add comments from app_old.js
-do something better w app loading scene and appcheckuser
-consider better file structure
-dropdown overlay is all bugged and FUCKED UP
+## Libs & Resources
+- https://medium.com/@spencer_carli
+- https://github.com/michaelcontento/redux-storage
+- https://facebook.github.io/react-native/docs/flexbox.html
+- https://docs.fabric.io/apple/beta/beta-walkthrough.html
+- [Chat UI]: https://github.com/FaridSafi/react-native-gifted-chat
+- [Hot Push]: https://github.com/Microsoft/react-native-code-push
 
-add mixpanel back, WITH VERSIONING
-remember to migrate user data
+## Configure Development environment*
+
+```sh
+git clone https://github.com/kevando/chaz.git
+npm3 install
+npm start
+```
+
+\* The package.json file is totally incomplete and these instructions won't  work. If you'd like to set up a local instance, open an issue and I will update everything proper.
+
+## Distribution Steps
+### Build Steps
+ - update version
+ - uncomment js line in AppDelegate
+ - Disable logging package (optional)
+ - xcode: change to generic ios device
+ - xcode: product > archive
+
+### uploading to iTunes
+ - validate (optional)
+ - upload to app store
+ - uncheck "include bitcode"
+ - This will take about 10 minutes for Apple to validate
+
+### Notifying existing users (Internal Testing via Testflight)
+ - log into itunesconnect
+ - check latest build and distribute
+
+### Adding new beta test users
+ - Add iTunes Connect Admin User by Apple ID email
+ - They get an email and agree to terms
+ - Now this user shows up in iTunes connect
+ - Click to the app and add this user
+ - Save
+ - User will now get an email and have to download test flight
+ - Enter the redeem code (optional)
 
 
 
+## Immutablejs Cheatsheet
+The docs are not easy to read, so here are some quick notes on some of the functions that I need
 
- - refactored app so its offline by default and syncs with firebase
- - Changed navigator API
+### Lists
+Assume we have a List of recs like:
 
-=---
+`const recList = List.of(
+  {id:1,title:'shawshank'},
+  {id:2,title:'death star'},
+  );`
 
-# 0.10 (resume of 0.8 basically)
 
-created the initial onboarding (first 3 steps)
-kinda janky but i think it should work great once i get the wording better
-probably should store the conditions to move to the next step in the onboarding
+#### Get most recent item in a List
+`recList.last()`
 
-store onboard status in firebase
-then go through evernote, clean notes and get ui ideas
-
-edit rec type
-
-add onboarding progress to profile screen with current process
-
-validate recr does not already exists
-assign emoji faces to recrs, give it some order or random
-
-improve styling across the board, while i build onboarding
-list style, focus on making look good for all situations (w recr)
-  yik yak for inspiration
-this screen says alot. very confusing... https://i.imgur.com/7hvrZdy.png
-
-get this ready to deploy to fabric, I want to test asap how grading will work
-login is pretty much set now how I want it. Code is janky as fuck tho. so fix that
-need to be careful about onboarding getting out of sync. how to protect?
-
-remove blue from filter nav shit
-
-# /0.8 workspace ------------------------------------------------------------
-
-### Version 0.8
- - Significantly improve the onboarding
- - Add Rec commments
- - Introduce the recommender
- - refactored to new firebase + offline support
-
-### Version 0.9
- - Introduce Rec grades
- - Add hyperlink ability
- - Add reminders (with notifications)
-
-### Version 1.0 (Release to app store)
- - Add Friend List page
- - Add a profile page that displays user's rec/recr/grade/score data
- - Add ability to save recs that I give people
- - Remove dependency on internet access.
-
-### Version 1.x
- - Chat feature
- - option to send "Started watching" to friend that gave rec
- - Get it ready for useronboarding.com
- - Premium service: we find links to the shit you get rec'd
+#### Replace a rec item in a List
+```
+return recs.update(
+  recs.findIndex(function(rec) {
+    return rec.get("id") === action.payload.id;
+  }), function(rec) {
+    return Map(action.payload); // return entire rec
+    //return rec.set("note", action.payload.note); sets individual field
+  }
+);
+```

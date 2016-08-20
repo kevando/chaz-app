@@ -1,27 +1,15 @@
 import * as types from './actionTypes';
-import * as Immutable from 'immutable';
+import {Map, List} from 'immutable';
 
-const initialState = Immutable.Map({
-  all: []
+const initialState = List([]);
 
-});
-
-export default function counter(state = initialState, action = {}) {
+export default function counter(recrs = initialState, action = {}) {
   switch (action.type) {
 
-    case types.UPDATE_RECR_LIST:
-      // var names = [];
-      // for(index in action.payload) {
-      //   names.push(action.payload[index].name);
-      // }
-      return state.merge({
-        all: action.payload,
-      });
-    case types.UPDATE_CURRENT_RECR:
-      return state.merge({
-        current: action.recr
-      });
+    case types.ADD_RECR:
+      return recrs.push(Map(action.payload));
+
     default:
-      return state;
+      return recrs;
   }
 }

@@ -32,12 +32,14 @@ export default class ListItem extends Component {
         <Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text>
         <Text style={{fontWeight:'400',fontSize:15,color:'#ccc'}}>{rec.note}</Text>
         <Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>{rec.type}</Text>
+        <Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>{this.renderRecr()}</Text>
 
         </View>
 
       </TouchableOpacity>
     );
   }
+
   onItemPress() {
 
     Actions.recommendation({rec: this.props.rec});
