@@ -32,7 +32,7 @@ you lose or break your phone. Also chaz gonna text you late at night.
 ### chaz onboarding overview
 
 
-
+getting filter options is a step in the onboarding
 
 
  - get reminder, consume rec

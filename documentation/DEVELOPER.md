@@ -7,18 +7,22 @@ back to original xcode project
 
 Get app functional again, then work on transitions, then ui
 
-edit rec
+recrs
+then onboarding
 
-type ui
 
 ---
 Cleanup
 app.js code add comments from app_old.js
 do something better w app loading scene and appcheckuser
 consider better file structure
+dropdown overlay is all bugged and FUCKED UP
 
 add mixpanel back, WITH VERSIONING
 remember to migrate user data
+
+
+
 
  - refactored app so its offline by default and syncs with firebase
  - Changed navigator API

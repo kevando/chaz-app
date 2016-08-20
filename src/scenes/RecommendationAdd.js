@@ -11,9 +11,7 @@ import {
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {Actions} from "react-native-router-flux";
-
 import { connect } from 'react-redux';
-
 import * as recActions from '../reducers/rec/actions';
 import * as Style from '../style/Style';
 

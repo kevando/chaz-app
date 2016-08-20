@@ -31,6 +31,7 @@ export default class ListItem extends Component {
       <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
         <Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text>
         <Text style={{fontWeight:'400',fontSize:15,color:'#ccc'}}>{rec.note}</Text>
+        <Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>{rec.type}</Text>
 
         </View>
 

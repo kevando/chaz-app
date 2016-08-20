@@ -32,13 +32,11 @@ const styles = StyleSheet.create({
     paddingBottom:17,
   },
   buttonText: {
-    flex:1,
     color: '#fff',
     textAlign: 'center',
     fontSize: 17,
     fontWeight: '500',
-    letterSpacing:1.3,
-    height:30,
+    letterSpacing:1.1,
     justifyContent:'center'
   },
 
