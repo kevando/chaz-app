@@ -2,12 +2,12 @@ import React, {Component, PropTypes} from 'react';
 import {
   Text,
   View,
-  ScrollView,
+  // ScrollView,
   TouchableOpacity,
   StyleSheet,
   TextInput,
-  Dimensions,
-  DeviceEventEmitter
+  // Dimensions,
+  // DeviceEventEmitter
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {Actions} from "react-native-router-flux";
@@ -15,29 +15,35 @@ import { connect } from 'react-redux';
 import * as recActions from '../reducers/rec/actions';
 import * as GlobalStyle from '../style/Global';
 
-
-
-// this is a traditional React component connected to the redux store
 class RecommendationAdd extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      recTitle:'',
-      recNote:'',
-      recType: '',
+      title: this.props.rec.title,
+      note: this.props.rec.note,
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    // This gets invoked after ADD_REC updates the state tree
-    // Now pop router to recView
-    var rec = nextProps.recs.last();
-    Actions.recommendationFromAdd({rec:rec.toJS()});
+    // This gets invoked after ADD_REC or UPDATE_REC updates the state tree
+    // Now get user back to recView with their data
+
+    // if editing
+    if(this.props.rec.id){
+      Actions.pop({refresh: {rec:this.props.rec}}); // previous scene is RecView
+    }
+    // if new
+    else {
+      var rec = nextProps.recs.last();
+      Actions.recommendationFromAdd({rec:rec.toJS()}); // fwd to RecView
+    }
   }
 
   componentDidMount() {
-      this.refs.TitleInput.focus(true); // dont auto show keyboard with popup
+    // Set keyboard active
+    this.refs.TitleInput.focus(true);
+    // TODO, figure out if user is editing note
   }
 
   render() {
@@ -51,18 +57,17 @@ class RecommendationAdd extends Component {
           {this.renderNoteInput()}
         </View>
 
-        {( this.state.recTitle == ''
+        {( this.state.title == ''
         ?
         null
         :
         <View style={styles.buttonContainer} >
-          <TouchableOpacity style={styles.saveButton} onPress={ this.onAddRecPress.bind(this) }>
+          <TouchableOpacity style={styles.saveButton} onPress={ this.onSaveRecPress.bind(this) }>
             <Text style={styles.saveText}>Save Recommendation</Text>
           </TouchableOpacity>
         </View>
 
         )}
-
 
         <KeyboardSpacer/>
       </View>
@@ -73,35 +78,44 @@ class RecommendationAdd extends Component {
     return (
       <TextInput
         style={{height: 40, paddingLeft:10}}
-        onChangeText={(recTitle) => this.setState({recTitle})}
-        value={this.state.recTitle}
+        onChangeText={(title) => this.setState({title})}
+        value={this.state.title}
         placeholder={"Add a new recommendation"}
         ref="TitleInput"
         enablesReturnKeyAutomatically={true}
         returnKeyType={'done'}
-        onSubmitEditing={this.onAddRecPress.bind(this)}
+        onSubmitEditing={this.onSaveRecPress.bind(this)}
       />
     )
   }
   renderNoteInput() {
     return (
       <TextInput
-        style={{fontSize:15,height: 40,paddingLeft:10}}
-        onChangeText={(recNote) => this.setState({recNote})}
-        value={this.state.recNote}
+        style={{fontSize:15,height: 40,paddingLeft:10,height:200}}
+        onChangeText={(note) => this.setState({note})}
+        value={this.state.note}
         placeholder="Write a note about this moment..."
         ref="NoteInput"
-        returnKeyType={'done'}
-        onSubmitEditing={this.onAddRecPress.bind(this)}
+        multiline={true}
+        onSubmitEditing={this.onSaveRecPress.bind(this)}
       />
     )
   }
 
-  onAddRecPress() {
-    console.log('state info',this.state);
-    this.props.dispatch(recActions.addRec(this.state.recTitle,this.state.recNote));
+  onSaveRecPress() {
+    var {title,note} = this.state;
+    // if editing
+    if(this.props.rec.id){
+      var newRec = this.props.rec;
+      newRec.title = title;
+      newRec.note = note;
+      this.props.dispatch(recActions.updateRec(newRec));
+    }
+    // if new
+    else {
+        this.props.dispatch(recActions.addRec(title,note));
+    }
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -128,7 +142,6 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     recs: state.recs,
-    // onboard: state.onboard
   };
 }
 

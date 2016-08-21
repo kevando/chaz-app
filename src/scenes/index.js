@@ -23,7 +23,7 @@ import {
 import Button from 'react-native-button';
 
 import Recommendations from './Recommendations';
-import RecommendationAdd from './RecommendationAdd';
+import RecommendationInput from './RecommendationInput';
 import Recommendation from './Recommendation';
 import Profile from './Profile'
 import Welcome from './Welcome'
@@ -84,8 +84,21 @@ export const Scenes = Actions.create(
        key="recommendationAdd"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[4]}}
        titleStyle={{color:"#444"}}
-       component={RecommendationAdd}
+       component={RecommendationInput}
        title="New Recommendation"
+       hideBackImage={true}
+       backButtonTextStyle={{color:'red',fontSize:13}}
+       backTitle="Cancel"
+       direction="vertical"
+       rec={{title:'',note:''}}
+      />
+
+      <Scene
+       key="recommendationEdit"
+       navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[4]}}
+       titleStyle={{color:"#444"}}
+       component={RecommendationInput}
+       title="Editing"
        hideBackImage={true}
        backButtonTextStyle={{color:'red',fontSize:13}}
        backTitle="Cancel"
@@ -95,7 +108,14 @@ export const Scenes = Actions.create(
       <Scene key="recommendationFromAdd" component={Recommendation} title="View Recy" type={ActionConst.REPLACE} />
 
 
-      <Scene key="recommendation" component={Recommendation} title="View Rec" />
+      <Scene
+       key="recommendation"
+       component={Recommendation}
+       backTitle="Back"
+       hideBackImage={true}
+       rightButtonStyle={{width:150}}
+       rightButtonTextStyle={{fontSize:13}}
+      />
       <Scene key="profile" component={Profile} title="Profile" />
 
 

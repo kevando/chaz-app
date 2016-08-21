@@ -13,50 +13,51 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 class RecView extends Component {
 
+  constructor(props) {
+    super(props)
+    // this will make it easier to handle the new props
+    this.state = {rec:this.props.rec}
+  }
+  componentWillReceiveProps(newProps) {
+    //user edited title or note, refresh data
+    this.setState({rec: newProps.rec});
+  }
+
   render(){
     let { dispatch } = this.props;
     let boundActionCreators = bindActionCreators(recActions, dispatch)
+    var {rec} = this.state;
 
-    var {rec} = this.props;
     return (
       <View  style={{flex:1}}>
-
         <View style={styles.row}>
           <View style={styles.left}>
             <RecType rec={rec} {...boundActionCreators} />
           </View>
           <View style={styles.right}>
-            <RecTitle rec={rec} {...boundActionCreators} />
+            <RecTitle rec={rec} onPress={Actions.recommendationEdit}  />
           </View>
         </View>
 
         <View style={styles.row}>
-          <View style={styles.left}>
-
-          </View>
+          <View style={styles.left}></View>
           <View style={styles.right}>
-            <RecNote rec={rec} {...boundActionCreators} />
+            <RecNote rec={rec} onPress={Actions.recommendationEdit} />
           </View>
         </View>
 
         <View style={styles.row}>
           <View style={styles.left}>
-
           </View>
           <View style={styles.right}>
             <RecrItem rec={rec} {...boundActionCreators} />
           </View>
         </View>
-
-
-        <View>
-
-        </View>
-
-        <Button style={{zIndex:1}} onPress={this.deleteRec.bind(this)}>Delete Rec</Button>
-
-        <KeyboardSpacer />
-      </View>
+      <View>
+    </View>
+    <Button style={{zIndex:1}} onPress={this.deleteRec.bind(this)}>Delete Rec</Button>
+    <KeyboardSpacer />
+  </View>
     );
   }
 
@@ -65,6 +66,7 @@ class RecView extends Component {
     this.props.dispatch(recActions.deleteRec(id));
     Actions.pop();
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    app: state.app,
+    recs: this.recs,
   };
 }
 export default connect(mapStateToProps)(RecView);

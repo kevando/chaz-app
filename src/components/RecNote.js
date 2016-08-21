@@ -4,35 +4,38 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  TextInput
 } from 'react-native';
 
 export default class RecNote extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {note: this.props.rec.note}
   }
+
   render() {
-    // console.log('note props',this.props)
+    var {rec} = this.props;
 
     return (
-      <TextInput
-        style={{fontSize:15,height: 40,paddingLeft:10}}
-        onChangeText={(note) => this.setState({note})}
-        value={this.state.note}
-        placeholder="Write a note about this moment..."
-        ref="NoteInput"
-        returnKeyType={'done'}
-        onSubmitEditing={this.onSubmitEditingPress.bind(this)}
-      />
+      <View>
+        <TouchableOpacity onPress={this.onNotePress.bind(this)}>
+          <Text style={styles.note}>{rec.note}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
-  onSubmitEditingPress() {
-    var newRec = this.props.rec;
-    newRec.note = this.state.note;
-    console.log('newRec',newRec);
-    this.props.updateRec(newRec);
+  onNotePress(){
+    var {rec, onPress} = this.props
+    onPress({rec: rec});
   }
 
 }
+const styles = StyleSheet.create({
+  note: {
+    fontSize: 18,
+    paddingLeft:10,
+    borderColor: '#ccc',
+    borderWidth:1,
+    color:'#444',
+  }
+
+})
