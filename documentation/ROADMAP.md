@@ -36,6 +36,7 @@ remember to migrate user data
  - refactored app so its offline by default
  - Changed navigator API
  - Added some janky animation to welcome page
+ - Changed the navbar height from to
 
 =---
 

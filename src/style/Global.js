@@ -26,52 +26,17 @@ var styles = StyleSheet.create({
   },
   text: {
     fontSize: 13,
+  },
+  // label and value used in rows
+  label: {
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  value: {
+    fontSize: 13,
+    fontWeight: '300',
+    textAlign:'right'
   }
-  //
-  //
-  // // is anthing below here used?
-  // listContainer: {
-  //   // backgroundColor: '#f2f2f2',
-  //   backgroundColor: 'red',
-  //   flex: 1,
-  //   paddingTop:0,
-  //   justifyContent: 'flex-start'
-  //   // marginTop:100 this is fucked up cause the loader
-  // },
-  // listview: {
-  //   backgroundColor:'#eee',
-  //   flex: 1,
-  //   marginTop:0,
-  //   paddingTop:0,
-  // },
-  // li: {
-  //   backgroundColor: '#fff',
-  //   borderBottomColor: '#eee',
-  //   borderColor: 'transparent',
-  //   borderWidth: 1,
-  //   paddingLeft: 10,
-  //   paddingTop: 5,
-  //   paddingBottom: 5,
-  //   flexDirection:'row',
-  // },
-  // liContainer: {
-  //   flex: 5,
-  // },
-  // liLeft: {
-  //   flex:2
-  // },
-  // liRight: {
-  //   flex:1,
-  // },
-  // filterContainer: {
-  //   backgroundColor:constants.colors[4],
-  //   marginTop:0,
-  //   alignItems: 'center',
-  //   marginTop:65, // not sure why I have to add this, think it has something to do with loader
-  // },
-  //
-
-
 
 })
 

@@ -81,3 +81,26 @@ return recs.update(
   }
 );
 ```
+
+#### Iterate a List
+
+you need to define the return value
+```onboard.get('steps').map(function(step,index){
+  // var status = "pending"; // does not error
+  return(
+    <View style={styles.row} key={step.get('label')} >
+      <View style={styles.left}><Text style={label}>{index}. {step.get('label')}</Text></View>
+      <View style={styles.right}><Text style={value}>status</Text></View>
+    </View>
+  );
+  ```
+
+this notation returns what is ever in loop
+```
+  onboard.get('steps').map((step,index) => (
+    // var status = "pending"; // this will throw an error
+      <View style={styles.row} key={step.get('label')} >
+        <View style={styles.left}><Text style={label}>{index}. {step.get('label')}</Text></View>
+        <View style={styles.right}><Text style={value}>status</Text></View>
+      </View>
+  ```  

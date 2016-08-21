@@ -58,7 +58,7 @@ const load = storage.createLoader(engine);
 
 // load(store); // I now call this in the constructor
 
-engine.save({}); // This clears the state from local storage
+// engine.save({}); // This clears the state from local storage
 
 // Notice that our load function will return a promise that can also be used
 // to respond to the restore event.
@@ -93,7 +93,7 @@ class App extends Component {
           // And that causses onStoreUpdate to run BEFORE the following code.
           // not sure if that fucks anything up
           // store.dispatch({type:'SET_WELCOME_MESSAGE',message:'0: User was previously found in redux'});
-          Scenes['recommendations'].initial = true;
+          Scenes['profile'].initial = true;
           this.setState({loading:false});
         }
       })

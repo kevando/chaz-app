@@ -7,11 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-// import Launch from '../nav_components/Launch';
-// import Register from '../nav_components/Register';
-// import Login from '../nav_components/Login';
-// import Login2 from '../nav_components/Login2';
-// import Login3 from '../nav_components/Login3';
+
 import {
   Scene,
   Reducer,
@@ -24,7 +20,6 @@ import {
 } from 'react-native-router-flux';
 
 
-
 import Button from 'react-native-button';
 
 import Recommendations from './Recommendations';
@@ -33,27 +28,70 @@ import Recommendation from './Recommendation';
 import Profile from './Profile'
 import Welcome from './Welcome'
 import RecommenderAdd from './RecommenderAdd';
-
 import Popup from './Popup';
 import OnboardPopup from './OnboardPopup';
 
+import * as GlobalStyle from '../style/Global';
 
 // not totally sure how all this works, I guess this is just a list of
 // scene transitions.
 
+const navBarStyle = {
+  backgroundColor:'#ddd',
+  // height:20,
+  padding:0,
+  borderBottomWidth: 1,
+}
+const navBarTitleStyle = {
+  // backgroundColor:'#fff',
+  color:'#444',
+  borderBottomWidth: 2,
+  borderBottomColor: 'red',
+  fontSize:15,
+}
+const leftButtonStyle = {
+  // backgroundColor:'#ccc',
+  // height:20,
+  // padding:0,
+  borderBottomWidth: 0,
+}
+const leftButtonTextStyle ={
+  fontSize:14,
+}
+const rightButtonStyle = {
+  // backgroundColor:'#fff',
+  height:20,
+  padding:0,
+  borderBottomWidth: 0,
+}
+
 export const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} >
-    <Scene key="root" hideTabBar>
+    <Scene key="root" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
       <Scene key="welcome" component={Welcome} title="Welcome" hideNavBar  />
 
+      <Scene key="recommendations"
+       navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
+       component={Recommendations}
+       type={ActionConst.REPLACE}
+       onLeft={()=>Actions.profile()}
+       leftTitle="Exit"
+      />
 
-      <Scene key="recommendations" component={Recommendations} title="Recommendationss" type={ActionConst.REPLACE} onLeft={()=>Actions.profile()} leftTitle="Exit" />
+      <Scene
+       key="recommendationAdd"
+       navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[4]}}
+       titleStyle={{color:"#444"}}
+       component={RecommendationAdd}
+       title="New Recommendation"
+       hideBackImage={true}
+       backButtonTextStyle={{color:'red',fontSize:13}}
+       backTitle="Cancel"
+       direction="vertical"
+      />
 
-
-
-      <Scene key="recommendationAdd" component={RecommendationAdd} title="Add Rec" hideBackImage={true} backButtonTextStyle={{color:'red'}} backTitle="Cancel" direction="vertical" />
       <Scene key="recommendationFromAdd" component={Recommendation} title="View Recy" type={ActionConst.REPLACE} />
 
 

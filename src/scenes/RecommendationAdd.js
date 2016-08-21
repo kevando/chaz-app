@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import * as recActions from '../reducers/rec/actions';
 import * as GlobalStyle from '../style/Global';
 
+
+
 // this is a traditional React component connected to the redux store
 class RecommendationAdd extends Component {
 

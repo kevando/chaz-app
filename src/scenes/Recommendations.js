@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet, ScrollView,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView,TouchableOpacity, LayoutAnimation } from 'react-native';
 import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 
@@ -23,6 +23,10 @@ class Recommendations extends Component {
 
   }
 
+  componentWillMount() {
+   // Animate creation
+   LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
+ }
   render() {
 
     // Might want to take this out of the render function
@@ -63,6 +67,9 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderColor:GlobalStyle.constants.colors[1],
+    backgroundColor:'#ccc',
+    borderTopWidth: 2,
+    borderTopColor: 'red'
 
   },
   text: {

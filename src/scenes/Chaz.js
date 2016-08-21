@@ -84,16 +84,6 @@ class Chaz extends Component {
 }
 
 
-  componentDidUpdate(nextProps) {
-    // console.log('DidUpdate in chaz.js')
-    // if(this.state.loading){ // Refresh screen with auth data
-    //   // var uid = user.get('uid');
-    //   // var welcomeMessage = nextProps.app.get('welcomeMessage');
-    //   this.setState({loading:false});
-    // }
-  }
-
-
   render(){
     return (
       <Router

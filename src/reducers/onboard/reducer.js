@@ -8,9 +8,12 @@ const initialState = Map({
   showPopup: false,
   steps: List.of(
     // 0 Not used
-    {title: 'I should never be seen'},
+    {
+      label: 'Open the App!'
+    },
     // 1
     {
+      label: 'Add your first rec',
       condition: function(state){
         console.log('I AM A PASSED CONDTION FUNCTION',state);
         return (state.recs.size == 0 ? true : false);
@@ -19,12 +22,10 @@ const initialState = Map({
       title: 'Welcome to chaz',
       caption: 'The best way to save recommendations.', //tagline
       instructions:'Lets get started by adding a rec. click the blue button below',
-      buttonText: 'Lets get started',
-      buttonColor:0,
-      backgroundColor: "rgba(50, 50, 50, 0.8)"
     },
     // 2
     {
+      label: 'Add your first recr',
       title: 'Awesome!',
       caption: 'Lets start out by adding my favorite movie',
       instructions:'Enter Shawshank Redemption in the next screen',
@@ -34,6 +35,7 @@ const initialState = Map({
     },
     // 3
     {
+      label: 'Categorize a rec',
       title: 'Great Job!',
       caption: 'You just saved your first recommendation! Now lets mark who its from',
       instructions:'Click the button',
@@ -42,7 +44,10 @@ const initialState = Map({
       backgroundColor: "rgba(100, 100, 100, 0.8)"
     },
 
-  )
+  ),
+
+
+  // rec type, recr
 
   // possibly pre-fill some of the inputs. figure out how to do note. "stephen king"
   // should each step include its action to proceed?
