@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     paddingLeft:10,
     borderColor: '#ccc',
-    borderWidth:1,
+    borderWidth:0,
   },
   // input: {
   //   fontSize: 25,

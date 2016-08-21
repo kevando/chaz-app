@@ -4,15 +4,14 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  AlertIOS
 } from 'react-native';
 
 import {Actions} from "react-native-router-flux";
 
 // import RecGrade from './RecGrade';
-// import RecDate from './RecDate';
+import RecDate from './RecDate';
 // import AddRecr from '../../containers/rec/AddRecr';
-// import RecType from './RecType';
+import RecType from './RecType';
 import GlobalStyle from '../style/Global';
 export default class ListItem extends Component {
 
@@ -28,10 +27,14 @@ export default class ListItem extends Component {
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
       <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
-        <Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text>
+        <View style={{flex:1,flexDirection:'row'}}>
+          <View style={{flex:1}}><RecType rec={rec} size={30} /></View>
+          <View style={{flex:7}}><Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text></View>
+        </View>
         <Text style={{fontWeight:'400',fontSize:15,color:'#ccc'}}>{rec.note}</Text>
-        <Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>{rec.type}</Text>
+
         <Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>{this.renderRecr()}</Text>
+        <RecDate timestamp={rec.created_at} />
 
         </View>
 

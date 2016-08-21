@@ -32,7 +32,7 @@ class RecView extends Component {
       <View  style={{flex:1}}>
         <View style={styles.row}>
           <View style={styles.left}>
-            <RecType rec={rec} {...boundActionCreators} />
+            <RecType rec={rec} {...boundActionCreators} size={30} />
           </View>
           <View style={styles.right}>
             <RecTitle rec={rec} onPress={Actions.recommendationEdit}  />

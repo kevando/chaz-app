@@ -4,12 +4,12 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
           // Dont execute this middleware for the following actions
           if (['REDUX_STORAGE_LOAD','CREATE_APP_USER'].indexOf(action.type) >= 0) { return next(action);  }
 
+          console.log('check onboard')
           var onboard = store.getState().onboard;
           var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
-          var {trigger,condition} = stepData;
+          var {trigger,condition} = stepData.toJS();
 
           switch (action.type) {
-
             // Check the conditions any time that data is saved to redux
             case 'REDUX_STORAGE_SAVE':
               if(condition(action.payload)) // might need to change this to getState

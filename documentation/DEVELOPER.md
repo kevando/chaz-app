@@ -15,6 +15,7 @@ Here are some resources and notes about the development of chaz.
 - [Chat UI]: https://github.com/FaridSafi/react-native-gifted-chat
 - [Hot Push]: https://github.com/Microsoft/react-native-code-push
 - [Tinder Swipe example]: https://github.com/brentvatne/react-native-animated-demo-tinder
+- [Animation lib looks dope]: https://github.com/oblador/react-native-animatable
 
 ## Configure Development environment*
 

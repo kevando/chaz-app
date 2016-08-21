@@ -1,28 +1,20 @@
-Draw this out
-
-
 # Onboarding
 
-Learning how to use a new product should be fun, engaging, leave no room for
-confusion, so chaz holds your hand ever step of the way. It should also feel
-very natural, so there is an extensive guide. NO OPTING OUT!
+Learning how to use a new product should be fun and engaging. Apple has done this
+better than any other company with regards to mobile.
+When a user first engages with an app, they should see a clear path for success.
+
 
 ## chaz onboarding process
+
+While chaz isn't complicated, it does offer a new experience that might
+be unfamiliar to some users. Therefore chaz provides a step-by-step guide
+to reaching various "milestones" that make the app more fun and useful.
 
 According to [name,link] from facebook, all products should lead users to that
 magic "aha" moment. For chaz, that moment is when you decide what suggestion
 based on your friend's score. Easier said than done!
 
-
-The user needs to put in quite a bit of work in order to get there, so chaz is
-designed to make that process smooth and fun. It takes time, so we broke the
-process into stages:
-
- - Add rec with new recr
- - Repeat
- - Grade a Rec
- - Repeat
- - Ask user to create account
 
 Your data belongs to you, and unless it improves your experience as a user, chaz
 does not mandate any user info. Users are prompted to provide only the following
@@ -31,9 +23,21 @@ you lose or break your phone. Also chaz gonna text you late at night.
 
 ### chaz onboarding overview
 
+The user needs to put in quite a bit of work in order to get there, so chaz is
+designed to make that process smooth and fun. That process can be broken into
+these major stages:
+
+- Add a recommendation with meta data, including who provided the recommendation
+- Save enough recommendations that you build a queue for any given category (quantity unknown)
+- Use your queue to help navigate a decision
+- Go back to the app and "grade" that recommendation
+- At this point, we suggest the user create an account
+- Use your queue enough to grade at least 5 recs from at least 2 people
+- Sort your queue by "score" to make a decision on what media to enjoy
+- Provide feedback to your friends
 
 getting filter options is a step in the onboarding
-acheivements, n recs/rs rec types get you filter, adding timer. 
+acheivements, n recs/rs rec types get you filter, adding timer.
 
 
  - get reminder, consume rec
@@ -43,6 +47,7 @@ acheivements, n recs/rs rec types get you filter, adding timer.
 
 ### How chaz implements this
 link to ui video.
+link to reducer of all the onboarding steps
 
 chaz expands into several steps, each with two messages:
  a notification of the current state

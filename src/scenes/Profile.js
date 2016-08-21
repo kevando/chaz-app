@@ -15,14 +15,6 @@ const engine = createEngine('async-data-v1');
 
 class Profile extends Component {
 
-
-  componentDidMount() {
-    // put this somewhere more universal
-    // console.log('IM SO COOL IM A POPUP');
-    // Actions.popup(this.props.app.get('welcomeMessage'));
-
-  }
-
   render(){
     let {value,label} = GlobalStyle.styles;
     let user = this.props.app.get('user').toJS();

@@ -3,19 +3,14 @@ import {
   Text,
   View,
   StyleSheet,
+  TouchableOpacity,
+  ActionSheetIOS,
 } from 'react-native';
 import Emoji from 'react-native-emoji';
 
 
-const DropDown = require('react-native-selectme');
-const {
-  Select,
-  Option,
-  OptionList,
-  updatePosition
-} = DropDown;
 
-const emojiList = {
+const emojiList_old = {
   all: "earth_americas",
   default: "page_with_curl",
   book: "book",
@@ -27,83 +22,65 @@ const emojiList = {
   movie: "vhs",
   app: "iphone",
   place: "desert_island",
-
-
 }
+const emojiList = {
+  default: "page_with_curl",
+  book: "book",
+  music: "minidisc",
+  movie: "vhs",
+}
+
+const optionArray = [
+  "book",
+  "movie",
+  "music",
+  "cancel"
+]
 
 export default class RecType extends Component {
   constructor(props) {
     super(props);
-    this.state = {type: this.props.rec.type || '?'}
+    console.log(this.props.rec.type)
+    this.state = {type: this.props.rec.type || 'default'}
   }
-
-
-  _getOptionList() {
-    return this.refs['OPTIONLIST'];
-  }
-
-  _type(type) {
-
-    this.setState({
-      ...this.state,
-      type: type
-    });
-    var newRec = this.props.rec;
-    newRec.type = type;
-    this.props.updateRec(newRec);
-  }
-
 
   render() {
     return (
       <View style={styles.container}>
-          <Select
-            ref="SELECT1"
-            optionListRef={this._getOptionList.bind(this)}
-            defaultValue={this.state.type}
-            style={styles.select}
-            onSelect={this._type.bind(this)}>
-            <Option style={styles.option}>Movie</Option>
-            <Option style={styles.option}>Podcast</Option>
-
-          </Select>
-
-          <OptionList ref="OPTIONLIST" />
-</View>
-
+        <TouchableOpacity onPress={this.onChangeTypePress.bind(this)}>
+          <Text style={{fontSize:this.props.size,flexDirection:'row',textAlign:'center'}}>
+            <Emoji name={emojiList[this.state.type]} />
+          </Text>
+        </TouchableOpacity>
+      </View>
     );
   }
+  onTypeSelect() {
+    var newRec = this.props.rec;
+    newRec.type = this.state.type; // might be a bad flow for perf
+    this.props.updateRec(newRec);
+  }
+  onChangeTypePress() {
+    if(!this.props.updateRec) // dont make this editable (hack)
+      return;
+    ActionSheetIOS.showActionSheetWithOptions({
+      title: 'How would you categorize this?',
+      options: optionArray,
+      cancelButtonIndex: 3,
+      destructiveButtonIndex: 3,
+    },
+    (selectedIndex) => {
+      if(selectedIndex!=3){ // cancel
+        this.setState({type: optionArray[selectedIndex]});
+        this.onTypeSelect()
+      }
+    });
 
+  }
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor:'#fff',
-    flex:1,
-  },
-  select: {
 
-    borderWidth: 0
-    // position: 'absolute',
-    // left: 0,
-    // top: 0,
-    // opacity: 0.5,
-    // backgroundColor: 'blue',
-    // width: 300
-  },
-  option: {
-    flex: 1,
-    // position: 'absolute',
-    // left: 0,
-    // top: 0,
-    // opacity: 0.5,
-    backgroundColor: 'red',
-    // justifyContent:'start'
 
-    // width: 250
-  },
-  optionList: {
-    // backgroundColor:'green'
-  }
 });

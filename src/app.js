@@ -93,7 +93,7 @@ class App extends Component {
           // And that causses onStoreUpdate to run BEFORE the following code.
           // not sure if that fucks anything up
           // store.dispatch({type:'SET_WELCOME_MESSAGE',message:'0: User was previously found in redux'});
-          Scenes['profile'].initial = true;
+          Scenes['recommendations'].initial = true;
           this.setState({loading:false});
         }
       })

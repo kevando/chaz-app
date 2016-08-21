@@ -15,12 +15,9 @@ import RecAddButton from '../components/RecAddButton';
 import RecList from '../components/RecList';
 import * as GlobalStyle from '../style/Global';
 
-
-// const Register = () => (
 class Recommendations extends Component {
   constructor(props) {
     super(props);
-
   }
 
   componentWillMount() {
@@ -31,10 +28,6 @@ class Recommendations extends Component {
 
     // Might want to take this out of the render function
     // var recsLoaded = this.props.rec.get('loaded');
-
-    // if(!recsLoaded){
-    //   // return (<Loading message="Loading Recs from Firebase" />);
-    // }
 
     var recList = this.props.recs; // was visible
     // var activeType = this.props.rec.getIn(['filters','type','active']);
@@ -54,10 +47,6 @@ class Recommendations extends Component {
     );
   }
 
-  onAddRecPress() {
-
-  }
-
 }
 
 
@@ -67,7 +56,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderRightWidth: 0,
     borderColor:GlobalStyle.constants.colors[1],
-    backgroundColor:'#ccc',
+    backgroundColor:'#eee',
     borderTopWidth: 2,
     borderTopColor: 'red'
 
@@ -90,7 +79,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    // counter: state.counter,
     recs: state.recs
   };
 }

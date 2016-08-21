@@ -15,7 +15,6 @@ const initialState = Map({
     {
       label: 'Add your first rec',
       condition: function(state){
-        console.log('I AM A PASSED CONDTION FUNCTION',state);
         return (state.recs.size == 0 ? true : false);
       },
       trigger: 'ADD_REC',

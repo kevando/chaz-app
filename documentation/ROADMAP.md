@@ -3,21 +3,27 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.9 workspace ------------------------------------------------------------
 
-look at popup animated and try to understand how this works
 
-onboarding mvp is there!
-work on transitions, profile page with onboard status, logout button
+add more types and emoji support
 
+
+build, commit
+
+improve recr add
+firebase sync
+
+expand onboarding
+logout button
+ability to filter, change out recType gets its data
 
 / ui improvements
 recrs (create popup for when there are many recrs to choose from)
 
 firebase sync: fix welcome message and how it pulls from fb on "auth" and where it sets initial scene
+login timeout
 analytics middleware
-and thats a release
+and thats a release!!
 
-better rec keyboard
-better edit text status and onComplete feedback
 look at origami for ui ideas
 
 ---
@@ -27,10 +33,13 @@ do something better w app loading scene and appcheckuser
 consider better file structure
 dropdown overlay is all bugged and FUCKED UP
 
-add mixpanel back, WITH VERSIONING
-remember to migrate user data
 
 
+---
+improve scene transitions
+
+
+---
 
 
  - refactored app so its offline by default
