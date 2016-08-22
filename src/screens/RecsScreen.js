@@ -16,7 +16,7 @@ import Loading from '../components/LoadingComponent';
 import Onboarding from '../containers/Onboarding';
 import FilterNav from '../containers/rec/FilterNav';
 import RecList from '../components/rec/RecList';
-import * as Style from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 
 var DeviceInfo = require('react-native-device-info');
 
@@ -24,11 +24,13 @@ let navBarVisiable = true;
 
 // this is a traditional React component connected to the redux store
 class RecsScreen extends Component {
+
   static navigatorStyle = {
-    statusBarColor: '#303F9F',
-    navBarBackgroundColor: Style.constants.colors[0],
     navBarTextColor: '#fff',
+    navBarBackgroundColor: GlobalStyle.constants.colors[0],
     navBarButtonColor: '#fff',
+    statusBarTextColorScheme: 'light',
+    navBarTransparent: true,
   };
 
   static navigatorButtons = {
@@ -38,14 +40,8 @@ class RecsScreen extends Component {
 
   constructor(props) {
     super(props);
-    // if you want to listen on navigator events, set this up
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
-    this.onAddRecrPress = this.onAddRecrPress.bind(this);
-
-    this.props.navigator.setTitle({
-      title: "chaz (v" +  DeviceInfo.getReadableVersion() +")"
-    });
-
+    this.props.navigator.setTitle({ title: "chaz (v" +  DeviceInfo.getVersion() +")" });
   }
 
   onNavigatorEvent(event) {
@@ -64,41 +60,45 @@ class RecsScreen extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'SET_LOADED', loaded: false}); // reset the app awareness that listener is off
     this.props.dispatch(recActions.listenForRecs()); // again i dont like this code here. but it works well
-    // this.props.dispatch(recrActions.listenForRecrs());
+    this.props.dispatch(recrActions.listenForRecrs()); // meh
+
+  }
+  componentWillMount() {
+    if(this.props.onboard.get('currentStep') == 0)
+      this.props.dispatch({type: 'INCREMENT_CURRENT_STEP'}); // Show welcome message
   }
 
-
   render() {
-    // return(<View><Text>tmp rec screen</Text></View>);
 
     // Might want to take this out of the render function
     var recsLoaded = this.props.rec.get('loaded');
-
 
     if(!recsLoaded){
       return (<Loading message="Loading Recs from Firebase" />);
     }
 
     var recList = this.props.rec.getIn(['visible']);
-    // console.log('recList',recList);
     var activeType = this.props.rec.getIn(['filters','type','active']);
 
-    // probly not the best place, but all life cycle methods ran pre-mature
-    this.props.navigator.setTitle({title: activeType+ ' ('+recList.size+')'});
+    // if(recList.size == 0)
+      // return(<Onboarding notify="You have no recs" guide="Press the button below to get started" />)
+
 
     return (
-      <View style={{flex: 1, padding: 0}}>
+      <View style={styles.container}>
         <FilterNav />
-        <View style={{flex:7}} >
-          {( recList.size == 0
-            ? <Onboarding notify="You have no recs" guide="Press the button below to get started" />
-            : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
-          )}
+        <View style={{flex:9}} >
+            <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
+
         </View>
         <AddRecButton activeType={activeType} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
   }
+  // {( recList.size == 0
+  //   ? <Onboarding notify="You have no recs" guide="Press the button below to get started" />
+  //   : <ScrollView><RecList recList={recList} navigator={this.props.navigator} /></ScrollView>
+  // )}
 
   addRecr(recrName) {
     // create new recr if new
@@ -123,47 +123,54 @@ class RecsScreen extends Component {
   onShowFriendsPress() {
     this.props.navigator.push({ screen: "chaz.RecrsScreen"});
   }
-  onAddRecrPress(itemRec) {
-    // Before adding recr name, set this listItem Rec to current.
-    // this is not the best place for this, but its needed to add recr
-    // this.props.dispatch(recActions.setCurrentRec(itemRec));
-    //
-    // var options = Array();
-    // options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
-    // options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
-    // AlertIOS.prompt('Who is recommending this?', null, options);
-    console.log(this.props)
-    var BUTTONS = [
-  'Option 0',
-  'Option 1',
-  'Option 2',
-  'Delete',
-  'Cancel',
-];
-var DESTRUCTIVE_INDEX = 3;
-var CANCEL_INDEX = 2;
-ActionSheetIOS.showActionSheetWithOptions({
-      title: 'title',
-      message: 'message',
-      options: BUTTONS,
-      cancelButtonIndex: CANCEL_INDEX,
-      destructiveButtonIndex: DESTRUCTIVE_INDEX,
-      tintColor: 'green',
-    },
-    (buttonIndex) => {
-      this.setState({ clicked: BUTTONS[buttonIndex] });
-    });
-
-  }
-  addRecr(recrName) {
-    // create new recr if new
-    // update current with updated rec info
-    this.props.dispatch(recrActions.createRecr(recrName));
-  }
+//   onAddRecrPress(itemRec) {
+//     // Before adding recr name, set this listItem Rec to current.
+//     // this is not the best place for this, but its needed to add recr
+//     // this.props.dispatch(recActions.setCurrentRec(itemRec));
+//     //
+//     // var options = Array();
+//     // options.push({text: 'Add New',  onPress: (recrName) => { this.addRecr(recrName) }    });
+//     // options.push({text: 'Cancel', onPress: (text) => console.log('action canelled') });
+//     // AlertIOS.prompt('Who is recommending this?', null, options);
+//     console.log(this.props)
+//     var BUTTONS = [
+//   'Option 0',
+//   'Option 1',
+//   'Option 2',
+//   'Delete',
+//   'Cancel',
+// ];
+// var DESTRUCTIVE_INDEX = 3;
+// var CANCEL_INDEX = 2;
+// ActionSheetIOS.showActionSheetWithOptions({
+//       title: 'title',
+//       message: 'message',
+//       options: BUTTONS,
+//       cancelButtonIndex: CANCEL_INDEX,
+//       destructiveButtonIndex: DESTRUCTIVE_INDEX,
+//       tintColor: 'green',
+//     },
+//     (buttonIndex) => {
+//       this.setState({ clicked: BUTTONS[buttonIndex] });
+//     });
+//
+//   }
+  // addRecr(recrName) {
+  //   // create new recr if new
+  //   // update current with updated rec info
+  //   this.props.dispatch(recrActions.createRecr(recrName));
+  // }
 
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderColor:GlobalStyle.constants.colors[1],
+
+  },
   text: {
     textAlign: 'center',
     fontSize: 18,
@@ -186,6 +193,7 @@ function mapStateToProps(state) {
     rec: state.rec,
     recr: state.recr,
     app: state.app,
+    onboard: state.onboard
   };
 }
 

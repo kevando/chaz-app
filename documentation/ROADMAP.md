@@ -1,12 +1,95 @@
 # Product Roadmap
 Here is a grouped list of planned features, broken out by version. To understand why it's done like this, check out the onboarding doc.
 
+# 0.9 workspace ------------------------------------------------------------
+
+delete lib auto size and mixpanel inside chaz
+
+improve recr add
+firebase sync
+firebase sync: fix welcome message and how it pulls from fb on "auth" and where it sets initial scene
+login timeout
+
+
+expand onboarding
+logout button
+ability to filter, change how recType gets its data. probyl add to redux
+
+/ ui improvements
+recrs (create popup for when there are many recrs to choose from)
+add cool animations
+https://facebook.github.io/origami/
+https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
+analytics middleware
+and thats a release!!
+
+
+---
+Cleanup
+app.js code add comments from app_old.js
+do something better w app loading scene and appcheckuser
+consider better file structure
+dropdown overlay is all bugged and FUCKED UP
+
+
+
+---
+improve scene transitions
+
+
+---
+
+
+ - refactored app so its offline by default
+ - Changed navigator API
+ - Added some janky animation to welcome page
+ - Changed the navbar height from to
+
+=---
+
+# 0.10 (resume of 0.8 basically)
+
+created the initial onboarding (first 3 steps)
+kinda janky but i think it should work great once i get the wording better
+probably should store the conditions to move to the next step in the onboarding
+
+store onboard status in firebase
+then go through evernote, clean notes and get ui ideas
+
+edit rec type
+
+recr view pages with rec List
+rec grades with recr scores
+
+
+add onboarding progress to profile screen with current process
+
+validate recr does not already exists
+assign emoji faces to recrs, give it some order or random
+
+improve styling across the board, while i build onboarding
+list style, focus on making look good for all situations (w recr)
+  yik yak for inspiration
+this screen says alot. very confusing... https://i.imgur.com/7hvrZdy.png
+
+get this ready to deploy to fabric, I want to test asap how grading will work
+login is pretty much set now how I want it. Code is janky as fuck tho. so fix that
+need to be careful about onboarding getting out of sync. how to protect?
+
+remove blue from filter nav shit
+
+# /0.8 workspace ------------------------------------------------------------
+
 ### Version 0.8
  - Significantly improve the onboarding
+ - Add Rec commments
  - Introduce the recommender
+ - refactored to new firebase + offline support
 
 ### Version 0.9
  - Introduce Rec grades
+ - Add hyperlink ability
+ - Add reminders (with notifications)
 
 ### Version 1.0 (Release to app store)
  - Add Friend List page
@@ -18,3 +101,4 @@ Here is a grouped list of planned features, broken out by version. To understand
  - Chat feature
  - option to send "Started watching" to friend that gave rec
  - Get it ready for useronboarding.com
+ - Premium service: we find links to the shit you get rec'd

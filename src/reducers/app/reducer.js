@@ -1,32 +1,23 @@
 import * as types from './actionTypes';
-import * as Immutable from 'immutable';
+import { Map } from 'immutable';
 
-const initialState = Immutable.Map({
-  root: 'login', //'init', // 'login' / 'after-login'
-  authError: '', // remove
-  authData: {},
-  firebaseRef: {},
-  // onboarding: {}
-  // filters: [
-  //   {
-  //     default: 'all',
-  //     options: ['all','graded','ungraded']
-  //   }
-  // ]
+const initialState = Map({
+  user: {},
+  welcomeMessage: 'nothing'
 });
 
 export default function app(state = initialState, action = {}) {
 
   switch (action.type) {
 
-    case types.ROOT_CHANGED:
-      return state.set( 'root', action.root );
+    // Used for testing, will show in the pop up after authenticating
+    case types.SET_WELCOME_MESSAGE:
+      return state.set( 'welcomeMessage', action.message );
 
-    case types.USER_LOGIN:
+    case types.CREATE_APP_USER:
       return state.merge({
-        authData: action.authData
+        user: {uid: action.uid, name: 'Kevo'}
       });
-
 
     default:
       return state;

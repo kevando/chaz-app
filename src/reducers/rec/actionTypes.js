@@ -1,5 +1,4 @@
-export const UPDATE_REC_LIST = 'UPDATE_REC_LIST';
-export const UPDATE_VISIBLE_REC_LIST = 'UPDATE_VISIBLE_REC_LIST';
-export const UPDATE_CURRENT_REC = 'UPDATE_CURRENT_REC';
-export const SET_LOADED = 'SET_LOADED';
-export const UPDATE_REC_FILTER = 'UPDATE_REC_FILTER';
+export const ADD_REC = 'ADD_REC';
+export const UPDATE_REC = 'UPDATE_REC';
+export const DELETE_REC = 'DELETE_REC';
+export const ASSIGN_RECR = 'ASSIGN_RECR';

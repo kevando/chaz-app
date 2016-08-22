@@ -9,40 +9,32 @@ import {
   Alert
 } from 'react-native';
 import { connect } from 'react-redux';
-import * as counterActions from '../reducers/counter/actions';
-import * as GlobalStyle from '../style/Style';
+import * as onboardActions from '../reducers/onboard/actions';
+import * as GlobalStyle from '../style/Global';
 
-// this is a traditional React component connected to the redux store
+
 class OnboardPopup extends Component {
-// eventually this will get all it's values passed via props
 
   constructor(props) {
     super(props);
   }
 
   render() {
+    console.log('popup props',this.props);
+    const {title,caption,instructions,buttonText,buttonColor} = this.props;
     return (
-      <View style={styles.popupContainer} >
+      <View style={styles.container} >
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.caption}>{caption}</Text>
+        <Text style={styles.instructions}>{instructions}</Text>
 
-        <View style={{padding: 20}}>
-
-          <Text style={styles.title}>
-            Nice Job!
-          </Text>
-          <Text style={styles.text}>
-            You just saved your first recommendation.
-          </Text>
-          <Text style={styles.text}>
-            Things only get better from here..
-          </Text>
-
-          <TouchableOpacity onPress={ this.onButtonPress.bind(this) }>
-            <Text style={styles.button}>Okay, I get it</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={ this.onButtonPress.bind(this) }>
+          <Text style={[styles.button,{backgroundColor:GlobalStyle.constants.colors[buttonColor]}]}>{buttonText}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
+
 
   onButtonPress() {
     this.props.navigator.dismissLightBox();
@@ -50,23 +42,40 @@ class OnboardPopup extends Component {
 }
 
 const styles = StyleSheet.create({
-  popupContainer: {
-    backgroundColor: '#fff',
+
+  container: {
+    // backgroundColor: '#ccc',
+    flex:1,
+    flexDirection:'column',
+    borderWidth:0,
+    borderColor:'#fff',
+    padding:30,
+    margin:30,
 
   },
   title: {
     textAlign: 'center',
-    fontSize: 18,
-    fontWeight:'500',
+    fontSize: 38,
+    fontWeight:'600',
     marginBottom: 10,
     marginTop:10,
+    color:"#fff"
   },
-  text: {
+  caption: {
     textAlign: 'center',
     fontSize: 13,
     fontWeight:'200',
     marginBottom: 2,
     marginTop:2,
+    color:"#fff"
+  },
+  instructions: {
+    textAlign: 'center',
+    fontSize: 13,
+    fontWeight:'200',
+    marginBottom: 2,
+    marginTop:2,
+    color:"#fff"
   },
   button: {
     textAlign: 'center',
@@ -82,7 +91,7 @@ const styles = StyleSheet.create({
 // which props do we want to inject, given the global state?
 function mapStateToProps(state) {
   return {
-    counter: state.counter
+    onboard: state.onboard,
   };
 }
 

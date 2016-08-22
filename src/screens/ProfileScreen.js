@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import DeviceInfo from 'react-native-device-info';
 import * as appActions from '../reducers/app/actions';
 import Badge from '../components/feedback/Badge';
-import * as GlobalStyle from '../style/Style';
+import * as GlobalStyle from '../style/Global';
 
 // this is a traditional React component connected to the redux store
 class ProfileScreen extends Component {

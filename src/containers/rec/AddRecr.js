@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start' ,
     fontSize: 14,
     fontWeight: '600',
-    color: Style.constants.colors[2]
+    color: GlobalStyle.constants.colors[2]
   },
   recomendContainer: {
     flexDirection:'row',
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start' ,
     fontSize: 14,
     fontWeight: '500',
-    color: Style.constants.colors[2],
+    color: GlobalStyle.constants.colors[2],
     flexDirection:'row'
 
   },

@@ -13,6 +13,9 @@ Here are some resources and notes about the development of chaz.
 - https://facebook.github.io/react-native/docs/flexbox.html
 - https://docs.fabric.io/apple/beta/beta-walkthrough.html
 - [Chat UI]: https://github.com/FaridSafi/react-native-gifted-chat
+- [Hot Push]: https://github.com/Microsoft/react-native-code-push
+- [Tinder Swipe example]: https://github.com/brentvatne/react-native-animated-demo-tinder
+- [Animation lib looks dope]: https://github.com/oblador/react-native-animatable
 
 ## Configure Development environment*
 
@@ -50,3 +53,55 @@ npm start
  - Save
  - User will now get an email and have to download test flight
  - Enter the redeem code (optional)
+
+
+
+## Immutablejs Cheatsheet
+The docs are not easy to read, so here are some quick notes on some of the functions that I need
+
+### Lists
+Assume we have a List of recs like:
+
+`const recList = List.of(
+  {id:1,title:'shawshank'},
+  {id:2,title:'death star'},
+  );`
+
+
+#### Get most recent item in a List
+`recList.last()`
+
+#### Replace a rec item in a List
+```
+return recs.update(
+  recs.findIndex(function(rec) {
+    return rec.get("id") === action.payload.id;
+  }), function(rec) {
+    return Map(action.payload); // return entire rec
+    //return rec.set("note", action.payload.note); sets individual field
+  }
+);
+```
+
+#### Iterate a List
+
+you need to define the return value
+```onboard.get('steps').map(function(step,index){
+  // var status = "pending"; // does not error
+  return(
+    <View style={styles.row} key={step.get('label')} >
+      <View style={styles.left}><Text style={label}>{index}. {step.get('label')}</Text></View>
+      <View style={styles.right}><Text style={value}>status</Text></View>
+    </View>
+  );
+  ```
+
+this notation returns what is ever in loop
+```
+  onboard.get('steps').map((step,index) => (
+    // var status = "pending"; // this will throw an error
+      <View style={styles.row} key={step.get('label')} >
+        <View style={styles.left}><Text style={label}>{index}. {step.get('label')}</Text></View>
+        <View style={styles.right}><Text style={value}>status</Text></View>
+      </View>
+  ```  
