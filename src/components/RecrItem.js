@@ -21,12 +21,13 @@ class RecrItem extends Component {
   render() {
     // console.log('recr props',this.props.recr)
     var recr = this.props.rec.recr;
-    if(recr)
-      return (<Text>{recr.name}</Text>)
-
+    
     return (
       <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
-        <Text style={{fontWeight:'600',color:"green",fontSize:15}}>Who recommended this?</Text>
+      {( recr
+        ? <Text style={{fontWeight:'600',color:"green",fontSize:15}}>{recr.name}</Text>
+        :<Text style={{fontWeight:'600',color:"green",fontSize:15}}>Who recommended this?</Text>
+      )}
       </TouchableOpacity>
     );
   }

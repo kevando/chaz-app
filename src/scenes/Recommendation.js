@@ -55,7 +55,7 @@ class RecView extends Component {
       <View>
     </View>
     <TouchableOpacity onPress={this.deleteRec.bind(this)} style={{flex:1,marginLeft:50,marginTop:150,marginRight:50}}>
-      <Text style={{color:'red',fontWeight:'600',textAlign:'center',borderColor:'red',borderWidth:2,padding:6}}>Delete Rec</Text>
+      <Text style={{color:'red',fontWeight:'600',textAlign:'center',padding:6}}>Delete Rec</Text>
     </TouchableOpacity>
     <KeyboardSpacer />
   </View>
