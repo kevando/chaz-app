@@ -8,11 +8,11 @@ const initialState = Map({
   showPopup: false,
   steps: List.of(
     // 0 Not used
-    {
+    Map({
       label: 'Open the App!'
-    },
+    }),
     // 1
-    {
+    Map({
       label: 'Add your first rec',
       condition: function(state){
         return (state.recs.size == 0 ? true : false);
@@ -21,9 +21,9 @@ const initialState = Map({
       title: 'Welcome to chaz',
       caption: 'The best way to save recommendations.', //tagline
       instructions:'Lets get started by adding a rec. click the blue button below',
-    },
+    }),
     // 2
-    {
+    Map({
       label: 'Add your first recr',
       title: 'Awesome!',
       caption: 'Lets start out by adding my favorite movie',
@@ -31,9 +31,9 @@ const initialState = Map({
       buttonText: 'Okay, got it',
       buttonColor:1,
       backgroundColor: "rgba(100, 100, 100, 0.8)"
-    },
+    }),
     // 3
-    {
+    Map({
       label: 'Categorize a rec',
       title: 'Great Job!',
       caption: 'You just saved your first recommendation! Now lets mark who its from',
@@ -41,7 +41,7 @@ const initialState = Map({
       buttonText: 'Okay, Okay I got it',
       buttonColor:2,
       backgroundColor: "rgba(100, 100, 100, 0.8)"
-    },
+    }),
 
   ),
 

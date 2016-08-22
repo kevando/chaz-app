@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 import {
   Text,
   View,
-  ScrollView,
   TouchableOpacity,
   StyleSheet,
   Animated,
   TextInput,
   Dimensions,
-  DeviceEventEmitter
 } from 'react-native';
 import Button from "react-native-button";
 import * as recrActions from '../reducers/recr/actions';

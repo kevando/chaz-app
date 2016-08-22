@@ -40,13 +40,13 @@ const optionArray = [
 export default class RecType extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.rec.type)
+    console.log('recType type in constructor',this.props.rec.type)
     this.state = {type: this.props.rec.type || 'default'}
   }
 
   componentWillReceiveProps(newProps) {
     // user edited type so the list item needs to be refreshed
-    this.setState({type: newProps.rec.type});
+    this.setState({type: newProps.rec.type  || 'default' }); // todo should have a better way to handle undefined types
   }
 
   render() {
