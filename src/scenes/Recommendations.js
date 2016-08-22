@@ -39,7 +39,7 @@ class Recommendations extends Component {
     return (
       <View style={styles.container}>
         <View style={{flex:9}} >
-          <ScrollView><RecList recs={recList} /></ScrollView>
+          <ScrollView><RecList recs={recList.reverse()} /></ScrollView>
 
         </View>
         <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderColor:GlobalStyle.constants.colors[1],
     backgroundColor:'#eee',
     borderTopWidth: 2,
-    borderTopColor: 'red'
+    // borderTopColor: 'red'
 
   },
   text: {

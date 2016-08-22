@@ -44,6 +44,11 @@ export default class RecType extends Component {
     this.state = {type: this.props.rec.type || 'default'}
   }
 
+  componentWillReceiveProps(newProps) {
+    // user edited type so the list item needs to be refreshed
+    this.setState({type: newProps.rec.type});
+  }
+
   render() {
     return (
       <View style={styles.container}>

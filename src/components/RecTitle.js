@@ -107,7 +107,7 @@ export default class RecTitle extends Component {
 const styles = StyleSheet.create({
   title: {
     fontSize: 25,
-    paddingLeft:10,
+    // paddingLeft:10,
     borderColor: '#ccc',
     borderWidth:0,
   },

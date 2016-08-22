@@ -15,10 +15,14 @@ export default class RecNote extends Component {
   render() {
     var {rec} = this.props;
 
+
     return (
       <View>
         <TouchableOpacity onPress={this.onNotePress.bind(this)}>
-          <Text style={styles.note}>{rec.note}</Text>
+        {( rec.note
+          ? <Text style={styles.note}>{rec.note}</Text>
+          : <Text style={styles.note}>Add a note...</Text>
+        )}
         </TouchableOpacity>
       </View>
     );
@@ -32,9 +36,9 @@ export default class RecNote extends Component {
 const styles = StyleSheet.create({
   note: {
     fontSize: 18,
-    paddingLeft:10,
+    // paddingLeft:10,
     borderColor: '#ccc',
-    borderWidth:1,
+    borderWidth:0,
     color:'#444',
   }
 

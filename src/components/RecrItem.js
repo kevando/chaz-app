@@ -7,7 +7,6 @@ import {
   TextInput
 } from 'react-native';
 
-import Button from "react-native-button";
 import {Actions} from 'react-native-router-flux';
 
 import {connect} from 'react-redux'
@@ -26,7 +25,9 @@ class RecrItem extends Component {
       return (<Text>{recr.name}</Text>)
 
     return (
-      <Button onPress={this.onWhoPress.bind(this)} >Who recommended this?</Button>
+      <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
+        <Text style={{fontWeight:'600',color:"green",fontSize:15}}>Who recommended this?</Text>
+      </TouchableOpacity>
     );
   }
   onWhoPress() {

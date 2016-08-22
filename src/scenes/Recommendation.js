@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet} from "react-native";
-import Button from "react-native-button";
+import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
@@ -10,6 +9,7 @@ import RecType from '../components/RecType';
 import RecrItem from '../components/RecrItem';
 import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import Emoji from 'react-native-emoji';
 
 class RecView extends Component {
 
@@ -40,22 +40,23 @@ class RecView extends Component {
         </View>
 
         <View style={styles.row}>
-          <View style={styles.left}></View>
+          <View style={styles.left}><Text style={{fontSize:20,textAlign:'center'}}><Emoji name="memo" /></Text></View>
           <View style={styles.right}>
             <RecNote rec={rec} onPress={Actions.recommendationEdit} />
           </View>
         </View>
 
         <View style={styles.row}>
-          <View style={styles.left}>
-          </View>
+          <View style={styles.left}><View style={styles.left}><Text style={{fontSize:20,textAlign:'center'}}><Emoji name="slightly_smiling_face" /></Text></View></View>
           <View style={styles.right}>
             <RecrItem rec={rec} {...boundActionCreators} />
           </View>
         </View>
       <View>
     </View>
-    <Button style={{zIndex:1}} onPress={this.deleteRec.bind(this)}>Delete Rec</Button>
+    <TouchableOpacity onPress={this.deleteRec.bind(this)} style={{flex:1,marginLeft:50,marginTop:150,marginRight:50}}>
+      <Text style={{color:'red',fontWeight:'600',textAlign:'center',borderColor:'red',borderWidth:2,padding:6}}>Delete Rec</Text>
+    </TouchableOpacity>
     <KeyboardSpacer />
   </View>
     );
@@ -86,10 +87,10 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center', // vertical middle
     flexDirection: 'column',
-    backgroundColor: '#fff'
+    // backgroundColor: 'red'
   },
   right: {
-    flex:10,
+    flex:8,
     justifyContent: 'center', // vertical middle
     flexDirection: 'column',
     backgroundColor:'#fff',

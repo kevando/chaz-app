@@ -31,7 +31,8 @@ export default class ListItem extends Component {
           <View style={{flex:1}}><RecType rec={rec} size={30} /></View>
           <View style={{flex:7}}><Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text></View>
         </View>
-        <Text style={{fontWeight:'400',fontSize:15,color:'#ccc'}}>{rec.note}</Text>
+        <Text style={{fontWeight:'400',fontSize:15,color:'#999',height:20}} >{rec.note}</Text>
+
 
         <Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>{this.renderRecr()}</Text>
         <RecDate timestamp={rec.created_at} />
