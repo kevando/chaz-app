@@ -29,8 +29,8 @@ export function deleteRec(recId){
 }
 
 export function assignRecr(rec,recr){
-  console.log('assign rec',rec)
-  console.log('assign recr',recr)
+  // console.log('assign rec',rec)
+  // console.log('assign recr',recr)
   rec.recr = recr.toJS(); // simply add recr
   return {
     type: types.UPDATE_REC, // I can do this cause im not editing recr tree yet

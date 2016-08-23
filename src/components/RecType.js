@@ -40,7 +40,7 @@ const optionArray = [
 export default class RecType extends Component {
   constructor(props) {
     super(props);
-    console.log('recType type in constructor',this.props.rec.type)
+    // console.log('recType type in constructor',this.props.rec.type)
     this.state = {type: this.props.rec.type || 'default'}
   }
 

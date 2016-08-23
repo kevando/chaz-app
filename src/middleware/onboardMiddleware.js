@@ -4,7 +4,7 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
           // Dont execute this middleware for the following actions
           if (['REDUX_STORAGE_LOAD','CREATE_APP_USER'].indexOf(action.type) >= 0) { return next(action);  }
 
-          console.log('check onboard')
+          // console.log('check onboard')
           var onboard = store.getState().onboard;
           var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
           var {trigger,condition} = stepData.toJS();
