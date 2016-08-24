@@ -18,9 +18,9 @@ const initialState = Map({
         return (state.recs.size == 0 ? true : false);
       },
       trigger: 'ADD_REC',
-      title: 'Welcome to chaz',
+      title: 'Awesome job!',
       caption: 'The best way to save recommendations.', //tagline
-      instructions:'Lets get started by adding a rec. click the blue button below',
+      instructions:'Its important to remember who is giving you recommendations, so add the recommender',
     }),
     // 2
     Map({

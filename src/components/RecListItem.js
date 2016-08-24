@@ -26,15 +26,13 @@ export default class ListItem extends Component {
 
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
-      <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
-        <View style={{flex:1,flexDirection:'row'}}>
-          <View style={{flex:1}}><RecType rec={rec} size={30} /></View>
-          <View style={{flex:7}}><Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text></View>
-        </View>
-        <Text style={{fontWeight:'400',fontSize:15,color:'#999',height:20}} >{rec.note}</Text>
-
-
-        <Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>{this.renderRecr()}</Text>
+        <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
+          <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+            <View style={{flex:1}}><RecType rec={rec} size={30} /></View>
+            <View style={{flex:6}}><Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text></View>
+          </View>
+        {this.renderRecNote(rec.note)}
+        {this.renderRecr(rec.recr)}
         <RecDate timestamp={rec.created_at} />
 
         </View>
@@ -44,49 +42,17 @@ export default class ListItem extends Component {
   }
 
   onItemPress() {
-
     Actions.recommendation({rec: this.props.rec});
   }
-  render_og() {
-    // // removing add recr until 0.8
-    // // {this.renderRecrDisplay()}
-    //
-    // var rec = this.props.rec;
-    //
-    // return (
-    //   <TouchableOpacity onPress={ this.onRecPress.bind(this) }>
-    //
-    //     <View style={styles.row} >
-    //
-    //       <View style={styles.innerRowTop}>
-    //         <View style={styles.left} >
-    //           <RecType type={rec.type} size={30} />
-    //         </View>
-    //         <View style={styles.right} >
-    //           <Text style={styles.title} >{rec.title}</Text>
-    //           { this.renderRecNote() }
-    //           { this.renderRecr() }
-    //         </View>
-    //       </View>
-    //
-    //       <View style={styles.innerRowBottom}>
-    //         <RecDate timestamp={rec.createdAt} />
-    //       </View>
-    //
-    //     </View>
-    //
-    //   </TouchableOpacity>
-    // );
+
+  renderRecNote(note) { // dont give spacing for note if its not there
+    if(note)
+    return(<Text style={{fontWeight:'400',fontSize:16,color:'#555',height:20,margin:5}} >{note}</Text>);
   }
 
-  renderRecNote() { // dont give spacing for note if its not there
-    if(this.props.rec.note)
-    return(<Text style={styles.note}>{this.props.rec.note}</Text>);
-  }
-
-  renderRecr() {
-    if(this.props.rec.recr)
-      return(<Text style={styles.recr}>Recommended by {this.props.rec.recr.name}</Text>);
+  renderRecr(recr) {
+    if(recr)
+      return(<Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>Recommended by {recr.name}</Text>);
   }
 
   onRecPress() {
@@ -115,23 +81,13 @@ const styles = StyleSheet.create({
     paddingLeft:5,
     paddingRight:5
   },
-  innerRowTop: {
-    backgroundColor:'#fff',
-    flexDirection: 'row',
-    flex:1,
-  },
-  innerRowBottom: {
-    backgroundColor:'#fff',
-    flexDirection: 'row',
-    flex:1,
-    paddingLeft: 10, // trying to align w emoji
-    paddingTop: 7, // Swarm did this, so I am too
-  },
+
+
   left: {
     flex:2,
     justifyContent: 'center', // vertical middle
     flexDirection: 'column',
-    backgroundColor: '#fff'
+    backgroundColor: 'red'
   },
   right: {
     flex:14,

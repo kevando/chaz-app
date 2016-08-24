@@ -44,7 +44,7 @@ var blacklist = ['CREATE_APP_USER','LOAD_RECS_FROM_FIREBASE','LOAD_RECRS_FROM_FI
 const storageMiddleware = storage.createMiddleware(engine,blacklist);
 
 // As everything is prepared, we can go ahead and combine all parts as usual
-const createStoreWithMiddleware = applyMiddleware(thunk,storageMiddleware,firebaseSyncMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk,storageMiddleware,firebaseSyncMiddleware,onboardMiddleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
 // At this stage the whole system is in place and every action will trigger
@@ -61,7 +61,7 @@ const load = storage.createLoader(engine);
 
 // load(store); // I now call this in the constructor
 
-engine.save({}); // This clears the state from local storage
+// engine.save({}); // This clears the state from local storage
 
 // Notice that our load function will return a promise that can also be used
 // to respond to the restore event.

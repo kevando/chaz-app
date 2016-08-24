@@ -7,18 +7,7 @@ var {
   height: deviceHeight
 } = Dimensions.get("window");
 
-var styles = StyleSheet.create({
-    container: {
-        position: "absolute",
-        top:0,
-        bottom:0,
-        left:0,
-        right:0,
-        backgroundColor:"transparent",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-});
+
 
 class OnboardPopup extends Component {
     constructor(props){
@@ -45,6 +34,8 @@ class OnboardPopup extends Component {
 
     render(){
       console.log('props',this.props);
+      var {title,instructions} = this.props.data
+
         return (
             <Animated.View style={[styles.container, {backgroundColor:"rgba(52,52,52,0.5)"},
                                   {transform: [{translateY: this.state.offset}]}]}>
@@ -53,13 +44,32 @@ class OnboardPopup extends Component {
                                 justifyContent: "center",
                                 alignItems: "center",
                                 backgroundColor:"white" }}>
-                    <Text>{this.props.title}</Text>
-                    <Text>{this.props.instructions}</Text>
-                    <Button onPress={this.closeModal.bind(this)}>Close</Button>
+                    <Text style={styles.title}>{title}</Text>
+                    <Text style={styles.instructions}>{instructions}</Text>
+                    <Button onPress={this.closeModal.bind(this)}>Got it</Button>
                 </View>
             </Animated.View>
         );
     }
 }
-
+const styles = StyleSheet.create({
+    container: {
+        position: "absolute",
+        top:0,
+        bottom:0,
+        left:0,
+        right:0,
+        backgroundColor:"transparent",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    title: {
+      fontSize:20,
+      fontWeight:'600'
+    },
+    instructions: {
+      fontSize:15,
+      fontWeight:'400'
+    }
+});
 module.exports = OnboardPopup;

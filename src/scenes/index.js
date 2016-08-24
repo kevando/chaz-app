@@ -72,15 +72,16 @@ export const Scenes = Actions.create(
     <Scene key="root" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
       <Scene key="welcome" component={Welcome}  hideNavBar type={ActionConst.REPLACE}   />
-
       <Scene key="logout" component={Logout} hideNavBar type={ActionConst.REPLACE} />
 
       <Scene key="recommendations"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
+       titleStyle={{fontSize:20,fontWeight:'600',color:'#fff'}}
        component={Recommendations}
        type={ActionConst.REPLACE}
        onLeft={()=>Actions.profile()}
        leftTitle="Exit"
+       title="chaz"
       />
 
       <Scene
@@ -108,7 +109,14 @@ export const Scenes = Actions.create(
        direction="vertical"
       />
 
-      <Scene key="recommendationFromAdd" component={Recommendation} title="View Recy" type={ActionConst.REPLACE} />
+      <Scene
+       key="recommendationFromAdd"
+       component={Recommendation}
+       title=""
+       type={ActionConst.REPLACE}
+       hideBackImage={true}
+       backTitle="Back"
+      />
 
 
       <Scene

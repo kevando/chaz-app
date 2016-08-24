@@ -4,12 +4,10 @@ Here is a grouped list of planned features, broken out by version. To understand
 # 0.9 workspace ------------------------------------------------------------
 
 
-
-firebase sync: fix welcome message and how it pulls from fb on "auth" and where it sets initial scene
-login timeout
-logout button
-
 expand and improve onboarding and ui
+Release this!
+Then consider what it takes to update the onboarding 
+
 ability to filter, change how recType gets its data. probyl add to redux
 
 
@@ -22,7 +20,7 @@ and thats a release!!
 ---
 improvements
 format listitem, add rec button bigger, change type should be a cta
-
+add rec button on every page, log what page user clicked add rec from
 ---
 Cleanup
 app.js code add comments from app_old.js
