@@ -30,6 +30,7 @@ import Welcome from './Welcome'
 import RecommenderAdd from './RecommenderAdd';
 import Popup from './Popup';
 import OnboardPopup from './OnboardPopup';
+import Logout from './Logout';
 
 import * as GlobalStyle from '../style/Global';
 
@@ -70,7 +71,9 @@ export const Scenes = Actions.create(
   <Scene key="modal" component={Modal} >
     <Scene key="root" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
-      <Scene key="welcome" component={Welcome} title="Welcome" hideNavBar  />
+      <Scene key="welcome" component={Welcome}  hideNavBar type={ActionConst.REPLACE}   />
+
+      <Scene key="logout" component={Logout} hideNavBar type={ActionConst.REPLACE} />
 
       <Scene key="recommendations"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}

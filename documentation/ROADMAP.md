@@ -3,7 +3,7 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.9 workspace ------------------------------------------------------------
 
-fixing bugs, attempting to increase logging to fabric. not sure if it did anytihing
+
 
 firebase sync: fix welcome message and how it pulls from fb on "auth" and where it sets initial scene
 login timeout
@@ -19,6 +19,9 @@ what happens if i change onboarding initial state? ask async github
 figure out a good way to handle errors, but log them as issues in fabric (indexof error)
 and thats a release!!
 
+---
+improvements
+format listitem, add rec button bigger, change type should be a cta
 
 ---
 Cleanup
@@ -36,6 +39,7 @@ dropdown overlay is all bugged and FUCKED UP
  - Added some janky animation to welcome page
  - Changed the navbar height from to
  - Added recr
+ - added custom error logging to fabric
 
 =---
 

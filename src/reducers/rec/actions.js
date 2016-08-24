@@ -8,7 +8,7 @@ export function addRec(title,note) {
       id: uuid.v1(),
       title: title,
       note: note,
-      created_at: new Date(),
+      created_at: Date.now(),
     }
   };
 }

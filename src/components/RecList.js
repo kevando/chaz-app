@@ -17,7 +17,7 @@ export default class RecList extends Component {
   render() {
 
     var recs = this.props.recs;
-    // console.log('recs',recs)
+    console.log('recs',recs)
     return (
       <View>
         {

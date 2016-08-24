@@ -9,37 +9,25 @@ import * as GlobalStyle from '../style/Global';
 var SPRING_CONFIG = {tension: 7, friction: 3}; //Soft spring
 var BUTTON_OFFSET = 300;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: GlobalStyle.constants.colors[0],
-  },
-  button: {
-    backgroundColor:'#fff',
-    padding:15,
-    color: GlobalStyle.constants.colors[1],
-    // hacking this animation
-    marginTop:BUTTON_OFFSET
-  },
-});
-
-
 class Welcome extends Component {
 
   constructor(props){
     super(props);
     // dispatches CREATE_APP_USER
     this.props.dispatch(firebaseActions.checkForAppUser());
-    this.state = {pan: new Animated.ValueXY(), status: 'loading...',uid: 'no uid',loading:true }
+    this.state = {
+      pan: new Animated.ValueXY(), // not totally sure what this does but it is needed for animation to work
+      status: 'loading...',
+      uid: 'no uid',
+      loading:true
+    }
   }
 
   componentDidUpdate(nextProps) { //todo change this after auth is improved
     var user = this.props.app.get('user');
     if(user && this.state.loading){ // Refresh screen with auth data
       var uid = user.get('uid');
-      var welcomeMessage = nextProps.app.get('welcomeMessage');
+      var welcomeMessage = user.get('welcomeMessage');
       this.setState({status:welcomeMessage,uid:uid,loading:false});
       this.triggerButtonAnimation(); // trying this animation for now
     }
@@ -47,7 +35,7 @@ class Welcome extends Component {
 
   componentWillMount() {
    // Animate creation
-   LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
+  //  LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
  }
   triggerButtonAnimation() {
     Animated.sequence([
@@ -81,7 +69,7 @@ class Welcome extends Component {
             <Button style={styles.button} onPress={Actions.recommendations}>Get Started</Button>
           </Animated.View>
         )}
-        <View style={{position:'absolute',bottom:10}}>
+        <View style={{position:'absolute',bottom:70}}>
           <Text style={{fontWeight:'400',color:'#fff'}}>Server Response: {this.state.status}</Text>
           <Text style={{fontWeight:'100',color:'#fff'}}>{this.state.uid}</Text>
         </View>
@@ -90,6 +78,22 @@ class Welcome extends Component {
   }
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: GlobalStyle.constants.colors[0],
+  },
+  button: {
+    backgroundColor:'#fff',
+    padding:15,
+    color: GlobalStyle.constants.colors[1],
+    // hacking this animation
+    marginTop:BUTTON_OFFSET
+  },
+});
 
 // which props do we want to inject, given the global state?
 function mapStateToProps(state) {

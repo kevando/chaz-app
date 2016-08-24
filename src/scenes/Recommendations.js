@@ -5,8 +5,6 @@ import { Actions } from 'react-native-router-flux';
 
 import * as counterActions from '../reducers/counter/actions';
 // import * as recActions from '../../reducers/rec/actions';
-import * as firebaseActions from '../reducers/firebase/actions';
-
 
 import { connect } from 'react-redux';
 import RecAddButton from '../components/RecAddButton';
@@ -22,7 +20,7 @@ class Recommendations extends Component {
 
   componentWillMount() {
    // Animate creation
-   LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
+  //  LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
  }
   render() {
 
