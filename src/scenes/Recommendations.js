@@ -9,7 +9,7 @@ import * as counterActions from '../reducers/counter/actions';
 import { connect } from 'react-redux';
 import RecAddButton from '../components/RecAddButton';
 import EmptyMessage from '../components/EmptyMessage';
-// import FilterNav from '../containers/rec/FilterNav';
+import FilterNav from '../components/FilterNav';
 import RecList from '../components/RecList';
 import * as GlobalStyle from '../style/Global';
 
@@ -22,13 +22,23 @@ class Recommendations extends Component {
    // Animate creation
   //  LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
  }
+ getVisibleRecs() {
+
+  var activeFilter = this.props.app.get('activeFilter');
+  if(activeFilter == 'all')
+    return this.props.recs;
+
+  return this.props.recs.filter(rec => rec.get('type') == activeFilter);
+  // return this.props.recs;
+ }
   render() {
 
     // Might want to take this out of the render function
     // var recsLoaded = this.props.rec.get('loaded');
 
-    var recList = this.props.recs; // was visible
-    // var activeType = this.props.rec.getIn(['filters','type','active']);
+    var visibleRecs = this.getVisibleRecs();
+    var totalRecs = this.props.recs
+    var currentStep = this.props.onboard.get('currentStep'); // used for rendering the filter
 
     // if(recList.size == 0)
       // return(<EmptyMessage notify="You have no recs" instructions="Press the button below to get started" />)
@@ -36,12 +46,19 @@ class Recommendations extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={{flex:9}} >
-        {(recList.size == 0
+      {(currentStep > 3
+        ?
+        <FilterNav />
+        :
+        null
+      )}
+
+        <View style={{flex:10}} >
+        {(totalRecs.size == 0
           ?
           <EmptyMessage title="Welcome to chaz" notify="Lets get started by guiding you through saving your first recommendation" instructions="Tap the blue button to save your first recommendation!" />
           :
-          <ScrollView><RecList recs={recList.reverse()} /></ScrollView>
+          <ScrollView><RecList recs={visibleRecs.reverse()} /></ScrollView>
         )}
         </View>
         <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
@@ -81,7 +98,9 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    recs: state.recs
+    recs: state.recs,
+    app: state.app,
+    onboard: state.onboard
   };
 }
 

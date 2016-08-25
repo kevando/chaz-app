@@ -1,9 +1,10 @@
 import * as types from './actionTypes';
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 const initialState = Map({
   user: {},
-  welcomeMessage: 'nothing'
+  activeFilter: 'all',
+  filters: List(['all','movie','tv','podcast','book']),
 });
 
 export default function app(state = initialState, action = {}) {
@@ -13,6 +14,10 @@ export default function app(state = initialState, action = {}) {
     case types.CREATE_APP_USER:
       return state.merge({
         user: action.payload
+      });
+    case types.SET_FILTER:
+      return state.merge({
+        activeFilter: action.payload
       });
 
     default:

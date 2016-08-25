@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import * as recActions from '../../reducers/rec/actions';
-import FilterItem from '../../components/rec/FilterItem';
-const GlobalStyle = require('../../style/Style');
+import * as appActions from '../reducers/app/actions';
+import FilterItem from '../components/FilterItem';
+import * as Global from '../style/Global';
 
 // tmp
 import * as Immutable from 'immutable';
@@ -22,40 +22,52 @@ class FilterNav extends Component {
       <ScrollView horizontal={true} contentContainerStyle={{backgroundColor:'#ccc',flex:1,flexDirection:'row',}}>
       <View style={styles.filtersContainer} >
         <View style={styles.filterRow}>
-          {this.renderFilters('type')}
+          {this.renderFilters()}
         </View>
         </View>
       </ScrollView>
     )
   }
 
-  onFilterPress(filter,option){
-    this.props.dispatch(recActions.updateFilter(filter,option));
+  onFilterPress(filter){
+    this.props.dispatch(appActions.setFilter(filter));
   }
 
   renderFilters(filterType) { // these variables are not named very well
     var onPress = this.onFilterPress;
 
-    var filterList = this.props.rec.getIn(['filters',filterType,'list']);
-    var activeFilter = this.props.rec.getIn(['filters',filterType,'active']);
+    var filterList = this.props.app.get('filters');
+    var activeFilter = this.props.app.get('activeFilter');
 
     var renderedFilterList = Array()
     // need to do it like this cause returning a map is some experimental feature
 
-    filterList.map((filterObject,filter) => {
+    filterList.map((filter) => {
 
       renderedFilterList.push(
         <FilterItem
-          filterObject={filterObject}
           filter={filter}
-          recCount={this.getRecCount(filterObject)}
           key={filter}
           style={styles.filterItem}
-          active={activeFilter}
-          onPress={this.onFilterPress.bind(this,filterType,filter)}
+          activeFilter={activeFilter}
+          onPress={this.onFilterPress.bind(this,filter)}
         />
       )
     });
+    // filterList.map((filterObject,filter) => {
+    //
+    //   renderedFilterList.push(
+    //     <FilterItem
+    //       filter={filterObject}
+    //       filter={filter}
+    //       recCount={this.getRecCount(filterObject)}
+    //       key={filter}
+    //       style={styles.filterItem}
+    //       active={activeFilter}
+    //       onPress={this.onFilterPress.bind(this,filterType,filter)}
+    //     />
+    //   )
+    // });
 
     return renderedFilterList;
   }
@@ -77,7 +89,7 @@ const styles = StyleSheet.create({
     borderTopWidth:0,
     borderTopColor: "#ccc",//GlobalStyle.constants.colors[1],
     borderBottomWidth:4,
-    borderBottomColor:GlobalStyle.constants.colors[1],
+    borderBottomColor:Global.constants.colors[1],
   },
   filterRow: { // makes it horizontal despite multiple text elemnts
     flex:1,

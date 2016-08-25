@@ -7,7 +7,7 @@ import {
 
 // Might need to make this a container
 import ListItem from './RecListItem';
-
+import EmptyMessage from './EmptyMessage';
 export default class RecList extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,8 @@ export default class RecList extends Component {
   render() {
 
     var recs = this.props.recs;
-    console.log('recs',recs)
+    if(recs.size == 0)
+    return(<EmptyMessage title="" notify="You have not saved anything for this category" instructions="" />)
     return (
       <View>
         {

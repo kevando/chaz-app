@@ -5,24 +5,22 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import RecType from '../../components/rec/RecType';
-const GlobalStyle = require('../../style/Style');
+// import RecType from '../../components/rec/RecType';
+const Global = require('../style/Global');
 export default class FilterItem extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    var {filter,active,onPress,filterObject,recCount} = this.props;
-    var activeButtonStyle = (active == filter ? styles.activeButton : null);
-    var activeTextStyle = (active == filter ? styles.activeText : null);
+    var {filter,activeFilter,onPress,recCount} = this.props;
+    var activeButtonStyle = (activeFilter == filter ? styles.activeButton : null);
+    var activeTextStyle = (activeFilter == filter ? styles.activeText : null);
     return (
       <TouchableOpacity style={[styles.filterButton,activeButtonStyle]} onPress={onPress}>
-        <RecType type={filter} size={25} />
-        <Text style={[styles.filterText,activeTextStyle]}>{filterObject.get('title')}</Text>
-        <View style={styles.countContainer}>
-          <Text style={[styles.count,activeTextStyle]}>{recCount}</Text>
-        </View>
+
+        <Text style={[styles.filterText,activeTextStyle]}>{filter}</Text>
+
         </TouchableOpacity>
      );
   }
@@ -47,11 +45,11 @@ const styles = StyleSheet.create({
     width:70
   },
   activeButton: {
-    backgroundColor: GlobalStyle.constants.colors[1],
+    backgroundColor: Global.constants.colors[1],
   },
   filterText: {
     color:"#555",
-    fontSize:10,
+    fontSize:12,
     fontWeight:'400',
     textAlign:'center',
   },

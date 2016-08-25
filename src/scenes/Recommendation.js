@@ -34,12 +34,13 @@ class RecView extends Component {
     let { dispatch } = this.props;
     let boundActionCreators = bindActionCreators(recActions, dispatch)
     var {rec} = this.state;
+    var filters = this.props.app.get('filters');
 
     return (
       <View  style={{flex:1}}>
         <View style={styles.row}>
           <View style={styles.left}>
-            <RecType rec={rec} {...boundActionCreators} size={30} />
+            <RecType rec={rec} {...boundActionCreators} size={30} filters={filters.toArray()} />
           </View>
           <View style={styles.right}>
             <RecTitle rec={rec} onPress={Actions.recommendationEdit}  />
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    recs: this.recs,
+    // recs: this.recs,
+    app: state.app
   };
 }
 export default connect(mapStateToProps)(RecView);

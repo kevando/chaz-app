@@ -11,19 +11,13 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
 
           switch (action.type) {
             // Check the conditions any time that data is saved to redux
-            case 'REDUX_STORAGE_SAVE':
-              if(condition(action.payload)) // might need to change this to getState
-                next({type: 'SET_ACTION_QUEUE', payload:trigger});
+
+            case trigger: // action saved in onboard. null or undefined might cause a problem
+              if(condition(store.getState()))
+                next({type: 'SHOW_ONBOARD_POPUP',payload:true}); // this should immediately render the popup
             break;
 
-            // end checking conditions
-
-            //
-            case trigger: // action saved in onboard. null or undefined might cause a problem
-              next({type: 'SHOW_ONBOARD_POPUP',payload:true}); // this should immediately render the popup
-               break;
-
-              } // switch
+          } // switch
 
             return next(action);
         }

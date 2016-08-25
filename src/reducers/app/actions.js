@@ -75,9 +75,9 @@ import * as types from './actionTypes';
 //     dispatch(changeAppRoot('login'));
 //   };
 // }
-// export function setAuthErrorMessage(message) {
-//   return {type: types.SET_AUTH_ERROR_MESSAGE, message: message};
-// }
+export function setFilter(filter) {
+  return {type: types.SET_FILTER, payload:filter};
+}
 //
 // export function startListeningToAuth() { // fuck this function NOT USED aNYMORE
 //   // return (dispatch, getState) => {

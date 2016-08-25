@@ -105,3 +105,6 @@ this notation returns what is ever in loop
         <View style={styles.right}><Text style={value}>status</Text></View>
       </View>
   ```  
+
+### Filter a List
+return this.props.recs.filter(rec => rec.get('type') == activeFilter);

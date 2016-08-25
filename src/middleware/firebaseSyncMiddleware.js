@@ -6,7 +6,7 @@ const firebaseSyncMiddleware = store => next => action => {
     store.dispatch(firebaseActions.syncFirebase());
   }
   // next() passes an action to the next middleware, or to the reducer if
-  console.log('go to next action')
+  // console.log('go to next action')
   next(action);
 };
 

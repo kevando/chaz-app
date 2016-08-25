@@ -3,29 +3,16 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.9 workspace ------------------------------------------------------------
 
-aug24
-
-add more filters and put it in redux and add filters to onboard. and filters
-
 
 analytics middleware
-what happens if i change onboarding initial state? ask async github
-figure out a good way to handle errors, but log them as issues in fabric (indexof error)
-and thats a release!!
 
----
-improvements
-format listitem, add rec button bigger, change type should be a cta
-add rec button on every page, log what page user clicked add rec from
+go through on bord and make smooth, make buttons CTA
+add more types
+add recr popup is pretty whack
+
+addRec button on every page
 ---
 Cleanup
-app.js code add comments from app_old.js
-do something better w app loading scene and appcheckuser
-consider better file structure
-dropdown overlay is all bugged and FUCKED UP
-
-
----
 
 
  - refactored app so its offline by default
@@ -33,7 +20,8 @@ dropdown overlay is all bugged and FUCKED UP
  - Added some janky animation to welcome page
  - Changed the navbar height from to
  - Added recr
- - added custom error logging to fabric
+ - added custom error logging to fabric (not sure if this works)
+ -
 
 =---
 
@@ -71,6 +59,8 @@ login is pretty much set now how I want it. Code is janky as fuck tho. so fix th
 need to be careful about onboarding getting out of sync. how to protect?
 
 remove blue from filter nav shit
+chat STUFF
+https://sendbird.com/pricing ?
 
 # /0.8 workspace ------------------------------------------------------------
 

@@ -75,11 +75,9 @@ class Chaz extends Component {
   onStoreUpdate() {
     var {store} = this.props;
     var onboard = store.getState().onboard;
-    // console.log('onStoreUpdate onboard JS',onboard.toJS());
 
     if (onboard.get('showPopup')) {
       store.dispatch({type: 'INCREMENT_CURRENT_STEP'}); // this should probly also take care of setting onboard to false
-      // store.dispatch({type: 'SHOW_ONBOARD_POPUP',payload:false});
       var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
       // using a delay because if the previous action is a closing modal, onboard never shows
       timer.setTimeout(this,'fuckingdelays', function(){Actions.popup({data: Onboard,passProps:stepData})}, 600);
