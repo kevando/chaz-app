@@ -27,9 +27,8 @@ import RecommendationInput from './RecommendationInput';
 import Recommendation from './Recommendation';
 import Profile from './Profile'
 import Welcome from './Welcome'
-import RecommenderAdd from './RecommenderAdd';
 import Popup from './Popup';
-import OnboardPopup from './OnboardPopup';
+import Logout from './Logout';
 
 import * as GlobalStyle from '../style/Global';
 
@@ -70,14 +69,17 @@ export const Scenes = Actions.create(
   <Scene key="modal" component={Modal} >
     <Scene key="root" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
-      <Scene key="welcome" component={Welcome} title="Welcome" hideNavBar  />
+      <Scene key="welcome" component={Welcome}  hideNavBar type={ActionConst.REPLACE}   />
+      <Scene key="logout" component={Logout} hideNavBar type={ActionConst.REPLACE} />
 
       <Scene key="recommendations"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
+       titleStyle={{fontSize:20,fontWeight:'600',color:'#fff'}}
        component={Recommendations}
        type={ActionConst.REPLACE}
        onLeft={()=>Actions.profile()}
        leftTitle="Exit"
+       title="chaz"
       />
 
       <Scene
@@ -105,7 +107,14 @@ export const Scenes = Actions.create(
        direction="vertical"
       />
 
-      <Scene key="recommendationFromAdd" component={Recommendation} title="View Recy" type={ActionConst.REPLACE} />
+      <Scene
+       key="recommendationFromAdd"
+       component={Recommendation}
+       title=""
+       type={ActionConst.REPLACE}
+       hideBackImage={true}
+       backTitle="Back"
+      />
 
 
       <Scene
@@ -125,8 +134,6 @@ export const Scenes = Actions.create(
     </Scene>
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
-    <Scene key="recommenderAdd" component={RecommenderAdd} />
-    <Scene key="onboardPopup" component={OnboardPopup} />
   </Scene>
 
 

@@ -5,12 +5,10 @@ import { Actions } from 'react-native-router-flux';
 
 import * as counterActions from '../reducers/counter/actions';
 // import * as recActions from '../../reducers/rec/actions';
-import * as firebaseActions from '../reducers/firebase/actions';
-
 
 import { connect } from 'react-redux';
 import RecAddButton from '../components/RecAddButton';
-// import Onboarding from '../../containers/Onboarding';
+import EmptyMessage from '../components/EmptyMessage';
 // import FilterNav from '../containers/rec/FilterNav';
 import RecList from '../components/RecList';
 import * as GlobalStyle from '../style/Global';
@@ -22,7 +20,7 @@ class Recommendations extends Component {
 
   componentWillMount() {
    // Animate creation
-   LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
+  //  LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
  }
   render() {
 
@@ -33,14 +31,18 @@ class Recommendations extends Component {
     // var activeType = this.props.rec.getIn(['filters','type','active']);
 
     // if(recList.size == 0)
-    //   return(<Onboarding notify="You have no recs" guide="Press the button below to get started" />)
+      // return(<EmptyMessage notify="You have no recs" instructions="Press the button below to get started" />)
 
 
     return (
       <View style={styles.container}>
         <View style={{flex:9}} >
+        {(recList.size == 0
+          ?
+          <EmptyMessage title="Welcome to chaz" notify="Lets get started by guiding you through saving your first recommendation" instructions="Tap the blue button to save your first recommendation!" />
+          :
           <ScrollView><RecList recs={recList.reverse()} /></ScrollView>
-
+        )}
         </View>
         <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
       </View>

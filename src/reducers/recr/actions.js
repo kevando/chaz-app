@@ -7,7 +7,7 @@ export function addRecr(name) {
     payload: {
       id: uuid.v1(),
       name: name,
-      created_at: new Date()
+      created_at: Date.now()
     }
   };
 }
@@ -47,29 +47,29 @@ export function assignRecr(recKey,recr) {
 
 }
 
-export function listenForNewRecrs() {
-  return (dispatch, getState) => {
-    const currentState = getState();
-    const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
-    recsRef.on('child_added', (snap) => {
-      console.log('Listener hear a new RECR!!!! now assign this rer to the current rec',snap);
-        // dispatch(getRecrList(snap));
-    });
-  }
-}
-
-export function setCurrentRecrByKey(recrKey) {                  // SET CURRENT REC
-  return(dispatch,getState) => {
-    const currentState = getState();
-    const recrRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${recrKey}`);
-    recrRef.once('value', (snapshot) => {
-      var recr = snapshot.val();
-      recr._key = snapshot.key();
-      dispatch(setCurrentRecr(recr ) );
-    });
-  };
-}
-
-export function setCurrentRecr(recr) {                  // SET CURRENT REC
-  return { type: types.UPDATE_CURRENT_RECR, recr: recr }
-}
+// export function listenForNewRecrs() {
+//   return (dispatch, getState) => {
+//     const currentState = getState();
+//     const recsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
+//     recsRef.on('child_added', (snap) => {
+//       console.log('Listener hear a new RECR!!!! now assign this rer to the current rec',snap);
+//         // dispatch(getRecrList(snap));
+//     });
+//   }
+// }
+//
+// export function setCurrentRecrByKey(recrKey) {                  // SET CURRENT REC
+//   return(dispatch,getState) => {
+//     const currentState = getState();
+//     const recrRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs/${recrKey}`);
+//     recrRef.once('value', (snapshot) => {
+//       var recr = snapshot.val();
+//       recr._key = snapshot.key();
+//       dispatch(setCurrentRecr(recr ) );
+//     });
+//   };
+// }
+//
+// export function setCurrentRecr(recr) {                  // SET CURRENT REC
+//   return { type: types.UPDATE_CURRENT_RECR, recr: recr }
+// }

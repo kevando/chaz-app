@@ -3,38 +3,26 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.9 workspace ------------------------------------------------------------
 
-delete lib auto size and mixpanel inside chaz
+aug24
 
-improve recr add
-firebase sync
-firebase sync: fix welcome message and how it pulls from fb on "auth" and where it sets initial scene
-login timeout
+add more filters and put it in redux and add filters to onboard. and filters
 
 
-expand onboarding
-logout button
-ability to filter, change how recType gets its data. probyl add to redux
-
-/ ui improvements
-recrs (create popup for when there are many recrs to choose from)
-add cool animations
-https://facebook.github.io/origami/
-https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
 analytics middleware
+what happens if i change onboarding initial state? ask async github
+figure out a good way to handle errors, but log them as issues in fabric (indexof error)
 and thats a release!!
 
-
+---
+improvements
+format listitem, add rec button bigger, change type should be a cta
+add rec button on every page, log what page user clicked add rec from
 ---
 Cleanup
 app.js code add comments from app_old.js
 do something better w app loading scene and appcheckuser
 consider better file structure
 dropdown overlay is all bugged and FUCKED UP
-
-
-
----
-improve scene transitions
 
 
 ---
@@ -44,10 +32,16 @@ improve scene transitions
  - Changed navigator API
  - Added some janky animation to welcome page
  - Changed the navbar height from to
+ - Added recr
+ - added custom error logging to fabric
 
 =---
 
 # 0.10 (resume of 0.8 basically)
+
+add cool animations
+https://facebook.github.io/origami/
+https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
 
 created the initial onboarding (first 3 steps)
 kinda janky but i think it should work great once i get the wording better

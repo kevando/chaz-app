@@ -94,7 +94,7 @@ class RecommendationAdd extends Component {
         style={{fontSize:15,height: 40,paddingLeft:10,height:200}}
         onChangeText={(note) => this.setState({note})}
         value={this.state.note}
-        placeholder="Write a note about this moment..."
+        placeholder="Write a note about this moment... (optional)"
         ref="NoteInput"
         multiline={true}
         onSubmitEditing={this.onSaveRecPress.bind(this)}

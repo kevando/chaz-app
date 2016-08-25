@@ -43,12 +43,15 @@ class Profile extends Component {
 
 
 
-        <Button onPress={this.clearStorage} style={{fontSize:28,color:'red',marginTop:30}}>engine.save()</Button>
+        <Button onPress={this.clearStorage.bind(this)} style={{fontSize:28,color:'red',marginTop:30}}>Logout</Button>
       </ScrollView>
     );
   }
   clearStorage(){
     engine.save({});
+
+    Actions.welcome();
+    // this.props.dispatch({type:'USER_LOGOUT'});
   }
 }
 

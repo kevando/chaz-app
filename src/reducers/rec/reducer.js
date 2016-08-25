@@ -58,33 +58,19 @@ const initialState_old = Map({
 
 });
 
-export default function counter(recs = initialState, action = {}) {
+export default function recs(recs = initialState, action = {}) {
 
   switch (action.type) {
 
-    // case types.SET_LOADED:
-    //   return state.set( 'loaded', action.loaded );
-
-    // case types.UPDATE_REC_LIST:
-    //   return state.merge({
-    //     all: action.payload
-    //   });
-
-    // case types.UPDATE_REC_FILTER:
-    //   return state.setIn( ['filters',action.filter,'active'], action.option );
-    //
-    // case types.UPDATE_VISIBLE_REC_LIST: //
-    //   var updatedList = action.recs.sort(function(a,b) {
-    //     return b.get('createdAt') - a.get('createdAt');
-    //   });
-    //   return state.set( 'visible', updatedList );
+    case types.LOAD_RECS_FROM_FIREBASE:
+      return action.payload; // already base a List in the actionCreator
 
     case types.ADD_REC:
       return recs.push(Map(action.payload));
 
     case types.UPDATE_REC:
       // Find rec by index, and update entire object in recs List
-      console.log('UPDATEREC',action.payload);
+      // console.log('UPDATEREC',action.payload);
       return recs.update(
         recs.findIndex(function(rec) {
           return rec.get("id") === action.payload.id;
@@ -95,9 +81,6 @@ export default function counter(recs = initialState, action = {}) {
 
     case types.DELETE_REC:
       return recs.filterNot(rec => rec.get('id') == action.payload.id);
-
-    // case types.ASSIGN_RECR:
-
 
     default:
       return recs;

@@ -2,38 +2,40 @@ import * as types from './actionTypes';
 import {Map,List} from 'immutable';
 
 const initialState = Map({
-  step: 1666, // Step we should be at
   currentStep: 1, // step we are are currently at
   queue: '',
   showPopup: false,
   steps: List.of(
     // 0 Not used
-    {
+    Map({
       label: 'Open the App!'
-    },
+    }),
     // 1
-    {
+    Map({
       label: 'Add your first rec',
       condition: function(state){
         return (state.recs.size == 0 ? true : false);
       },
       trigger: 'ADD_REC',
-      title: 'Welcome to chaz',
-      caption: 'The best way to save recommendations.', //tagline
-      instructions:'Lets get started by adding a rec. click the blue button below',
-    },
-    // 2
-    {
-      label: 'Add your first recr',
       title: 'Awesome!',
-      caption: 'Lets start out by adding my favorite movie',
-      instructions:'Enter Shawshank Redemption in the next screen',
-      buttonText: 'Okay, got it',
-      buttonColor:1,
-      backgroundColor: "rgba(100, 100, 100, 0.8)"
-    },
+      caption: 'You just saved your first recommendation.', //tagline
+      instructions:'chaz helps you figure out which friends give you the best recommendations, so be sure and add the person who recommended this.',
+      buttonText: 'I got it',
+    }),
+    // 2
+    Map({
+      label: 'Assign your first recomender',
+      condition: function(state){
+        return (state.recrs.size == 0 ? true : false);
+      },
+      trigger: 'ADD_RECR',
+      title: 'Sweet',
+      caption: 'You just gave credit for this recommendation',
+      instructions:'Now lets categorize it. Click the paper in the top left to change what type of recommendation this is.',
+      buttonText: 'Okay, I got it',
+    }),
     // 3
-    {
+    Map({
       label: 'Categorize a rec',
       title: 'Great Job!',
       caption: 'You just saved your first recommendation! Now lets mark who its from',
@@ -41,7 +43,7 @@ const initialState = Map({
       buttonText: 'Okay, Okay I got it',
       buttonColor:2,
       backgroundColor: "rgba(100, 100, 100, 0.8)"
-    },
+    }),
 
   ),
 
@@ -67,7 +69,8 @@ export default function counter(onboard = initialState, action = {}) {
     case types.INCREMENT_CURRENT_STEP:
       console.log('I WAS CALLED FROM ONBOARD MIDDLWARE!!')
       return onboard.merge({
-        currentStep: onboard.get('currentStep') + 1
+        currentStep: onboard.get('currentStep') + 1,
+        showPopup: false,
       });
       case types.SHOW_ONBOARD_POPUP: // only dispatched in app.js
         console.log('show pop up')

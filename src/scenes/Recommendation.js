@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity,AlertIOS} from "react-native";
 import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
@@ -17,6 +17,13 @@ class RecView extends Component {
     super(props)
     // this will make it easier to handle the new props
     this.state = {rec:this.props.rec}
+    // Set delete button in top right
+
+
+
+  }
+  componentWillMount(){
+    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:'red'} })
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
@@ -54,12 +61,17 @@ class RecView extends Component {
         </View>
       <View>
     </View>
-    <TouchableOpacity onPress={this.deleteRec.bind(this)} style={{flex:1,marginLeft:50,marginTop:150,marginRight:50}}>
-      <Text style={{color:'red',fontWeight:'600',textAlign:'center',padding:6}}>Delete Rec</Text>
-    </TouchableOpacity>
     <KeyboardSpacer />
   </View>
     );
+  }
+
+  onDeletePress(){
+    var Options = [
+      { text: 'Yes', onPress: () => {this.deleteRec() } },
+      { text: 'Cancel', onPress: () => console.log('action canelled') }
+    ];
+    AlertIOS.alert('Are you sure?',null,Options);
   }
 
   deleteRec(){

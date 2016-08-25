@@ -8,7 +8,7 @@ export function addRec(title,note) {
       id: uuid.v1(),
       title: title,
       note: note,
-      created_at: new Date()
+      created_at: Date.now(),
     }
   };
 }
@@ -19,7 +19,7 @@ export function updateRec(rec) {
   };
 }
 
-export function deleteRec(recId){                  // REMOVE REC
+export function deleteRec(recId){
   return {
     type: types.DELETE_REC,
     payload: {
@@ -28,9 +28,9 @@ export function deleteRec(recId){                  // REMOVE REC
   }
 }
 
-export function assignRecr(rec,recr){                  // REMOVE REC
-  console.log('assign rec',rec)
-  console.log('assign recr',recr)
+export function assignRecr(rec,recr){
+  // console.log('assign rec',rec)
+  // console.log('assign recr',recr)
   rec.recr = recr.toJS(); // simply add recr
   return {
     type: types.UPDATE_REC, // I can do this cause im not editing recr tree yet
