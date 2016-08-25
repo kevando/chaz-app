@@ -36,25 +36,16 @@ class OnboardPopup extends Component {
     }
 
     render(){
-      console.log('props',this.props);
-      var {title,caption,instructions,buttonText} = this.props.data.toJS();
+
+      var {title,caption,instructions,buttonText} = this.props.passProps.toJS();
 
         return (
-            <Animated.View style={[styles.container, {backgroundColor:"rgba(52,52,52,0.5)"},
-                                  {transform: [{translateY: this.state.offset}]}]}>
-                <View style={{  width:250,
-                                borderColor:"#999",
-                                borderWidth:2,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                padding:20,
-                                backgroundColor:"white" }}>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.caption}>{caption}</Text>
-                    <Text style={styles.instructions}>{instructions}</Text>
-                    <Button onPress={this.closeModal.bind(this)}>{buttonText}</Button>
-                </View>
-            </Animated.View>
+            <View>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.caption}>{caption}</Text>
+              <Text style={styles.instructions}>{instructions}</Text>
+              <Button onPress={this.props.closeHandler}>{buttonText}</Button>
+            </View>
         );
     }
 }

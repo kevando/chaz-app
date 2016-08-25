@@ -19,7 +19,7 @@ import {
 import {Scenes} from './';
 import {connect} from 'react-redux';
 
-// import * as appActions from '../reducers/app/actions';
+import Onboard from '../components/Onboard';
 import * as onboardActions from '../reducers/onboard/actions';
 
 const styles = StyleSheet.create({
@@ -82,7 +82,7 @@ class Chaz extends Component {
       // store.dispatch({type: 'SHOW_ONBOARD_POPUP',payload:false});
       var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
       // using a delay because if the previous action is a closing modal, onboard never shows
-      timer.setTimeout(this,'fuckingdelays', function(){Actions.onboardPopup(stepData)}, 600);
+      timer.setTimeout(this,'fuckingdelays', function(){Actions.popup({data: Onboard,passProps:stepData})}, 600);
 
     }
 

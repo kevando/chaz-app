@@ -12,6 +12,8 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux'
 import * as recrActions from '../reducers/recr/actions';
 
+import RecommenderAdd from '../components/RecommenderAdd';
+
 class RecrItem extends Component {
 
   constructor(props) {
@@ -21,7 +23,7 @@ class RecrItem extends Component {
   render() {
     // console.log('recr props',this.props.recr)
     var recr = this.props.rec.recr;
-    
+
     return (
       <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
       {( recr
@@ -32,9 +34,7 @@ class RecrItem extends Component {
     );
   }
   onWhoPress() {
-    Actions.recommenderAdd({rec:this.props.rec});
-    // var rec = this.props.rec;
-    // this.props.dispatch(recrActions.addRecr(name));
+    Actions.popup({data: RecommenderAdd,passProps:this.props.rec})
   }
 
 }

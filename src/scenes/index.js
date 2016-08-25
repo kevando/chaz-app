@@ -27,9 +27,7 @@ import RecommendationInput from './RecommendationInput';
 import Recommendation from './Recommendation';
 import Profile from './Profile'
 import Welcome from './Welcome'
-import RecommenderAdd from './RecommenderAdd';
 import Popup from './Popup';
-import OnboardPopup from './OnboardPopup';
 import Logout from './Logout';
 
 import * as GlobalStyle from '../style/Global';
@@ -136,8 +134,6 @@ export const Scenes = Actions.create(
     </Scene>
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
-    <Scene key="recommenderAdd" component={RecommenderAdd} />
-    <Scene key="onboardPopup" component={OnboardPopup} />
   </Scene>
 
 
