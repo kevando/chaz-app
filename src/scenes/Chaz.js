@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import Button from "react-native-button";
 
+// I dont like using a timer for this, but the scenes are all fucked up
+// feels like a hack
+const timer = require('react-native-timer');
 
 import {
   // Scene,
@@ -75,10 +78,12 @@ class Chaz extends Component {
     // console.log('onStoreUpdate onboard JS',onboard.toJS());
 
     if (onboard.get('showPopup')) {
-      var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
-      Actions.onboardPopup(stepData);
-      store.dispatch({type: 'SHOW_ONBOARD_POPUP',payload:false});
       store.dispatch({type: 'INCREMENT_CURRENT_STEP'}); // this should probly also take care of setting onboard to false
+      // store.dispatch({type: 'SHOW_ONBOARD_POPUP',payload:false});
+      var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
+      // using a delay because if the previous action is a closing modal, onboard never shows
+      timer.setTimeout(this,'fuckingdelays', function(){Actions.onboardPopup(stepData)}, 600);
+
     }
 
 }

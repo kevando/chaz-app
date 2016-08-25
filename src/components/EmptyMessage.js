@@ -13,11 +13,12 @@ export default class EmptyMessage extends Component {
 
   render() {
 
-    var {notify, instructions} = this.props;
+    var {title, notify, instructions} = this.props;
 
 
     return (
       <View style={styles.container}>
+        <Text style={styles.title}>{title}</Text>
         <Text style={styles.notify}>{notify}</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
@@ -34,9 +35,17 @@ const styles = StyleSheet.create({
     alignItems:'center',
     paddingTop:110
   },
+  title: {
+    fontSize:35,
+    fontWeight:'500',
+    textAlign:'center',
+    margin:10
+
+  },
   notify: {
-    fontSize:30,
-    fontWeight:'600',
+    fontSize:20,
+    color:'#444',
+    fontWeight:'500',
     textAlign:'center',
     margin:10
 

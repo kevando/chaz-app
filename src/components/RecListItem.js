@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import {Actions} from "react-native-router-flux";
+import Emoji from 'react-native-emoji';
 
 // import RecGrade from './RecGrade';
 import RecDate from './RecDate';
@@ -52,7 +53,7 @@ export default class ListItem extends Component {
 
   renderRecr(recr) {
     if(recr)
-      return(<Text style={{fontWeight:'500',fontSize:15,color:'#333'}}>Recommended by {recr.name}</Text>);
+      return(<Text style={{fontWeight:'500',fontSize:15,color:'#333',marginLeft:3}}><Emoji name="slightly_smiling_face" /> Recommended by {recr.name}</Text>);
   }
 
   onRecPress() {

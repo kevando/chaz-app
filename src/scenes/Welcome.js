@@ -7,7 +7,7 @@ import * as firebaseActions from '../reducers/firebase/actions';
 import * as GlobalStyle from '../style/Global';
 
 var SPRING_CONFIG = {tension: 7, friction: 3}; //Soft spring
-var BUTTON_OFFSET = 300;
+var BUTTON_OFFSET = 250;
 
 class Welcome extends Component {
 
@@ -58,8 +58,9 @@ class Welcome extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={{top:170,flex:1}}>
+        <View style={{top:100,flex:1}}>
           <Text style={{fontWeight:'500',color:'#fff',fontSize:100,textAlign:'center'}} >chaz</Text>
+          <Text style={{fontWeight:'300',color:'#fff',fontSize:20,textAlign:'center',margin:20}} >Save all your recommendations in one place and follow up with your friends when they give you gold.</Text>
         </View>
         {( this.state.loading
           ?

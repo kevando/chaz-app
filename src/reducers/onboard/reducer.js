@@ -2,7 +2,6 @@ import * as types from './actionTypes';
 import {Map,List} from 'immutable';
 
 const initialState = Map({
-  step: 1666, // Step we should be at
   currentStep: 1, // step we are are currently at
   queue: '',
   showPopup: false,
@@ -18,19 +17,22 @@ const initialState = Map({
         return (state.recs.size == 0 ? true : false);
       },
       trigger: 'ADD_REC',
-      title: 'Awesome job!',
-      caption: 'The best way to save recommendations.', //tagline
-      instructions:'Its important to remember who is giving you recommendations, so add the recommender',
+      title: 'Awesome!',
+      caption: 'You just saved your first recommendation.', //tagline
+      instructions:'chaz helps you figure out which friends give you the best recommendations, so be sure and add the person who recommended this.',
+      buttonText: 'I got it',
     }),
     // 2
     Map({
-      label: 'Add your first recr',
-      title: 'Awesome!',
-      caption: 'Lets start out by adding my favorite movie',
-      instructions:'Enter Shawshank Redemption in the next screen',
-      buttonText: 'Okay, got it',
-      buttonColor:1,
-      backgroundColor: "rgba(100, 100, 100, 0.8)"
+      label: 'Assign your first recomender',
+      condition: function(state){
+        return (state.recrs.size == 0 ? true : false);
+      },
+      trigger: 'ADD_RECR',
+      title: 'Sweet',
+      caption: 'You just gave credit for this recommendation',
+      instructions:'Now lets categorize it. Click the paper in the top left to change what type of recommendation this is.',
+      buttonText: 'Okay, I got it',
     }),
     // 3
     Map({
@@ -67,7 +69,8 @@ export default function counter(onboard = initialState, action = {}) {
     case types.INCREMENT_CURRENT_STEP:
       console.log('I WAS CALLED FROM ONBOARD MIDDLWARE!!')
       return onboard.merge({
-        currentStep: onboard.get('currentStep') + 1
+        currentStep: onboard.get('currentStep') + 1,
+        showPopup: false,
       });
       case types.SHOW_ONBOARD_POPUP: // only dispatched in app.js
         console.log('show pop up')

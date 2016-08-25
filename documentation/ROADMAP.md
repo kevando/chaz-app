@@ -3,14 +3,8 @@ Here is a grouped list of planned features, broken out by version. To understand
 
 # 0.9 workspace ------------------------------------------------------------
 
-
-expand and improve onboarding and ui
-Release this!
-Then consider what it takes to update the onboarding 
-
-ability to filter, change how recType gets its data. probyl add to redux
-
-
+aug24
+add more filters and put it in redux and add filters to onboard. and filters
 
 analytics middleware
 what happens if i change onboarding initial state? ask async github
