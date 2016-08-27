@@ -52,7 +52,7 @@ class Friend extends Component {
       <View>
     </View>
     </ScrollView>
-    <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
+    <RecAddButton activeType={"default"} recr={this.props.recr} onPress={Actions.recommendationAdd} />
   </View>
     );
   }

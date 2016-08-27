@@ -7,14 +7,19 @@
 
 
 Design app pages
-Get the flow
-users can view recr
+
 add friendview to the onboard
 style navbar
+add rec from recr page autofills recr
+edit recr name
 
 ## next build
 
 grade recs
+set recr score, adding recs create list for recrs, add all this to recr view page
+Architect this data as if we have chat enabled
+
+---
 add filters, redesign top nav
 
 sort rec list newest oldest score

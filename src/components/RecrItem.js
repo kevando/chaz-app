@@ -24,18 +24,29 @@ class RecrItem extends Component {
     // console.log('recr props',this.props.recr)
     var recr = this.props.rec.recr;
 
-    return (
-      <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
-      {( recr
-        ? <Text style={{fontWeight:'600',color:"green",fontSize:18}}>{recr.name}</Text>
-        :<Text style={{fontWeight:'600',color:"green",fontSize:20}}>Who recommended this?</Text>
-      )}
-      </TouchableOpacity>
-    );
+    if(recr) {
+      return (
+        <TouchableOpacity onPress={this.onRecrPress.bind(this)} >
+          <Text style={{fontWeight:'600',color:"green",fontSize:16}}>{recr.name}</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
+          <Text style={{fontWeight:'600',color:"green",fontSize:20}}>Who recommended this?</Text>
+        </TouchableOpacity>
+      )
+    }
+
   }
   onWhoPress() {
     Actions.popup({data: RecommenderAdd,passProps:this.props.rec})
   }
+
+  onRecrPress() {
+    Actions.friend({recr: this.props.rec.recr});
+  }
+
 
 }
 
