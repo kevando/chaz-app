@@ -47,7 +47,7 @@ class Recommendations extends Component {
 
     return (
       <View style={styles.container}>
-      {(currentStep > 2
+      {(currentStep > 3
         ?
         <FilterNav />
         :

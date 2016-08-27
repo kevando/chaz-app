@@ -16,10 +16,10 @@ var analyticsMiddleware = function(middlewareAPI){
           switch (action.type) {
 
             case 'CREATE_APP_USER': // only used for login
-              Mixpanel.track("Initiated App");
               Mixpanel.identify(action.payload.uid);
               Mixpanel.set({"$device": action.payload.uid,"$name": action.payload.name});
               Mixpanel.registerSuperProperties({"App Version": action.payload.appVersion});
+              Mixpanel.track("Initiated App");
             break;
 
             case 'ADD_REC':
