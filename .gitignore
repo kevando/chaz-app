@@ -50,3 +50,5 @@ src/reducers/app/constants.js
 
 # New config file
 src/reducers/config.js
+
+data

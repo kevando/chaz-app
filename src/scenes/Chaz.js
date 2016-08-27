@@ -51,8 +51,8 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params);
   return (state, action) => {
-    console.log('%c ROUTER STATE:', 'color: green',state);
-    console.log('%c ROUTER ACTION:', 'color: green',action);
+    // console.log('%c ROUTER STATE:', 'color: green',state);
+    // console.log('%c ROUTER ACTION:', 'color: green',action);
     return defaultReducer(state, action);
   };
 };

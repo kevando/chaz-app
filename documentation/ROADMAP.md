@@ -1,5 +1,7 @@
 # Product Roadmap
 
+update mp
+
 # 0.10
 
 do logrithmic plan here, incorporate trello here
@@ -9,7 +11,9 @@ logout is all fucked up
 https://facebook.github.io/origami/
 https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
 
-grade rec, recr view, recr score
+grade rec
+recr view
+recr score
 validate recr does not already exists
 assign emoji faces to recrs, give it some order or random
 better ui for recr add and other data io, like edit recr

@@ -1,7 +1,7 @@
 import React, {
   Component,
 } from 'react';
-
+import {View, Text, StyleSheet,AlertIOS} from "react-native";
 import Chaz from './scenes/Chaz'; // Container
 import Loading from './components/Loading'; // todo remove after cleaning auth
 //
@@ -108,7 +108,6 @@ class App extends Component {
           // REDUX_LOAD action  gets call that triggers this .then statement (i think)
           // And that causses onStoreUpdate to run BEFORE the following code.
           // not sure if that fucks anything up
-          // store.dispatch({type:'SET_WELCOME_MESSAGE',message:'0: User was previously found in redux'});
           Scenes['recommendations'].initial = true;
           this.setState({loading:false});
         }

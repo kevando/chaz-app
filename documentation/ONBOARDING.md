@@ -1,3 +1,13 @@
+notes from nevernote
+Onboarding
+"2 factor auth = something you know and somwrhinf ou have"
+"chaz is a fun way to remeber why your friends are awesome"
+Its what the humans think
+keep onboarding very similar to how it is now.
+     ask for name (store with device ID).
+     if people dont use the app, dont make them create an account
+     show people list of how other user’s stored them
+
 # Onboarding
 
 When a user first engages with an app, she should see a clear path for success.
