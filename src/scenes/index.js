@@ -29,6 +29,8 @@ import Profile from './Profile'
 import Welcome from './Welcome'
 import Popup from './Popup';
 import Logout from './Logout';
+import Friends from './Friends';
+import Friend from './Friend';
 
 import * as GlobalStyle from '../style/Global';
 
@@ -71,6 +73,10 @@ export const Scenes = Actions.create(
 
       <Scene key="profile" component={Profile}  />
 
+      <Scene key="friends" component={Friends}  />
+
+      <Scene key="friend" component={Friend}  />
+
       <Scene key="recommendations"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
        titleStyle={{fontSize:20,fontWeight:'600',color:'#fff'}}
@@ -78,6 +84,9 @@ export const Scenes = Actions.create(
        type={ActionConst.REPLACE}
        onLeft={()=>Actions.profile()}
        leftTitle="Settings"
+       leftButtonTextStyle={{color:'#fff',fontSize:14}}
+       onRight={()=>Actions.friends()}
+       rightTitle="Friends"
        leftButtonTextStyle={{color:'#fff',fontSize:14}}
        title="chaz"
       />

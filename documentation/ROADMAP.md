@@ -5,10 +5,12 @@
 
 ## this buld
 
-addRec on every page
+
 Design app pages
 Get the flow
 users can view recr
+add friendview to the onboard
+style navbar
 
 ## next build
 
@@ -32,6 +34,11 @@ better ui for recr add and other data io, like edit recr
 addRec button on every page, track where its clicked, add type auto fill
 disable logging for production
 bug: welcome button not aligned, do work on iphone5
+build mechanism to fresh data for users, force logout or something (like if i expanded music into bands and songs)
+
+
+ - Add Rec button on more pages with pre-filled information for easier add
+
 
 
 ### Beta Roadmap
