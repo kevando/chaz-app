@@ -52,8 +52,7 @@ class Profile extends Component {
     let user = this.state.user;
 
     return (
-      <View style={styles.background}>
-      <Animated.View style={[styles.container,{transform: [{translateY: this.state.offset}]}]}>
+      <View style={[styles.container]}>
         <ScrollView >
           <OnboardProgress onboard={this.props.onboard} />
 
@@ -81,7 +80,6 @@ class Profile extends Component {
           <Button onPress={this.closeHandler.bind(this)} style={{fontSize:27,color:'blue',marginTop:30}}>Back</Button>
           <Button onPress={this.onLogoutPress.bind(this)} style={{fontSize:14,color:'red',marginTop:30}}>Logout</Button>
         </ScrollView>
-        </Animated.View>
       </View>
     );
   }
@@ -105,13 +103,13 @@ const styles = StyleSheet.create({
     backgroundColor:"rgba(102,102,102,0.8)",
   },
   container: {
-    width: deviceWidth,
+    // width: deviceWidth,
     flex: 1,
     flexDirection:'column',
     backgroundColor: "transparent",
     backgroundColor:"white",
     borderWidth:1,
-    marginBottom:70,
+    // marginBottom:70,
     paddingTop:30
   },
   rowHeader: {

@@ -32,8 +32,6 @@ import Logout from './Logout';
 
 import * as GlobalStyle from '../style/Global';
 
-// not totally sure how all this works, I guess this is just a list of
-// scene transitions.
 
 const navBarStyle = {
   backgroundColor:'#ddd',
@@ -69,8 +67,9 @@ export const Scenes = Actions.create(
   <Scene key="modal" component={Modal} >
     <Scene key="root" direction="vertical" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
-      <Scene key="welcome" animation="fade" component={Welcome}  hideNavBar   />
+      <Scene key="welcome" component={Welcome}  hideNavBar   />
 
+      <Scene key="profile" component={Profile}  />
 
       <Scene key="recommendations"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
@@ -138,7 +137,7 @@ export const Scenes = Actions.create(
 
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
-    <Scene key="profile" component={Profile} hideNavBar  />
+
 
   </Scene>
 

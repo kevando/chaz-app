@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity,AlertIOS} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity,AlertIOS,ScrollView} from "react-native";
 import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
@@ -10,6 +10,8 @@ import RecrItem from '../components/RecrItem';
 import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Emoji from 'react-native-emoji';
+import RecAddButton from '../components/RecAddButton';
+import {constants} from '../style/Global';
 
 class RecView extends Component {
 
@@ -37,7 +39,8 @@ class RecView extends Component {
     var filters = this.props.app.get('filters');
 
     return (
-      <View  style={{flex:1}}>
+      <View  style={styles.container}>
+      <ScrollView>
         <View style={styles.row}>
           <View style={styles.left}>
             <RecType rec={rec} {...boundActionCreators} size={30} filters={filters.toArray()} />
@@ -62,7 +65,8 @@ class RecView extends Component {
         </View>
       <View>
     </View>
-    <KeyboardSpacer />
+    </ScrollView>
+    <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
   </View>
     );
   }
@@ -84,8 +88,20 @@ class RecView extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderColor:constants.colors[1],
+    // backgroundColor:'#444',
+    borderTopWidth: 2,
+    flexDirection:'column'
+
+    // borderTopColor: 'red'
+
+  },
   row: {
-    backgroundColor: 'white',
+    // backgroundColor: 'red',
     borderBottomWidth:1,
     borderBottomColor: '#ddd',
     flexDirection: 'row', // inner rows on top of each other
