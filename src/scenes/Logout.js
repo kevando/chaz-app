@@ -64,6 +64,7 @@ class Logout extends Component {
         <View style={{top:170,flex:1}}>
         <Text style={{fontWeight:'500',color:'#fff',fontSize:100,textAlign:'center'}} >logged out</Text>
         <Text style={{fontWeight:'500',color:'#fff',fontSize:20,textAlign:'center'}} >please restart the app</Text>
+        <Text style={{fontWeight:'500',color:'#fff',fontSize:12,textAlign:'center'}} >(double tap the home button and swipe up on chaz)</Text>
         </View>
 
       </View>

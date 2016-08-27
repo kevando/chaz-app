@@ -86,6 +86,7 @@ class App extends Component {
     super(props);
     this.state = {loading: true}; // Always do this before getting auth info
 
+    console.log('app.js constructor');
     load(store)
       .then((newState) => {
         console.log('newState',newState);

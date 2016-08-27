@@ -1,27 +1,11 @@
 # Product Roadmap
-Here is a grouped list of planned features, broken out by version. To understand why it's done like this, check out the onboarding doc.
-
-# 0.9 workspace ------------------------------------------------------------
-
-
----
-
- - refactored app so its offline by default
- - Changed navigator API
- - Added some janky animation to welcome page
- - Changed the navbar height from to
- - Added recr
- - added custom error logging to fabric (not sure if this works)
- -
-
-=---
-
 
 # 0.10
 
-do logrithmic plan here
+do logrithmic plan here, incorporate trello here
 
 add cooler animations, how to group scenes, figure out scenes once and for all
+logout is all fucked up
 https://facebook.github.io/origami/
 https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
 
@@ -30,6 +14,9 @@ validate recr does not already exists
 assign emoji faces to recrs, give it some order or random
 better ui for recr add and other data io, like edit recr
 addRec button on every page, track where its clicked, add type auto fill
+disable logging for production
+bug: welcome button not aligned, do work on iphone5
+
 
 ### Beta Roadmap
 

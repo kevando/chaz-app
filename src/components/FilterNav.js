@@ -19,7 +19,7 @@ class FilterNav extends Component {
     var rec = this.props.rec;
 
     return (
-      <ScrollView horizontal={true} contentContainerStyle={{backgroundColor:'#ccc',flex:1,flexDirection:'row',}}>
+      <ScrollView horizontal={true} contentContainerStyle={{backgroundColor:'#ccc'}}>
       <View style={styles.filtersContainer} >
         <View style={styles.filterRow}>
           {this.renderFilters()}

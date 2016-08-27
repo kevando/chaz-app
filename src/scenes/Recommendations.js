@@ -43,10 +43,11 @@ class Recommendations extends Component {
     // if(recList.size == 0)
       // return(<EmptyMessage notify="You have no recs" instructions="Press the button below to get started" />)
 
+    // return(<View><Text>current step: {currentStep}</Text></View>)
 
     return (
       <View style={styles.container}>
-      {(currentStep > 3
+      {(currentStep > 2
         ?
         <FilterNav />
         :

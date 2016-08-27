@@ -11,10 +11,10 @@ const initialState = Map({
       condition: function(state){
         return (true);
       },
-      title: 'welcome',
-      caption: 'welcome', //tagline
-      instructions:'welcome',
-      buttonText: 'I got it',
+      title: 'Welcome!',
+      caption: 'Thank you for being part of the beta test', //tagline
+      instructions:'Let Kevin know what you think :)',
+      buttonText: 'Will do',
     }),
     // 1
     Map({

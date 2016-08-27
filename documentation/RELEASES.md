@@ -1,3 +1,10 @@
+#### 0.9
+- refactored app so its offline by default
+- Changed navigator API
+- Added some janky animation to welcome page
+- Added recr
+- added custom error logging to fabric (not sure if this works)
+
 ### 0.7.8
  - added fabric tracking to analytics middleware
  - changed login button to a yellow heart

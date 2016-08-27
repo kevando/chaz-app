@@ -1,32 +1,29 @@
 # chaz
 
 #### iOS app written with React Native.
-chaz is a place to save recommendations.
+chaz is an app to save recommendations.
 
 ## Update (2016.07.31)
-chaz is currently in private beta and has about 4 people using it. Open an issue in this repo if you would like to beta test chaz.
+chaz is currently in private beta and has about 4 people using it. Open an issue in this repo if you would like to join the beta test.
 
 ## Latest Version (2016.07.29)
-#### 0.7.8
- - added fabric tracking to analytics middleware
- - changed login button to a yellow heart
- - removed auth listener, changed auth to custom device token
- - added back in redux async storage
- - added rec loading state, and move rec display to RecList component
- - Removed step name from login, now authenticates by device ID
- - Add Rec modal dismisses
- - Removed currentRec and recView loads from redux list
- - Removed recr and grade for now to focus on ux simplicity
- - Added recType and some filters
+#### 0.9
+- refactored app so its offline by default
+- Changed navigator API
+- Added some janky animation to welcome page
+- Added recr
+- added custom error logging to fabric (not sure if this works)
+
 
 [Full Release History]
 
 [Full Release History]: <https://github.com/kevando/chaz/blob/master/documentation/RELEASES.md>
 
 ## Roadmap
-chaz is in active development and has a very dynamic and aggresive list of features. View the entire [Product Roadmap] here. Open an issue if you'd like to add a feature to the pipeline.
+chaz is in active development and has a very dynamic list of features. View the entire [Product Roadmap] here. Open an issue if you'd like to add a feature to the pipeline.
 
 [Product Roadmap]: https://github.com/kevando/chaz/blob/master/documentation/ROADMAP.md
+
 ## Screenshots
 Here are some selected iPhone6 screens from the latest version.
 ### Welcome Sceen:
