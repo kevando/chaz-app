@@ -50,7 +50,8 @@ var saveActions = [
   'ADD_REC',
   'UPDATE_REC',
   'DELETE_REC',
-  'ADD_RECR'
+  'ADD_RECR',
+  'INIT_ONBOARD'
 ];
 const storageMiddleware = storage.createMiddleware(engine,[],saveActions);
 
