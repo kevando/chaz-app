@@ -67,9 +67,9 @@ const rightButtonStyle = {
 export const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} >
-    <Scene key="root" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
+    <Scene key="root" direction="vertical" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
-      <Scene key="welcome" component={Welcome}  hideNavBar type={ActionConst.REPLACE}   />
+      <Scene key="welcome" animation="fade" component={Welcome}  hideNavBar   />
       <Scene key="logout" component={Logout} hideNavBar type={ActionConst.REPLACE} />
 
       <Scene key="recommendations"
@@ -78,7 +78,8 @@ export const Scenes = Actions.create(
        component={Recommendations}
        type={ActionConst.REPLACE}
        onLeft={()=>Actions.profile()}
-       leftTitle="Exit"
+       leftTitle="Settings"
+       leftButtonTextStyle={{color:'#fff',fontSize:14}}
        title="chaz"
       />
 
@@ -125,7 +126,9 @@ export const Scenes = Actions.create(
        rightButtonStyle={{width:150}}
        rightButtonTextStyle={{fontSize:13}}
       />
-      <Scene key="profile" component={Profile} title="Profile" />
+
+
+
 
 
 
@@ -134,6 +137,7 @@ export const Scenes = Actions.create(
     </Scene>
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
+    <Scene key="profile" component={Profile} hideNavBar  />
   </Scene>
 
 

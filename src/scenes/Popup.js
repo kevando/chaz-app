@@ -11,7 +11,7 @@ import {
 
 import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
-import * as GlobalStyle from '../style/Global';
+import {constants} from '../style/Global';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 var {
@@ -66,7 +66,7 @@ export default class extends Component {
       <Animated.View style={[styles.background,{opacity:this.state.fadeAnim}]}>
         <Animated.View style={[styles.container,{transform: [{translateY: this.state.offset}]}]}>
           <Child closeHandler={this.closeHandler} passProps={this.props.passProps} />
-          
+
         </Animated.View>
         <KeyboardSpacer/>
       </Animated.View>
@@ -75,22 +75,24 @@ export default class extends Component {
 }
 var styles = StyleSheet.create({
     background: {
-    position: "absolute",
-    top:0,
-    bottom:0,
-    left:0,
-    right:0,
-    backgroundColor:"transparent",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor:"rgba(52,52,52,0.5)",
+      position: "absolute",
+      top:0,
+      bottom:0,
+      left:0,
+      right:0,
+      backgroundColor:"transparent",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor:"rgba(102,102,102,0.8)",
     },
     container: {
       padding:20,
       margin:20,
-      height:250,
+      
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor:"white"
+      backgroundColor:"white",
+      borderColor:constants.colors[0],
+      borderWidth:7
     },
 });

@@ -47,3 +47,6 @@ src/reducers/app/constants.js
 .buckconfig
 .flowconfig
 .watchmanconfig
+
+# New config file
+src/reducers/config.js

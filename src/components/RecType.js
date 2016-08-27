@@ -10,9 +10,10 @@ import Emoji from 'react-native-emoji';
 
 
 
-const emojiList_old = {
+const emojiList = {
   all: "earth_americas",
   default: "page_with_curl",
+  other: "page_with_curl",
   book: "book",
   video: "film_projector",
   music: "minidisc",
@@ -20,15 +21,8 @@ const emojiList_old = {
   podcast: "radio",
   tv: "tv",
   movie: "vhs",
-  app: "iphone",
+  // app: "iphone",
   place: "desert_island",
-}
-const emojiList = {
-  default: "page_with_curl",
-  book: "book",
-  music: "minidisc",
-  movie: "vhs",
-  podcast:"radio"
 }
 
 
@@ -49,7 +43,6 @@ export default class RecType extends Component {
       return;
 
     var options = this.props.filters
-
     options.push('Cancel')
     options.shift(); // remove 'all' from list
     return options;
@@ -75,20 +68,20 @@ export default class RecType extends Component {
     if(!this.props.updateRec) // if set to uneditable(hack)
       return;
 
-      // return;
+    var {options}=this.state;
+
     ActionSheetIOS.showActionSheetWithOptions({
       title: 'Categorize this recommendation',
-      options: this.state.options,
-      cancelButtonIndex: this.state.options.length-1,
-      destructiveButtonIndex: this.state.options.length-1,
+      options: options,
+      cancelButtonIndex: options.length-1,
+      destructiveButtonIndex: options.length-1,
     },
     (selectedIndex) => {
-      if(selectedIndex<this.state.options.length-1){ // cancel
-        this.setState({type: this.state.options[selectedIndex]});
+      if(selectedIndex < options.length-1){ // cancel
+        this.setState({type: options[selectedIndex]});
         this.onTypeSelect()
       }
     });
-
   }
 
 }

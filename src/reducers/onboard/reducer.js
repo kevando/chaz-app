@@ -2,32 +2,39 @@ import * as types from './actionTypes';
 import {Map,List} from 'immutable';
 
 const initialState = Map({
-  currentStep: 1, // step we are are currently at
+  currentStep: 0, // step we are are currently at
   showPopup: false,
   steps: List.of(
     // 0 Not used
     Map({
-      label: 'Open the App!'
+      label: 'Open the App!',
+      condition: function(state){
+        return (true);
+      },
+      title: 'welcome',
+      caption: 'welcome', //tagline
+      instructions:'welcome',
+      buttonText: 'I got it',
     }),
     // 1
     Map({
       label: 'Add your first rec',
       condition: function(state){
-        return (state.recs.size == 0 ? true : false);
+        // console.log('recr size',state.recrs.size)
+        return (state.recs.size > 0 ? true : false);
       },
-      trigger: 'ADD_REC',
       title: 'Awesome!',
       caption: 'You just saved your first recommendation.', //tagline
-      instructions:'chaz helps you figure out which friends give you the best recommendations, so be sure and add the person who recommended this.',
+      instructions:'chaz also helps you understand which friends give you the best recommendations, so include who recommended this.',
       buttonText: 'I got it',
     }),
     // 2
     Map({
       label: 'Assign your first recomender',
       condition: function(state){
-        return (state.recrs.size == 0 ? true : false);
+        // console.log('recr size',state.recs.size)
+        return (state.recrs.size > 0 ? true : false);
       },
-      trigger: 'ADD_RECR',
       title: 'Sweet',
       caption: 'You just gave credit for this recommendation',
       instructions:'Now lets categorize it. Click the paper in the top left to change what type of recommendation this is.',
@@ -37,12 +44,12 @@ const initialState = Map({
     Map({
       label: 'Save Recs with multiple filters',
       condition: function(state){
-        return (state.recs.size > 1 ? true : false);
+        // console.log('rec size',state.recs.size)
+        return (state.recs.size > 5 ? true : false);
       },
-      trigger: 'ADD_REC',
       title: 'Congrats!',
       caption: 'You just unlocked filters!',
-      instructions:'Use the filters at the top of your list to sort by category.',
+      instructions:'You saved enough recommendations where it makes sense to filter them.',
       buttonText: 'Okay, I got it',
     }),
     // 4
@@ -80,11 +87,14 @@ export default function counter(onboard = initialState, action = {}) {
 
   switch (action.type) {
     case types.INCREMENT_CURRENT_STEP:
-      console.log('I WAS CALLED FROM ONBOARD MIDDLWARE!!')
       return onboard.merge({
         currentStep: onboard.get('currentStep') + 1,
-        showPopup: false,
+        showPopup: false, // probly not needed
       });
+      case types.SET_STEP:
+        return onboard.merge({
+          currentStep: action.payload,
+        });
       case types.SHOW_ONBOARD_POPUP: // only dispatched in app.js
         console.log('show pop up')
         return onboard.merge({

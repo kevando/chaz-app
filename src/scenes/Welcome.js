@@ -67,15 +67,19 @@ class Welcome extends Component {
           <Text>Loading from server</Text>
           :
           <Animated.View style={this.getButtonStyle()} >
-            <Button style={styles.button} onPress={Actions.recommendations}>Get Started</Button>
+            <Button style={styles.button} onPress={this.onButtonPress}>Get Started</Button>
           </Animated.View>
         )}
-        <View style={{position:'absolute',bottom:70}}>
+        <View style={{position:'absolute',bottom:25,left:5}}>
+          <Text style={{fontWeight:'400',color:'#fff'}}>NODE_ENV: {process.env.NODE_ENV}</Text>
           <Text style={{fontWeight:'400',color:'#fff'}}>Server Response: {this.state.status}</Text>
           <Text style={{fontWeight:'100',color:'#fff'}}>{this.state.uid}</Text>
         </View>
       </View>
     );
+  }
+  onButtonPress() {
+    Actions.recommendations()
   }
 
 }

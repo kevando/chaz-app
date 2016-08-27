@@ -1,4 +1,4 @@
-import {firebaseConfig} from './constants';
+import { firebaseConfig } from '../config';
 const firebase = require('firebase');
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
@@ -13,13 +13,15 @@ import {Map,List} from 'immutable';
 export function checkForAppUser() { // This dispatches CREATE_USER either way.
   return function(dispatch,getState){
 
-    var uid = DeviceInfo.getUniqueID();
-    var deviceName = DeviceInfo.getDeviceName();
+    var user =  {
+      uid: DeviceInfo.getUniqueID(),
+      name: DeviceInfo.getDeviceName(),
+      appVersion: DeviceInfo.getReadableVersion()
+    }
 
     var fireRef = firebaseApp.database().ref();
-    var userRef = fireRef.child(`users/${uid}`);
+    var userRef = fireRef.child(`users/${user.uid}`);
 
-    var user =  {uid: uid, name: deviceName }
     userRef.once("value", function(snapshot) {
       if(!snapshot.exists()){ // then lets create the user in firebase !
         user.welcomeMessage = 'User NOT in firebase so we created it';
@@ -66,7 +68,8 @@ export function loadDataFromFirebase(user) { // hydrate
       });
       dispatch({type: 'LOAD_RECS_FROM_FIREBASE',payload:List(recs)});
       dispatch({type: 'LOAD_RECRS_FROM_FIREBASE',payload:List(recrs)}); // doing it this way could get complicated
-      dispatch({type:'CREATE_APP_USER',payload: user}); // should have state data now
+      dispatch({type:'CREATE_APP_USER',payload: user});
+      dispatch({type:'INIT_ONBOARD'}); // should have state data now
     });
 
   }

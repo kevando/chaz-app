@@ -27,8 +27,8 @@ class RecrItem extends Component {
     return (
       <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
       {( recr
-        ? <Text style={{fontWeight:'600',color:"green",fontSize:15}}>{recr.name}</Text>
-        :<Text style={{fontWeight:'600',color:"green",fontSize:15}}>Who recommended this?</Text>
+        ? <Text style={{fontWeight:'600',color:"green",fontSize:18}}>{recr.name}</Text>
+        :<Text style={{fontWeight:'600',color:"green",fontSize:20}}>Who recommended this?</Text>
       )}
       </TouchableOpacity>
     );

@@ -56,7 +56,7 @@ class Recommendations extends Component {
         <View style={{flex:10}} >
         {(totalRecs.size == 0
           ?
-          <EmptyMessage title="Welcome to chaz" notify="Lets get started by guiding you through saving your first recommendation" instructions="Tap the blue button to save your first recommendation!" />
+          <EmptyMessage title="Welcome to chaz" notify="When people in your life give you suggestions and recommendations, save them here." instructions="Tap the blue button to save your first recommendation." />
           :
           <ScrollView><RecList recs={visibleRecs.reverse()} /></ScrollView>
         )}

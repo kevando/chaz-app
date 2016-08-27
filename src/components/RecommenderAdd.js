@@ -29,13 +29,9 @@ class RecommenderAdd extends Component {
     componentWillReceiveProps(nextProps) {
       // This gets invoked after ADD_RECR
       // Now get user back to recView with their recr data
-      console.log('props came back in recrAdd');
-      console.log(this.props.recrs.size)
-      console.log(nextProps.recrs.size)
       if(this.props.recrs.size != nextProps.recrs.size){
-          console.log('a NEW recr was added, so assign it and close out',recr)
-          var recr = nextProps.recrs.last();
-          this.onRecrAssignPress(recr)
+        var recr = nextProps.recrs.last();
+        this.onRecrAssignPress(recr)
       }
 
     }
@@ -57,6 +53,8 @@ class RecommenderAdd extends Component {
             />
 
             {this.renderRecrs()}
+
+            <Button style={{color:'red',marginTop:20}} onPress={this.props.closeHandler}>Cancel</Button>
           </View>
         );
     }
@@ -65,12 +63,12 @@ class RecommenderAdd extends Component {
       if(recrs.size > 0){
         return (
           <View>
-          <Text>Or choose from existing friends:</Text>
+          <Text style={{marginTop:10,marginBottom:10}}>Or choose from existing friends:</Text>
           <View style={{flex:1,flexDirection:'row',justifyContent:'flex-start',alignItems:'flex-start',flexWrap:'wrap'}}>
 
             {
               recrs.map(recr => (
-                <Button style={{color:'green',fontWeight:'600',textAlign:'left',borderColor:'green',borderWidth:2,padding:6,margin:5}} key={recr.get('id')} onPress={this.onRecrAssignPress.bind(this,recr)} >{recr.get('name')}</Button>
+                <Button style={{color:'green',fontWeight:'300',fontSize:14,textAlign:'center',borderColor:'#ccc',borderWidth:1,padding:6,margin:5}} key={recr.get('id')} onPress={this.onRecrAssignPress.bind(this,recr)} >{recr.get('name')}</Button>
               ))
             }
           </View>

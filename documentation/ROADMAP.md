@@ -4,16 +4,21 @@ Here is a grouped list of planned features, broken out by version. To understand
 # 0.9 workspace ------------------------------------------------------------
 
 
-analytics middleware
+logout on version mismatch
 
-go through on bord and make smooth, make buttons CTA
-add more types
-add recr popup is pretty whack
+set version in mp
 
-addRec button on every page
+
+
+
 ---
-Cleanup
-
+see if i can get fabric js console logs
+fix animation directions
+profile is chaz title
+add a reset onboard on to profile, create debug section
+emojies to filter
+put user IDs in an ENV array
+---
 
  - refactored app so its offline by default
  - Changed navigator API
@@ -25,57 +30,25 @@ Cleanup
 
 =---
 
-# 0.10 (resume of 0.8 basically)
 
-add cool animations
+# 0.10
+
+do logrithmic plan here
+
+add cooler animations, how to group scenes
 https://facebook.github.io/origami/
 https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
 
-created the initial onboarding (first 3 steps)
-kinda janky but i think it should work great once i get the wording better
-probably should store the conditions to move to the next step in the onboarding
-
-store onboard status in firebase
-then go through evernote, clean notes and get ui ideas
-
-edit rec type
-
-recr view pages with rec List
-rec grades with recr scores
-
-
-add onboarding progress to profile screen with current process
-
+grade rec, recr view, recr score
 validate recr does not already exists
 assign emoji faces to recrs, give it some order or random
+better ui for recr add and other data io, like edit recr
+addRec button on every page, track where its clicked, add type auto fill
 
-improve styling across the board, while i build onboarding
-list style, focus on making look good for all situations (w recr)
-  yik yak for inspiration
-this screen says alot. very confusing... https://i.imgur.com/7hvrZdy.png
+### Beta Roadmap
 
-get this ready to deploy to fabric, I want to test asap how grading will work
-login is pretty much set now how I want it. Code is janky as fuck tho. so fix that
-need to be careful about onboarding getting out of sync. how to protect?
-
-remove blue from filter nav shit
-chat STUFF
-https://sendbird.com/pricing ?
-
-# /0.8 workspace ------------------------------------------------------------
-
-### Version 0.8
- - Significantly improve the onboarding
- - Add Rec commments
- - Introduce the recommender
- - refactored to new firebase + offline support
-
-### Version 0.9
- - Introduce Rec grades
  - Add hyperlink ability
  - Add reminders (with notifications)
-
-### Version 1.0 (Release to app store)
  - Add Friend List page
  - Add a profile page that displays user's rec/recr/grade/score data
  - Add ability to save recs that I give people
@@ -86,3 +59,6 @@ https://sendbird.com/pricing ?
  - option to send "Started watching" to friend that gave rec
  - Get it ready for useronboarding.com
  - Premium service: we find links to the shit you get rec'd
+
+ chat STUFF
+ https://sendbird.com/pricing ?

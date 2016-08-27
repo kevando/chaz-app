@@ -20,7 +20,7 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
           switch (action.type) {
             // Check the conditions any time that data is saved to redux
 
-            case 'CREATE_APP_USER': // Properly set the current onboard step
+            case 'INIT_ONBOARD': // Properly set the current onboard step
               var steps = onboard.get('steps');
               var currentStep = 0; // tmp
               steps.map(function(step){

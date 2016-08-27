@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet,ScrollView} from "react-native";
+import {View, Text, StyleSheet,ScrollView, Dimensions,Animated} from "react-native";
 import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
 import * as GlobalStyle from '../style/Global';
@@ -8,63 +8,116 @@ import {connect} from 'react-redux';
 
 const DeviceInfo = require('react-native-device-info');
 
+var {
+  height: deviceHeight,
+  width: deviceWidth
+} = Dimensions.get("window");
 
-// TMP
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');
 
 class Profile extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      offset: new Animated.Value(-deviceHeight),
+    };
+
+    this.closeHandler = this.closeHandler.bind(this)
+
+  }
+  componentDidMount() {
+    // Slide Up
+    Animated.timing(this.state.offset, {
+        duration: 150,
+        toValue: 0
+    }).start();
+
+  }
+
+  closeHandler() {
+    Animated.timing(this.state.offset, {
+      duration: 150,
+      toValue: deviceHeight
+    }
+  ).start(Actions.pop)
+
+  //actions.pop
+
+  }
   render(){
     let {value,label} = GlobalStyle.styles;
     let user = this.props.app.get('user').toJS();
     // console.log('props',this.props.app.get('user')
 
     return (
-      <ScrollView>
+      <View style={styles.background}>
+      <Animated.View style={[styles.container,{transform: [{translateY: this.state.offset}]}]}>
+        <ScrollView >
+          <OnboardProgress onboard={this.props.onboard} />
 
-        <OnboardProgress onboard={this.props.onboard} />
+          <View style={styles.rowHeader}>
+            <View style={styles.left}><Text style={styles.rowTitle}>Settings</Text></View>
+          </View>
+          <View style={styles.row}>
+            <View style={styles.left}><Text style={label}>Name</Text></View>
+            <View style={styles.right}><Text style={value}>{user.name}</Text></View>
+          </View>
+          <View style={styles.row}>
+            <View style={styles.left}><Text style={label}>UID</Text></View>
+            <View style={styles.right}><Text style={value}>{user.uid}</Text></View>
+          </View>
+          <View style={styles.row}>
+            <View style={styles.left}><Text style={label}>Version</Text></View>
+            <View style={styles.right}><Text style={value}>{DeviceInfo.getReadableVersion()}</Text></View>
+          </View>
+          <View style={styles.row}>
+            <View style={styles.left}><Text style={label}>ENV</Text></View>
+            <View style={styles.right}><Text style={value}>{process.env.NODE_ENV}</Text></View>
+          </View>
 
-        <View style={styles.rowHeader}>
-          <View style={styles.left}><Text style={styles.rowTitle}>Settings</Text></View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.left}><Text style={label}>Name</Text></View>
-          <View style={styles.right}><Text style={value}>{user.name}</Text></View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.left}><Text style={label}>UID</Text></View>
-          <View style={styles.right}><Text style={value}>{user.uid}</Text></View>
-        </View>
-        <View style={styles.row}>
-          <View style={styles.left}><Text style={label}>Version</Text></View>
-          <View style={styles.right}><Text style={value}>{DeviceInfo.getReadableVersion()}</Text></View>
-        </View>
 
 
-
-        <Button onPress={this.clearStorage.bind(this)} style={{fontSize:28,color:'red',marginTop:30}}>Logout</Button>
-      </ScrollView>
+          <Button onPress={this.closeHandler.bind(this)} style={{fontSize:20,color:'#ccc',marginTop:30}}>Back</Button>
+          <Button onPress={this.clearStorage.bind(this)} style={{fontSize:28,color:'red',marginTop:30}}>Logout</Button>
+        </ScrollView>
+        </Animated.View>
+      </View>
     );
   }
+
   clearStorage(){
     engine.save({});
 
-    Actions.welcome();
+    // Actions.welcome();
     // this.props.dispatch({type:'USER_LOGOUT'});
   }
 }
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  background: {
+    position: "absolute",
+    top:0,
+    bottom:0,
+    left:0,
+    right:0,
+    backgroundColor:"transparent",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor:"rgba(102,102,102,0.8)",
+  },
+  container: {
+    width: deviceWidth,
+    flex: 1,
+    flexDirection:'column',
     backgroundColor: "transparent",
-    flexDirection: 'column',
-    justifyContent:'flex-start',
-    // backgroundColor: 'yellow',
+    backgroundColor:"white",
+    borderWidth:1,
+    marginBottom:70,
+    paddingTop:30
   },
   rowHeader: {
     borderBottomWidth:1,

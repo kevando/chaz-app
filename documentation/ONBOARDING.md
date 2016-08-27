@@ -1,14 +1,13 @@
 # Onboarding
 
-Learning how to use a new product should be fun and engaging. Apple has done this
-better than any other company with regards to mobile.
-When a user first engages with an app, they should see a clear path for success.
+When a user first engages with an app, she should see a clear path for success.
+This means providing the right information at the right moments and guidance.
 
 
 ## chaz onboarding process
 
-While chaz isn't complicated, it does offer a new experience that might
-be unfamiliar to some users. Therefore chaz provides a step-by-step guide
+While chaz isn't complicated, it gives users a new experience that might
+be unfamiliar. Therefore chaz provides a step-by-step guide
 to reaching various "milestones" that make the app more fun and useful.
 
 According to [name,link] from facebook, all products should lead users to that

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import Button from "react-native-button";
 
-// I dont like using a timer for this, but the scenes are all fucked up
-// feels like a hack
-const timer = require('react-native-timer');
-
 import {
   // Scene,
   Reducer,
@@ -18,9 +14,12 @@ import {
 
 import {Scenes} from './';
 import {connect} from 'react-redux';
-
 import Onboard from '../components/Onboard';
 import * as onboardActions from '../reducers/onboard/actions';
+
+// I dont like using a timer for this, but the scenes are all fucked up
+// feels like a hack
+const timer = require('react-native-timer');
 
 const styles = StyleSheet.create({
   container: {

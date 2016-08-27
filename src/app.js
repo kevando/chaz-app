@@ -46,6 +46,7 @@ var blacklist = ['LOAD_RECS_FROM_FIREBASE','LOAD_RECRS_FROM_FIREBASE'];
 
 // Only write to disk on these actions
 var saveActions = [
+  'CREATE_APP_USER',
   'ADD_REC',
   'UPDATE_REC',
   'DELETE_REC',
@@ -71,7 +72,7 @@ const load = storage.createLoader(engine);
 
 // load(store); // I now call this in the constructor
 
-engine.save({}); // This clears the state from local storage
+// engine.save({}); // This clears the state from local storage
 
 // Notice that our load function will return a promise that can also be used
 // to respond to the restore event.
@@ -95,6 +96,7 @@ class App extends Component {
 
           Scenes['welcome'].initial = true;
           this.setState({loading:false});
+
           //no user data, so create one
           // but make sure user is not in firebase with data
           // do this on welcome click

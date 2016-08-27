@@ -4,7 +4,7 @@ import { Map, List } from 'immutable';
 const initialState = Map({
   user: {},
   activeFilter: 'all',
-  filters: List(['all','movie','tv','podcast','book']),
+  filters: List(['all','movie','tv','podcast','book','music','food','place','other']),
 });
 
 export default function app(state = initialState, action = {}) {

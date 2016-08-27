@@ -110,6 +110,8 @@ const styles = StyleSheet.create({
     // paddingLeft:10,
     borderColor: '#ccc',
     borderWidth:0,
+    marginTop:10,
+    marginBottom:10
   },
   // input: {
   //   fontSize: 25,
