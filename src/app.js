@@ -38,13 +38,23 @@ const engine = createEngine('async-data-v1');
 
 import onboardMiddleware from './middleware/onboardMiddleware';
 import firebaseSyncMiddleware from './middleware/firebaseSyncMiddleware';
+import analyticsMiddleware from './middleware/analyticsMiddleware';
 
 // blacklist any initialization actions. it fucks up loading the data
-var blacklist = ['CREATE_APP_USER','LOAD_RECS_FROM_FIREBASE','LOAD_RECRS_FROM_FIREBASE'];
-const storageMiddleware = storage.createMiddleware(engine,blacklist);
+// I changed sync function, not sure I still need to do this
+var blacklist = ['LOAD_RECS_FROM_FIREBASE','LOAD_RECRS_FROM_FIREBASE'];
+
+// Only write to disk on these actions
+var saveActions = [
+  'ADD_REC',
+  'UPDATE_REC',
+  'DELETE_REC',
+  'ADD_RECR'
+];
+const storageMiddleware = storage.createMiddleware(engine,[],saveActions);
 
 // As everything is prepared, we can go ahead and combine all parts as usual
-const createStoreWithMiddleware = applyMiddleware(thunk,storageMiddleware,firebaseSyncMiddleware,onboardMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk,storageMiddleware,firebaseSyncMiddleware,onboardMiddleware,analyticsMiddleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
 // At this stage the whole system is in place and every action will trigger

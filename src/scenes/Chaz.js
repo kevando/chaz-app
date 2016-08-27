@@ -71,14 +71,16 @@ class Chaz extends Component {
 
   }
 
-  // FOR ONBOARDING LOGIC
+  // ONBOARDING LOGIC This runs on EVERY redux state update
   onStoreUpdate() {
     var {store} = this.props;
     var onboard = store.getState().onboard;
 
     if (onboard.get('showPopup')) {
-      store.dispatch({type: 'INCREMENT_CURRENT_STEP'}); // this should probly also take care of setting onboard to false
       var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
+
+      store.dispatch({type: 'INCREMENT_CURRENT_STEP',payload:onboard.currentStep}); // this also takes care of setting onboard to false
+
       // using a delay because if the previous action is a closing modal, onboard never shows
       timer.setTimeout(this,'fuckingdelays', function(){Actions.popup({data: Onboard,passProps:stepData})}, 600);
 

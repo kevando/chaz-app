@@ -1,38 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Animated, Dimensions} from "react-native";
-import Button from "react-native-button";
+import {View, Text, StyleSheet, Animated, Dimensions, TouchableOpacity} from "react-native";
 import {Actions} from "react-native-router-flux";
-
-var {
-  height: deviceHeight
-} = Dimensions.get("window");
-
-
+import {constants} from '../style/Global';
 
 class OnboardPopup extends Component {
     constructor(props){
-        super (props);
-
-        this.state = {
-            offset: new Animated.Value(deviceHeight)
-        };
-    }
-
-    componentDidMount() {
-        Animated.timing(this.state.offset, {
-            duration: 150,
-            delay:30,
-            toValue: 0
-        }).start();
-    }
-
-    closeModal() {
-      console.log('onboard closemodal called')
-        Animated.timing(this.state.offset, {
-            duration: 150,
-            delay:20,
-            toValue: -deviceHeight
-        }).start(Actions.pop);
+      super (props);
     }
 
     render(){
@@ -44,39 +17,42 @@ class OnboardPopup extends Component {
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.caption}>{caption}</Text>
               <Text style={styles.instructions}>{instructions}</Text>
-              <Button onPress={this.props.closeHandler}>{buttonText}</Button>
+              <TouchableOpacity onPress={this.props.closeHandler}>
+                <Text style={styles.button}>{buttonText}</Text>
+              </TouchableOpacity>
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
-    container: {
-        position: "absolute",
-        top:0,
-        bottom:0,
-        left:0,
-        right:0,
-        backgroundColor:"transparent",
-        justifyContent: "center",
-        alignItems: "center",
-    },
+
     title: {
-      fontSize:25,
+      fontSize:30,
       fontWeight:'600',
       textAlign:'center',
-      marginBottom:5
+      marginBottom:5,
+      marginTop:15,
+      color:'#333',
     },
     caption: {
       fontSize:20,
       fontWeight:'500',
       textAlign:'center',
-      marginBottom:10
+      marginBottom:10,
+      color:'#555',
     },
     instructions: {
       fontSize:15,
       fontWeight:'400',
       textAlign:'center',
-      marginBottom:15
+
+    },
+    button: {
+      backgroundColor: constants.colors[1],
+      textAlign:'center',
+      color:'#fff',
+      margin:40,
+      padding:10
     }
 });
 module.exports = OnboardPopup;

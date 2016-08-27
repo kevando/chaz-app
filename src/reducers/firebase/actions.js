@@ -24,12 +24,13 @@ export function checkForAppUser() { // This dispatches CREATE_USER either way.
       if(!snapshot.exists()){ // then lets create the user in firebase !
         user.welcomeMessage = 'User NOT in firebase so we created it';
         userRef.set(user);
+        dispatch({type:'CREATE_APP_USER',payload: user});
       } else {  // If the user DOES exist, the person got logged out on their phone.
         user.welcomeMessage = 'FOUND User in firebase, so we pulled the data';
         // Will need to probably run additional sync code here for the recs and such
-        dispatch(loadDataFromFirebase(uid));
+        dispatch(loadDataFromFirebase(user)); // handles CREATE APP USER
       }
-      dispatch({type:'CREATE_APP_USER',payload: user});
+
     });
 }
 
@@ -46,31 +47,27 @@ export function syncFirebase() {
   }
 }
 
-export function loadDataFromFirebase(uid) {
+export function loadDataFromFirebase(user) { // hydrate
   return function(dispatch,getState){
-    console.log('Go to firebase and pull recs');
 
     var fireRef = firebaseApp.database().ref();
-    var recsRef = fireRef.child(`users/${uid}/recs`);
-    var recrsRef = fireRef.child(`users/${uid}/recrs`);
+    var dataRef = fireRef.child(`users/${user.uid}`);
 
-    // LOAD RECS
-    recsRef.once("value", function(data) {
-      recs = [];
-      data.forEach((rec) => {
+    dataRef.once("value", function(snapshot) {
+      // Data to import
+      var recs = [];
+      var recrs = [];
+
+      snapshot.child('recs').forEach((rec) => {
         recs.push(Map(rec.val()));
       });
+      snapshot.child('recrs').forEach((rec) => {
+        recrs.push(Map(rec.val()));
+      });
       dispatch({type: 'LOAD_RECS_FROM_FIREBASE',payload:List(recs)});
+      dispatch({type: 'LOAD_RECRS_FROM_FIREBASE',payload:List(recrs)}); // doing it this way could get complicated
+      dispatch({type:'CREATE_APP_USER',payload: user}); // should have state data now
     });
 
-    // LOAD RECRS
-    recrsRef.once("value", function(data) {
-      recrs = [];
-      data.forEach((recr) => {
-        recrs.push(Map(recr.val()));
-      });
-      dispatch({type: 'LOAD_RECRS_FROM_FIREBASE',payload:List(recrs)});
-    });
-    // I dont like the logic behind this function
   }
 }

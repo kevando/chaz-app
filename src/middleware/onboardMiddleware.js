@@ -1,20 +1,41 @@
 var onboardMiddleware = function(store){ // formerly middlewareAPI
     return function(next){
         return function(action){
-          // Dont execute this middleware for the following actions
-          if (['REDUX_STORAGE_LOAD','CREATE_APP_USER'].indexOf(action.type) >= 0) { return next(action);  }
 
-          // console.log('check onboard')
-          var onboard = store.getState().onboard;
-          var stepData = onboard.getIn(['steps',onboard.get('currentStep')]);
-          var {trigger,condition} = stepData.toJS();
+          // HOW THIS WORKS
+          //
+          // Each redux save, check the current condition function,
+          // if it evaluates true, immediately show the pop up
+          // this might be bad considering we dont know what action generated the
+          // condition to be true
+          //
+          //  SHOW_ONBOARD_POPUP = true gets triggered in chaz.js
+
+          var state = store.getState();
+          var onboard = state.onboard;
+          var currentStep = onboard.get('currentStep');
+          var stepData = onboard.getIn(['steps',currentStep]);
+          var {condition} = stepData.toJS();
 
           switch (action.type) {
             // Check the conditions any time that data is saved to redux
 
-            case trigger: // action saved in onboard. null or undefined might cause a problem
-              if(condition(store.getState()))
-                next({type: 'SHOW_ONBOARD_POPUP',payload:true}); // this should immediately render the popup
+            case 'CREATE_APP_USER': // Properly set the current onboard step
+              var steps = onboard.get('steps');
+              var currentStep = 0; // tmp
+              steps.map(function(step){
+                // console.log('step data in loop',step.toJS())
+                var {condition} = step.toJS();
+                if(condition(state))
+                  store.dispatch({type: 'INCREMENT_CURRENT_STEP'});
+              });
+
+            break;
+
+            case 'REDUX_STORAGE_SAVE':
+              if(condition(state))
+                next({type: 'SHOW_ONBOARD_POPUP',payload:true}); // this will immediately render the popup
+
             break;
 
           } // switch
