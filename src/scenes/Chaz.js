@@ -17,6 +17,8 @@ import {connect} from 'react-redux';
 import Onboard from '../components/Onboard';
 import * as onboardActions from '../reducers/onboard/actions';
 
+import DeviceInfo from 'react-native-device-info';
+
 // I dont like using a timer for this, but the scenes are all fucked up
 // feels like a hack
 const timer = require('react-native-timer');
@@ -51,8 +53,8 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params);
   return (state, action) => {
-    // console.log('%c ROUTER STATE:', 'color: green',state);
-    // console.log('%c ROUTER ACTION:', 'color: green',action);
+    console.log('%c ROUTER STATE:', 'color: green',state);
+    console.log('%c ROUTER ACTION:', 'color: green',action);
     return defaultReducer(state, action);
   };
 };
@@ -94,6 +96,7 @@ class Chaz extends Component {
         createReducer={reducerCreate}
         scenes={Scenes}
         getSceneStyle={getSceneStyle}
+        store={this.props.store}
       />
     );
   }

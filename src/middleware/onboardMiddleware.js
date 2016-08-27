@@ -21,6 +21,7 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
             // Check the conditions any time that data is saved to redux
 
             case 'INIT_ONBOARD': // Properly set the current onboard step
+              console.log('init onboard?');
               var steps = onboard.get('steps');
               var currentStep = 0; // tmp
               steps.map(function(step){

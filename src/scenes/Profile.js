@@ -13,8 +13,7 @@ var {
   width: deviceWidth
 } = Dimensions.get("window");
 
-import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
-const engine = createEngine('async-data-v1');
+import timer from 'react-native-timer';
 
 class Profile extends Component {
 
@@ -23,6 +22,7 @@ class Profile extends Component {
 
     this.state = {
       offset: new Animated.Value(-deviceHeight),
+      user: this.props.app.get('user').toJS()
     };
 
     this.closeHandler = this.closeHandler.bind(this)
@@ -49,8 +49,7 @@ class Profile extends Component {
   }
   render(){
     let {value,label} = GlobalStyle.styles;
-    let user = this.props.app.get('user').toJS();
-    // console.log('props',this.props.app.get('user')
+    let user = this.state.user;
 
     return (
       <View style={styles.background}>
@@ -79,20 +78,16 @@ class Profile extends Component {
           </View>
 
 
-
-          <Button onPress={this.closeHandler.bind(this)} style={{fontSize:20,color:'#ccc',marginTop:30}}>Back</Button>
-          <Button onPress={this.clearStorage.bind(this)} style={{fontSize:28,color:'red',marginTop:30}}>Logout</Button>
+          <Button onPress={this.closeHandler.bind(this)} style={{fontSize:27,color:'blue',marginTop:30}}>Back</Button>
+          <Button onPress={this.onLogoutPress.bind(this)} style={{fontSize:14,color:'red',marginTop:30}}>Logout</Button>
         </ScrollView>
         </Animated.View>
       </View>
     );
   }
 
-  clearStorage(){
-    engine.save({});
-
-    // Actions.welcome();
-    // this.props.dispatch({type:'USER_LOGOUT'});
+  onLogoutPress(){
+    Actions.logout()
   }
 }
 

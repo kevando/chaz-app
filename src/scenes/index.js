@@ -70,7 +70,7 @@ export const Scenes = Actions.create(
     <Scene key="root" direction="vertical" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
       <Scene key="welcome" animation="fade" component={Welcome}  hideNavBar   />
-      <Scene key="logout" component={Logout} hideNavBar type={ActionConst.REPLACE} />
+
 
       <Scene key="recommendations"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
@@ -130,14 +130,16 @@ export const Scenes = Actions.create(
 
 
 
-
+      <Scene key="logout" component={Logout} hideNavBar type={ActionConst.REPLACE} />
 
 
 
     </Scene>
+
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
     <Scene key="profile" component={Profile} hideNavBar  />
+
   </Scene>
 
 

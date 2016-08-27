@@ -4,20 +4,6 @@ Here is a grouped list of planned features, broken out by version. To understand
 # 0.9 workspace ------------------------------------------------------------
 
 
-logout on version mismatch
-
-set version in mp
-
-
-
-
----
-see if i can get fabric js console logs
-fix animation directions
-profile is chaz title
-add a reset onboard on to profile, create debug section
-emojies to filter
-put user IDs in an ENV array
 ---
 
  - refactored app so its offline by default
@@ -35,7 +21,7 @@ put user IDs in an ENV array
 
 do logrithmic plan here
 
-add cooler animations, how to group scenes
+add cooler animations, how to group scenes, figure out scenes once and for all
 https://facebook.github.io/origami/
 https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
 

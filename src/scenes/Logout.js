@@ -12,6 +12,8 @@ var BUTTON_OFFSET = 300;
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 const engine = createEngine('async-data-v1');
 
+import timer from 'react-native-timer';
+
 class Logout extends Component {
 
   constructor(props){
@@ -30,9 +32,28 @@ class Logout extends Component {
   componentWillMount() {
    // destroy data and redirect to login page
     // engine.save();
-   this.props.dispatch({type:'USER_LOGOUT'});
+  //  this.props.dispatch({type:'USER_LOGOUT'});
 
-   Actions.welcome();
+  //  Actions.welcome();
+ }
+ componentDidMount(){
+   console.log('LOG OUT MOUNTED')
+  //  this.props.dispatch({type:'USER_LOGOUT'});
+
+  // Actions.welcome();
+  engine.save({});
+  // var dispatch = this.props.dispatch;
+  // //
+  // timer.setTimeout(this,'wait',function(){
+  //   console.log('dispatch logout')
+  //   //  dispatch({type:'USER_LOGOUT'})
+  //  },200);
+  //
+  //  timer.setTimeout(this,'wait',function(){
+  //    console.log('go to welcome')
+  //     Actions.welcome();
+  //   },1200);
+
  }
 
 
@@ -41,7 +62,8 @@ class Logout extends Component {
     return (
       <View style={styles.container}>
         <View style={{top:170,flex:1}}>
-          <Text style={{fontWeight:'500',color:'#fff',fontSize:100,textAlign:'center'}} >logged out</Text>
+        <Text style={{fontWeight:'500',color:'#fff',fontSize:100,textAlign:'center'}} >logged out</Text>
+        <Text style={{fontWeight:'500',color:'#fff',fontSize:20,textAlign:'center'}} >please restart the app</Text>
         </View>
 
       </View>

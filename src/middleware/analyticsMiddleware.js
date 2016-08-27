@@ -20,7 +20,7 @@ var analyticsMiddleware = function(middlewareAPI){
               Mixpanel.identify(action.payload.uid);
               Mixpanel.set({"$device": action.payload.uid,"$name": action.payload.name});
               Mixpanel.registerSuperProperties({"App Version": action.payload.appVersion});
-              break;
+            break;
 
             case 'ADD_REC':
               Mixpanel.trackWithProperties('Rec Added', { title: action.payload.title });
