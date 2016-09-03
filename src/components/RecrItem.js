@@ -19,15 +19,17 @@ class RecrItem extends Component {
   constructor(props) {
     super(props);
     this.state = {name: this.props.rec.name}
+    this.getRecr = this.getRecr.bind(this);
   }
+
   render() {
     // console.log('recr props',this.props.recr)
-    var recr = this.props.rec.recr;
+    var recr = this.getRecr(this.props.rec.recr_id)
 
     if(recr) {
       return (
         <TouchableOpacity onPress={this.onRecrPress.bind(this)} >
-          <Text style={{fontWeight:'600',color:"green",fontSize:16}}>{recr.name}</Text>
+          <Text style={{fontWeight:'600',color:"green",fontSize:16}}>{recr.get('name')}</Text>
         </TouchableOpacity>
       );
     } else {
@@ -46,6 +48,12 @@ class RecrItem extends Component {
   onRecrPress() {
     Actions.friend({recr: this.props.rec.recr});
   }
+  getRecr(recr_id){
+    var recr = this.props.recrs.find(function(obj){
+      return obj.get('id') === recr_id;
+    });
+    return recr;
+  }
 
 
 }
@@ -55,6 +63,7 @@ class RecrItem extends Component {
 function mapStateToProps(state) {
   return {
     recs: state.recs,
+    recrs: state.recrs,
   };
 }
 export default connect(mapStateToProps)(RecrItem);

@@ -1,29 +1,37 @@
 # Product Roadmap
 
-# 0.10 (Focus on the queue)
-
+# 0.10
+Focus on the queue
+But build the data with chat in mind
 
 ## this buld
 
 
-Design app pages
+pull all recr info by fk
 
-add friendview to the onboard
-style navbar
-add rec from recr page autofills recr
-edit recr name
 
 ## next build
+
 
 grade recs
 set recr score, adding recs create list for recrs, add all this to recr view page
 Architect this data as if we have chat enabled
 
 ---
+
+
+add rec from recr page autofills recr
+edit recr name
+
+
+add friendview to the onboard
+style navbar
+
 add filters, redesign top nav
 
 sort rec list newest oldest score
 filter graded, ungraded, all
+start testing app notifications
 
 add cooler animations, how to group scenes, figure out scenes once and for all
 logout is all fucked up
@@ -41,7 +49,7 @@ disable logging for production
 bug: welcome button not aligned, do work on iphone5
 build mechanism to fresh data for users, force logout or something (like if i expanded music into bands and songs)
 
-
+fresh rn build doesnt have those yellowbox errors, think about figuring out why
  - Add Rec button on more pages with pre-filled information for easier add
 
 

@@ -24,28 +24,28 @@ export function removeRecr(recrKey){                  // REMOVE REC
   }
 }
 
-export function assignRecr(recKey,recr) {
-  console.log('recKey',recKey)
-  console.log('recr',recr);
-  // Firebase bugs out with undefined data, but its probly good to
-  // clear recs from recr before assigning it to rec list
-  delete recr.recs; // this works even if recs is not there
-
-  return(dispatch,getState) => {
-    const currentState = getState();
-    const uid = currentState.app.getIn(["authData","uid"]);
-
-    // 1 assign recKey to recr recs list
-    const recrRecsRef = fireRef.child(`users/${uid}/recrs/${recr._key}/recs/${recKey}`);
-    recrRecsRef.set( {recKey:recKey}); // set entire rec objrect?
-
-    // 2 assign recr to rec
-    const recRef = fireRef.child(`users/${uid}/recs/${recKey}`);
-    recRef.update({recr: recr });
-
-  }
-
-}
+// export function assignRecr(recKey,recr) {
+//   console.log('recKey',recKey)
+//   console.log('recr',recr);
+//   // Firebase bugs out with undefined data, but its probly good to
+//   // clear recs from recr before assigning it to rec list
+//   delete recr.recs; // this works even if recs is not there
+//
+//   return(dispatch,getState) => {
+//     const currentState = getState();
+//     const uid = currentState.app.getIn(["authData","uid"]);
+//
+//     // 1 assign recKey to recr recs list
+//     const recrRecsRef = fireRef.child(`users/${uid}/recrs/${recr._key}/recs/${recKey}`);
+//     recrRecsRef.set( {recKey:recKey}); // set entire rec objrect?
+//
+//     // 2 assign recr to rec
+//     const recRef = fireRef.child(`users/${uid}/recs/${recKey}`);
+//     recRef.update({recr: recr });
+//
+//   }
+//
+// }
 
 // export function listenForNewRecrs() {
 //   return (dispatch, getState) => {

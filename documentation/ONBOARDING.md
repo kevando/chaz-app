@@ -1,18 +1,17 @@
-notes from nevernote
-Onboarding
-"2 factor auth = something you know and somwrhinf ou have"
-"chaz is a fun way to remeber why your friends are awesome"
-Its what the humans think
-keep onboarding very similar to how it is now.
-     ask for name (store with device ID).
-     if people dont use the app, dont make them create an account
-     show people list of how other user’s stored them
-
 # Onboarding
 
-When a user first engages with an app, she should see a clear path for success.
-This means providing the right information at the right moments and guidance.
+The best apps provide a clear path (links to tear downs) for a user to understand the app's value proposition. The term 'onboarding' best describes this approach
+(link to onboarding definition) and focuses on a guided experience that excites the user, while explaining the core functionality and features the user will do in order to acheive that success.
 
+
+# chaz
+
+chaz is designed for three moments
+ 1) When someone gives you a recommendation
+ 2) When you're deciding how you want to spend your immediate attention
+ 3) When you give feedback to a friend about their recommendation
+
+As a result, the onboarding process focuses on sheperding the user though  to that final moment, which is the 'magic moment' of chaz.
 
 ## chaz onboarding process
 
@@ -76,3 +75,13 @@ A simple message and a..
 
 someone tells you something
 that person
+
+notes from nevernote
+Onboarding
+"2 factor auth = something you know and somwrhinf ou have"
+"chaz is a fun way to remeber why your friends are awesome"
+Its what the humans think
+keep onboarding very similar to how it is now.
+     ask for name (store with device ID).
+     if people dont use the app, dont make them create an account
+     show people list of how other user’s stored them

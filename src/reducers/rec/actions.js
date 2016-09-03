@@ -13,6 +13,7 @@ export function addRec(title,note) {
   };
 }
 export function updateRec(rec) {
+  console.log('update rec',rec)
   return {
     type: types.UPDATE_REC,
     payload: rec
@@ -28,15 +29,16 @@ export function deleteRec(recId){
   }
 }
 
-export function assignRecr(rec,recr){
-  // console.log('assign rec',rec)
-  // console.log('assign recr',recr)
-  rec.recr = recr.toJS(); // simply add recr
-  return {
-    type: types.UPDATE_REC, // I can do this cause im not editing recr tree yet
-    payload: rec
-  }
-}
+// Replacing this with simply the recr_id
+// export function assignRecr(rec,recr){
+//   // console.log('assign rec',rec)
+//   // console.log('assign recr',recr)
+//   rec.recr = recr.toJS(); // simply add recr
+//   return {
+//     type: types.UPDATE_REC, // I can do this cause im not editing recr tree yet
+//     payload: rec
+//   }
+// }
 
 
 // export function setGrade(rec, grade) {                  // ADD NEW REC

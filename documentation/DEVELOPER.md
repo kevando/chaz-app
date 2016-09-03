@@ -108,3 +108,11 @@ this notation returns what is ever in loop
 
 ### Filter a List
 return this.props.recs.filter(rec => rec.get('type') == activeFilter);
+
+
+### Find in a List
+var result = map.find(function(obj){return obj.get('id') === 4;});
+
+
+append to map
+var recWithRecr = rec.set('recr', recr)

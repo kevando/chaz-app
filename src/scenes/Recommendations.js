@@ -24,11 +24,41 @@ class Recommendations extends Component {
  }
  getVisibleRecs() {
 
-  var activeFilter = this.props.app.get('activeFilter');
-  if(activeFilter == 'all')
-    return this.props.recs;
+   var activeFilter = this.props.app.get('activeFilter');
+   // First add the Recr data (probly a better place to do this)
+    var recrs = this.props.recrs;
 
-  return this.props.recs.filter(rec => rec.get('type') == activeFilter);
+
+   var visibleRecs = this.props.recs.map(function(rec) {
+
+     var recrId = rec.get('recr_id');
+
+     var recr = recrs.find(function(obj){
+       return obj.get('id') === recrId;
+     });
+     var recWithRecr = rec.set('recr', recr)
+
+    return recWithRecr;
+
+   });
+   //
+  //  var visibleRecs = this.props.recs.filter(function(rec) {
+  //    console.log('rec',rec);
+  //    if(rec.get('type') == activeFilter){
+  //      return rec;
+  //    }
+  //  });
+
+
+
+
+
+
+
+  //  if(activeFilter != 'all')
+  //     visibleRecs = this.props.recs.filter(rec => rec.get('type') == activeFilter);
+
+  return visibleRecs;
   // return this.props.recs;
  }
   render() {
@@ -100,6 +130,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     recs: state.recs,
+    recrs: state.recrs,
     app: state.app,
     onboard: state.onboard
   };
