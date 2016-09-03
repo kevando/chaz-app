@@ -3,11 +3,9 @@ import {View, Text, StyleSheet, TouchableOpacity,AlertIOS,ScrollView} from "reac
 import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
-import * as recrActions from '../reducers/recr/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
-import RecGrade from '../components/RecGrade';
 import RecrItem from '../components/RecrItem';
 import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -15,72 +13,46 @@ import Emoji from 'react-native-emoji';
 import RecAddButton from '../components/RecAddButton';
 import {constants} from '../style/Global';
 
-class RecView extends Component {
+class Friend extends Component {
 
   constructor(props) {
     super(props)
     // this will make it easier to handle the new props
-    this.state = {rec:this.props.rec}
+    this.state = {recr:this.props.recr}
     // Set delete button in top right
 
 
 
   }
   componentWillMount(){
-    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:'red'} })
+    // Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:'red'} })
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
-    this.setState({rec: newProps.rec});
+    // this.setState({rec: newProps.rec});
   }
 
   render(){
-    let { dispatch } = this.props;
-    let boundActionCreators = bindActionCreators(recActions, dispatch)
-    let recrActionCreators = bindActionCreators(recrActions, dispatch)
-    var {rec} = this.state;
-    var filters = this.props.app.get('filters');
+    // let { dispatch } = this.props;
+    // let boundActionCreators = bindActionCreators(recActions, dispatch)
+    // var {rec} = this.state;
+    // var filters = this.props.app.get('filters');
 
     return (
       <View  style={styles.container}>
       <ScrollView>
         <View style={styles.row}>
           <View style={styles.left}>
-            <RecType rec={rec} {...boundActionCreators} size={30} filters={filters.toArray()} />
+            <Text>Name:</Text>
           </View>
           <View style={styles.right}>
-            <RecTitle rec={rec} onPress={Actions.recommendationEdit}  />
+            <Text>{this.props.recr.name}</Text>
           </View>
         </View>
-
-        <View style={styles.row}>
-          <View style={styles.left}><Text style={{fontSize:20,textAlign:'center'}}><Emoji name="memo" /></Text></View>
-          <View style={styles.right}>
-            <RecNote rec={rec} onPress={Actions.recommendationEdit} />
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.left}><View style={styles.left}><Text style={{fontSize:20,textAlign:'center'}}><Emoji name="slightly_smiling_face" /></Text></View></View>
-          <View style={styles.right}>
-            <RecrItem rec={rec} {...boundActionCreators} />
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.left}>
-
-          </View>
-          <View style={styles.right}>
-            <RecGrade rec={rec} {...boundActionCreators} {...recrActionCreators} />
-          </View>
-        </View>
-
-
       <View>
     </View>
     </ScrollView>
-    <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
+    <RecAddButton activeType={"default"} recr={this.props.recr} onPress={Actions.recommendationAdd} />
   </View>
     );
   }
@@ -163,4 +135,4 @@ function mapStateToProps(state) {
     app: state.app
   };
 }
-export default connect(mapStateToProps)(RecView);
+export default connect(mapStateToProps)(Friend);

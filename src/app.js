@@ -50,12 +50,14 @@ var saveActions = [
   'ADD_REC',
   'UPDATE_REC',
   'DELETE_REC',
-  'ADD_RECR'
+  'ADD_RECR',
+  'UPDATE_RECR_SCORE',
+  'INIT_ONBOARD'
 ];
 const storageMiddleware = storage.createMiddleware(engine,[],saveActions);
 
 // As everything is prepared, we can go ahead and combine all parts as usual
-const createStoreWithMiddleware = applyMiddleware(thunk,storageMiddleware,firebaseSyncMiddleware,onboardMiddleware,analyticsMiddleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk,storageMiddleware,firebaseSyncMiddleware)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
 // At this stage the whole system is in place and every action will trigger

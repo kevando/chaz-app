@@ -78,7 +78,9 @@ class RecommenderAdd extends Component {
     }
     onRecrAssignPress(recr) {
       var rec = this.props.passProps;
-      this.props.dispatch(recActions.assignRecr(rec,recr));
+      // console.log('recr in asign recr',recr);
+      rec.recr_id = recr.get('id');
+      this.props.dispatch(recActions.updateRec(rec));
       this.props.closeHandler();
     }
     onAddRecrPress() {

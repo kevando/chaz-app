@@ -29,11 +29,11 @@ import Profile from './Profile'
 import Welcome from './Welcome'
 import Popup from './Popup';
 import Logout from './Logout';
+import Friends from './Friends';
+import Friend from './Friend';
 
 import * as GlobalStyle from '../style/Global';
 
-// not totally sure how all this works, I guess this is just a list of
-// scene transitions.
 
 const navBarStyle = {
   backgroundColor:'#ddd',
@@ -69,8 +69,13 @@ export const Scenes = Actions.create(
   <Scene key="modal" component={Modal} >
     <Scene key="root" direction="vertical" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
 
-      <Scene key="welcome" animation="fade" component={Welcome}  hideNavBar   />
+      <Scene key="welcome" component={Welcome}  hideNavBar   />
 
+      <Scene key="profile" component={Profile}  />
+
+      <Scene key="friends" component={Friends}  />
+
+      <Scene key="friend" component={Friend}  />
 
       <Scene key="recommendations"
        navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
@@ -79,6 +84,9 @@ export const Scenes = Actions.create(
        type={ActionConst.REPLACE}
        onLeft={()=>Actions.profile()}
        leftTitle="Settings"
+       leftButtonTextStyle={{color:'#fff',fontSize:14}}
+       onRight={()=>Actions.friends()}
+       rightTitle="Friends"
        leftButtonTextStyle={{color:'#fff',fontSize:14}}
        title="chaz"
       />
@@ -138,7 +146,7 @@ export const Scenes = Actions.create(
 
     <Scene key="error" component={Error} />
     <Scene key="popup" component={Popup} />
-    <Scene key="profile" component={Profile} hideNavBar  />
+
 
   </Scene>
 

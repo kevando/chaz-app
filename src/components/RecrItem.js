@@ -19,23 +19,42 @@ class RecrItem extends Component {
   constructor(props) {
     super(props);
     this.state = {name: this.props.rec.name}
+    this.getRecr = this.getRecr.bind(this);
   }
+
   render() {
     // console.log('recr props',this.props.recr)
-    var recr = this.props.rec.recr;
+    var recr = this.getRecr(this.props.rec.recr_id)
 
-    return (
-      <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
-      {( recr
-        ? <Text style={{fontWeight:'600',color:"green",fontSize:18}}>{recr.name}</Text>
-        :<Text style={{fontWeight:'600',color:"green",fontSize:20}}>Who recommended this?</Text>
-      )}
-      </TouchableOpacity>
-    );
+    if(recr) {
+      return (
+        <TouchableOpacity onPress={this.onRecrPress.bind(this)} >
+          <Text style={{fontWeight:'600',color:"green",fontSize:16}}>{recr.get('name')}</Text>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
+          <Text style={{fontWeight:'600',color:"green",fontSize:20}}>Who recommended this?</Text>
+        </TouchableOpacity>
+      )
+    }
+
   }
   onWhoPress() {
     Actions.popup({data: RecommenderAdd,passProps:this.props.rec})
   }
+
+  onRecrPress() {
+    Actions.friend({recr: this.props.rec.recr});
+  }
+  getRecr(recr_id){
+    var recr = this.props.recrs.find(function(obj){
+      return obj.get('id') === recr_id;
+    });
+    return recr;
+  }
+
 
 }
 
@@ -44,6 +63,7 @@ class RecrItem extends Component {
 function mapStateToProps(state) {
   return {
     recs: state.recs,
+    recrs: state.recrs,
   };
 }
 export default connect(mapStateToProps)(RecrItem);

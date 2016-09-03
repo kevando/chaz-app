@@ -1,10 +1,33 @@
 # Product Roadmap
 
-update mp
-
 # 0.10
+Focus on the queue
+But build the data with chat in mind
 
-do logrithmic plan here, incorporate trello here
+## this buld
+
+set recr score, adding recs create list for recrs, add all this to recr view page
+
+## next build
+
+try and enable invites
+Architect this data as if we have chat enabled
+
+---
+
+
+add rec from recr page autofills recr
+edit recr name
+work on "queue"
+consider what other data I would want stored (like total graded recs for recr) yeah this is def needed when i think about the recr view page
+add friendview to the onboard
+style navbar
+
+add filters, redesign top nav
+
+sort rec list newest oldest score
+filter graded, ungraded, all
+start testing app notifications
 
 add cooler animations, how to group scenes, figure out scenes once and for all
 logout is all fucked up
@@ -20,6 +43,11 @@ better ui for recr add and other data io, like edit recr
 addRec button on every page, track where its clicked, add type auto fill
 disable logging for production
 bug: welcome button not aligned, do work on iphone5
+build mechanism to fresh data for users, force logout or something (like if i expanded music into bands and songs)
+
+fresh rn build doesnt have those yellowbox errors, think about figuring out why
+ - Add Rec button on more pages with pre-filled information for easier add
+
 
 
 ### Beta Roadmap
@@ -29,10 +57,9 @@ bug: welcome button not aligned, do work on iphone5
  - Add Friend List page
  - Add a profile page that displays user's rec/recr/grade/score data
  - Add ability to save recs that I give people
- - Remove dependency on internet access.
+ - Users can chat and send recs
 
 ### Version 1.x
- - Chat feature
  - option to send "Started watching" to friend that gave rec
  - Get it ready for useronboarding.com
  - Premium service: we find links to the shit you get rec'd
