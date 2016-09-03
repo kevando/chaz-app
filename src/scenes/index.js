@@ -64,7 +64,15 @@ export const Scenes = Actions.create(
 
       <Scene key="friends" component={Friends}  />
 
-      <Scene key="friend" component={Friend}  />
+      <Scene
+        key="friend"
+        component={Friend}
+        navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.green,borderBottomColor:colors.green}]}
+        titleStyle={[NavigationStyle.titleStyle,{color:colors.white}]}
+        hideBackImage={true}
+        backButtonTextStyle={{color:colors.white}}
+        backTitle="Back"
+      />
 
       <Scene key="recommendations"
        navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.purple,borderBottomColor:colors.purple}]}
@@ -82,7 +90,6 @@ export const Scenes = Actions.create(
       <Scene
        key="recommendationAdd"
        navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.gery,borderBottomColor:colors.blue}]}
-       titleStyle={{color:"#444"}}
        component={RecommendationInput}
        title=""
        hideBackImage={true}
@@ -107,10 +114,11 @@ export const Scenes = Actions.create(
       <Scene
        key="recommendationFromAdd"
        component={Recommendation}
-       title=""
+       navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.blue,borderBottomColor:colors.blue}]}
        type={ActionConst.REPLACE}
        hideBackImage={true}
        backTitle="Back"
+       backButtonTextStyle={[NavigationStyle.backButtonTextStyle,{color:'#fff'}]}
       />
 
 
@@ -121,10 +129,7 @@ export const Scenes = Actions.create(
        backTitle="Back"
        hideBackImage={true}
        backButtonTextStyle={[NavigationStyle.backButtonTextStyle,{color:'#fff'}]}
-
       />
-
-
 
 
       <Scene key="logout" component={Logout} hideNavBar type={ActionConst.REPLACE} />

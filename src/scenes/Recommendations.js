@@ -14,20 +14,13 @@ import RecList from '../components/RecList';
 import * as GlobalStyle from '../style/Global';
 import {colors} from '../style/Global';
 
-const leftTitle="Pr";
-
 class Recommendations extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      uid: this.props.app.getIn(['user','uid']),
-    }
-
-
+    this.state = {uid: this.props.app.getIn(['user','uid'])}
   }
 
-  componentDidMount(){
+  componentWillReceiveProps(){
     // Hide profile link during first opening of app
     var currentStep = this.props.onboard.get('currentStep');
     if(currentStep < 2)

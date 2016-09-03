@@ -43,7 +43,7 @@ class Friend extends Component {
       <ScrollView>
         <View style={styles.row}>
           <View style={styles.left}>
-            <Text>Name:</Text>
+
           </View>
           <View style={styles.right}>
             <Text>{this.props.recr.name}</Text>
@@ -55,20 +55,6 @@ class Friend extends Component {
     <RecAddButton activeType={"default"} recr={this.props.recr} onPress={Actions.recommendationAdd} />
   </View>
     );
-  }
-
-  onDeletePress(){
-    var Options = [
-      { text: 'Yes', onPress: () => {this.deleteRec() } },
-      { text: 'Cancel', onPress: () => console.log('action canelled') }
-    ];
-    AlertIOS.alert('Are you sure?',null,Options);
-  }
-
-  deleteRec(){
-    var id = this.props.rec.id;
-    this.props.dispatch(recActions.deleteRec(id));
-    Actions.pop();
   }
 
 }
