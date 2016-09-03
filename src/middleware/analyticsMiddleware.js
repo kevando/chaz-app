@@ -11,7 +11,7 @@ var analyticsMiddleware = function(middlewareAPI){
 
     return function(next){
         return function(action){
-          // console.log('ANALYTICS MIDDLWARE', action.type);
+          console.log('ANALYTICS MIDDLWARE', action.type);
           // var state = store.getState();
           switch (action.type) {
 

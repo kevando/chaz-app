@@ -9,7 +9,7 @@ import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
 import RecGrade from '../components/RecGrade';
-import RecChat from '../components/RecChat';
+// import RecChat from '../components/RecChat';
 import RecrItem from '../components/RecrItem';
 import ReceeItem from '../components/ReceeItem'; // change this name please
 import {connect} from 'react-redux';
@@ -35,7 +35,7 @@ class RecView extends Component {
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
-    this.setState({rec: newProps.rec});
+    // this.setState({rec: newProps.rec});
   }
 
   render(){
@@ -72,27 +72,19 @@ class RecView extends Component {
           </View>
         </View>
 
-        <View style={styles.row}>
-          <View style={styles.left}><View style={styles.left}><Text style={{fontSize:20,textAlign:'center'}}><Emoji name="slightly_smiling_face" /></Text></View></View>
-          <View style={styles.right}>
-            <ReceeItem rec={rec} {...boundActionCreators} />
+        {(rec.recr_id // only allow grading if recr is added
+          ?
+          <View style={styles.row}>
+            <View style={styles.left}>
+            </View>
+            <View style={styles.right}>
+              <RecGrade rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
+            </View>
           </View>
-        </View>
+          :
+          null
+        )}
 
-        <View style={styles.row}>
-          <View style={styles.left}>
-          </View>
-          <View style={styles.right}>
-            <RecGrade rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
-          </View>
-        </View>
-
-        <View >
-          <Text>Here is a log of messages</Text>
-          <View>
-            <RecChat rec={rec}  />
-          </View>
-        </View>
 
 
       <View>

@@ -20,17 +20,16 @@ export default class ListItem extends Component {
     super(props);
   }
   render() {
-    // removing add recr until 0.8
-    // {this.renderRecrDisplay()}
 
     var rec = this.props.rec;
 
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
-        <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
+        <View style={{padding:5,borderBottomWidth:1,borderBottomColor:'#ccc',backgroundColor:'#fff'}}>
           <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-            <View style={{flex:1}}><RecType rec={rec} size={30} /></View>
-            <View style={{flex:6}}><Text style={{fontWeight:'600',fontSize:20}}>{rec.title}</Text></View>
+            <View style={{flex:1,backgroundColor:'#fff'}}><RecType rec={rec} size={30} /></View>
+            <View style={{flex:6,backgroundColor:'#fff'}}><Text style={{fontWeight:'600',fontSize:17}}>{rec.title}</Text></View>
+            <View style={{flex:2,backgroundColor:'#fff'}}><Text style={{fontWeight:'600',fontSize:12,textAlign:'right'}}>{this.renderGrade(rec.grade)}</Text></View>
           </View>
         {this.renderRecNote(rec.note)}
         {this.renderRecr(rec.recr)}
@@ -50,30 +49,23 @@ export default class ListItem extends Component {
     if(note)
     return(<Text style={{fontWeight:'400',fontSize:16,color:'#555',height:20,margin:5}} >{note}</Text>);
   }
+  renderGrade(grade) { // dont give spacing for note if its not there
+    if(grade)
+    return grade + " Stars";
+  }
 
   renderRecr(recr) {
     if(recr)
-      return(<Text style={{fontWeight:'500',fontSize:15,color:'#333',marginLeft:3}}><Emoji name="slightly_smiling_face" /> Recommended by {recr.name}</Text>);
+      return(<Text style={{fontWeight:'500',fontSize:15,color:'#333',marginLeft:3}}><Emoji name="slightly_smiling_face" /> Recommended by {recr.name} {recr.score}</Text>);
   }
 
-  onRecPress() {
-    var recKey = this.props.rec._key;
-
-    // passed in via props, not redux.
-    this.props.navigator.push({
-      title: "Recommendation",
-      screen: "chaz.RecViewScreen",
-      backButtonTitle: 'Back',
-      passProps: { recKey }
-    });
-  }
 
 }
 
 
 const styles = StyleSheet.create({
   row: {
-    backgroundColor: 'white',
+    backgroundColor: 'red',
     borderBottomWidth:1,
     borderBottomColor: '#ddd',
     flexDirection: 'column', // inner rows on top of each other

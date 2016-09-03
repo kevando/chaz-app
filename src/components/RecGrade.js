@@ -36,13 +36,14 @@ export default class RecType extends Component {
 
 
   render() {
+
     var grade = this.state.grade;
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={this.onChangeGradePress.bind(this)}>
         {(grade
           ? <Text>You gave this a grade of {grade} out of 5</Text>
-          : <Text>Give this a recommendation a grade out of 5</Text>
+          : <Text>Grade this on  0-5 stars</Text>
         )}
         </TouchableOpacity>
       </View>
@@ -55,7 +56,8 @@ export default class RecType extends Component {
     this.props.updateRecrScore(newRec);
 
     // New CHAT FEATURE
-    this.props.appendMessageToRec("Added a new grade",newRec.id);
+    // this.props.appendMessageToRec("Added a new grade",newRec.id);
+    // disabling for now
   }
   onChangeGradePress() {
 

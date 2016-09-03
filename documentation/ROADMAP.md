@@ -4,49 +4,13 @@
 Focus on the queue
 But build the data with chat in mind
 
-## this buld
 
-set recr score, adding recs create list for recrs, add all this to recr view page
-
-## next build
-
-try and enable invites
-Architect this data as if we have chat enabled
 
 ---
 
 
-add rec from recr page autofills recr
-edit recr name
-work on "queue"
-consider what other data I would want stored (like total graded recs for recr) yeah this is def needed when i think about the recr view page
-add friendview to the onboard
-style navbar
-
-add filters, redesign top nav
-
-sort rec list newest oldest score
-filter graded, ungraded, all
-start testing app notifications
-
-add cooler animations, how to group scenes, figure out scenes once and for all
-logout is all fucked up
-https://facebook.github.io/origami/
-https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
-
-grade rec
-recr view
-recr score
-validate recr does not already exists
-assign emoji faces to recrs, give it some order or random
-better ui for recr add and other data io, like edit recr
-addRec button on every page, track where its clicked, add type auto fill
-disable logging for production
-bug: welcome button not aligned, do work on iphone5
-build mechanism to fresh data for users, force logout or something (like if i expanded music into bands and songs)
-
-fresh rn build doesnt have those yellowbox errors, think about figuring out why
  - Add Rec button on more pages with pre-filled information for easier add
+ - Adding uid field to recs for future bi-directional sharing
 
 
 
