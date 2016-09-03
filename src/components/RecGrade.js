@@ -53,6 +53,9 @@ export default class RecType extends Component {
     newRec.grade = this.state.grade; // might be a bad flow for perf
     this.props.updateRec(newRec);
     this.props.updateRecrScore(newRec);
+
+    // New CHAT FEATURE
+    this.props.appendMessageToRec("Added a new grade",newRec.id);
   }
   onChangeGradePress() {
 

@@ -49,7 +49,7 @@ export function syncFirebase() {
   }
 }
 
-export function loadDataFromFirebase(user) { // hydrate
+export function loadDataFromFirebase(user) { // hydrate on user sign in
   return function(dispatch,getState){
 
     var fireRef = firebaseApp.database().ref();
@@ -70,6 +70,47 @@ export function loadDataFromFirebase(user) { // hydrate
       dispatch({type: 'LOAD_RECRS_FROM_FIREBASE',payload:List(recrs)}); // doing it this way could get complicated
       dispatch({type:'CREATE_APP_USER',payload: user});
       dispatch({type:'INIT_ONBOARD'}); // should have state data now
+    });
+
+  }
+}
+
+// Chat messages. Might want to pull this out
+
+
+export function appendMessageToRec(message,rec_id) { // hydrate on user sign in
+  return function(dispatch,getState){
+
+
+    var fireRef = firebaseApp.database().ref();
+    var chatsRef = fireRef.child(`messages/${rec_id}`);
+    chatsRef.push({message:message});
+
+
+  }
+}
+
+export function listenForMessages(rec_id) {
+  return function(dispatch,getState){
+
+    console.log('Listen for recs',rec_id);
+
+    var fireRef = firebaseApp.database().ref();
+    var messagesRef = fireRef.child(`messages/${rec_id}`);
+
+    messagesRef.on('value', (snap) => {
+      console.log('Listen for recs heard! I may need to unlisten this');
+
+      // get children as an array
+      var items = [];
+      snap.forEach((child) => {
+        items.push({
+          message: child.val().message,
+          _key: child.key
+        });
+      });
+      dispatch({type:'LOAD_MESSAGES',payload:items})
+
     });
 
   }

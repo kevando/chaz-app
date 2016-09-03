@@ -4,10 +4,12 @@ import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
+import * as firebaseActions from '../reducers/firebase/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
 import RecGrade from '../components/RecGrade';
+import RecChat from '../components/RecChat';
 import RecrItem from '../components/RecrItem';
 import ReceeItem from '../components/ReceeItem'; // change this name please
 import {connect} from 'react-redux';
@@ -39,6 +41,7 @@ class RecView extends Component {
     let { dispatch } = this.props;
     let boundActionCreators = bindActionCreators(recActions, dispatch)
     let recrActionCreators = bindActionCreators(recrActions, dispatch)
+    let firebaseActionCreators = bindActionCreators(firebaseActions, dispatch)
     var {rec} = this.state;
     var filters = this.props.app.get('filters');
 
@@ -77,10 +80,16 @@ class RecView extends Component {
 
         <View style={styles.row}>
           <View style={styles.left}>
-
           </View>
           <View style={styles.right}>
-            <RecGrade rec={rec} {...boundActionCreators} {...recrActionCreators} />
+            <RecGrade rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
+          </View>
+        </View>
+
+        <View >
+          <Text>Here is a log of messages</Text>
+          <View>
+            <RecChat rec={rec}  />
           </View>
         </View>
 
