@@ -16,6 +16,8 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
           var currentStep = onboard.get('currentStep');
           var stepData = onboard.getIn(['steps',currentStep]);
           var {condition} = stepData.toJS();
+          console.log('currentStep',currentStep);
+          console.log('condition',condition);
 
           switch (action.type) {
             // Check the conditions any time that data is saved to redux
@@ -27,8 +29,10 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
               steps.map(function(step){
                 // console.log('step data in loop',step.toJS())
                 var {condition} = step.toJS();
-                if(condition(state))
-                  store.dispatch({type: 'INCREMENT_CURRENT_STEP'});
+                if(condition(state)){
+                  console.log('iterating thru steps and returned true for step: ',step)
+                }
+                  // store.dispatch({type: 'INCREMENT_CURRENT_STEP'});
               });
 
             break;

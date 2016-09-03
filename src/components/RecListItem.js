@@ -14,6 +14,7 @@ import RecDate from './RecDate';
 // import AddRecr from '../../containers/rec/AddRecr';
 import RecType from './RecType';
 import GlobalStyle from '../style/Global';
+import {colors} from '../style/Global';
 export default class ListItem extends Component {
 
   constructor(props) {
@@ -25,7 +26,7 @@ export default class ListItem extends Component {
 
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
-        <View style={{padding:5,borderBottomWidth:1,borderBottomColor:'#ccc',backgroundColor:'#fff'}}>
+        <View style={styles.card}>
           <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
             <View style={{flex:1,backgroundColor:'#fff'}}><RecType rec={rec} size={30} /></View>
             <View style={{flex:6,backgroundColor:'#fff'}}><Text style={{fontWeight:'600',fontSize:17}}>{rec.title}</Text></View>
@@ -64,44 +65,56 @@ export default class ListItem extends Component {
 
 
 const styles = StyleSheet.create({
-  row: {
-    backgroundColor: 'red',
+  card: {
+    marginTop:3,
+    marginBottom:3,
+    padding:5,
     borderBottomWidth:1,
-    borderBottomColor: '#ddd',
-    flexDirection: 'column', // inner rows on top of each other
-    paddingTop:5,
-    paddingBottom:5,
-    paddingLeft:5,
-    paddingRight:5
-  },
-
-
-  left: {
-    flex:2,
-    justifyContent: 'center', // vertical middle
-    flexDirection: 'column',
-    backgroundColor: 'red'
-  },
-  right: {
-    flex:14,
-    justifyContent: 'center', // vertical middle
-    flexDirection: 'column',
-    backgroundColor:'#fff',
-    paddingLeft:5
-  },
-  title: {
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '400',
-    letterSpacing:1.1
-  },
-  note: {
-    textAlign: 'left',
-    fontSize: 13,
-    fontWeight: '300',
-    color: "#666",
-    letterSpacing:1.0,
-    marginTop:5
+    borderBottomColor:colors.grey,
+    borderTopWidth:1,
+    borderTopColor:colors.grey,
+    backgroundColor:"#fff"
   }
+
+
+  // row: {
+  //   backgroundColor: 'red',
+  //   borderBottomWidth:1,
+  //   borderBottomColor: '#ddd',
+  //   flexDirection: 'column', // inner rows on top of each other
+  //   paddingTop:5,
+  //   paddingBottom:5,
+  //   paddingLeft:5,
+  //   paddingRight:5
+  // },
+  //
+  //
+  // left: {
+  //   flex:2,
+  //   justifyContent: 'center', // vertical middle
+  //   flexDirection: 'column',
+  //   backgroundColor: 'red'
+  // },
+  // right: {
+  //   flex:14,
+  //   justifyContent: 'center', // vertical middle
+  //   flexDirection: 'column',
+  //   backgroundColor:'#fff',
+  //   paddingLeft:5
+  // },
+  // title: {
+  //   textAlign: 'left',
+  //   fontSize: 16,
+  //   fontWeight: '400',
+  //   letterSpacing:1.1
+  // },
+  // note: {
+  //   textAlign: 'left',
+  //   fontSize: 13,
+  //   fontWeight: '300',
+  //   color: "#666",
+  //   letterSpacing:1.0,
+  //   marginTop:5
+  // }
 
 });

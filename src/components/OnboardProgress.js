@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet} from "react-native";
 import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
-import * as GlobalStyle from '../style/Global';
+import {colors,fonts} from '../style/Global';
 import {connect} from 'react-redux';
 
 const DeviceInfo = require('react-native-device-info');
@@ -15,9 +15,8 @@ class OnboardProgress extends Component {
     this.getStyle = this.getStyle.bind(this);
   }
 
-
   render(){
-    let {value,label} = GlobalStyle.styles;
+    let {value,label} = fonts;
     let onboard = this.props.onboard;
     let currentStep = onboard.get('currentStep');
     let getTextStyle = this.getStyle;
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     flex:9,
   },
   right: {
-    flex:2,
+    flex:3,
 
   },
 });

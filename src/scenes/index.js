@@ -33,72 +33,60 @@ import Friends from './Friends';
 import Friend from './Friend';
 
 import * as GlobalStyle from '../style/Global';
+import {colors} from '../style/Global';
 
 
-const navBarStyle = {
-  backgroundColor:'#ddd',
-  // height:20,
-  padding:0,
-  borderBottomWidth: 1,
-}
-const navBarTitleStyle = {
-  // backgroundColor:'#fff',
-  color:'#444',
-  borderBottomWidth: 2,
-  borderBottomColor: 'red',
-  fontSize:15,
-}
-const leftButtonStyle = {
-  // backgroundColor:'#ccc',
-  // height:20,
-  // padding:0,
-  borderBottomWidth: 0,
-}
-const leftButtonTextStyle ={
-  fontSize:14,
-}
-const rightButtonStyle = {
-  // backgroundColor:'#fff',
-  height:20,
-  padding:0,
-  borderBottomWidth: 0,
+const NavigationStyle = {
+  navigationBarStyle: {backgroundColor:'#fff',borderBottomWidth:2,borderBottomColor:'red'},
+  titleStyle: {},
+  leftButtonStyle:  {top:22},
+  rightButtonStyle: {top:22},
+
+  leftButtonTextStyle:  {color:colors.darkGrey,fontSize:16,fontWeight:'400'},
+  rightButtonTextStyle: {color:colors.darkGrey,fontSize:16,fontWeight:'400'},
+
+  backButtonTextStyle: {}
 }
 
 export const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} >
-    <Scene key="root" direction="vertical" leftButtonTextStyle={leftButtonTextStyle} titleStyle={navBarTitleStyle} navigationBarStyle={navBarStyle} rightButtonStyle={rightButtonStyle} leftButtonStyle={leftButtonStyle} hideTabBar>
+    <Scene key="root" direction="vertical" {...NavigationStyle} hideTabBar>
 
       <Scene key="welcome" component={Welcome}  hideNavBar   />
 
-      <Scene key="profile" component={Profile}  />
+      <Scene
+        key="profile"
+        component={Profile}
+        title="Profile"
+        navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.lightGrey,borderBottomWidth:0}]}
+      />
 
       <Scene key="friends" component={Friends}  />
 
       <Scene key="friend" component={Friend}  />
 
       <Scene key="recommendations"
-       navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[0]}}
-       titleStyle={{fontSize:20,fontWeight:'600',color:'#fff'}}
+       navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.purple,borderBottomColor:colors.purple}]}
        component={Recommendations}
        type={ActionConst.REPLACE}
        onLeft={()=>Actions.profile()}
-       leftTitle="Settings"
-       leftButtonTextStyle={{color:'#fff',fontSize:14}}
+       leftTitle="Profile"
+       leftButtonTextStyle={[NavigationStyle.leftButtonTextStyle,{color:'#fff'}]}
        onRight={()=>Actions.friends()}
        rightTitle="Friends"
-       leftButtonTextStyle={{color:'#fff',fontSize:14}}
-       title="chaz"
+       rightButtonTextStyle={[NavigationStyle.rightButtonTextStyle,{color:colors.purple}]}
+       title=""
       />
 
       <Scene
        key="recommendationAdd"
-       navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[4]}}
+       navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.gery,borderBottomColor:colors.blue}]}
        titleStyle={{color:"#444"}}
        component={RecommendationInput}
-       title="New Recommendation"
+       title=""
        hideBackImage={true}
-       backButtonTextStyle={{color:'red',fontSize:13}}
+       backButtonTextStyle={{color:colors.red}}
        backTitle="Cancel"
        direction="vertical"
        rec={{title:'',note:''}}
@@ -106,12 +94,12 @@ export const Scenes = Actions.create(
 
       <Scene
        key="recommendationEdit"
-       navigationBarStyle={{backgroundColor:GlobalStyle.constants.colors[4]}}
-       titleStyle={{color:"#444"}}
+       navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.gery,borderBottomColor:colors.blue}]}
+       titleStyle={[NavigationStyle.titleStyle,{color:colors.grey}]}
        component={RecommendationInput}
        title="Editing"
        hideBackImage={true}
-       backButtonTextStyle={{color:'red',fontSize:13}}
+       backButtonTextStyle={{color:colors.red}}
        backTitle="Cancel"
        direction="vertical"
       />
@@ -128,11 +116,12 @@ export const Scenes = Actions.create(
 
       <Scene
        key="recommendation"
+       navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.blue,borderBottomColor:colors.blue}]}
        component={Recommendation}
        backTitle="Back"
        hideBackImage={true}
-       rightButtonStyle={{width:150}}
-       rightButtonTextStyle={{fontSize:13}}
+       backButtonTextStyle={[NavigationStyle.backButtonTextStyle,{color:'#fff'}]}
+
       />
 
 

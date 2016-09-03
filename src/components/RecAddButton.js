@@ -5,31 +5,27 @@ import {
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
-import * as GlobalStyle from '../style/Global';
-// import RecType from './RecType';
+import {colors} from '../style/Global';
+
 export default class AddRecButton extends Component {
   constructor(props) {
     super(props);
+    this.state = {text: this.props.text || 'Add New Recommendation' }
   }
-  renderTypeEmoji(){
-    if(this.props.activeType != "all")
-      return <Text> <RecType type={this.props.activeType} size={22} /> </Text>
-    else
-      return <Text style={{fontSize:22}}> </Text>;
-  }
+
   render() {
     return (
       <TouchableOpacity style={styles.button} onPress={ this.props.onPress }>
-        <Text style={styles.buttonText}>Add New Recommendation</Text>
+        <Text style={styles.buttonText}>{this.state.text}</Text>
       </TouchableOpacity>
     );
   }
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: GlobalStyle.constants.colors[1],
-    paddingTop:17,
-    paddingBottom:17,
+    backgroundColor: colors.blue,
+    height:50, // height of tab bar
+    justifyContent:'center'
   },
   buttonText: {
     color: '#fff',
@@ -37,7 +33,5 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
     letterSpacing:1.1,
-    justifyContent:'center'
   },
-
 });

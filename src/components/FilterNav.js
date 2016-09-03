@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import * as appActions from '../reducers/app/actions';
 import FilterItem from '../components/FilterItem';
 import * as Global from '../style/Global';
-
-// tmp
-import * as Immutable from 'immutable';
+import {colors} from '../style/Global';
 
 class FilterNav extends Component {
   constructor(props) {
@@ -14,8 +12,7 @@ class FilterNav extends Component {
   }
 
   render() {
-    // tmp commenting this out
-    // {this.renderFilter('grade')}
+
     var rec = this.props.rec;
 
     return (
@@ -54,20 +51,7 @@ class FilterNav extends Component {
         />
       )
     });
-    // filterList.map((filterObject,filter) => {
-    //
-    //   renderedFilterList.push(
-    //     <FilterItem
-    //       filter={filterObject}
-    //       filter={filter}
-    //       recCount={this.getRecCount(filterObject)}
-    //       key={filter}
-    //       style={styles.filterItem}
-    //       active={activeFilter}
-    //       onPress={this.onFilterPress.bind(this,filterType,filter)}
-    //     />
-    //   )
-    // });
+
 
     return renderedFilterList;
   }
@@ -86,10 +70,10 @@ class FilterNav extends Component {
 
 const styles = StyleSheet.create({
   filtersContainer: {
-    borderTopWidth:0,
+    borderTopWidth:1,
     borderTopColor: "#ccc",//GlobalStyle.constants.colors[1],
     borderBottomWidth:4,
-    borderBottomColor:Global.constants.colors[1],
+    borderBottomColor:colors.purple,
   },
   filterRow: { // makes it horizontal despite multiple text elemnts
     flex:1,
@@ -97,9 +81,9 @@ const styles = StyleSheet.create({
     // justifyContent:'center',
     alignItems:'stretch',
     margin:0,
-    borderRightWidth: 2,
+    borderRightWidth: 0,
     borderRightColor: "#ccc",//GlobalStyle.constants.colors[1],
-    borderLeftWidth: 2,
+    borderLeftWidth: 0,
     borderLeftColor: "#ccc",//GlobalStyle.constants.colors[1],
   },
   filterItem: {

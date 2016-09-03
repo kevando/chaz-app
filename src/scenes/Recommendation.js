@@ -16,7 +16,7 @@ import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Emoji from 'react-native-emoji';
 import RecAddButton from '../components/RecAddButton';
-import {constants} from '../style/Global';
+import {colors} from '../style/Global';
 
 class RecView extends Component {
 
@@ -31,7 +31,7 @@ class RecView extends Component {
 
   }
   componentWillMount(){
-    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:'red'} })
+    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:colors.red} })
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
@@ -84,13 +84,9 @@ class RecView extends Component {
           :
           null
         )}
-
-
-
       <View>
     </View>
     </ScrollView>
-    <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
   </View>
     );
   }
@@ -116,13 +112,9 @@ const styles = StyleSheet.create({
     flex: 1,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderColor:constants.colors[1],
-    // backgroundColor:'#444',
-    borderTopWidth: 2,
+    borderColor:colors.darkGrey,
+    borderTopWidth: 1,
     flexDirection:'column'
-
-    // borderTopColor: 'red'
-
   },
   row: {
     // backgroundColor: 'red',
@@ -149,20 +141,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     paddingLeft:5
   },
-  title: {
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '400',
-    letterSpacing:1.1
-  },
-  note: {
-    textAlign: 'left',
-    fontSize: 13,
-    fontWeight: '300',
-    color: "#666",
-    letterSpacing:1.0,
-    marginTop:5
-  }
 
 });
 

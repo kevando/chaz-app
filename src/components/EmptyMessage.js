@@ -5,16 +5,16 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import {colors} from '../style/Global';
+
 export default class EmptyMessage extends Component {
   constructor(props) {
     super(props);
   }
 
-
   render() {
 
     var {title, notify, instructions} = this.props;
-
 
     return (
       <View style={styles.container}>
@@ -24,38 +24,32 @@ export default class EmptyMessage extends Component {
       </View>
     );
   }
-
-
 }
 
 const styles = StyleSheet.create({
   container: {
     flex:1,
     flexDirection:'column',
-    alignItems:'center',
-    paddingTop:110
+    backgroundColor:colors.lightGrey,
+    paddingTop:30
   },
   title: {
-    fontSize:35,
-    fontWeight:'500',
-    textAlign:'center',
+    fontSize:30,
+    fontWeight:'600',
+    color:colors.darkGrey,
     margin:10
-
   },
   notify: {
     fontSize:20,
-    color:'#444',
+    color:colors.darkGrey,
     fontWeight:'500',
-    textAlign:'center',
     margin:10
-
   },
   instructions: {
     fontSize:18,
-    textAlign:'center',
     margin:10,
-    fontWeight:'400',
-    color:'#555'
+    fontWeight:'300',
+    color:colors.darkGrey,
   }
 
 });

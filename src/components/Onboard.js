@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Animated, Dimensions, TouchableOpacity} from "react-native";
-import {Actions} from "react-native-router-flux";
-import {constants} from '../style/Global';
+import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
+import {colors} from '../style/Global';
 
 class OnboardPopup extends Component {
     constructor(props){
@@ -13,7 +12,7 @@ class OnboardPopup extends Component {
       var {title,caption,instructions,buttonText} = this.props.passProps.toJS();
 
         return (
-            <View>
+            <View style={styles.container}>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.caption}>{caption}</Text>
               <Text style={styles.instructions}>{instructions}</Text>
@@ -26,33 +25,36 @@ class OnboardPopup extends Component {
 }
 const styles = StyleSheet.create({
 
+  container: {
+    padding:0,
+  },
     title: {
       fontSize:30,
       fontWeight:'600',
-      textAlign:'center',
-      marginBottom:5,
-      marginTop:15,
-      color:'#333',
+      marginBottom:10,
+      marginTop:5,
+      color:colors.darkGrey,
     },
     caption: {
       fontSize:20,
       fontWeight:'500',
-      textAlign:'center',
       marginBottom:10,
-      color:'#555',
+      color:colors.darkGrey,
     },
     instructions: {
-      fontSize:15,
+      fontSize:14,
       fontWeight:'400',
-      textAlign:'center',
-
+      color:colors.darkGrey,
     },
     button: {
-      backgroundColor: constants.colors[1],
+      backgroundColor: colors.blue,
       textAlign:'center',
       color:'#fff',
-      margin:40,
-      padding:10
+      padding:10,
+      marginRight:50, // style hack
+      marginTop:20,
+      marginBottom:20
+
     }
 });
 module.exports = OnboardPopup;

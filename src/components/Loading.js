@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Animated, PropTypes, Easing } from 'react-native';
 import Emoji from 'react-native-emoji';
-const GlobalStyle = require('../style/Global');
-
-// Not totally sure how all this works, but it looks great and I can
-// figure it out later
+import {colors, hearts} from '../style/Global';
 
 class Loading extends Component {
   constructor(props) {
@@ -43,7 +40,7 @@ class Loading extends Component {
   }
   getRandomHeart(){
     var heartIndex = Math.floor((Math.random() * 4));
-    return <Emoji name={GlobalStyle.constants.hearts[heartIndex]} />
+    return <Emoji name={hearts[heartIndex]} />
   }
 
   render() {
@@ -65,15 +62,13 @@ class Loading extends Component {
 
 const styles = StyleSheet.create({
   loadingContainer: {
-    backgroundColor:GlobalStyle.constants.colors[4],
+    backgroundColor:colors.lightGrey,
     flex:1,
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'center'
   },
   animationContainer: {
-    // borderWidth:1,
-    // borderColor:'red',
     height:50,
   }
 })

@@ -12,86 +12,90 @@ import EmptyMessage from '../components/EmptyMessage';
 import FilterNav from '../components/FilterNav';
 import RecList from '../components/RecList';
 import * as GlobalStyle from '../style/Global';
+import {colors} from '../style/Global';
+
+const leftTitle="Pr";
 
 class Recommendations extends Component {
   constructor(props) {
     super(props);
 
-    var uid = this.props.app.getIn(['user','uid'])
-    this.state = {uid:uid}
+    this.state = {
+      uid: this.props.app.getIn(['user','uid']),
+    }
+
+
   }
 
-  componentWillMount() {
-   // Animate creation
-  //  LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
- }
+  componentDidMount(){
+    // Hide profile link during first opening of app
+    var currentStep = this.props.onboard.get('currentStep');
+    if(currentStep < 2)
+      Actions.refresh({leftButtonTextStyle:{color:colors.purple}});
+  }
 
 
  getVisibleRecs() { // this fn will probly be used elsewhere
-
-   var activeFilter = this.props.app.get('activeFilter');
-   // do something like this for filtered list
-  //  var result = map.find(function(obj){return obj.get('id') === 4;});
 
   // Filter rec list by uid, only showing recs 'given' to me
   var uid = this.state.uid;
   var recsForMe = this.props.recs.filter(function(obj){return obj.get('uid') === uid;});
 
+  // Now filter by active filter
+  var activeFilter = this.props.app.get('activeFilter');
+  var visibleRecsForMe = recsForMe.filter((obj) =>( obj.get('type') === activeFilter || activeFilter == 'all'));
 
-   // First add the Recr data (probly a better place to do this)
+
+   // Then add the Recr data (probly a better place/way to do this)
   var recrs = this.props.recrs;
-
-  var visibleRecs = recsForMe.map(function(rec) {
-
+  var visibleRecs = visibleRecsForMe.map(function(rec) {
     var recrId = rec.get('recr_id');
-
     var recr = recrs.find(function(obj){
        return (obj.get('id') === recrId);
      });
      var recWithRecr = rec.set('recr', recr)
-
     return recWithRecr;
-
    });
-
   return visibleRecs;
  }
 
   render() {
-
-    // Might want to take this out of the render function
-    // var recsLoaded = this.props.rec.get('loaded');
-
-    var visibleRecs = this.getVisibleRecs();
-    var totalRecs = this.props.recs
-    var currentStep = this.props.onboard.get('currentStep'); // used for rendering the filter
-
-    // if(recList.size == 0)
-      // return(<EmptyMessage notify="You have no recs" instructions="Press the button below to get started" />)
-
-    // return(<View><Text>current step: {currentStep}</Text></View>)
+    var activeFilter = this.props.app.get('activeFilter');
 
     return (
       <View style={styles.container}>
-      {(currentStep > 3
-        ?
-        <FilterNav />
-        :
-        null
-      )}
-
+        {this.renderFilterNav()}
         <View style={{flex:10}} >
-        {(totalRecs.size == 0
-          ?
-          <EmptyMessage title="Welcome to chaz" notify="When people in your life give you suggestions and recommendations, save them here." instructions="Tap the blue button to save your first recommendation." />
-          :
-          <ScrollView><RecList recs={visibleRecs.reverse()} /></ScrollView>
-        )}
+          {(this.props.recs.size == 0
+            ? this.renderWelcomeMessage()
+            : this.renderRecList()
+          )}
         </View>
-        <RecAddButton activeType={"default"} onPress={this.onAddRecPress.bind(this)} />
+        <RecAddButton text="Add New Recommendation" activeFilter={activeFilter} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
   }
+
+  renderFilterNav(){
+    var currentStep = this.props.onboard.get('currentStep');
+    if(currentStep > 3)
+      return(<FilterNav />)
+  }
+  renderWelcomeMessage(){
+    return(<EmptyMessage title="Welcome to chaz" notify="The fastest way to save recommendations in your phone. Tap the blue button to get started." instructions="If you do not have anything to save yet, I would like to recommend my favorite move, Shawshank Redemption." />);
+  }
+  renderRecList(){
+    var visibleRecs = this.getVisibleRecs();
+    var count = visibleRecs.size;
+    return(
+      <ScrollView>
+        <Text style={styles.title}>Recommendations ({count})</Text>
+        <RecList recs={visibleRecs.reverse()} />
+      </ScrollView>
+    );
+
+  }
+
   onAddRecPress(){
     Actions.recommendationAdd({uid:this.state.uid})
   }
@@ -104,25 +108,18 @@ const styles = StyleSheet.create({
     flex: 1,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderColor:GlobalStyle.constants.colors[1],
-    backgroundColor:'#eee',
-    borderTopWidth: 2,
-    // borderTopColor: 'red'
+    borderColor:'white',
+    backgroundColor:colors.lightGrey,
+    borderTopWidth: 0,
 
   },
-  text: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10
-  },
-  button: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
-    color: 'blue'
+  title: {
+    margin:15,
+    fontWeight:'600',
+    fontSize:18,
+    color:colors.darkGrey
   }
+
 });
 
 

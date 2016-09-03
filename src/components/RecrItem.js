@@ -13,6 +13,7 @@ import {connect} from 'react-redux'
 import * as recrActions from '../reducers/recr/actions';
 
 import RecommenderAdd from '../components/RecommenderAdd';
+import {colors} from '../style/Global';
 
 class RecrItem extends Component {
 
@@ -23,19 +24,19 @@ class RecrItem extends Component {
   }
 
   render() {
-    // console.log('recr props',this.props.recr)
+
     var recr = this.getRecr(this.props.rec.recr_id)
 
     if(recr) {
       return (
         <TouchableOpacity onPress={this.onRecrPress.bind(this)} >
-          <Text>Recommended by: <Text style={{fontWeight:'600',color:"green",fontSize:16}}>{recr.get('name')}</Text></Text>
+          <Text>Recommended by: <Text style={{fontWeight:'600',color:colors.green,fontSize:16}}>{recr.get('name')}</Text></Text>
         </TouchableOpacity>
       );
     } else {
       return (
         <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
-          <Text style={{fontWeight:'600',color:"green",fontSize:20}}>Who recommended this?</Text>
+          <Text style={{fontWeight:'600',color:colors.green,fontSize:18}}>Who recommended this?</Text>
         </TouchableOpacity>
       )
     }
