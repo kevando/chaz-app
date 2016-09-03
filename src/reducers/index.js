@@ -5,6 +5,7 @@ import counter from './counter/reducer';
 import recs from './rec/reducer';
 import recrs from './recr/reducer';
 import onboard from './onboard/reducer';
+import messages from './messages/reducer';
 
 const reducers = {
   app,
@@ -12,6 +13,7 @@ const reducers = {
   recs,
   recrs,
   onboard,
+  messages
 };
 
 const appReducer = combineReducers(reducers);

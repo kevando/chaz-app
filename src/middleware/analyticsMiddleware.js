@@ -11,7 +11,7 @@ var analyticsMiddleware = function(middlewareAPI){
 
     return function(next){
         return function(action){
-          // console.log('ANALYTICS MIDDLWARE', action.type);
+          console.log('ANALYTICS MIDDLWARE', action.type);
           // var state = store.getState();
           switch (action.type) {
 
@@ -28,7 +28,6 @@ var analyticsMiddleware = function(middlewareAPI){
               break;
             case 'UPDATE_REC':
               Mixpanel.trackWithProperties('Rec Updated', action.payload);
-              Mixpanel.increment("Rec Count", 1);
               break;
             case 'DELETE_REC':
               Mixpanel.trackWithProperties('Rec Deleted', { title: action.payload.title });

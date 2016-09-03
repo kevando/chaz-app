@@ -110,7 +110,7 @@ this notation returns what is ever in loop
 return this.props.recs.filter(rec => rec.get('type') == activeFilter);
 
 
-### Find in a List
+### Find in a Map
 var result = map.find(function(obj){return obj.get('id') === 4;});
 
 

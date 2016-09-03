@@ -32,12 +32,13 @@ export function updateRecrScore(rec) {
     });
     console.log(totalGradedRecs);
     console.log(totalGrade);
-    score = (totalGrade/totalGradedRecs)*100;
+    score = Math.round((totalGradedRecs/totalGrade)*200);
     dispatch({
       type: types.UPDATE_RECR_SCORE,
       payload: {
         id: recr_id,
         score: score,
+
       }
     });
   }
