@@ -22,6 +22,7 @@ class RecommendationAdd extends Component {
     this.state = {
       title: this.props.rec.title,
       note: this.props.rec.note,
+      uid: this.props.uid || 'not-set'
     }
   }
 
@@ -103,7 +104,7 @@ class RecommendationAdd extends Component {
   }
 
   onSaveRecPress() {
-    var {title,note} = this.state;
+    var {title,note,uid} = this.state;
     // if editing
     if(this.props.rec.id){
       var newRec = this.props.rec;
@@ -113,7 +114,7 @@ class RecommendationAdd extends Component {
     }
     // if new
     else {
-        this.props.dispatch(recActions.addRec(title,note));
+        this.props.dispatch(recActions.addRec(title,note,uid));
     }
   }
 }

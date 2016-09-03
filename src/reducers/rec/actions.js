@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 var uuid = require('react-native-uuid');
 
-export function addRec(title,note) {
+export function addRec(title,note,uid) {
   return {
     type: types.ADD_REC,
     payload: {
@@ -9,6 +9,7 @@ export function addRec(title,note) {
       title: title,
       note: note,
       created_at: Date.now(),
+      uid: uid
     }
   };
 }

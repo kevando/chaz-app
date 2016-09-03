@@ -16,51 +16,47 @@ import * as GlobalStyle from '../style/Global';
 class Recommendations extends Component {
   constructor(props) {
     super(props);
+
+    var uid = this.props.app.getIn(['user','uid'])
+    this.state = {uid:uid}
   }
 
   componentWillMount() {
    // Animate creation
   //  LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
  }
- getVisibleRecs() {
+
+
+ getVisibleRecs() { // this fn will probly be used elsewhere
 
    var activeFilter = this.props.app.get('activeFilter');
+   // do something like this for filtered list
+  //  var result = map.find(function(obj){return obj.get('id') === 4;});
+
+  // Filter rec list by uid, only showing recs 'given' to me
+  var uid = this.state.uid;
+  var recsForMe = this.props.recs.filter(function(obj){return obj.get('uid') === uid;});
+
+
    // First add the Recr data (probly a better place to do this)
-    var recrs = this.props.recrs;
+  var recrs = this.props.recrs;
 
+  var visibleRecs = recsForMe.map(function(rec) {
 
-   var visibleRecs = this.props.recs.map(function(rec) {
+    var recrId = rec.get('recr_id');
 
-     var recrId = rec.get('recr_id');
-
-     var recr = recrs.find(function(obj){
-       return obj.get('id') === recrId;
+    var recr = recrs.find(function(obj){
+       return (obj.get('id') === recrId);
      });
      var recWithRecr = rec.set('recr', recr)
 
     return recWithRecr;
 
    });
-   //
-  //  var visibleRecs = this.props.recs.filter(function(rec) {
-  //    console.log('rec',rec);
-  //    if(rec.get('type') == activeFilter){
-  //      return rec;
-  //    }
-  //  });
-
-
-
-
-
-
-
-  //  if(activeFilter != 'all')
-  //     visibleRecs = this.props.recs.filter(rec => rec.get('type') == activeFilter);
 
   return visibleRecs;
-  // return this.props.recs;
  }
+
   render() {
 
     // Might want to take this out of the render function
@@ -92,9 +88,12 @@ class Recommendations extends Component {
           <ScrollView><RecList recs={visibleRecs.reverse()} /></ScrollView>
         )}
         </View>
-        <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
+        <RecAddButton activeType={"default"} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
+  }
+  onAddRecPress(){
+    Actions.recommendationAdd({uid:this.state.uid})
   }
 
 }

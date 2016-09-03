@@ -9,6 +9,7 @@ import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
 import RecGrade from '../components/RecGrade';
 import RecrItem from '../components/RecrItem';
+import ReceeItem from '../components/ReceeItem'; // change this name please
 import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Emoji from 'react-native-emoji';
@@ -64,6 +65,13 @@ class RecView extends Component {
           <View style={styles.left}><View style={styles.left}><Text style={{fontSize:20,textAlign:'center'}}><Emoji name="slightly_smiling_face" /></Text></View></View>
           <View style={styles.right}>
             <RecrItem rec={rec} {...boundActionCreators} />
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.left}><View style={styles.left}><Text style={{fontSize:20,textAlign:'center'}}><Emoji name="slightly_smiling_face" /></Text></View></View>
+          <View style={styles.right}>
+            <ReceeItem rec={rec} {...boundActionCreators} />
           </View>
         </View>
 
