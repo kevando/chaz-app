@@ -9,6 +9,7 @@ import {
 import Button from "react-native-button";
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
+import * as firebaseActions from '../reducers/firebase/actions';
 
 import {Actions} from "react-native-router-flux";
 import { connect } from 'react-redux';
@@ -81,6 +82,7 @@ class RecommenderAdd extends Component {
       // console.log('recr in asign recr',recr);
       rec.recr_id = recr.get('id');
       this.props.dispatch(recActions.updateRec(rec));
+      this.props.dispatch(firebaseActions.assignRecr(rec)); // LIVE
       this.props.closeHandler();
     }
     onAddRecrPress() {

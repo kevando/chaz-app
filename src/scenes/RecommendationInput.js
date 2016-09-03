@@ -22,7 +22,7 @@ class RecommendationAdd extends Component {
     this.state = {
       title: this.props.rec.title,
       note: this.props.rec.note,
-      uid: this.props.uid || 'not-set'
+      uid: this.props.uid || 'self'
     }
   }
 
@@ -37,6 +37,7 @@ class RecommendationAdd extends Component {
     // if new
     else {
       var rec = nextProps.recs.last();
+      console.log('rec added',rec)
       Actions.recommendationFromAdd({rec:rec.toJS()}); // fwd to RecView
     }
   }
@@ -114,6 +115,7 @@ class RecommendationAdd extends Component {
     }
     // if new
     else {
+      // if uid is null, then we are SENDING a rec
         this.props.dispatch(recActions.addRec(title,note,uid));
     }
   }

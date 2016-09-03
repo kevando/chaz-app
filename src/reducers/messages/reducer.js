@@ -7,7 +7,6 @@ export default function counter(messages = initialState, action = {}) {
   switch (action.type) {
 
     case 'LOAD_MESSAGES': // from firebase
-      console.log('load messages',action.payload)
       return action.payload; //
 
     default:

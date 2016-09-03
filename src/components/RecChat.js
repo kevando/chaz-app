@@ -11,13 +11,10 @@ class RecChat extends Component {
   constructor(props) {
     super(props);
     var rec_id = this.props.rec.id;
-    console.log('recid',rec_id)
-    this.props.dispatch(firebaseActions.listenForMessages(rec_id));
+    // console.log('recid',rec_id)
+    this.props.dispatch(firebaseActions.listenForMessages(rec_id)); // check if this unmounts
   }
 
-  componentDidMount(){
-    // firebaseActions.loadMessages(rec_id); // trying to listen instead
-  }
 
   render() {
     // tmp commenting this out
@@ -30,7 +27,7 @@ class RecChat extends Component {
       <View style={{height:200,borderWidth:2,borderColor:'#ccc'}} >
 
           {this.renderChatMessages(messages)}
-        
+
         </View>
 
     )
