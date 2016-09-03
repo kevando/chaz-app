@@ -3,9 +3,11 @@ import {View, Text, StyleSheet, TouchableOpacity,AlertIOS,ScrollView} from "reac
 import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
+import * as recrActions from '../reducers/recr/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
+import RecGrade from '../components/RecGrade';
 import RecrItem from '../components/RecrItem';
 import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
@@ -35,6 +37,7 @@ class RecView extends Component {
   render(){
     let { dispatch } = this.props;
     let boundActionCreators = bindActionCreators(recActions, dispatch)
+    let recrActionCreators = bindActionCreators(recrActions, dispatch)
     var {rec} = this.state;
     var filters = this.props.app.get('filters');
 
@@ -63,6 +66,17 @@ class RecView extends Component {
             <RecrItem rec={rec} {...boundActionCreators} />
           </View>
         </View>
+
+        <View style={styles.row}>
+          <View style={styles.left}>
+
+          </View>
+          <View style={styles.right}>
+            <RecGrade rec={rec} {...boundActionCreators} {...recrActionCreators} />
+          </View>
+        </View>
+
+
       <View>
     </View>
     </ScrollView>

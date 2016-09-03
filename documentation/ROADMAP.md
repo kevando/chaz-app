@@ -6,15 +6,11 @@ But build the data with chat in mind
 
 ## this buld
 
-
-pull all recr info by fk
-
+set recr score, adding recs create list for recrs, add all this to recr view page
 
 ## next build
 
-
-grade recs
-set recr score, adding recs create list for recrs, add all this to recr view page
+try and enable invites
 Architect this data as if we have chat enabled
 
 ---
@@ -22,8 +18,8 @@ Architect this data as if we have chat enabled
 
 add rec from recr page autofills recr
 edit recr name
-
-
+work on "queue"
+consider what other data I would want stored (like total graded recs for recr) yeah this is def needed when i think about the recr view page
 add friendview to the onboard
 style navbar
 

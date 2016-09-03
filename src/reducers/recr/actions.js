@@ -12,17 +12,51 @@ export function addRecr(name) {
   };
 }
 
-export function removeRecr(recrKey){                  // REMOVE REC
+export function updateRecrScore(rec) {
+  console.log('updateRecrscore w recr id',rec.recr_id)
+  var recr_id = rec.recr_id;
+
   return function(dispatch, getState) {
-    console.log('remove recr',recrKey)
-    const currentState = getState();
-    const recrsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
-    recrsRef.child(recrKey).remove();
-    // todo dispatch upgrade recr score and recs recr score
-    // consider if I need to do any other checks
-    // I feel like properly structred data would help alot here
+    var recs = getState().recs;
+    var score = 0;
+    var totalGradedRecs = 0;
+    var totalGrade = 0;
+    recs.map(function(rec){ // could consolidate this better
+      // console.log('recr id',rec.recr_id)
+      // console.log('recr grade',rec.get('grade'))
+        if(rec.get('recr_id') == recr_id && rec.get('grade') != undefined ){
+          console.log('found a graded rec',rec)
+          totalGradedRecs++;
+          totalGrade += rec.get('grade');
+        }
+    });
+    console.log(totalGradedRecs);
+    console.log(totalGrade);
+    score = (totalGrade/totalGradedRecs)*100;
+    dispatch({
+      type: types.UPDATE_RECR_SCORE,
+      payload: {
+        id: recr_id,
+        score: score,
+      }
+    });
   }
 }
+
+
+
+//
+// export function removeRecr(recrKey){                  // REMOVE REC
+//   return function(dispatch, getState) {
+//     console.log('remove recr',recrKey)
+//     const currentState = getState();
+//     const recrsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
+//     recrsRef.child(recrKey).remove();
+//     // todo dispatch upgrade recr score and recs recr score
+//     // consider if I need to do any other checks
+//     // I feel like properly structred data would help alot here
+//   }
+// }
 
 // export function assignRecr(recKey,recr) {
 //   console.log('recKey',recKey)

@@ -27,7 +27,7 @@ export default class ListItem extends Component {
         <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
           <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
             <View style={{flex:6}}><Text style={{fontWeight:'600',fontSize:20}}><Emoji name="slightly_smiling_face"/>{recr.name}</Text></View>
-            <View style={{flex:2}}><Text style={{fontWeight:'600',fontSize:20}}>90%</Text></View>
+            <View style={{flex:2}}><Text style={{fontWeight:'600',fontSize:20}}>{recr.score}%</Text></View>
           </View>
 
         </View>
@@ -39,6 +39,7 @@ export default class ListItem extends Component {
   onItemPress() {
     Actions.friend({recr: this.props.recr});
   }
+
 
 
 }
