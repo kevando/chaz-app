@@ -31,7 +31,7 @@ class RecView extends Component {
 
   }
   componentWillMount(){
-    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress, rightButtonTextStyle: {color:colors.red} })
+    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:colors.red} })
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data

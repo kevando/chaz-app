@@ -27,12 +27,12 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
               var steps = onboard.get('steps');
               var currentStep = 0; // tmp
               steps.map(function(step){
-                // console.log('step data in loop',step.toJS())
                 var {condition} = step.toJS();
                 if(condition(state)){
-                  console.log('iterating thru steps and returned true for step: ',step)
+                  console.log('iterating thru steps and returned true for step: ',step);
+                  store.dispatch({type: 'INCREMENT_CURRENT_STEP'});
                 }
-                  // store.dispatch({type: 'INCREMENT_CURRENT_STEP'});
+
               });
 
             break;

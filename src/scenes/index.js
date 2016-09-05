@@ -53,7 +53,7 @@ export const Scenes = Actions.create(
   <Scene key="modal" component={Modal} >
     <Scene key="root" direction="vertical" {...NavigationStyle} hideTabBar>
 
-      <Scene key="welcome" component={Welcome}  hideNavBar   />
+      <Scene key="welcome" component={Welcome}  hideNavBar  type={ActionConst.REPLACE} />
 
       <Scene
         key="profile"
