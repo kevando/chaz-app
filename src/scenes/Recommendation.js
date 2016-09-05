@@ -23,7 +23,7 @@ class RecView extends Component {
   constructor(props) {
     super(props)
     // this will make it easier to handle the new props
-    console.log('this rec',this.props.rec);
+    // console.log('this rec',this.props.rec);
     this.state = {rec:this.props.rec}
     // Set delete button in top right
 

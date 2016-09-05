@@ -2,25 +2,33 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
 import {colors} from '../style/Global';
 
+
+import {connect} from 'react-redux';
+
 class OnboardPopup extends Component {
     constructor(props){
       super (props);
+      this.closePopup = this.closePopup.bind(this)
     }
 
     render(){
 
-      var {title,caption,instructions,buttonText} = this.props.passProps.toJS();
+      var {title,caption,instructions,buttonText} = this.props.passProps;
 
         return (
             <View style={styles.container}>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.caption}>{caption}</Text>
               <Text style={styles.instructions}>{instructions}</Text>
-              <TouchableOpacity onPress={this.props.closeHandler}>
+              <TouchableOpacity onPress={this.closePopup}>
                 <Text style={styles.button}>{buttonText}</Text>
               </TouchableOpacity>
             </View>
         );
+    }
+    closePopup(){
+      this.props.dispatch({type: 'INCREMENT_CURRENT_STEP',payload:this.props.onboard.currentStep}); // this also takes care of setting onboard to false
+      this.props.closeHandler()
     }
 }
 const styles = StyleSheet.create({
@@ -57,4 +65,13 @@ const styles = StyleSheet.create({
 
     }
 });
-module.exports = OnboardPopup;
+
+// module.exports = OnboardPopup;
+
+function mapStateToProps(state) {
+  return {
+    // recs: this.recs,
+    onboard: state.onboard
+  };
+}
+export default connect(mapStateToProps)(OnboardPopup);
