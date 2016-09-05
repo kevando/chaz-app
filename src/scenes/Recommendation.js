@@ -8,7 +8,7 @@ import * as firebaseActions from '../reducers/firebase/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
-import RecGrade from '../components/RecGrade';
+import RecGradeSelecter from '../components/RecGradeSelecter';
 // import RecChat from '../components/RecChat';
 import RecrItem from '../components/RecrItem';
 import ReceeItem from '../components/ReceeItem'; // change this name please
@@ -78,7 +78,7 @@ class RecView extends Component {
             <View style={styles.left}>
             </View>
             <View style={styles.right}>
-              <RecGrade rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
+              <RecGradeSelecter rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
             </View>
           </View>
           :

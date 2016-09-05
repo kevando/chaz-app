@@ -28,28 +28,44 @@ class Recommendations extends Component {
   }
 
 
- getVisibleRecs() { // this fn will probly be used elsewhere
+  getGradedRecs() { // this fn will probly be used elsewhere
+
+   // Filter rec list by uid, only showing recs 'given' to me
+   var uid = this.state.uid;
+   var activeFilter = this.props.app.get('activeFilter');
+   var recs = this.props.recs.filter(function(obj){
+     return (
+       (obj.get('uid') === uid) &&
+       (obj.get('grade') != null) &&
+       (obj.get('type') === activeFilter || activeFilter == 'all')
+     );
+
+   });
+
+   return this.appendRecr(recs);
+  }
+ getQueue() { // this fn will probly be used elsewhere
 
   // Filter rec list by uid, only showing recs 'given' to me
   var uid = this.state.uid;
-  var recsForMe = this.props.recs.filter(function(obj){return obj.get('uid') === uid;});
-
-  // Now filter by active filter
   var activeFilter = this.props.app.get('activeFilter');
-  var visibleRecsForMe = recsForMe.filter((obj) =>( obj.get('type') === activeFilter || activeFilter == 'all'));
+  var recs = this.props.recs.filter(function(obj){
+    return (
+      (obj.get('uid') === uid) &&
+      (obj.get('grade') == null) &&
+      (obj.get('type') === activeFilter || activeFilter == 'all')
+    );
 
+  });
 
+  return this.appendRecr(recs);
+ }
+
+ appendRecr(recs){
    // Then add the Recr data (probly a better place/way to do this)
-  var recrs = this.props.recrs;
-  var visibleRecs = visibleRecsForMe.map(function(rec) {
-    var recrId = rec.get('recr_id');
-    var recr = recrs.find(function(obj){
-       return (obj.get('id') === recrId);
-     });
-     var recWithRecr = rec.set('recr', recr)
-    return recWithRecr;
-   });
-  return visibleRecs;
+   // But I want the latest data possible
+   var recrs = this.props.recrs;
+   return recs.map((rec) => rec.set('recr', recrs.find(obj => (obj.get('id') === rec.get('recr_id')))));
  }
 
   render() {
@@ -61,7 +77,7 @@ class Recommendations extends Component {
         <View style={{flex:10}} >
           {(this.props.recs.size == 0
             ? this.renderWelcomeMessage()
-            : this.renderRecList()
+            : this.renderRecLists()
           )}
         </View>
         <RecAddButton text="Add New Recommendation" activeFilter={activeFilter} onPress={this.onAddRecPress.bind(this)} />
@@ -77,13 +93,23 @@ class Recommendations extends Component {
   renderWelcomeMessage(){
     return(<EmptyMessage title="Welcome to chaz" notify="The fastest way to save recommendations in your phone. Tap the blue button to get started." instructions="If you do not have anything to save yet, I would like to recommend my favorite move, Shawshank Redemption." />);
   }
-  renderRecList(){
-    var visibleRecs = this.getVisibleRecs();
-    var count = visibleRecs.size;
+  renderRecLists(){
+    var gradedRecs = this.getGradedRecs();
+    var queue = this.getQueue();
     return(
       <ScrollView>
-        <Text style={styles.title}>Recommendations ({count})</Text>
-        <RecList recs={visibleRecs.reverse()} />
+        <Text style={styles.title}>Queue ({queue.size})</Text>
+        <RecList recs={queue} />
+        {(gradedRecs.size > 0
+          ?
+          <View>
+            <Text style={styles.title}>Graded Recommendations ({gradedRecs.size})</Text>
+            <RecList recs={gradedRecs} />
+          </View>
+          :
+          null
+        )}
+
       </ScrollView>
     );
 

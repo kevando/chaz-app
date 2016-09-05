@@ -16,7 +16,7 @@ class FilterNav extends Component {
     var rec = this.props.rec;
 
     return (
-      <ScrollView horizontal={true} contentContainerStyle={{backgroundColor:'#ccc'}}>
+      <ScrollView horizontal={true} >
       <View style={styles.filtersContainer} >
         <View style={styles.filterRow}>
           {this.renderFilters()}
@@ -52,54 +52,28 @@ class FilterNav extends Component {
       )
     });
 
-
     return renderedFilterList;
   }
 
-  getRecCount(filterObject){
-    // probly a cleaner more redux appropriate way to get this data
-    // at the very list, write this somewhere other than the filter component
-    var recList = this.props.rec.get('all');
-    var filterQuery = filterObject.get('query');
-    var filteredList = recList.filter(function(rec) {
-      return filterQuery.includes(rec.get('type'));
-    });
-    return filteredList.size;
-  }
 }
 
 const styles = StyleSheet.create({
   filtersContainer: {
     borderTopWidth:1,
     borderTopColor: "#ccc",//GlobalStyle.constants.colors[1],
-    borderBottomWidth:4,
-    borderBottomColor:colors.purple,
   },
   filterRow: { // makes it horizontal despite multiple text elemnts
     flex:1,
     flexDirection:'row',
-    // justifyContent:'center',
     alignItems:'stretch',
     margin:0,
-    borderRightWidth: 0,
-    borderRightColor: "#ccc",//GlobalStyle.constants.colors[1],
-    borderLeftWidth: 0,
-    borderLeftColor: "#ccc",//GlobalStyle.constants.colors[1],
   },
-  filterItem: {
-    flex:1,
-    flexDirection:'row',
-    // backgroundColor:'red',
-    padding:0
-  }
-
 
 })
 
 function mapStateToProps(state) {
   return {
     app: state.app, // depending how I do this. I probably only need onboarding here
-    rec: state.rec,
   }
 }
 

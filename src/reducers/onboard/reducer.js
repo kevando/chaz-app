@@ -31,7 +31,6 @@ const initialState = Map({
     Map({
       label: 'Add a friend',
       condition: function(state){
-        console.log('checking condition',state.recrs.size)
         return (state.recrs.size > 0 ? true : false);
       },
       title: 'Sweet.',
@@ -41,9 +40,8 @@ const initialState = Map({
     }),
     // 3
     Map({
-      label: 'Save 3 recommendations',
+      label: 'Unlock filters',
       condition: function(state){
-        console.log('save 3 recs?',state.recs)
         return (state.recs.size > 2 ? true : false);
       },
       title: 'Hey,',

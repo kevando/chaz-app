@@ -6,24 +6,45 @@ import {
   TouchableOpacity,
   ActionSheetIOS,
 } from 'react-native';
-import Emoji from 'react-native-emoji';
 
+import RecGrade from './RecGrade';
+
+var BUTTONS = [
+  'O Stars',
+  '1 Star',
+  '2 Stars',
+  '3 Stars',
+  '4 Stars',
+  '5 Stars',
+  'Cancel',
+];
+var CANCEL_INDEX = BUTTONS.length-1;
 
 export default class RecType extends Component {
   constructor(props) {
     super(props);
+    // console.log('recType type in constructor',this.props.rec.type)
     this.state = {grade: this.props.rec.grade || null}
+    // this.getOptions = this.getOptions.bind(this)
   }
+
+  componentWillReceiveProps(newProps) {
+    // user edited type so the list item needs to be refreshed
+    this.setState({grade: newProps.rec.grade  || null }); // should never return null
+  }
+
 
   render() {
 
     var grade = this.state.grade;
     return (
       <View style={styles.container}>
-        {(grade == 0
-          ? <Text>No Love</Text>
+        <TouchableOpacity onPress={this.onChangeGradePress.bind(this)}>
+        {(grade
+          ? <RecGrade size={30} grade={grade} />
           : <Text>Grade this on  0-5 stars</Text>
         )}
+        </TouchableOpacity>
       </View>
     );
   }

@@ -59,36 +59,19 @@ const styles = StyleSheet.create({
     paddingBottom:0,
     paddingLeft:8,
     paddingRight:8,
-    // width:70
   },
   activeButton: {
-    // backgroundColor: colors.grey
+    borderBottomWidth:3,
+    borderBottomColor:"#fff",
   },
   filterText: {
     color:"#fff",
     fontSize:12,
     fontWeight:'400',
     textAlign:'center',
-    lineHeight:20,
   },
   activeText: {
     color:"#fff",
-    textDecorationLine:'underline',
     fontWeight:'700'
   },
-  countContainer:{
-    height:10,
-    width:10,
-    position:'absolute',
-    top:2,
-    right:11,
-    flexDirection:'column',
-    justifyContent:'center', //vertical align
-  },
-  count: {
-    fontSize:7,
-    color:'#111',
-    textAlign:'center',
-    backgroundColor:'rgba(0,0,0,0)', //clear
-  }
 })

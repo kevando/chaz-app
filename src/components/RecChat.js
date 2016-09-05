@@ -53,38 +53,9 @@ class RecChat extends Component {
 
 }
 
-const styles = StyleSheet.create({
-  // filtersContainer: {
-  //   borderTopWidth:0,
-  //   borderTopColor: "#ccc",//GlobalStyle.constants.colors[1],
-  //   borderBottomWidth:4,
-  //   borderBottomColor:Global.constants.colors[1],
-  // },
-  // filterRow: { // makes it horizontal despite multiple text elemnts
-  //   flex:1,
-  //   flexDirection:'row',
-  //   // justifyContent:'center',
-  //   alignItems:'stretch',
-  //   margin:0,
-  //   borderRightWidth: 2,
-  //   borderRightColor: "#ccc",//GlobalStyle.constants.colors[1],
-  //   borderLeftWidth: 2,
-  //   borderLeftColor: "#ccc",//GlobalStyle.constants.colors[1],
-  // },
-  // filterItem: {
-  //   flex:1,
-  //   flexDirection:'row',
-  //   // backgroundColor:'red',
-  //   padding:0
-  // }
-  //
-
-})
-
 function mapStateToProps(state) {
   return {
     app: state.app, // depending how I do this. I probably only need onboarding here
-    // rec: state.rec,
     messages: state.messages
   }
 }
