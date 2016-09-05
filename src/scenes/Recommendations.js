@@ -133,9 +133,9 @@ const styles = StyleSheet.create({
 
   },
   title: {
-    margin:15,
+    margin:10,
     fontWeight:'600',
-    fontSize:18,
+    fontSize:13,
     color:colors.darkGrey
   }
 

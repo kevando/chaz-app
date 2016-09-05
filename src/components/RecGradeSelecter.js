@@ -38,7 +38,7 @@ export default class RecType extends Component {
 
     var grade = this.state.grade;
     return (
-      <View style={styles.container}>
+      <View >
         <TouchableOpacity onPress={this.onChangeGradePress.bind(this)}>
         {(grade
           ? <RecGrade size={30} grade={grade} />
