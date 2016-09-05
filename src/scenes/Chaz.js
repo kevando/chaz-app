@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, AlertIOS} from "react-native";
 import Button from "react-native-button";
 
 import {
-  // Scene,
   Reducer,
   Router,
-  Switch,
-  // Modal,
   Actions,
   ActionConst,
 } from 'react-native-router-flux';
@@ -51,11 +48,31 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params);
   return (state, action) => {
-    // console.log('%c ROUTER STATE:', 'color: green',state);
-    // console.log('%c ROUTER ACTION:', 'color: green',action);
+    console.log('%c ROUTER STATE:', 'color: green',state);
+    console.log('%c ROUTER ACTION:', 'color: green',action);
+
+    if(checkVersionMismatch(state,action)){
+      alertNewVersion();
+      return; // Dont return reducer
+    }
+
     return defaultReducer(state, action);
   };
 };
+
+function checkVersionMismatch(state,action){ // returns true if there is a mismatch
+  if(action.type == "REACT_NATIVE_ROUTER_FLUX_FOCUS" && state){  // only check for this action and if there is state
+    var userAppVersion = state.store.getState().app.getIn(['user','appVersion']);
+    if(userAppVersion != state.appVersion && action.scene.name != 'logout' && !(typeof userAppVersion === "undefined")) {
+      return true;
+    }
+  }
+  return false; // catch all
+}
+
+function alertNewVersion() {
+  AlertIOS.alert('App Version has changed','Forcing an app restart',[{ text: 'Okay, log me out', onPress: () => Actions.logout() }]);
+}
 
 
 class Chaz extends Component {
@@ -85,8 +102,9 @@ class Chaz extends Component {
 
     }
 
-}
 
+
+}
 
   render(){
     return (
@@ -94,6 +112,7 @@ class Chaz extends Component {
         createReducer={reducerCreate}
         scenes={Scenes}
         getSceneStyle={getSceneStyle}
+        store={this.props.store}
       />
     );
   }

@@ -12,15 +12,12 @@ import {
   Scene,
   Reducer,
   Router,
-  Switch,
+  // Switch,
   Modal,
   Actions,
   ActionConst,
   NavBar
 } from 'react-native-router-flux';
-
-
-import Button from 'react-native-button';
 
 import Recommendations from './Recommendations';
 import RecommendationInput from './RecommendationInput';
@@ -31,10 +28,8 @@ import Popup from './Popup';
 import Logout from './Logout';
 import Friends from './Friends';
 import Friend from './Friend';
-
-import * as GlobalStyle from '../style/Global';
 import {colors} from '../style/Global';
-
+import DeviceInfo from 'react-native-device-info'; // Used to detect correct version
 
 const NavigationStyle = {
   navigationBarStyle: {backgroundColor:'#fff',borderBottomWidth:2,borderBottomColor:'red'},
@@ -50,7 +45,7 @@ const NavigationStyle = {
 
 export const Scenes = Actions.create(
 
-  <Scene key="modal" component={Modal} >
+  <Scene key="modal" component={Modal} appVersion={DeviceInfo.getReadableVersion()} >
     <Scene key="root" direction="vertical" {...NavigationStyle} hideTabBar>
 
       <Scene key="welcome" component={Welcome}  hideNavBar  type={ActionConst.REPLACE} />
