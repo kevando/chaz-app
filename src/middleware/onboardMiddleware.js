@@ -14,18 +14,19 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
           // probly dont need full middleware for this, but keeping for now cause im lazy
 
 
-          var state = store.getState();
-          var onboard = state.onboard;
-          var currentStep = onboard.get('currentStep');
-          var stepData = onboard.getIn(['steps',currentStep]);
-          var {dataCondition} = stepData.toJS();
-          console.log('currentStep',currentStep);
-          console.log('dataCondition',dataCondition);
+
 
           switch (action.type) {
             // Check the conditions any time that data is saved to redux
 
             case 'INIT_ONBOARD': // Properly set the current onboard step
+              var state = store.getState();
+              var onboard = state.onboard;
+              var currentStep = onboard.get('currentStep');
+              var stepData = onboard.getIn(['steps',currentStep]);
+              var {dataCondition} = stepData.toJS();
+              console.log('currentStep',currentStep);
+              console.log('dataCondition',dataCondition);
               console.log('init onboard?');
               var steps = onboard.get('steps');
               var currentStep = 0; // tmp

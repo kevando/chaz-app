@@ -52,6 +52,7 @@ class RecommenderAdd extends Component {
               returnKeyType={'done'}
               onSubmitEditing={this.onAddRecrPress.bind(this)}
             />
+            <Button style={{backgroundColor:'green',color:'#fff',fontWeight:'300',fontSize:14,textAlign:'center',padding:6,margin:5}} onPress={this.onAddRecrPress.bind(this)} >Add</Button>
 
             {this.renderRecrs()}
 

@@ -45,6 +45,8 @@ export function syncFirebase() {
     var uid = app.getIn(['user','uid']);
     var fireRef = firebaseApp.database().ref();
 
+    console.log(recs.toJS())
+
     fireRef.child(`users/${uid}/recs`).set(recs.toJS());
     fireRef.child(`users/${uid}/recrs`).set(recrs.toJS());
   }

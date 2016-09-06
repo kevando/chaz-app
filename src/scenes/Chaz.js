@@ -85,6 +85,8 @@ function checkOnboard(state,action) {
     var reduxState = state.store.getState();
     var onboard = reduxState.onboard;
     var currentStep = onboard.get('currentStep');
+    console.log(currentStep)
+    console.log(onboard.get('steps').size)
     if(currentStep == onboard.get('steps').size) // We are at the final step, do not proceed
       return;
     var stepData = onboard.getIn(['steps',currentStep]).toJS();
