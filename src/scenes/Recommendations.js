@@ -87,7 +87,7 @@ class Recommendations extends Component {
 
   renderFilterNav(){
     var currentStep = this.props.onboard.get('currentStep');
-    if(currentStep > 3)
+    if(currentStep > 2)
       return(<FilterNav />)
   }
   renderWelcomeMessage(){

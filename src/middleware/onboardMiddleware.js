@@ -33,9 +33,12 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
               steps.map(function(step){
                 var {dataCondition} = step.toJS();
                 if(dataCondition(state)){
-                  console.log('iterating thru steps and returned true for step: ',step);
+                  console.log('iterating thru steps and returned true for step: ',step.toJS());
                   store.dispatch({type: 'INCREMENT_CURRENT_STEP'});
+                } else {
+                  return;
                 }
+
 
               });
 

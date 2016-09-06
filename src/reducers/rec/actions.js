@@ -14,9 +14,17 @@ export function addRec(title,note,uid) {
   };
 }
 export function updateRec(rec) {
-  console.log('update rec',rec)
+  delete rec.recr; // STOP SENDNG FUCKING RECR
   return {
     type: types.UPDATE_REC,
+    payload: rec
+  };
+}
+
+export function gradeRec(rec) {
+  delete rec.recr; // STOP SENDNG FUCKING RECR
+  return {
+    type: types.GRADE_REC,
     payload: rec
   };
 }

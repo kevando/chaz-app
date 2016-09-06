@@ -22,6 +22,14 @@ export default function recs(recs = initialState, action = {}) {
           return Map(action.payload); // return entire rec
         }
       );
+    case types.GRADE_REC: // same as update rec
+      return recs.update(
+        recs.findIndex(function(rec) {
+          return rec.get("id") === action.payload.id;
+        }), function(rec) {
+          return Map(action.payload); // return entire rec
+        }
+      );
 
     case types.DELETE_REC:
       return recs.filterNot(rec => rec.get('id') == action.payload.id);

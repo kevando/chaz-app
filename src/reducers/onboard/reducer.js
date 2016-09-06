@@ -6,15 +6,14 @@ const initialState = Map({
   showPopup: false,
   steps: List.of(
 
-
-    // 0 Create some initial step that doesnt get called
-    // open the app
-
     // Step 0
     Map({
       label: 'Save a recommendation',
       actionCondition: function(action) {
-        return ( (action.type == types.FOCUS && action.scene.name == "recommendationFromAdd") ? true : false);
+        if(action.scene)
+          return ( (action.type == types.FOCUS && action.scene.name == "recommendationFromAdd") ? true : false);
+        else
+          return false;
       },
       dataCondition: function(state) {
         return (state.recs.size > 0 ? true : false);
@@ -25,76 +24,91 @@ const initialState = Map({
       buttonText: 'I got it',
     }),
 
-    // 2
+    // Step 1
     Map({
       label: 'Add a friend',
-      action: {type: "REACT_NATIVE_ROUTER_FLUX_BACK"},
       actionCondition: function(action) {
         return ( (action.type == types.BACK ) ? true : false);
       },
       dataCondition: function(state) {
         return (state.recrs.size > 0 ? true : false);
       },
-
       title: 'Sweet.',
       caption: 'You just added your first friend to chaz.',
       instructions:'Finally, lets categorize this recommendation. Tap the paper in the top left.',
       buttonText: 'I will do that',
     }),
-    // 3
-    // Map({
-    //   label: 'Unlock filters',
-    //   condition: function(state){
-    //     return (state.recs.size > 2 ? true : false);
-    //   },
-    //   title: 'Hey,',
-    //   caption: 'You just unlocked filters!',
-    //   instructions:'chaz works great when you want to do something specific, so now you can filter by category. ',
-    //   buttonText: 'Okay, cool',
-    // }),
-    // // 4
-    // Map({
-    //   label: 'Save 4 recommendations',
-    //   condition: function(state){
-    //     return (state.recs.size > 3 ? true : false);
-    //   },
-    //   title: 'A+',
-    //   caption: 'chaz is the best app to follow up with your friends',
-    //   instructions:'Now you can grade recommendations after you enjoy it.',
-    //   buttonText: 'Okay, okay, I get it',
-    // }),
-    // // 5
-    // Map({
-    //   label: 'Grade a recommendation',
-    //   condition: function(state){
-    //     var hasGrade = state.recs.map((rec) => rec.get('grade') != undefined );
-    //     console.log('hasGrade',hasGrade);
-    //     return (hasGrade.size > 0 ? true : false);
-    //     // return true if at least 1 rec has a grade
-    //   },
-    //   title: 'Cool',
-    //   caption: 'You now have a graded recommendation.',
-    //   instructions:'This also means that your friend has a score. Go check it out.',
-    //   buttonText: 'Got it',
-    // }),
-    // // 6
-    // Map({
-    //   label: 'Start your squad',
-    //   condition: function(state){
-    //     return (state.recrs.size > 4 ? true : false);
-    //   },
-    //   title: 'Heyo',
-    //   caption: 'You added so many people.',
-    //   instructions:'If you navigate back to your queue, you should see a link to view all your friends in one page',
-    //   buttonText: 'Got it',
-    // }),
-    // // 7
-    // Map({
-    //   label: 'Start chatting',
-    //   condition: function(state){
-    //     return (false);
-    //   },
-    // }),
+    // Step 2
+    Map({
+      label: 'Unlock filters',
+      actionCondition: function(action) {
+        if(action.scene)
+          return ( (action.scene.name == "recommendations" ) ? true : false);
+        else
+          return false;
+      },
+      dataCondition: function(state) {
+        // console.log('recs size for unlock filters check?',state.recs.size )
+        return (state.recs.size > 2 ? true : false);
+      },
+      title: 'Hey,',
+      caption: 'You just unlocked filters!',
+      instructions:'chaz works great when you want to do something specific, so now you can filter by category. ',
+      buttonText: 'Okay, cool',
+    }),
+    // Step 3
+    Map({
+      label: 'Unlock grades',
+      actionCondition: function(action) {
+        if(action.scene)
+          return ( (action.type == types.FOCUS && action.scene.name == "recommendationFromAdd") ? true : false);
+        else
+          return false;
+      },
+      dataCondition: function(state) {
+        return (state.recs.size > 3 ? true : false);
+      },
+      title: 'A+',
+      caption: 'chaz is the best app to follow up with your friends',
+      instructions:'Now you can grade recommendations after you enjoy it.',
+      buttonText: 'Okay, okay, I get it',
+    }),
+    // Step 4
+    Map({
+      label: 'Grade a recommendation',
+      actionCondition: function(action) {
+        if(action.scene)
+          return ( (action.type == types.FOCUS && action.scene.name == "recommendationFromAdd") ? true : false);
+        else
+          return false;
+      },
+      dataCondition: function(state){
+        recsWithGrades = 0
+        state.recs.map(function(rec){ if(!(typeof rec.get('grade') === "undefined")){recsWithGrades++} } );
+        // console.log('recsWithGrades',recsWithGrades);
+        return (recsWithGrades.size > 0 ? true : false);
+        // return true if at least 1 rec has a grade
+      },
+      title: 'Cool',
+      caption: 'You now have a graded recommendation.',
+      instructions:'This also means that your friend has a score. Go check it out.',
+      buttonText: 'Got it',
+    }),
+    // Step 5
+    Map({
+      label: 'Start your squad',
+      actionCondition: function(action) {
+        return ( (action.type == types.BACK ) ? true : false);
+      },
+      dataCondition: function(state) {
+        return (state.recrs.size > 4 ? true : false);
+      },
+      title: 'Heyo',
+      caption: 'You added so many people.',
+      instructions:'If you navigate back to your queue, you should see a link to view all your friends in one page',
+      buttonText: 'Got it',
+    }),
+
 
   ),
 
@@ -106,17 +120,8 @@ export default function counter(onboard = initialState, action = {}) {
     case types.INCREMENT_CURRENT_STEP:
       return onboard.merge({
         currentStep: onboard.get('currentStep') + 1,
-        showPopup: false, // probly not needed
       });
-      case types.SET_STEP:
-        return onboard.merge({
-          currentStep: action.payload,
-        });
-      case types.SHOW_ONBOARD_POPUP: // only dispatched in app.js
-        console.log('show pop up')
-        return onboard.merge({
-          showPopup: action.payload
-        });
+
 
     default:
       return onboard;

@@ -9,17 +9,13 @@ import {
 import Emoji from 'react-native-emoji';
 
 
-export default class RecType extends Component {
+export default class RecGrade extends Component {
   constructor(props) {
     super(props);
-    this.state = {grade: this.props.grade}
   }
 
   render() {
-
-
-    var grade = this.state.grade;
-    console.log('grade',grade)
+    var grade = this.props.grade;
     return (
       <View>
         {(grade === 0

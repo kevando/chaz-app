@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity,AlertIOS,ScrollView} from "react-native";
 import {Actions} from "react-native-router-flux";
-import { bindActionCreators } from 'redux'
-import * as recActions from '../reducers/rec/actions';
-import RecNote from '../components/RecNote';
-import RecTitle from '../components/RecTitle';
-import RecType from '../components/RecType';
-import RecrItem from '../components/RecrItem';
+
 import {connect} from 'react-redux';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-import Emoji from 'react-native-emoji';
-import RecAddButton from '../components/RecAddButton';
-import {constants} from '../style/Global';
+
 
 class Friend extends Component {
 
@@ -21,40 +13,40 @@ class Friend extends Component {
     this.state = {recr:this.props.recr}
     // Set delete button in top right
 
+  }
 
-
-  }
-  componentWillMount(){
-    // Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:'red'} })
-  }
-  componentWillReceiveProps(newProps) {
-    //user edited title or note, refresh data
-    // this.setState({rec: newProps.rec});
-  }
 
   render(){
-    // let { dispatch } = this.props;
-    // let boundActionCreators = bindActionCreators(recActions, dispatch)
-    // var {rec} = this.state;
-    // var filters = this.props.app.get('filters');
+
 
     return (
       <View  style={styles.container}>
-      <ScrollView>
-        <View style={styles.row}>
-          <View style={styles.left}>
+        <ScrollView>
 
+          <View style={styles.row}>
+            <View style={styles.left}></View>
+            <View style={styles.right}>
+              <Text style={{fontSize:30}}>{this.props.recr.name}</Text>
+            </View>
           </View>
-          <View style={styles.right}>
-            <Text>{this.props.recr.name}</Text>
+
+          <View style={styles.row}>
+            <View style={styles.left}></View>
+            <View style={styles.right}>
+              <Text style={{fontSize:20}}>{this.renderScore()}</Text>
+            </View>
           </View>
-        </View>
-      <View>
-    </View>
-    </ScrollView>
-    <RecAddButton activeType={"default"} recr={this.props.recr} onPress={Actions.recommendationAdd} />
-  </View>
+
+
+        </ScrollView>
+      </View>
     );
+  }
+  renderScore() {
+    if(this.props.recr.stats)
+      return "Score: " + this.props.recr.stats.score + "%"
+    else
+      return "No score yet";
   }
 
 }
@@ -64,7 +56,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderColor:constants.colors[1],
     // backgroundColor:'#444',
     borderTopWidth: 2,
     flexDirection:'column'

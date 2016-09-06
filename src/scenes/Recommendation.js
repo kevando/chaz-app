@@ -36,6 +36,7 @@ class RecView extends Component {
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
     // this.setState({rec: newProps.rec});
+    console.log('rec got new props',newProps)
   }
 
   render(){
@@ -43,7 +44,7 @@ class RecView extends Component {
     let boundActionCreators = bindActionCreators(recActions, dispatch)
     let recrActionCreators = bindActionCreators(recrActions, dispatch)
     let firebaseActionCreators = bindActionCreators(firebaseActions, dispatch)
-    var {rec} = this.state;
+    var {rec} = this.props;
     var filters = this.props.app.get('filters');
 
     return (

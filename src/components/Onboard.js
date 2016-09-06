@@ -27,7 +27,7 @@ class OnboardPopup extends Component {
         );
     }
     closePopup(){
-      this.props.dispatch({type: 'INCREMENT_CURRENT_STEP',payload:this.props.onboard.currentStep}); // this also takes care of setting onboard to false
+      this.props.dispatch({type: 'INCREMENT_CURRENT_STEP',payload:this.props.onboard.get('currentStep')}); // this also takes care of setting onboard to false
       this.props.closeHandler()
     }
 }

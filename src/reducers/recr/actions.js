@@ -12,32 +12,37 @@ export function addRecr(name) {
   };
 }
 
-export function updateRecrScore(rec) {
-  console.log('updateRecrscore w recr id',rec.recr_id)
+export function updateRecrStats(rec) {
+  
   var recr_id = rec.recr_id;
 
   return function(dispatch, getState) {
     var recs = getState().recs;
     var score = 0;
+    var totalRecs = 0;
     var totalGradedRecs = 0;
     var totalGrade = 0;
     recs.map(function(rec){ // could consolidate this better
-      // console.log('recr id',rec.recr_id)
-      // console.log('recr grade',rec.get('grade'))
-        if(rec.get('recr_id') == recr_id && rec.get('grade') != undefined ){
-          console.log('found a graded rec',rec)
-          totalGradedRecs++;
-          totalGrade += rec.get('grade');
+        if(rec.get('recr_id') == recr_id) {
+          totalRecs++;
+          if(rec.get('grade') != undefined){
+              totalGradedRecs++;
+              totalGrade += rec.get('grade');
+          }
         }
     });
-    console.log(totalGradedRecs);
-    console.log(totalGrade);
-    score = Math.round((totalGradedRecs/totalGrade)*200);
+    // score = Math.round((totalGradedRecs/totalGrade)*200);
+    score = (totalGradedRecs/totalGrade)
     dispatch({
-      type: types.UPDATE_RECR_SCORE,
+      type: types.UPDATE_RECR_STATS,
       payload: {
         id: recr_id,
-        score: score,
+        stats: {
+          score: score,
+          totalRecs: totalRecs,
+          totalGrade: totalGrade,
+          totalGradedRecs: totalGradedRecs,
+        }
 
       }
     });

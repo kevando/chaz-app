@@ -20,17 +20,10 @@ var BUTTONS = [
 ];
 var CANCEL_INDEX = BUTTONS.length-1;
 
-export default class RecType extends Component {
+export default class RecGradeSelecter extends Component {
   constructor(props) {
     super(props);
-    // console.log('recType type in constructor',this.props.rec.type)
-    this.state = {grade: this.props.rec.grade || null}
-    // this.getOptions = this.getOptions.bind(this)
-  }
-
-  componentWillReceiveProps(newProps) {
-    // user edited type so the list item needs to be refreshed
-    this.setState({grade: newProps.rec.grade  || null }); // should never return null
+    this.state = {grade: this.props.rec.grade}
   }
 
 
@@ -40,7 +33,7 @@ export default class RecType extends Component {
     return (
       <View >
         <TouchableOpacity onPress={this.onChangeGradePress.bind(this)}>
-        {(grade
+        {(grade != null
           ? <RecGrade size={30} grade={grade} />
           : <Text>Grade this on  0-5 stars</Text>
         )}
@@ -51,8 +44,8 @@ export default class RecType extends Component {
   onGradeSelect() {
     var newRec = this.props.rec;
     newRec.grade = this.state.grade; // might be a bad flow for perf
-    this.props.updateRec(newRec);
-    this.props.updateRecrScore(newRec);
+    this.props.gradeRec(newRec);
+    this.props.updateRecrStats(newRec);
 
     // New CHAT FEATURE
     // this.props.appendMessageToRec("Added a new grade",newRec.id);
@@ -66,7 +59,7 @@ export default class RecType extends Component {
       cancelButtonIndex: CANCEL_INDEX,
     },
     (selectedIndex) => {
-      console.log('selectedIndex',selectedIndex)
+      // console.log('selectedIndex',selectedIndex)
       if(selectedIndex != CANCEL_INDEX){
          this.setState({ grade: selectedIndex }); // index correlates to grade value
         this.onGradeSelect()
