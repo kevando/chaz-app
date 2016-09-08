@@ -52,7 +52,8 @@ class RecommenderAdd extends Component {
               returnKeyType={'done'}
               onSubmitEditing={this.onAddRecrPress.bind(this)}
             />
-            <Button style={{backgroundColor:'green',color:'#fff',fontWeight:'300',fontSize:14,textAlign:'center',padding:6,margin:5}} onPress={this.onAddRecrPress.bind(this)} >Add</Button>
+            {(this.state.name ? <Button style={{backgroundColor:'green',color:'#fff',fontWeight:'300',fontSize:14,textAlign:'center',padding:6,margin:5}} onPress={this.onAddRecrPress.bind(this)} >Add</Button> : null )}
+
 
             {this.renderRecrs()}
 
@@ -95,7 +96,7 @@ class RecommenderAdd extends Component {
 var styles = StyleSheet.create({
     title: {
       textAlign:'center',
-      fontSize: 20,
+      fontSize: 15,
       fontWeight: '500',
       marginBottom:15,
     }

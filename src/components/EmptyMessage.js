@@ -18,9 +18,9 @@ export default class EmptyMessage extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.notify}>{notify}</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        {(title ? <Text style={styles.title}>{title}</Text> : null )}
+        {(notify ? <Text style={styles.notify}>{notify}</Text> : null )}
+        {(instructions ? <Text style={styles.instructions}>{instructions}</Text> : null )} 
       </View>
     );
   }
@@ -28,10 +28,10 @@ export default class EmptyMessage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
-    flexDirection:'column',
+    // flex:1,
+    // flexDirection:'column',
     backgroundColor:colors.lightGrey,
-    paddingTop:30
+    // paddingTop:30
   },
   title: {
     fontSize:30,

@@ -25,12 +25,13 @@ class RecrItem extends Component {
 
   render() {
 
-    var recr = this.getRecr(this.props.rec.recr_id)
+    var recr = this.getRecr(this.props.rec.recr_id);
+
 
     if(recr) {
       return (
         <TouchableOpacity onPress={this.onRecrPress.bind(this)} >
-          <Text>Recommended by: <Text style={{fontWeight:'600',color:colors.green,fontSize:16}}>{recr.get('name')}</Text></Text>
+          <Text>Recommended by: <Text style={{fontWeight:'600',color:colors.green,fontSize:16}}>{recr.name}</Text></Text>
         </TouchableOpacity>
       );
     } else {
@@ -47,13 +48,13 @@ class RecrItem extends Component {
   }
 
   onRecrPress() {
-    Actions.friend({recr: this.props.rec.recr});
+    Actions.friend({recr: this.getRecr(this.props.rec.recr_id)});
   }
   getRecr(recr_id){
     var recr = this.props.recrs.find(function(obj){
       return obj.get('id') === recr_id;
     });
-    return recr;
+    return recr ? recr.toJS() : null ;
   }
 
 

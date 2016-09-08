@@ -18,6 +18,7 @@ class Friend extends Component {
 
   render(){
 
+    var {recr} = this.state;
 
     return (
       <View  style={styles.container}>
@@ -26,14 +27,28 @@ class Friend extends Component {
           <View style={styles.row}>
             <View style={styles.left}></View>
             <View style={styles.right}>
-              <Text style={{fontSize:30}}>{this.props.recr.name}</Text>
+              <Text style={{fontSize:30}}>{recr.name}</Text>
             </View>
           </View>
 
           <View style={styles.row}>
             <View style={styles.left}></View>
             <View style={styles.right}>
-              <Text style={{fontSize:20}}>{this.renderScore()}</Text>
+              <Text style={{fontSize:20}}>{this.renderScore(recr)}</Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.left}></View>
+            <View style={styles.right}>
+              <Text style={{fontSize:15}}>Total Recommendations: {recr.stats.totalRecs}</Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.left}></View>
+            <View style={styles.right}>
+              <Text style={{fontSize:15}}>Graded Recommendations: {recr.stats.totalGradedRecs}</Text>
             </View>
           </View>
 
@@ -42,9 +57,9 @@ class Friend extends Component {
       </View>
     );
   }
-  renderScore() {
-    if(this.props.recr.stats)
-      return "Score: " + this.props.recr.stats.score + "%"
+  renderScore(recr) {
+    if(recr.stats.score)
+      return "Score: " + recr.stats.score + "%"
     else
       return "No score yet";
   }

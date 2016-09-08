@@ -101,8 +101,9 @@ class RecView extends Component {
   }
 
   deleteRec(){
-    var id = this.props.rec.id;
-    this.props.dispatch(recActions.deleteRec(id));
+    var rec = this.props.rec;
+    this.props.dispatch(recActions.deleteRec(rec.id));
+    this.props.dispatch(recrActions.updateRecrStats(rec));
     Actions.pop();
   }
 

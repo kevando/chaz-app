@@ -52,7 +52,7 @@ var saveActions = [
   'GRADE_REC',
   'DELETE_REC',
   'ADD_RECR',
-  'UPDATE_RECR_SCORE',
+  'UPDATE_RECR_STATS',
   'INIT_ONBOARD'
 ];
 const storageMiddleware = storage.createMiddleware(engine,[],saveActions);

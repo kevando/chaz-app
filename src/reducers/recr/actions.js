@@ -7,13 +7,14 @@ export function addRecr(name) {
     payload: {
       id: uuid.v1(),
       name: name,
-      created_at: Date.now()
+      created_at: Date.now(),
+      stats: {},
     }
   };
 }
 
 export function updateRecrStats(rec) {
-  
+
   var recr_id = rec.recr_id;
 
   return function(dispatch, getState) {
@@ -32,7 +33,7 @@ export function updateRecrStats(rec) {
         }
     });
     // score = Math.round((totalGradedRecs/totalGrade)*200);
-    score = (totalGradedRecs/totalGrade)
+    score = (totalGrade/(totalGradedRecs*5))*100;
     dispatch({
       type: types.UPDATE_RECR_STATS,
       payload: {

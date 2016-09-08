@@ -35,7 +35,7 @@ class Recommendations extends Component {
    var activeFilter = this.props.app.get('activeFilter');
    var recs = this.props.recs.filter(function(obj){
      return (
-       (obj.get('uid') === uid) &&
+      //  (obj.get('uid') === uid) && removing for now
        (obj.get('grade') != null) &&
        (obj.get('type') === activeFilter || activeFilter == 'all')
      );
@@ -51,7 +51,7 @@ class Recommendations extends Component {
   var activeFilter = this.props.app.get('activeFilter');
   var recs = this.props.recs.filter(function(obj){
     return (
-      (obj.get('uid') === uid) &&
+      // (obj.get('uid') === uid) && removing for now
       (obj.get('grade') == null) &&
       (obj.get('type') === activeFilter || activeFilter == 'all')
     );
