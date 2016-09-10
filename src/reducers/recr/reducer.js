@@ -12,6 +12,16 @@ export default function counter(recrs = initialState, action = {}) {
     case types.ADD_RECR:
       return recrs.push(Map(action.payload));
 
+    case types.UPDATE_RECR:
+      // Find recr by index, and update entire object in recs List
+      return recrs.update(
+        recrs.findIndex(function(recr) {
+          return recr.get("id") === action.payload.id;
+        }), function(recr) {
+          return Map(action.payload); // return entire rec
+        }
+      );
+
     case types.UPDATE_RECR_STATS:
       // Find recr by index, and update just the score
       return recrs.update(

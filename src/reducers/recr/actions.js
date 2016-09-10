@@ -13,6 +13,13 @@ export function addRecr(name) {
   };
 }
 
+export function updateRecr(recr) {
+  return {
+    type: types.UPDATE_RECR,
+    payload: recr
+  };
+}
+
 export function updateRecrStats(rec) {
 
   var recr_id = rec.recr_id;

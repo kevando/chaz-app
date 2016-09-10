@@ -26,7 +26,6 @@ class RecommenderAdd extends Component {
       this.refs.RecrInput.focus(true);
      }
 
-
     componentWillReceiveProps(nextProps) {
       // This gets invoked after ADD_RECR
       // Now get user back to recView with their recr data

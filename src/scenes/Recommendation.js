@@ -18,6 +18,8 @@ import Emoji from 'react-native-emoji';
 import RecAddButton from '../components/RecAddButton';
 import {colors} from '../style/Global';
 
+import moment from 'moment';
+
 class RecView extends Component {
 
   constructor(props) {
@@ -31,7 +33,13 @@ class RecView extends Component {
 
   }
   componentWillMount(){
-    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:colors.red} })
+    var d = new Date(this.props.rec.created_at); 
+    Actions.refresh({
+      rightTitle: "Delete",
+      onRight:() => this.onDeletePress(),
+      rightButtonTextStyle: {color:colors.red},
+      title: moment(d).format('MM/DD/YYYY')
+     })
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
