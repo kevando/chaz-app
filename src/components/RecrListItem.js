@@ -15,19 +15,23 @@ export default class ListItem extends Component {
 
   constructor(props) {
     super(props);
+
+    var tmpRecr = this.props.recr;
+    tmpRecr.stats = tmpRecr.stats || {}; // stats might not exist
+    this.state = {recr:tmpRecr}
+
+
   }
   render() {
-    // removing add recr until 0.8
-    // {this.renderRecrDisplay()}
 
-    var recr = this.props.recr;
+    var {recr} = this.state;
 
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
         <View style={{padding:10,borderBottomWidth:1,borderBottomColor:'#ccc'}}>
           <View style={{flex:1,flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
-            <View style={{flex:6}}><Text style={{fontWeight:'600',fontSize:20}}><Emoji name="slightly_smiling_face"/>{recr.name}</Text></View>
-            <View style={{flex:2}}><Text style={{fontWeight:'600',fontSize:20}}>{this.renderScore(recr)}</Text></View>
+            <View style={{flex:3}}><Text style={{fontWeight:'600',fontSize:20}}><Emoji name="slightly_smiling_face"/>{recr.name}</Text></View>
+            <View style={{flex:2}}><Text style={{fontWeight:'500',fontSize:16}}>{this.renderScore(recr)}</Text></View>
           </View>
 
         </View>

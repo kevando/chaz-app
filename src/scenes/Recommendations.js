@@ -20,7 +20,7 @@ class Recommendations extends Component {
     this.state = {uid: this.props.app.getIn(['user','uid'])}
   }
 
-  componentWillReceiveProps(){
+  componentDidMount(){
     // Hide profile link during first opening of app
     var currentStep = this.props.onboard.get('currentStep');
     if(currentStep < 2)
@@ -91,7 +91,7 @@ class Recommendations extends Component {
       return(<FilterNav />)
   }
   renderWelcomeMessage(){
-    return(<EmptyMessage title="Welcome to chaz" notify="The fastest way to save recommendations in your phone. Tap the blue button to get started." instructions="If you do not have anything to save yet, I would like to recommend my favorite move, Shawshank Redemption." />);
+    return(<EmptyMessage title="Welcome to chaz" notify="The fastest way to save recommendations in your phone." instructions="If you do not have anything to save yet, I would like to recommend my favorite movie, Shawshank Redemption." />);
   }
   renderRecLists(){
     var gradedRecs = this.getGradedRecs();

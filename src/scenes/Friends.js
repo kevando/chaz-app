@@ -25,7 +25,7 @@ class Friends extends Component {
         <View style={{flex:10}} >
           <ScrollView><RecrList recrs={friendList.reverse()} /></ScrollView>
         </View>
-        <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
+        
       </View>
     );
   }

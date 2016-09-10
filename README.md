@@ -1,48 +1,44 @@
 # chaz
+chaz is an app for chazy people. Written for iOS with React Native.
 
-#### iOS app written with React Native.
-chaz is an app to save recommendations.
+## Last Beta Release
+#### Version 0.10
+- Released 2016.09.10
+- Adding Aiden to beta testers
+- Totally overhauled navbar UI Style
+- Added several onboarding steps
+- App forces a logout if version is mimatched
+- Users can grade recommendations
+- Users can view basic friend profile pages
+- Friends have a score, based on the average of their graded recs
 
-## Update (2016.07.31)
-chaz is currently in private beta and has about 4 people using it. Open an issue in this repo if you would like to join the beta test.
+#### Screenshots
 
-## Latest Version (2016.07.29)
-#### 0.9
-- refactored app so its offline by default
-- Changed navigator API
-- Added some janky animation to welcome page
-- Added recr
-- added custom error logging to fabric (not sure if this works)
+# ![alt text][welcome]
+# ![alt text][empty]
+# ![alt text][add]
+# ![alt text][popup]
+# ![alt text][list]
+# ![alt text][rec]
+# ![alt text][recr]
 
+[welcome]: https://i.imgur.com/ZGOxN3A.png "Welcome Screen"
+[empty]: https://i.imgur.com/M19oiwt.png "Empty Screen"
+[add]: https://i.imgur.com/FrpA1P0.png "Add Rec"
+[popup]: https://i.imgur.com/xCWU6XS.png "Popup"
+[list]: https://i.imgur.com/3qlhbHF.png "Rec List"
+[rec]: https://i.imgur.com/FEwOGvG.png "Rec View"
+[recr]: https://i.imgur.com/dfDGREm.png "Recr View"
 
 [Full Release History]
 
 [Full Release History]: <https://github.com/kevando/chaz/blob/master/documentation/RELEASES.md>
 
+
+
 ## Roadmap
 chaz is in active development and has a very dynamic list of features. View the entire [Product Roadmap] here. Open an issue if you'd like to add a feature to the pipeline.
 
 [Product Roadmap]: https://github.com/kevando/chaz/blob/master/documentation/ROADMAP.md
-
-## Screenshots
-Here are some selected iPhone6 screens from the latest version.
-### Welcome Sceen:
-![alt text][welcome]
-### Opening Screen (no recommendations):
-![alt text][empty]
-### Pop up after saving 1st rec
-![alt text][first popup]
-### One Generic Rec Added
-![alt text][rec added]
-### Empty Screen for TV shows
-![alt text][empty tv list]
-
-[welcome]: https://i.imgur.com/QxLSRpB.png "Welcome Screen"
-[empty]: https://i.imgur.com/tcSGj5s.png "Empty Screen"
-[first popup]: https://i.imgur.com/w8kfeiL.png "Popup"
-[list]: https://i.imgur.com/bTAd5Ib.png "Rec List"
-[rec added]: https://i.imgur.com/8DaqHMH.png "Rec Added"
-[empty tv list]: https://i.imgur.com/nmfn4vo.png "Empty List"
-
 
 Cheers, Kevando

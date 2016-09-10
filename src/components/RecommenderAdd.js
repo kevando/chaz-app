@@ -84,7 +84,8 @@ class RecommenderAdd extends Component {
       // console.log('recr in asign recr',recr);
       rec.recr_id = recr.get('id');
       this.props.dispatch(recActions.updateRec(rec));
-      this.props.dispatch(firebaseActions.assignRecr(rec)); // LIVE
+      this.props.dispatch(recrActions.updateRecrStats(rec));
+      // this.props.dispatch(firebaseActions.assignRecr(rec)); // I think I did this for the live connection
       this.props.closeHandler();
     }
     onAddRecrPress() {

@@ -9,9 +9,11 @@ class Friend extends Component {
 
   constructor(props) {
     super(props)
-    // this will make it easier to handle the new props
-    this.state = {recr:this.props.recr}
-    // Set delete button in top right
+
+    var tmpRecr = this.props.recr;
+    tmpRecr.stats = tmpRecr.stats || {}; // stats might not exist
+    this.state = {recr:tmpRecr}
+
 
   }
 

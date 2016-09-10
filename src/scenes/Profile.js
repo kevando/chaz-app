@@ -52,9 +52,6 @@ class Profile extends Component {
             <View style={styles.right}><Text style={value}>{process.env.NODE_ENV}</Text></View>
           </View>
 
-
-          <Button onPress={this.closeHandler.bind(this)} style={{fontSize:27,color:'blue',marginTop:30}}>Back</Button>
-          <Button onPress={this.onLogoutPress.bind(this)} style={{fontSize:14,color:'red',marginTop:30}}>Logout</Button>
         </ScrollView>
       </View>
     );

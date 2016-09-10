@@ -1,18 +1,9 @@
 # Product Roadmap
 
-# 0.10
-Focus on the queue
-But build the data with chat in mind
+# 0.11
 
-
-
----
-
-
- - Add Rec button on more pages with pre-filled information for easier add
- - Adding uid field to recs for future bi-directional sharing
-
-
+- Rec reminders
+- Rec list sorting
 
 ### Beta Roadmap
 

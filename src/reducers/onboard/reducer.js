@@ -21,7 +21,7 @@ const initialState = Map({
       title: 'Awesome!',
       caption: 'You just saved your first recommendation.', //tagline
       instructions:'chaz helps you understand which friends are giving you the best recommendations. On the next page, add who recommended this.',
-      buttonText: 'I got it',
+      buttonText: 'Okay, I will do that',
     }),
 
     // Step 1
@@ -84,8 +84,9 @@ const initialState = Map({
       },
       dataCondition: function(state){
         recsWithGrades = 0
+
         state.recs.map(function(rec){ if(!(typeof rec.get('grade') === "undefined")){recsWithGrades++} } );
-        // console.log('recsWithGrades',recsWithGrades);
+        console.log('recsWithGrades',recsWithGrades);
         return (recsWithGrades.size > 0 ? true : false);
         // return true if at least 1 rec has a grade
       },
@@ -94,20 +95,20 @@ const initialState = Map({
       instructions:'This also means that your friend has a score. Go check it out.',
       buttonText: 'Got it',
     }),
-    // Step 5
-    Map({
-      label: 'Start your squad',
-      actionCondition: function(action) {
-        return ( (action.type == types.BACK ) ? true : false);
-      },
-      dataCondition: function(state) {
-        return (state.recrs.size > 4 ? true : false);
-      },
-      title: 'Heyo',
-      caption: 'You added so many people.',
-      instructions:'If you navigate back to your queue, you should see a link to view all your friends in one page',
-      buttonText: 'Got it',
-    }),
+    // Step 5 (removing for this version)
+    // Map({
+    //   label: 'Start your squad',
+    //   actionCondition: function(action) {
+    //     return ( (action.type == types.BACK ) ? true : false);
+    //   },
+    //   dataCondition: function(state) {
+    //     return (state.recrs.size > 4 ? true : false);
+    //   },
+    //   title: 'Heyo',
+    //   caption: 'You added so many people.',
+    //   instructions:'If you navigate back to your queue, you should see a link to view all your friends in one page',
+    //   buttonText: 'Got it',
+    // }),
 
 
   ),
