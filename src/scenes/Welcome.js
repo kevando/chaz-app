@@ -4,7 +4,7 @@ import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
 import {connect} from 'react-redux';
 import * as firebaseActions from '../reducers/firebase/actions';
-import * as GlobalStyle from '../style/Global';
+import {colors} from '../style/Global';
 
 var SPRING_CONFIG = {tension: 7, friction: 3}; //Soft spring
 var BUTTON_OFFSET = 250;
@@ -54,21 +54,19 @@ class Welcome extends Component {
     return [{transform: this.state.pan.getTranslateTransform()}];
   }
 
+
   render(){
 
     return (
       <View style={styles.container}>
-        <View style={{top:100,flex:1}}>
           <Text style={{fontWeight:'500',color:'#fff',fontSize:100,textAlign:'center'}} >chaz</Text>
-          <Text style={{fontWeight:'300',color:'#fff',fontSize:20,textAlign:'center',margin:20}} >Save all your recommendations in one place and follow up with your friends when they give you gold.</Text>
-        </View>
         {( this.state.loading
           ?
           <Text>Loading from server</Text>
           :
-          <Animated.View style={this.getButtonStyle()} >
+          <View>
             <Button style={styles.button} onPress={this.onButtonPress}>Get Started</Button>
-          </Animated.View>
+          </View>
         )}
         <View style={{position:'absolute',bottom:25,left:5}}>
           <Text style={{fontWeight:'400',color:'#fff'}}>NODE_ENV: {process.env.NODE_ENV}</Text>
@@ -87,16 +85,17 @@ class Welcome extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
+    paddingTop:80,
     alignItems: "center",
-    backgroundColor: GlobalStyle.constants.colors[0],
+    backgroundColor: colors.purple,
   },
   button: {
     backgroundColor:'#fff',
     padding:15,
-    color: GlobalStyle.constants.colors[1],
+    color: colors.purple,
     // hacking this animation
-    marginTop:BUTTON_OFFSET
+    // marginTop:BUTTON_OFFSET
   },
 });
 

@@ -6,6 +6,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import {colors} from '../style/Global';
+
 export default class RecNote extends Component {
 
   constructor(props) {
@@ -21,7 +23,7 @@ export default class RecNote extends Component {
         <TouchableOpacity onPress={this.onNotePress.bind(this)}>
         {( rec.note
           ? <Text style={styles.note}>{rec.note}</Text>
-          : <Text style={styles.note}>Add a note...</Text>
+          : <Text style={styles.empty}>Add a note...</Text>
         )}
         </TouchableOpacity>
       </View>
@@ -36,10 +38,11 @@ export default class RecNote extends Component {
 const styles = StyleSheet.create({
   note: {
     fontSize: 18,
-    // paddingLeft:10,
-    borderColor: '#ccc',
-    borderWidth:0,
-    color:'#444',
+    color:colors.darkGrey,
+  },
+  empty: {
+    fontSize: 18,
+    color:colors.grey,
   }
 
 })

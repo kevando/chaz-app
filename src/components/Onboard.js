@@ -1,58 +1,77 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Animated, Dimensions, TouchableOpacity} from "react-native";
-import {Actions} from "react-native-router-flux";
-import {constants} from '../style/Global';
+import {View, Text, StyleSheet, TouchableOpacity} from "react-native";
+import {colors} from '../style/Global';
+
+
+import {connect} from 'react-redux';
 
 class OnboardPopup extends Component {
     constructor(props){
       super (props);
+      this.closePopup = this.closePopup.bind(this)
     }
 
     render(){
 
-      var {title,caption,instructions,buttonText} = this.props.passProps.toJS();
+      var {title,caption,instructions,buttonText} = this.props.passProps;
 
         return (
-            <View>
+            <View style={styles.container}>
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.caption}>{caption}</Text>
               <Text style={styles.instructions}>{instructions}</Text>
-              <TouchableOpacity onPress={this.props.closeHandler}>
+              <TouchableOpacity onPress={this.closePopup}>
                 <Text style={styles.button}>{buttonText}</Text>
               </TouchableOpacity>
             </View>
         );
     }
+    closePopup(){
+      this.props.dispatch({type: 'INCREMENT_CURRENT_STEP',payload:this.props.onboard.get('currentStep')}); // this also takes care of setting onboard to false
+      this.props.closeHandler()
+    }
 }
 const styles = StyleSheet.create({
 
+  container: {
+    padding:0,
+  },
     title: {
       fontSize:30,
       fontWeight:'600',
-      textAlign:'center',
-      marginBottom:5,
-      marginTop:15,
-      color:'#333',
+      marginBottom:10,
+      marginTop:5,
+      color:colors.darkGrey,
     },
     caption: {
       fontSize:20,
       fontWeight:'500',
-      textAlign:'center',
       marginBottom:10,
-      color:'#555',
+      color:colors.darkGrey,
     },
     instructions: {
-      fontSize:15,
+      fontSize:14,
       fontWeight:'400',
-      textAlign:'center',
-
+      color:colors.darkGrey,
     },
     button: {
-      backgroundColor: constants.colors[1],
+      backgroundColor: colors.blue,
       textAlign:'center',
       color:'#fff',
-      margin:40,
-      padding:10
+      padding:10,
+      marginRight:50, // style hack
+      marginTop:20,
+      marginBottom:20
+
     }
 });
-module.exports = OnboardPopup;
+
+// module.exports = OnboardPopup;
+
+function mapStateToProps(state) {
+  return {
+    // recs: this.recs,
+    onboard: state.onboard
+  };
+}
+export default connect(mapStateToProps)(OnboardPopup);

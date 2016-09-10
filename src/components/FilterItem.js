@@ -5,8 +5,25 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-// import RecType from '../../components/rec/RecType';
-const Global = require('../style/Global');
+
+import {colors} from '../style/Global';
+
+const recType = {
+  all: "Everything",
+  default: "page_with_curl",
+  other: "Other",
+  book: "Books",
+  video: "film_projector",
+  music: "Music",
+  food: "Food",
+  podcast: "Podcasts",
+  tv: "TV Shows",
+  movie: "Movies",
+  place: "Places",
+}
+
+
+
 export default class FilterItem extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +36,7 @@ export default class FilterItem extends Component {
     return (
       <TouchableOpacity style={[styles.filterButton,activeButtonStyle]} onPress={onPress}>
 
-        <Text style={[styles.filterText,activeTextStyle]}>{filter}</Text>
+        <Text style={[styles.filterText,activeTextStyle]}>{recType[filter]}</Text>
 
         </TouchableOpacity>
      );
@@ -31,44 +48,30 @@ export default class FilterItem extends Component {
 const styles = StyleSheet.create({
 
   filterButton: {
-    backgroundColor:'#fff',
+    backgroundColor:colors.purple,
     flexDirection:'column',
     justifyContent:'center', //vertical align
-    borderRightWidth:1,
+    borderRightWidth:0,
     borderRightColor:"#ccc",//GlobalStyle.constants.colors[1],
-    borderLeftWidth:1,
+    borderLeftWidth:0,
     borderLeftColor:"#ccc",//GlobalStyle.constants.colors[1],
     paddingTop:0,
     paddingBottom:0,
-    paddingLeft:5,
-    paddingRight:5,
-    width:70
+    paddingLeft:8,
+    paddingRight:8,
   },
   activeButton: {
-    backgroundColor: Global.constants.colors[1],
+    borderBottomWidth:3,
+    borderBottomColor:"#fff",
   },
   filterText: {
-    color:"#555",
+    color:"#fff",
     fontSize:12,
     fontWeight:'400',
     textAlign:'center',
   },
   activeText: {
-    color:"#fff"
+    color:"#fff",
+    fontWeight:'700'
   },
-  countContainer:{
-    height:10,
-    width:10,
-    position:'absolute',
-    top:2,
-    right:11,
-    flexDirection:'column',
-    justifyContent:'center', //vertical align
-  },
-  count: {
-    fontSize:7,
-    color:'#111',
-    textAlign:'center',
-    backgroundColor:'rgba(0,0,0,0)', //clear
-  }
 })

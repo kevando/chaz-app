@@ -7,45 +7,86 @@ export function addRecr(name) {
     payload: {
       id: uuid.v1(),
       name: name,
-      created_at: Date.now()
+      created_at: Date.now(),
+      stats: {},
     }
   };
 }
 
-export function removeRecr(recrKey){                  // REMOVE REC
+export function updateRecrStats(rec) {
+
+  var recr_id = rec.recr_id;
+
   return function(dispatch, getState) {
-    console.log('remove recr',recrKey)
-    const currentState = getState();
-    const recrsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
-    recrsRef.child(recrKey).remove();
-    // todo dispatch upgrade recr score and recs recr score
-    // consider if I need to do any other checks
-    // I feel like properly structred data would help alot here
+    var recs = getState().recs;
+    var score = 0;
+    var totalRecs = 0;
+    var totalGradedRecs = 0;
+    var totalGrade = 0;
+    recs.map(function(rec){ // could consolidate this better
+        if(rec.get('recr_id') == recr_id) {
+          totalRecs++;
+          if(rec.get('grade') != undefined){
+              totalGradedRecs++;
+              totalGrade += rec.get('grade');
+          }
+        }
+    });
+    // score = Math.round((totalGradedRecs/totalGrade)*200);
+    score = (totalGrade/(totalGradedRecs*5))*100;
+    dispatch({
+      type: types.UPDATE_RECR_STATS,
+      payload: {
+        id: recr_id,
+        stats: {
+          score: score,
+          totalRecs: totalRecs,
+          totalGrade: totalGrade,
+          totalGradedRecs: totalGradedRecs,
+        }
+
+      }
+    });
   }
 }
 
-export function assignRecr(recKey,recr) {
-  console.log('recKey',recKey)
-  console.log('recr',recr);
-  // Firebase bugs out with undefined data, but its probly good to
-  // clear recs from recr before assigning it to rec list
-  delete recr.recs; // this works even if recs is not there
 
-  return(dispatch,getState) => {
-    const currentState = getState();
-    const uid = currentState.app.getIn(["authData","uid"]);
 
-    // 1 assign recKey to recr recs list
-    const recrRecsRef = fireRef.child(`users/${uid}/recrs/${recr._key}/recs/${recKey}`);
-    recrRecsRef.set( {recKey:recKey}); // set entire rec objrect?
+//
+// export function removeRecr(recrKey){                  // REMOVE REC
+//   return function(dispatch, getState) {
+//     console.log('remove recr',recrKey)
+//     const currentState = getState();
+//     const recrsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
+//     recrsRef.child(recrKey).remove();
+//     // todo dispatch upgrade recr score and recs recr score
+//     // consider if I need to do any other checks
+//     // I feel like properly structred data would help alot here
+//   }
+// }
 
-    // 2 assign recr to rec
-    const recRef = fireRef.child(`users/${uid}/recs/${recKey}`);
-    recRef.update({recr: recr });
-
-  }
-
-}
+// export function assignRecr(recKey,recr) {
+//   console.log('recKey',recKey)
+//   console.log('recr',recr);
+//   // Firebase bugs out with undefined data, but its probly good to
+//   // clear recs from recr before assigning it to rec list
+//   delete recr.recs; // this works even if recs is not there
+//
+//   return(dispatch,getState) => {
+//     const currentState = getState();
+//     const uid = currentState.app.getIn(["authData","uid"]);
+//
+//     // 1 assign recKey to recr recs list
+//     const recrRecsRef = fireRef.child(`users/${uid}/recrs/${recr._key}/recs/${recKey}`);
+//     recrRecsRef.set( {recKey:recKey}); // set entire rec objrect?
+//
+//     // 2 assign recr to rec
+//     const recRef = fireRef.child(`users/${uid}/recs/${recKey}`);
+//     recRef.update({recr: recr });
+//
+//   }
+//
+// }
 
 // export function listenForNewRecrs() {
 //   return (dispatch, getState) => {

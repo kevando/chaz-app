@@ -2,18 +2,15 @@ import React, {Component, PropTypes} from 'react';
 import {
   Text,
   View,
-  // ScrollView,
   TouchableOpacity,
   StyleSheet,
   TextInput,
-  // Dimensions,
-  // DeviceEventEmitter
 } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {Actions} from "react-native-router-flux";
 import { connect } from 'react-redux';
 import * as recActions from '../reducers/rec/actions';
-import * as GlobalStyle from '../style/Global';
+import {colors} from '../style/Global';
 
 class RecommendationAdd extends Component {
 
@@ -22,6 +19,7 @@ class RecommendationAdd extends Component {
     this.state = {
       title: this.props.rec.title,
       note: this.props.rec.note,
+      uid: this.props.uid || 'self'
     }
   }
 
@@ -36,6 +34,7 @@ class RecommendationAdd extends Component {
     // if new
     else {
       var rec = nextProps.recs.last();
+      console.log('rec added',rec)
       Actions.recommendationFromAdd({rec:rec.toJS()}); // fwd to RecView
     }
   }
@@ -57,7 +56,7 @@ class RecommendationAdd extends Component {
           {this.renderNoteInput()}
         </View>
 
-        {( this.state.title == ''
+        {( this.state.title == '' // dont show button until user types something
         ?
         null
         :
@@ -66,7 +65,6 @@ class RecommendationAdd extends Component {
             <Text style={styles.saveText}>Save Recommendation</Text>
           </TouchableOpacity>
         </View>
-
         )}
 
         <KeyboardSpacer/>
@@ -103,17 +101,19 @@ class RecommendationAdd extends Component {
   }
 
   onSaveRecPress() {
-    var {title,note} = this.state;
+    var {title,note,uid} = this.state;
     // if editing
     if(this.props.rec.id){
       var newRec = this.props.rec;
       newRec.title = title;
       newRec.note = note;
+      delete newRec.recr; // if recr is undefined, Firebase will have a fit
       this.props.dispatch(recActions.updateRec(newRec));
     }
     // if new
     else {
-        this.props.dispatch(recActions.addRec(title,note));
+      // if uid is null, then we are SENDING a rec
+        this.props.dispatch(recActions.addRec(title,note,uid));
     }
   }
 }
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
 
   },
   saveButton: {
-    backgroundColor: GlobalStyle.constants.colors[1],
+    backgroundColor: colors.blue,
 
   },
   saveText: {

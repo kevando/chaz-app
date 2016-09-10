@@ -12,59 +12,111 @@ import EmptyMessage from '../components/EmptyMessage';
 import FilterNav from '../components/FilterNav';
 import RecList from '../components/RecList';
 import * as GlobalStyle from '../style/Global';
+import {colors} from '../style/Global';
 
 class Recommendations extends Component {
   constructor(props) {
     super(props);
+    this.state = {uid: this.props.app.getIn(['user','uid'])}
   }
 
-  componentWillMount() {
-   // Animate creation
-  //  LayoutAnimation.spring(); // I guess this fades it in.. not sure how or why
- }
- getVisibleRecs() {
+  componentDidMount(){
+    // Hide profile link during first opening of app
+    var currentStep = this.props.onboard.get('currentStep');
+    if(currentStep < 2)
+      Actions.refresh({leftButtonTextStyle:{color:colors.purple}});
+  }
 
+
+  getGradedRecs() { // this fn will probly be used elsewhere
+
+   // Filter rec list by uid, only showing recs 'given' to me
+   var uid = this.state.uid;
+   var activeFilter = this.props.app.get('activeFilter');
+   var recs = this.props.recs.filter(function(obj){
+     return (
+      //  (obj.get('uid') === uid) && removing for now
+       (obj.get('grade') != null) &&
+       (obj.get('type') === activeFilter || activeFilter == 'all')
+     );
+
+   });
+
+   return this.appendRecr(recs);
+  }
+ getQueue() { // this fn will probly be used elsewhere
+
+  // Filter rec list by uid, only showing recs 'given' to me
+  var uid = this.state.uid;
   var activeFilter = this.props.app.get('activeFilter');
-  if(activeFilter == 'all')
-    return this.props.recs;
+  var recs = this.props.recs.filter(function(obj){
+    return (
+      // (obj.get('uid') === uid) && removing for now
+      (obj.get('grade') == null) &&
+      (obj.get('type') === activeFilter || activeFilter == 'all')
+    );
 
-  return this.props.recs.filter(rec => rec.get('type') == activeFilter);
-  // return this.props.recs;
+  });
+
+  return this.appendRecr(recs);
  }
+
+ appendRecr(recs){
+   // Then add the Recr data (probly a better place/way to do this)
+   // But I want the latest data possible
+   var recrs = this.props.recrs;
+   return recs.map((rec) => rec.set('recr', recrs.find(obj => (obj.get('id') === rec.get('recr_id')))));
+ }
+
   render() {
-
-    // Might want to take this out of the render function
-    // var recsLoaded = this.props.rec.get('loaded');
-
-    var visibleRecs = this.getVisibleRecs();
-    var totalRecs = this.props.recs
-    var currentStep = this.props.onboard.get('currentStep'); // used for rendering the filter
-
-    // if(recList.size == 0)
-      // return(<EmptyMessage notify="You have no recs" instructions="Press the button below to get started" />)
-
-    // return(<View><Text>current step: {currentStep}</Text></View>)
+    var activeFilter = this.props.app.get('activeFilter');
 
     return (
       <View style={styles.container}>
-      {(currentStep > 3
-        ?
-        <FilterNav />
-        :
-        null
-      )}
-
+        {this.renderFilterNav()}
         <View style={{flex:10}} >
-        {(totalRecs.size == 0
-          ?
-          <EmptyMessage title="Welcome to chaz" notify="When people in your life give you suggestions and recommendations, save them here." instructions="Tap the blue button to save your first recommendation." />
-          :
-          <ScrollView><RecList recs={visibleRecs.reverse()} /></ScrollView>
-        )}
+          {(this.props.recs.size == 0
+            ? this.renderWelcomeMessage()
+            : this.renderRecLists()
+          )}
         </View>
-        <RecAddButton activeType={"default"} onPress={Actions.recommendationAdd} />
+        <RecAddButton text="Add New Recommendation" activeFilter={activeFilter} onPress={this.onAddRecPress.bind(this)} />
       </View>
     );
+  }
+
+  renderFilterNav(){
+    var currentStep = this.props.onboard.get('currentStep');
+    if(currentStep > 2)
+      return(<FilterNav />)
+  }
+  renderWelcomeMessage(){
+    return(<EmptyMessage title="Welcome to chaz" notify="The fastest way to save recommendations in your phone." instructions="If you do not have anything to save yet, I would like to recommend my favorite movie, Shawshank Redemption." />);
+  }
+  renderRecLists(){
+    var gradedRecs = this.getGradedRecs();
+    var queue = this.getQueue();
+    return(
+      <ScrollView>
+        <Text style={styles.title}>Queue ({queue.size})</Text>
+        <RecList recs={queue} />
+        {(gradedRecs.size > 0
+          ?
+          <View>
+            <Text style={styles.title}>Graded Recommendations ({gradedRecs.size})</Text>
+            <RecList recs={gradedRecs} />
+          </View>
+          :
+          null
+        )}
+
+      </ScrollView>
+    );
+
+  }
+
+  onAddRecPress(){
+    Actions.recommendationAdd({uid:this.state.uid})
   }
 
 }
@@ -75,31 +127,25 @@ const styles = StyleSheet.create({
     flex: 1,
     borderLeftWidth: 0,
     borderRightWidth: 0,
-    borderColor:GlobalStyle.constants.colors[1],
-    backgroundColor:'#eee',
-    borderTopWidth: 2,
-    // borderTopColor: 'red'
+    borderColor:'white',
+    backgroundColor:colors.lightGrey,
+    borderTopWidth: 0,
 
   },
-  text: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10
-  },
-  button: {
-    textAlign: 'center',
-    fontSize: 18,
-    marginBottom: 10,
-    marginTop:10,
-    color: 'blue'
+  title: {
+    margin:10,
+    fontWeight:'600',
+    fontSize:13,
+    color:colors.darkGrey
   }
+
 });
 
 
 function mapStateToProps(state) {
   return {
     recs: state.recs,
+    recrs: state.recrs,
     app: state.app,
     onboard: state.onboard
   };

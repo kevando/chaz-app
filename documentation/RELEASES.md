@@ -1,9 +1,39 @@
-#### 0.9
-- refactored app so its offline by default
+#### 0.10
+- Totally overhauled navbar UI Style
+- Added several onboarding steps
+- App forces a logout if version is mimatched
+- Users can grade recommendations
+- Users can view basic friend profile pages
+- Friends have a score, based on the average of their graded recs
+
+#### Version 0.9
+- Released 2016.07.29
+- Refactored app so its offline by default
 - Changed navigator API
 - Added some janky animation to welcome page
 - Added recr
-- added custom error logging to fabric (not sure if this works)
+- Added custom error logging to fabric (not sure if this works)
+
+#### Screenshots
+
+##### Welcome Sceen:
+![alt text][welcome]
+### Opening Screen (no recommendations):
+![alt text][empty]
+### Pop up after saving 1st rec
+![alt text][first popup]
+### One Generic Rec Added
+![alt text][rec added]
+### Empty Screen for TV shows
+![alt text][empty tv list]
+
+[welcome]: https://i.imgur.com/QxLSRpB.png "Welcome Screen"
+[empty]: https://i.imgur.com/tcSGj5s.png "Empty Screen"
+[first popup]: https://i.imgur.com/w8kfeiL.png "Popup"
+[list]: https://i.imgur.com/bTAd5Ib.png "Rec List"
+[rec added]: https://i.imgur.com/8DaqHMH.png "Rec Added"
+[empty tv list]: https://i.imgur.com/nmfn4vo.png "Empty List"
+
 
 ### 0.7.8
  - added fabric tracking to analytics middleware

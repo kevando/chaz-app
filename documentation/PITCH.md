@@ -1,19 +1,11 @@
-
-
-
 ### What is Chaz?
+The fastest way to save recommendations in your phone, chaz also creates the most efficient way to provide feedback on recommendations.
+### What is the purpose behind chaz?
+The heart of friendship is empathy and understanding. Our digital world makes it difficult to provide authentic feedback and demonstrate understanding. The goal of chaz is to build a stronger sense of empathy in humanity.
 
 
-
-the heart of friendship is empathy and understanding.
-Empathy is the heart of friendship.
-
-### How does Chaz help me?
-Chaz helps you figure out what to do with your attention.
-
-### How does Chaz challenge social norms?
-
-### What are some ways that I can use Chaz deeply?
+### Other questions
+ - How does Chaz challenge social norms?
 
 ### How does Chaz improve my media consumption.
 Take movies for example. We love getting excited about new movies, but trailers
@@ -21,13 +13,6 @@ always seem to ruin suprises.
 
 ### What about all the other rec apps?
 [I am not a robot] https://i.imgur.com/KvRvkUz.png
-
-## yc questions
-
-### What about attention?
-
-add shit from old evernote here
-..review chaz bookmarks for inspiration here
 
 
 ### What is our contrarian belief?

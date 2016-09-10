@@ -1,26 +1,9 @@
 # Product Roadmap
 
-update mp
+# 0.11
 
-# 0.10
-
-do logrithmic plan here, incorporate trello here
-
-add cooler animations, how to group scenes, figure out scenes once and for all
-logout is all fucked up
-https://facebook.github.io/origami/
-https://medium.com/@Jpoliachik/react-native-s-layoutanimation-is-awesome-4a4d317afd3e#.lx22qwmlw
-
-grade rec
-recr view
-recr score
-validate recr does not already exists
-assign emoji faces to recrs, give it some order or random
-better ui for recr add and other data io, like edit recr
-addRec button on every page, track where its clicked, add type auto fill
-disable logging for production
-bug: welcome button not aligned, do work on iphone5
-
+- Rec reminders
+- Rec list sorting
 
 ### Beta Roadmap
 
@@ -29,10 +12,9 @@ bug: welcome button not aligned, do work on iphone5
  - Add Friend List page
  - Add a profile page that displays user's rec/recr/grade/score data
  - Add ability to save recs that I give people
- - Remove dependency on internet access.
+ - Users can chat and send recs
 
 ### Version 1.x
- - Chat feature
  - option to send "Started watching" to friend that gave rec
  - Get it ready for useronboarding.com
  - Premium service: we find links to the shit you get rec'd

@@ -11,7 +11,7 @@ var analyticsMiddleware = function(middlewareAPI){
 
     return function(next){
         return function(action){
-          console.log('ANALYTICS MIDDLWARE', action.type);
+          // console.log('ANALYTICS MIDDLWARE', action.type);
           // var state = store.getState();
           switch (action.type) {
 
@@ -28,7 +28,9 @@ var analyticsMiddleware = function(middlewareAPI){
               break;
             case 'UPDATE_REC':
               Mixpanel.trackWithProperties('Rec Updated', action.payload);
-              Mixpanel.increment("Rec Count", 1);
+              break;
+            case 'GRADE_REC':
+              Mixpanel.trackWithProperties('Rec Graded', action.payload);
               break;
             case 'DELETE_REC':
               Mixpanel.trackWithProperties('Rec Deleted', { title: action.payload.title });
@@ -40,8 +42,9 @@ var analyticsMiddleware = function(middlewareAPI){
               Mixpanel.increment("Recr Count", 1);
             break;
 
-            case 'SHOW_ONBOARD_POPUP':
-              Mixpanel.trackWithProperties('Onboard Popup', { step: action.payload });
+            case 'INCREMENT_CURRENT_STEP':
+              if(action.payload) // payload is empty if this was called from middleware and should not be tracked
+                Mixpanel.trackWithProperties('Onboard Step', { step: action.payload });
             break;
 
 

@@ -44,12 +44,15 @@ export function syncFirebase() {
     var { app, recs, recrs } = getState();
     var uid = app.getIn(['user','uid']);
     var fireRef = firebaseApp.database().ref();
+
+    // console.log(recs.toJS())
+
     fireRef.child(`users/${uid}/recs`).set(recs.toJS());
     fireRef.child(`users/${uid}/recrs`).set(recrs.toJS());
   }
 }
 
-export function loadDataFromFirebase(user) { // hydrate
+export function loadDataFromFirebase(user) { // hydrate on user sign in
   return function(dispatch,getState){
 
     var fireRef = firebaseApp.database().ref();
@@ -71,6 +74,91 @@ export function loadDataFromFirebase(user) { // hydrate
       dispatch({type:'CREATE_APP_USER',payload: user});
       dispatch({type:'INIT_ONBOARD'}); // should have state data now
     });
+
+  }
+}
+
+// Chat messages. Might want to pull this out
+
+
+export function appendMessageToRec(message,rec_id) { // hydrate on user sign in
+  return function(dispatch,getState){
+
+
+    var fireRef = firebaseApp.database().ref();
+    var chatsRef = fireRef.child(`messages/${rec_id}`);
+    chatsRef.push({message:message});
+
+
+  }
+}
+
+export function listenForMessages(rec_id) {
+  return function(dispatch,getState){
+
+    var fireRef = firebaseApp.database().ref();
+    var messagesRef = fireRef.child(`messages/${rec_id}`);
+
+    messagesRef.on('value', (snap) => {
+      console.log('Listen for recs heard! I may need to unlisten this');
+
+      // get children as an array
+      var items = [];
+      snap.forEach((child) => {
+        items.push({
+          message: child.val().message,
+          _key: child.key
+        });
+      });
+      console.log('items',items)
+        dispatch({type:'LOAD_MESSAGES',payload:items})
+
+    });
+
+  }
+}
+
+// Push new rec to recr user if user exists
+export function assignRecr(rec) {
+  return function(dispatch,getState){
+
+    var recrs = getState().recrs;
+    var recr = recrs.find(function(obj){return obj.get('id') === rec.recr_id });
+    console.log('recr',recr);
+    var recr_uid = recr.get('uid');
+    if(recr_uid != undefined){
+      console.log('then we found an online recr! Send him the rec we just added');
+      var { app, recs, recrs } = getState();
+      var uid = app.getIn(['user','uid']);
+      var fireRef = firebaseApp.database().ref();
+      fireRef.child(`users/${recr_uid}/recs`).push(rec);
+    }
+
+    // Now we push this rec to the user's recs list
+    // The listener will fire and this user will see their new rec live!
+
+
+
+
+    // console.log('Listen for recs',rec_id);
+    //
+    // var fireRef = firebaseApp.database().ref();
+    // var messagesRef = fireRef.child(`messages/${rec_id}`);
+    //
+    // messagesRef.on('value', (snap) => {
+    //   console.log('Listen for recs heard! I may need to unlisten this');
+    //
+    //   // get children as an array
+    //   var items = [];
+    //   snap.forEach((child) => {
+    //     items.push({
+    //       message: child.val().message,
+    //       _key: child.key
+    //     });
+    //   });
+    //   dispatch({type:'LOAD_MESSAGES',payload:items})
+    //
+    // });
 
   }
 }

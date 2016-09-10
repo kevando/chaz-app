@@ -8,7 +8,3 @@ export function incrementStep() {
 export function incrementCurrentStep() {
   return {type: types.INCREMENT_CURRENT_STEP};
 }
-
-export function setQueue(action) {
-  return {type: types.SET_QUEUE, payload: action};
-}

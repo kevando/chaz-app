@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity,AlertIOS} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity,AlertIOS,ScrollView} from "react-native";
 import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
+import * as recrActions from '../reducers/recr/actions';
+import * as firebaseActions from '../reducers/firebase/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
+import RecGradeSelecter from '../components/RecGradeSelecter';
+// import RecChat from '../components/RecChat';
 import RecrItem from '../components/RecrItem';
+import ReceeItem from '../components/ReceeItem'; // change this name please
 import {connect} from 'react-redux';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Emoji from 'react-native-emoji';
+import RecAddButton from '../components/RecAddButton';
+import {colors} from '../style/Global';
 
 class RecView extends Component {
 
   constructor(props) {
     super(props)
     // this will make it easier to handle the new props
+    // console.log('this rec',this.props.rec);
     this.state = {rec:this.props.rec}
     // Set delete button in top right
 
@@ -23,21 +31,25 @@ class RecView extends Component {
 
   }
   componentWillMount(){
-    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:'red'} })
+    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:colors.red} })
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
-    this.setState({rec: newProps.rec});
+    // this.setState({rec: newProps.rec});
+    console.log('rec got new props',newProps)
   }
 
   render(){
     let { dispatch } = this.props;
     let boundActionCreators = bindActionCreators(recActions, dispatch)
-    var {rec} = this.state;
+    let recrActionCreators = bindActionCreators(recrActions, dispatch)
+    let firebaseActionCreators = bindActionCreators(firebaseActions, dispatch)
+    var {rec} = this.props;
     var filters = this.props.app.get('filters');
 
     return (
-      <View  style={{flex:1}}>
+      <View  style={styles.container}>
+      <ScrollView>
         <View style={styles.row}>
           <View style={styles.left}>
             <RecType rec={rec} {...boundActionCreators} size={30} filters={filters.toArray()} />
@@ -60,9 +72,22 @@ class RecView extends Component {
             <RecrItem rec={rec} {...boundActionCreators} />
           </View>
         </View>
+
+        {(rec.recr_id // only allow grading if recr is added
+          ?
+          <View style={styles.row}>
+            <View style={styles.left}>
+            </View>
+            <View style={styles.right}>
+              <RecGradeSelecter rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
+            </View>
+          </View>
+          :
+          null
+        )}
       <View>
     </View>
-    <KeyboardSpacer />
+    </ScrollView>
   </View>
     );
   }
@@ -76,16 +101,25 @@ class RecView extends Component {
   }
 
   deleteRec(){
-    var id = this.props.rec.id;
-    this.props.dispatch(recActions.deleteRec(id));
+    var rec = this.props.rec;
+    this.props.dispatch(recActions.deleteRec(rec.id));
+    this.props.dispatch(recrActions.updateRecrStats(rec));
     Actions.pop();
   }
 
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+    borderColor:colors.darkGrey,
+    borderTopWidth: 1,
+    flexDirection:'column'
+  },
   row: {
-    backgroundColor: 'white',
+    // backgroundColor: 'red',
     borderBottomWidth:1,
     borderBottomColor: '#ddd',
     flexDirection: 'row', // inner rows on top of each other
@@ -109,20 +143,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     paddingLeft:5
   },
-  title: {
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '400',
-    letterSpacing:1.1
-  },
-  note: {
-    textAlign: 'left',
-    fontSize: 13,
-    fontWeight: '300',
-    color: "#666",
-    letterSpacing:1.0,
-    marginTop:5
-  }
 
 });
 

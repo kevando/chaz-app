@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 var uuid = require('react-native-uuid');
 
-export function addRec(title,note) {
+export function addRec(title,note,uid) {
   return {
     type: types.ADD_REC,
     payload: {
@@ -9,12 +9,22 @@ export function addRec(title,note) {
       title: title,
       note: note,
       created_at: Date.now(),
+      uid: uid
     }
   };
 }
 export function updateRec(rec) {
+  delete rec.recr; // STOP SENDNG FUCKING RECR
   return {
     type: types.UPDATE_REC,
+    payload: rec
+  };
+}
+
+export function gradeRec(rec) {
+  delete rec.recr; // STOP SENDNG FUCKING RECR
+  return {
+    type: types.GRADE_REC,
     payload: rec
   };
 }
@@ -28,15 +38,16 @@ export function deleteRec(recId){
   }
 }
 
-export function assignRecr(rec,recr){
-  // console.log('assign rec',rec)
-  // console.log('assign recr',recr)
-  rec.recr = recr.toJS(); // simply add recr
-  return {
-    type: types.UPDATE_REC, // I can do this cause im not editing recr tree yet
-    payload: rec
-  }
-}
+// Replacing this with simply the recr_id
+// export function assignRecr(rec,recr){
+//   // console.log('assign rec',rec)
+//   // console.log('assign recr',recr)
+//   rec.recr = recr.toJS(); // simply add recr
+//   return {
+//     type: types.UPDATE_REC, // I can do this cause im not editing recr tree yet
+//     payload: rec
+//   }
+// }
 
 
 // export function setGrade(rec, grade) {                  // ADD NEW REC

@@ -9,6 +9,7 @@ import {
 import Button from "react-native-button";
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
+import * as firebaseActions from '../reducers/firebase/actions';
 
 import {Actions} from "react-native-router-flux";
 import { connect } from 'react-redux';
@@ -51,6 +52,8 @@ class RecommenderAdd extends Component {
               returnKeyType={'done'}
               onSubmitEditing={this.onAddRecrPress.bind(this)}
             />
+            {(this.state.name ? <Button style={{backgroundColor:'green',color:'#fff',fontWeight:'300',fontSize:14,textAlign:'center',padding:6,margin:5}} onPress={this.onAddRecrPress.bind(this)} >Add</Button> : null )}
+
 
             {this.renderRecrs()}
 
@@ -78,7 +81,11 @@ class RecommenderAdd extends Component {
     }
     onRecrAssignPress(recr) {
       var rec = this.props.passProps;
-      this.props.dispatch(recActions.assignRecr(rec,recr));
+      // console.log('recr in asign recr',recr);
+      rec.recr_id = recr.get('id');
+      this.props.dispatch(recActions.updateRec(rec));
+      this.props.dispatch(recrActions.updateRecrStats(rec));
+      // this.props.dispatch(firebaseActions.assignRecr(rec)); // I think I did this for the live connection
       this.props.closeHandler();
     }
     onAddRecrPress() {
@@ -90,7 +97,7 @@ class RecommenderAdd extends Component {
 var styles = StyleSheet.create({
     title: {
       textAlign:'center',
-      fontSize: 20,
+      fontSize: 15,
       fontWeight: '500',
       marginBottom:15,
     }

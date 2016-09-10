@@ -18,7 +18,7 @@ export default class RecList extends Component {
 
     var recs = this.props.recs;
     if(recs.size == 0)
-    return(<EmptyMessage title="" notify="You have not saved anything for this category" instructions="" />)
+    return(<EmptyMessage instructions="There is nothing to show here."  />)
     return (
       <View>
         {

@@ -11,31 +11,37 @@ var onboardMiddleware = function(store){ // formerly middlewareAPI
           //
           //  SHOW_ONBOARD_POPUP = true gets triggered in chaz.js
 
-          var state = store.getState();
-          var onboard = state.onboard;
-          var currentStep = onboard.get('currentStep');
-          var stepData = onboard.getIn(['steps',currentStep]);
-          var {condition} = stepData.toJS();
+          // probly dont need full middleware for this, but keeping for now cause im lazy
+
+
+
 
           switch (action.type) {
             // Check the conditions any time that data is saved to redux
 
             case 'INIT_ONBOARD': // Properly set the current onboard step
+              var state = store.getState();
+              var onboard = state.onboard;
+              var currentStep = onboard.get('currentStep');
+              var stepData = onboard.getIn(['steps',currentStep]);
+              var {dataCondition} = stepData.toJS();
+              console.log('currentStep',currentStep);
+              console.log('dataCondition',dataCondition);
               console.log('init onboard?');
               var steps = onboard.get('steps');
               var currentStep = 0; // tmp
               steps.map(function(step){
-                // console.log('step data in loop',step.toJS())
-                var {condition} = step.toJS();
-                if(condition(state))
+                var {dataCondition} = step.toJS();
+                if(dataCondition(state)){
+                  console.log('iterating thru steps and returned true for step: ',step.toJS());
                   store.dispatch({type: 'INCREMENT_CURRENT_STEP'});
+                } else {
+                  return;
+                }
+
+
               });
 
-            break;
-
-            case 'REDUX_STORAGE_SAVE':
-              if(condition(state))
-                next({type: 'SHOW_ONBOARD_POPUP',payload:true}); // this will immediately render the popup
 
             break;
 

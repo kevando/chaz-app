@@ -13,9 +13,8 @@ import {connect} from 'react-redux'
 import * as recrActions from '../reducers/recr/actions';
 
 import RecommenderAdd from '../components/RecommenderAdd';
-import {colors} from '../style/Global';
 
-class RecrItem extends Component {
+class ReceeItem extends Component {
 
   constructor(props) {
     super(props);
@@ -24,20 +23,32 @@ class RecrItem extends Component {
   }
 
   render() {
+    var recee = null;
+    // console.log('recr props',this.props.recr)
+    // var recr = this.getRecr(this.props.rec.recr_id)
+    var rec = this.props.rec;
+    // Either this was sent or received
+    var uid = this.props.app.getIn(['user','uid']);
+    if(uid == rec.uid)
+      recee = 'Me'
 
-    var recr = this.getRecr(this.props.rec.recr_id);
+    if(rec.uid != null && uid != rec.uid) {
+      Recee = this.props.recrs.find(function(obj){return obj.get('uid') === rec.uid; })
+      // console.log('Recee',Recee)
+        recee = Recee.get('name')
+    }
 
 
-    if(recr) {
+    if(recee) {
       return (
         <TouchableOpacity onPress={this.onRecrPress.bind(this)} >
-          <Text>Recommended by: <Text style={{fontWeight:'600',color:colors.green,fontSize:16}}>{recr.name}</Text></Text>
+          <Text>Recommended to: <Text style={{fontWeight:'600',color:"green",fontSize:16}}>{recee}</Text></Text>
         </TouchableOpacity>
       );
     } else {
       return (
         <TouchableOpacity onPress={this.onWhoPress.bind(this)} >
-          <Text style={{fontWeight:'600',color:colors.green,fontSize:18}}>Who recommended this?</Text>
+          <Text style={{fontWeight:'600',color:"green",fontSize:20}}>Who is this recd to?</Text>
         </TouchableOpacity>
       )
     }
@@ -48,13 +59,13 @@ class RecrItem extends Component {
   }
 
   onRecrPress() {
-    Actions.friend({recr: this.getRecr(this.props.rec.recr_id)});
+    Actions.friend({recr: this.props.rec.recr});
   }
   getRecr(recr_id){
     var recr = this.props.recrs.find(function(obj){
       return obj.get('id') === recr_id;
     });
-    return recr ? recr.toJS() : null ;
+    return recr;
   }
 
 
@@ -66,6 +77,7 @@ function mapStateToProps(state) {
   return {
     recs: state.recs,
     recrs: state.recrs,
+    app: state.app,
   };
 }
-export default connect(mapStateToProps)(RecrItem);
+export default connect(mapStateToProps)(ReceeItem);

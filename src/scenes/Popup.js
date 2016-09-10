@@ -11,7 +11,7 @@ import {
 
 import Button from "react-native-button";
 import {Actions} from "react-native-router-flux";
-import {constants} from '../style/Global';
+import {colors} from '../style/Global';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 var {
@@ -88,11 +88,11 @@ var styles = StyleSheet.create({
     container: {
       padding:20,
       margin:20,
-      
+
       justifyContent: "center",
       alignItems: "center",
       backgroundColor:"white",
-      borderColor:constants.colors[0],
+      borderColor:colors.purple,
       borderWidth:7
     },
 });

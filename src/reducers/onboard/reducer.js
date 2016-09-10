@@ -5,81 +5,113 @@ const initialState = Map({
   currentStep: 0, // step we are are currently at
   showPopup: false,
   steps: List.of(
-    // 0 Not used
+
+    // Step 0
     Map({
-      label: 'Open the App!',
-      condition: function(state){
-        return (true);
+      label: 'Save a recommendation',
+      actionCondition: function(action) {
+        if(action.scene)
+          return ( (action.type == types.FOCUS && action.scene.name == "recommendationFromAdd") ? true : false);
+        else
+          return false;
       },
-      title: 'Welcome!',
-      caption: 'Thank you for being part of the beta test', //tagline
-      instructions:'Let Kevin know what you think :)',
-      buttonText: 'Will do',
-    }),
-    // 1
-    Map({
-      label: 'Add your first rec',
-      condition: function(state){
-        // console.log('recr size',state.recrs.size)
+      dataCondition: function(state) {
         return (state.recs.size > 0 ? true : false);
       },
       title: 'Awesome!',
       caption: 'You just saved your first recommendation.', //tagline
-      instructions:'chaz also helps you understand which friends give you the best recommendations, so include who recommended this.',
-      buttonText: 'I got it',
+      instructions:'chaz helps you understand which friends are giving you the best recommendations. On the next page, add who recommended this.',
+      buttonText: 'Okay, I will do that',
     }),
-    // 2
+
+    // Step 1
     Map({
-      label: 'Assign your first recomender',
-      condition: function(state){
-        // console.log('recr size',state.recs.size)
+      label: 'Add a friend',
+      actionCondition: function(action) {
+        return ( (action.type == types.BACK ) ? true : false);
+      },
+      dataCondition: function(state) {
         return (state.recrs.size > 0 ? true : false);
       },
-      title: 'Sweet',
-      caption: 'You just gave credit for this recommendation',
-      instructions:'Now lets categorize it. Click the paper in the top left to change what type of recommendation this is.',
-      buttonText: 'Okay, I got it',
+      title: 'Sweet.',
+      caption: 'You just added your first friend to chaz.',
+      instructions:'Finally, lets categorize this recommendation. Tap the paper in the top left.',
+      buttonText: 'I will do that',
     }),
-    // 3
+    // Step 2
     Map({
-      label: 'Save Recs with multiple filters',
-      condition: function(state){
-        // console.log('rec size',state.recs.size)
-        return (state.recs.size > 5 ? true : false);
+      label: 'Unlock filters',
+      actionCondition: function(action) {
+        if(action.scene)
+          return ( (action.scene.name == "recommendations" ) ? true : false);
+        else
+          return false;
       },
-      title: 'Congrats!',
+      dataCondition: function(state) {
+        // console.log('recs size for unlock filters check?',state.recs.size )
+        return (state.recs.size > 2 ? true : false);
+      },
+      title: 'Hey,',
       caption: 'You just unlocked filters!',
-      instructions:'You saved enough recommendations where it makes sense to filter them.',
-      buttonText: 'Okay, I got it',
+      instructions:'chaz works great when you want to do something specific, so now you can filter by category. ',
+      buttonText: 'Okay, cool',
     }),
-    // 4
+    // Step 3
     Map({
-      label: 'Grade a Recommendation',
-      condition: function(state){
-        return (false);
+      label: 'Unlock grades',
+      actionCondition: function(action) {
+        if(action.scene)
+          return ( (action.type == types.FOCUS && action.scene.name == "recommendationFromAdd") ? true : false);
+        else
+          return false;
       },
-      trigger: 'GRADE_REC',
-      // title: 'Congrats!',
-      // caption: 'You just unlocked filters!',
-      // instructions:'Use the filters at the top of your list to sort by category.',
-      // buttonText: 'Okay, I got it',
+      dataCondition: function(state) {
+        return (state.recs.size > 3 ? true : false);
+      },
+      title: 'A+',
+      caption: 'chaz is the best app to follow up with your friends',
+      instructions:'Now you can grade recommendations after you enjoy it.',
+      buttonText: 'Okay, okay, I get it',
     }),
+    // Step 4
+    Map({
+      label: 'Grade a recommendation',
+      actionCondition: function(action) {
+        if(action.scene)
+          return ( (action.type == types.FOCUS && action.scene.name == "recommendationFromAdd") ? true : false);
+        else
+          return false;
+      },
+      dataCondition: function(state){
+        recsWithGrades = 0
+
+        state.recs.map(function(rec){ if(!(typeof rec.get('grade') === "undefined")){recsWithGrades++} } );
+        console.log('recsWithGrades',recsWithGrades);
+        return (recsWithGrades.size > 0 ? true : false);
+        // return true if at least 1 rec has a grade
+      },
+      title: 'Cool',
+      caption: 'You now have a graded recommendation.',
+      instructions:'This also means that your friend has a score. Go check it out.',
+      buttonText: 'Got it',
+    }),
+    // Step 5 (removing for this version)
+    // Map({
+    //   label: 'Start your squad',
+    //   actionCondition: function(action) {
+    //     return ( (action.type == types.BACK ) ? true : false);
+    //   },
+    //   dataCondition: function(state) {
+    //     return (state.recrs.size > 4 ? true : false);
+    //   },
+    //   title: 'Heyo',
+    //   caption: 'You added so many people.',
+    //   instructions:'If you navigate back to your queue, you should see a link to view all your friends in one page',
+    //   buttonText: 'Got it',
+    // }),
+
 
   ),
-
-
-  // rec type, recr
-
-  // possibly pre-fill some of the inputs. figure out how to do note. "stephen king"
-  // should each step include its action to proceed?
-
-  // user types in my name, clicks save
-  // 4 Great! I will show up on this screen in the future
-  // user clicks back
-  // 5 Whoops! Looks like we accidentally added shawshank to the random category, lets fix that
-  // user edits recType
-  //
-
 
 });
 
@@ -89,17 +121,8 @@ export default function counter(onboard = initialState, action = {}) {
     case types.INCREMENT_CURRENT_STEP:
       return onboard.merge({
         currentStep: onboard.get('currentStep') + 1,
-        showPopup: false, // probly not needed
       });
-      case types.SET_STEP:
-        return onboard.merge({
-          currentStep: action.payload,
-        });
-      case types.SHOW_ONBOARD_POPUP: // only dispatched in app.js
-        console.log('show pop up')
-        return onboard.merge({
-          showPopup: action.payload
-        });
+
 
     default:
       return onboard;
