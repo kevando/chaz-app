@@ -1,2 +1,4 @@
-export const CREATE_APP_USER = 'CREATE_APP_USER';
-export const SET_FILTER = 'SET_FILTER';
+
+
+// new meteor
+export const CHANGE_SIGN_IN_STATUS = 'CHANGE_SIGN_IN_STATUS';

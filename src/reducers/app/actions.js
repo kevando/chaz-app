@@ -1,6 +1,13 @@
 import * as types from './actionTypes';
 
 
+// new meteor
+import ddpClient from '../../ddp';
+
+export function changeSignInStatus(status = false) {
+  return { type: types.CHANGE_SIGN_IN_STATUS, status };
+}
+
 
 // export function initialize(newState) {
 //   // This function sets the intial route and dispatches the app to create a new user if not set
