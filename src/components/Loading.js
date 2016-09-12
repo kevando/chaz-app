@@ -19,7 +19,20 @@ class Loading extends Component {
     }
   }
 
+  componentWillUnmount(){
+    console.log('loading.js unmounted')
+  }
+
+  continuePulse(){
+    this.startPulse()
+    // todo only return on even pulses
+  }
+
   startPulse() {
+    // console.log('start pulse'); this is going on forever
+    // todo probly change that
+
+
     if (!this.props.hasPulse) {
       return;
     }
@@ -36,7 +49,7 @@ class Loading extends Component {
         duration: 700,
       }),
       Animated.delay(300 * Math.random()),
-    ]).start(this.startPulse.bind(this));
+    ]).start(this.continuePulse.bind(this));
   }
   getRandomHeart(){
     var heartIndex = Math.floor((Math.random() * 4));
