@@ -1,4 +1,2 @@
-
-
-// new meteor
+export const APP_INITIALIZED = 'APP_INITIALIZED';
 export const CHANGE_SIGN_IN_STATUS = 'CHANGE_SIGN_IN_STATUS';

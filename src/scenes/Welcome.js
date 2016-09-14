@@ -14,16 +14,14 @@ import {colors} from '../style/Global';
 // new meteor stuff
 import Button from '../components/button';
 import ddpClient from '../ddp';
-import { changeSignInStatus } from '../reducers/app/actions';
+import { changeSignInStatus, initializeApp } from '../reducers/app/actions';
 
 class Welcome extends Component {
 
   constructor(props){
     super(props);
-    // dispatches CREATE_APP_USER
-    // this.props.dispatch(firebaseActions.checkForAppUser());
     this.state = {
-      status: 'loading...',
+      status: ''
     }
   }
 
@@ -38,13 +36,16 @@ class Welcome extends Component {
 
 
   handleSignIn() {
+    this.setState({status:'authenticating with server'});
     var userId = this.props.deviceId;
     ddpClient.loginWithUsername(userId, userId, (error, res) => {
       if (error) {
-        this.setState({error: error.reason})
+        // User exists, so lets create the account
+        this.handleCreateAccount();
       } else {
         this.props.changedSignedIn(true);
-        Actions.recommendations();
+        this.props.initializeApp();
+
       }
     });
   }
@@ -56,6 +57,7 @@ class Welcome extends Component {
         this.setState({error: error.reason})
       } else {
         this.props.changedSignedIn(true);
+        this.props.initializeApp();
       }
     });
   }
@@ -65,18 +67,17 @@ class Welcome extends Component {
     let signIn, createAccount;
 
     if (this.props.connected) { // todo. do I need to check this?
-      signIn = <Button text="I been here" onPress={() => this.handleSignIn()} />;
-      createAccount = <Button text="I am new" onPress={() => this.handleCreateAccount()} />;
+      signIn = <Button text="Lets get started" onPress={() => this.handleSignIn()} />;
     }
 
     return (
       <View style={styles.container}>
         <Text style={{fontWeight:'500',color:'#fff',fontSize:100,textAlign:'center'}} >chaz</Text>
-        <Text style={styles.error}>{this.state.error}</Text>
+        <Text style={{fontWeight:'400',color:'#fff',fontSize:20,textAlign:'center'}} >The fastest way to save recommendations.</Text>
+        <Text style={{color:'#fff'}}>{this.state.status}</Text>
 
         <View style={styles.buttons}>
           {signIn}
-          {createAccount}
         </View>
 
         <View style={{position:'absolute',bottom:25,left:5}}>
@@ -128,7 +129,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changedSignedIn: (status) => dispatch(changeSignInStatus(status))
+    changedSignedIn: (status) => dispatch(changeSignInStatus(status)),
+    initializeApp: () => dispatch(initializeApp())
   }
 }
 

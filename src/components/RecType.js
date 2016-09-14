@@ -65,7 +65,7 @@ export default class RecType extends Component {
     );
   }
   onTypeSelect() {
-    var newRec = this.props.rec;
+    let newRec = Object.assign({},this.props.rec); // complained about mutating the state if I just set a new var
     newRec.type = this.state.type; // might be a bad flow for perf
     this.props.updateRec(newRec);
   }

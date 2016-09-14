@@ -86,12 +86,8 @@ class Profile extends Component {
   }
 
   onLogoutPress(){
-
-
     ddpClient.logout(() => {
-      // this.props.changedSignedIn(false);
       this.props.dispatch(changeSignInStatus(false));
-      
     });
 
   }

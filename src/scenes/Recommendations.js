@@ -35,7 +35,6 @@ class Recommendations extends Component {
     //   .then((user) => {
     //     this.setState({user})
     //   });
-      this.makeSubscription();
       this.observeRecs();
   }
 
@@ -63,15 +62,6 @@ class Recommendations extends Component {
     }
   }
 
-  makeSubscription() {
-    ddpClient.subscribe("recs", [], () => {
-      console.log('subscribed to recs',ddpClient.collections.posts)
-      // this.setState({posts: ddpClient.collections.posts || {} });
-      // get this in an action todo
-      // console.log(ddpClient.collections.recs)
-      this.props.dispatch(setRecs(ddpClient.collections.recs));
-    });
-  }
 
 
   getAllRecs() { // this fn will probly be used elsewhere
@@ -136,7 +126,7 @@ class Recommendations extends Component {
    // Then add the Recr data (probly a better place/way to do this)
    // But I want the latest data possible
    var recrs = this.props.recrs;
-   return recs.map((rec) => rec.set('recr', recrs.find(obj => (obj.get('id') === rec.get('recr_id')))));
+   return recs.map((rec) => rec.set('recr', recrs.find(obj => (obj._id === rec.recr_id))));
  }
 
 

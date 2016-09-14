@@ -1,7 +1,8 @@
 import * as types from './actionTypes';
-var uuid = require('react-native-uuid');
-
+import uuid from 'react-native-uuid';
 import ddpClient from '../../ddp';
+
+
 
 export function addRec(title,note,uid) {
   const rec = {
@@ -34,7 +35,6 @@ export function setRecs(recs) {
     type: 'SET_RECS',
     payload: recs,
   };
-
 }
 
 export function updateRec(rec) {
@@ -44,7 +44,7 @@ export function updateRec(rec) {
     dispatch(updateRecOptimistic(rec));
 
     ddpClient.call('updateRec', [rec], (err, res) => {
-      console.log('added rec in meteor. possibly do some sort of optimistic return here')
+      console.log('updasted rec in meteor. possibly do some sort of optimistic return here')
     });
   }
 }

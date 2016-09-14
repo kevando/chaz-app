@@ -29,9 +29,10 @@ class RecommendationAdd extends Component {
     // This gets invoked after ADD_REC or UPDATE_REC updates the state tree
     // Now get user back to recView with their data
 
+    console.log('nextProps from Input',nextProps);
     // if editing
-    if(this.props.rec.id){
-      // Actions.pop({refresh: {rec:this.props.rec}}); // previous scene is RecView
+    if(this.props.rec._id){
+      Actions.pop({refresh: {rec:this.props.rec}}); // previous scene is RecView
     }
     // if new
     else {

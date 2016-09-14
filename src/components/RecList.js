@@ -17,7 +17,6 @@ export default class RecList extends Component {
   render() {
 
     var recs = this.props.recs;
-    console.log(recs);
     if(recs.size == 0)
       return(<EmptyMessage instructions="There is nothing to show here."  />)
     return (

@@ -3,13 +3,7 @@ import {View, Text, StyleSheet, AlertIOS} from "react-native";
 import { connect } from 'react-redux';
 
 import ddpClient from '../ddp';
-import { changeSignInStatus } from '../reducers/app/actions';
-
-import SignIn from './signIn';
-import SignOut from './signOut';
-
-import Loading from '../components/Loading';
-
+import { initializeApp, changeSignInStatus } from '../reducers/app/actions';
 import timer from 'react-native-timer'; // add some delays so we know whats going on
 
 import {
@@ -66,19 +60,22 @@ export class App extends Component {
 
   constructor(props) {
       super(props);
-      this.state = {loading: true, showLoading:true}; // Always default to loading. add some timeout here.
+      // this.state = {loading: true }; // Always default to loading. add some timeout here.
   }
 
   componentWillReceiveProps(newProps){
+    // this might fuck up the logged out process
     // console.log('newProps',newProps);
-    if (newProps.signedIn) {
-      // return <SignOut />
-      console.log('User is now signed in!')
+    if (newProps.initialized) {
+      Actions.recommendations();
+      console.log('App has data and ready to go!');
+    }
       // Actions.recommendations(); this causes an error -_-
-    } else {
-      console.log('User is now signed out!')
-      Actions.welcome(); // dont like keeping this here if I cant do it above
-      // return <SignIn />
+    if (!newProps.signedIn && newProps.initialized) {
+      console.log('User is now signed out!');
+      // alert('sign user out!')
+      Actions.logout(); // dont like restarting the app but whatever
+
     }
   }
 
@@ -92,13 +89,15 @@ export class App extends Component {
         ddpClient.loginWithToken((err, res) => {
           // had to change loginWithToken in the ddp to invoke a cb. not sure if thats correct
           if (!err){
-            this.props.changedSignedIn(true);
-            Scenes['recommendations'].initial = true;
+            // Initialize the app
+            this.props.changeSignInStatus(true);
+            this.props.initializeApp();
           } else {
-            Scenes['welcome'].initial = true;
+            // Scenes['welcome'].initial = true;
+            timer.setTimeout(this,'meteordelay',() => Actions.welcome() ,1200);
           }
 
-          timer.setTimeout(this,'meteordelay',() => this.setState({loading: false}),1200);
+          // timer.setTimeout(this,'meteordelay',() => this.setState({loading: false}),1200);
 
         });
       }
@@ -106,10 +105,6 @@ export class App extends Component {
   }
 
   render() {
-    // Dont render the app until I have user data back from Meteor connection
-        if(this.state.loading)
-          return(<Loading message="Connecting to Meteor Server" />)
-
 
         return(
           <Router
@@ -125,13 +120,15 @@ export class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    signedIn: state.app.get('signedIn')
+    signedIn: state.app.get('signedIn'),
+    initialized: state.app.get('initialized'),
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changedSignedIn: (status) => dispatch(changeSignInStatus(status))
+    changeSignInStatus: (status) => dispatch(changeSignInStatus(status)),
+    initializeApp: () => dispatch(initializeApp())
   }
 }
 

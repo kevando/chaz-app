@@ -30,7 +30,15 @@ class RecommenderAdd extends Component {
       // This gets invoked after ADD_RECR
       // Now get user back to recView with their recr data
       if(this.props.recrs.size != nextProps.recrs.size){
-        var recr = nextProps.recrs.last();
+        console.log('new recr added',nextProps.recrs);
+
+        var latest = nextProps.recrs.find(function(obj){
+          console.log('obj',obj)
+          return obj.created_at > 4;
+
+        });
+        var recr = nextProps.recrs.first();
+        console.log('last recr',recr);
         this.onRecrAssignPress(recr)
       }
 
@@ -70,7 +78,7 @@ class RecommenderAdd extends Component {
 
             {
               recrs.map(recr => (
-                <Button style={{color:'green',fontWeight:'300',fontSize:14,textAlign:'center',borderColor:'#ccc',borderWidth:1,padding:6,margin:5}} key={recr.get('id')} onPress={this.onRecrAssignPress.bind(this,recr)} >{recr.get('name')}</Button>
+                <Button style={{color:'green',fontWeight:'300',fontSize:14,textAlign:'center',borderColor:'#ccc',borderWidth:1,padding:6,margin:5}} key={recr._id} onPress={this.onRecrAssignPress.bind(this,recr)} >{recr.name}</Button>
               ))
             }
           </View>
@@ -79,11 +87,12 @@ class RecommenderAdd extends Component {
       } // if
     }
     onRecrAssignPress(recr) {
-      var rec = this.props.passProps;
+      console.log('recr',recr)
+      var rec = Object.assign({},this.props.passProps);
       // console.log('recr in asign recr',recr);
-      rec.recr_id = recr.get('id');
+      rec.recr_id = recr._id;
       this.props.dispatch(recActions.updateRec(rec));
-      this.props.dispatch(recrActions.updateRecrStats(rec));
+      // this.props.dispatch(recrActions.updateRecrStats(rec));
       // this.props.dispatch(firebaseActions.assignRecr(rec)); // I think I did this for the live connection
       this.props.closeHandler();
     }

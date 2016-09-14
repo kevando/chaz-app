@@ -1,15 +1,28 @@
 import * as types from './actionTypes';
-var uuid = require('react-native-uuid');
+import uuid from 'react-native-uuid';
+import ddpClient from '../../ddp';
 
 export function addRecr(name) {
+  const recr = {
+    _id: uuid.v1(),
+    name: name,
+    created_at: Date.now(),
+    stats: {},
+  }
+  return function(dispatch, getState){
+    dispatch(addRecrOptimistic(recr));
+    ddpClient.call('addRecr',[recr],(err, res) => {
+      if(err) alert('error adding recr to meteor');
+      console.log('added rec in meteor. possibly do some sort of optimistic return here')
+      console.log(res)
+      console.log(err)
+    });
+  }
+}
+function addRecrOptimistic(recr){
   return {
     type: types.ADD_RECR,
-    payload: {
-      id: uuid.v1(),
-      name: name,
-      created_at: Date.now(),
-      stats: {},
-    }
+    payload: recr
   };
 }
 
@@ -57,6 +70,12 @@ export function updateRecrStats(rec) {
   }
 }
 
+export function setRecrs(recrs) {
+  return {
+    type: 'SET_RECRS',
+    payload: recrs,
+  };
+}
 
 
 //

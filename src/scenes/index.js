@@ -27,6 +27,7 @@ import Welcome from './Welcome'
 import Popup from './Popup';
 import Logout from './Logout';
 import Friends from './Friends';
+import Loading from './Loading';
 import Friend from './Friend';
 import {colors} from '../style/Global';
 import DeviceInfo from 'react-native-device-info'; // Used to detect correct version
@@ -47,6 +48,8 @@ export const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} appVersion={DeviceInfo.getReadableVersion()} >
     <Scene key="root" direction="vertical" {...NavigationStyle} hideTabBar>
+
+      <Scene key="loading" component={Loading}  hideNavBar  type={ActionConst.REPLACE} initial={true} />
 
       <Scene key="welcome" component={Welcome}  hideNavBar  type={ActionConst.REPLACE} />
 

@@ -22,6 +22,7 @@ export default class ListItem extends Component {
   render() {
 
     var rec = this.props.rec;
+    // console.log('rec',rec)
 
     return (
       <TouchableOpacity onPress={this.onItemPress.bind(this)}>
