@@ -8,12 +8,19 @@ import {connect} from 'react-redux';
 
 import DeviceInfo from 'react-native-device-info';
 
+// meteor tmp stuff
+import ddpClient from '../ddp';
+
+import { changeSignInStatus } from '../reducers/app/actions';
+import { addPost, setPosts } from '../reducers/post/actions';
+
+
 class Profile extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {user: this.props.app.get('user').toJS()};
-    this.closeHandler = this.closeHandler.bind(this)
+    // this.state = {user: this.props.app.get('user').toJS()};
+    // this.closeHandler = this.closeHandler.bind(this)
   }
 
   componentWillMount(){
@@ -21,6 +28,23 @@ class Profile extends Component {
   }
 
   render(){
+    let {value,label} = fonts;
+
+
+    return (
+      <View style={[styles.container]}>
+        <ScrollView >
+          <View>
+            <Text style={fonts.title} >This is currently for debugging</Text>
+          </View>
+
+
+        </ScrollView>
+      </View>
+    );
+  }
+
+  render_og(){
     let {value,label} = fonts;
     let user = this.state.user;
 
@@ -62,7 +86,14 @@ class Profile extends Component {
   }
 
   onLogoutPress(){
-    Actions.logout()
+
+
+    ddpClient.logout(() => {
+      // this.props.changedSignedIn(false);
+      this.props.dispatch(changeSignInStatus(false));
+      
+    });
+
   }
 }
 

@@ -9,8 +9,10 @@ import {
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {Actions} from "react-native-router-flux";
 import { connect } from 'react-redux';
-import * as recActions from '../reducers/rec/actions';
+import {addRec, updateRec} from '../reducers/rec/actions';
 import {colors} from '../style/Global';
+
+var update = require('react/lib/update')
 
 class RecommendationAdd extends Component {
 
@@ -29,13 +31,13 @@ class RecommendationAdd extends Component {
 
     // if editing
     if(this.props.rec.id){
-      Actions.pop({refresh: {rec:this.props.rec}}); // previous scene is RecView
+      // Actions.pop({refresh: {rec:this.props.rec}}); // previous scene is RecView
     }
     // if new
     else {
       var rec = nextProps.recs.last();
       console.log('rec added',rec)
-      Actions.recommendationFromAdd({rec:rec.toJS()}); // fwd to RecView
+      // Actions.recommendationFromAdd({rec:rec.toJS()}); // fwd to RecView
     }
   }
 
@@ -103,17 +105,17 @@ class RecommendationAdd extends Component {
   onSaveRecPress() {
     var {title,note,uid} = this.state;
     // if editing
-    if(this.props.rec.id){
-      var newRec = this.props.rec;
+    console.log(this.props.rec);
+    if(this.props.rec._id){
+      let newRec = Object.assign({},this.props.rec); // complained about mutating the state if I just set a new var
       newRec.title = title;
       newRec.note = note;
-      delete newRec.recr; // if recr is undefined, Firebase will have a fit
-      this.props.dispatch(recActions.updateRec(newRec));
+      this.props.updateRec(newRec);
     }
     // if new
     else {
-      // if uid is null, then we are SENDING a rec
-        this.props.dispatch(recActions.addRec(title,note,uid));
+      // if uid is null, then we are SENDING a rec todo future feature
+        this.props.addRec(title,note,uid);
     }
   }
 }
@@ -145,4 +147,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(RecommendationAdd);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addRec: (rec) => dispatch(addRec(rec)),
+    updateRec: (rec) => dispatch(updateRec(rec))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecommendationAdd);

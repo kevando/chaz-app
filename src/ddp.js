@@ -117,12 +117,15 @@ ddpClient.onAuthResponse = (err, res) => {
 };
 
 ddpClient.loginWithToken = (cb) => {
+  // console.log('try to log in with a token'); // revisit this flow todo
   let params = { resume: '' };
   AsyncStorage.getItem('loginToken')
     .then((token) => {
       if (token) {
         params.resume = token;
         ddpClient.call("login", [params], cb);
+      } else { // but what if there is no token?
+        cb('No token found');
       }
     });
 };

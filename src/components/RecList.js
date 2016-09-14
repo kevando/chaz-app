@@ -17,19 +17,18 @@ export default class RecList extends Component {
   render() {
 
     var recs = this.props.recs;
+    console.log(recs);
     if(recs.size == 0)
-    return(<EmptyMessage instructions="There is nothing to show here."  />)
+      return(<EmptyMessage instructions="There is nothing to show here."  />)
     return (
       <View>
         {
-          recs.map(rec => (
-             <ListItem key={rec.get('id')} rec={rec.toJS()} />
+          recs.valueSeq().map(rec => (
+             <ListItem key={rec._id} rec={rec} />
           ))}
       </View>
     );
   }
-
-
 }
 
 const styles = StyleSheet.create({

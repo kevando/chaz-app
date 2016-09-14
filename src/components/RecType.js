@@ -39,12 +39,17 @@ export default class RecType extends Component {
     this.setState({type: newProps.rec.type  || 'default' }); // todo should have a better way to handle undefined types
   }
   getOptions(){
-    if(!this.props.updateRec) // if set to uneditable(hack)
+    if(!this.props.updateRec) // if set to uneditable. this is a hack todo
       return;
 
-    var options = this.props.filters
+    var options = [];
+    // console.log('categories',this.props.categories)
+    this.props.categories.map(category => options.push(category.id));
+    // console.log('options',options);
     options.push('Cancel')
     options.shift(); // remove 'all' from list
+    // console.log('options',options);
+    // return;
     return options;
   }
 

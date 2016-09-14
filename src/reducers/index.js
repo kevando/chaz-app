@@ -6,14 +6,19 @@ import recs from './rec/reducer';
 import recrs from './recr/reducer';
 import onboard from './onboard/reducer';
 import messages from './messages/reducer';
+import categories from './categories/reducer';
+
+import posts from './post/reducer';
 
 const reducers = {
   app,
-  counter, // still used for some light testing
+  // counter, // still used for some light testing
   recs,
   recrs,
   onboard,
-  messages
+  // messages,
+  posts,
+  categories,
 };
 
 const appReducer = combineReducers(reducers);

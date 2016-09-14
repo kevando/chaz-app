@@ -1,27 +1,26 @@
 import * as types from './actionTypes';
-import {Map,List} from 'immutable';
+import Immutable, {Map,List} from 'immutable';
 
-const initialState = List([]);
+const initialState = Map(); // consider how to hydrate this on app load instead of set_recs
 
 export default function recs(recs = initialState, action = {}) {
 
   switch (action.type) {
 
-    case types.LOAD_RECS_FROM_FIREBASE:
-      return action.payload; // already base a List in the actionCreator
+    case 'SET_RECS': //hydration I guess
+
+      // Moving away from rec objects being immutable Maps. Not sure I need that
+      // now that I am moving away from the async storage
+      return Map(action.payload);
 
     case types.ADD_REC:
-      return recs.push(Map(action.payload));
+      // console.log('addRec in reducer',action.payload);
+      return recs.set(action.payload._id, action.payload);
 
     case types.UPDATE_REC:
-      // Find rec by index, and update entire object in recs List
-      return recs.update(
-        recs.findIndex(function(rec) {
-          return rec.get("id") === action.payload.id;
-        }), function(rec) {
-          return Map(action.payload); // return entire rec
-        }
-      );
+      // console.log('new rec to update',action.payload)
+      return recs.set(action.payload._id, action.payload);
+
     case types.GRADE_REC: // same as update rec
       return recs.update(
         recs.findIndex(function(rec) {
@@ -32,7 +31,7 @@ export default function recs(recs = initialState, action = {}) {
       );
 
     case types.DELETE_REC:
-      return recs.filterNot(rec => rec.get('id') == action.payload.id);
+      return recs.delete(action.payload);
 
     default:
       return recs;

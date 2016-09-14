@@ -8,19 +8,19 @@ import {
 
 import {colors} from '../style/Global';
 
-const recType = {
-  all: "Everything",
-  default: "page_with_curl",
-  other: "Other",
-  book: "Books",
-  video: "film_projector",
-  music: "Music",
-  food: "Food",
-  podcast: "Podcasts",
-  tv: "TV Shows",
-  movie: "Movies",
-  place: "Places",
-}
+// const recType = {
+//   all: "Everything",
+//   default: "page_with_curl",
+//   other: "Other",
+//   book: "Books",
+//   video: "film_projector",
+//   music: "Music",
+//   food: "Food",
+//   podcast: "Podcasts",
+//   tv: "TV Shows",
+//   movie: "Movies",
+//   place: "Places",
+// }
 
 
 
@@ -31,12 +31,12 @@ export default class FilterItem extends Component {
 
   render() {
     var {filter,activeFilter,onPress,recCount} = this.props;
-    var activeButtonStyle = (activeFilter == filter ? styles.activeButton : null);
-    var activeTextStyle = (activeFilter == filter ? styles.activeText : null);
+    var activeButtonStyle = (activeFilter == filter.id ? styles.activeButton : null);
+    var activeTextStyle = (activeFilter == filter.id ? styles.activeText : null);
     return (
       <TouchableOpacity style={[styles.filterButton,activeButtonStyle]} onPress={onPress}>
 
-        <Text style={[styles.filterText,activeTextStyle]}>{recType[filter]}</Text>
+        <Text style={[styles.filterText,activeTextStyle]}>{filter.label}</Text>
 
         </TouchableOpacity>
      );

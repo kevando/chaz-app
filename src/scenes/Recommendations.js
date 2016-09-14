@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView,TouchableOpacity, LayoutAnimation } 
 import Button from 'react-native-button';
 import { Actions } from 'react-native-router-flux';
 
-import * as counterActions from '../reducers/counter/actions';
+// import * as counterActions from '../reducers/counter/actions';
 // import * as recActions from '../../reducers/rec/actions';
 
 import { connect } from 'react-redux';
@@ -14,25 +14,91 @@ import RecList from '../components/RecList';
 import * as GlobalStyle from '../style/Global';
 import {colors} from '../style/Global';
 
+// tmp for meteor before we put this in redux
+import ddpClient from '../ddp';
+
+import { setRecs } from '../reducers/rec/actions';
+
 class Recommendations extends Component {
   constructor(props) {
     super(props);
-    this.state = {uid: this.props.app.getIn(['user','uid'])}
+    // this.state = {uid: this.props.app.getIn(['user','uid'])}
   }
 
   componentDidMount(){
     // Hide profile link during first opening of app
-    var currentStep = this.props.onboard.get('currentStep');
-    if(currentStep < 2)
-      Actions.refresh({leftButtonTextStyle:{color:colors.purple}});
+    // var currentStep = this.props.onboard.get('currentStep');
+    // if(currentStep < 2)
+    //   Actions.refresh({leftButtonTextStyle:{color:colors.purple}});
+
+    // ddpClient.user() // does this do anything?
+    //   .then((user) => {
+    //     this.setState({user})
+    //   });
+      this.makeSubscription();
+      this.observeRecs();
+  }
+
+  observeRecs() {
+
+    let observer = ddpClient.observe("recs"); // i think observer is out of the box
+    observer.added = (id) => {
+      // this.setState({posts: ddpClient.collections.posts})
+      console.log('observed rec added')
+      // this.props.dispatch(setPosts(ddpClient.collections.posts));
+    }
+    observer.changed = (id, oldFields, clearedFields, newFields) => {
+      // this.setState({posts: ddpClient.collections.posts})
+      // console.log('observer changed',ddpClient.collections.recs)
+      // console.log('id',id);
+      // console.log('oldFields',oldFields);
+      // console.log('clearedFields',clearedFields);
+      // console.log('newFields',newFields);
+      // this.props.dispatch(setPosts(ddpClient.collections.posts));
+    }
+    observer.removed = (id, oldValue) => {
+      // this.setState({posts: ddpClient.collections.posts})
+      console.log('observed a rec removed')
+      // this.props.dispatch(setPosts(ddpClient.collections.posts));
+    }
+  }
+
+  makeSubscription() {
+    ddpClient.subscribe("recs", [], () => {
+      console.log('subscribed to recs',ddpClient.collections.posts)
+      // this.setState({posts: ddpClient.collections.posts || {} });
+      // get this in an action todo
+      // console.log(ddpClient.collections.recs)
+      this.props.dispatch(setRecs(ddpClient.collections.recs));
+    });
   }
 
 
+  getAllRecs() { // this fn will probly be used elsewhere
+
+    // removing this for now while i figure out hydration shit
+    return this.props.recs;
+   // Filter rec list by uid, only showing recs 'given' to me
+   var uid = this.props.app.get('deviceId');
+   var activeFilter = 'all';//this.props.app.get('activeFilter');
+   var recs = this.props.recs.filter(function(obj){
+     return (
+      //  (obj.get('uid') === uid) && removing for now
+       (obj.get('grade') != null) &&
+       (obj.get('type') === activeFilter || activeFilter == 'all')
+     );
+
+   });
+
+   return this.appendRecr(recs);
+  }
   getGradedRecs() { // this fn will probly be used elsewhere
 
+    // removing this for now while i figure out hydration shit
+    return this.props.recs;
    // Filter rec list by uid, only showing recs 'given' to me
-   var uid = this.state.uid;
-   var activeFilter = this.props.app.get('activeFilter');
+   var uid = this.props.app.get('deviceId');
+   var activeFilter = 'all';//this.props.app.get('activeFilter');
    var recs = this.props.recs.filter(function(obj){
      return (
       //  (obj.get('uid') === uid) && removing for now
@@ -47,18 +113,23 @@ class Recommendations extends Component {
  getQueue() { // this fn will probly be used elsewhere
 
   // Filter rec list by uid, only showing recs 'given' to me
-  var uid = this.state.uid;
-  var activeFilter = this.props.app.get('activeFilter');
+  var uid = this.props.app.get('deviceId');
+  var activeFilter = 'all';//this.props.app.get('activeFilter');
   var recs = this.props.recs.filter(function(obj){
+    console.log('obj',obj)
     return (
       // (obj.get('uid') === uid) && removing for now
-      (obj.get('grade') == null) &&
-      (obj.get('type') === activeFilter || activeFilter == 'all')
+      // (obj.grade == null) &&
+      // (obj.type === activeFilter || activeFilter == 'all')
+      true
     );
 
   });
 
-  return this.appendRecr(recs);
+  // disabling for now
+  // return this.appendRecr(recs);
+  console.log('recs',recs)
+  return recs;
  }
 
  appendRecr(recs){
@@ -68,8 +139,10 @@ class Recommendations extends Component {
    return recs.map((rec) => rec.set('recr', recrs.find(obj => (obj.get('id') === rec.get('recr_id')))));
  }
 
+
   render() {
-    var activeFilter = this.props.app.get('activeFilter');
+
+    var activeFilter = 'all'; //get from redux
 
     return (
       <View style={styles.container}>
@@ -86,14 +159,25 @@ class Recommendations extends Component {
   }
 
   renderFilterNav(){
-    var currentStep = this.props.onboard.get('currentStep');
-    if(currentStep > 2)
+    // var currentStep = this.props.onboard.get('currentStep');
+    // if(currentStep > 2)
       return(<FilterNav />)
   }
   renderWelcomeMessage(){
     return(<EmptyMessage title="Welcome to chaz" notify="The fastest way to save recommendations in your phone." instructions="If you do not have anything to save yet, I would like to recommend my favorite movie, Shawshank Redemption." />);
   }
   renderRecLists(){
+    const recList = this.props.recs;
+    return(
+      <ScrollView>
+        <Text style={styles.title}>All Recs</Text>
+        <RecList recs={recList} />
+
+      </ScrollView>
+    );
+
+  }
+  renderRecLists_og(){
     var gradedRecs = this.getGradedRecs();
     var queue = this.getQueue();
     return(
@@ -116,7 +200,8 @@ class Recommendations extends Component {
   }
 
   onAddRecPress(){
-    Actions.recommendationAdd({uid:this.state.uid})
+    // console.log('deviceId',this.props.app.get('deviceId'));
+    Actions.recommendationAdd({uid:this.props.app.get('deviceId')}); // should store meteor data in app
   }
 
 }
@@ -147,7 +232,8 @@ function mapStateToProps(state) {
     recs: state.recs,
     recrs: state.recrs,
     app: state.app,
-    onboard: state.onboard
+    // onboard: state.onboard
+
   };
 }
 
