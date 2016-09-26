@@ -19,6 +19,7 @@ import {
   NavBar
 } from 'react-native-router-flux';
 
+import Home from './Home';
 import Recommendations from './Recommendations';
 import RecommendationInput from './RecommendationInput';
 import Recommendation from './Recommendation';
@@ -70,6 +71,19 @@ export const Scenes = Actions.create(
         hideBackImage={true}
         backButtonTextStyle={{color:colors.white}}
         backTitle="Back"
+      />
+
+    <Scene key="home"
+       navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.purple,borderBottomColor:colors.purple}]}
+       component={Home}
+       type={ActionConst.REPLACE}
+       onLeft={()=>Actions.profile()}
+       leftTitle="Profile"
+       leftButtonTextStyle={[NavigationStyle.leftButtonTextStyle,{color:'#fff'}]}
+       onRight={()=>Actions.friends()}
+       rightTitle="Friends"
+       rightButtonTextStyle={[NavigationStyle.rightButtonTextStyle,{color:colors.purple}]}
+       title=""
       />
 
       <Scene key="recommendations"

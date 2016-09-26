@@ -67,7 +67,7 @@ export class App extends Component {
     // this might fuck up the logged out process
     // console.log('newProps',newProps);
     if (newProps.initialized) {
-      Actions.recommendations();
+      Actions.home();
       console.log('App has data and ready to go!');
     }
       // Actions.recommendations(); this causes an error -_-
