@@ -3,14 +3,17 @@ import { StyleSheet, Text, View, Animated, PropTypes, Easing } from 'react-nativ
 import Emoji from 'react-native-emoji';
 import {colors, hearts} from '../style/Global';
 
+import timer from 'react-native-timer';
+
 class Loading extends Component {
   constructor(props) {
     super(props);
-    this.state = { pulse: new Animated.Value(1) };
+    this.state = { pulse: new Animated.Value(1), pulsing:true, message: this.props.message };
   }
 
   componentDidMount() {
     this.startPulse();
+    timer.setTimeout(this,'fuckingdelays', ()=> this.setState({pulsing:false,message:'Something went wrong :('}), 6000);
   }
 
   componentDidUpdate(prevProps) {
@@ -20,11 +23,13 @@ class Loading extends Component {
   }
 
   componentWillUnmount(){
-    console.log('loading.js unmounted')
+    console.log('loading.js unmounted');
+    timer.clearTimeout(this);
   }
 
   continuePulse(){
-    this.startPulse()
+    if(this.state.pulsing)
+      this.startPulse()
     // todo only return on even pulses
   }
 
@@ -67,7 +72,7 @@ class Loading extends Component {
             {this.getRandomHeart()}
           </Animated.View>
         </View>
-        <Text style={{fontSize:14,color:'#888'}}>{this.props.message}</Text>
+        <Text style={{fontSize:14,color:'#888'}}>{this.state.message}</Text>
       </View>
     )
   }

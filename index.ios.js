@@ -6,7 +6,7 @@
 import { AppRegistry } from 'react-native';
 
 // @todo remove when RN upstream is fixed
-console.ignoredYellowBox = ['Warning: You are manually calling a React.PropTypes validation'];
+// console.ignoredYellowBox = ['Warning: You are manually calling a React.PropTypes validation'];
 
 import App from './src/app';
 

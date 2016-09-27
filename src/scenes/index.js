@@ -50,7 +50,7 @@ export const Scenes = Actions.create(
   <Scene key="modal" component={Modal} appVersion={DeviceInfo.getReadableVersion()} >
     <Scene key="root" direction="vertical" {...NavigationStyle} hideTabBar>
 
-      <Scene key="loading" component={Loading}  hideNavBar  type={ActionConst.REPLACE} initial={true} />
+      <Scene key="loading" component={Loading}  hideNavBar  type={ActionConst.REPLACE} initial={true} message="Connecting to server" />
 
       <Scene key="welcome" component={Welcome}  hideNavBar  type={ActionConst.REPLACE} />
 

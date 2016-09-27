@@ -122,9 +122,13 @@ ddpClient.loginWithToken = (cb) => {
   AsyncStorage.getItem('loginToken')
     .then((token) => {
       if (token) {
+        console.log('token found');
+        // not sure why I need this now
+        process.nextTick = setImmediate;
         params.resume = token;
         ddpClient.call("login", [params], cb);
       } else { // but what if there is no token?
+        console.log('token NOT found');
         cb('No token found');
       }
     });

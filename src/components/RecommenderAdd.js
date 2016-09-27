@@ -9,7 +9,7 @@ import {
 import Button from "react-native-button";
 import * as recrActions from '../reducers/recr/actions';
 import * as recActions from '../reducers/rec/actions';
-import * as firebaseActions from '../reducers/firebase/actions';
+// import * as firebaseActions from '../reducers/firebase/actions';
 
 import {Actions} from "react-native-router-flux";
 import { connect } from 'react-redux';

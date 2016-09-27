@@ -8,10 +8,13 @@ export default function recs(recs = initialState, action = {}) {
   switch (action.type) {
 
     case 'SET_RECS': //hydration I guess
+      // not entirely sure why this response changed, but it did
+      // now its in items
+
 
       // Moving away from rec objects being immutable Maps. Not sure I need that
       // now that I am moving away from the async storage
-      return Map(action.payload);
+      return Map(action.payload.items);
 
     case types.ADD_REC:
       // console.log('addRec in reducer',action.payload);

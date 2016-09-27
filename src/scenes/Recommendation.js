@@ -4,7 +4,6 @@ import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
-import * as firebaseActions from '../reducers/firebase/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
@@ -52,11 +51,11 @@ class RecView extends Component {
     return (
       <View  style={styles.container}><Text>REC!!</Text></View>);
   }
+
   render(){
     let { dispatch } = this.props;
     let boundActionCreators = bindActionCreators(recActions, dispatch)
     let recrActionCreators = bindActionCreators(recrActions, dispatch)
-    let firebaseActionCreators = bindActionCreators(firebaseActions, dispatch)
     var {rec} = this.state;
     var categories = this.props.categories;//app.get('filters');
     console.log('render recView again',rec)
@@ -93,7 +92,7 @@ class RecView extends Component {
             <View style={styles.left}>
             </View>
             <View style={styles.right}>
-              <RecGradeSelecter rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
+              <RecGradeSelecter rec={rec} {...boundActionCreators} {...recrActionCreators}  />
             </View>
           </View>
           :
