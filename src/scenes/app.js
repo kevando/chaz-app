@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, Text, StyleSheet, AlertIOS} from "react-native";
 import { connect } from 'react-redux';
 
-import ddpClient from '../ddp';
+// import ddpClient from '../ddp';
 import { initializeApp, changeSignInStatus } from '../reducers/app/actions';
 import timer from 'react-native-timer'; // add some delays so we know whats going on
 
@@ -15,7 +15,10 @@ import {
 
 import {Scenes} from './';
 
-// probly time to move this code elsewhere
+
+
+import { AsyncStorage } from 'react-native';
+import Meteor, { createContainer } from 'react-native-meteor';
 
 
 const styles = StyleSheet.create({
@@ -81,27 +84,55 @@ export class App extends Component {
 
   componentWillMount() {
 
-    ddpClient.connect((error, wasReconnect) => {
+    // custom loginwithtoken
+    let params = { resume: '' };
+    AsyncStorage.getItem('loginToken')
+      .then((token) => {
+        // if (token) {
+        if (false) {
+          console.log('token found');
+          // not sure why I need this now
+          // process.nextTick = setImmediate;
+          params.resume = token;
+          Meteor.call("login", [params], function(err,res){
+            console.log('call back from login attempt');
+            console.log('call back from login attempt',res);
+            console.log('call back from login attempt',err);
+          });
+        } else { // but what if there is no token?
+          console.log('token NOT found');
+          timer.setTimeout(this,'meteordelay',() => Actions.welcome() ,1200);
 
-      if (error) {
-        console.log('connect error', error);
-      } else {
-        ddpClient.loginWithToken((err, res) => {
-          // had to change loginWithToken in the ddp to invoke a cb. not sure if thats correct
-          if (!err){
-            // Initialize the app
-            this.props.changeSignInStatus(true);
-            this.props.initializeApp();
-          } else {
-            // Scenes['welcome'].initial = true;
-            timer.setTimeout(this,'meteordelay',() => Actions.welcome() ,1200);
-          }
+        }
+      });
 
-          // timer.setTimeout(this,'meteordelay',() => this.setState({loading: false}),1200);
 
-        });
-      }
-    });
+
+
+
+
+    //
+    // ddpClient.connect((error, wasReconnect) => {
+    //
+    //   if (error) {
+    //     console.log('connect error', error);
+    //   } else {
+    //     ddpClient.loginWithToken((err, res) => {
+    //       // had to change loginWithToken in the ddp to invoke a cb. not sure if thats correct
+    //       if (!err){
+    //         // Initialize the app
+    //         this.props.changeSignInStatus(true);
+    //         this.props.initializeApp();
+    //       } else {
+    //         // Scenes['welcome'].initial = true;
+    //         timer.setTimeout(this,'meteordelay',() => Actions.welcome() ,1200);
+    //       }
+    //
+    //       // timer.setTimeout(this,'meteordelay',() => this.setState({loading: false}),1200);
+    //
+    //     });
+    //   }
+    // });
   }
 
   render() {

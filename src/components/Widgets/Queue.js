@@ -14,9 +14,9 @@ import {colors} from '../../style/Global';
 import { bindActionCreators } from 'redux'
 import * as recActions from '../../reducers/rec/actions';
 
-import RecType from '../RecType';
+import RecListItem from '../RecListItem';
 
-class Uncategorized extends Component {
+class Queue extends Component {
 
   constructor(props) {
     super(props);
@@ -25,10 +25,10 @@ class Uncategorized extends Component {
   // componentDidMount
 
   render() {
-    let recs = this.props.recs.filter(rec => typeof rec.type == "undefined")
+    let recs = this.props.recs.filter(rec => typeof rec.grade == "undefined")
     return (
       <View>
-        <Text>You have {recs.size} uncategorized recs</Text>
+        <Text>You have {recs.size} ungraded recs</Text>
           {this.renderRecs(recs)}
       </View>
     );
@@ -41,8 +41,7 @@ class Uncategorized extends Component {
     return (
       recs.valueSeq().map(rec => (
         <View key={rec._id}>
-          <RecType rec={rec} {...boundActionCreators} size={20} categories={this.props.categories} />
-          <Text>{rec.title}</Text>
+          <RecListItem rec={rec}  />
         </View>
       ))
 
@@ -62,4 +61,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Uncategorized);
+export default connect(mapStateToProps)(Queue);

@@ -26,6 +26,8 @@ class RecrItem extends Component {
   render() {
 
     var recr = this.getRecr(this.props.rec.recr_id);
+    console.log('recr id',this.props.rec.recr_id);
+    console.log('recr',recr);
 
 
     if(recr) {

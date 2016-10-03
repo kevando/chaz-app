@@ -9,7 +9,8 @@ export default function counter(recrs = initialState, action = {}) {
   switch (action.type) {
 
     case 'SET_RECRS':
-      return Map(action.payload); 
+      // return Map(action.payload);
+      return Map(action.payload.items); // changing this, not sure why tho
 
     case types.ADD_RECR:
       return recrs.set(action.payload._id, action.payload);

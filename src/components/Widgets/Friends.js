@@ -6,38 +6,62 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import {connect} from 'react-redux'
+
+import styles from './Styles';
 import {colors} from '../../style/Global';
 
-export default class Friends extends Component {
+import { bindActionCreators } from 'redux'
+import * as recActions from '../../reducers/rec/actions';
+
+import RecrItem from '../RecrItem';
+import RecrListItem from '../RecrListItem';
+
+class Friends extends Component {
 
   constructor(props) {
     super(props);
   }
 
-  render() {
-    // var {rec} = this.props;
+  // componentDidMount
 
+  render() {
+    let recrs = this.props.recrs;//.filter(rec => typeof rec.recr_id == "undefined");
 
     return (
       <View>
-        <Text>I am a friend</Text>
+        <Text>You saved {recrs.size} friends</Text>
+          {this.renderRecrs(recrs)}
       </View>
     );
   }
-  onNotePress(){
-    var {rec, onPress} = this.props
-    onPress({rec: rec});
+  renderRecrs(recrs){
+    // let { dispatch } = this.props;
+    // let boundActionCreators = bindActionCreators(recActions, dispatch)
+
+
+    return (
+      recrs.valueSeq().map(recr => (
+        <View key={recr._id}>
+          <RecrListItem recr={recr} />
+
+        </View>
+      ))
+
+    );
   }
 
 }
-const styles = StyleSheet.create({
-  note: {
-    fontSize: 18,
-    color:colors.darkGrey,
-  },
-  empty: {
-    fontSize: 18,
-    color:colors.grey,
-  }
 
-})
+
+function mapStateToProps(state) {
+  return {
+    categories: state.categories,
+    recs: state.recs,
+    recrs: state.recrs,
+    // onboard: state.onboard
+
+  };
+}
+
+export default connect(mapStateToProps)(Friends);

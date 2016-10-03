@@ -13,7 +13,9 @@ import {colors} from '../style/Global';
 
 // new meteor stuff
 import Button from '../components/button';
-import ddpClient from '../ddp';
+// import ddpClient from '../ddp';
+import Meteor, { createContainer } from 'react-native-meteor';
+Meteor.connect('ws://localhost:3000/websocket');//do this only once
 import { changeSignInStatus, initializeApp } from '../reducers/app/actions';
 
 class Welcome extends Component {
@@ -38,28 +40,59 @@ class Welcome extends Component {
   handleSignIn() {
     this.setState({status:'authenticating with server'});
     var userId = this.props.deviceId;
-    ddpClient.loginWithUsername(userId, userId, (error, res) => {
-      if (error) {
-        // User exists, so lets create the account
-        this.handleCreateAccount();
-      } else {
-        this.props.changedSignedIn(true);
-        this.props.initializeApp();
 
-      }
+
+    let params = {
+      user: {
+        username: userId
+      },
+      password: userId//ddpClient.sha256(password)
+    };
+
+    Meteor.call("login",[params], (err, res) => {
+      console.log('err',err)
+      console.log('res',res)
+      if(err)
+      this.handleCreateAccount();
+      // ddpClient.onAuthResponse(err, res);
+      // cb && cb(err, res)
     });
+
+    //
+    // ddpClient.loginWithUsername(userId, userId, (error, res) => {
+    //   if (error) {
+    //     // User exists, so lets create the account
+    //     this.handleCreateAccount();
+    //   } else {
+    //     this.props.changedSignedIn(true);
+    //     this.props.initializeApp();
+    //
+    //   }
+    // });
   }
 
   handleCreateAccount() {
     var userId = this.props.deviceId;
-    ddpClient.signUpWithUsername(userId, userId, (error, res) => {
-      if (error) {
-        this.setState({error: error.reason})
-      } else {
-        this.props.changedSignedIn(true);
-        this.props.initializeApp();
-      }
+
+    let params = {
+      username: userId,
+      password: userId,//ddpClient.sha256(password)
+      // consider adding profile data here.
+    };
+
+    Meteor.call('createUser', [params], (err, res) => {
+      console.log('create user err',err)
+      console.log('create user res',res)
     });
+
+    // ddpClient.signUpWithUsername(userId, userId, (error, res) => {
+    //   if (error) {
+    //     this.setState({error: error.reason})
+    //   } else {
+    //     this.props.changedSignedIn(true);
+    //     this.props.initializeApp();
+    //   }
+    // });
   }
 
   render(){

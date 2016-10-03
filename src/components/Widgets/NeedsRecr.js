@@ -14,9 +14,9 @@ import {colors} from '../../style/Global';
 import { bindActionCreators } from 'redux'
 import * as recActions from '../../reducers/rec/actions';
 
-import RecType from '../RecType';
+import RecrItem from '../RecrItem';
 
-class Uncategorized extends Component {
+class NeedsRecr extends Component {
 
   constructor(props) {
     super(props);
@@ -25,10 +25,11 @@ class Uncategorized extends Component {
   // componentDidMount
 
   render() {
-    let recs = this.props.recs.filter(rec => typeof rec.type == "undefined")
+    let recs = this.props.recs.filter(rec => typeof rec.recr_id == "undefined");
+
     return (
       <View>
-        <Text>You have {recs.size} uncategorized recs</Text>
+        <Text>You have {recs.size} recs that need recommenders</Text>
           {this.renderRecs(recs)}
       </View>
     );
@@ -41,7 +42,7 @@ class Uncategorized extends Component {
     return (
       recs.valueSeq().map(rec => (
         <View key={rec._id}>
-          <RecType rec={rec} {...boundActionCreators} size={20} categories={this.props.categories} />
+          <RecrItem rec={rec} {...boundActionCreators} />
           <Text>{rec.title}</Text>
         </View>
       ))
@@ -62,4 +63,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Uncategorized);
+export default connect(mapStateToProps)(NeedsRecr);
