@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import app from './app/reducer';
+// import app from './app/reducer';
 // import counter from './counter/reducer';
 import recs from './rec/reducer';
 import recrs from './recr/reducer';
@@ -11,7 +11,7 @@ import widgets from './widgets/reducer';
 import posts from './post/reducer';
 
 const reducers = {
-  app,
+  // app,
   // counter, // still used for some light testing
   recs,
   recrs,

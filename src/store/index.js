@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 // import createLogger from 'redux-logger';
-import immutableCheckMiddleWare from 'redux-immutable-state-invariant';
+// import immutableCheckMiddleWare from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk'
 
 import reducers from '../reducers'; // changing from rootReducer
@@ -11,7 +11,7 @@ import reducers from '../reducers'; // changing from rootReducer
 // import reducers from '../reducers/post/reducer';
 import config from '../config';
 
-import ddpClient from '../ddp';
+// import ddpClient from '../ddp';
 
 // const loggerMiddleware = createLogger({
 //   predicate: (getState, action) => config.env === 'dev'
@@ -19,9 +19,9 @@ import ddpClient from '../ddp';
 
 const middleWare = [];
 
-if (config.env === 'dev') {
-  middleWare.push(immutableCheckMiddleWare());
-}
+// if (config.env === 'dev') {
+//   middleWare.push(immutableCheckMiddleWare());
+// }
 
 // middleWare.push(loggerMiddleware); // logger always has to be last
 middleWare.push(thunk);
