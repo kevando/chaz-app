@@ -8,13 +8,19 @@ import settings from './config/settings';
 
 Meteor.connect(settings.METEOR_URL);
 
-const RNApp = (props) => {
+// possibly tmp redux stuff
+import { Provider } from 'react-redux';
+import createStore from './store';
+const store = createStore();
+
+// const RNApp = (props) => { // same as below
+const RNApp = function(props) {
   const { status, user, loggingIn } = props;
 
   if (status.connected === false || loggingIn) {
     return <Loading />;
   } else if (user !== null) {
-    return <LoggedIn />;
+    return <Provider store={store}><LoggedIn /></Provider>;
   } else {
     return <LoggedOut />;
   }

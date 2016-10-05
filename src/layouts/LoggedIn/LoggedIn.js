@@ -10,7 +10,7 @@ class LoggedIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'Home',
+      selectedTab: 'Recommendations', // Initial Route
     };
   }
 
@@ -48,6 +48,8 @@ class LoggedIn extends React.Component {
     return (
       <TabNavigator>
         {this.renderTabItem('Home', Routes.getHomeRoute(), images.icons.home)}
+        {this.renderTabItem('Recommendations', Routes.getRecommendationsRoute(), images.icons.home)}
+        {this.renderTabItem('Categories', Routes.getCategoriesRoute(), images.icons.home)}
         {this.renderTabItem('Profile', Routes.getProfileRoute(), images.icons.profile)}
       </TabNavigator>
     );
