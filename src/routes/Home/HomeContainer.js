@@ -6,6 +6,7 @@ const HomeContainer = (props) => {
   return (
     <Home
       onDetailsPress={() => props.navigator.push(Routes.getDetailsRoute())}
+      onAddRecPress={() => props.navigator.push(Routes.getRecInputRoute())}
     />
   );
 };

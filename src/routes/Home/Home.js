@@ -13,12 +13,17 @@ const Home = (props) => {
         text="Details"
         onPress={props.onDetailsPress}
       />
+      <Button
+        text="Add Rec"
+        onPress={props.onAddRecPress}
+      />
     </View>
   );
 };
 
 Home.propTypes = {
   onDetailsPress: React.PropTypes.func,
+  onAddRecPress: React.PropTypes.func,
 };
 
 export default Home;
