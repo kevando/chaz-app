@@ -6,14 +6,12 @@ import recrs from './recr/reducer';
 import onboard from './onboard/reducer';
 import categories from './categories/reducer';
 import widgets from './widgets/reducer';
-import posts from './post/reducer';
 
 const reducers = {
   // app,
   recs,
   recrs,
   onboard,
-  posts,
   categories,
   widgets,
 };

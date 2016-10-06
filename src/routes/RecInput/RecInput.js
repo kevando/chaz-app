@@ -7,31 +7,35 @@ import images from '../../config/images';
 import styles from './styles';
 
 const RecInput = (props) => {
-  const { updateState, addRec, error, confirmPasswordVisible } = props;
+  const { updateState, saveRec, headerText, title, note } = props;
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
 
-      <Text style={styles.headerText}>Add Rec</Text>
+      <Text style={styles.headerText}>{headerText}</Text>
       </View>
 
       <InputWrapper>
         <GenericTextInput
-          placeholder="add rec title"
+          placeholder="What was recommended?"
+          value={title}
           onChangeText={(title) => updateState({ title })}
         />
 
-        <Text style={styles.errorText}>{error}</Text>
+        <GenericTextInput
+          placeholder="Write a note"
+          value={note}
+          onChangeText={(note) => updateState({ note })}
+        />
+
 
       </InputWrapper>
 
-      <View style={styles.error}>
-        <Text style={styles.errorText}>{error}</Text>
-      </View>
+
 
       <View style={styles.buttons}>
-        <Button text="Add Rec" onPress={addRec} />
+        <Button text="Save Rec" onPress={saveRec} />
       </View>
 
       <KeyboardSpacer />
@@ -43,6 +47,7 @@ RecInput.propTypes = {
   updateState: React.PropTypes.func,
   addRec: React.PropTypes.func,
   error: React.PropTypes.string,
+  headerText: React.PropTypes.string,
 };
 
 export default RecInput;

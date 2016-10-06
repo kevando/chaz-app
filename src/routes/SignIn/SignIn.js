@@ -41,7 +41,7 @@ const SignIn = (props) => {
       </View>
 
       <View style={styles.buttons}>
-        <Button text="Get Started" onPress={getStarted} />
+        <Button text="Sign In" onPress={signIn} />
       </View>
 
       <KeyboardSpacer />

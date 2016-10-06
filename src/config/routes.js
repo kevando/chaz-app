@@ -51,7 +51,7 @@ export const routes = {
     };
   },
   getRecsRoute(category) { // arguement is tmp. make this its own route
-    
+
     return {
       renderScene(navigator) {
         return <Recs navigator={navigator} category={category}/>;
@@ -72,19 +72,25 @@ export const routes = {
       },
 
       getTitle(){
-        return rec.title
+        return 'Rec';//rec.title
       },
+
+      getBackButtonTitle() {
+        return 'Back';
+      },
+
 
       showNavigationBar: true,
     };
   },
-  getRecInputRoute() {
+  getRecInputRoute(rec) {
     return {
       renderScene(navigator) {
-        return <RecInput navigator={navigator} />;
+        return <RecInput navigator={navigator} rec={rec} />;
       },
 
       showNavigationBar: true,
+
     };
   },
   getCategoriesRoute() {

@@ -10,70 +10,72 @@ class RecInputContainer extends Component {
 
     this.mounted = false;
     this.state = {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      confirmPasswordVisible: false,
-      error: null,
+      title: '',
+      note: '',
+      headerText: 'Add Rec',
+      handleSaveRec: this.addRec.bind(this),
+      navigator: this.props.navigator, // maybe not the best approach
     };
   }
+  componentDidMount() {
 
-  componentWillMount() {
-    this.mounted = true;
-  }
+    const { rec } = this.props;
 
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-
-  handleError(error) {
-    this.mounted && this.setState({ error });
-  }
-
-  validInput(overrideConfirm) {
-    const { email, password, confirmPassword, confirmPasswordVisible } = this.state;
-    let valid = true;
-
-    if (email.length === 0 || password.length === 0) {
-      this.handleError('Email and password cannot be empty.');
-      valid = false;
+    // if rec exists, then we are editing instead of adding
+    if(rec) {
+      this.setState({
+        title: rec.title,
+        note: rec.note,
+        headerText: 'Edit Rec',
+        handleSaveRec: this.updateRec.bind(this,rec)
+      });
     }
 
-    if (!overrideConfirm && confirmPasswordVisible && password !== confirmPassword) {
-      this.handleError('Passwords do not match.');
-      valid = false;
-    }
-
-    if (valid) {
-      this.handleError(null);
-    }
-
-    return valid;
   }
 
 
-  handleAddRec() {
-    const { title } = this.state;
-
-    // console.log('adding rec', title)
-    const rec = {title:title,uid: Meteor.userId()}
+  addRec(){
+    console.log('addRec');
+    const { title, note, navigator } = this.state;
+    //
+    const rec = {title, note, uid: Meteor.userId()}
+    //
 
 
 
     Meteor.call('addRec',rec,function(err,res){
       console.log('added rec',err)
       console.log('added rec',res)
-      this.props.navigator.replace(Routes.getRecRoute(rec));
+      // Might need to add the id from meteor to the rec object.
+      navigator.replace(Routes.getRecRoute(rec));
     })
 
-  
+  }
+  updateRec(rec){
+    console.log('updateRec', rec);
+
+    const { title, note, navigator } = this.state;
+    //
+    rec.title = title;
+    rec.note = note;
+    //
+
+    Meteor.call('updateRec',rec,function(err,res){
+      console.log('updated rec',err)
+      console.log('updated rec',res)
+      // Might need to add the id from meteor to the rec object.
+      navigator.replace(Routes.getRecRoute(rec));
+    })
+
   }
 
   render() {
+    const { handleSaveRec } = this.state;
     return (
       <RecInput
+        headerText={ this.state.headerText }
         updateState={this.setState.bind(this)}
-        addRec={this.handleAddRec.bind(this)}
+        saveRec={handleSaveRec}
         {...this.state}
       />
     );
