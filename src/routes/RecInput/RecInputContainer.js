@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { LayoutAnimation } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
 import RecInput from './RecInput';
+import Routes from '../../config/routes';
 
 class RecInputContainer extends Component {
   constructor(props) {
@@ -55,25 +56,17 @@ class RecInputContainer extends Component {
     const { title } = this.state;
 
     // console.log('adding rec', title)
+    const rec = {title:title,uid: Meteor.userId()}
 
 
-    Meteor.call('addRec',{title:title,uid: Meteor.userId()},function(err,res){
+
+    Meteor.call('addRec',rec,function(err,res){
       console.log('added rec',err)
       console.log('added rec',res)
+      this.props.navigator.replace(Routes.getRecRoute(rec));
     })
 
-      // Accounts.createUser({ username, password: username }, (err) => {
-      //   if (err) {
-      //     console.log('getstarted err',err)
-      //     this.handleError(err.reason);
-      //     // if there is an error, we are going to assume the user exists
-      //     this.handleSignIn();
-      //   } else {
-      //     // hack because react-native-meteor doesn't login right away after sign in
-      //     this.handleSignIn();
-      //   }
-      // });
-
+  
   }
 
   render() {

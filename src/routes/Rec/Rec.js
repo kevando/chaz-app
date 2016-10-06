@@ -4,7 +4,7 @@ import { MeteorListView } from 'react-native-meteor';
 import Loading from '../../components/Loading';
 import styles from './styles';
 
-const Recommendation = ({ rec }) => {
+const Rec = ({ rec }) => {
 
   return (
     <View style={styles.container}>
@@ -13,8 +13,8 @@ const Recommendation = ({ rec }) => {
   );
 };
 
-Recommendation.propTypes = {
+Rec.propTypes = {
   rec: PropTypes.object,
 };
 
-export default Recommendation;
+export default Rec;

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Categories from './Categories';
 import {connect} from 'react-redux';
 import {ListView} from 'react-native'; // should this be here?
+import Routes from '../../config/routes';
 
 class CategoriesContainer extends Component {
 
@@ -17,6 +18,7 @@ class CategoriesContainer extends Component {
     return (
       <Categories
         dataSource={this.state.dataSource}
+        onPress= { (category) => this.props.navigator.push(Routes.getRecsRoute(category)) }
         />
     );
   }

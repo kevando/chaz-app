@@ -1,11 +1,11 @@
-import * as types from './actionTypes';
-import { Map, List } from 'immutable';
-
+import { List } from 'immutable';
 
 const initialState = List([
 
   {id:'all',label: 'All'},
-  {id:'movie',label: 'Movies'}
+  {id:'movie',label: 'Movies'},
+  {id:'tv',label: 'TV Shows'},
+  {id:'music',label: 'Music'}
 
 ]);
 

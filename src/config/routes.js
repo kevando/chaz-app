@@ -4,8 +4,8 @@ import Details from '../routes/Details';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
 
-import Recommendations from '../routes/Recommendations';
-import Recommendation from '../routes/Recommendation';
+import Recs from '../routes/Recs';
+import Rec from '../routes/Rec';
 import Categories from '../routes/Categories';
 import RecInput from '../routes/RecInput';
 
@@ -50,20 +50,25 @@ export const routes = {
       showNavigationBar: false,
     };
   },
-  getRecommendationsRoute() {
+  getRecsRoute(category) { // arguement is tmp. make this its own route
+    
     return {
       renderScene(navigator) {
-        return <Recommendations navigator={navigator} />;
+        return <Recs navigator={navigator} category={category}/>;
       },
 
       showNavigationBar: true,
+
+      getTitle() {
+        return 'Recommendations';
+      },
     };
   },
-  getRecommendationRoute(rec) {
+  getRecRoute(rec) {
 
     return {
       renderScene(navigator) {
-        return <Recommendation navigator={navigator} rec={rec} />;
+        return <Rec navigator={navigator} rec={rec} />;
       },
 
       getTitle(){

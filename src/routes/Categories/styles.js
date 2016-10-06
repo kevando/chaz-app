@@ -16,12 +16,16 @@ export default styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   item: {
-    backgroundColor: colors.buttonBackground,
-    color: colors.buttonText,
     width: cardSize,
     height: cardSize,
     marginHorizontal: MARGIN_HORIZONTAL,
     marginVertical: 5,
+  },
+  itemText: {
+    backgroundColor: colors.buttonBackground,
+    color: colors.buttonText,
+    width: cardSize,
+    height: cardSize,
     paddingTop: cardSize / 2.3,
     fontSize: 16,
     fontWeight: '500',
