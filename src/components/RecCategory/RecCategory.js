@@ -1,24 +1,92 @@
-import React from 'react';
+
+import React, {Component} from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ActionSheetIOS,
+} from 'react-native';
 import Emoji from 'react-native-emoji';
 
+import { connect } from 'react-redux';
+
+
 const emojiList = {
-  default: 'paperclip',
-  tv: "radio",
-  movie: "vhs"
+  uncategorized: "paperclip",
+  all: "earth_americas",
+  default: "page_with_curl",
+  other: "page_with_curl",
+  book: "book",
+  video: "film_projector",
+  music: "minidisc",
+  food: "ramen",
+  podcast: "radio",
+  tv: "tv",
+  movie: "vhs",
+  // app: "iphone",
+  place: "desert_island",
 }
 
-const RecCategory = ({rec}) => {
 
-  const category = rec.category || 'default';
+class RecCategory extends Component {
 
-  return (
-    <Emoji name={emojiList[category]} />
-  );
-};
+  constructor(props) {
+    super(props);
+  }
 
-RecCategory.propTypes = {
-  rec: React.PropTypes.object,
-};
+  render() {
 
+    const { category = 'uncategorized', onChange } = this.props;
 
-export default RecCategory;
+    if(!onChange){
+      // Just show the category
+      return ( <Emoji name={emojiList[category]} /> );
+
+    } else {
+      // a function was passed, so give the user a selector
+      // Might want to expand this out in the future
+      return (
+        <TouchableOpacity onPress={this.onChangeCategoryPress.bind(this)}>
+          <Text ><Emoji name={emojiList[category]} /> - {category}</Text>
+        </TouchableOpacity>
+      );
+    }
+  }
+
+  getOptions(){
+    var options = [];
+    this.props.categories.map(category => options.push(category.id));
+    options.push('Cancel')
+    options.shift(); // remove 'all' from list
+    return options;
+  }
+
+  onCategorySelect(category) {
+    this.props.onChange(category);
+  }
+  onChangeCategoryPress() {
+
+    var options = this.getOptions();
+
+    ActionSheetIOS.showActionSheetWithOptions({
+      title: 'Categorize this recommendation',
+      options: options,
+      cancelButtonIndex: options.length-1,
+      destructiveButtonIndex: options.length-1,
+    },
+    (selectedIndex) => {
+      if(selectedIndex < options.length-1){ // cancel
+        this.onCategorySelect(options[selectedIndex])
+      }
+    });
+  }
+
+}
+function mapStateToProps(state) {
+  return {
+    categories: state.categories,
+  };
+}
+
+export default connect(mapStateToProps)(RecCategory);
