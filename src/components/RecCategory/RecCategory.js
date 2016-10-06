@@ -16,15 +16,13 @@ const emojiList = {
   uncategorized: "paperclip",
   all: "earth_americas",
   default: "page_with_curl",
-  other: "page_with_curl",
   book: "book",
-  video: "film_projector",
   music: "minidisc",
   food: "ramen",
   podcast: "radio",
   tv: "tv",
   movie: "vhs",
-  // app: "iphone",
+  app: "phone",
   place: "desert_island",
 }
 

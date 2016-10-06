@@ -1,10 +1,10 @@
 import React from 'react';
 import Home from '../routes/Home';
-import Details from '../routes/Details';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
 
 import Recs from '../routes/Recs';
+import Recrs from '../routes/Recrs';
 import Rec from '../routes/Rec';
 import Categories from '../routes/Categories';
 import RecInput from '../routes/RecInput';
@@ -21,14 +21,14 @@ export const routes = {
       },
     };
   },
-  getDetailsRoute() {
+  getRecrsRoute() {
     return {
       renderScene(navigator) {
-        return <Details navigator={navigator} />;
+        return <Recrs navigator={navigator} />;
       },
 
       getTitle() {
-        return 'Details';
+        return 'Friends';
       },
     };
   },

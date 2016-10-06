@@ -7,12 +7,8 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.main}>
-        Home
+        chaz
       </Text>
-      <Button
-        text="Details"
-        onPress={props.onDetailsPress}
-      />
       <Button
         text="Add Rec"
         onPress={props.onAddRecPress}
@@ -22,7 +18,6 @@ const Home = (props) => {
 };
 
 Home.propTypes = {
-  onDetailsPress: React.PropTypes.func,
   onAddRecPress: React.PropTypes.func,
 };
 
