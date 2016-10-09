@@ -18,6 +18,7 @@ const Recs = ({ recsReady, onRecPress, selector }) => {
         contentContainerStyle={styles.list}
         collection="recs"
         selector={selector}
+        options={{sort: {createdAt: -1}}}
         enableEmptySections={true}
         renderRow={(rec) => <RecListItem rec={rec} onPress={ () => onRecPress(rec) }/>}
       />
