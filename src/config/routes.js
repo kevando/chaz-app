@@ -8,6 +8,7 @@ import Recrs from '../routes/Recrs';
 import Rec from '../routes/Rec';
 import Categories from '../routes/Categories';
 import RecInput from '../routes/RecInput';
+import RecrInput from '../routes/RecrInput';
 
 export const routes = {
   getHomeRoute() {
@@ -22,6 +23,7 @@ export const routes = {
     };
   },
   getRecrsRoute() {
+
     return {
       renderScene(navigator) {
         return <Recrs navigator={navigator} />;
@@ -87,6 +89,16 @@ export const routes = {
     return {
       renderScene(navigator) {
         return <RecInput navigator={navigator} rec={rec} />;
+      },
+
+      showNavigationBar: true,
+
+    };
+  },
+  getRecrInputRoute(rec) {
+    return {
+      renderScene(navigator) {
+        return <RecrInput navigator={navigator} rec={rec} />;
       },
 
       showNavigationBar: true,
