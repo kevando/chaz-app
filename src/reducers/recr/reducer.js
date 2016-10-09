@@ -1,26 +1,29 @@
 import * as types from './actionTypes';
 import {Map, List} from 'immutable';
 
-const initialState = List([]);
+
+
+const initialState = Map();
 
 export default function counter(recrs = initialState, action = {}) {
   switch (action.type) {
 
-    case types.LOAD_RECRS_FROM_FIREBASE:
-      return action.payload; // already base a List in the actionCreator
+    case 'SET_RECRS':
+      // return Map(action.payload);
+      return Map(action.payload.items); // changing this, not sure why tho
 
     case types.ADD_RECR:
-      return recrs.push(Map(action.payload));
+      return recrs.set(action.payload._id, action.payload);
 
-    case types.UPDATE_RECR:
-      // Find recr by index, and update entire object in recs List
-      return recrs.update(
-        recrs.findIndex(function(recr) {
-          return recr.get("id") === action.payload.id;
-        }), function(recr) {
-          return Map(action.payload); // return entire rec
-        }
-      );
+    // case types.UPDATE_RECR:
+    //   // Find recr by index, and update entire object in recs List
+    //   return recrs.update(
+    //     recrs.findIndex(function(recr) {
+    //       return recr.get("id") === action.payload.id;
+    //     }), function(recr) {
+    //       return Map(action.payload); // return entire rec
+    //     }
+    //   );
 
     case types.UPDATE_RECR_STATS:
       // Find recr by index, and update just the score

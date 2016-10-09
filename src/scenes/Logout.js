@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import {View, Text} from "react-native";
-import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
-const engine = createEngine('async-data-v1');
 import timer from 'react-native-timer';
-import RNRestart from 'react-native-restart'; 
+import RNRestart from 'react-native-restart';
 
 export default class Logout extends Component {
 
  componentDidMount(){
 
    // Clear everything written to disk
-   engine.save({});
    // Wait 2 seconds, then restart the app
    timer.setTimeout(this,'wait',function(){RNRestart.Restart();},2000);
  }

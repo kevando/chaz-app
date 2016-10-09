@@ -26,6 +26,8 @@ class RecrItem extends Component {
   render() {
 
     var recr = this.getRecr(this.props.rec.recr_id);
+    console.log('recr id',this.props.rec.recr_id);
+    console.log('recr',recr);
 
 
     if(recr) {
@@ -52,9 +54,9 @@ class RecrItem extends Component {
   }
   getRecr(recr_id){
     var recr = this.props.recrs.find(function(obj){
-      return obj.get('id') === recr_id;
+      return obj._id === recr_id;
     });
-    return recr ? recr.toJS() : null ;
+    return recr ? recr : null ;
   }
 
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import * as appActions from '../reducers/app/actions';
+// import * as categoriesActions from '../reducers/categories/actions';
 import FilterItem from '../components/FilterItem';
 import * as Global from '../style/Global';
 import {colors} from '../style/Global';
@@ -9,6 +9,7 @@ import {colors} from '../style/Global';
 class FilterNav extends Component {
   constructor(props) {
     super(props);
+    this.state = {activeFilter: 'all'};
   }
 
   render() {
@@ -17,34 +18,36 @@ class FilterNav extends Component {
 
     return (
       <ScrollView horizontal={true} >
-      <View style={styles.filtersContainer} >
-        <View style={styles.filterRow}>
-          {this.renderFilters()}
-        </View>
+        <View style={styles.filtersContainer} >
+          <View style={styles.filterRow}>
+            {this.renderFilters()}
+          </View>
         </View>
       </ScrollView>
     )
   }
 
   onFilterPress(filter){
-    this.props.dispatch(appActions.setFilter(filter));
+    // this.props.dispatch(categoriesActions.setFilter(filter));
+    this.setState({activeFilter:filter.id});
   }
 
-  renderFilters(filterType) { // these variables are not named very well
+  renderFilters() {
     var onPress = this.onFilterPress;
 
-    var filterList = this.props.app.get('filters');
-    var activeFilter = this.props.app.get('activeFilter');
+    var filterList = this.props.categories;
+    var activeFilter = this.state.activeFilter;//'all';//this.props.app.get('activeFilter');
 
     var renderedFilterList = Array()
     // need to do it like this cause returning a map is some experimental feature
+    // todo change this render fn, no longer need to map like this
 
     filterList.map((filter) => {
-
+      // console.log('filter to render',filter);
       renderedFilterList.push(
         <FilterItem
           filter={filter}
-          key={filter}
+          key={filter.label}
           style={styles.filterItem}
           activeFilter={activeFilter}
           onPress={this.onFilterPress.bind(this,filter)}
@@ -74,6 +77,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     app: state.app, // depending how I do this. I probably only need onboarding here
+    categories: state.categories
   }
 }
 

@@ -1,7 +1,23 @@
 import * as types from './actionTypes';
+import {setRecs} from '../rec/actions';
+import {setRecrs} from '../recr/actions';
+import ddpClient from '../../ddp';
 
+export function changeSignInStatus(status = false) {
+  return { type: types.CHANGE_SIGN_IN_STATUS, status };
+}
 
-
+export function initializeApp() {
+  // Pull in data from meteor
+  return function(dispatch, getState) {
+    ddpClient.subscribe("init", ['uid'], () => {
+      const { recs, recrs } = ddpClient.collections;
+      dispatch(setRecs(recs));
+      dispatch(setRecrs(recrs));
+      dispatch({type: types.APP_INITIALIZED}); // this loads the recs scene
+    });
+  }
+}
 // export function initialize(newState) {
 //   // This function sets the intial route and dispatches the app to create a new user if not set
 //   // I think its good to keep this here in case we want to do other stuff later

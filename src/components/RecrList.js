@@ -18,7 +18,7 @@ export default class RecrList extends Component {
       <View>
         {
           recrs.map(recr => (
-             <ListItem key={recr.get('id')} recr={recr.toJS()} />
+             <ListItem key={recr._id} recr={recr} />
           ))}
       </View>
     );
