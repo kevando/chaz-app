@@ -7,7 +7,7 @@ import images from '../../config/images';
 import styles from './styles';
 
 const SignIn = (props) => {
-  const { updateState, signIn, createAccount, getStarted, error, confirmPasswordVisible } = props;
+  const { updateState, signIn, getStarted, error, confirmPasswordVisible } = props;
 
   return (
     <View style={styles.container}>
@@ -41,7 +41,7 @@ const SignIn = (props) => {
       </View>
 
       <View style={styles.buttons}>
-        <Button text="Sign In" onPress={signIn} />
+        <Button text="Sign In" onPress={getStarted} />
       </View>
 
       <KeyboardSpacer />

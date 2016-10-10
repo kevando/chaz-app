@@ -25,12 +25,12 @@ class Loading extends Component {
 
   continuePulse(){
     this.startPulse()
-    // todo only return on even pulses
+
   }
 
   startPulse() {
     // console.log('start pulse'); this is going on forever
-    // todo probly change that
+    
 
 
     if (!this.props.hasPulse) {

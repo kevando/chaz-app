@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   ListView
 } from 'react-native';
-
 import Meteor, { createContainer } from 'react-native-meteor';
+import styles from './styles';
 
 class RecrSelection extends Component {
 
@@ -28,7 +28,7 @@ class RecrSelection extends Component {
     const { onSelect } = this.props;
     return(
       <TouchableOpacity onPress={() => onSelect(recr)}>
-        <Text style={this.getStyle(recr)}>{recr.name}</Text>
+        <Text style={[styles.item,this.getStyle(recr)]}>{recr.name}</Text>
       </TouchableOpacity>
     );
   }

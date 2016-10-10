@@ -11,35 +11,39 @@ import Meteor, { MeteorListView } from 'react-native-meteor';
 
 const RecrInput = (props) => {
   const { updateState, onSelect, addRecr, assignRecr, name, recr } = props;
+  console.log('recr in rec inout',recr)
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-
-      <Text style={styles.headerText}>Assign Recr</Text>
-      </View>
 
       <InputWrapper>
         <GenericTextInput
-          placeholder="Who recd??"
+          placeholder="Who recommended this?"
           value={name}
           onChangeText={(name) => updateState({ name })}
         />
 
+      { name != '' ?
         <View style={styles.buttons}>
-          <Button text="Add Recr" onPress={addRecr} />
+          <Button text="Add Friend" onPress={addRecr} />
         </View>
+
+      : null }
+
 
       </InputWrapper>
 
-      <View style={styles.buttons}>
-        <Button text="Assign Recr" onPress={assignRecr} />
-      </View>
-
+      <View>
       <RecrSelection onSelect={(recr) => updateState({ recr })} recr={recr} />
 
+      {recr._id ?
+        <View style={styles.buttons}>
+          <Button text="Assign Friend" onPress={assignRecr} />
+        </View>
+        : null
+      }
 
-
+      </View>
 
       <KeyboardSpacer />
     </View>

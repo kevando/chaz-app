@@ -9,23 +9,21 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    padding:10
   },
-  list: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+  title: {
+    paddingBottom: 8,
+    fontSize: 18,
+    fontWeight: '600',
   },
-  item: {
-    backgroundColor: colors.buttonBackground,
-    color: colors.buttonText,
-    width: cardSize,
-    height: cardSize,
-    marginHorizontal: MARGIN_HORIZONTAL,
-    marginVertical: 5,
-    paddingTop: cardSize / 2.3,
-    fontSize: 16,
+  note: {
+    paddingBottom: 18,
+    fontSize: 15,
     fontWeight: '500',
-    textAlign: 'center',
-    alignItems: 'center',
   },
+  recr: {
+    color: 'green',
+    fontWeight: '700',
+    fontSize: 15
+  }
 });

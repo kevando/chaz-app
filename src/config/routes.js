@@ -10,6 +10,8 @@ import Categories from '../routes/Categories';
 import RecInput from '../routes/RecInput';
 import RecrInput from '../routes/RecrInput';
 
+import ExNavigator from '@exponent/react-native-navigator';
+
 export const routes = {
   getHomeRoute() {
     return {
@@ -59,10 +61,12 @@ export const routes = {
         return <Recs navigator={navigator} category={category}/>;
       },
 
-      showNavigationBar: true,
-
       getTitle() {
         return 'Recommendations';
+      },
+
+      getBackButtonTitle() {
+        return 'Back';
       },
     };
   },
@@ -74,7 +78,7 @@ export const routes = {
       },
 
       getTitle(){
-        return 'Rec';//rec.title
+        return rec.category
       },
 
       getBackButtonTitle() {
@@ -91,7 +95,9 @@ export const routes = {
         return <RecInput navigator={navigator} rec={rec} />;
       },
 
-      showNavigationBar: true,
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
 
     };
   },
@@ -101,7 +107,13 @@ export const routes = {
         return <RecrInput navigator={navigator} rec={rec} />;
       },
 
-      showNavigationBar: true,
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
+
+      getBackButtonTitle() {
+        return 'Back';
+      },
 
     };
   },
@@ -115,6 +127,12 @@ export const routes = {
       },
 
       showNavigationBar: true,
+
+      configureScene() {
+        console.log(this);
+        // return SceneConfigs.PushFromRight;
+
+      },
     };
   },
 };

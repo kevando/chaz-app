@@ -40,7 +40,7 @@ class FilterNav extends Component {
 
     var renderedFilterList = Array()
     // need to do it like this cause returning a map is some experimental feature
-    // todo change this render fn, no longer need to map like this
+    
 
     filterList.map((filter) => {
       // console.log('filter to render',filter);

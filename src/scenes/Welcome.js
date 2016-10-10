@@ -27,7 +27,7 @@ class Welcome extends Component {
     }
   }
 
-  componentDidUpdate(nextProps) { //todo change this after auth is improved
+  componentDidUpdate(nextProps) {
     // var user = this.props.app.get('user');
     // if(user && this.state.loading){ // Refresh screen with auth data
     //   var uid = user.get('uid');
@@ -99,7 +99,7 @@ class Welcome extends Component {
 
     let signIn, createAccount;
 
-    if (this.props.connected) { // todo. do I need to check this?
+    if (this.props.connected) {
       signIn = <Button text="Lets get started" onPress={() => this.handleSignIn()} />;
     }
 
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
   return {
     deviceId: state.app.get('deviceId'),
-    connected: true // todo this should connect to this.ddp.connected
+    connected: true 
   }
 }
 

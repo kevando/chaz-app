@@ -21,6 +21,7 @@ class LoggedIn extends React.Component {
       sceneStyle.push({ paddingTop: 64 });
     }
 
+
     return (
       <TabNavigator.Item
         selected={selectedTab === title}

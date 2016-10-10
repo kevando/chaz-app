@@ -7,7 +7,6 @@ export default class RecrInputContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.mounted = false;
     this.state = {
       name: '',
       recr: {},
@@ -17,19 +16,25 @@ export default class RecrInputContainer extends Component {
 
   handleAddRecr(){
     const { name, navigator } = this.state;
-    const recr = {name, uid: Meteor.userId(), createdAt: Date.now() }
-    Meteor.call('addRecr',recr);
+    const updateState = this.setState.bind(this);
+    var recr = {name, uid: Meteor.userId(), createdAt: Date.now() }
+
+    Meteor.call('addRecr', recr, function(err,res){
+      // set new recr and clear form
+      recr._id = res
+      updateState({name: '', recr: recr})
+    });
+
   }
 
   handleAssignRecr() {
     const { rec, recr } = this.state;
+    const { navigator } = this.props;
     rec.recr_id = recr._id;
 
     Meteor.call('updateRec',rec,function(err,res){
-      // Might need to add the id from meteor to the rec object.
-      // navigator.replace(Routes.getRecRoute(recr));
-    })
-
+      navigator.pop();
+    });
   }
 
   render() {

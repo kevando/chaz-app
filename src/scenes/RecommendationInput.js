@@ -115,7 +115,7 @@ class RecommendationAdd extends Component {
     }
     // if new
     else {
-      // if uid is null, then we are SENDING a rec todo future feature
+      
         this.props.addRec(title,note,uid);
     }
   }

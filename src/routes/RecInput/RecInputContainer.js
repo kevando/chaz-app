@@ -36,10 +36,11 @@ class RecInputContainer extends Component {
 
   addRec(){
     const { title, note, category, navigator } = this.state;
-    const rec = {title, note, category, uid: Meteor.userId(), createdAt: Date.now()}
+    var rec = {title, note, category, uid: Meteor.userId(), createdAt: Date.now()}
 
     Meteor.call('addRec',rec,function(err,res){
-      // Might need to add the id from meteor to the rec object.
+      //res is the rec ID
+      rec._id = res; // better way to do this?
       navigator.replace(Routes.getRecRoute(rec));
     })
   }

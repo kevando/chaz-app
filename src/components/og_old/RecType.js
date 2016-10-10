@@ -36,10 +36,10 @@ export default class RecType extends Component {
 
   componentWillReceiveProps(newProps) {
     // user edited type so the list item needs to be refreshed
-    this.setState({type: newProps.rec.type  || 'default' }); // todo should have a better way to handle undefined types
+    this.setState({type: newProps.rec.type  || 'default' });
   }
   getOptions(){
-    if(!this.props.updateRec) // if set to uneditable. this is a hack todo
+    if(!this.props.updateRec) 
       return;
 
     var options = [];
