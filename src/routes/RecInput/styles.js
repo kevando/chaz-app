@@ -42,4 +42,14 @@ export default styles = StyleSheet.create({
     fontWeight: '400',
     fontStyle: 'italic',
   },
+  // because some bullshit w the TextInput ref
+  input: {
+    height: 40,
+    borderRadius: 5,
+    backgroundColor: colors.inputBackground,
+    marginLeft: 10,
+    marginVertical: 5,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+  },
 });

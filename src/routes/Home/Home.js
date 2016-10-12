@@ -1,19 +1,19 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import Button from '../../components/Button';
 import styles from './styles';
+import { Categories, MovieQueue } from '../../components/Widgets'
 
 const Home = (props) => {
+
+  const { onCategoryPress, onMovieQueuePress } = props;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.main}>
-        chaz
-      </Text>
-      <Button
-        text="Add Rec"
-        onPress={props.onAddRecPress}
-      />
+      <Categories onPress={onCategoryPress} />
+      <MovieQueue onPress={onMovieQueuePress} />
     </View>
+
+
   );
 };
 

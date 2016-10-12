@@ -1,4 +1,5 @@
 import React from 'react';
+import NavBar from '../components/NavBar';
 import Home from '../routes/Home';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
@@ -19,8 +20,11 @@ export const routes = {
         return <Home navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Home';
+      // probly a better way to do this
+      renderTitle(navigator) {
+        return (
+          <NavBar title="chaz" navigator={navigator} />
+        );
       },
     };
   },
@@ -42,7 +46,9 @@ export const routes = {
         return <Profile navigator={navigator} />;
       },
 
-      showNavigationBar: false,
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
     };
   },
   getSignInRoute() {

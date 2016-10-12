@@ -22,7 +22,7 @@ class RecInputContainer extends Component {
 
     const { rec } = this.props;
 
-    // if rec exists, then we are editing instead of adding
+    // if rec exists, then user is editing
     if(rec) {
       this.setState({
         title: rec.title,
@@ -60,8 +60,10 @@ class RecInputContainer extends Component {
 
   render() {
     const { handleSaveRec } = this.state;
+    const { rec } = this.props;
     return (
       <RecInput
+        rec={rec}
         headerText={ this.state.headerText }
         updateState={this.setState.bind(this)}
         saveRec={handleSaveRec}

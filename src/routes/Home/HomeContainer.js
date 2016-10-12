@@ -6,6 +6,8 @@ const HomeContainer = (props) => {
   return (
     <Home
       onAddRecPress={() => props.navigator.push(Routes.getRecInputRoute())}
+      onCategoryPress={() => props.navigator.push(Routes.getCategoriesRoute())}
+      onMovieQueuePress={() => props.navigator.push(Routes.getRecsRoute('movie'))}
     />
   );
 };
