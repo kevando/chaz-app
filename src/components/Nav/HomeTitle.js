@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Routes from '../../config/routes';
 
-const NavBar = (props) => {
+const HomeTitle = (props) => {
   const { title, navigator } = props;
   return (
     <TouchableOpacity onPress={() => navigator.push(Routes.getProfileRoute())} >
@@ -14,8 +14,8 @@ const NavBar = (props) => {
   );
 };
 
-NavBar.propTypes = {
+HomeTitle.propTypes = {
   text: React.PropTypes.string,
 };
 
-export default NavBar;
+export default HomeTitle;

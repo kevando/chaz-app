@@ -9,9 +9,9 @@ import Rec from '../routes/Rec';
 import Categories from '../routes/Categories';
 import RecInput from '../routes/RecInput';
 import RecrInput from '../routes/RecrInput';
+import Queue from '../routes/Queue';
 
-import NavBar from '../components/NavBar';
-import NavButton from '../components/NavButton';
+import * as Nav from '../components/Nav';
 
 import ExNavigator from '@exponent/react-native-navigator';
 
@@ -22,10 +22,9 @@ export const routes = {
         return <Home navigator={navigator} />;
       },
 
-      // probly a better way to do this
       renderTitle(navigator) {
         return (
-          <NavBar title="chaz" navigator={navigator} />
+          <Nav.HomeTitle title="chaz" navigator={navigator} />
         );
       },
     };
@@ -65,7 +64,7 @@ export const routes = {
 
   /* Recommendations */
 
-  getRecsRoute(category) { // arguement is tmp. make this its own route
+  getRecsRoute(category) {
 
     return {
       renderScene(navigator) {
@@ -77,7 +76,29 @@ export const routes = {
       },
 
       renderLeftButton(navigator) {
-        return <NavButton text="Back" onPress={() => navigator.pop() } />
+        return <Nav.Button text="Back" onPress={() => navigator.pop() } />
+      },
+
+    };
+  },
+
+  /* Queue */
+
+  getQueueRoute(category) {
+
+    return {
+      renderScene(navigator) {
+        return <Queue navigator={navigator} category={category}/>;
+      },
+
+      renderTitle(navigator) {
+        return (
+          <Nav.QueueTitle icon="tv" />
+        );
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Back" onPress={() => navigator.pop() } />
       },
 
     };
@@ -108,7 +129,7 @@ export const routes = {
       },
 
       renderLeftButton(navigator) {
-        return <NavButton text="Cancel" onPress={() => navigator.pop() } />
+        return <Nav.Button text="Cancel" onPress={() => navigator.pop() } />
       },
 
       configureScene(){
@@ -131,7 +152,7 @@ export const routes = {
       },
 
       renderLeftButton(navigator) {
-        return <NavButton text="Cancel" onPress={() => navigator.pop() } />
+        return <Nav.Button text="Cancel" onPress={() => navigator.pop() } />
       },
 
     };
