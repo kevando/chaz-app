@@ -13,7 +13,7 @@ class RecInputContainer extends Component {
       title: '',
       note: '',
       category: 'uncategorized',
-      headerText: 'Add Rec',
+      headerText: 'Add ',
       handleSaveRec: this.addRec.bind(this),
       navigator: this.props.navigator, // maybe not the best approach
     };
@@ -22,13 +22,13 @@ class RecInputContainer extends Component {
 
     const { rec } = this.props;
 
-    // if rec exists, then we are editing instead of adding
+    // if rec exists, then user is editing
     if(rec) {
       this.setState({
         title: rec.title,
         note: rec.note,
         category: rec.category,
-        headerText: 'Edit Rec',
+        headerText: 'Edit ',
         handleSaveRec: this.updateRec.bind(this,rec)
       });
     }
@@ -60,8 +60,10 @@ class RecInputContainer extends Component {
 
   render() {
     const { handleSaveRec } = this.state;
+    const { rec } = this.props;
     return (
       <RecInput
+        rec={rec}
         headerText={ this.state.headerText }
         updateState={this.setState.bind(this)}
         saveRec={handleSaveRec}

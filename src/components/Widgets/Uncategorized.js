@@ -1,65 +1,29 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-
-import {connect} from 'react-redux'
-
-import styles from './Styles';
-import {colors} from '../../style/Global';
-
-import { bindActionCreators } from 'redux'
-import * as recActions from '../../reducers/rec/actions';
-
-import RecType from '../RecType';
+import { Text, View, TouchableOpacity, } from 'react-native';
+import styles from './styles';
+import WidgetContainer from './WidgetContainer';
 
 class Uncategorized extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
-  // componentDidMount
-
   render() {
-    let recs = this.props.recs.filter(rec => typeof rec.type == "undefined")
-    return (
-      <View>
-        <Text>You have {recs.size} uncategorized recs</Text>
-          {this.renderRecs(recs)}
-      </View>
-    );
+    const { onPress, recs} = this.props.data;
+
+    if(recs.length > 0){
+      return (
+        <WidgetContainer icon="question" title="Uncategorized" >
+          <TouchableOpacity onPress={onPress} >
+            <View>
+              <Text>You have {recs.length} uncateogorized recs</Text>
+            </View>
+          </TouchableOpacity>
+        </WidgetContainer>
+      );
+    } else {
+      return <View></View>
+    }
   }
-  renderRecs(recs){
-    let { dispatch } = this.props;
-    let boundActionCreators = bindActionCreators(recActions, dispatch)
 
-
-    return (
-      recs.valueSeq().map(rec => (
-        <View key={rec._id}>
-          <RecType rec={rec} {...boundActionCreators} size={20} categories={this.props.categories} />
-          <Text>{rec.title}</Text>
-        </View>
-      ))
-
-    );
-  }
 
 }
 
-
-function mapStateToProps(state) {
-  return {
-    categories: state.categories,
-    recs: state.recs,
-    // app: state.app,
-    // onboard: state.onboard
-
-  };
-}
-
-export default connect(mapStateToProps)(Uncategorized);
+export default Uncategorized;

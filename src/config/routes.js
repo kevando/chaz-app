@@ -1,14 +1,17 @@
 import React from 'react';
+
 import Home from '../routes/Home';
 import Profile from '../routes/Profile';
 import SignIn from '../routes/SignIn';
-
 import Recs from '../routes/Recs';
 import Recrs from '../routes/Recrs';
 import Rec from '../routes/Rec';
 import Categories from '../routes/Categories';
 import RecInput from '../routes/RecInput';
 import RecrInput from '../routes/RecrInput';
+
+import NavBar from '../components/NavBar';
+import NavButton from '../components/NavButton';
 
 import ExNavigator from '@exponent/react-native-navigator';
 
@@ -19,8 +22,11 @@ export const routes = {
         return <Home navigator={navigator} />;
       },
 
-      getTitle() {
-        return 'Home';
+      // probly a better way to do this
+      renderTitle(navigator) {
+        return (
+          <NavBar title="chaz" navigator={navigator} />
+        );
       },
     };
   },
@@ -42,7 +48,9 @@ export const routes = {
         return <Profile navigator={navigator} />;
       },
 
-      showNavigationBar: false,
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
     };
   },
   getSignInRoute() {
@@ -54,6 +62,9 @@ export const routes = {
       showNavigationBar: false,
     };
   },
+
+  /* Recommendations */
+
   getRecsRoute(category) { // arguement is tmp. make this its own route
 
     return {
@@ -62,12 +73,13 @@ export const routes = {
       },
 
       getTitle() {
-        return 'Recommendations';
+        return '';
       },
 
-      getBackButtonTitle() {
-        return 'Back';
+      renderLeftButton(navigator) {
+        return <NavButton text="Back" onPress={() => navigator.pop() } />
       },
+
     };
   },
   getRecRoute(rec) {
@@ -81,18 +93,22 @@ export const routes = {
         return rec.category
       },
 
-      getBackButtonTitle() {
-        return 'Back';
-      },
 
 
       showNavigationBar: true,
     };
   },
+
+  /* Rec Input */
+
   getRecInputRoute(rec) {
     return {
       renderScene(navigator) {
         return <RecInput navigator={navigator} rec={rec} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <NavButton text="Cancel" onPress={() => navigator.pop() } />
       },
 
       configureScene(){
@@ -101,6 +117,9 @@ export const routes = {
 
     };
   },
+
+  /* Recr Input */
+
   getRecrInputRoute(rec) {
     return {
       renderScene(navigator) {
@@ -111,8 +130,8 @@ export const routes = {
         return ExNavigator.SceneConfigs.FloatFromBottom
       },
 
-      getBackButtonTitle() {
-        return 'Back';
+      renderLeftButton(navigator) {
+        return <NavButton text="Cancel" onPress={() => navigator.pop() } />
       },
 
     };
@@ -126,13 +145,10 @@ export const routes = {
         return 'Categories';
       },
 
-      showNavigationBar: true,
+      // renderLeftButton(navigator) {
+      //   return <NavButton text="Cancel" onPress={() => navigator.pop() } />
+      // },
 
-      configureScene() {
-        console.log(this);
-        // return SceneConfigs.PushFromRight;
-
-      },
     };
   },
 };

@@ -10,15 +10,16 @@ import Meteor, { MeteorListView } from 'react-native-meteor';
 
 
 const RecrInput = (props) => {
-  const { updateState, onSelect, addRecr, assignRecr, name, recr } = props;
-  console.log('recr in rec inout',recr)
+  const { updateState, onSelect, addRecr, assignRecr, name, recr, rec } = props;
+
+  console.log('recr input rec',props)
 
   return (
     <View style={styles.container}>
 
       <InputWrapper>
         <GenericTextInput
-          placeholder="Who recommended this?"
+          placeholder={"Who recommended " + rec.title}
           value={name}
           onChangeText={(name) => updateState({ name })}
         />

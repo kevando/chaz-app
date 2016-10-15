@@ -1,66 +1,43 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-
-import {connect} from 'react-redux'
-
-import styles from './Styles';
-import {colors} from '../../style/Global';
-
-import { bindActionCreators } from 'redux'
-import * as recActions from '../../reducers/rec/actions';
-
-import RecrItem from '../RecrItem';
+import { Text, View, TouchableOpacity, ListView } from 'react-native';
+import styles from './styles';
+import WidgetContainer from './WidgetContainer';
 
 class NeedsRecr extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
-  // componentDidMount
-
   render() {
-    let recs = this.props.recs.filter(rec => typeof rec.recr_id == "undefined");
 
     return (
-      <View>
-        <Text>You have {recs.size} recs that need recommenders</Text>
-          {this.renderRecs(recs)}
-      </View>
+      <WidgetContainer icon="sleeping" title="Who recommended these?" >
+      <View style={{flex: 1}}>
+      { this.renderRecs() }
+    </View>
+  </WidgetContainer>
     );
   }
-  renderRecs(recs){
-    let { dispatch } = this.props;
-    let boundActionCreators = bindActionCreators(recActions, dispatch)
+
+  renderRecs() {
+    const { recs } = this.props.data;
+    const displayRecs = [];
+    for(rec of recs) {
+      displayRecs.push(this.renderRec(rec));
+    }
+    return displayRecs;
+  }
 
 
-    return (
-      recs.valueSeq().map(rec => (
-        <View key={rec._id}>
-          <RecrItem rec={rec} {...boundActionCreators} />
+  renderRec(rec) {
+    const { onPress } = this.props.data;
+    return(
+      <TouchableOpacity key={rec._id} onPress={onPress.bind(this,rec)} >
+        <View style={styles.item}>
           <Text>{rec.title}</Text>
         </View>
-      ))
-
+      </TouchableOpacity>
     );
   }
 
+
 }
 
-
-function mapStateToProps(state) {
-  return {
-    categories: state.categories,
-    recs: state.recs,
-    // app: state.app,
-    // onboard: state.onboard
-
-  };
-}
-
-export default connect(mapStateToProps)(NeedsRecr);
+export default NeedsRecr;

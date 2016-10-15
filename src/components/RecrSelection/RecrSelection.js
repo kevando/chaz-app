@@ -4,31 +4,43 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  ListView
 } from 'react-native';
+import Emoji from 'react-native-emoji';
 import Meteor, { createContainer } from 'react-native-meteor';
 import styles from './styles';
 
 class RecrSelection extends Component {
 
   render() {
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const { dataReady } = this.props;
+
+    if(!dataReady)
+      return <View><Text>loading</Text></View>
 
     return (
-      <ListView
-        contentContainerStyle={styles.list}
-        dataSource={ds.cloneWithRows(this.props.recrs)}
-        enableEmptySections={true}
-        renderRow={(recr) => this.renderRecr(recr)}
-      />
+      <View style={{flex: 1}}>
+      { this.renderRecrs() }
+    </View>
     );
   }
+
+  renderRecrs() {
+    const { recrs } = this.props;
+    const displayRecrs = [];
+    for(recr of recrs) {
+      displayRecrs.push(this.renderRecr(recr));
+    }
+    return displayRecrs;
+  }
+
 
   renderRecr(recr) {
     const { onSelect } = this.props;
     return(
-      <TouchableOpacity onPress={() => onSelect(recr)}>
-        <Text style={[styles.item,this.getStyle(recr)]}>{recr.name}</Text>
+      <TouchableOpacity key={recr._id} onPress={() => onSelect(recr)}>
+        <View style={styles.item}>
+          <Text style={this.getStyle(recr)}><Emoji name="stuck_out_tongue" />&nbsp;{recr.name}</Text>
+        </View>
       </TouchableOpacity>
     );
   }
@@ -47,6 +59,7 @@ export default createContainer((props) => {
   const handle = Meteor.subscribe('recrs-list',Meteor.userId());
 
   return {
+    dataReady: handle.ready(),
     recrs: Meteor.collection('recrs').find()//.find({status: "pending"}),
   };
 }, RecrSelection);

@@ -3,17 +3,19 @@ import { Text, View, TouchableOpacity, } from 'react-native';
 import styles from './styles';
 import WidgetContainer from './WidgetContainer';
 
-class Queue extends Component {
+class PodcastQueue extends Component {
 
   render() {
     const { onPress, recs} = this.props.data;
 
     if(recs.length > 0){
       return (
-        <WidgetContainer icon="page_with_curl" title="All Recs" onPress={onPress}>
-          <View>
-            <Text>You have {recs.length} total recs</Text>
-          </View>
+        <WidgetContainer icon="radio" title="Podcasts" >
+          <TouchableOpacity onPress={onPress} >
+            <View>
+              <Text>You have {recs.length} podcast recs</Text>
+            </View>
+          </TouchableOpacity>
         </WidgetContainer>
       );
     } else {
@@ -24,4 +26,4 @@ class Queue extends Component {
 
 }
 
-export default Queue;
+export default PodcastQueue;
