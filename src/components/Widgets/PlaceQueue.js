@@ -3,17 +3,17 @@ import { Text, View, TouchableOpacity, } from 'react-native';
 import styles from './styles';
 import WidgetContainer from './WidgetContainer';
 
-class MovieQueue extends Component {
+class PlaceQueue extends Component {
 
   render() {
     const { onPress, recs} = this.props.data;
 
     if(recs.length > 0){
       return (
-        <WidgetContainer icon="vhs" title="Movies" >
+        <WidgetContainer icon="desert_island" title="Places" >
           <TouchableOpacity onPress={onPress} >
             <View>
-              <Text>You have {recs.length} movie recs</Text>
+              <Text>You have {recs.length} uncateogorized recs</Text>
             </View>
           </TouchableOpacity>
         </WidgetContainer>
@@ -26,4 +26,4 @@ class MovieQueue extends Component {
 
 }
 
-export default MovieQueue;
+export default PlaceQueue;

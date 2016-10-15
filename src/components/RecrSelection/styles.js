@@ -3,17 +3,21 @@ import { colors } from '../../config/styles';
 
 export default styles = StyleSheet.create({
   list: {
+    flex: 1,
     // paddingVertical: 10,
     // paddingHorizontal: 10,
     backgroundColor: '#eee',
     margin: 5,
-    borderColor:'#999',
-    borderWidth:2
+    borderColor:'#bbb',
+    borderWidth:1
   },
   item: {
-    fontSize: 26,
-    borderBottomColor:'#999',
-    borderBottomWidth:12
+    flexDirection: 'row',
+
+    padding: 10,
+    backgroundColor: '#ddd',
+    borderColor:'#fff',
+    borderBottomWidth:1,
   }
 
 });

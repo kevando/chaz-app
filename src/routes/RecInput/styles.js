@@ -5,12 +5,16 @@ const window = Dimensions.get('window');
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+
+  },
+  inputContainer: {
+    flex: 1,
     backgroundColor: colors.background,
   },
   buttons: {
-    flexDirection: 'row',
+    // flexDirection: 'column',
+    justifyContent: 'flex-end',
+    // alignSelf: 'flex-end'
   },
   error: {
     height: 28,
@@ -23,17 +27,17 @@ export default styles = StyleSheet.create({
     fontSize: 14,
   },
   header: {
-    marginBottom: 25,
-    alignItems: 'center',
+    margin: 15,
+    flexDirection:'row', // so text does not wrap
   },
   logo: {
     width: 125,
     height: 125,
   },
   headerText: {
-    fontSize: 30,
+    fontSize: 17,
     color: colors.headerText,
-    fontWeight: '600',
+    fontWeight: '400',
     fontStyle: 'italic',
   },
   subHeaderText: {
@@ -45,7 +49,7 @@ export default styles = StyleSheet.create({
   // because some bullshit w the TextInput ref
   input: {
     height: 40,
-    borderRadius: 5,
+    borderColor:'#ccc',
     backgroundColor: colors.inputBackground,
     marginLeft: 10,
     marginVertical: 5,

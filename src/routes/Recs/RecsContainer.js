@@ -1,4 +1,4 @@
-  import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import Meteor, { createContainer } from 'react-native-meteor';
 import Recs from './Recs';
 import Routes from '../../config/routes';
@@ -27,6 +27,7 @@ export default createContainer((props) => {
   return {
     recsReady: handle.ready(),
     onRecPress: (rec) => props.navigator.push(Routes.getRecRoute(rec)),
-    selector: selector
+    selector: selector,
+    recs: Meteor.collection('recs').find(selector), 
   };
 }, Recs);

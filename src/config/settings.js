@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === 'production') {
   METEOR_URL = 'ws://chaz.tacopolice.com:80/websocket';
 }
 
-METEOR_URL = 'ws://chaz.tacopolice.com:80/websocket'; 
+// METEOR_URL = 'ws://chaz.tacopolice.com:80/websocket'; 
 
 export const settings = {
   env: process.env.NODE_ENV,

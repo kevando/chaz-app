@@ -1,24 +1,36 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import styles from './styles';
-import { Categories, MovieQueue } from '../../components/Widgets'
+import Button from '../../components/Button';
+import * as Widget from '../../components/Widgets';
 
 const Home = (props) => {
 
-  const { onCategoryPress, onMovieQueuePress } = props;
+  const { widgetData, onAddRecPress, dataReady, onRecrPress } = props;
+
+  if(!dataReady)
+    return <View><Text>Loading</Text></View>
 
   return (
     <View style={styles.container}>
-      <Categories onPress={onCategoryPress} />
-      <MovieQueue onPress={onMovieQueuePress} />
+      <ScrollView>
+        <Widget.Uncategorized data={widgetData.uncategorized} />
+        <Widget.NeedsRecr     data={widgetData.needsRecr} />
+        <Widget.MovieQueue    data={widgetData.movieQueue} />
+        
+        <Widget.TvQueue       data={widgetData.tvQueue} />
+        <Widget.MusicQueue    data={widgetData.musicQueue} />
+        <Widget.BookQueue     data={widgetData.bookQueue} />
+        <Widget.PodcastQueue  data={widgetData.podcastQueue} />
+        <Widget.FoodQueue     data={widgetData.foodQueue} />
+        <Widget.PlaceQueue    data={widgetData.placeQueue} />
+        <Widget.Queue         data={widgetData.queue} />
+
+      </ScrollView>
+      <Button text="Add Rec" onPress={onAddRecPress}/>
     </View>
 
-
   );
-};
-
-Home.propTypes = {
-  onAddRecPress: React.PropTypes.func,
 };
 
 export default Home;

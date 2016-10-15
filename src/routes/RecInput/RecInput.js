@@ -3,9 +3,8 @@ import { Text, View, TextInput } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Button from '../../components/Button';
 import RecCategory from '../../components/RecCategory';
-import GenericTextInput, { InputWrapper, ChazTextInput } from '../../components/GenericTextInput';
+import GenericTextInput, { InputWrapper } from '../../components/GenericTextInput';
 import styles from './styles';
-
 
 class RecInput extends Component {
 
@@ -15,51 +14,52 @@ class RecInput extends Component {
     if(!this.props.rec) this.refs.TitleInput.focus(true);
   }
 
-
   render() {
-  const { updateState, saveRec, headerText, title, note, category } = this.props;
+    const { updateState, saveRec, headerText, title, note, category } = this.props;
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    return (
 
-      <Text style={styles.headerText}>{headerText}</Text>
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <View style={styles.header}>
+
+            <Text style={styles.headerText}>{headerText}</Text>
+              <RecCategory
+                category={category}
+                onChange={(category) => updateState({ category })}
+                {...this.state}
+                />
+              <Text style={styles.headerText}>Recommendation</Text>
+
+          </View>
+
+          <InputWrapper>
+            <TextInput
+              style={styles.input}
+              placeholder="What was recommended?"
+              value={title}
+              ref="TitleInput"
+              onChangeText={(title) => updateState({ title })}
+              />
+
+            <GenericTextInput
+              placeholder="Write a note"
+              value={note}
+              onChangeText={(note) => updateState({ note })}
+              multiline={true}
+              />
+          </InputWrapper>
+
+        </View>
+
+        <View style={styles.buttons}>
+          <Button text="Save Recommendation" onPress={saveRec} />
+        </View>
+
+        <KeyboardSpacer />
       </View>
-
-
-      <InputWrapper>
-        <TextInput
-          style={styles.input}
-          placeholder="What was recommended?"
-          value={title}
-          ref="TitleInput"
-          onChangeText={(title) => updateState({ title })}
-        />
-
-
-        <GenericTextInput
-          placeholder="Write a note"
-          value={note}
-          onChangeText={(note) => updateState({ note })}
-        />
-
-
-      </InputWrapper>
-
-      <RecCategory
-        category={category}
-        onChange={(category) => updateState({ category })}
-        {...this.state}
-      />
-
-      <View style={styles.buttons}>
-        <Button text="Save Rec" onPress={saveRec} />
-      </View>
-
-      <KeyboardSpacer />
-    </View>
-  );
-}
+    );
+  }
 };
 
 RecInput.propTypes = {

@@ -13,7 +13,7 @@ class RecInputContainer extends Component {
       title: '',
       note: '',
       category: 'uncategorized',
-      headerText: 'Add Rec',
+      headerText: 'Add ',
       handleSaveRec: this.addRec.bind(this),
       navigator: this.props.navigator, // maybe not the best approach
     };
@@ -28,7 +28,7 @@ class RecInputContainer extends Component {
         title: rec.title,
         note: rec.note,
         category: rec.category,
-        headerText: 'Edit Rec',
+        headerText: 'Edit ',
         handleSaveRec: this.updateRec.bind(this,rec)
       });
     }

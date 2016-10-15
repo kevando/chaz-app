@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import RecListItem from '../../components/RecListItem';
 import { MeteorListView } from 'react-native-meteor';
 import Loading from '../../components/Loading';
@@ -12,8 +12,10 @@ const Recs = ({ recsReady, onRecPress, selector }) => {
     return <Loading />;
   }
 
+
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <MeteorListView
         contentContainerStyle={styles.list}
         collection="recs"
@@ -22,7 +24,7 @@ const Recs = ({ recsReady, onRecPress, selector }) => {
         enableEmptySections={true}
         renderRow={(rec) => <RecListItem rec={rec} onPress={ () => onRecPress(rec) }/>}
       />
-    </View>
+  </ScrollView>
   );
 };
 

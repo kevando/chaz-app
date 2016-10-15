@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 
 const emojiList = {
-  uncategorized: "paperclip",
+  uncategorized: "question",
   all: "earth_americas",
   default: "page_with_curl",
   book: "book",
@@ -46,7 +46,7 @@ class RecCategory extends Component {
       // Might want to expand this out in the future
       return (
         <TouchableOpacity onPress={this.onChangeCategoryPress.bind(this)}>
-          <Text ><Emoji name={emojiList[category]} /> - {category}</Text>
+          <Text><Emoji name={emojiList[category]} /></Text>
         </TouchableOpacity>
       );
     }
