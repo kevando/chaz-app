@@ -1,6 +1,7 @@
 export const colors = {
   // boilerplate colors
   background: '#F5F2F9',
+  border: '#ddd',
   errorText: '#FA3256',
   headerText: '#444444',
   buttonBackground: '#39BD98',

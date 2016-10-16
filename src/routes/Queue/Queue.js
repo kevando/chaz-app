@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import RecListItem from '../../components/RecListItem';
-import { MeteorListView } from 'react-native-meteor';
+import Emoji from 'react-native-emoji';
+import RecCategory from '../../components/RecCategory';
 import Loading from '../../components/Loading';
 import styles from './styles';
 
@@ -24,23 +25,23 @@ class Queue extends Component {
   }
   render(){
 
-     const { recsReady, onRecPress, selector } = this.props;
+     const { recsReady, onRecPress, selector, category } = this.props;
 
 
     if (!recsReady) {
-      return <Loading />;
+      return <Loading message="Loading Queue" />;
     }
 
     return (
       <View style={styles.container}>
       <View style={styles.sortContainer} >
-        <TouchableOpacity onPress={this.updateSort.bind(this,'newest')}><Text style={[styles.sort,this.getStyle('newest')]}>Newest</Text></TouchableOpacity>
-        <TouchableOpacity onPress={this.updateSort.bind(this,'oldest')}><Text style={[styles.sort,this.getStyle('oldest')]}>Oldest</Text></TouchableOpacity>
-        <TouchableOpacity onPress={this.updateSort.bind(this,'bestOverall')}><Text style={[styles.sort,this.getStyle('bestOverall')]}>Best Overall</Text></TouchableOpacity>
-        <TouchableOpacity onPress={this.updateSort.bind(this,'bestCategory')}><Text style={[styles.sort,this.getStyle('bestCategory')]}>Best TV</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.updateSort.bind(this,'newest')}><Text style={[styles.sort,this.getStyle('newest')]}><Emoji name="new" />Newest</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.updateSort.bind(this,'oldest')}><Text style={[styles.sort,this.getStyle('oldest')]}><Emoji name="coffin" />Oldest</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.updateSort.bind(this,'bestOverall')}><Text style={[styles.sort,this.getStyle('bestOverall')]}><Emoji name="earth_americas" />Best</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.updateSort.bind(this,'bestCategory')}><Text style={[styles.sort,this.getStyle('bestCategory')]}><RecCategory category={category} />Best</Text></TouchableOpacity>
       </View>
       <View style={styles.headerContainer} >
-        <Text style={styles.title}>This is your list of unwatched TV shows</Text>
+        <Text style={styles.title}></Text>
 
       </View>
 

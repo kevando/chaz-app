@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Meteor, { connectMeteor } from 'react-native-meteor';
-import Rec from './Rec';
+import Recr from './Recr';
 import Routes from '../../config/routes';
 
-class RecContainer extends Component {
+class RecrContainer extends Component {
 
   // getMeteorData() {
   //   const { rec } = this.props;
@@ -35,24 +35,29 @@ class RecContainer extends Component {
 
   render() {
 
-    const { rec, navigator } = this.props;
+    const { recr, navigator } = this.props;
+    // console.log('propssss',this.props)
     // const { recr } = this.data;
 
     return (
-      <Rec
-        rec={rec}
-        updateState={this.setState.bind(this)}
-        onGradeRecPress={this.handleAssignGrade.bind(this)}
-        onRecrEditPress={() => navigator.push(Routes.getRecrInputRoute(rec))}
-        onRecrPress={() => navigator.push(Routes.getRecrRoute(recr))}
+      <Recr
+        recr={recr}
       />
     );
+    // return (
+    //   <Rec
+    //     rec={rec}
+    //     updateState={this.setState.bind(this)}
+    //     onGradeRecPress={this.handleAssignGrade.bind(this)}
+    //     onRecrEditPress={() => navigator.push(Routes.getRecrInputRoute(rec))}
+    //   />
+    // );
   }
 }
 
-RecContainer.propTypes = {
-  rec: PropTypes.object,
+RecrContainer.propTypes = {
+  recr: PropTypes.object,
 };
 
-connectMeteor(RecContainer);
-export default RecContainer;
+connectMeteor(RecrContainer);
+export default RecrContainer;

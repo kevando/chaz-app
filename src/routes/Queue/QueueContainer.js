@@ -9,13 +9,14 @@ export default createContainer((props) => {
   const handle = Meteor.subscribe('recs-list',Meteor.userId());
   const { category } = props;
 
-  var selector = (category ? {category} : {});
+  var selector = (category ? {category, grade: {$exists: false}, recr_id: {$exists: true} } : {});
 
   var overallSorter = "recr_score."+"overall";
   var categorySorter = "recr_score."+category;
 
   return {
     recsReady: handle.ready(),
+    category,
     onRecPress: (rec) => props.navigator.push(Routes.getRecRoute(rec)),
     recs: {
       newest: Meteor.collection('recs').find(selector,{sort: {createdAt: -1}}),

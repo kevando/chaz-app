@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import styles from './styles';
 
 const Loading = (props) => {
+  const message = props.message || 'Generic loading screen'
   return (
     <View style={styles.container}>
       <ActivityIndicator
@@ -10,6 +11,7 @@ const Loading = (props) => {
         size={props.size}
         {...props}
       />
+    <Text>{message}</Text>
     </View>
   );
 };

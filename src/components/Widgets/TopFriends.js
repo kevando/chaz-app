@@ -7,16 +7,16 @@ import Emoji from 'react-native-emoji';
 class TopFriends extends Component {
 
   render() {
-    const { onPress, recrs} = this.props.data;
+    const { recrs} = this.props.data;
 
     if(recrs.length > 0){
       return (
         <WidgetContainer icon="smiley" title="Top Friends" >
-          <TouchableOpacity onPress={onPress} >
+
             <View style={styles.recrContainer}>
               {this.renderFriends()}
             </View>
-          </TouchableOpacity>
+
         </WidgetContainer>
       );
     } else {
@@ -34,11 +34,14 @@ class TopFriends extends Component {
     return displayFriends;
   }
   renderFriend(recr) {
+    const { onPress} = this.props.data;
     return(
-      <View key={recr._id} style={styles.recrItem}>
+      <TouchableOpacity key={recr._id} onPress={onPress.bind(this,recr)} >
+      <View style={styles.recrItem}>
         <Text style={{fontSize: 30}}><Emoji name="smiley" /></Text>
         <Text style={styles.recrName}>{recr.name}</Text>
       </View>
+    </TouchableOpacity>
     )
   }
 

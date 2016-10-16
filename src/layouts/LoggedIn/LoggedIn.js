@@ -23,7 +23,7 @@ class LoggedIn extends React.Component {
 
     // For development, just load the widgets screen
     // Dont default to the Add Rec form
-    // if(process.env.NODE_ENV == 'production')
+    if(process.env.NODE_ENV == 'production')
       initialStack.push(Routes.getInitialRecInputRoute());
 
     return (

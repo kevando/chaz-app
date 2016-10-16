@@ -30,7 +30,7 @@ const Home = (props) => {
         <Widget.Queue         data={widgetData.queue} />
 
       </ScrollView>
-      <Button text="Add Rec" onPress={onAddRecPress}/>
+      <Button text="Add Recommendation" onPress={onAddRecPress}/>
     </View>
 
   );

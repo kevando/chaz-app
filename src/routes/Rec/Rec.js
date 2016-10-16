@@ -6,7 +6,7 @@ import RecCategory from '../../components/RecCategory';
 import moment from 'moment';
 import Emoji from 'react-native-emoji';
 
-const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress }) => {
+const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress }) => {
 
   var d = new Date(rec.createdAt);
   var savedAgo = moment(d).fromNow();
@@ -27,7 +27,9 @@ const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress }) => {
 
       <View style={styles.momentContainer}>
         {rec.recr_id ?
-          <Text style={styles.recr}>Recommended by {rec.recr_name}</Text>
+          <TouchableOpacity onPress={onRecrPress} >
+            <Text>Recommended by <Text style={styles.recr}>{rec.recr_name}</Text></Text>
+          </TouchableOpacity>
           :
           null
         }

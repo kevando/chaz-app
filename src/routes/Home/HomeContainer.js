@@ -9,6 +9,13 @@ export default createContainer((props) => {
   const recrsHandle = Meteor.subscribe('recrs-list',Meteor.userId());
   const {navigator} = props;
 
+
+  const getQueue = (category) => {
+    return (
+      Meteor.collection('recs').find({category, grade: {$exists: false}, recr_id: {$exists: true} })
+    )
+  }
+
   return {
     dataReady: handle.ready(),
 
@@ -20,7 +27,7 @@ export default createContainer((props) => {
       bookQueue: { recs: Meteor.collection('recs').find({category:'book'}), onPress: () => navigator.push(Routes.getRecsRoute('book')) },
       musicQueue: { recs: Meteor.collection('recs').find({category:'music'}), onPress: () => navigator.push(Routes.getRecsRoute('music')) },
 
-      tvQueue: { recs: Meteor.collection('recs').find({category:'tv'}), onPress: () => navigator.push(Routes.getQueueRoute('tv')) },
+      tvQueue: { recs: getQueue('tv'), onPress: () => navigator.push(Routes.getQueueRoute('tv')) },
 
       podcastQueue: { recs: Meteor.collection('recs').find({category:'podcast'}), onPress: () => navigator.push(Routes.getRecsRoute('podcast')) },
       foodQueue: { recs: Meteor.collection('recs').find({category:'food'}), onPress: () => navigator.push(Routes.getRecsRoute('food')) },

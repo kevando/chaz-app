@@ -4,10 +4,10 @@ import styles from './styles';
 import Emoji from 'react-native-emoji';
 
 const QueueTitle = (props) => {
-  const { icon } = props;
+  const { title } = props;
   return (
       <Text style={styles.title}>
-        <Emoji name={icon} /> Queue
+        {title} Queue
       </Text>
   );
 };

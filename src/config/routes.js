@@ -6,6 +6,7 @@ import SignIn from '../routes/SignIn';
 import Recs from '../routes/Recs';
 import Recrs from '../routes/Recrs';
 import Rec from '../routes/Rec';
+import Recr from '../routes/Recr';
 import Categories from '../routes/Categories';
 import RecInput from '../routes/RecInput';
 import RecrInput from '../routes/RecrInput';
@@ -93,7 +94,7 @@ export const routes = {
 
       renderTitle(navigator) {
         return (
-          <Nav.QueueTitle icon="tv" />
+          <Nav.QueueTitle title={category} />
         );
       },
 
@@ -179,6 +180,29 @@ export const routes = {
 
       renderLeftButton(navigator) {
         return <Nav.Button text="Cancel" onPress={() => navigator.pop() } />
+      },
+
+    };
+  },
+
+  /* Recommender View */
+
+  getRecrRoute(recr) {
+
+    let editRoute = this.getRecrInputRoute(recr);
+
+    return {
+
+      renderScene(navigator) {
+        return <Recr navigator={navigator} recr={recr} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Back" onPress={() => navigator.pop() } />
+      },
+
+      renderRightButton(navigator) {
+        return <Nav.Button text="Edit" onPress={() => navigator.push(editRoute) } />
       },
 
     };
