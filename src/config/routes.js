@@ -201,9 +201,9 @@ export const routes = {
         return <Nav.Button text="Back" onPress={() => navigator.pop() } />
       },
 
-      renderRightButton(navigator) {
-        return <Nav.Button text="Edit" onPress={() => navigator.push(editRoute) } />
-      },
+      // renderRightButton(navigator) {
+      //   return <Nav.Button text="Edit" onPress={() => navigator.push(editRoute) } />
+      // },
 
     };
   },

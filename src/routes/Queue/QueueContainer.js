@@ -11,8 +11,8 @@ export default createContainer((props) => {
 
   var selector = (category ? {category, grade: {$exists: false}, recr_id: {$exists: true} } : {});
 
-  var overallSorter = "recr_score."+"overall";
-  var categorySorter = "recr_score."+category;
+  var overallSorter = "rec.recr.score."+"overall";
+  var categorySorter = "rec.recr.score."+category;
 
   return {
     recsReady: handle.ready(),

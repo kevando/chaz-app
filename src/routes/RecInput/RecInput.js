@@ -3,62 +3,65 @@ import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Button from '../../components/Button';
 import RecCategory from '../../components/RecCategory';
-import GenericTextInput, { InputWrapper } from '../../components/GenericTextInput';
+import { InputWrapper, RecTitleInput, RecNoteInput } from '../../components/GenericTextInput';
 import styles from './styles';
 
 var dismissKeyboard = require('dismissKeyboard');
 
 class RecInput extends Component {
 
-  componentDidMount() {
-    // User is adding a new Rec, auto load the keyboard
-    if(!this.props.rec) this.refs.TitleInput.focus(true);
-  }
 
   render() {
-    const { updateState, saveRec, onEditRecrPress, headerText, title, note, category, initial, onDismiss, rec } = this.props;
+    const { updateState, saveRec, onRemoveRecrPress, onDeleteRecPress, onRemoveGradePress, headerText, title, note, category, initial, onDismiss, rec } = this.props;
 
     return (
-
       <View style={styles.container}>
 
         <View style={styles.inputContainer}>
-          <View style={styles.header}>
 
-            <Text style={styles.headerText}>{headerText}</Text>
-              <RecCategory
-                category={category}
-                onChange={(category) => updateState({ category })}
-                {...this.state}
-                />
-              <Text style={styles.headerText}>Recommendation</Text>
 
-          </View>
+<InputWrapper>
+  <RecTitleInput
+    value={title}
+    onChangeText={(title) => updateState({ title })}
+    />
+  <RecNoteInput
+    value={note}
+    onChangeText={(note) => updateState({ note })}
+    borderTop={true}
+      />
+</InputWrapper>
 
-          <InputWrapper>
-            <TextInput
-              style={styles.input}
-              placeholder="What was recommended?"
-              value={title}
-              ref="TitleInput"
-              onChangeText={(title) => updateState({ title })}
-              />
+<RecCategory
+  category={category}
+  onChange={(category) => updateState({ category })}
+  {...this.state}
+  />
 
-            <GenericTextInput
-              placeholder="Write a note"
-              value={note}
-              onChangeText={(note) => updateState({ note })}
-              multiline={true}
-              />
-          </InputWrapper>
+{rec.recr_id && !rec.grade ?
+    <View style={styles.buttons}>
+      <TouchableOpacity onPress={onRemoveRecrPress.bind(this,rec)} ><Text>Remove Recommender</Text></TouchableOpacity>
+    </View>
+  :
+  null
+ }
 
-          {false ?
-            <View style={styles.buttons}>
-              <TouchableOpacity onPress={onEditRecrPress.bind(this,rec)} ><Text>Change Recommender</Text></TouchableOpacity>
-            </View>
-          :
-          null
-         }
+ {rec.grade ?
+     <View style={styles.buttons}>
+       <TouchableOpacity onPress={onRemoveGradePress.bind(this,rec)} ><Text>Remove Grade</Text></TouchableOpacity>
+     </View>
+   :
+   null
+  }
+
+  {!rec.grade && !rec.recr_id ?
+      <View style={styles.buttons}>
+        <TouchableOpacity onPress={onDeleteRecPress.bind(this,rec)} ><Text>Delete Recommendation</Text></TouchableOpacity>
+      </View>
+    :
+    null
+   }
+
 
         </View>
 

@@ -59,6 +59,24 @@ class RecInputContainer extends Component {
       navigator.replace(Routes.getRecRoute(rec));
     })
   }
+  deleteRec(rec){
+    const { navigator } = this.props;
+
+    Meteor.call('deleteRec',rec,function(err,res){
+      // Might need to add the id from meteor to the rec object.
+      navigator.resetTo(Routes.getHomeRoute());
+    })
+  }
+
+  removeRecr(rec){
+    rec.recr_id = null
+    Meteor.call('updateRec',rec)
+  }
+  removeGrade(rec){
+    rec.grade = null
+    Meteor.call('updateRec',rec)
+  }
+
   onDismiss() {
     const { navigator } = this.props;
     dismissKeyboard();
@@ -71,7 +89,9 @@ class RecInputContainer extends Component {
     return (
       <RecInput
         rec={rec}
-        onEditRecrPress={ (rec) => navigator.push(Routes.getRecrInputRoute(rec)) } 
+        onRemoveRecrPress={ this.removeRecr }
+        onRemoveGradePress={ this.removeGrade }
+        onDeleteRecPress={ this.deleteRec.bind(this) }
         initial={initial}
         onDismiss={this.onDismiss.bind(this)}
         headerText={ this.state.headerText }

@@ -12,7 +12,7 @@ class Uncategorized extends Component {
       return (
         <WidgetContainer icon="question" title="Uncategorized" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You have {recs.length} uncateogorized recs</Text>
             </View>
           </TouchableOpacity>

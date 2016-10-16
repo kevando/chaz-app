@@ -31,8 +31,8 @@ export default styles = StyleSheet.create({
   },
 
   dateText: {
-    fontSize:14,
-    color:'#999',
+    fontSize:16,
+    color:'#555',
     marginLeft:8,
     marginBottom:3
   },
@@ -49,11 +49,12 @@ export default styles = StyleSheet.create({
 
 
   note: {
-    paddingBottom: 18,
-    fontSize: 15,
+    paddingTop: 4,
+    paddingBottom: 10,
+    fontSize: 16,
     fontWeight: '500',
     fontStyle: 'italic',
-    color:'#999'
+    color:'#555'
   },
   recr: {
     color: 'green',

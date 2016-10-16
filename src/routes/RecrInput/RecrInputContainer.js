@@ -33,8 +33,7 @@ export default class RecrInputContainer extends Component {
     const { rec, recr } = this.state;
     const { navigator } = this.props;
     rec.recr_id = recr._id;
-    rec.recr_name = recr.name;
-    rec.recr_score = recr.score;
+    rec.recr = recr; // this might not be the best idea, but need this because recr is not returned yet from publish
 
     Meteor.call('updateRec',rec,function(err,res){
       navigator.pop();

@@ -12,7 +12,7 @@ class PlaceQueue extends Component {
       return (
         <WidgetContainer icon="desert_island" title="Places" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You have {recs.length} uncateogorized recs</Text>
             </View>
           </TouchableOpacity>

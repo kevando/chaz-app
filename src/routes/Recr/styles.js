@@ -14,7 +14,7 @@ export default styles = StyleSheet.create({
 
   titleContainer: {
     backgroundColor: '#fff',
-    flexDirection:'row', // so text does not wrap
+    // flexDirection:'row', // so text does not wrap
     padding:15,
     marginBottom:20,
     borderBottomWidth:1,

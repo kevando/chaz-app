@@ -11,7 +11,7 @@ const InputWrapper = (props) => {
 };
 
 InputWrapper.propTypes = {
-  children: React.PropTypes.array,
+  // children: React.PropTypes.array,
 };
 
 export default InputWrapper;

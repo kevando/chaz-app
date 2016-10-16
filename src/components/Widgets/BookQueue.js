@@ -12,7 +12,7 @@ class BookQueue extends Component {
       return (
         <WidgetContainer icon="book" title="Books">
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You have {recs.length} book recs</Text>
             </View>
           </TouchableOpacity>

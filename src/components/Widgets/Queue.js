@@ -12,7 +12,7 @@ class Queue extends Component {
       return (
         <WidgetContainer icon="page_with_curl" title="All Recommendations" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You saved {recs.length} total recommendations.</Text>
             </View>
           </TouchableOpacity>

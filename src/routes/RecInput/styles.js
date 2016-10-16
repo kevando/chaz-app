@@ -34,26 +34,11 @@ export default styles = StyleSheet.create({
     width: 125,
     height: 125,
   },
-  headerText: {
-    fontSize: 17,
-    color: colors.headerText,
-    fontWeight: '400',
-    fontStyle: 'italic',
-  },
+
   subHeaderText: {
     fontSize: 20,
     color: colors.headerText,
     fontWeight: '400',
     fontStyle: 'italic',
-  },
-  // because some bullshit w the TextInput ref
-  input: {
-    height: 40,
-    borderColor:'#ccc',
-    backgroundColor: colors.inputBackground,
-    marginLeft: 10,
-    marginVertical: 5,
-    paddingVertical: 5,
-    paddingHorizontal: 15,
   },
 });

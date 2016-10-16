@@ -26,12 +26,17 @@ export default styles = StyleSheet.create({
     borderBottomRightRadius:10,
     backgroundColor: colors.lightGrey,
     borderTopWidth:0,
-    paddingHorizontal:10,
-    paddingVertical:20,
+    // paddingHorizontal:10,
+    // paddingVertical:20,
   },
   title: {
-    fontSize:13,
+    fontSize:15,
     fontWeight:'500',
+  },
+
+  widgetButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
 
   recrContainer: {
@@ -48,5 +53,27 @@ export default styles = StyleSheet.create({
     alignItems:'center',
 
   },
+
+  item: {
+  flexDirection: 'row',
+
+  padding: 10,
+  backgroundColor: '#ddd',
+  borderColor:'#fff',
+  borderBottomWidth:1,
+
+},
+itemText: {
+  backgroundColor: colors.buttonBackground,
+  color: colors.buttonText,
+  width: cardSize,
+  height: cardSize,
+  paddingTop: cardSize / 2.3,
+  fontSize: 16,
+  fontWeight:'500',
+  textAlign: 'center',
+  alignItems: 'center',
+},
+
 
 });

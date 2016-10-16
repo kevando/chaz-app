@@ -12,7 +12,7 @@ class FoodQueue extends Component {
       return (
         <WidgetContainer icon="ramen" title="Food" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You have {recs.length} food recs</Text>
             </View>
           </TouchableOpacity>

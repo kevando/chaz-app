@@ -12,7 +12,7 @@ class TvQueue extends Component {
       return (
         <WidgetContainer icon="tv" title="TV Shows" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You have {recs.length} TV show in your queue</Text>
               <Text>Click here to view your TV show Queue</Text>
             </View>

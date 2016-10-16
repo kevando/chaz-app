@@ -24,10 +24,13 @@ export default createContainer((props) => {
   var selector = {}
   if(props.category) selector = {category: props.category}
 
+  var tempRecs = Meteor.collection('recs').find();
+  console.log('tmp rtecs', tempRecs);
+
   return {
     recsReady: handle.ready(),
     onRecPress: (rec) => props.navigator.push(Routes.getRecRoute(rec)),
     selector: selector,
-    recs: Meteor.collection('recs').find(selector), 
+    recs: Meteor.collection('recs').find(selector),
   };
 }, Recs);

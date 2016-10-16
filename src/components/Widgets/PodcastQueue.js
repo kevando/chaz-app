@@ -12,7 +12,7 @@ class PodcastQueue extends Component {
       return (
         <WidgetContainer icon="radio" title="Podcasts" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You have {recs.length} podcast recs</Text>
             </View>
           </TouchableOpacity>

@@ -13,9 +13,9 @@ const RecListItem = (props) => {
         <Text style={styles.title}><RecCategory category={rec.category} />{rec.title}</Text>
         <Text style={styles.note}>{rec.note}</Text>
 
-          {rec.recr_name ?
+          {rec.recr ?
 
-            <Text style={styles.note}>Recommended by: {rec.recr_name}</Text>
+            <Text style={styles.note}>Recommended by: {rec.recr.name}</Text>
             :
             null
           }

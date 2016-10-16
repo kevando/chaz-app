@@ -12,7 +12,7 @@ class MusicQueue extends Component {
       return (
         <WidgetContainer icon="minidisc" title="Music" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.widgetButton}>
               <Text>You have {recs.length} uncateogorized recs</Text>
             </View>
           </TouchableOpacity>

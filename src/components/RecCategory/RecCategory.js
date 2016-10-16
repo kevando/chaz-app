@@ -5,27 +5,11 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  ActionSheetIOS,
 } from 'react-native';
 import Emoji from 'react-native-emoji';
+import styles from './styles.js';
 
-import { connect } from 'react-redux';
-
-
-const emojiList = {
-  uncategorized: "question",
-  all: "earth_americas",
-  default: "page_with_curl",
-  book: "book",
-  music: "minidisc",
-  food: "ramen",
-  podcast: "radio",
-  tv: "tv",
-  movie: "vhs",
-  app: "phone",
-  place: "desert_island",
-}
-
+import Categories from '../../lib/Categories';
 
 class RecCategory extends Component {
 
@@ -39,52 +23,64 @@ class RecCategory extends Component {
 
     if(!onChange){
       // Just show the category
-      return ( <Emoji name={emojiList[category]} /> );
+      return ( <Emoji name={Categories[category].icon} /> );
 
     } else {
-      // a function was passed, so give the user a selector
-      // Might want to expand this out in the future
-      return (
-        <TouchableOpacity onPress={this.onChangeCategoryPress.bind(this)}>
-          <Text><Emoji name={emojiList[category]} /></Text>
-        </TouchableOpacity>
-      );
+
+      var displayOptions = [];
+      for(var cat in Categories) {
+        displayOptions.push(this.renderOption(Categories[cat]));
+      }
+
+      return(<View style={styles.optionsContainer}>{displayOptions}</View>);
+
     }
   }
 
-  getOptions(){
-    var options = [];
-    this.props.categories.map(category => options.push(category.id));
-    options.push('Cancel')
-    options.shift(); // remove 'all' from list
-    return options;
+  renderOption(cat){
+    const {onChange} = this.props;
+    return (
+      <TouchableOpacity key={cat._id} onPress={onChange.bind(this,cat._id)}>
+        <View style={[styles.option,this.getStyle(cat._id)]}>
+          <Text style={styles.optionText}><Emoji name={cat.icon} /></Text>
+          </View>
+        </TouchableOpacity>
+      );
+
+  }
+  getStyle(cat){
+    if(cat == this.props.category)
+      return {backgroundColor:'#ccc'}
   }
 
-  onCategorySelect(category) {
-    this.props.onChange(category);
-  }
-  onChangeCategoryPress() {
-
-    var options = this.getOptions();
-
-    ActionSheetIOS.showActionSheetWithOptions({
-      title: 'Categorize this recommendation',
-      options: options,
-      cancelButtonIndex: options.length-1,
-      destructiveButtonIndex: options.length-1,
-    },
-    (selectedIndex) => {
-      if(selectedIndex < options.length-1){ // cancel
-        this.onCategorySelect(options[selectedIndex])
-      }
-    });
-  }
+  // getOptions(){
+  //   var options = [];
+  //   this.props.categories.map(category => options.push(category.id));
+  //   options.push('Cancel')
+  //   options.shift(); // remove 'all' from list
+  //   return options;
+  // }
+  //
+  // onCategorySelect(category) {
+  //   this.props.onChange(category);
+  // }
+  // onChangeCategoryPress() {
+  //
+  //   var options = this.getOptions();
+  //
+  //   ActionSheetIOS.showActionSheetWithOptions({
+  //     title: 'Categorize this recommendation',
+  //     options: options,
+  //     cancelButtonIndex: options.length-1,
+  //     destructiveButtonIndex: options.length-1,
+  //   },
+  //   (selectedIndex) => {
+  //     if(selectedIndex < options.length-1){ // cancel
+  //       this.onCategorySelect(options[selectedIndex])
+  //     }
+  //   });
+  // }
 
 }
-function mapStateToProps(state) {
-  return {
-    categories: state.categories,
-  };
-}
 
-export default connect(mapStateToProps)(RecCategory);
+export default RecCategory;
