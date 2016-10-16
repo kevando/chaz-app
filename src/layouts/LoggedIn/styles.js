@@ -11,6 +11,7 @@ export default styles = StyleSheet.create({
     tintColor: 'rgb(0, 122, 255)',
   },
   navBar: {
-    backgroundColor: colors.purple
+    backgroundColor: colors.purple,
+    borderBottomWidth: 0,
   }
 });

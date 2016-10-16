@@ -5,7 +5,7 @@ export default styles = StyleSheet.create({
   button: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: colors.blue,
+    backgroundColor: 'red',
     margin: 0,
   },
   buttonText: {

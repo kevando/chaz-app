@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Text, View, TouchableOpacity, } from 'react-native';
-import styles from './styles';
+import styles from './Styles';
 import WidgetContainer from './WidgetContainer';
 
 class TvQueue extends Component {
@@ -13,7 +13,8 @@ class TvQueue extends Component {
         <WidgetContainer icon="tv" title="TV Shows" >
           <TouchableOpacity onPress={onPress} >
             <View>
-              <Text>You have {recs.length} tv recs</Text>
+              <Text>You have {recs.length} TV show in your queue</Text>
+              <Text>Click here to view your TV show Queue</Text>
             </View>
           </TouchableOpacity>
         </WidgetContainer>

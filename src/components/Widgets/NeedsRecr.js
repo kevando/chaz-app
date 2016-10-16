@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
-import { Text, View, TouchableOpacity, ListView } from 'react-native';
-import styles from './styles';
+import { Text, View, TouchableOpacity } from 'react-native';
+import styles from './Styles';
 import WidgetContainer from './WidgetContainer';
 
 class NeedsRecr extends Component {
 
   render() {
+    const { recs } = this.props.data;
+
+    if(recs.length < 1 )
+      return (<View></View>);
 
     return (
       <WidgetContainer icon="sleeping" title="Who recommended these?" >
-      <View style={{flex: 1}}>
-      { this.renderRecs() }
-    </View>
-  </WidgetContainer>
+        <View style={{flex: 1}}>
+          { this.renderRecs() }
+        </View>
+      </WidgetContainer>
     );
   }
 

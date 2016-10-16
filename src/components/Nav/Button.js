@@ -1,12 +1,18 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
+var dismissKeyboard = require('dismissKeyboard');
 
 const Button = (props) => {
   const { text, onPress } = props;
 
+  const onButtonPress = () => {
+    dismissKeyboard();
+    onPress();
+  }
+
   return (
-    <TouchableOpacity onPress={onPress} >
+    <TouchableOpacity onPress={onButtonPress} >
       <Text style={styles.button}>
         {text}
       </Text>

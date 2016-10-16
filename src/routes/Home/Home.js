@@ -17,8 +17,11 @@ const Home = (props) => {
         <Widget.Uncategorized data={widgetData.uncategorized} />
         <Widget.NeedsRecr     data={widgetData.needsRecr} />
         <Widget.MovieQueue    data={widgetData.movieQueue} />
-        
+
         <Widget.TvQueue       data={widgetData.tvQueue} />
+
+        <Widget.TopFriends    data={widgetData.topFriends} />
+
         <Widget.MusicQueue    data={widgetData.musicQueue} />
         <Widget.BookQueue     data={widgetData.bookQueue} />
         <Widget.PodcastQueue  data={widgetData.podcastQueue} />

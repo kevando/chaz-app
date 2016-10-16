@@ -18,6 +18,7 @@ class RecInputContainer extends Component {
       navigator: this.props.navigator, // maybe not the best approach
     };
   }
+  
   componentDidMount() {
 
     const { rec } = this.props;

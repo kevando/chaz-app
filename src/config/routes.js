@@ -103,20 +103,27 @@ export const routes = {
 
     };
   },
+
+  /* Recommendation */
+
   getRecRoute(rec) {
 
+    let editRoute = this.getRecInputRoute(rec);
+
     return {
+
       renderScene(navigator) {
         return <Rec navigator={navigator} rec={rec} />;
       },
 
-      getTitle(){
-        return rec.category
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Back" onPress={() => navigator.pop() } />
       },
 
+      renderRightButton(navigator) {
+        return <Nav.Button text="Edit" onPress={() => navigator.push(editRoute) } />
+      },
 
-
-      showNavigationBar: true,
     };
   },
 

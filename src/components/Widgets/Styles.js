@@ -69,8 +69,15 @@ export default styles = StyleSheet.create({
   recrContainer: {
     borderWidth: 2,
     borderColor: '#555',
+    flex: 1,
+    flexDirection:'row',
+
+  },
+  recrItem: {
+    borderWidth: 2,
+    borderColor: '#555',
     flex: 3,
-    
-  }
+
+  },
 
 });

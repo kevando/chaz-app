@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Button from '../../components/Button';
 import RecCategory from '../../components/RecCategory';
 import GenericTextInput, { InputWrapper } from '../../components/GenericTextInput';
 import styles from './styles';
+
+var dismissKeyboard = require('dismissKeyboard');
 
 class RecInput extends Component {
 
@@ -20,6 +22,7 @@ class RecInput extends Component {
     return (
 
       <View style={styles.container}>
+        
         <View style={styles.inputContainer}>
           <View style={styles.header}>
 

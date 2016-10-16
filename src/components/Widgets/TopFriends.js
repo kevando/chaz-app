@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { Text, View, TouchableOpacity, } from 'react-native';
-import styles from './styles';
+import styles from './Styles';
 import WidgetContainer from './WidgetContainer';
+import Emoji from 'react-native-emoji';
 
 class TopFriends extends Component {
 
@@ -12,7 +13,7 @@ class TopFriends extends Component {
       return (
         <WidgetContainer icon="smiley" title="Top Friends" >
           <TouchableOpacity onPress={onPress} >
-            <View>
+            <View style={styles.recrContainer}>
               {this.renderFriends()}
             </View>
           </TouchableOpacity>
@@ -24,7 +25,7 @@ class TopFriends extends Component {
   }
 
   renderFriends() {
-    const { recrs } = this.props;
+    const { recrs } = this.props.data;
     var displayFriends = [];
     console.log('recrs',recrs)
     for(recr of recrs) {
@@ -34,7 +35,7 @@ class TopFriends extends Component {
   }
   renderFriend(recr) {
     return(
-      <View style={styles.recrContainer}>
+      <View key={recr._id} style={styles.recrItem}>
         <Text style={{fontSize: 30}}><Emoji name="smiley" /></Text>
         <Text style={styles.recrName}>{recr.name}</Text>
       </View>

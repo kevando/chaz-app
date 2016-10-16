@@ -16,8 +16,8 @@ export default styles = StyleSheet.create({
 
   button: {
     color: '#fff',
-    fontSize: 20,
-    fontWeight: '600',
-    paddingTop: 5
+    fontSize: 16,
+    fontWeight: '400',
+    padding: 11
   },
 });

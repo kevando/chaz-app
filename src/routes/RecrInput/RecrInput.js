@@ -26,7 +26,7 @@ const RecrInput = (props) => {
 
       { name != '' ?
         <View style={styles.buttons}>
-          <Button text="Add Friend" onPress={addRecr} />
+          <Button text="Add Friend" onPress={addRecr} color="green" />
         </View>
 
       : null }
@@ -39,7 +39,7 @@ const RecrInput = (props) => {
 
       {recr._id ?
         <View style={styles.buttons}>
-          <Button text="Assign Friend" onPress={assignRecr} />
+          <Button text="Assign Friend" onPress={assignRecr} color="green" />
         </View>
         : null
       }

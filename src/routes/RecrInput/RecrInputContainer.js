@@ -31,6 +31,8 @@ export default class RecrInputContainer extends Component {
     const { rec, recr } = this.state;
     const { navigator } = this.props;
     rec.recr_id = recr._id;
+    rec.recr_name = recr.name;
+    rec.recr_score = recr.score;
 
     Meteor.call('updateRec',rec,function(err,res){
       navigator.pop();
