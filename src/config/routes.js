@@ -127,6 +127,25 @@ export const routes = {
     };
   },
 
+  /* Initial Rec Input */
+
+  getInitialRecInputRoute() {
+    return {
+      renderScene(navigator) {
+        return <RecInput navigator={navigator} initial={true} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Cancel" onPress={() => navigator.pop() } />
+      },
+
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
+
+    };
+  },
+
   /* Rec Input */
 
   getRecInputRoute(rec) {

@@ -3,6 +3,7 @@ import { LayoutAnimation } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
 import RecInput from './RecInput';
 import Routes from '../../config/routes';
+var dismissKeyboard = require('dismissKeyboard');
 
 class RecInputContainer extends Component {
   constructor(props) {
@@ -15,10 +16,9 @@ class RecInputContainer extends Component {
       category: 'uncategorized',
       headerText: 'Add ',
       handleSaveRec: this.addRec.bind(this),
-      navigator: this.props.navigator, // maybe not the best approach
     };
   }
-  
+
   componentDidMount() {
 
     const { rec } = this.props;
@@ -36,7 +36,8 @@ class RecInputContainer extends Component {
   }
 
   addRec(){
-    const { title, note, category, navigator } = this.state;
+    const { title, note, category } = this.state;
+    const { navigator } = this.props;
     var rec = {title, note, category, uid: Meteor.userId(), createdAt: Date.now()}
 
     Meteor.call('addRec',rec,function(err,res){
@@ -47,8 +48,8 @@ class RecInputContainer extends Component {
   }
 
   updateRec(rec){
-    const { title, note, category, navigator } = this.state;
-
+    const { title, note, category } = this.state;
+    const { navigator } = this.props;
     rec.title = title;
     rec.note = note;
     rec.category = category;
@@ -58,13 +59,20 @@ class RecInputContainer extends Component {
       navigator.replace(Routes.getRecRoute(rec));
     })
   }
+  onDismiss() {
+    const { navigator } = this.props;
+    dismissKeyboard();
+    navigator.pop();
+  }
 
   render() {
     const { handleSaveRec } = this.state;
-    const { rec } = this.props;
+    const { rec, initial } = this.props;
     return (
       <RecInput
         rec={rec}
+        initial={initial}
+        onDismiss={this.onDismiss.bind(this)}
         headerText={ this.state.headerText }
         updateState={this.setState.bind(this)}
         saveRec={handleSaveRec}

@@ -11,18 +11,17 @@ var dismissKeyboard = require('dismissKeyboard');
 class RecInput extends Component {
 
   componentDidMount() {
-    console.log('rec in input',this.props.rec)
     // User is adding a new Rec, auto load the keyboard
     if(!this.props.rec) this.refs.TitleInput.focus(true);
   }
 
   render() {
-    const { updateState, saveRec, headerText, title, note, category } = this.props;
+    const { updateState, saveRec, headerText, title, note, category, initial, onDismiss } = this.props;
 
     return (
 
       <View style={styles.container}>
-        
+
         <View style={styles.inputContainer}>
           <View style={styles.header}>
 
@@ -55,9 +54,27 @@ class RecInput extends Component {
 
         </View>
 
-        <View style={styles.buttons}>
-          <Button text="Save Recommendation" onPress={saveRec} />
-        </View>
+        {title ?
+          <View style={styles.buttons}>
+            <Button text="Save Recommendation" onPress={saveRec} />
+          </View>
+        :
+        null
+
+
+       }
+
+       {!title && initial ?
+         <View style={styles.buttons}>
+           <Button text="Dismiss" onPress={onDismiss} color="red" />
+         </View>
+       :
+       null
+
+
+      }
+
+
 
         <KeyboardSpacer />
       </View>
