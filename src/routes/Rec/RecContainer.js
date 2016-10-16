@@ -18,7 +18,7 @@ class RecContainer extends Component {
     super(props);
 
     this.state = {
-      grade: null,
+      grade: this.props.rec.grade || null,
 
     };
   }
@@ -33,6 +33,17 @@ class RecContainer extends Component {
     });
   }
 
+  updateGrade(grade){
+    // dont let user change grade this is tmp
+    if(!this.props.rec.grade)
+      this.setState({grade});
+
+  }
+  getGradeStyle(grade) {
+    if(this.state.grade >= grade)
+      return {fontSize:36,opacity:1}
+  }
+
   render() {
 
     const { rec, navigator } = this.props;
@@ -41,10 +52,13 @@ class RecContainer extends Component {
     return (
       <Rec
         rec={rec}
+        updateGrade={this.updateGrade.bind(this)}
+        getGradeStyle={this.getGradeStyle.bind(this)}
         updateState={this.setState.bind(this)}
         onGradeRecPress={this.handleAssignGrade.bind(this)}
         onRecrEditPress={() => navigator.push(Routes.getRecrInputRoute(rec))}
         onRecrPress={() => navigator.push(Routes.getRecrRoute(recr))}
+        {...this.state}
       />
     );
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RecrInput from './RecrInput';
 import Routes from '../../config/routes';
 import Meteor from 'react-native-meteor';
+var dismissKeyboard = require('dismissKeyboard');
 
 export default class RecrInputContainer extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ export default class RecrInputContainer extends Component {
     Meteor.call('addRecr', recr, function(err,res){
       // set new recr and clear form
       recr._id = res
-      updateState({name: '', recr: recr})
+      updateState({name: '', recr: recr});
+      dismissKeyboard();
     });
 
   }

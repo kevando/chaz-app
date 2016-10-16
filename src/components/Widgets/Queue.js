@@ -10,10 +10,12 @@ class Queue extends Component {
 
     if(recs.length > 0){
       return (
-        <WidgetContainer icon="page_with_curl" title="All Recs" onPress={onPress}>
-          <View>
-            <Text>You have {recs.length} total recs</Text>
-          </View>
+        <WidgetContainer icon="page_with_curl" title="All Recommendations" >
+          <TouchableOpacity onPress={onPress} >
+            <View>
+              <Text>You saved {recs.length} total recommendations.</Text>
+            </View>
+          </TouchableOpacity>
         </WidgetContainer>
       );
     } else {

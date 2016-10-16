@@ -67,10 +67,11 @@ class RecInputContainer extends Component {
 
   render() {
     const { handleSaveRec } = this.state;
-    const { rec, initial } = this.props;
+    const { rec, initial, navigator } = this.props;
     return (
       <RecInput
         rec={rec}
+        onEditRecrPress={ (rec) => navigator.push(Routes.getRecrInputRoute(rec)) } 
         initial={initial}
         onDismiss={this.onDismiss.bind(this)}
         headerText={ this.state.headerText }

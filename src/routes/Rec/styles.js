@@ -68,7 +68,15 @@ export default styles = StyleSheet.create({
     borderTopWidth:1,
     borderTopColor:'#ccc',
     borderBottomWidth:1,
-    borderBottomColor:'#ccc'
+    borderBottomColor:'#ccc',
+    flexDirection: 'row',
   },
+
+  grade: {
+    flex: 1,
+    fontSize: 34,
+    padding:5,
+    opacity: 0.6,
+  }
 
 });

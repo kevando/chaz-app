@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import RecCategory from '../RecCategory';
+import RecGrade from '../RecGrade';
 import styles from './styles';
 
 const RecListItem = (props) => {
@@ -9,27 +10,17 @@ const RecListItem = (props) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.badge}>
-        <Text style={styles.title}>{rec.title}</Text>
+        <Text style={styles.title}><RecCategory category={rec.category} />{rec.title}</Text>
         <Text style={styles.note}>{rec.note}</Text>
-
-          {rec.recr_score ?
-            <Text style={styles.note}>Score: {rec.recr_score.overall}</Text>
-            :
-            null
-          }
-
-          {rec.recr_score ?
-            <Text style={styles.note}>Cat Score: {rec.recr_score[rec.category]}</Text>
-            :
-            null
-          }
 
           {rec.recr_name ?
 
-            <Text style={styles.note}>Recr: {rec.recr_name}</Text>
+            <Text style={styles.note}>Recommended by: {rec.recr_name}</Text>
             :
             null
           }
+
+          <RecGrade grade={rec.grade} />
 
       </View>
     </TouchableOpacity>

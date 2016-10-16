@@ -35,16 +35,17 @@ export default styles = StyleSheet.create({
   },
 
   recrContainer: {
-    borderWidth: 2,
+    borderWidth: 0,
     borderColor: '#555',
     flex: 1,
     flexDirection:'row',
 
   },
   recrItem: {
-    borderWidth: 2,
+    borderWidth: 0,
     borderColor: '#555',
     width: cardSize,
+    alignItems:'center',
 
   },
 

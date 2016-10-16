@@ -37,9 +37,9 @@ const RecrInput = (props) => {
       <View>
       <RecrSelection onSelect={(recr) => updateState({ recr })} recr={recr} />
 
-      {recr._id ?
+      {recr._id && name == '' ?
         <View style={styles.buttons}>
-          <Button text="Assign Friend" onPress={assignRecr} color="green" />
+          <Button text={"Assign "+recr.name} onPress={assignRecr} color="green" />
         </View>
         : null
       }

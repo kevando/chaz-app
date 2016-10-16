@@ -16,7 +16,7 @@ class RecInput extends Component {
   }
 
   render() {
-    const { updateState, saveRec, headerText, title, note, category, initial, onDismiss } = this.props;
+    const { updateState, saveRec, onEditRecrPress, headerText, title, note, category, initial, onDismiss, rec } = this.props;
 
     return (
 
@@ -52,6 +52,14 @@ class RecInput extends Component {
               />
           </InputWrapper>
 
+          {false ?
+            <View style={styles.buttons}>
+              <TouchableOpacity onPress={onEditRecrPress.bind(this,rec)} ><Text>Change Recommender</Text></TouchableOpacity>
+            </View>
+          :
+          null
+         }
+
         </View>
 
         {title ?
@@ -60,9 +68,9 @@ class RecInput extends Component {
           </View>
         :
         null
-
-
        }
+
+
 
        {!title && initial ?
          <View style={styles.buttons}>

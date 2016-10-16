@@ -13,7 +13,7 @@ class MovieQueue extends Component {
         <WidgetContainer icon="vhs" title="Movies" >
           <TouchableOpacity onPress={onPress} >
             <View>
-              <Text>You have {recs.length} movie recs</Text>
+              <Text>Your unwatched movie recommendations</Text>
             </View>
           </TouchableOpacity>
         </WidgetContainer>

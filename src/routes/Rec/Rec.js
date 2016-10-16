@@ -6,7 +6,7 @@ import RecCategory from '../../components/RecCategory';
 import moment from 'moment';
 import Emoji from 'react-native-emoji';
 
-const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress }) => {
+const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress, updateGrade, getGradeStyle, grade }) => {
 
   var d = new Date(rec.createdAt);
   var savedAgo = moment(d).fromNow();
@@ -43,40 +43,25 @@ const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress }
       </View>
 
 
+
       {rec.recr_id ?
+        <View>
+          <Text style={styles.dateText}>Your feedback</Text>
 
-      <View style={styles.gradeContainer}>
+          <View style={styles.gradeContainer}>
 
-
-                <View>
-                  <TouchableOpacity onPress={() => updateState({ grade: 1 })} ><Text>1 star</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={() => updateState({ grade: 2 })} ><Text>2 stars</Text></TouchableOpacity>
-                      <TouchableOpacity onPress={() => updateState({ grade: 3 })} ><Text>3 stars</Text></TouchableOpacity>
-                  <TouchableOpacity onPress={onGradeRecPress}><Text>Submit Grade</Text></TouchableOpacity>
-                </View>
-
-
-      </View>
+            <TouchableOpacity onPress={updateGrade.bind(this,1)}><Text style={[styles.grade,getGradeStyle(1)]}><Emoji name="yellow_heart" /></Text></TouchableOpacity>
+            <TouchableOpacity onPress={updateGrade.bind(this,2)}><Text style={[styles.grade,getGradeStyle(2)]}><Emoji name="yellow_heart" /></Text></TouchableOpacity>
+            <TouchableOpacity onPress={updateGrade.bind(this,3)}><Text style={[styles.grade,getGradeStyle(3)]}><Emoji name="yellow_heart" /></Text></TouchableOpacity>
+            <TouchableOpacity onPress={updateGrade.bind(this,4)}><Text style={[styles.grade,getGradeStyle(4)]}><Emoji name="yellow_heart" /></Text></TouchableOpacity>
+            <TouchableOpacity onPress={updateGrade.bind(this,5)}><Text style={[styles.grade,getGradeStyle(5)]}><Emoji name="yellow_heart" /></Text></TouchableOpacity>
+          </View>
+          {grade && ! rec.grade ? <Button onPress={onGradeRecPress} text="Save Your Feedback" /> : null }
+        </View>
 
         : null
       }
 
-      {!rec.grade ?
-        null
-        :
-        <Text>grade is {rec.grade}</Text>
-      }
-
-      {!rec.recr_score ?
-        null
-        :
-        <Text>overall score is {rec.recr_score.overall}</Text>
-      }
-      {!rec.recr_score ?
-        null
-        :
-        <Text>cat score is {rec.recr_score[rec.category]}</Text>
-      }
 
       {rec.recr_id ?
         null

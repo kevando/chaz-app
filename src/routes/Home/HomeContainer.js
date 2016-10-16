@@ -23,17 +23,20 @@ export default createContainer((props) => {
     widgetData:  {
       uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: () => navigator.push(Routes.getRecsRoute('uncategorized')) },
       needsRecr: { recs: Meteor.collection('recs').find({recr_id:null}), onPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)) },
-      movieQueue: { recs: Meteor.collection('recs').find({category:'movie'}), onPress: () => navigator.push(Routes.getRecsRoute('movie')) },
-      bookQueue: { recs: Meteor.collection('recs').find({category:'book'}), onPress: () => navigator.push(Routes.getRecsRoute('book')) },
-      musicQueue: { recs: Meteor.collection('recs').find({category:'music'}), onPress: () => navigator.push(Routes.getRecsRoute('music')) },
+
+      bookQueue: { recs: getQueue('book'), onPress: () => navigator.push(Routes.getQueueRoute('book')) },
+      musicQueue: { recs: getQueue('music'), onPress: () => navigator.push(Routes.getQueueRoute('music')) },
+      podcastQueue: { recs: getQueue('podcast'), onPress: () => navigator.push(Routes.getQueueRoute('podcast')) },
+      foodQueue: { recs: getQueue('food'), onPress: () => navigator.push(Routes.getQueueRoute('food')) },
+      placeQueue: { recs: getQueue('place'), onPress: () => navigator.push(Routes.getQueueRoute('place')) },
+
+      topFriends: { recrs: Meteor.collection('recrs').find(), onPress: (recr) => navigator.push(Routes.getRecrRoute(recr)) },
 
       tvQueue: { recs: getQueue('tv'), onPress: () => navigator.push(Routes.getQueueRoute('tv')) },
+      movieQueue: { recs: getQueue('movie'), onPress: () => navigator.push(Routes.getQueueRoute('movie')) },
 
-      podcastQueue: { recs: Meteor.collection('recs').find({category:'podcast'}), onPress: () => navigator.push(Routes.getRecsRoute('podcast')) },
-      foodQueue: { recs: Meteor.collection('recs').find({category:'food'}), onPress: () => navigator.push(Routes.getRecsRoute('food')) },
-      placeQueue: { recs: Meteor.collection('recs').find({category:'place'}), onPress: () => navigator.push(Routes.getRecsRoute('place')) },
+
       queue: { recs: Meteor.collection('recs').find(), onPress: () => navigator.push(Routes.getRecsRoute()) },
-      topFriends: { recrs: Meteor.collection('recrs').find(), onPress: (recr) => navigator.push(Routes.getRecrRoute(recr)) },
     }
   };
 }, Home);

@@ -9,6 +9,7 @@ import Emoji from 'react-native-emoji';
 import Meteor, { createContainer } from 'react-native-meteor';
 import styles from './styles';
 
+
 class RecrSelection extends Component {
 
   render() {
@@ -39,10 +40,16 @@ class RecrSelection extends Component {
     return(
       <TouchableOpacity key={recr._id} onPress={() => onSelect(recr)}>
         <View style={styles.item}>
-          <Text style={this.getStyle(recr)}><Emoji name="stuck_out_tongue" />&nbsp;{recr.name}</Text>
+          <Text style={this.getStyle(recr)}><Emoji name={this.getFace(recr)} />&nbsp;{recr.name}</Text>
         </View>
       </TouchableOpacity>
     );
+  }
+  getFace(recr) {
+    if(recr._id == this.props.recr._id)
+      return "stuck_out_tongue"
+    else
+      return "slightly_smiling_face"
   }
 
   getStyle(recr) {

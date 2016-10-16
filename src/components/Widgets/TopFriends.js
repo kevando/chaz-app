@@ -26,9 +26,10 @@ class TopFriends extends Component {
 
   renderFriends() {
     const { recrs } = this.props.data;
+    var limitRecrs = recrs.slice(0,3)
     var displayFriends = [];
     console.log('recrs',recrs)
-    for(recr of recrs) {
+    for(recr of limitRecrs) {
       displayFriends.push(this.renderFriend(recr))
     }
     return displayFriends;
