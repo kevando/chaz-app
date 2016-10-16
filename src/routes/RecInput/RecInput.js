@@ -12,7 +12,7 @@ class RecInput extends Component {
 
 
   render() {
-    const { updateState, saveRec, onRemoveRecrPress, onDeleteRecPress, onRemoveGradePress, headerText, title, note, category, initial, onDismiss, rec } = this.props;
+    const { updateState, saveRec, onRemoveRecrPress, onDeleteRecPress, onRemoveGradePress, headerText, title, note, category, initial, onDismiss, rec={} } = this.props;
 
     return (
       <View style={styles.container}>
@@ -54,7 +54,7 @@ class RecInput extends Component {
    null
   }
 
-  {!rec.grade && !rec.recr_id ?
+  {!rec.grade && !rec.recr_id  && Object.keys(rec).length > 0 ?
       <View style={styles.buttons}>
         <TouchableOpacity onPress={onDeleteRecPress.bind(this,rec)} ><Text>Delete Recommendation</Text></TouchableOpacity>
       </View>
