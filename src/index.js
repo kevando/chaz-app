@@ -9,9 +9,9 @@ import settings from './config/settings';
 Meteor.connect(settings.METEOR_URL);
 
 // Redux stuff (removing for now)
-import { Provider } from 'react-redux';
-import createStore from './store';
-const store = createStore();
+// import { Provider } from 'react-redux';
+// import createStore from './store';
+// const store = createStore();
 
 const RNApp = function(props) {
   const { status, user, loggingIn } = props;
@@ -21,7 +21,7 @@ const RNApp = function(props) {
   } else if (loggingIn){
       return <Loading message="loggingIn==true"/>;
   } else if (user !== null) {
-    return <Provider store={store}><LoggedIn /></Provider>;
+    return <LoggedIn />;
   } else {
     return <LoggedOut />;
   }

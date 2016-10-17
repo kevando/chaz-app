@@ -10,6 +10,7 @@ import MusicQueue from './MusicQueue';
 import MovieQueue from './MovieQueue';
 import Queue from './Queue';
 import TopFriends from './TopFriends';
+import Welcome from './Welcome';
 //
 export {
   Uncategorized,
@@ -22,6 +23,7 @@ export {
   BookQueue,
   TvQueue,
   Queue,
-  TopFriends
+  TopFriends,
+  Welcome
 
 };

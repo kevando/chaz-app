@@ -1,5 +1,5 @@
 import React from 'react';
-import Meteor, { connectMeteor, createContainer } from 'react-native-meteor';
+import Meteor, { createContainer } from 'react-native-meteor';
 import Home from './Home';
 import Routes from '../../config/routes';
 
@@ -37,6 +37,7 @@ export default createContainer((props) => {
 
 
       queue: { recs: Meteor.collection('recs').find(), onPress: () => navigator.push(Routes.getRecsRoute()) },
+      welcome: { recs: Meteor.collection('recs').find() },
     }
   };
 }, Home);

@@ -69,11 +69,11 @@ class RecInputContainer extends Component {
   }
 
   removeRecr(rec){
-    rec.recr_id = null
+    rec.recr_id = null;
     Meteor.call('updateRec',rec)
   }
   removeGrade(rec){
-    rec.grade = null
+    rec.grade = null;
     Meteor.call('updateRec',rec)
   }
 

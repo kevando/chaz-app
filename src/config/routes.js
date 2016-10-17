@@ -25,7 +25,7 @@ export const routes = {
 
       renderTitle(navigator) {
         return (
-          <Nav.HomeTitle title="chaz" navigator={navigator} />
+          <Nav.HomeTitle title="chaz v0.11" navigator={navigator} />
         );
       },
     };

@@ -14,6 +14,7 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView>
+        <Widget.Welcome       data={widgetData.welcome} />
         <Widget.Uncategorized data={widgetData.uncategorized} />
         <Widget.NeedsRecr     data={widgetData.needsRecr} />
         <Widget.MovieQueue    data={widgetData.movieQueue} />
