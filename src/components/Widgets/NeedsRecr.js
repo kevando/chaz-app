@@ -12,7 +12,7 @@ class NeedsRecr extends Component {
       return (<View></View>);
 
     return (
-      <WidgetContainer icon="sleeping" title="Who recommended these?" >
+      <WidgetContainer icon="no_mouth" title="Who recommended these?" >
         <View style={{flex: 1}}>
           { this.renderRecs() }
         </View>
@@ -34,8 +34,9 @@ class NeedsRecr extends Component {
     const { onPress } = this.props.data;
     return(
       <TouchableOpacity key={rec._id} onPress={onPress.bind(this,rec)} >
-        <View style={styles.item}>
-          <Text>{rec.title}</Text>
+        <View style={styles.recrItem}>
+          <Text style={styles.recTitle}>{rec.title}</Text>
+          <Text style={styles.recNote}>{rec.note}</Text>
         </View>
       </TouchableOpacity>
     );

@@ -34,7 +34,7 @@ const RecrInput = (props) => {
 
       </InputWrapper>
 
-      <View>
+      <View style={{flex:1}}>
       <RecrSelection onSelect={(recr) => updateState({ recr })} recr={recr} />
 
       {recr._id && name == '' ?

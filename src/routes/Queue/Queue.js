@@ -60,7 +60,7 @@ class Queue extends Component {
     var displayRecs = [];
 
     for(rec of recs){
-      displayRecs.push(<RecListItem key={rec._id} rec={rec} onPress={ () => onRecPress(rec) }/>);
+      displayRecs.push(<RecListItem key={rec._id} rec={rec} onPress={ onRecPress }/>);
     }
     return displayRecs;
   }

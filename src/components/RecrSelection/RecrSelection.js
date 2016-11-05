@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {
   Text,
   View,
+  ScrollView,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import Emoji from 'react-native-emoji';
+import _ from 'lodash';
 import Meteor, { createContainer } from 'react-native-meteor';
 import styles from './styles';
 
@@ -19,28 +21,30 @@ class RecrSelection extends Component {
       return <View><Text>loading</Text></View>
 
     return (
-      <View style={{flex: 1}}>
-      { this.renderRecrs() }
-    </View>
+      <ScrollView>
+          { this.renderRecrs() }
+      </ScrollView>
     );
   }
 
   renderRecrs() {
-    const { recrs } = this.props;
-    const displayRecrs = [];
-    for(recr of recrs) {
-      displayRecrs.push(this.renderRecr(recr));
-    }
-    return displayRecrs;
-  }
+    const recrs = _.sortBy(this.props.recrs, (recr) => { return !recr.score.overall; });
 
+    return _.map(recrs,(recr) => { return this.renderRecr(recr) });
+  }
 
   renderRecr(recr) {
     const { onSelect } = this.props;
     return(
       <TouchableOpacity key={recr._id} onPress={() => onSelect(recr)}>
         <View style={styles.item}>
-          <Text style={this.getStyle(recr)}><Emoji name={this.getFace(recr)} />&nbsp;{recr.name}</Text>
+          <View style={{flex:1}}>
+            <Text style={styles.icon}><Emoji name={this.getFace(recr)} /></Text>
+          </View>
+          <View style={{flex:7}}>
+            <Text style={[styles.recrName,this.getStyle(recr)]}>{recr.name}</Text>
+            <Text style={[styles.recrScore,this.getStyle(recr)]}>Total score: {recr.score.overall}</Text>
+          </View>
         </View>
       </TouchableOpacity>
     );

@@ -7,31 +7,50 @@ const cardSize = (window.width - MARGIN_HORIZONTAL * 4) / 3;
 
 export default styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
-    marginHorizontal: 10,
+    marginVertical: 20,
+    marginHorizontal: 20,
+    borderColor:colors.grey,
+    borderWidth:1,
   },
+
   titleContainer: {
-    borderWidth:1,
-    borderColor: colors.border,
-    borderTopLeftRadius:10,
-    borderTopRightRadius:10,
+
+    flexDirection: 'row',
+
     backgroundColor: '#fff',
-    padding:5,
-    paddingLeft:9,
+    padding:9,
+
   },
+
+  titleLeft: {
+    flex:1,
+    alignItems:'center',
+  },
+
+  titleRight: {
+    flex:5,
+    justifyContent:'center'
+  },
+
   contentContainer: {
-    borderWidth:1,
-    borderColor: colors.border,
-    borderBottomLeftRadius:10,
-    borderBottomRightRadius:10,
+    // borderWidth:1,
+    // borderColor: colors.border,
+
     backgroundColor: colors.lightGrey,
     borderTopWidth:0,
     // paddingHorizontal:10,
     // paddingVertical:20,
   },
+  icon: {
+    fontSize: 30,
+    paddingBottom:5,
+  },
+
   title: {
-    fontSize:15,
+    fontSize:14,
+    color:'#555',
     fontWeight:'500',
+
   },
 
   widgetButton: {
@@ -55,14 +74,33 @@ export default styles = StyleSheet.create({
   },
 
   item: {
-  flexDirection: 'row',
+    flexDirection: 'row',
 
-  padding: 10,
-  backgroundColor: '#ddd',
-  borderColor:'#fff',
-  borderBottomWidth:1,
+    padding: 10,
+    backgroundColor: '#ddd',
+    borderColor:'#fff',
+    borderBottomWidth:1,
 
-},
+  },
+
+  recrItem: {
+    padding: 10,
+    backgroundColor: '#eee',
+    borderColor:'#ddd',
+    borderTopWidth:1,
+  },
+  recTitle: {
+    fontSize:13,
+    color:'#555',
+    fontWeight:'400',
+  },
+  recNote: {
+    fontSize:11,
+    color:'#aaa',
+    fontWeight:'300',
+  },
+
+
 itemText: {
   backgroundColor: colors.buttonBackground,
   color: colors.buttonText,

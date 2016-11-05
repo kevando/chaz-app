@@ -8,11 +8,6 @@ import settings from './config/settings';
 
 Meteor.connect(settings.METEOR_URL);
 
-// Redux stuff (removing for now)
-// import { Provider } from 'react-redux';
-// import createStore from './store';
-// const store = createStore();
-
 const RNApp = function(props) {
   const { status, user, loggingIn } = props;
 
