@@ -1,15 +1,26 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { colors } from '../../config/styles';
 
 const Button = (props) => {
-  const { text, onPress, color='blue' } = props;
+
+  // Defaults
+  const { text, onPress, color='white', bgcolor='blue', } = props;
+
+  const customStyles = {
+    backgroundColor:colors[bgcolor],
+    borderColor:colors[bgcolor],
+    color:colors[color],
+  }
+
   return (
-    <TouchableOpacity style={[styles.button,{backgroundColor:colors[color]}]} onPress={onPress}>
-      <Text style={styles.buttonText}>
-        {text}
-      </Text>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <Text style={[styles.button,customStyles]}>
+          {text}
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 };

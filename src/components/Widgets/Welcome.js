@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { Text, View, TouchableOpacity, } from 'react-native';
 import styles from './Styles';
 import WidgetContainer from './WidgetContainer';
-import Emoji from 'react-native-emoji';
 
 class Welcome extends Component {
 
@@ -11,12 +10,13 @@ class Welcome extends Component {
 
     if(recs.length == 0){
       return (
-        <WidgetContainer icon="wave" title="Welcome" >
+        <WidgetContainer icon="wave" title="Welcome to chaz" >
 
             <View style={styles.widgetButton}>
-              <Text>Hello, and welcome to chaz</Text>
-              <Text>The app is arranged using 'widgets.' These will grow and expand as you use the app.</Text>
-              <Text>Get started by adding a new recommendation by hitting the blue button.</Text>
+
+              <Text style={styles.text}>Thank you for participating in the beta test.</Text>
+              <Text style={styles.text}>&nbsp;</Text>
+              <Text style={styles.text}>When someone gives you a good recommendation, use this app to save it for later.</Text>
             </View>
 
         </WidgetContainer>
@@ -25,8 +25,6 @@ class Welcome extends Component {
       return <View />
     }
   }
-
-
 
 }
 

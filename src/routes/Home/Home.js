@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
+import Loading from '../../components/Loading';
 import * as Widget from '../../components/Widgets';
 
 const Home = (props) => {
@@ -9,7 +10,7 @@ const Home = (props) => {
   const { widgetData, onAddRecPress, dataReady, onRecrPress } = props;
 
   if(!dataReady)
-    return <View><Text>Loading</Text></View>
+    return <Loading text='Loading data' heart='blue' />
 
   return (
     <View style={styles.container}>
@@ -20,7 +21,7 @@ const Home = (props) => {
         <Widget.NeedsRecr     data={widgetData.needsRecr} />
 
         <Widget.MovieQueue    data={widgetData.movieQueue} />
-        <Widget.TvQueue       data={widgetData.tvQueue} />
+        <Widget.Tv            data={widgetData.tv} />
 
         <Widget.TopFriends    data={widgetData.topFriends} />
 

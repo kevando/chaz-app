@@ -21,13 +21,12 @@ export const colors = {
   white:        "#F2F2F2",
 };
 
-export const hearts = [
-    'green_heart',
-    'blue_heart',
-    'purple_heart',
-    'yellow_heart',
-  ];
-
+export const hearts = {
+  green:     'green_heart',
+  blue:      'blue_heart',
+  purple:    'purple_heart',
+  yellow:    'yellow_heart',
+}
 
 // Turn this into constants
 // for stuff like font size, weight, etc

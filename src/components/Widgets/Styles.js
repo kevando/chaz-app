@@ -81,8 +81,7 @@ export default styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: 'row',
-    padding: 5,
-    // backgroundColor: '#ddd',
+    paddingLeft: 5,
     borderColor: colors.grey,
     borderBottomWidth:1,
 
@@ -106,17 +105,28 @@ export default styles = StyleSheet.create({
   },
 
 
-itemText: {
-  backgroundColor: colors.buttonBackground,
-  color: colors.buttonText,
-  width: cardSize,
-  height: cardSize,
-  paddingTop: cardSize / 2.3,
-  fontSize: 16,
-  fontWeight:'500',
-  textAlign: 'center',
-  alignItems: 'center',
-},
+  itemText: {
+    backgroundColor: colors.buttonBackground,
+    color: colors.buttonText,
+    width: cardSize,
+    height: cardSize,
+    paddingTop: cardSize / 2.3,
+    fontSize: 16,
+    fontWeight:'500',
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+
+  text: {
+    fontWeight: '400',
+    fontSize: 15,
+    color: colors.black,
+  },
+  bold: {
+    fontWeight: '700',
+    fontSize: 15,
+    color: colors.black,
+  },
 
 
 });

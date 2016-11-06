@@ -1,27 +1,18 @@
 import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import styles from './styles';
+import { hearts } from '../../config/styles';
+import Emoji from 'react-native-emoji';
 
-const Loading = (props) => {
-  const message = props.message || 'Generic loading screen'
+const Loading = ({ text='Loading', heart='purple' }) => {
+
   return (
     <View style={styles.container}>
-      <ActivityIndicator
-        animating
-        size={props.size}
-        {...props}
-      />
-    <Text>{message}</Text>
+      <Text style={styles.heart}><Emoji name={hearts[heart]} /></Text>
+      <Text style={styles.text}>{text}</Text>
     </View>
   );
 };
 
-Loading.propTypes = {
-  size: React.PropTypes.string,
-};
-
-Loading.defaultProps = {
-  size: 'large',
-};
 
 export default Loading;

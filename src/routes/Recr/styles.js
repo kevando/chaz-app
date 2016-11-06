@@ -26,49 +26,31 @@ export default styles = StyleSheet.create({
     fontWeight: '600',
     marginTop:5
   },
-  emoji: {
-    fontSize: 40,
+
+  scores: {
+    borderWidth: 1,
+    borderColor: colors.grey,
+    borderBottomWidth: 0,
+    marginHorizontal: 30,
+
+  },
+  scoreRow: {
+    paddingHorizontal:5,
+    paddingVertical:7,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderColor: colors.grey,
+  },
+  text: {
+    fontWeight: '400',
+    fontSize: 16
+  },
+  category: {
+    flex: 4,
+  },
+  score: {
+    flex: 1,
   },
 
-  dateText: {
-    fontSize:14,
-    color:'#999',
-    marginLeft:8,
-    marginBottom:3
-  },
-
-  momentContainer: {
-    backgroundColor: '#fff',
-    marginBottom:20,
-    padding:10,
-    borderTopWidth:1,
-    borderTopColor:'#ccc',
-    borderBottomWidth:1,
-    borderBottomColor:'#ccc'
-  },
-
-
-  note: {
-    paddingBottom: 18,
-    fontSize: 15,
-    fontWeight: '500',
-    fontStyle: 'italic',
-    color:'#999'
-  },
-  recr: {
-    color: 'green',
-    fontWeight: '700',
-    fontSize: 15
-  },
-
-  gradeContainer: {
-    backgroundColor: '#fff',
-    marginBottom:20,
-    padding:10,
-    borderTopWidth:1,
-    borderTopColor:'#ccc',
-    borderBottomWidth:1,
-    borderBottomColor:'#ccc'
-  },
 
 });

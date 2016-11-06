@@ -16,6 +16,8 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+// nov6
+@import Firebase;
 
 @implementation AppDelegate
 
@@ -39,6 +41,9 @@
 
   // Crashlytics and Fabric Beta Testing
   [Fabric with:@[[Crashlytics class]]];
+
+  // nov6
+  [FIRApp configure];
 
   return YES;
 }

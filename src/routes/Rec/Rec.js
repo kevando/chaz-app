@@ -49,7 +49,7 @@ const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress, 
 
         {rec.recr_id ?
           <View>
-            <Text style={styles.dateText}>Your feedback</Text>
+            <Text style={styles.dateText}>What did you think?</Text>
 
             <View style={styles.gradeContainer}>
 
@@ -74,7 +74,7 @@ const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress, 
       {rec.recr_id ?
         null
         :
-        <Button onPress={onRecrEditPress} text="Who Recommended this?" color="green" />
+        <Button onPress={onRecrEditPress} text="Who Recommended this?" bgcolor="green" />
       }
       </View>
 

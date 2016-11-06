@@ -12,7 +12,7 @@ class RecInput extends Component {
 
 
   render() {
-    const { updateState, saveRec, onRemoveRecrPress, onDeleteRecPress, onRemoveGradePress, headerText, title, note, category, initial, onDismiss, rec={} } = this.props;
+    const { updateState, saveRec, onRemoveRecrPress, onDeleteRecPress, onRemoveGradePress, headerText, title, note, category, initial, onDismiss, rec={}, editCategory } = this.props;
 
     const isEditing = rec._id ? true : false;
 
@@ -20,19 +20,25 @@ class RecInput extends Component {
       <View style={styles.container}>
         <View style={styles.inputContainer}>
 
-          <InputWrapper>
-            <RecTitleInput
-              value={title}
-              onChangeText={(title) => updateState({ title })}
-              />
-            { isEditing ?
-            <RecNoteInput
-              value={note}
-              onChangeText={(note) => updateState({ note })}
-              borderTop={true}
+        {editCategory ?
+          <Text style={styles.title}>{rec.title}</Text>
+        :
+
+        <InputWrapper>
+          <RecTitleInput
+            value={title}
+            onChangeText={(title) => updateState({ title })}
             />
-            : null }
-          </InputWrapper>
+          { isEditing ?
+          <RecNoteInput
+            value={note}
+            onChangeText={(note) => updateState({ note })}
+            borderTop={true}
+          />
+          : null }
+        </InputWrapper>
+
+        }
 
           { isEditing ?
             <RecCategory
@@ -40,6 +46,10 @@ class RecInput extends Component {
               onChange={(category) => updateState({ category })}
               {...this.state}
             />
+          : null }
+
+          {editCategory ?
+            <Text style={styles.title}>{category}</Text>
           : null }
 
 
@@ -59,7 +69,7 @@ class RecInput extends Component {
    null
   }
 
-  {!rec.grade && !rec.recr_id  && Object.keys(rec).length > 0 ?
+  {!rec.grade && !rec.recr_id  && Object.keys(rec).length > 0 && !editCategory ?
       <View style={styles.buttons}>
         <TouchableOpacity onPress={onDeleteRecPress.bind(this,rec)} ><Text>Delete Recommendation</Text></TouchableOpacity>
       </View>

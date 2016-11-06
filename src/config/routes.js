@@ -25,7 +25,7 @@ export const routes = {
 
       renderTitle(navigator) {
         return (
-          <Nav.HomeTitle title="chaz v0.11" navigator={navigator} />
+          <Nav.HomeTitle title="chaz v1.0" navigator={navigator} />
         );
       },
     };
@@ -153,6 +153,25 @@ export const routes = {
     return {
       renderScene(navigator) {
         return <RecInput navigator={navigator} rec={rec} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Cancel" onPress={() => navigator.pop() } />
+      },
+
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
+
+    };
+  },
+
+  /* Edit Category */
+
+  getEditCategoryRoute(rec) {
+    return {
+      renderScene(navigator) {
+        return <RecInput navigator={navigator} rec={rec} editCategory={true} />;
       },
 
       renderLeftButton(navigator) {

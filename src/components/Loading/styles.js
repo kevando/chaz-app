@@ -8,4 +8,13 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.background,
   },
+  heart: {
+    fontSize: 70,
+
+  },
+  text: {
+    fontSize: 15,
+    color: colors.grey,
+    marginTop:20,
+  }
 });
