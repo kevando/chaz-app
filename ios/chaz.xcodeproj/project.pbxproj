@@ -27,7 +27,6 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		CEF0DAC559B98618AF8A2404 /* Pods_chaz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E17EF205A6C906B4BBCA4D41 /* Pods_chaz.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,11 +147,8 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = chaz/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = chaz/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
-		18C2718C3F37B9CE2CE93C8E /* Pods-chaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-chaz/Pods-chaz.release.xcconfig"; sourceTree = "<group>"; };
-		54D472C785C86BA0F3EE9CEB /* Pods-chaz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chaz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chaz/Pods-chaz.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		E17EF205A6C906B4BBCA4D41 /* Pods_chaz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chaz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +177,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				0ACBF14D1DA5DC910060E39A /* Crashlytics.framework in Frameworks */,
 				0ACBF14C1DA5DC910060E39A /* Fabric.framework in Frameworks */,
-				CEF0DAC559B98618AF8A2404 /* Pods_chaz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,15 +247,6 @@
 				0AF67ECB1DCEFA9100F8526D /* RNMailTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		108DFD4753496B1E552C87CC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				54D472C785C86BA0F3EE9CEB /* Pods-chaz.debug.xcconfig */,
-				18C2718C3F37B9CE2CE93C8E /* Pods-chaz.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
@@ -345,7 +331,6 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				0ACBF14A1DA5DC900060E39A /* Fabric.framework */,
 				0ACBF14B1DA5DC910060E39A /* Crashlytics.framework */,
-				108DFD4753496B1E552C87CC /* Pods */,
 				8C2359533AAACA163B9DCA4D /* Frameworks */,
 			);
 			indentWidth = 2;
@@ -364,7 +349,6 @@
 		8C2359533AAACA163B9DCA4D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E17EF205A6C906B4BBCA4D41 /* Pods_chaz.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -394,14 +378,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "chaz" */;
 			buildPhases = (
-				498661B33DFB5A53505C7125 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				0ACBF1491DA5DC5A0060E39A /* ShellScript */,
-				5F9696249029120F74DC5FF8 /* [CP] Embed Pods Frameworks */,
-				C1C0684579B831CAD96AAED1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -630,51 +611,6 @@
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 6f8c3009d1fd2908681f11b2f8578d38fa4787ba a827748e0a74f4e5aa6034c96ff9693d515ec6198411f4ae4d82031cf8735ea8    ";
 		};
-		498661B33DFB5A53505C7125 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		5F9696249029120F74DC5FF8 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chaz/Pods-chaz-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1C0684579B831CAD96AAED1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chaz/Pods-chaz-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -749,7 +685,6 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54D472C785C86BA0F3EE9CEB /* Pods-chaz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -778,7 +713,6 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18C2718C3F37B9CE2CE93C8E /* Pods-chaz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
