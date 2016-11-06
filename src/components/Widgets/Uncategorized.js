@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { Text, View, TouchableOpacity, } from 'react-native';
+import _ from 'lodash';
 import styles from './Styles';
 import WidgetContainer from './WidgetContainer';
+import TextItem from '../TextItem';
 
 class Uncategorized extends Component {
 
@@ -10,12 +12,21 @@ class Uncategorized extends Component {
 
     if(recs.length > 0){
       return (
-        <WidgetContainer icon="question" title="Uncategorized" >
-          <TouchableOpacity onPress={onPress} >
+        <WidgetContainer icon="card_index" title="Uncategorized Recommendations" >
+
             <View style={styles.widgetButton}>
-              <Text>You have {recs.length} uncateogorized recs</Text>
+            {
+              _.map(recs, (rec, i) => {
+              return (
+                <TouchableOpacity key={i} onPress={onPress.bind(this,rec)} style={styles.listItem}>
+                  <TextItem title={rec.title} />
+                  </TouchableOpacity>
+                );
+              })
+            }
+
             </View>
-          </TouchableOpacity>
+
         </WidgetContainer>
       );
     } else {

@@ -9,7 +9,7 @@ class TopFriends extends Component {
   render() {
     const { recrs} = this.props.data;
 
-    if(recrs.length > 0){
+    if(recrs.length > 3){
       return (
         <WidgetContainer icon="smiley" title="Top Friends" >
 
@@ -20,7 +20,7 @@ class TopFriends extends Component {
         </WidgetContainer>
       );
     } else {
-      return <View></View>
+      return <View />
     }
   }
 

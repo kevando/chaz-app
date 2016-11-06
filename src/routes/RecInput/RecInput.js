@@ -14,29 +14,34 @@ class RecInput extends Component {
   render() {
     const { updateState, saveRec, onRemoveRecrPress, onDeleteRecPress, onRemoveGradePress, headerText, title, note, category, initial, onDismiss, rec={} } = this.props;
 
+    const isEditing = rec._id ? true : false;
+
     return (
       <View style={styles.container}>
-
         <View style={styles.inputContainer}>
 
+          <InputWrapper>
+            <RecTitleInput
+              value={title}
+              onChangeText={(title) => updateState({ title })}
+              />
+            { isEditing ?
+            <RecNoteInput
+              value={note}
+              onChangeText={(note) => updateState({ note })}
+              borderTop={true}
+            />
+            : null }
+          </InputWrapper>
 
-<InputWrapper>
-  <RecTitleInput
-    value={title}
-    onChangeText={(title) => updateState({ title })}
-    />
-  <RecNoteInput
-    value={note}
-    onChangeText={(note) => updateState({ note })}
-    borderTop={true}
-      />
-</InputWrapper>
+          { isEditing ?
+            <RecCategory
+              category={category}
+              onChange={(category) => updateState({ category })}
+              {...this.state}
+            />
+          : null }
 
-<RecCategory
-  category={category}
-  onChange={(category) => updateState({ category })}
-  {...this.state}
-  />
 
 {rec.recr_id && !rec.grade ?
     <View style={styles.buttons}>

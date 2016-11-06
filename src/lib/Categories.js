@@ -3,7 +3,7 @@ export default Categories = {
 
   uncategorized: {
     _id: 'uncategorized',
-    icon: 'question',
+    icon: 'card_index',
     label: 'Uncategorized'
   },
 

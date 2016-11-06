@@ -14,12 +14,9 @@ export default styles = StyleSheet.create({
   },
 
   titleContainer: {
-
     flexDirection: 'row',
-
     backgroundColor: '#fff',
     padding:9,
-
   },
 
   titleLeft: {
@@ -79,6 +76,14 @@ export default styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#ddd',
     borderColor:'#fff',
+    borderBottomWidth:1,
+
+  },
+  listItem: {
+    flexDirection: 'row',
+    padding: 5,
+    // backgroundColor: '#ddd',
+    borderColor: colors.grey,
     borderBottomWidth:1,
 
   },
