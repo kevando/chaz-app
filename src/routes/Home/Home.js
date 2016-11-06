@@ -15,13 +15,15 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Widget.Welcome       data={widgetData.welcome} />
+
+        <Widget.Onboarding    data={widgetData.onboarding} />
 
         <Widget.Uncategorized data={widgetData.uncategorized} />
         <Widget.NeedsRecr     data={widgetData.needsRecr} />
 
-        <Widget.MovieQueue    data={widgetData.movieQueue} />
         <Widget.Tv            data={widgetData.tv} />
+
+        <Widget.MovieQueue    data={widgetData.movieQueue} />
 
         <Widget.TopFriends    data={widgetData.topFriends} />
 

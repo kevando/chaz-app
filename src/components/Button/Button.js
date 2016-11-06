@@ -6,11 +6,23 @@ import { colors } from '../../config/styles';
 const Button = (props) => {
 
   // Defaults
-  const { text, onPress, color='white', bgcolor='blue', } = props;
+  const { text, onPress, color='white', bgcolor='blue', ghost={false} } = props;
 
-  const customStyles = {
+  const customStyles = ghost === true ?
+  {
+    backgroundColor: 'rgba(0,0,0,0)',
+    borderColor: colors.darkGrey,
+    borderWidth:1,
+    color:colors.black,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    fontSize: 12,
+    fontWeight: '300',
+    borderRadius: 5
+  } :
+  {
     backgroundColor:colors[bgcolor],
-    borderColor:colors[bgcolor],
+    borderColor: colors[bgcolor],
     color:colors[color],
   }
 

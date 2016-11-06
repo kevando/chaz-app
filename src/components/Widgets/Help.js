@@ -37,7 +37,9 @@ export default class Help extends Component {
           <View style={styles.widgetButton}>
             <Text>Confused about something?</Text>
             <Text>Ask your questions here.</Text>
-            <Button text='Send Feedback' color='black' bgcolor='lightGrey' onPress={this.handleFeedback} />
+            <View style={styles.buttons} >
+              <Button text='Send Feedback' ghost={true} onPress={this.handleFeedback} />
+            </View>
           </View>
 
       </WidgetContainer>

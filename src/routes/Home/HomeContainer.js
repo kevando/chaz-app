@@ -28,7 +28,14 @@ export default createContainer((props) => {
     onAddRecPress: () => navigator.push(Routes.getRecInputRoute()),
     widgetData:  {
 
-      appMessage: { display: true },
+      // ONBOARDING
+
+      onboarding: {
+        recs: Meteor.collection('recs').find(),
+        recrs: Meteor.collection('recrs').find(),
+        navigator, // in case users can do things from the onboard widget
+      },
+
 
       uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)) },
       needsRecr: { recs: Meteor.collection('recs').find({recr_id:null}), onPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)) },
@@ -42,6 +49,7 @@ export default createContainer((props) => {
       topFriends: { recrs: Meteor.collection('recrs').find(), onPress: (recr) => navigator.push(Routes.getRecrRoute(recr)) },
 
       // TV SHOWS
+
       tv: {
         recs: {queue: getQueue('tv'), all: getRecs('tv') },
         onRecPress: (rec) => navigator.push(Routes.getRecRoute(rec))
@@ -51,7 +59,6 @@ export default createContainer((props) => {
 
 
       queue: { recs: Meteor.collection('recs').find(), onPress: () => navigator.push(Routes.getRecsRoute()) },
-      welcome: { recs: Meteor.collection('recs').find() },
 
       help: { recs: Meteor.collection('recs').find(), recrs: Meteor.collection('recrs').find(),  },
     }

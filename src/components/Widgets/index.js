@@ -10,9 +10,8 @@ import MusicQueue from './MusicQueue';
 import MovieQueue from './MovieQueue';
 import Queue from './Queue';
 import TopFriends from './TopFriends';
-import Welcome from './Welcome';
-import AppMessage from './AppMessage';
 import Help from './Help';
+import Onboarding from './Onboarding';
 //
 export {
   Uncategorized,
@@ -26,8 +25,7 @@ export {
   Tv,
   Queue,
   TopFriends,
-  Welcome,
-  AppMessage,
   Help,
+  Onboarding,
 
 };
