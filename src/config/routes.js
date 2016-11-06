@@ -166,6 +166,25 @@ export const routes = {
     };
   },
 
+  /* Edit Category */
+
+  getEditCategoryRoute(rec) {
+    return {
+      renderScene(navigator) {
+        return <RecInput navigator={navigator} rec={rec} editCategory={true} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Cancel" onPress={() => navigator.pop() } />
+      },
+
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
+
+    };
+  },
+
   /* Recr Input */
 
   getRecrInputRoute(rec) {

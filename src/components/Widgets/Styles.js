@@ -81,8 +81,7 @@ export default styles = StyleSheet.create({
   },
   listItem: {
     flexDirection: 'row',
-    padding: 5,
-    // backgroundColor: '#ddd',
+    paddingLeft: 5,
     borderColor: colors.grey,
     borderBottomWidth:1,
 

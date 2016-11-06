@@ -30,7 +30,7 @@ export default createContainer((props) => {
 
       appMessage: { display: true },
 
-      uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: (rec) => navigator.push(Routes.getRecInputRoute(rec)) },
+      uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)) },
       needsRecr: { recs: Meteor.collection('recs').find({recr_id:null}), onPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)) },
 
       bookQueue: { recs: getQueue('book'), onPress: () => navigator.push(Routes.getQueueRoute('book')) },
@@ -44,7 +44,7 @@ export default createContainer((props) => {
       // TV SHOWS
       tv: {
         recs: {queue: getQueue('tv'), all: getRecs('tv') },
-        onPress: () => navigator.push(Routes.getQueueRoute('tv'))
+        onRecPress: (rec) => navigator.push(Routes.getRecRoute(rec))
       },
 
       movieQueue: { recs: getQueue('movie'), onPress: () => navigator.push(Routes.getQueueRoute('movie')) },

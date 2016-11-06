@@ -43,7 +43,7 @@ class RecrSelection extends Component {
           </View>
           <View style={{flex:7}}>
             <Text style={[styles.recrName,this.getStyle(recr)]}>{recr.name}</Text>
-            <Text style={[styles.recrScore,this.getStyle(recr)]}>Total score: {recr.score.overall}</Text>
+            <Text style={[styles.recrScore,this.getStyle(recr)]}>Total score: {recr.score.overall.score}</Text>
           </View>
         </View>
       </TouchableOpacity>

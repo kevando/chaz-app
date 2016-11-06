@@ -103,6 +103,7 @@ class RecInputContainer extends Component {
         updateState={this.setState.bind(this)}
         saveRec={handleSaveRec}
         {...this.state}
+        {...this.props}
       />
     );
   }

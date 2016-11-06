@@ -9,19 +9,19 @@ import WidgetContainer from './WidgetContainer';
 class TvQueue extends Component {
 
   render() {
-    const { onPress, recs } = this.props.data;
+    const { onRecPress, recs } = this.props.data;
 
     if(recs.all.length > 0){
       return (
         <WidgetContainer icon="tv" title="TV Shows" >
-          <TouchableOpacity onPress={onPress} >
+
             <View style={styles.widgetButton}>
-              <Text style={styles.bold}>Latest Recommendations</Text>
+            <Text style={styles.bold}>Unwatched Recommendations</Text>
               {
-                _.map(recs.all, (rec, i) => {
+                _.map(recs.queue, (rec, i) => {
                 return (
-                  <TouchableOpacity key={i} onPress={onPress.bind(this,rec)} style={styles.listItem}>
-                    <TextItem title={`${rec.recr.name} recommended ${rec.title}`} />
+                  <TouchableOpacity key={i} onPress={onRecPress.bind(this,rec)} style={styles.listItem}>
+                    <TextItem title={`${rec.title}`} />
                     </TouchableOpacity>
                   );
                 })
@@ -33,7 +33,7 @@ class TvQueue extends Component {
 
 
             </View>
-          </TouchableOpacity>
+
         </WidgetContainer>
       );
     } else {

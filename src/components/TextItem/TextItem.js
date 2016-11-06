@@ -46,7 +46,7 @@ function iconSize(size) {
   if(size == 2) {
     return { fontSize: 20, }
   } else if(size == 3) {
-    return { fontSize: 55,}
+    return { fontSize: 45,}
   }
 }
 
@@ -58,19 +58,22 @@ const styles = StyleSheet.create({
     // backgroundColor: 'yellow',
   },
   left: {
-    flex: 2,
+    flex: 1,
     // backgroundColor:'blue',
     justifyContent: 'center', // vertical align
     alignItems: 'center',
+
   },
   right: {
-    flex: 7,
+    flex: 5,
     // backgroundColor:'red',
     justifyContent: 'center', // vertical align
+    paddingVertical:10
   },
   icon: {
     fontSize: 20,
-    padding:10,
+    paddingBottom:5,
+
   },
   title: {
     fontSize: 14,
