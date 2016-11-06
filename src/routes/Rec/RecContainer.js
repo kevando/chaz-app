@@ -2,17 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import Meteor, { connectMeteor } from 'react-native-meteor';
 import Rec from './Rec';
 import Routes from '../../config/routes';
+import Toast from 'react-native-root-toast';
 
 class RecContainer extends Component {
-
-  // getMeteorData() {
-  //   const { rec } = this.props;
-  //   // const handle = Meteor.subscribe('recrs-list',Meteor.userId());
-  //   // var recr =  Meteor.collection('recrs').findOne({_id: rec.recr_id})
-  //   return {
-  //     recr: recr
-  //   };
-  // }
 
   constructor(props) {
     super(props);
@@ -29,7 +21,7 @@ class RecContainer extends Component {
     rec.grade = grade;
 
     Meteor.call('gradeRec',rec,function(err,res){
-      // navigator.pop();
+      Toast.show('Feedback Saved', { position: Toast.positions.TOP });
     });
   }
 

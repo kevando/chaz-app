@@ -1,7 +1,7 @@
 
 import Uncategorized from './Uncategorized';
 import NeedsRecr from './NeedsRecr';
-import TvQueue from './TvQueue';
+import Tv from './Tv';
 import BookQueue from './BookQueue';
 import PlaceQueue from './PlaceQueue';
 import FoodQueue from './FoodQueue';
@@ -23,7 +23,7 @@ export {
   FoodQueue,
   PlaceQueue,
   BookQueue,
-  TvQueue,
+  Tv,
   Queue,
   TopFriends,
   Welcome,

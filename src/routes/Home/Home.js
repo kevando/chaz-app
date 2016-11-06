@@ -20,7 +20,7 @@ const Home = (props) => {
         <Widget.NeedsRecr     data={widgetData.needsRecr} />
 
         <Widget.MovieQueue    data={widgetData.movieQueue} />
-        <Widget.TvQueue       data={widgetData.tvQueue} />
+        <Widget.Tv            data={widgetData.tv} />
 
         <Widget.TopFriends    data={widgetData.topFriends} />
 

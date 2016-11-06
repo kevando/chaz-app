@@ -106,17 +106,23 @@ export default styles = StyleSheet.create({
   },
 
 
-itemText: {
-  backgroundColor: colors.buttonBackground,
-  color: colors.buttonText,
-  width: cardSize,
-  height: cardSize,
-  paddingTop: cardSize / 2.3,
-  fontSize: 16,
-  fontWeight:'500',
-  textAlign: 'center',
-  alignItems: 'center',
-},
+  itemText: {
+    backgroundColor: colors.buttonBackground,
+    color: colors.buttonText,
+    width: cardSize,
+    height: cardSize,
+    paddingTop: cardSize / 2.3,
+    fontSize: 16,
+    fontWeight:'500',
+    textAlign: 'center',
+    alignItems: 'center',
+  },
+
+  bold: {
+    fontWeight: '700',
+    fontSize: 15,
+    color: colors.black,
+  },
 
 
 });

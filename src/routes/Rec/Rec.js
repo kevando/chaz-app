@@ -49,7 +49,7 @@ const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress, 
 
         {rec.recr_id ?
           <View>
-            <Text style={styles.dateText}>Your feedback</Text>
+            <Text style={styles.dateText}>What did you think?</Text>
 
             <View style={styles.gradeContainer}>
 

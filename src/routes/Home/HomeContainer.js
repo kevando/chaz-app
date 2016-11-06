@@ -15,6 +15,12 @@ export default createContainer((props) => {
       Meteor.collection('recs').find({category, grade: {$exists: false}, recr_id: {$exists: true} })
     )
   }
+  const getRecs = (category) => {
+    return (
+      Meteor.collection('recs').find({category, recr_id: {$exists: true} })
+    )
+  }
+
 
   return {
     dataReady: handle.ready(),
@@ -35,7 +41,12 @@ export default createContainer((props) => {
 
       topFriends: { recrs: Meteor.collection('recrs').find(), onPress: (recr) => navigator.push(Routes.getRecrRoute(recr)) },
 
-      tvQueue: { recs: getQueue('tv'), onPress: () => navigator.push(Routes.getQueueRoute('tv')) },
+      // TV SHOWS
+      tv: {
+        recs: {queue: getQueue('tv'), all: getRecs('tv') },
+        onPress: () => navigator.push(Routes.getQueueRoute('tv'))
+      },
+
       movieQueue: { recs: getQueue('movie'), onPress: () => navigator.push(Routes.getQueueRoute('movie')) },
 
 

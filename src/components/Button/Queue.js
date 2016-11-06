@@ -2,24 +2,23 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { colors } from '../../config/styles';
+import Categories from '../../lib/Categories';
+import Routes from '../../config/routes';
 
 const Button = (props) => {
 
   // Defaults
-  const { text, onPress, color='white', bgcolor='blue', } = props;
+  const { category, navigator } = props;
+  if(props.navigator){alert('asdf')}
 
-  const customStyles = {
-    backgroundColor:colors[bgcolor],
-    color:colors[color],
-  }
 
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
-        <Text style={[styles.button,customStyles]}>
-          {text}
+    <TouchableOpacity onPress={() => navigator.push(Routes.getQueueRoute(category)) }>
+      <View style={styles.queueContainer}>
+        <Text style={styles.button}>
+          View {Categories[category].label} Queue
         </Text>
-      </View>
+        </View>
     </TouchableOpacity>
   );
 };
