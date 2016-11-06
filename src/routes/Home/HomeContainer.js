@@ -21,7 +21,10 @@ export default createContainer((props) => {
 
     onAddRecPress: () => navigator.push(Routes.getRecInputRoute()),
     widgetData:  {
-      uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: () => navigator.push(Routes.getRecsRoute('uncategorized')) },
+
+      appMessage: { display: true },
+
+      uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: (rec) => navigator.push(Routes.getRecInputRoute(rec)) },
       needsRecr: { recs: Meteor.collection('recs').find({recr_id:null}), onPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)) },
 
       bookQueue: { recs: getQueue('book'), onPress: () => navigator.push(Routes.getQueueRoute('book')) },
@@ -38,6 +41,8 @@ export default createContainer((props) => {
 
       queue: { recs: Meteor.collection('recs').find(), onPress: () => navigator.push(Routes.getRecsRoute()) },
       welcome: { recs: Meteor.collection('recs').find() },
+
+      help: { recs: Meteor.collection('recs').find(), recrs: Meteor.collection('recrs').find(),  },
     }
   };
 }, Home);

@@ -15,10 +15,11 @@ const Home = (props) => {
     <View style={styles.container}>
       <ScrollView>
         <Widget.Welcome       data={widgetData.welcome} />
+
         <Widget.Uncategorized data={widgetData.uncategorized} />
         <Widget.NeedsRecr     data={widgetData.needsRecr} />
-        <Widget.MovieQueue    data={widgetData.movieQueue} />
 
+        <Widget.MovieQueue    data={widgetData.movieQueue} />
         <Widget.TvQueue       data={widgetData.tvQueue} />
 
         <Widget.TopFriends    data={widgetData.topFriends} />
@@ -29,6 +30,8 @@ const Home = (props) => {
         <Widget.FoodQueue     data={widgetData.foodQueue} />
         <Widget.PlaceQueue    data={widgetData.placeQueue} />
         <Widget.Queue         data={widgetData.queue} />
+
+        <Widget.Help          data={widgetData.help} />
 
       </ScrollView>
       <Button text="Add Recommendation" onPress={onAddRecPress}/>

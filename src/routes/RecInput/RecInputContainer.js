@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { LayoutAnimation } from 'react-native';
+// import { LayoutAnimation } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
 import RecInput from './RecInput';
 import Routes from '../../config/routes';
 var dismissKeyboard = require('dismissKeyboard');
+import Toast from 'react-native-root-toast';
 
 class RecInputContainer extends Component {
   constructor(props) {
@@ -40,11 +41,13 @@ class RecInputContainer extends Component {
     const { navigator } = this.props;
     var rec = {title, note, category, uid: Meteor.userId(), createdAt: Date.now()}
 
+
     Meteor.call('addRec',rec,function(err,res){
       //res is the rec ID
       rec._id = res; // better way to do this?
       navigator.replace(Routes.getRecRoute(rec));
-    })
+      Toast.show('Recommendation Saved', { position: Toast.positions.TOP });
+    });
   }
 
   updateRec(rec){
@@ -56,7 +59,8 @@ class RecInputContainer extends Component {
 
     Meteor.call('updateRec',rec,function(err,res){
       // Might need to add the id from meteor to the rec object.
-      navigator.replace(Routes.getRecRoute(rec));
+      navigator.pop();
+      Toast.show('Recommendation Saved', { position: Toast.positions.TOP });
     })
   }
   deleteRec(rec){
@@ -86,6 +90,7 @@ class RecInputContainer extends Component {
   render() {
     const { handleSaveRec } = this.state;
     const { rec, initial, navigator } = this.props;
+
     return (
       <RecInput
         rec={rec}

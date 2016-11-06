@@ -8,7 +8,7 @@ const RecListItem = (props) => {
   const { rec, onPress } = props;
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={ () => onPress(rec) }>
       <View style={styles.badge}>
         <Text style={styles.title}><RecCategory category={rec.category} />{rec.title}</Text>
         <Text style={styles.note}>{rec.note}</Text>

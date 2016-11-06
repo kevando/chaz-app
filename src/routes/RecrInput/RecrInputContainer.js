@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RecrInput from './RecrInput';
 import Routes from '../../config/routes';
 import Meteor from 'react-native-meteor';
+import Toast from 'react-native-root-toast';
 var dismissKeyboard = require('dismissKeyboard');
 
 export default class RecrInputContainer extends Component {
@@ -36,6 +37,7 @@ export default class RecrInputContainer extends Component {
     rec.recr = recr; // this might not be the best idea, but need this because recr is not returned yet from publish
 
     Meteor.call('updateRec',rec,function(err,res){
+      Toast.show('Friend Assigned', { position: Toast.positions.TOP });
       navigator.pop();
     });
   }

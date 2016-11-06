@@ -8,12 +8,22 @@ const cardSize = (window.width - MARGIN_HORIZONTAL * 4) / 2;
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     backgroundColor: colors.background,
     padding:0
   },
+  recContainer: {
+    // backgroundColor: 'purple',
+    // padding:0
+  },
+  buttonContainer: {
+    // backgroundColor: 'yellow',
+    // padding:0
+  },
 
   titleContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: 'orange',
     flexDirection:'row', // so text does not wrap
     padding:15,
     marginBottom:20,
@@ -31,8 +41,8 @@ export default styles = StyleSheet.create({
   },
 
   dateText: {
-    fontSize:16,
-    color:'#555',
+    fontSize:14,
+    color:'#999',
     marginLeft:8,
     marginBottom:3
   },
@@ -51,10 +61,10 @@ export default styles = StyleSheet.create({
   note: {
     paddingTop: 4,
     paddingBottom: 10,
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '500',
     fontStyle: 'italic',
-    color:'#555'
+    color:'#999'
   },
   recr: {
     color: 'green',

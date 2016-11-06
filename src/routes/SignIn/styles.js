@@ -2,12 +2,12 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { colors } from '../../config/styles';
 
 const window = Dimensions.get('window');
+
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: colors.background,
+    backgroundColor: colors.purple,
+    paddingTop:100,
   },
   buttons: {
     flexDirection: 'row',
@@ -30,15 +30,15 @@ export default styles = StyleSheet.create({
     width: 125,
     height: 125,
   },
-  headerText: {
-    fontSize: 30,
-    color: colors.headerText,
+  title: {
+    fontSize: 60,
+    color: '#fff',
     fontWeight: '600',
     fontStyle: 'italic',
   },
   subHeaderText: {
     fontSize: 20,
-    color: colors.headerText,
+    color: '#fff',
     fontWeight: '400',
     fontStyle: 'italic',
   },

@@ -11,6 +11,8 @@ import MovieQueue from './MovieQueue';
 import Queue from './Queue';
 import TopFriends from './TopFriends';
 import Welcome from './Welcome';
+import AppMessage from './AppMessage';
+import Help from './Help';
 //
 export {
   Uncategorized,
@@ -24,6 +26,8 @@ export {
   TvQueue,
   Queue,
   TopFriends,
-  Welcome
+  Welcome,
+  AppMessage,
+  Help,
 
 };

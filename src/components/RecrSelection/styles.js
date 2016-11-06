@@ -4,8 +4,6 @@ import { colors } from '../../config/styles';
 export default styles = StyleSheet.create({
   list: {
     flex: 1,
-    // paddingVertical: 10,
-    // paddingHorizontal: 10,
     backgroundColor: '#eee',
     margin: 5,
     borderColor:'#bbb',
@@ -15,9 +13,21 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
 
     padding: 10,
-    backgroundColor: '#ddd',
-    borderColor:'#fff',
+    backgroundColor: '#fff',
+    borderColor:'#ccc',
     borderBottomWidth:1,
+  },
+  icon: {
+    fontSize:30,
+    paddingBottom:5,
+
+  },
+  recrName: {
+    fontSize:16
+  },
+  recrScore: {
+    fontSize:13,
+    color:'#999'
   }
 
 });

@@ -1,47 +1,35 @@
 import React, {Component} from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+import _ from 'lodash';
 import styles from './Styles';
+import Categories from '../../lib/Categories';
+import TextItem from '../TextItem';
 import WidgetContainer from './WidgetContainer';
 
 class NeedsRecr extends Component {
 
   render() {
-    const { recs } = this.props.data;
+    const { recs, onPress } = this.props.data;
 
     if(recs.length < 1 )
       return (<View></View>);
 
     return (
-      <WidgetContainer icon="sleeping" title="Who recommended these?" >
+      <WidgetContainer icon="no_mouth" title="Who recommended these?" >
         <View style={{flex: 1}}>
-          { this.renderRecs() }
+        {
+          _.map(recs, (rec, i) => {
+          return (
+            <TouchableOpacity key={i} onPress={onPress.bind(this,rec)} style={styles.listItem}>
+              <TextItem title={rec.title} note={rec.note} icon={Categories[rec.category].icon} />
+              </TouchableOpacity>
+            );
+          })
+        }
         </View>
       </WidgetContainer>
     );
   }
-
-  renderRecs() {
-    const { recs } = this.props.data;
-    const displayRecs = [];
-    for(rec of recs) {
-      displayRecs.push(this.renderRec(rec));
-    }
-    return displayRecs;
-  }
-
-
-  renderRec(rec) {
-    const { onPress } = this.props.data;
-    return(
-      <TouchableOpacity key={rec._id} onPress={onPress.bind(this,rec)} >
-        <View style={styles.item}>
-          <Text>{rec.title}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-
-
 }
 
 export default NeedsRecr;
