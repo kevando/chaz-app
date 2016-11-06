@@ -1,13 +1,13 @@
 export const colors = {
   // boilerplate colors
-  background: '#E83AA8',
-  border: '#E83AA8',
-  errorText: '#E83AA8',
-  headerText: '#E83AA8',
-  buttonBackground: '#E83AA8',
-  buttonText: '#E83AA8',
-  inputBackground: '#E83AA8',
-  inputDivider: '#E83AA8',
+  background: '#F4F4F4',
+  border: '#F4F4F4',
+  errorText: '#F4F4F4',
+  headerText: '#F4F4F4',
+  buttonBackground: '#F4F4F4',
+  buttonText: '#F4F4F4',
+  inputBackground: '#F4F4F4',
+  inputDivider: '#F4F4F4',
 
   // chaz colors
   purple:       "#8a69c6",

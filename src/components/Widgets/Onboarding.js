@@ -12,13 +12,11 @@ class Onboarding extends Component {
       return (
         <WidgetContainer icon="moyai" title="Welcome to chaz" >
             <View style={styles.widgetButton}>
-              <Text style={styles.text}>Thank you for participating in the beta test.</Text>
+              <Text style={styles.text}>This is where you recommendations will show up.</Text>
               <Text style={styles.text}>&nbsp;</Text>
-              <Text style={styles.text}>This is your home screen and it will populate with widgets (like this one) as you use the app.</Text>
+              <Text style={styles.text}>Get started by adding your first recommendation.</Text>
               <Text style={styles.text}>&nbsp;</Text>
-              <Text style={styles.text}>You can always scroll to the bottom of this screen and send me a question.</Text>
-              <Text style={styles.text}>&nbsp;</Text>
-              <Text style={styles.text}> - Kevando</Text>
+              <Text style={styles.text}> Thanks, Kevando</Text>
             </View>
         </WidgetContainer>
       );

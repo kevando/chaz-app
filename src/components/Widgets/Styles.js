@@ -7,7 +7,7 @@ const cardSize = (window.width - MARGIN_HORIZONTAL * 4) / 3;
 
 export default styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginVertical: 10,
     marginHorizontal: 20,
     borderColor:colors.grey,
     borderWidth:1,
