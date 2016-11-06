@@ -21,7 +21,7 @@ class RecInput extends Component {
         <View style={styles.inputContainer}>
 
         {editCategory ?
-          <Text style={styles.title}>{category}</Text>
+          <Text style={styles.title}>{rec.title}</Text>
         :
 
         <InputWrapper>
@@ -40,14 +40,16 @@ class RecInput extends Component {
 
         }
 
-
-
           { isEditing ?
             <RecCategory
               category={category}
               onChange={(category) => updateState({ category })}
               {...this.state}
             />
+          : null }
+
+          {editCategory ?
+            <Text style={styles.title}>{category}</Text>
           : null }
 
 
@@ -67,7 +69,7 @@ class RecInput extends Component {
    null
   }
 
-  {!rec.grade && !rec.recr_id  && Object.keys(rec).length > 0 && !editCategory ? 
+  {!rec.grade && !rec.recr_id  && Object.keys(rec).length > 0 && !editCategory ?
       <View style={styles.buttons}>
         <TouchableOpacity onPress={onDeleteRecPress.bind(this,rec)} ><Text>Delete Recommendation</Text></TouchableOpacity>
       </View>

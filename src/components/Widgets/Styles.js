@@ -117,6 +117,11 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  text: {
+    fontWeight: '400',
+    fontSize: 15,
+    color: colors.black,
+  },
   bold: {
     fontWeight: '700',
     fontSize: 15,

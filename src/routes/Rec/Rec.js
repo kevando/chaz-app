@@ -74,7 +74,7 @@ const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress, 
       {rec.recr_id ?
         null
         :
-        <Button onPress={onRecrEditPress} text="Who Recommended this?" color="green" />
+        <Button onPress={onRecrEditPress} text="Who Recommended this?" bgcolor="green" />
       }
       </View>
 

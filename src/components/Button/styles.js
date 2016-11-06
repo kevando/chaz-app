@@ -17,7 +17,8 @@ export default styles = StyleSheet.create({
     margin: 0,
     fontSize: 17,
     fontWeight: '500',
-    backgroundColor:'red'
+    backgroundColor:'red',
+    borderWidth: 1,
   },
 
 

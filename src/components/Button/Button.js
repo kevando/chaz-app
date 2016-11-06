@@ -10,6 +10,7 @@ const Button = (props) => {
 
   const customStyles = {
     backgroundColor:colors[bgcolor],
+    borderColor:colors[bgcolor],
     color:colors[color],
   }
 
