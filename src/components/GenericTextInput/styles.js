@@ -5,9 +5,8 @@ const window = Dimensions.get('window');
 export default styles = StyleSheet.create({
   input: {
     height: 40,
-    borderRadius: 5,
-    backgroundColor: colors.inputBackground,
-    marginLeft: 10,
+    // borderRadius: 5,
+    backgroundColor: colors.white,
     marginVertical: 5,
     paddingVertical: 5,
     paddingHorizontal: 15,
@@ -19,7 +18,13 @@ export default styles = StyleSheet.create({
     marginLeft: 10,
   },
   inputWrapper: {
-    backgroundColor: colors.inputBackground,
+    // backgroundColor: colors.inputBackground,
     width: window.width,
   },
+
+  // Login specific styles
+  loginContainer: {
+    marginHorizontal: 40,
+    backgroundColor: colors.white,
+  }
 });

@@ -7,10 +7,11 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.purple,
-    paddingTop:100,
+    paddingTop: 70,
   },
   buttons: {
     flexDirection: 'row',
+    justifyContent: 'center', // horizontal align
   },
   error: {
     height: 28,
@@ -31,15 +32,17 @@ export default styles = StyleSheet.create({
     height: 125,
   },
   title: {
-    fontSize: 60,
-    color: '#fff',
-    fontWeight: '600',
-    fontStyle: 'italic',
+    fontSize: 70,
+    color: colors.white,
+    fontWeight: '500',
+    // fontStyle: 'italic',
   },
   subHeaderText: {
-    fontSize: 20,
-    color: '#fff',
-    fontWeight: '400',
+    fontSize: 18,
+    color: colors.white,
+    fontWeight: '300',
     fontStyle: 'italic',
+    marginVertical: 10,
+    marginHorizontal: 20,
   },
 });
