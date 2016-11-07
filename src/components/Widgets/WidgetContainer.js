@@ -5,6 +5,7 @@ import Emoji from 'react-native-emoji';
 
 const WidgetContainer = (props) => {
   return (
+
     <View style={styles.container}>
 
         <View style={styles.titleContainer}>
@@ -21,6 +22,7 @@ const WidgetContainer = (props) => {
         </View>
 
     </View>
+
   );
 };
 

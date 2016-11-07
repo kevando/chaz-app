@@ -9,7 +9,7 @@ class TopFriends extends Component {
   render() {
     const { recrs} = this.props.data;
 
-    if(recrs.length > 0){
+    if(recrs.length > 10){ // tmp
       return (
         <WidgetContainer icon="smiley" title="Top Friends" >
 

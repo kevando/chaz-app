@@ -13,16 +13,23 @@ export default styles = StyleSheet.create({
   option: {
 
     borderRadius: 5,
-    backgroundColor: colors.inputBackground,
+    backgroundColor: colors.lightGrey,
     marginLeft: 10,
     marginVertical: 5,
-    paddingVertical: 5,
+    paddingVertical: 15,
     paddingHorizontal: 15,
-    // backgroundColor:'blue',
+    borderColor: colors.grey,
+    borderWidth: 1,
 
   },
-  optionText: {
+  icon: {
     fontSize:40,
-  }
+    textAlign: 'center',
+  },
+  optionText: {
+    fontSize:12,
+    textAlign: 'center',
+    marginTop: 5,
+  },
 
 });

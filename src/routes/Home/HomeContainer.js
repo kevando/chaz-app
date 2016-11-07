@@ -36,6 +36,22 @@ export default createContainer((props) => {
         navigator, // in case users can do things from the onboard widget
       },
 
+      // MISSING REC DATA
+
+      needsData: {
+        recs: Meteor.collection('recs').find({$or: [{category:'uncategorized'},{recr_id: null}] }),
+        // recs: Meteor.collection('recs').find(),
+        onRecrPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)),
+        onCategoryPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)),
+      },
+
+      // TV SHOWS
+
+      tv: {
+        recs: {queue: getQueue('tv'), all: getRecs('tv') },
+        onRecPress: (rec) => navigator.push(Routes.getRecRoute(rec))
+      },
+
 
       uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)) },
       needsRecr: { recs: Meteor.collection('recs').find({recr_id:null}), onPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)) },
@@ -48,12 +64,7 @@ export default createContainer((props) => {
 
       topFriends: { recrs: Meteor.collection('recrs').find(), onPress: (recr) => navigator.push(Routes.getRecrRoute(recr)) },
 
-      // TV SHOWS
 
-      tv: {
-        recs: {queue: getQueue('tv'), all: getRecs('tv') },
-        onRecPress: (rec) => navigator.push(Routes.getRecRoute(rec))
-      },
 
       movieQueue: { recs: getQueue('movie'), onPress: () => navigator.push(Routes.getQueueRoute('movie')) },
 

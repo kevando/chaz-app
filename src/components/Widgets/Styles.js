@@ -133,7 +133,25 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 20,
     marginHorizontal: 5,
-  }
+  },
+
+  notificationContainer: {
+    marginVertical: 10,
+    marginHorizontal: 20,
+    borderColor:colors.grey,
+    borderWidth:1,
+    shadowColor: colors.darkGrey,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+  },
+  notificationTitle: {
+    backgroundColor: colors.lightGrey,
+    padding: 3,
+  },
 
 
 });

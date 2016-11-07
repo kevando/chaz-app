@@ -21,7 +21,7 @@ class RecInput extends Component {
         <View style={styles.inputContainer}>
 
         {editCategory ?
-          <Text style={styles.title}>{rec.title}</Text>
+          <Text style={styles.title}>What is {rec.title}?</Text>
         :
 
         <InputWrapper>
@@ -49,7 +49,7 @@ class RecInput extends Component {
           : null }
 
           {editCategory ?
-            <Text style={styles.title}>{category}</Text>
+            <Text style={styles.title}>Currently marked: {category}</Text>
           : null }
 
 
