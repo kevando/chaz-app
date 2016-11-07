@@ -43,7 +43,10 @@
   [Fabric with:@[[Crashlytics class]]];
 
   // nov6
-  [FIRApp configure];
+  // #if DEBUG
+    [FIRApp configure];
+  // #endif
+
 
   return YES;
 }

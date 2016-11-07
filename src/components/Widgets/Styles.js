@@ -7,18 +7,25 @@ const cardSize = (window.width - MARGIN_HORIZONTAL * 4) / 3;
 
 export default styles = StyleSheet.create({
   container: {
-    marginVertical: 20,
+    marginVertical: 10,
     marginHorizontal: 20,
     borderColor:colors.grey,
     borderWidth:1,
+    shadowColor: colors.darkGrey,
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
   },
-
   titleContainer: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    padding:9,
+    padding:10,
+    borderColor:colors.grey,
+    borderBottomWidth:1,
   },
-
   titleLeft: {
     flex:1,
     alignItems:'center',
@@ -28,15 +35,9 @@ export default styles = StyleSheet.create({
     flex:5,
     justifyContent:'center'
   },
-
   contentContainer: {
-    // borderWidth:1,
-    // borderColor: colors.border,
-
     backgroundColor: colors.lightGrey,
     borderTopWidth:0,
-    // paddingHorizontal:10,
-    // paddingVertical:20,
   },
   icon: {
     fontSize: 30,
@@ -127,6 +128,12 @@ export default styles = StyleSheet.create({
     fontSize: 15,
     color: colors.black,
   },
+
+  buttons: {
+    flexDirection: 'row',
+    marginVertical: 20,
+    marginHorizontal: 5,
+  }
 
 
 });

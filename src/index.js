@@ -11,10 +11,8 @@ Meteor.connect(settings.METEOR_URL);
 const RNApp = function(props) {
   const { status, user, loggingIn } = props;
 
-  if (status.connected === false) {
-    return <Loading text='Connecting' heart='purple' />;
-  } else if (loggingIn){
-    return <Loading text='Authenticating' heart='green' />;
+  if (status.connected === false && loggingIn) {
+    return <Loading text='Connecting & Authenticating' heart='purple' paddingTop={64} />;
   } else if (user !== null) {
     return <LoggedIn />;
   } else {
