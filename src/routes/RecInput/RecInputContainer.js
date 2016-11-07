@@ -45,7 +45,9 @@ class RecInputContainer extends Component {
     Meteor.call('addRec',rec,function(err,res){
       //res is the rec ID
       rec._id = res; // better way to do this?
-      navigator.replace(Routes.getRecRoute(rec));
+      // navigator.replace(Routes.getRecRoute(rec));
+      // dismissing the route back to the widgets page
+      navigator.pop();
       Toast.show('Recommendation Saved', { position: Toast.positions.TOP });
     });
   }

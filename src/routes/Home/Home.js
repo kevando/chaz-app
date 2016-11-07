@@ -1,46 +1,99 @@
 import React from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, LayoutAnimation } from 'react-native';
 import styles from './styles';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 import * as Widget from '../../components/Widgets';
 
-const Home = (props) => {
+import * as Animatable from 'react-native-animatable';
 
-  const { widgetData, onAddRecPress, dataReady, onRecrPress } = props;
+// const Home = (props) => {
+class Home extends React.Component {
 
-  if(!dataReady)
-    return <Loading text='Loading data' heart='blue' />
 
-  return (
-    <View style={styles.container}>
-      <ScrollView>
+  // componentDidMount() {
+  //   LayoutAnimation.configureNext(LayoutAnimation.Presets.spring); // this fades in
+  // }
 
-        <Widget.Onboarding    data={widgetData.onboarding} />
+  componentWillUpdate() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear); // this springs on position changes
+  }
 
-        <Widget.Uncategorized data={widgetData.uncategorized} />
-        <Widget.NeedsRecr     data={widgetData.needsRecr} />
 
-        <Widget.Tv            data={widgetData.tv} />
+  render() {
 
-        <Widget.MovieQueue    data={widgetData.movieQueue} />
+    const { widgetData, onAddRecPress, dataReady, onRecrPress } = this.props;
 
-        <Widget.TopFriends    data={widgetData.topFriends} />
+    if(!dataReady)
+      return <Loading text='Loading data' heart='blue' />
 
-        <Widget.MusicQueue    data={widgetData.musicQueue} />
-        <Widget.BookQueue     data={widgetData.bookQueue} />
-        <Widget.PodcastQueue  data={widgetData.podcastQueue} />
-        <Widget.FoodQueue     data={widgetData.foodQueue} />
-        <Widget.PlaceQueue    data={widgetData.placeQueue} />
-        <Widget.Queue         data={widgetData.queue} />
+      return (
+        <View style={styles.container}>
 
-        <Widget.Help          data={widgetData.help} />
 
-      </ScrollView>
-      <Button text="Add Recommendation" onPress={onAddRecPress}/>
-    </View>
+          <ScrollView>
 
-  );
-};
+                <Widget.Onboarding    data={widgetData.onboarding} />
+
+
+                <Widget.NeedsData     data={widgetData.needsData} />
+
+                <Widget.Tv            data={widgetData.tv} />
+
+                <Widget.MovieQueue    data={widgetData.movieQueue} />
+
+                <Widget.TopFriends    data={widgetData.topFriends} />
+
+                <Widget.MusicQueue    data={widgetData.musicQueue} />
+                <Widget.BookQueue     data={widgetData.bookQueue} />
+                <Widget.PodcastQueue  data={widgetData.podcastQueue} />
+                <Widget.FoodQueue     data={widgetData.foodQueue} />
+                <Widget.PlaceQueue    data={widgetData.placeQueue} />
+                <Widget.Queue         data={widgetData.queue} />
+
+                <Widget.Help          data={widgetData.help} />
+
+
+          </ScrollView>
+          <Button text="Add Recommendation" onPress={onAddRecPress}/>
+        </View>
+
+      );
+
+  }
+}
+
+
+
+  // return (
+  //   <View style={styles.container}>
+  //     <ScrollView>
+  //
+  //       <Widget.Onboarding    data={widgetData.onboarding} />
+  //
+  //       <Widget.Uncategorized data={widgetData.uncategorized} />
+  //       <Widget.NeedsRecr     data={widgetData.needsRecr} />
+  //
+  //       <Widget.Tv            data={widgetData.tv} />
+  //
+  //       <Widget.MovieQueue    data={widgetData.movieQueue} />
+  //
+  //       <Widget.TopFriends    data={widgetData.topFriends} />
+  //
+  //       <Widget.MusicQueue    data={widgetData.musicQueue} />
+  //       <Widget.BookQueue     data={widgetData.bookQueue} />
+  //       <Widget.PodcastQueue  data={widgetData.podcastQueue} />
+  //       <Widget.FoodQueue     data={widgetData.foodQueue} />
+  //       <Widget.PlaceQueue    data={widgetData.placeQueue} />
+  //       <Widget.Queue         data={widgetData.queue} />
+  //
+  //       <Widget.Help          data={widgetData.help} />
+  //
+  //     </ScrollView>
+  //     <Button text="Add Recommendation" onPress={onAddRecPress}/>
+  //   </View>
+  //
+  // );
+
 
 export default Home;

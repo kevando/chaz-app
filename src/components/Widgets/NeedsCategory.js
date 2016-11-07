@@ -9,25 +9,26 @@ import * as Animatable from 'react-native-animatable';
 
 
 
-export default class NeedsRecr extends Component {
+export default class NeedsCategory extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {recr_id: this.props.rec.recr_id}
+    this.state = {category: this.props.rec.category}
   }
-
 
   componentDidUpdate(prevProps) {
 
     const { rec }  = this.props;
-    const { recr_id } = this.state;
+    const { category } = this.state;
 
-    if(rec.recr_id && !recr_id){
-      // then user updated the recr!
-      this.setState({recr_id:rec.recr_id});
-      this.refs.view.bounceIn();
+    if(rec.category != category){
+      // then user updated the category!
+      this.setState({category:rec.category});
+      this.refs.view.bounceInDown();
     }
   }
+
+
 
   render() {
     const { rec, onPress, title } = this.props;
@@ -37,10 +38,10 @@ export default class NeedsRecr extends Component {
 
 
         <TouchableOpacity onPress={onPress.bind(this,rec)} style={styles.listItem}  >
-        {!rec.recr_id ?
-          <TextItem title='Assign Recr' icon={'writing_hand'} />
+        {rec.category == 'uncategorized' ?
+          <TextItem title='Categorize this' icon={'writing_hand'} />
         :
-          <TextItem title={`Recommended by ${rec.recr.name}!`}  icon='white_check_mark' />
+          <TextItem title={`Categorized as ${rec.category}!`}  icon='white_check_mark' />
         }
 
         </TouchableOpacity>

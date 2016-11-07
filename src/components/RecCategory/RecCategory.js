@@ -22,7 +22,7 @@ class RecCategory extends Component {
     const { category = 'uncategorized', onChange } = this.props;
 
     if(!onChange){
-      // Just show the category
+      // Just show the category (i dont think this is used anymore)
       return ( <Emoji name={Categories[category].icon} /> );
 
     } else {
@@ -31,6 +31,9 @@ class RecCategory extends Component {
       for(var cat in Categories) {
         displayOptions.push(this.renderOption(Categories[cat]));
       }
+
+      // remove uncategorized
+      displayOptions.shift();
 
       return(<View style={styles.optionsContainer}>{displayOptions}</View>);
 
@@ -42,7 +45,8 @@ class RecCategory extends Component {
     return (
       <TouchableOpacity key={cat._id} onPress={onChange.bind(this,cat._id)}>
         <View style={[styles.option,this.getStyle(cat._id)]}>
-          <Text style={styles.optionText}><Emoji name={cat.icon} /></Text>
+          <Text style={styles.icon}><Emoji name={cat.icon} /></Text>
+          <Text style={styles.optionText}>{cat.label}</Text>
           </View>
         </TouchableOpacity>
       );
@@ -52,34 +56,6 @@ class RecCategory extends Component {
     if(cat == this.props.category)
       return {backgroundColor:'#ccc'}
   }
-
-  // getOptions(){
-  //   var options = [];
-  //   this.props.categories.map(category => options.push(category.id));
-  //   options.push('Cancel')
-  //   options.shift(); // remove 'all' from list
-  //   return options;
-  // }
-  //
-  // onCategorySelect(category) {
-  //   this.props.onChange(category);
-  // }
-  // onChangeCategoryPress() {
-  //
-  //   var options = this.getOptions();
-  //
-  //   ActionSheetIOS.showActionSheetWithOptions({
-  //     title: 'Categorize this recommendation',
-  //     options: options,
-  //     cancelButtonIndex: options.length-1,
-  //     destructiveButtonIndex: options.length-1,
-  //   },
-  //   (selectedIndex) => {
-  //     if(selectedIndex < options.length-1){ // cancel
-  //       this.onCategorySelect(options[selectedIndex])
-  //     }
-  //   });
-  // }
 
 }
 
