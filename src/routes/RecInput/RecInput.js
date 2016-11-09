@@ -92,7 +92,7 @@ class RecInput extends Component {
 
        {!title && initial ?
          <View style={styles.buttons}>
-           <Button text="Dismiss" onPress={onDismiss} color="red" />
+           <Button text="Dismiss" onPress={onDismiss} bgcolor='red' color='white' />
          </View>
        :
        null

@@ -12,7 +12,7 @@ const RNApp = function(props) {
   const { status, user, loggingIn } = props;
 
   if (status.connected === false && loggingIn) {
-    return <Loading text='Connecting & Authenticating' heart='purple' paddingTop={64} />;
+    return <Loading text='Connecting & Authenticating' heart='yellow' paddingTop={64} />;
   } else if (user !== null) {
     return <LoggedIn />;
   } else {

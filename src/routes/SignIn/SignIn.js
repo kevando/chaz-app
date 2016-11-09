@@ -6,7 +6,7 @@ import styles from './styles';
 
 const SignIn = (props) => {
 
-  const { updateState, signIn, getStarted, error, confirmPasswordVisible } = props;
+  const { updateState, signIn, getStarted, error, confirmPasswordVisible, showInput } = props;
 
   return (
     <View style={styles.container}>
@@ -16,22 +16,35 @@ const SignIn = (props) => {
         <Text style={styles.subHeaderText}>The fastest, easiest way to save {'\n'}recommendations from your friends.</Text>
       </View>
 
-      <InputWrapper>
 
-        <LoginInput
-          placeholder="username"
-          onChangeText={(username) => updateState({ username })}
-        />
+      {showInput ?
+        <View>
 
-      </InputWrapper>
+          <InputWrapper>
+            <LoginInput
+              placeholder="username"
+              onChangeText={(username) => updateState({ username })}
+            />
+          </InputWrapper>
 
-      <View style={styles.error}>
-        <Text style={styles.errorText}>{error}</Text>
-      </View>
+          <View style={styles.error}>
+            <Text style={styles.errorText}>{error}</Text>
+          </View>
+
+          <View style={styles.buttons}>
+            <Button text="Log In" onPress={ signIn } />
+          </View>
+
+          <Text style={styles.subHeaderText}>* The final version of chaz will not require a username, but it makes things much easier during the beta test</Text>
+
+        </View>
+      :
 
       <View style={styles.buttons}>
-        <Button text="Get Started" onPress={signIn} />
+        <Button text="Get Started" onPress={() => updateState({showInput: true})} bgcolor='white' color='purple' />
       </View>
+
+     }
 
     </View>
   );

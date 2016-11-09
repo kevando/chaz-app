@@ -7,13 +7,13 @@ import Emoji from 'react-native-emoji';
 
 import * as Animatable from 'react-native-animatable';
 
-const Loading = ({ text='Loading', heart='purple', paddingTop=0 }) => {
+const Loading = ({ text='Loading', heart='yellow', paddingTop=0 }) => {
 
   return (
     <View style={[styles.container,{paddingTop}]}>
-    <Animatable.Text animation="pulse" easing="ease-out" iterationCount="infinite" style={styles.heart}>
+    <Text style={styles.heart}>
       <Emoji name={hearts[heart]} />
-    </Animatable.Text>
+    </Text>
 
     <Text style={styles.text}>{text}</Text>
 

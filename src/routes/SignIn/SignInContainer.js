@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LayoutAnimation } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import Meteor, { Accounts } from 'react-native-meteor';
 import SignIn from './SignIn';
 
@@ -14,6 +14,7 @@ class SignInContainer extends Component {
       confirmPassword: '',
       confirmPasswordVisible: false,
       error: null,
+      showInput: false,
     };
   }
 
@@ -35,6 +36,9 @@ class SignInContainer extends Component {
       if (err) {
         console.log('signin err',err)
         this.handleError(err.reason);
+      } else {
+        // save auth data locally
+        AsyncStorage.setItem('authStatus', 'loggedIn' );
       }
     });
   }
