@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux'
 
-import app from './app/reducer';
-import counter from './counter/reducer';
+// import app from './app/reducer';
 import recs from './rec/reducer';
 import recrs from './recr/reducer';
 import onboard from './onboard/reducer';
-import messages from './messages/reducer';
+import categories from './categories/reducer';
+import widgets from './widgets/reducer';
 
 const reducers = {
-  app,
-  counter, // still used for some light testing
+  // app,
   recs,
   recrs,
   onboard,
-  messages
+  categories,
+  widgets,
 };
 
 const appReducer = combineReducers(reducers);

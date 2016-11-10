@@ -1,14 +1,15 @@
-// import App from './src/app';
-//
-// const app = new App();
-
-
 import { AppRegistry } from 'react-native';
 
-// @todo remove when RN upstream is fixed
-console.ignoredYellowBox = ['Warning: You are manually calling a React.PropTypes validation'];
+// Chaz
+import App from './src';
 
-import App from './src/app';
 
-// I think this has to be the xcode project name
+
+// Examples
+
+// Animations
+// import App from './src/examples/Animations';
+
+
+
 AppRegistry.registerComponent('chaz', () => App);

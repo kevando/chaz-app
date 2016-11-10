@@ -1,10 +1,14 @@
 # Developers
 Here are some resources and notes about the development of chaz.
 
+## Meteor deployment script
+`DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy --settings settings.json kevinhabich.com`
+
 ### Development guidelines
  - function prefixes
  - render(functions that return renderable object)
  - on(callbacks for events, most likely a user click)
+ - updating code layout to match spencer's meteor boilerplate
 
 
 ## Libs & Resources

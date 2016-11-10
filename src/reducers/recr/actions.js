@@ -1,15 +1,35 @@
 import * as types from './actionTypes';
-var uuid = require('react-native-uuid');
+import uuid from 'react-native-uuid';
+import ddpClient from '../../ddp';
 
 export function addRecr(name) {
+  const recr = {
+    _id: uuid.v1(),
+    name: name,
+    created_at: Date.now(),
+    stats: {},
+  }
+  return function(dispatch, getState){
+    dispatch(addRecrOptimistic(recr));
+    ddpClient.call('addRecr',[recr],(err, res) => {
+      if(err) alert('error adding recr to meteor');
+      console.log('added rec in meteor. possibly do some sort of optimistic return here')
+      console.log(res)
+      console.log(err)
+    });
+  }
+}
+function addRecrOptimistic(recr){
   return {
     type: types.ADD_RECR,
-    payload: {
-      id: uuid.v1(),
-      name: name,
-      created_at: Date.now(),
-      stats: {},
-    }
+    payload: recr
+  };
+}
+
+export function updateRecr(recr) {
+  return {
+    type: types.UPDATE_RECR,
+    payload: recr
   };
 }
 
@@ -50,6 +70,12 @@ export function updateRecrStats(rec) {
   }
 }
 
+export function setRecrs(recrs) {
+  return {
+    type: 'SET_RECRS',
+    payload: recrs,
+  };
+}
 
 
 //
@@ -59,7 +85,7 @@ export function updateRecrStats(rec) {
 //     const currentState = getState();
 //     const recrsRef = fireRef.child(`users/${currentState.app.authData.uid}/recrs`);
 //     recrsRef.child(recrKey).remove();
-//     // todo dispatch upgrade recr score and recs recr score
+
 //     // consider if I need to do any other checks
 //     // I feel like properly structred data would help alot here
 //   }

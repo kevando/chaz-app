@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, TouchableOpacity,AlertIOS,ScrollView} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity,AlertIOS,ScrollView,TextInput} from "react-native";
 import {Actions} from "react-native-router-flux";
-
+import * as recrActions from '../reducers/recr/actions';
 import {connect} from 'react-redux';
 
 
@@ -12,7 +12,7 @@ class Friend extends Component {
 
     var tmpRecr = this.props.recr;
     tmpRecr.stats = tmpRecr.stats || {}; // stats might not exist
-    this.state = {recr:tmpRecr}
+    this.state = {recr:tmpRecr,name: tmpRecr.name}
 
 
   }
@@ -29,7 +29,16 @@ class Friend extends Component {
           <View style={styles.row}>
             <View style={styles.left}></View>
             <View style={styles.right}>
-              <Text style={{fontSize:30}}>{recr.name}</Text>
+              <TextInput
+                style={{height: 40, paddingLeft:0,fontSize:30}}
+                onChangeText={(name) => this.setState({name})}
+                value={this.state.name}
+                placeholder={"Name"}
+                ref="NameInput"
+                enablesReturnKeyAutomatically={true}
+                returnKeyType={'done'}
+                onSubmitEditing={this.onSaveNamePress.bind(this)}
+              />
             </View>
           </View>
 
@@ -64,6 +73,14 @@ class Friend extends Component {
       return "Score: " + recr.stats.score + "%"
     else
       return "No score yet";
+  }
+
+  onSaveNamePress() {
+    // Might expand this as recr gets more data, but this works for now
+    var newRecr = this.props.recr;
+    newRecr.name = this.state.name;
+    this.props.dispatch(recrActions.updateRecr(newRecr));
+
   }
 
 }

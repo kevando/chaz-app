@@ -1,20 +1,55 @@
 import * as types from './actionTypes';
-var uuid = require('react-native-uuid');
+import uuid from 'react-native-uuid';
+import ddpClient from '../../ddp';
+
+
 
 export function addRec(title,note,uid) {
+  const rec = {
+    _id: uuid.v1(),
+    title: title,
+    note: note,
+    created_at: Date.now(),
+    uid: uid
+  }
+  return function(dispatch, getState) {
+    dispatch(addRecOptimistic(rec));
+    ddpClient.call('addRec', [rec], (err, res) => {
+      if(err) alert('woah');
+      console.log('added rec in meteor. possibly do some sort of optimistic return here')
+      console.log(res)
+      console.log(err)
+    });
+  }
+}
+
+function addRecOptimistic(rec) {
   return {
     type: types.ADD_REC,
-    payload: {
-      id: uuid.v1(),
-      title: title,
-      note: note,
-      created_at: Date.now(),
-      uid: uid
-    }
+    payload: rec
   };
 }
+
+export function setRecs(recs) {
+  return {
+    type: 'SET_RECS',
+    payload: recs,
+  };
+}
+
 export function updateRec(rec) {
-  delete rec.recr; // STOP SENDNG FUCKING RECR
+  console.log('updateRec',rec)
+
+  return function(dispatch, getState) {
+    dispatch(updateRecOptimistic(rec));
+
+    ddpClient.call('updateRec', [rec], (err, res) => {
+      console.log('updasted rec in meteor. possibly do some sort of optimistic return here')
+    });
+  }
+}
+
+export function updateRecOptimistic(rec) {
   return {
     type: types.UPDATE_REC,
     payload: rec
@@ -29,12 +64,22 @@ export function gradeRec(rec) {
   };
 }
 
-export function deleteRec(recId){
+
+export function deleteRec(rec) {
+
+  return function(dispatch, getState) {
+    dispatch(deleteRecOptimistic(rec._id));
+
+    ddpClient.call('deleteRec', [rec], (err, res) => {
+      console.log('deleted rec in meteor. possibly do some sort of optimistic return here')
+    });
+  }
+}
+
+export function deleteRecOptimistic(recKey){
   return {
     type: types.DELETE_REC,
-    payload: {
-      id: recId,
-    }
+    payload: recKey
   }
 }
 

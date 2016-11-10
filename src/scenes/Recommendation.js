@@ -4,7 +4,6 @@ import {Actions} from "react-native-router-flux";
 import { bindActionCreators } from 'redux'
 import * as recActions from '../reducers/rec/actions';
 import * as recrActions from '../reducers/recr/actions';
-import * as firebaseActions from '../reducers/firebase/actions';
 import RecNote from '../components/RecNote';
 import RecTitle from '../components/RecTitle';
 import RecType from '../components/RecType';
@@ -17,6 +16,8 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 import Emoji from 'react-native-emoji';
 import RecAddButton from '../components/RecAddButton';
 import {colors} from '../style/Global';
+
+import moment from 'moment';
 
 class RecView extends Component {
 
@@ -31,28 +32,40 @@ class RecView extends Component {
 
   }
   componentWillMount(){
-    Actions.refresh({rightTitle: "Delete", onRight:() => this.onDeletePress(), rightButtonTextStyle: {color:colors.red} })
+    var d = new Date(this.props.rec.created_at);
+    Actions.refresh({
+      rightTitle: "Delete",
+      onRight:() => this.onDeletePress(),
+      rightButtonTextStyle: {color:colors.red},
+      title: moment(d).format('MM/DD/YYYY')
+     })
   }
   componentWillReceiveProps(newProps) {
     //user edited title or note, refresh data
-    // this.setState({rec: newProps.rec});
+    this.setState({rec: newProps.rec});
     console.log('rec got new props',newProps)
+  }
+
+  render_tmp() {
+
+    return (
+      <View  style={styles.container}><Text>REC!!</Text></View>);
   }
 
   render(){
     let { dispatch } = this.props;
     let boundActionCreators = bindActionCreators(recActions, dispatch)
     let recrActionCreators = bindActionCreators(recrActions, dispatch)
-    let firebaseActionCreators = bindActionCreators(firebaseActions, dispatch)
-    var {rec} = this.props;
-    var filters = this.props.app.get('filters');
+    var {rec} = this.state;
+    var categories = this.props.categories;//app.get('filters');
+    console.log('render recView again',rec)
 
     return (
       <View  style={styles.container}>
       <ScrollView>
         <View style={styles.row}>
           <View style={styles.left}>
-            <RecType rec={rec} {...boundActionCreators} size={30} filters={filters.toArray()} />
+            <RecType rec={rec} {...boundActionCreators} size={30} categories={categories} />
           </View>
           <View style={styles.right}>
             <RecTitle rec={rec} onPress={Actions.recommendationEdit}  />
@@ -79,7 +92,7 @@ class RecView extends Component {
             <View style={styles.left}>
             </View>
             <View style={styles.right}>
-              <RecGradeSelecter rec={rec} {...boundActionCreators} {...recrActionCreators} {...firebaseActionCreators} />
+              <RecGradeSelecter rec={rec} {...boundActionCreators} {...recrActionCreators}  />
             </View>
           </View>
           :
@@ -102,8 +115,9 @@ class RecView extends Component {
 
   deleteRec(){
     var rec = this.props.rec;
-    this.props.dispatch(recActions.deleteRec(rec.id));
-    this.props.dispatch(recrActions.updateRecrStats(rec));
+    console.log(rec);
+    this.props.dispatch(recActions.deleteRec(rec));
+    // this.props.dispatch(recrActions.updateRecrStats(rec));
     Actions.pop();
   }
 
@@ -150,7 +164,8 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     // recs: this.recs,
-    app: state.app
+    app: state.app,
+    categories: state.categories
   };
 }
 export default connect(mapStateToProps)(RecView);

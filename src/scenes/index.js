@@ -19,6 +19,7 @@ import {
   NavBar
 } from 'react-native-router-flux';
 
+import Home from './Home';
 import Recommendations from './Recommendations';
 import RecommendationInput from './RecommendationInput';
 import Recommendation from './Recommendation';
@@ -27,6 +28,7 @@ import Welcome from './Welcome'
 import Popup from './Popup';
 import Logout from './Logout';
 import Friends from './Friends';
+import Loading from './Loading';
 import Friend from './Friend';
 import {colors} from '../style/Global';
 import DeviceInfo from 'react-native-device-info'; // Used to detect correct version
@@ -43,10 +45,13 @@ const NavigationStyle = {
   backButtonTextStyle: {}
 }
 
+
 export const Scenes = Actions.create(
 
   <Scene key="modal" component={Modal} appVersion={DeviceInfo.getReadableVersion()} >
-    <Scene key="root" direction="vertical" {...NavigationStyle} hideTabBar>
+    <Scene key="root" direction="vertical"  {...NavigationStyle} hideTabBar>
+
+      <Scene key="loading" component={Loading}  hideNavBar  type={ActionConst.REPLACE} initial={true} message="Connecting to server" />
 
       <Scene key="welcome" component={Welcome}  hideNavBar  type={ActionConst.REPLACE} />
 
@@ -67,6 +72,19 @@ export const Scenes = Actions.create(
         hideBackImage={true}
         backButtonTextStyle={{color:colors.white}}
         backTitle="Back"
+      />
+
+    <Scene key="home"
+       navigationBarStyle={[NavigationStyle.navigationBarStyle,{backgroundColor:colors.purple,borderBottomColor:colors.purple}]}
+       component={Home}
+       type={ActionConst.REPLACE}
+       onLeft={()=>Actions.profile()}
+       leftTitle="Profile"
+       leftButtonTextStyle={[NavigationStyle.leftButtonTextStyle,{color:'#fff'}]}
+       onRight={()=>Actions.friends()}
+       rightTitle="Friends"
+       rightButtonTextStyle={[NavigationStyle.rightButtonTextStyle,{color:colors.purple}]}
+       title=""
       />
 
       <Scene key="recommendations"
