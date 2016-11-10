@@ -133,6 +133,11 @@ export default styles = StyleSheet.create({
     fontSize: 15,
     color: colors.black,
   },
+
+  recr: {
+    color: colors.green,
+    fontWeight: '600',
+  },
   bold: {
     fontWeight: '700',
     fontSize: 15,

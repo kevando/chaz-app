@@ -49,7 +49,7 @@ class RecContainer extends Component {
         updateState={this.setState.bind(this)}
         onGradeRecPress={this.handleAssignGrade.bind(this)}
         onRecrEditPress={() => navigator.push(Routes.getRecrInputRoute(rec))}
-        onRecrPress={() => navigator.push(Routes.getRecrRoute(recr))}
+        onRecrPress={(recr) => navigator.push(Routes.getRecrRoute(recr))}
         {...this.state}
       />
     );

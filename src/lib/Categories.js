@@ -10,43 +10,51 @@ export default Categories = {
   movie: {
     _id: 'movie',
     icon: 'vhs',
-    label: 'Movie'
+    label: 'Movie',
+    labels: 'Movies'
   },
 
   tv: {
     _id: 'tv',
     icon: 'tv',
-    label: 'TV Show'
+    label: 'TV Show',
+    labels: 'TV Shows',
+
   },
 
   music: {
     _id: 'music',
     icon: 'minidisc',
-    label: 'Music'
+    label: 'Music',
+    labels: 'Music',
   },
 
   food: {
     _id: 'food',
     icon: 'ramen',
-    label: 'Food'
+    label: 'Food',
+    label: 'Food',
   },
 
   podcast: {
     _id: 'podcast',
     icon: 'radio',
-    label: 'Podcast'
+    label: 'Podcast',
+    label: 'Podcasts',
   },
 
   book: {
     _id: 'book',
     icon: 'book',
-    label: 'Book'
+    label: 'Book',
+    labels: 'Books',
   },
 
   place: {
     _id: 'place',
     icon: 'desert_island',
-    label: 'Place'
+    label: 'Place',
+    labels: 'Places',
   },
 
 };

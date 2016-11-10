@@ -62,7 +62,9 @@ export default class Rec extends Component {
           <Animatable.View ref='options'>
           { !showOptions ?
 
-          <View/>
+          <View style={{paddingVertical: 3, paddingLeft: 10}}>
+            <Text style={styles.text}>Recommended by <Text style={styles.recr}>{rec.recr.name}</Text></Text>
+          </View>
 
           :
           <View>

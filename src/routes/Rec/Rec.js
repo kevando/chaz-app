@@ -30,7 +30,7 @@ const Rec = ({ rec, onRecrEditPress, updateState, onGradeRecPress, onRecrPress, 
 
         <View style={styles.momentContainer}>
           {rec.recr_id ?
-            <TouchableOpacity onPress={onRecrPress} >
+            <TouchableOpacity onPress={onRecrPress.bind(this,rec.recr)} >
               <Text>Recommended by <Text style={styles.recr}>{rec.recr.name}</Text></Text>
             </TouchableOpacity>
             :

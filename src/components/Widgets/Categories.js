@@ -29,7 +29,7 @@ export default class Categories extends Component {
 
             if(category.length > 2){
               return (
-                <WidgetContainer icon={Cats[i].icon} title={i} key={i} onPress={onPress.bind(this,i)}>
+                <WidgetContainer icon={Cats[i].icon} title={Cats[i].labels} key={i} onPress={onPress.bind(this,i)}>
                     <View style={styles.categoryContent}>
                     <Animatable.View ref='options'>
 
