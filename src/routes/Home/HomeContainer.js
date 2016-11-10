@@ -36,6 +36,15 @@ export default createContainer((props) => {
         navigator, // in case users can do things from the onboard widget
       },
 
+      // RECENT RECS
+
+      recent: {
+        recs: Meteor.collection('recs').find({}, {sort: {createdAt: -1}} ),
+        // recs: Meteor.collection('recs').find(),
+        onRecrPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)),
+        onCategoryPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)),
+      },
+
       // MISSING REC DATA
 
       needsData: {

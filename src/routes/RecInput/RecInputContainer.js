@@ -38,6 +38,7 @@ class RecInputContainer extends Component {
   componentDidUpdate(prevProps,prevState) {
     // When user is editing category, one click to save
     if(prevState.category != this.state.category && this.props.editCategory){
+      // alert(this.state.category)
       this.updateRec(this.props.rec);
     }
   }

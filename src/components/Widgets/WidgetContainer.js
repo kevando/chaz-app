@@ -11,10 +11,27 @@ class WidgetContainer extends React.Component {
 
   componentDidMount() {
 
-    const { icon, title, children } = this.props
+    const { title, index } = this.props
+    if(index == 0){
+      // This condition means the first rec is added!
+      this.refs.widget.bounceIn();
+    }
+  }
 
-    // this.refs[title].bounceInDown();
+  componentWillUpdate(nextProps){
 
+    const { title, index } = this.props
+
+    if(nextProps.title != title && index == 0){
+      // This condition means this is a newly added rec!
+      this.refs.widget.bounceIn();
+    }
+
+    if(nextProps.recr_id && nextProps.category != 'uncategorized'){
+      // This condition means this is a newly added rec!
+      // this.refs.widget.bounceOut();
+      alert('asdf');
+    }
   }
 
   render() {
@@ -24,7 +41,7 @@ class WidgetContainer extends React.Component {
 
     return (
 
-      <Animatable.View ref={title} animation="bounceIn" delay={100}>
+      <Animatable.View ref='widget' >
       <View style={styles.container}>
 
           <View style={styles.titleContainer}>

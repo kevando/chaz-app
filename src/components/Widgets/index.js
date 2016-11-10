@@ -11,6 +11,8 @@ import Queue from './Queue';
 import TopFriends from './TopFriends';
 import Help from './Help';
 import Onboarding from './Onboarding';
+import Recent from './Recent';
+import Rec from './Rec';
 //
 export {
   NeedsData,
@@ -25,5 +27,6 @@ export {
   TopFriends,
   Help,
   Onboarding,
-
+  Recent,
+  Rec,
 };

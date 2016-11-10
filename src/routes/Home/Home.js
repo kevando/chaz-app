@@ -15,9 +15,9 @@ class Home extends React.Component {
   //   LayoutAnimation.configureNext(LayoutAnimation.Presets.spring); // this fades in
   // }
 
-  componentWillUpdate() {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.linear); // this springs on position changes
-  }
+  // componentWillUpdate() {
+  //   LayoutAnimation.configureNext(LayoutAnimation.Presets.linear); // this springs on position changes
+  // }
 
 
   render() {
@@ -33,25 +33,7 @@ class Home extends React.Component {
 
           <ScrollView>
 
-                <Widget.Onboarding    data={widgetData.onboarding} />
-
-
-                <Widget.NeedsData     data={widgetData.needsData} />
-
-                <Widget.Tv            data={widgetData.tv} />
-
-                <Widget.MovieQueue    data={widgetData.movieQueue} />
-
-                <Widget.TopFriends    data={widgetData.topFriends} />
-
-                <Widget.MusicQueue    data={widgetData.musicQueue} />
-                <Widget.BookQueue     data={widgetData.bookQueue} />
-                <Widget.PodcastQueue  data={widgetData.podcastQueue} />
-                <Widget.FoodQueue     data={widgetData.foodQueue} />
-                <Widget.PlaceQueue    data={widgetData.placeQueue} />
-                <Widget.Queue         data={widgetData.queue} />
-
-                <Widget.Help          data={widgetData.help} />
+                <Widget.Recent     data={widgetData.recent} />
 
 
           </ScrollView>
@@ -62,38 +44,32 @@ class Home extends React.Component {
 
   }
 }
+//
+// <ScrollView>
+//
+//       <Widget.Onboarding    data={widgetData.onboarding} />
+//
+//
+//       <Widget.NeedsData     data={widgetData.needsData} />
+//
+//       <Widget.Tv            data={widgetData.tv} />
+//
+//       <Widget.MovieQueue    data={widgetData.movieQueue} />
+//
+//       <Widget.TopFriends    data={widgetData.topFriends} />
+//
+//       <Widget.MusicQueue    data={widgetData.musicQueue} />
+//       <Widget.BookQueue     data={widgetData.bookQueue} />
+//       <Widget.PodcastQueue  data={widgetData.podcastQueue} />
+//       <Widget.FoodQueue     data={widgetData.foodQueue} />
+//       <Widget.PlaceQueue    data={widgetData.placeQueue} />
+//       <Widget.Queue         data={widgetData.queue} />
+//
+//       <Widget.Help          data={widgetData.help} />
+//
+//
+// </ScrollView>
 
-
-
-  // return (
-  //   <View style={styles.container}>
-  //     <ScrollView>
-  //
-  //       <Widget.Onboarding    data={widgetData.onboarding} />
-  //
-  //       <Widget.Uncategorized data={widgetData.uncategorized} />
-  //       <Widget.NeedsRecr     data={widgetData.needsRecr} />
-  //
-  //       <Widget.Tv            data={widgetData.tv} />
-  //
-  //       <Widget.MovieQueue    data={widgetData.movieQueue} />
-  //
-  //       <Widget.TopFriends    data={widgetData.topFriends} />
-  //
-  //       <Widget.MusicQueue    data={widgetData.musicQueue} />
-  //       <Widget.BookQueue     data={widgetData.bookQueue} />
-  //       <Widget.PodcastQueue  data={widgetData.podcastQueue} />
-  //       <Widget.FoodQueue     data={widgetData.foodQueue} />
-  //       <Widget.PlaceQueue    data={widgetData.placeQueue} />
-  //       <Widget.Queue         data={widgetData.queue} />
-  //
-  //       <Widget.Help          data={widgetData.help} />
-  //
-  //     </ScrollView>
-  //     <Button text="Add Recommendation" onPress={onAddRecPress}/>
-  //   </View>
-  //
-  // );
 
 
 export default Home;

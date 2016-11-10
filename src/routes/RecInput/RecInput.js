@@ -49,7 +49,7 @@ class RecInput extends Component {
           : null }
 
           {editCategory ?
-            <Text style={styles.title}>Currently marked: {category}</Text>
+            <Text style={styles.caption}>Currently {category}</Text>
           : null }
 
 

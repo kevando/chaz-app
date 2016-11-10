@@ -16,35 +16,11 @@ export default styles = StyleSheet.create({
     fontWeight: '400',
     color: colors.black,
     margin:20,
-  }
-  // buttons: {
-  //   // flexDirection: 'column',
-  //   justifyContent: 'flex-end',
-  //   // alignSelf: 'flex-end'
-  // },
-  // error: {
-  //   height: 28,
-  //   justifyContent: 'center',
-  //   width: window.width,
-  //   alignItems: 'center',
-  // },
-  // errorText: {
-  //   color: colors.errorText,
-  //   fontSize: 14,
-  // },
-  // header: {
-  //   margin: 15,
-  //   flexDirection:'row', // so text does not wrap
-  // },
-  // logo: {
-  //   width: 125,
-  //   height: 125,
-  // },
-  //
-  // subHeaderText: {
-  //   fontSize: 20,
-  //   color: colors.headerText,
-  //   fontWeight: '400',
-  //   fontStyle: 'italic',
-  // },
+  },
+  caption: {
+    fontSize: 16,
+    fontWeight: '300',
+    color: colors.darkGrey,
+    margin:20,
+  },
 });
