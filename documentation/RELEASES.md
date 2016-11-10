@@ -1,3 +1,31 @@
+#### Version 0.11
+- Released 2016.09.10
+- Adding Aiden to beta testers
+- Totally overhauled navbar UI Style
+- Added several onboarding steps
+- App forces a logout if version is mimatched
+- Users can grade recommendations
+- Users can view basic friend profile pages
+- Friends have a score, based on the average of their graded recs
+
+#### Screenshots
+
+# ![alt text][welcome]
+# ![alt text][empty]
+# ![alt text][add]
+# ![alt text][popup]
+# ![alt text][list]
+# ![alt text][rec]
+# ![alt text][recr]
+
+[welcome]: https://i.imgur.com/ZGOxN3A.png "Welcome Screen"
+[empty]: https://i.imgur.com/M19oiwt.png "Empty Screen"
+[add]: https://i.imgur.com/FrpA1P0.png "Add Rec"
+[popup]: https://i.imgur.com/xCWU6XS.png "Popup"
+[list]: https://i.imgur.com/3qlhbHF.png "Rec List"
+[rec]: https://i.imgur.com/FEwOGvG.png "Rec View"
+[recr]: https://i.imgur.com/dfDGREm.png "Recr View"
+
 #### 0.10
 - Totally overhauled navbar UI Style
 - Added several onboarding steps
