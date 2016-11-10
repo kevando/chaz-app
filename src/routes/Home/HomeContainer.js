@@ -24,7 +24,6 @@ export default createContainer((props) => {
 
   return {
     dataReady: handle.ready(),
-
     onAddRecPress: () => navigator.push(Routes.getRecInputRoute()),
     widgetData:  {
 
@@ -40,47 +39,32 @@ export default createContainer((props) => {
 
       recent: {
         recs: Meteor.collection('recs').find({}, {sort: {createdAt: -1}} ),
-        // recs: Meteor.collection('recs').find(),
+        onRecPress: (rec) => navigator.push(Routes.getRecRoute(rec)),
         onRecrPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)),
         onCategoryPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)),
       },
 
-      // MISSING REC DATA
+      // CATEGORIES
 
-      needsData: {
-        recs: Meteor.collection('recs').find({$or: [{category:'uncategorized'},{recr_id: null}] }, {sort: {createdAt: -1}} ),
+      categories: {
+        recs: Meteor.collection('recs').find({}, {sort: {createdAt: -1}} ),
+        onPress: (category) => navigator.push(Routes.getQueueRoute(category)),
+
+      },
+
+      // ALL RECS
+
+      all: {
+        recs: Meteor.collection('recs').find(),
+        onPress: () => navigator.push(Routes.getQueueRoute()),
+      },
+
+      // HELP
+
+      help: {
         // recs: Meteor.collection('recs').find(),
-        onRecrPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)),
-        onCategoryPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)),
+        // recrs: Meteor.collection('recrs').find(),
       },
-
-      // TV SHOWS
-
-      tv: {
-        recs: {queue: getQueue('tv'), all: getRecs('tv') },
-        onRecPress: (rec) => navigator.push(Routes.getRecRoute(rec))
-      },
-
-
-      uncategorized: { recs: Meteor.collection('recs').find({category:'uncategorized'}), onPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)) },
-      needsRecr: { recs: Meteor.collection('recs').find({recr_id:null}), onPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)) },
-
-      bookQueue: { recs: getQueue('book'), onPress: () => navigator.push(Routes.getQueueRoute('book')) },
-      musicQueue: { recs: getQueue('music'), onPress: () => navigator.push(Routes.getQueueRoute('music')) },
-      podcastQueue: { recs: getQueue('podcast'), onPress: () => navigator.push(Routes.getQueueRoute('podcast')) },
-      foodQueue: { recs: getQueue('food'), onPress: () => navigator.push(Routes.getQueueRoute('food')) },
-      placeQueue: { recs: getQueue('place'), onPress: () => navigator.push(Routes.getQueueRoute('place')) },
-
-      topFriends: { recrs: Meteor.collection('recrs').find(), onPress: (recr) => navigator.push(Routes.getRecrRoute(recr)) },
-
-
-
-      movieQueue: { recs: getQueue('movie'), onPress: () => navigator.push(Routes.getQueueRoute('movie')) },
-
-
-      queue: { recs: Meteor.collection('recs').find(), onPress: () => navigator.push(Routes.getRecsRoute()) },
-
-      help: { recs: Meteor.collection('recs').find(), recrs: Meteor.collection('recrs').find(),  },
     }
   };
 }, Home);

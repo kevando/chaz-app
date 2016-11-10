@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './Styles';
 import Emoji from 'react-native-emoji';
 
@@ -36,30 +36,31 @@ class WidgetContainer extends React.Component {
 
   render() {
 
-    const { icon, title, children } = this.props
+    const { icon, title, children, onPress } = this.props
 
 
     return (
+      <TouchableOpacity onPress={onPress} >
+        <Animatable.View ref='widget' >
+        <View style={styles.container}>
 
-      <Animatable.View ref='widget' >
-      <View style={styles.container}>
-
-          <View style={styles.titleContainer}>
-            <View style={styles.titleLeft}>
-              <Text style={styles.icon}><Emoji name={icon} /></Text>
+            <View style={styles.titleContainer}>
+              <View style={styles.titleLeft}>
+                <Text style={styles.icon}><Emoji name={icon} /></Text>
+              </View>
+              <View style={styles.titleRight}>
+                <Text style={styles.title}>{title}</Text>
+              </View>
             </View>
-            <View style={styles.titleRight}>
-              <Text style={styles.title}>{title}</Text>
+
+            <View style={styles.contentContainer}>
+              {children}
             </View>
-          </View>
 
-          <View style={styles.contentContainer}>
-            {children}
-          </View>
+        </View>
 
-      </View>
-
-      </Animatable.View>
+        </Animatable.View>
+      </TouchableOpacity>
 
     );
   }

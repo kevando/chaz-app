@@ -19,7 +19,7 @@ export default class Rec extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {showOptions: false}
+    this.state = {showOptions: true}
   }
 
   componentDidMount() {
@@ -28,6 +28,8 @@ export default class Rec extends Component {
     const { showOptions } = this.state;
     if((!rec.recr_id || rec.category == 'uncategorized')){
       this.setState({showOptions: true});
+    } else {
+      this.setState({showOptions: false});
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -48,19 +50,19 @@ export default class Rec extends Component {
 
   render() {
 
-    const { rec, index, onRecrPress, onCategoryPress } = this.props;
+    const { rec, index, onRecrPress, onCategoryPress, onRecPress } = this.props;
     const { showOptions } = this.state;
 
     const icon = rec.category == 'uncategorized' ? 'no_entry' : Categories[rec.category].icon;
 
     return(
 
-      <WidgetContainer icon={icon} title={rec.title} index={index}>
-          <View style={styles.widgetButton}>
+      <WidgetContainer icon={icon} title={rec.title} index={index} onPress={onRecPress.bind(this,rec)}>
+          <TouchableOpacity style={styles.recContent} >
           <Animatable.View ref='options'>
           { !showOptions ?
 
-          <View><Text>Recommended by {rec.recr.name}</Text></View>
+          <View/>
 
           :
           <View>
@@ -70,7 +72,7 @@ export default class Rec extends Component {
           }
           </Animatable.View>
 
-          </View>
+          </TouchableOpacity>
       </WidgetContainer>
 
     )

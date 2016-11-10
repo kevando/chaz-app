@@ -18,7 +18,7 @@ export default class Recent extends Component {
 
   render() {
 
-    const { recs, onRecrPress, onCategoryPress } = this.props.data;
+    const { recs, onRecrPress, onCategoryPress, onRecPress } = this.props.data;
 
     return(
       <View>
@@ -26,13 +26,13 @@ export default class Recent extends Component {
         {
           _.map(recs, (rec,i) => {
 
+            if(i < 4){ // last 4 recs saved
+              return (
+                <Rec rec={rec} key={i} index={i} onRecPress={onRecPress} onCategoryPress={onCategoryPress} onRecrPress={onRecrPress} />
 
+              )
+            }
 
-            return (
-              <Rec rec={rec} key={i} index={i} onCategoryPress={onCategoryPress} onRecrPress={onRecrPress} />
-
-
-            )
           })
         }
 

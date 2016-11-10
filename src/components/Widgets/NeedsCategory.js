@@ -24,7 +24,7 @@ export default class NeedsCategory extends Component {
     if(rec.category != category){
       // then user updated the category!
       this.setState({category:rec.category});
-      this.refs.view.bounceInDown();
+      this.refs.view.bounceIn();
     }
   }
 
