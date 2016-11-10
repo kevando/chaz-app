@@ -39,7 +39,7 @@ export default createContainer((props) => {
       // MISSING REC DATA
 
       needsData: {
-        recs: Meteor.collection('recs').find({$or: [{category:'uncategorized'},{recr_id: null}] }),
+        recs: Meteor.collection('recs').find({$or: [{category:'uncategorized'},{recr_id: null}] }, {sort: {createdAt: -1}} ),
         // recs: Meteor.collection('recs').find(),
         onRecrPress: (rec) => navigator.push(Routes.getRecrInputRoute(rec)),
         onCategoryPress: (rec) => navigator.push(Routes.getEditCategoryRoute(rec)),

@@ -3,27 +3,49 @@ import { View, Text } from 'react-native';
 import styles from './Styles';
 import Emoji from 'react-native-emoji';
 
-const WidgetContainer = (props) => {
-  return (
 
-    <View style={styles.container}>
+import * as Animatable from 'react-native-animatable';
 
-        <View style={styles.titleContainer}>
-          <View style={styles.titleLeft}>
-            <Text style={styles.icon}><Emoji name={props.icon} /></Text>
+
+class WidgetContainer extends React.Component {
+
+  componentDidMount() {
+
+    const { icon, title, children } = this.props
+
+    // this.refs[title].bounceInDown();
+
+  }
+
+  render() {
+
+    const { icon, title, children } = this.props
+
+
+    return (
+
+      <Animatable.View ref={title} animation="bounceIn" delay={100}>
+      <View style={styles.container}>
+
+          <View style={styles.titleContainer}>
+            <View style={styles.titleLeft}>
+              <Text style={styles.icon}><Emoji name={icon} /></Text>
+            </View>
+            <View style={styles.titleRight}>
+              <Text style={styles.title}>{title}</Text>
+            </View>
           </View>
-          <View style={styles.titleRight}>
-            <Text style={styles.title}>{props.title}</Text>
+
+          <View style={styles.contentContainer}>
+            {children}
           </View>
-        </View>
 
-        <View style={styles.contentContainer}>
-          {props.children}
-        </View>
+      </View>
 
-    </View>
+      </Animatable.View>
 
-  );
+    );
+  }
 };
 
 

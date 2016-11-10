@@ -28,7 +28,7 @@ class RecrSelection extends Component {
   }
 
   renderRecrs() {
-    const recrs = _.sortBy(this.props.recrs, (recr) => { return !recr.score.overall; });
+    const recrs = _.sortBy(this.props.recrs, (recr) => { return -recr.createdAt; });
 
     return _.map(recrs,(recr) => { return this.renderRecr(recr) });
   }

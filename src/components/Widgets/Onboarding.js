@@ -12,9 +12,9 @@ class Onboarding extends Component {
       return (
         <WidgetContainer icon="moyai" title="Welcome to chaz" >
             <View style={styles.widgetButton}>
-              <Text style={styles.text}>This is where you recommendations will show up.</Text>
+              <Text style={styles.text}>As you save recommendations, they will show up here.</Text>
               <Text style={styles.text}>&nbsp;</Text>
-              <Text style={styles.text}>Get started by adding your first recommendation.</Text>
+              <Text style={styles.text}>Get started by saving your first recommendation.</Text>
               <Text style={styles.text}>&nbsp;</Text>
               <Text style={styles.text}> Thanks, Kevando</Text>
             </View>

@@ -38,7 +38,7 @@ export default class NeedsRecr extends Component {
 
         <TouchableOpacity onPress={onPress.bind(this,rec)} style={styles.listItem}  >
         {!rec.recr_id ?
-          <TextItem title='Assign Recr' icon={'writing_hand'} />
+          <TextItem title='Who recommended this?' icon={'writing_hand'} />
         :
           <TextItem title={`Recommended by ${rec.recr.name}!`}  icon='white_check_mark' />
         }

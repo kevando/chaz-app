@@ -80,7 +80,7 @@ class RecInput extends Component {
 
         </View>
 
-        {title ?
+        {title && !editCategory ?
           <View style={styles.buttons}>
             <Button text="Save Recommendation" onPress={saveRec} />
           </View>

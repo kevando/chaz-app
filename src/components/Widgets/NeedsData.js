@@ -8,30 +8,37 @@ import TextItem from '../TextItem';
 import NeedsCategory from './NeedsCategory';
 import NeedsRecr from './NeedsRecr';
 
+import * as Animatable from 'react-native-animatable';
+
 export default class NeedsData extends Component {
+
 
   render() {
 
     const { recs, onRecrPress, onCategoryPress } = this.props.data;
-    
+
     return(
-      <View>
-      {
-        _.map(recs, (rec,i) => {
+      <View style={styles.needsData}>
 
-          const icon = rec.category == 'uncategorized' ? 'no_entry' : Categories[rec.category].icon;
+        {
+          _.map(recs, (rec,i) => {
 
-          return (
+            const icon = rec.category == 'uncategorized' ? 'no_entry' : Categories[rec.category].icon;
 
-            <WidgetContainer icon={icon} title={rec.title} key={i} >
-                <View style={styles.widgetButton}>
-                  <NeedsCategory rec={rec} onPress={onCategoryPress} />
-                  <NeedsRecr rec={rec} onPress={onRecrPress} />
-                </View>
-            </WidgetContainer>
-          )
-        })
-      }
+            return (
+
+
+                <WidgetContainer icon={icon} title={rec.title} key={i}>
+                    <View style={styles.widgetButton}>
+                      <NeedsCategory rec={rec} onPress={onCategoryPress} />
+                      <NeedsRecr rec={rec} onPress={onRecrPress} />
+                    </View>
+                </WidgetContainer>
+
+
+            )
+          })
+        }
 
       </View>
     )

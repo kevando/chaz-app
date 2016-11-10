@@ -7,8 +7,8 @@ const cardSize = (window.width - MARGIN_HORIZONTAL * 4) / 3;
 
 export default styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
-    marginHorizontal: 20,
+    marginVertical: 15,
+    marginHorizontal: 30,
     borderColor:colors.grey,
     borderWidth:1,
     shadowColor: colors.darkGrey,
@@ -151,6 +151,19 @@ export default styles = StyleSheet.create({
   notificationTitle: {
     backgroundColor: colors.lightGrey,
     padding: 3,
+  },
+
+  needsData: {
+    backgroundColor: colors.lightGrey,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.grey,
+  },
+  needsDataTitle: {
+    fontSize:17,
+    color: colors.black,
+    fontWeight: '400'
   },
 
 
