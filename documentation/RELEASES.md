@@ -10,16 +10,16 @@
 
 #### Screenshots
 
-# ![alt text][welcome]
-# ![alt text][empty]
+# ![alt text][welcome1]
+# ![alt text][empty1]
 # ![alt text][add]
 # ![alt text][popup]
 # ![alt text][list]
 # ![alt text][rec]
 # ![alt text][recr]
 
-[welcome]: https://i.imgur.com/ZGOxN3A.png "Welcome Screen"
-[empty]: https://i.imgur.com/M19oiwt.png "Empty Screen"
+[welcome1]: https://i.imgur.com/ZGOxN3A.png "Welcome Screen"
+[empty1]: https://i.imgur.com/M19oiwt.png "Empty Screen"
 [add]: https://i.imgur.com/FrpA1P0.png "Add Rec"
 [popup]: https://i.imgur.com/xCWU6XS.png "Popup"
 [list]: https://i.imgur.com/3qlhbHF.png "Rec List"
@@ -45,9 +45,9 @@
 #### Screenshots
 
 ##### Welcome Sceen:
-![alt text][welcome]
+![alt text][welcome2]
 ### Opening Screen (no recommendations):
-![alt text][empty]
+![alt text][empty2]
 ### Pop up after saving 1st rec
 ![alt text][first popup]
 ### One Generic Rec Added
@@ -55,8 +55,8 @@
 ### Empty Screen for TV shows
 ![alt text][empty tv list]
 
-[welcome]: https://i.imgur.com/QxLSRpB.png "Welcome Screen"
-[empty]: https://i.imgur.com/tcSGj5s.png "Empty Screen"
+[welcome2]: https://i.imgur.com/QxLSRpB.png "Welcome Screen"
+[empty2]: https://i.imgur.com/tcSGj5s.png "Empty Screen"
 [first popup]: https://i.imgur.com/w8kfeiL.png "Popup"
 [list]: https://i.imgur.com/bTAd5Ib.png "Rec List"
 [rec added]: https://i.imgur.com/8DaqHMH.png "Rec Added"
@@ -86,10 +86,10 @@
  ## Screenshots
 Here are some selected screens from the latest version.
 ### Welcome Sceen:
-![alt text][welcome]
+![alt text][welcome3]
 
 ### Empty Sceen (no recommendations):
-![alt text][empty]
+![alt text][empty3]
 
 ### Recomendation List (aka queue):
 ![alt text][list]
@@ -100,8 +100,8 @@ Here are some selected screens from the latest version.
 ### Friend List (score value based only on graded recs):
 ![alt text][friend list]
 
-[welcome]: https://i.imgur.com/0rM849v.png "Welcome Screen"
-[empty]: https://i.imgur.com/ONu91qL.png "Empty Screen"
+[welcome3]: https://i.imgur.com/0rM849v.png "Welcome Screen"
+[empty3]: https://i.imgur.com/ONu91qL.png "Empty Screen"
 [list]: https://i.imgur.com/bTAd5Ib.png "Rec List"
 [add rec]: https://i.imgur.com/Rey2jLN.png "Rec Add"
 [friend list]: https://i.imgur.com/nelxzjt.png "Friend List"
