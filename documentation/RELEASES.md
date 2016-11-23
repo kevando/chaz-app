@@ -12,19 +12,19 @@
 
 # ![alt text][welcome1]
 # ![alt text][empty1]
-# ![alt text][add]
-# ![alt text][popup]
-# ![alt text][list]
-# ![alt text][rec]
-# ![alt text][recr]
+# ![alt text][add1]
+# ![alt text][popup1]
+# ![alt text][list1]
+# ![alt text][rec1]
+# ![alt text][recr1]
 
 [welcome1]: https://i.imgur.com/ZGOxN3A.png "Welcome Screen"
 [empty1]: https://i.imgur.com/M19oiwt.png "Empty Screen"
-[add]: https://i.imgur.com/FrpA1P0.png "Add Rec"
-[popup]: https://i.imgur.com/xCWU6XS.png "Popup"
-[list]: https://i.imgur.com/3qlhbHF.png "Rec List"
-[rec]: https://i.imgur.com/FEwOGvG.png "Rec View"
-[recr]: https://i.imgur.com/dfDGREm.png "Recr View"
+[add1]: https://i.imgur.com/FrpA1P0.png "Add Rec"
+[popup1]: https://i.imgur.com/xCWU6XS.png "Popup"
+[list1]: https://i.imgur.com/3qlhbHF.png "Rec List"
+[rec1]: https://i.imgur.com/FEwOGvG.png "Rec View"
+[recr1]: https://i.imgur.com/dfDGREm.png "Recr View"
 
 #### 0.10
 - Totally overhauled navbar UI Style
