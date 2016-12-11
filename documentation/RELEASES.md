@@ -1,4 +1,30 @@
-#### Version 0.11
+## Version 1.0
+- Released 2016.10.10
+- Beta Testers: Aidan, Austen, Dr. John, Lyno, Rob
+- Fixed bugs with incorrect recommender names
+- Added feedback "form"
+- Added firebase analytics
+- Added onboarding widget
+- Added animations to improve UX
+- Streamlined adding rec
+- 'Add Rec' form auto pops up
+
+#### UI Preview
+
+![alt text][preview]
+[preview]: https://media.giphy.com/media/3oriNZhGzOoLitvTZ6/giphy.gif "Preview GIF"
+
+
+#### Screenshots
+
+![alt text][welcome_1.0]
+![alt text][home_1.0]
+[welcome_1.0]: https://i.imgur.com/PFzz2Hq.png "Welcome Screen"
+[home_1.0]: https://i.imgur.com/GCcilmc.png "Home Screen"
+
+
+
+## Version 0.11
 - Released 2016.09.10
 - Adding Aiden to beta testers
 - Totally overhauled navbar UI Style
@@ -26,7 +52,7 @@
 [rec1]: https://i.imgur.com/FEwOGvG.png "Rec View"
 [recr1]: https://i.imgur.com/dfDGREm.png "Recr View"
 
-#### 0.10
+## 0.10
 - Totally overhauled navbar UI Style
 - Added several onboarding steps
 - App forces a logout if version is mimatched
@@ -34,7 +60,7 @@
 - Users can view basic friend profile pages
 - Friends have a score, based on the average of their graded recs
 
-#### Version 0.9
+## Version 0.9
 - Released 2016.07.29
 - Refactored app so its offline by default
 - Changed navigator API
@@ -63,7 +89,7 @@
 [empty tv list]: https://i.imgur.com/nmfn4vo.png "Empty List"
 
 
-### 0.7.8
+## 0.7.8
  - added fabric tracking to analytics middleware
  - changed login button to a yellow heart
  - removed auth listener, changed auth to custom device token
@@ -75,7 +101,7 @@
  - Removed recr and grade for now to focus on ux simplicity
  - Added recType and some filters
 
-### 0.7.5 (focus on phase 1)
+## 0.7.5 (focus on phase 1)
  - Remove dude from rec input, auto pull up keyboard
  - Fixed log out bug
  - Remove grade, delete rec
@@ -107,17 +133,17 @@ Here are some selected screens from the latest version.
 [friend list]: https://i.imgur.com/nelxzjt.png "Friend List"
 
 
-### 0.7.4 (dist: Rob and Anna)
+## 0.7.4 (dist: Rob and Anna)
  - Allows recr assign from a list
  - Delete Recr if he has no recs
  - Improved rec view
  - Changed settings to profile
 
-### 0.7.3
+## 0.7.3
  - Added google analytics tracking through custom middleware
 
 
-### 0.7.2 (dist to austen)
+## 0.7.2 (dist to austen)
  - Removed bottom tabs, added rec button
  - Improved reclistitem,recview,recrview
  - Improved some of the display code
@@ -125,14 +151,14 @@ Here are some selected screens from the latest version.
  - Changed launch icon color
  - Added log in screen back
 
-### 0.7.1
+## 0.7.1
  / deploy make sure it builds
  - totally refactored with new router
  - Add Rec is now a page
  - Improved listitem
 
 
-### 0.6
+## 0.6
  - Fixed sort/filter & added sort by best
  - Added some emoji stuff and updated react and all the modules, except firebase.
  - Mostly for dist with a new xcode project
