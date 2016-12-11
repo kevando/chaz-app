@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Meteor, { connectMeteor } from 'react-native-meteor';
 import Rec from './Rec';
 import Routes from '../../config/routes';
-import Toast from 'react-native-root-toast';
+// import Toast from 'react-native-root-toast';
 
 class RecContainer extends Component {
 
@@ -21,7 +21,7 @@ class RecContainer extends Component {
     rec.grade = grade;
 
     Meteor.call('gradeRec',rec,function(err,res){
-      Toast.show('Feedback Saved', { position: Toast.positions.TOP });
+      // Toast.show('Feedback Saved', { position: Toast.positions.TOP });
     });
   }
 

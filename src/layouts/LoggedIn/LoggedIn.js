@@ -11,10 +11,9 @@ class LoggedIn extends React.Component {
 
     const initialStack = [Routes.getHomeRoute()];
 
-    // For development, just load the widgets screen
-    // Dont default to the Add Rec form
-    if(process.env.NODE_ENV == 'production')
-      initialStack.push(Routes.getInitialRecInputRoute());
+    
+    // if(process.env.NODE_ENV == 'production')
+    //   initialStack.push(Routes.getInitialRecInputRoute());
 
     return (
       <ExNavigator

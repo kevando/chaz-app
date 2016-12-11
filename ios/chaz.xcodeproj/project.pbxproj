@@ -845,7 +845,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.chaz;
+				PRODUCT_BUNDLE_IDENTIFIER = co.chaz.development;
 				PRODUCT_NAME = chaz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -863,7 +863,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.chaz;
+				PRODUCT_BUNDLE_IDENTIFIER = co.chaz.development;
 				PRODUCT_NAME = chaz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

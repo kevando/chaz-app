@@ -48,6 +48,7 @@ class SignInContainer extends Component {
       <SignIn
         updateState={this.setState.bind(this)}
         signIn={this.handleSignIn.bind(this)}
+        setUserId={this.props.setUserId}
         {...this.state}
       />
     );

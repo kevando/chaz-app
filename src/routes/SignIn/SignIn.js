@@ -6,8 +6,8 @@ import styles from './styles';
 
 const SignIn = (props) => {
 
-  const { updateState, signIn, getStarted, error, confirmPasswordVisible, showInput } = props;
-
+  const { setUserId, updateState, signIn, getStarted, error, confirmPasswordVisible, showInput } = props;
+  console.log('props',props);
   return (
     <View style={styles.container}>
 
@@ -41,7 +41,7 @@ const SignIn = (props) => {
       :
 
       <View style={styles.buttons}>
-        <Button text="Get Started" onPress={() => updateState({showInput: true})} bgcolor='white' color='purple' />
+        <Button text="Get Started" onPress={() => setUserId({uid:'fuck'})} bgcolor='white' color='purple' />
       </View>
 
      }

@@ -3,7 +3,7 @@ import { View, Text, ScrollView, NetInfo } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements'
 import { connect } from 'react-redux';
 
-import { requestPerson, requestPersonByUrl, connectionState } from './actions';
+import { saveRecommendation, requestPerson, requestPersonByUrl, connectionState } from './actions';
 
 class NameList extends Component {
   componentDidMount() {
@@ -28,13 +28,17 @@ class NameList extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+      <List>
+            <ListItem key={'asdf'} title={this.props.isConnected ? 'Connected' : 'Not Conntected'} />
+            <ListItem key={'asdff'} title={'some meteor info'} />
+      </List>
         <ScrollView>
           <List>
             {
-              this.props.people.map((item, i) => (
+              this.props.recommendations.map((item, i) => (
                 <ListItem
                   key={i}
-                  title={item.name}
+                  title={item.title}
                 />
               ))
             }
@@ -45,7 +49,7 @@ class NameList extends Component {
           name={this.props.isConnected ? 'add' : 'alarm-add'}
           color='#51b9d3'
           reverse
-          onPress={() => this.props.dispatch(requestPerson({ index: this.props.personIndex }))}
+          onPress={() => this.props.dispatch(saveRecommendation({ title: 'some Title' }))}
           containerStyle={{ position: 'absolute', right: 20, bottom: 20 }}
         />
       </View>
@@ -59,6 +63,7 @@ const mapStateToProps = (state) => {
     personIndex: state.personIndex,
     actionQueue: state.actionQueue,
     isConnected: state.isConnected,
+    recommendations: state.recommendations,
   };
 };
 

@@ -4,7 +4,7 @@ import Meteor, { Accounts } from 'react-native-meteor';
 import RecInput from './RecInput';
 import Routes from '../../config/routes';
 var dismissKeyboard = require('dismissKeyboard');
-import Toast from 'react-native-root-toast';
+// import Toast from 'react-native-root-toast';
 
 class RecInputContainer extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class RecInputContainer extends Component {
       // navigator.replace(Routes.getRecRoute(rec));
       // dismissing the route back to the widgets page
       navigator.pop();
-      Toast.show('Recommendation Saved', { position: Toast.positions.TOP });
+      // Toast.show('Recommendation Saved', { position: Toast.positions.TOP });
     });
   }
 
@@ -69,7 +69,7 @@ class RecInputContainer extends Component {
     Meteor.call('updateRec',rec,function(err,res){
       // Might need to add the id from meteor to the rec object.
       navigator.pop();
-      Toast.show('Recommendation Saved', { position: Toast.positions.TOP });
+      // Toast.show('Recommendation Saved', { position: Toast.positions.TOP });
     })
   }
   deleteRec(rec){

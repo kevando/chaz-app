@@ -5,6 +5,10 @@ const initialState = {
   people: [],
   actionQueue: [],
   isConnected: false,
+
+  recommendations: [],
+  uid: null, // outside user object for now
+
 };
 
 const reducer = (state = initialState, action) =>{
@@ -29,6 +33,15 @@ const reducer = (state = initialState, action) =>{
       return Object.assign({}, state, {
         actionQueue: _.without(state.actionQueue, action.payload),
       });
+    case 'SET_USER_ID':
+      return Object.assign({}, state, {
+        uid: action.uid,
+      });
+    case 'SAVE_RECOMMENDATION':
+      return Object.assign({},state, {
+        recommendations: [action.recommendation].concat(state.recommendations),
+      });
+
     default:
       return state;
   }
