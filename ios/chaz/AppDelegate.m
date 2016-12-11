@@ -12,13 +12,6 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 
-// Crashlytics and Fabric Beta Testing
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-
-// nov6
-@import Firebase;
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -38,16 +31,6 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-
-  // Crashlytics and Fabric Beta Testing
-  [Fabric with:@[[Crashlytics class]]];
-
-  // nov6
-  // #if DEBUG
-    [FIRApp configure];
-  // #endif
-
-
   return YES;
 }
 
