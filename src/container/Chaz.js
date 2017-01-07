@@ -7,30 +7,34 @@ import { requestPerson, requestPersonByUrl, connectionState } from '../actions';
 
 import LoggedOut from '../layouts/LoggedOut';
 import LoggedIn from '../layouts/LoggedIn';
-//tmp
+
+// tmp
 import NameList from '../NameList';
 
 class Chaz extends Component {
   componentDidMount() {
-    NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
+    // NetInfo.isConnected.addEventListener('change', this._handleConnectionChange);
   }
 
   componentWillUnmount() {
-    NetInfo.isConnected.removeEventListener('change', this._handleConnectionChange);
+    // NetInfo.isConnected.removeEventListener('change', this._handleConnectionChange);
   }
 
-  _handleConnectionChange = (isConnected) => {
-    const { dispatch, actionQueue } = this.props;
-    dispatch(connectionState({ status: isConnected }));
-
-    if (isConnected && actionQueue.length > 0) {
-      actionQueue.forEach((url) => {
-        this.props.dispatch(requestPersonByUrl({ url }));
-      });
-    }
-  };
+  // _handleConnectionChange = (isConnected) => {
+  //   const { dispatch, actionQueue } = this.props;
+  //   dispatch(connectionState({ status: isConnected }));
+  //
+  //   if (isConnected && actionQueue.length > 0) {
+  //     actionQueue.forEach((url) => {
+  //       this.props.dispatch(requestPersonByUrl({ url }));
+  //     });
+  //   }
+  // };
 
   render() {
+    return <NameList />
+  }
+  render_old() {
 
     const { uid } = this.props;
 

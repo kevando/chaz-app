@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-// Might need to put this elsewhere.
-import Meteor, { createContainer } from 'react-native-meteor';
-import settings from './config/settings';
-Meteor.connect(settings.METEOR_URL);
+// Commenting out to do offline first
+// import Meteor, { createContainer } from 'react-native-meteor';
+// import settings from './config/settings';
+// Meteor.connect(settings.METEOR_URL);
 
 import { Provider } from 'react-redux';
 import configureStore from './store';
