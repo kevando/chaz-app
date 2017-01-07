@@ -7,6 +7,8 @@ import { Text, View, ScrollView, LayoutAnimation } from 'react-native';
 //
 // import * as Animatable from 'react-native-animatable';
 
+import { Container, Content, Button } from 'native-base';
+
 class Dashboard extends React.Component {
 
   render() {
@@ -16,12 +18,17 @@ class Dashboard extends React.Component {
 
 
       return (
-        <View style={styles.container}>
-          <Text>DUDE I AM DASHBOARD</Text>
+
+        <Container>
+                <Content>
+
+                    <Button onPress={()=>alert('asdf')}> Click Me! </Button>
+                </Content>
+            </Container>
 
 
 
-        </View>
+
 
       );
 
