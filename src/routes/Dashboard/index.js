@@ -1,39 +1,17 @@
-import React from 'react';
-import { Text, View, ScrollView, LayoutAnimation } from 'react-native';
-// import styles from './styles';
-// import Button from '../../components/Button';
-// import Loading from '../../components/Loading';
-// import * as Widget from '../../components/Widgets';
-//
-// import * as Animatable from 'react-native-animatable';
+import DashboardContainer from './DashboardContainer';
+// import Dashboard from './Dashboard';
 
-import { Container, Content, Button } from 'native-base';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-class Dashboard extends React.Component {
+// import actions
 
-  render() {
+const mapStateToProps = (state) => {
+  return {
+    username: state.user.name
+  };
+};
 
-    // const { widgetData, onAddRecPress, dataReady, onRecrPress } = this.props;
+// map dispatch to props
 
-
-
-      return (
-
-        <Container>
-                <Content>
-
-                    <Button onPress={()=>alert('asdf')}> Click Me! </Button>
-                </Content>
-            </Container>
-
-
-
-
-
-      );
-
-  }
-}
-
-
-export default Dashboard;
+export default connect(mapStateToProps, null)(DashboardContainer);
