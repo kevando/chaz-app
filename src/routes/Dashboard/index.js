@@ -1,14 +1,14 @@
-import DashboardContainer from './DashboardContainer';
-// import Dashboard from './Dashboard';
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+
+import DashboardContainer from './DashboardContainer';
+
 
 // import actions
 
 const mapStateToProps = (state) => {
   return {
-    username: state.user.name
+    recommendations: state.recommendations.list,
   };
 };
 

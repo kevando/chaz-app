@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ExNavigator from '@exponent/react-native-navigator';
 import Routes from '../../config/routes';
 import styles from './styles';
 
-class LoggedIn extends React.Component {
+class Chaz extends Component {
 
   render() {
     const sceneStyle = [];
@@ -11,6 +11,9 @@ class LoggedIn extends React.Component {
 
     const initialStack = [Routes.getDashboardRoute()];
 
+
+    // this is causing a render issue with the dynamic list
+    // initialStack.push(Routes.getNewRecommendationRoute());
 
     // if(process.env.NODE_ENV == 'production')
     //   initialStack.push(Routes.getInitialRecInputRoute());
@@ -28,4 +31,4 @@ class LoggedIn extends React.Component {
 
 }
 
-export default LoggedIn;
+export default Chaz;

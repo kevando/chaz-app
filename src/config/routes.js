@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Dashboard from '../routes/Dashboard';
+import InputTitle from '../routes/InputTitle';
 // import Profile from '../routes/Profile';
 // import SignIn from '../routes/SignIn';
 // import Recs from '../routes/Recs';
@@ -12,11 +13,15 @@ import Dashboard from '../routes/Dashboard';
 // import RecrInput from '../routes/RecrInput';
 // import Queue from '../routes/Queue';
 
-// import * as Nav from '../components/Nav';
+import * as Nav from '../components/Nav';
 
 import ExNavigator from '@exponent/react-native-navigator';
 
 export const routes = {
+
+  // -----------------------------------------
+  // DASHBOARD
+  // -----------------------------------------
 
   getDashboardRoute() {
     return {
@@ -29,6 +34,30 @@ export const routes = {
       //     <Nav.HomeTitle title="chaz v1.0" navigator={navigator} />
       //   );
       // },
+      getTitle() {
+        return 'Dashboard';
+      }
+    };
+  },
+
+  // -----------------------------------------
+  // NEW RECOMMENDATION
+  // -----------------------------------------
+
+  getNewRecommendationRoute() {
+    return {
+      renderScene(navigator) {
+        return <InputTitle navigator={navigator} initial={true} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Close" onPress={() => navigator.pop() } />
+      },
+
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
+
     };
   },
   // getRecrsRoute() {
@@ -129,24 +158,7 @@ export const routes = {
   //   };
   // },
   //
-  // /* Initial Rec Input */
-  //
-  // getInitialRecInputRoute() {
-  //   return {
-  //     renderScene(navigator) {
-  //       return <RecInput navigator={navigator} initial={true} />;
-  //     },
-  //
-  //     renderLeftButton(navigator) {
-  //       return <Nav.Button text="Cancel" onPress={() => navigator.pop() } />
-  //     },
-  //
-  //     configureScene(){
-  //       return ExNavigator.SceneConfigs.FloatFromBottom
-  //     },
-  //
-  //   };
-  // },
+
   //
   // /* Rec Input */
   //

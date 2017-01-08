@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 
 import Dashboard from './Dashboard';
+import Routes from '../../config/routes';
 
 class DashboardContainer extends Component {
-  // constructor
-
-
-  // bunch of functions
 
 
   render() {
-    return <Dashboard username={this.props.username} />
 
+    const { navigator, recommendations} = this.props;
 
+    return (
+      <Dashboard
+        {...this.props}
+        onNewRecPress={() => navigator.push(Routes.getNewRecommendationRoute())}
+      />
+      )
 
-    // possible things to pass along
-
-    // updateState={this.setState.bind(this)}
-    // signIn={this.handleSignIn.bind(this)}
-    // setUserId={this.props.setUserId}
-    // {...this.state}
   }
 }
 

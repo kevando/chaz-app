@@ -1,21 +1,28 @@
 import React from 'react';
-import { View, Text} from 'react-native';
+import { View} from 'react-native';
 
+import { Container, Content, List, ListItem, Button, Text, Icon } from 'native-base';
 
 const Dashboard = (props) => {
 
-
-  // This should be a pure function with all acitivty happening in container
-
-  const { username } = props;
+  const { recommendations, onNewRecPress } = props;
 
   return (
-    <View style={styles.container}>
-      <Text>dude im da dashboard</Text>
-      <Text>username: {username}</Text>
-    </View>
+    <Container>
+      <Content>
+        <List dataArray={recommendations}
+            renderRow={({title,recr}) =>
+                <ListItem iconLeft>
+                <Icon name="ios-book" style={{ color: '#0A69FE' }} />
+                    <Text>{title}</Text>
+                    <Text note>{recr}</Text>
+                </ListItem>
+            }>
+        </List>
+        <Button block onPress={onNewRecPress}>ADD RECOMMENDATION</Button>
+      </Content>
+    </Container>
   );
-
 
 
 }

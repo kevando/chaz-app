@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
 import user from './user/reducer';
-// import recs from './rec/reducer';
+import recommendations from './recommendations/reducer';
 // import recrs from './recr/reducer';
 // import onboard from './onboard/reducer';
 // import categories from './categories/reducer';
@@ -9,7 +9,7 @@ import user from './user/reducer';
 
 const reducers = {
   user,
-  // recs,
+  recommendations,
   // recrs,
   // onboard,
   // categories,
