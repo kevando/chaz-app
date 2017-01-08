@@ -12,8 +12,8 @@ class Chaz extends Component {
     const initialStack = [Routes.getDashboardRoute()];
 
 
-    // this is causing a render issue with the dynamic list
     initialStack.push(Routes.getNewRecommendationRoute());
+    // initialStack.push(Routes.getDebugRoute());
 
     // if(process.env.NODE_ENV == 'production')
     //   initialStack.push(Routes.getInitialRecInputRoute());

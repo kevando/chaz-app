@@ -15,13 +15,13 @@ const Dashboard = (props) => {
     <View style={styles.container}>
       <ScrollView>
       {
-        _.map(recommendations,function({title,recr, note},i) {
+        _.map(recommendations,function({title, friend, note},i) {
           return(
             <ListItem iconLeft key={i}>
             <Icon name="ios-book" style={{ color: '#0A69FE' }} />
                 <Text>{title}</Text>
                 <Text>{note}</Text>
-                <Text style={{color:'#888'}}>{recr}</Text>
+                <Text style={{color:'#888'}}>{friend}</Text>
             </ListItem>
           )
         })

@@ -1,9 +1,9 @@
 // import QueueTitle from './QueueTitle';
 import Button from './Button';
-// import HomeTitle from './HomeTitle';
+import DashboardTitle from './DashboardTitle';
 
 export {
-  // HomeTitle,
+  DashboardTitle,
   // QueueTitle,
   Button,
 };

@@ -1,8 +1,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import InputTitleContainer from './InputTitleContainer';
+import InputFriendContainer from './InputFriendContainer';
 import * as Actions from '../../reducers/recommendations/actions';
+// Also need action to create friend @todo
 
 const mapStateToProps = (state) => {
   return {
@@ -14,4 +15,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InputTitleContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(InputFriendContainer);

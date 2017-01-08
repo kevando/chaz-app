@@ -19,7 +19,10 @@ const reducers = {
 const appReducer = combineReducers(reducers);
 
 const rootReducer = (state, action) => {
-  // @todo Do I need this?
+
+  if (action.type === 'PURGE_DATA') {
+    state = undefined;
+  }
   // console.log('%c REDUX STATE:', 'color: blue',state);
   // console.log('%c REDUX ACTION:', 'color: blue',action);
   return appReducer(state, action)

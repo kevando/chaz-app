@@ -1,17 +1,18 @@
 import _ from 'lodash';
 
 import {
-  SET_TITLE
+  SET_TITLE,
+  SET_FRIEND,
+  SAVE_RECOMMENDATION,
 } from './actionTypes';
-
 
 const initialState =
   {
-    unfinished: {title:'empty'},
+    unfinished: {},
     list: [
       {
         title: 'chaz',
-        recr: 'Kevin',
+        friend: 'Kevin',
         status: 'using',
         category: 'other',
         note: 'because super fresh',
@@ -25,14 +26,30 @@ export default function recs(recommendations = initialState, action = {}) {
   switch (action.type) {
 
     case SET_TITLE:
-      // alert(action.title)
       return {
       ...recommendations,
-      unfinished: {title: 'dude'}
+      unfinished: {title: action.title}
       }
 
+    // -------------------------------------------
+    case SET_FRIEND:
+      return {
+        ...recommendations,
+        unfinished: {
+          ...recommendations.unfinished,
+          friend: action.friend
+        }
+      }
 
+    // -------------------------------------------
+    case SAVE_RECOMMENDATION:
+      var newList = recommendations.list.concat([recommendations.unfinished]); // Merges both 'arrays'
+      return {
+        ...recommendations,
+        list: newList,
+      }
 
+    // -------------------------------------------
     default:
       return recommendations;
   }

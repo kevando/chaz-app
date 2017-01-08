@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
 import Button from '../../components/Button';
 
-import InputTitle from './InputTitle';
+import InputFriend from './InputFriend';
 import Routes from '../../config/routes';
 
-class InputTitleContainer extends Component {
+class InputFriendContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {title: ''}
+    this.state = {friend: ''}
   }
 
   renderButton() {
-    if(this.state.title)
+    if(this.state.friend)
       return <Button text="Next" onPress={this.onNextPress.bind(this)} />
   }
 
   onNextPress() {
-    const { navigator, setTitle } = this.props;
-    setTitle(this.state.title); // Redux
-    navigator.push(Routes.getInputFriendRoute());
+    const { navigator, setFriend } = this.props;
+    setFriend(this.state.friend); // Redux
+    // @todo also create friend object
+    navigator.push(Routes.getConfirmRecommendationRoute());
   }
 
   render() {
     return (
-      <InputTitle
+      <InputFriend
         updateState={this.setState.bind(this)}
         renderButton={this.renderButton.bind(this)}
       />
@@ -33,4 +34,4 @@ class InputTitleContainer extends Component {
 
 }
 
-export default InputTitleContainer;
+export default InputFriendContainer;

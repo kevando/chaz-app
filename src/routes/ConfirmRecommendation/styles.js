@@ -5,6 +5,8 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+    // flexDirection: 'start',
+    // alignItems: 'flex-start',
   },
 
   input: {

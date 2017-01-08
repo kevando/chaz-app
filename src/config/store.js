@@ -11,10 +11,10 @@ const createStoreWithMiddleware = applyMiddleware(...middleWare)(createStore);
 
 export default configureStore = (onComplete) => {
   const store = autoRehydrate()(createStoreWithMiddleware)(reducer);
-  // persistStore(store, { storage: AsyncStorage }, onComplete);
+  persistStore(store, { storage: AsyncStorage }, onComplete);
 
   // Uncomment this to purge the async store
-  persistStore(store, { storage: AsyncStorage }, onComplete).purge();
+  // persistStore(store, { storage: AsyncStorage }, onComplete).purge();
 
   return store;
 };

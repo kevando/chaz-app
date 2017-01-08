@@ -3,8 +3,8 @@ import React from 'react';
 import Dashboard from '../routes/Dashboard';
 import InputTitle from '../routes/InputTitle';
 import InputFriend from '../routes/InputFriend';
-// import Profile from '../routes/Profile';
-// import SignIn from '../routes/SignIn';
+import ConfirmRecommendation from '../routes/ConfirmRecommendation';
+import Debug from '../routes/Debug';
 // import Recs from '../routes/Recs';
 // import Recrs from '../routes/Recrs';
 // import Rec from '../routes/Rec';
@@ -30,14 +30,12 @@ export const routes = {
         return <Dashboard navigator={navigator} />;
       },
 
-      // renderTitle(navigator) {
-      //   return (
-      //     <Nav.HomeTitle title="chaz v1.0" navigator={navigator} />
-      //   );
-      // },
-      getTitle() {
-        return 'Dashboard';
-      }
+      renderTitle(navigator) {
+        return (
+          <Nav.DashboardTitle title="Dashboard" navigator={navigator} />
+        );
+      },
+
     };
   },
 
@@ -82,29 +80,46 @@ export const routes = {
 
     };
   },
-  // getRecrsRoute() {
-  //
-  //   return {
-  //     renderScene(navigator) {
-  //       return <Recrs navigator={navigator} />;
-  //     },
-  //
-  //     getTitle() {
-  //       return 'Friends';
-  //     },
-  //   };
-  // },
-  // getProfileRoute() {
-  //   return {
-  //     renderScene(navigator) {
-  //       return <Profile navigator={navigator} />;
-  //     },
-  //
-  //     configureScene(){
-  //       return ExNavigator.SceneConfigs.FloatFromBottom
-  //     },
-  //   };
-  // },
+
+  // -----------------------------------------
+  // CONFIRM NEW RECOMMENDATION
+  // -----------------------------------------
+
+  getConfirmRecommendationRoute() {
+    return {
+      renderScene(navigator) {
+        return <ConfirmRecommendation navigator={navigator} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Back" onPress={() => navigator.pop() } />
+      },
+
+      // configureScene(){
+      //   return ExNavigator.SceneConfigs.FloatFromBottom
+      // },
+
+    };
+  },
+
+  // -----------------------------------------
+  // DEBUG SETTINGS
+  // -----------------------------------------
+
+  getDebugRoute() {
+    return {
+      renderScene(navigator) {
+        return <Debug navigator={navigator} />;
+      },
+
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
+      getTitle() {
+        return 'Debug Settings';
+      }
+    };
+  },
   // getSignInRoute() {
   //   return {
   //     renderScene(navigator) {
