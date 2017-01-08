@@ -9,14 +9,21 @@ class Chaz extends Component {
     const sceneStyle = [];
     sceneStyle.push({ paddingTop: 64 });
 
+    const store = this.context.store.getState();
     const initialStack = [Routes.getDashboardRoute()];
 
+    if(store.recommendations.list.length == 0)
+      initialStack.push(Routes.getHelloRoute());
+    else
+      initialStack.push(Routes.getNewRecommendationRoute());
 
-    initialStack.push(Routes.getNewRecommendationRoute());
-    // initialStack.push(Routes.getDebugRoute());
 
     // if(process.env.NODE_ENV == 'production')
     //   initialStack.push(Routes.getInitialRecInputRoute());
+
+
+
+
 
     return (
       <ExNavigator
@@ -30,5 +37,9 @@ class Chaz extends Component {
   }
 
 }
+
+Chaz.contextTypes = {
+  store: React.PropTypes.object.isRequired // Gives us store without @connect
+};
 
 export default Chaz;

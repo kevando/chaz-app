@@ -10,13 +10,13 @@ const initialState =
   {
     unfinished: {},
     list: [
-      {
-        title: 'chaz',
-        friend: 'Kevin',
-        status: 'using',
-        category: 'other',
-        note: 'because super fresh',
-      },
+      // {
+      //   title: 'chaz',
+      //   friend: 'Kevin',
+      //   status: 'using',
+      //   category: 'other',
+      //   note: 'because super fresh',
+      // },
     ],
 
   };
