@@ -2,6 +2,7 @@ import React from 'react';
 
 import Dashboard from '../routes/Dashboard';
 import InputTitle from '../routes/InputTitle';
+import InputFriend from '../routes/InputFriend';
 // import Profile from '../routes/Profile';
 // import SignIn from '../routes/SignIn';
 // import Recs from '../routes/Recs';
@@ -47,7 +48,7 @@ export const routes = {
   getNewRecommendationRoute() {
     return {
       renderScene(navigator) {
-        return <InputTitle navigator={navigator} initial={true} />;
+        return <InputTitle navigator={navigator} />;
       },
 
       renderLeftButton(navigator) {
@@ -57,6 +58,27 @@ export const routes = {
       configureScene(){
         return ExNavigator.SceneConfigs.FloatFromBottom
       },
+
+    };
+  },
+
+  // -----------------------------------------
+  // ASSIGN FRIEND TO RECOMMENDATION
+  // -----------------------------------------
+
+  getInputFriendRoute() {
+    return {
+      renderScene(navigator) {
+        return <InputFriend navigator={navigator} />;
+      },
+
+      renderLeftButton(navigator) {
+        return <Nav.Button text="Back" onPress={() => navigator.pop() } />
+      },
+
+      // configureScene(){
+      //   return ExNavigator.SceneConfigs.FloatFromBottom
+      // },
 
     };
   },

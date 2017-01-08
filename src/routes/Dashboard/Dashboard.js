@@ -1,36 +1,35 @@
 import React from 'react';
-import { View} from 'react-native';
+import { View, ScrollView } from 'react-native';
 import _ from 'lodash';
-import { Container, Content, List, ListItem, Button, Text, Icon } from 'native-base';
+import { ListItem, Text, Icon } from 'native-base';
+
+import Button from '../../components/Button';
+import styles from './styles';
 
 const Dashboard = (props) => {
 
   const { recommendations, onNewRecPress } = props;
 
-  // Using the dataArray List caused issue when the add rec popped up first
+  // Not sure if using ListItem with scrollview is a good idea, but it wokrs
   return (
-    <Container>
-      <Content>
-        <List>
-        {
-          _.map(recommendations,function({title,recr, note},i) {
-            return(
-              <ListItem iconLeft key={i}>
-              <Icon name="ios-book" style={{ color: '#0A69FE' }} />
-                  <Text>{title}</Text>
-                  <Text>{note}</Text>
-                  <Text style={{color:'#888'}}>{recr}</Text>
-              </ListItem>
-            )
-          })
-        }
-        </List>
-        
-      </Content>
-    </Container>
+    <View style={styles.container}>
+      <ScrollView>
+      {
+        _.map(recommendations,function({title,recr, note},i) {
+          return(
+            <ListItem iconLeft key={i}>
+            <Icon name="ios-book" style={{ color: '#0A69FE' }} />
+                <Text>{title}</Text>
+                <Text>{note}</Text>
+                <Text style={{color:'#888'}}>{recr}</Text>
+            </ListItem>
+          )
+        })
+      }
+      </ScrollView>
+      <Button text="New Recommendation" onPress={onNewRecPress} />
+    </View>
   );
-
-
 }
 
 export default Dashboard;

@@ -13,7 +13,7 @@ class Chaz extends Component {
 
 
     // this is causing a render issue with the dynamic list
-    // initialStack.push(Routes.getNewRecommendationRoute());
+    initialStack.push(Routes.getNewRecommendationRoute());
 
     // if(process.env.NODE_ENV == 'production')
     //   initialStack.push(Routes.getInitialRecInputRoute());

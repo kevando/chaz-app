@@ -6,4 +6,11 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+
+  input: {
+    flex:1,
+    fontSize: 20,
+    padding: 3
+  }
+
 });
