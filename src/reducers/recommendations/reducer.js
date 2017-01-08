@@ -9,17 +9,16 @@ const initialState =
   {
     unfinished: {title:'empty'},
     list: [
-      {title: 'chaz', recr: 'Kevin'},
+      {
+        title: 'chaz',
+        recr: 'Kevin',
+        status: 'using',
+        category: 'other',
+        note: 'because super fresh',
+      },
     ],
 
   };
-
-  // const initialStatee =
-  //   [
-  //       {title: 'chaz', recr: 'Kevin'},
-  //     ]
-
-
 
 export default function recs(recommendations = initialState, action = {}) {
 
