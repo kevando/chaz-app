@@ -1,10 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import DashboardContainer from './DashboardContainer';
-
-
-// import actions
+import DebugContainer from './DebugContainer';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,6 +9,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-// map dispatch to props
-
-export default connect(mapStateToProps, null)(DashboardContainer);
+export default connect(mapStateToProps, null)(DebugContainer);

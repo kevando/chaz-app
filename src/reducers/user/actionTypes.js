@@ -1,0 +1,2 @@
+export const APP_INITIALIZED = 'APP_INITIALIZED'; // tmp
+export const CHANGE_SIGN_IN_STATUS = 'CHANGE_SIGN_IN_STATUS'; // tmp
