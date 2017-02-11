@@ -4,16 +4,17 @@ import * as Animatable from 'react-native-animatable';
 
 import images from '../../config/images';
 
+
 class Heartman extends Component {
 
   render() {
 
-    const { text='Hi I am heartman' } = this.props;
+    const { text='Hi I am heartman', delay=1000 } = this.props;
 
     return (
       <View>
         <Animatable.Text
-          delay={100}
+          delay={delay+200}
           duration={1800}
           animation="bounceInUp"
         >
@@ -21,7 +22,7 @@ class Heartman extends Component {
         </Animatable.Text>
         <Animatable.Image
           source={images.heartman}
-          delay={100}
+          delay={delay}
           duration={1800}
           animation="bounceInLeft"
         />

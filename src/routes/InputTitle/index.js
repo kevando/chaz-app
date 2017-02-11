@@ -6,7 +6,7 @@ import * as Actions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
   return {
-    unfinished: state.recommendations.unfinished, // not used currently
+    onboard: state.onboard.step
   };
 };
 
