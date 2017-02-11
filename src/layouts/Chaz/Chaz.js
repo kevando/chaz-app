@@ -12,10 +12,11 @@ class Chaz extends Component {
     const store = this.context.store.getState();
     const initialStack = [Routes.getDashboardRoute()];
 
-    // if(store.recommendations.list.length == 0)
-    //   initialStack.push(Routes.getHelloRoute());
-    // else
-    //   initialStack.push(Routes.getNewRecommendationRoute());
+    // @bug this does not bring up the AddRec as much as I would like
+    if(store.recommendations.list.length == 0)
+      initialStack.push(Routes.getHelloRoute());
+    else
+      initialStack.push(Routes.getNewRecommendationRoute());
 
 
     // if(process.env.NODE_ENV == 'production')
@@ -23,6 +24,8 @@ class Chaz extends Component {
 
 
 
+    // Testing
+    // initialStack.push(Routes.getInputFriendRoute());
 
 
     return (
