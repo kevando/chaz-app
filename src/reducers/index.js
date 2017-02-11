@@ -2,16 +2,16 @@ import { combineReducers } from 'redux'
 
 import user from './user/reducer';
 import recommendations from './recommendations/reducer';
-// import recrs from './recr/reducer';
-// import onboard from './onboard/reducer';
+import onboard from './onboard/reducer';
+import friends from './friends/reducer';
 // import categories from './categories/reducer';
 // import widgets from './widgets/reducer';
 
 const reducers = {
   user,
   recommendations,
-  // recrs,
-  // onboard,
+  onboard,
+  friends,
   // categories,
   // widgets,
 };

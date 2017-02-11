@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Button from '../../components/Button';
+import _ from 'lodash';
 
+import Button from '../../components/Button';
 import InputFriend from './InputFriend';
 import Routes from '../../config/routes';
 
@@ -8,7 +9,10 @@ class InputFriendContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {friend: ''}
+    this.state = {
+      friend: '',
+      friends: this.props.friends
+    }
   }
 
   renderButton() {
@@ -17,17 +21,32 @@ class InputFriendContainer extends Component {
   }
 
   onNextPress() {
+    const { navigator, setFriend, saveFriend } = this.props;
+    const {friend} = this.state;
+    setFriend(friend); // Redux
+    saveFriend({name: friend}); // Redux
+    navigator.push(Routes.getConfirmRecommendationRoute());
+  }
+
+  onKeyPress(friend) {
+    const { friends } = this.props;
+    const filteredFriends = _.filter(friends, ({name}) => { return name.includes(friend); });
+    this.setState({friends: filteredFriends, friend })
+  }
+
+  onFriendPress(name) {
     const { navigator, setFriend } = this.props;
-    setFriend(this.state.friend); // Redux
-    // @todo also create friend object
+    setFriend(name); // Redux
     navigator.push(Routes.getConfirmRecommendationRoute());
   }
 
   render() {
     return (
       <InputFriend
-        updateState={this.setState.bind(this)}
+        onFriendPress={this.onFriendPress.bind(this)}
         renderButton={this.renderButton.bind(this)}
+        onKeyPress={this.onKeyPress.bind(this)}
+        friends={this.state.friends}
       />
     );
   }

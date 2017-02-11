@@ -6,7 +6,6 @@ import InputFriend from '../routes/InputFriend';
 import ConfirmRecommendation from '../routes/ConfirmRecommendation';
 import Debug from '../routes/Debug';
 import Hello from '../routes/Hello';
-import Start from '../routes/Start';
 // import Rec from '../routes/Rec';
 // import Recr from '../routes/Recr';
 // import Categories from '../routes/Categories';
@@ -125,28 +124,6 @@ export const routes = {
     return {
       renderScene(navigator) {
         return <Hello navigator={navigator} />;
-      },
-      // @todo change this, user can still click button
-      renderTitle(navigator) {
-        return (
-          <Nav.DashboardTitle title="" navigator={navigator} />
-        );
-      },
-      // @todo change this, user can still click button
-      renderLeftButton(navigator) {
-        return <Nav.Button text="" onPress={() => navigator.pop() } />
-      },
-    };
-  },
-
-  // -----------------------------------------
-  //    GET STARTED
-  // -----------------------------------------
-
-  getStartRoute() {
-    return {
-      renderScene(navigator) {
-        return <Start navigator={navigator} />;
       },
       // @todo change this, user can still click button
       renderTitle(navigator) {

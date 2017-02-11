@@ -13,13 +13,13 @@ class InputTitle extends Component {
 
   render() {
 
-    const { updateState, renderButton } = this.props;
+    const { updateState, renderButton, renderHeartman } = this.props;
 
     return (
       <View style={styles.container}>
-        <InputGroup style={{flex:1}}>
+        <InputGroup style={{flex:1,borderWidth:0}}>
           <Input
-            placeholder='How should I spend my time?'
+            placeholder='Type recommendation here'
             ref={ c => this._title = c }
             autoCapitalize="none"
             autoCorrect={false}
@@ -28,6 +28,7 @@ class InputTitle extends Component {
             onChangeText={(title) => updateState({title})}
           />
         </InputGroup>
+        { renderHeartman() }
         { renderButton() }
         <KeyboardSpacer />
       </View>

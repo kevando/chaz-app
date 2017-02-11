@@ -12,15 +12,22 @@ export default styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontSize: 40,
+    fontSize: 90,
     textAlign: 'center',
+    paddingTop:80,
+    paddingBottom: 0,
+    fontWeight: '600',
+    letterSpacing:4
   },
   tagline: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 27,
     textAlign: 'center',
+    fontWeight: '300',
+    lineHeight:37,
+    marginTop:15,
   },
-  button: {
+  button: { // not used but keeping for the dimension code
     marginTop: 100,
     width: BUTTON_WIDTH,
     marginLeft: MARGIN_HORIZONTAL,

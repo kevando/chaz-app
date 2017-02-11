@@ -11,7 +11,7 @@ class HelloContainer extends Component {
 
     return (
       <Hello
-        onStartPress={() => navigator.push(Routes.getStartRoute())}
+        onButtonPress={() => navigator.push(Routes.getNewRecommendationRoute())}
       />
     );
   }
