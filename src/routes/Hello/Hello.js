@@ -19,27 +19,35 @@ const Hello = ({onButtonPress}) => {
       <ScrollView>
 
         <Animatable.Text
-          delay={1100}
+          delay={1000}
           style={styles.title}
-          duration={1100}
+          duration={1000}
           animation="fadeInUp"
         >chaz</Animatable.Text>
 
         <Animatable.Text
           style={styles.tagline}
-          animation='lightSpeedIn'
+          animation='fadeInUp'
           delay={2000}
-          duration={500}
+          duration={1000}
         >
-
           The <Text style={{fontStyle:'italic',fontWeight:'500'}}>fastest</Text> way to save recommendations.
-
         </Animatable.Text>
-        </ScrollView>
+
+        <Animatable.Text
+          style={styles.tagline}
+          animation='fadeInUp'
+          delay={4000}
+          duration={1000}
+        >
+          With reminders to follow up
+        </Animatable.Text>
+
+      </ScrollView>
 
         <Animatable.View animation='fadeInUp'
-        delay={2500}
-        duration={500}>
+        delay={6000}
+        duration={1000}>
         <Button text="Get Started" onPress={onButtonPress} />
 
         </Animatable.View>

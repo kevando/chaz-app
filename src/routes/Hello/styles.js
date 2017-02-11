@@ -25,6 +25,7 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '300',
     lineHeight:37,
+    marginTop:15,
   },
   button: { // not used but keeping for the dimension code
     marginTop: 100,

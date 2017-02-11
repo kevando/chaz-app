@@ -12,10 +12,10 @@ class Chaz extends Component {
     const store = this.context.store.getState();
     const initialStack = [Routes.getDashboardRoute()];
 
-    if(store.recommendations.list.length == 0)
-      initialStack.push(Routes.getHelloRoute());
-    else
-      initialStack.push(Routes.getNewRecommendationRoute());
+    // if(store.recommendations.list.length == 0)
+    //   initialStack.push(Routes.getHelloRoute());
+    // else
+    //   initialStack.push(Routes.getNewRecommendationRoute());
 
 
     // if(process.env.NODE_ENV == 'production')
