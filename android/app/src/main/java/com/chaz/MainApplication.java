@@ -4,6 +4,10 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.chirag.RNMail.RNMail;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.kevinejohn.RNMixpanel.RNMixpanel;
 import com.facebook.react.ReactInstanceManager;
@@ -27,6 +31,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativePermissionsPackage(),
+            new ReactNativePushNotificationPackage(),
+            new RNMail(),
+            new RNDeviceInfo(),
             new VectorIconsPackage(),
             new RNMixpanel()
       );

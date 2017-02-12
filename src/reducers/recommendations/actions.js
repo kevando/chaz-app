@@ -2,6 +2,7 @@ import {
   SET_TITLE,
   SET_FRIEND,
   SAVE_RECOMMENDATION,
+  SET_REMINDER,
 } from './actionTypes';
 
 export function setTitle(title) {
@@ -14,4 +15,8 @@ export function setFriend(friend) {
 
 export function saveRecommendation() {
   return { type: SAVE_RECOMMENDATION }
+}
+
+export function setReminder(recId) {
+  return { type: SET_REMINDER, recId }
 }

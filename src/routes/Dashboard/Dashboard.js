@@ -4,29 +4,27 @@ import _ from 'lodash';
 import { ListItem, Text, Icon } from 'native-base';
 
 import Button from '../../components/Button';
+import Card from '../../components/Card';
+import EnableReminders from '../../components/EnableReminders';
 import styles from './styles';
 
 const Dashboard = (props) => {
 
-  const { recommendations, onNewRecPress } = props;
+  const { recommendations, onNewRecPress, app, setReminder, setNotificationPermission } = props;
 
-  // Not sure if using ListItem with scrollview is a good idea, but it wokrs
   return (
     <View style={styles.container}>
       <ScrollView>
       {
-        _.map(recommendations,function({title, friend, note},i) {
+        _.map(recommendations,function(rec,i) {
           return(
-            <ListItem iconLeft key={i}>
-            <Icon name="ios-book" style={{ color: '#0A69FE' }} />
-                <Text>{title}</Text>
-                <Text>{note}</Text>
-                <Text style={{color:'#888'}}>{friend}</Text>
-            </ListItem>
+            <Card rec={rec} key={i} setReminder={setReminder} />
           )
         })
       }
+
       </ScrollView>
+      <EnableReminders app={app} setNotificationPermission={setNotificationPermission} />
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>
   );

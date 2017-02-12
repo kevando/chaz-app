@@ -1,31 +1,19 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+
 import styles from './styles';
 import { colors } from '../../config/styles';
-
-// @todo alot of this code doesnt really apply anymore if I use a
 
 const Button = (props) => {
 
   // Defaults
-  const { text, onPress, color='white', bgcolor='blue', ghost={false} } = props;
+  const { text, onPress, color='white', bgcolor='blue' } = props;
 
-  const customStyles = ghost === true ?
+  const customStyles =
   {
-    backgroundColor: 'rgba(0,0,0,0)',
-    borderColor: colors.darkGrey,
-    borderWidth:1,
-    color:colors.black,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    fontSize: 12,
-    fontWeight: '300',
-    borderRadius: 5
-  } :
-  {
-    backgroundColor:colors[bgcolor],
+    backgroundColor: colors[bgcolor],
     borderColor: colors[bgcolor],
-    color:colors[color],
+    color: color,
   }
 
   return (

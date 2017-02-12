@@ -41,14 +41,26 @@ export const friend = {
   letterSpacing: 1.1,
   fontWeight: '400'
 }
-//
-// // ------------------------------
-// // Title Defaults
-//
-// export const Title = {
-//   fontSize: 20,
-//   // fontFamily: 'Baskerville', // default for now
-//   color: Colors.black,
-//   letterSpacing: 1.1,
-//   fontWeight: '500'
-// }
+
+// ------------------------------
+// Text
+
+export const text = {
+  fontSize: 20,
+  fontFamily: 'Helvetica', // default for now
+  color: colors.black,
+  letterSpacing: 0.5,
+  fontWeight: '400'
+}
+
+
+// ------------------------------
+// Title Defaults
+
+export const Title = {
+  fontSize: 20,
+  // fontFamily: 'Baskerville', // default for now
+  color: colors.black,
+  letterSpacing: 1.1,
+  fontWeight: '500'
+}

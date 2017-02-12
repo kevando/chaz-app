@@ -126,6 +126,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-permissions')
+    compile project(':react-native-push-notification')
+    compile project(':react-native-mail')
+    compile project(':react-native-device-info')
     compile project(':react-native-vector-icons')
     compile project(':react-native-mixpanel')
     compile fileTree(dir: "libs", include: ["*.jar"])

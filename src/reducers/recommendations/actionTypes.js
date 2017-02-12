@@ -1,3 +1,4 @@
 export const SET_TITLE = 'SET_TITLE';
 export const SET_FRIEND = 'SET_FRIEND';
 export const SAVE_RECOMMENDATION = 'SAVE_RECOMMENDATION';
+export const SET_REMINDER = 'SET_REMINDER';

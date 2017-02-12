@@ -1,14 +1,16 @@
 import _ from 'lodash';
+var uuid = require('react-native-uuid');
 
 import {
   SET_TITLE,
   SET_FRIEND,
   SAVE_RECOMMENDATION,
+  SET_REMINDER,
 } from './actionTypes';
 
 const initialState =
   {
-    unfinished: {},
+    unfinished: {title: 'Rick and Morty', friend: 'Kevin Habich'},
     list: [
       // {
       //   title: 'chaz',
@@ -28,7 +30,7 @@ export default function recs(recommendations = initialState, action = {}) {
     case SET_TITLE:
       return {
       ...recommendations,
-      unfinished: {title: action.title}
+      unfinished: {title: action.title, id: uuid.v1()}
       }
 
     // -------------------------------------------
@@ -43,7 +45,19 @@ export default function recs(recommendations = initialState, action = {}) {
 
     // -------------------------------------------
     case SAVE_RECOMMENDATION:
-      var newList = recommendations.list.concat([recommendations.unfinished]); // Merges both 'arrays'
+      var newList = [recommendations.unfinished].concat(recommendations.list);
+      return {
+        ...recommendations,
+        list: newList,
+      }
+
+    // -------------------------------------------
+    case SET_REMINDER:
+
+      var newList = _.map(recommendations.list, function(rec) {
+        return rec.id === action.recId ? {...rec,reminder: true} : rec;
+      });
+
       return {
         ...recommendations,
         list: newList,
