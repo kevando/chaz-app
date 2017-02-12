@@ -110,8 +110,8 @@ export const routes = {
       configureScene(){
         return ExNavigator.SceneConfigs.FloatFromBottom
       },
-      getTitle() {
-        return 'Debug Settings';
+      renderTitle(navigator) {
+        return <Nav.DashboardTitle title="Debug Settings" navigator={navigator} />
       }
     };
   },

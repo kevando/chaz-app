@@ -25,7 +25,7 @@ class Chaz extends Component {
 
 
     // Testing
-    // initialStack.push(Routes.getInputFriendRoute());
+    // initialStack.push(Routes.getDebugRoute());
 
 
     return (
