@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-var DeviceInfo = require('react-native-device-info');
 var Mailer = require('NativeModules').RNMail;
 
 import Debug from './Debug';
@@ -29,8 +28,6 @@ class DebugContainer extends Component {
       <Debug
         {...this.props}
         onPurgePress={this.purgeData.bind(this)}
-        appVersion={DeviceInfo.getReadableVersion()}
-        deviceName={DeviceInfo.getDeviceName()}
         onFeedbackPress={this.handleHelp.bind(this)}
       />
     );

@@ -5,18 +5,25 @@ import styles from './styles';
 
 class Chaz extends Component {
 
+  componentDidMount() {
+    // If this function grows, consider a initializeApp action
+    const { checkNotificationPermission } = this.props;
+    checkNotificationPermission();
+  }
+
   render() {
     const sceneStyle = [];
     sceneStyle.push({ paddingTop: 64 });
 
     const store = this.context.store.getState();
+    // const initialStack = [Routes.getDebugRoute()];
     const initialStack = [Routes.getDashboardRoute()];
 
     // @bug this does not bring up the AddRec as much as I would like
-    if(store.recommendations.list.length == 0)
-      initialStack.push(Routes.getHelloRoute());
-    else
-      initialStack.push(Routes.getNewRecommendationRoute());
+    // if(store.recommendations.list.length == 0)
+    //   initialStack.push(Routes.getHelloRoute());
+    // else
+    //   initialStack.push(Routes.getNewRecommendationRoute());
 
 
     // if(process.env.NODE_ENV == 'production')

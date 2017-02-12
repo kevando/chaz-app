@@ -7,7 +7,7 @@ import styles from './styles';
 
 const Debug = (props) => {
 
-  const { recommendations, onPurgePress, appVersion, deviceName, onFeedbackPress } = props;
+  const { recommendations, onPurgePress, app, onFeedbackPress, notificationPermission } = props;
 
   return (
     <Container>
@@ -21,13 +21,19 @@ const Debug = (props) => {
           <ListItem iconLeft>
             <Icon name="ios-phone-portrait" />
             <Text>Device</Text>
-            <Text note>{deviceName}</Text>
+            <Text note>{app.deviceName}</Text>
           </ListItem>
 
           <ListItem iconLeft>
             <Icon name="ios-phone-portrait" />
             <Text>Version</Text>
-            <Text note>{appVersion}</Text>
+            <Text note>{app.version}</Text>
+          </ListItem>
+
+          <ListItem iconLeft>
+            <Icon name="ios-phone-portrait" />
+            <Text>Notifications</Text>
+            <Text note>{app.notificationPermission}</Text>
           </ListItem>
 
 

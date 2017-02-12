@@ -5,13 +5,13 @@ import { ListItem, Text, Icon } from 'native-base';
 
 import Button from '../../components/Button';
 import Card from '../../components/Card';
+import EnableReminders from '../../components/EnableReminders';
 import styles from './styles';
 
 const Dashboard = (props) => {
 
-  const { recommendations, onNewRecPress } = props;
+  const { recommendations, onNewRecPress, app, setNotificationPermission } = props;
 
-  // Not sure if using ListItem with scrollview is a good idea, but it wokrs
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -22,7 +22,9 @@ const Dashboard = (props) => {
           )
         })
       }
+
       </ScrollView>
+      <EnableReminders app={app} setNotificationPermission={setNotificationPermission} />
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>
   );

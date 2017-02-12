@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
-
+import SetReminder from '../../components/SetReminder';
 
 const Card = ({ rec, onPress, }) => {
 
@@ -22,6 +22,10 @@ const Card = ({ rec, onPress, }) => {
 
           <View style={styles.friendContainer}>
             <Text style={styles.friend}>Recommended by: <Text style={styles.bold}>{rec.friend}</Text></Text>
+          </View>
+
+          <View style={styles.friendContainer}>
+            <SetReminder />
           </View>
 
         </View>

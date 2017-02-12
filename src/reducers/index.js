@@ -4,7 +4,7 @@ import user from './user/reducer';
 import recommendations from './recommendations/reducer';
 import onboard from './onboard/reducer';
 import friends from './friends/reducer';
-// import categories from './categories/reducer';
+import app from './app/reducer';
 // import widgets from './widgets/reducer';
 
 const reducers = {
@@ -12,7 +12,7 @@ const reducers = {
   recommendations,
   onboard,
   friends,
-  // categories,
+  app,
   // widgets,
 };
 
