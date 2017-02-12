@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { ListItem, Text, Icon } from 'native-base';
 
 import Button from '../../components/Button';
+import Card from '../../components/Card';
 import styles from './styles';
 
 const Dashboard = (props) => {
@@ -15,14 +16,9 @@ const Dashboard = (props) => {
     <View style={styles.container}>
       <ScrollView>
       {
-        _.map(recommendations,function({title, friend, note},i) {
+        _.map(recommendations,function(rec,i) {
           return(
-            <ListItem iconLeft key={i}>
-            <Icon name="ios-book" style={{ color: '#0A69FE' }} />
-                <Text>{title}</Text>
-                <Text>{note}</Text>
-                <Text style={{color:'#888'}}>{friend}</Text>
-            </ListItem>
+            <Card rec={rec} key={i} />
           )
         })
       }

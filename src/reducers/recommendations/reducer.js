@@ -8,7 +8,7 @@ import {
 
 const initialState =
   {
-    unfinished: {},
+    unfinished: {title: 'Rick and Morty', friend: 'Kevin Habich'},
     list: [
       // {
       //   title: 'chaz',
@@ -43,7 +43,7 @@ export default function recs(recommendations = initialState, action = {}) {
 
     // -------------------------------------------
     case SAVE_RECOMMENDATION:
-      var newList = recommendations.list.concat([recommendations.unfinished]); // Merges both 'arrays'
+      var newList = [recommendations.unfinished].concat(recommendations.list);
       return {
         ...recommendations,
         list: newList,
