@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import SetReminder from '../../components/SetReminder';
 
-const Card = ({ rec, onPress, }) => {
+const Card = ({ rec, onPress, setReminder }) => {
 
   return (
 
@@ -25,7 +25,12 @@ const Card = ({ rec, onPress, }) => {
           </View>
 
           <View style={styles.friendContainer}>
-            <SetReminder />
+            {rec.reminder ?
+              null
+              :
+              <SetReminder setReminder={setReminder} rec={rec} />
+            }
+
           </View>
 
         </View>

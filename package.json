@@ -19,6 +19,7 @@
     "react-native-mail": "^3.0.1",
     "react-native-mixpanel": "0.0.12",
     "react-native-permissions": "^0.2.7",
+    "react-native-uuid": "^1.4.9",
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import DashboardContainer from './DashboardContainer';
 
-import * as Actions from '../../reducers/app/actions';
+import * as AppActions from '../../reducers/app/actions';
+import * as RecActions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,4 +15,4 @@ const mapStateToProps = (state) => {
 
 // map dispatch to props
 
-export default connect(mapStateToProps, Actions)(DashboardContainer);
+export default connect(mapStateToProps, {...AppActions, ...RecActions})(DashboardContainer);

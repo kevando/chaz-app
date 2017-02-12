@@ -10,7 +10,7 @@ import styles from './styles';
 
 const Dashboard = (props) => {
 
-  const { recommendations, onNewRecPress, app, setNotificationPermission } = props;
+  const { recommendations, onNewRecPress, app, setReminder, setNotificationPermission } = props;
 
   return (
     <View style={styles.container}>
@@ -18,7 +18,7 @@ const Dashboard = (props) => {
       {
         _.map(recommendations,function(rec,i) {
           return(
-            <Card rec={rec} key={i} />
+            <Card rec={rec} key={i} setReminder={setReminder} />
           )
         })
       }
