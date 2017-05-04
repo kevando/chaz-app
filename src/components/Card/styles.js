@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { colors, text } from '../../config/styles';
 
 const window = Dimensions.get('window');
-const MARGIN_HORIZONTAL = 20;
+const MARGIN_HORIZONTAL = 10;
 const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
 const ICON_WIDTH = CARD_WIDTH / 5;
 const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - 5;
@@ -12,19 +12,13 @@ export default styles = StyleSheet.create({
   container: {
     marginHorizontal: MARGIN_HORIZONTAL,
     marginVertical: 10,
-    borderWidth: 1,
+    // borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: colors.grey,
-    borderRadius: 10,
     flexDirection: 'row',
     width: CARD_WIDTH,
-    paddingVertical: 10
-  },
-
-
-  iconContainer: {
-    justifyContent: 'center',
-    paddingHorizontal:10,
-    width: ICON_WIDTH,
+    paddingVertical: 10,
+    paddingLeft: 10,
   },
 
   textContainer: {
@@ -51,6 +45,7 @@ export default styles = StyleSheet.create({
 
   friend: {
     fontSize: 15,
+    color: '#444',
   },
 
   bold: {

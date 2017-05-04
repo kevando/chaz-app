@@ -10,10 +10,6 @@ const Card = ({ rec, onPress, setReminder }) => {
 
       <View style={styles.container}>
 
-        <View style={styles.iconContainer}>
-          <Text style={styles.icon}>🗣️</Text>
-        </View>
-
         <View style={styles.textContainer}>
 
           <View style={styles.recContainer}>

@@ -1174,7 +1174,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 238ECU3XMU;
+						DevelopmentTeam = E34JX9GA2A;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1745,7 +1745,7 @@
 				CODE_SIGN_ENTITLEMENTS = Chaz/Chaz.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 238ECU3XMU;
+				DEVELOPMENT_TEAM = E34JX9GA2A;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**";
 				INFOPLIST_FILE = Chaz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1754,7 +1754,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.chaz.development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevaid.chaz;
 				PRODUCT_NAME = Chaz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1766,7 +1766,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chaz/Chaz.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 238ECU3XMU;
+				DEVELOPMENT_TEAM = E34JX9GA2A;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**";
 				INFOPLIST_FILE = Chaz/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1775,7 +1775,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.chaz.development;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevaid.chaz;
 				PRODUCT_NAME = Chaz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

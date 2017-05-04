@@ -12,8 +12,6 @@ class Chaz extends Component {
   }
 
   render() {
-    const sceneStyle = [];
-    sceneStyle.push({ paddingTop: 64 });
 
     const store = this.context.store.getState();
     // const initialStack = [Routes.getDebugRoute()];
@@ -29,19 +27,12 @@ class Chaz extends Component {
     // if(process.env.NODE_ENV == 'production')
     //   initialStack.push(Routes.getInitialRecInputRoute());
 
-
-
-    // Testing
-    // initialStack.push(Routes.getDebugRoute());
-
-
     return (
       <ExNavigator
         initialRouteStack={initialStack}
         style={{ flex: 1 }}
         navigationBarStyle={styles.navBar}
-        sceneStyle={sceneStyle}
-        showNavigationBar={true}
+        sceneStyle={{ paddingTop: 64 }}
       />
     );
   }
