@@ -3,6 +3,7 @@ import {
   SET_FRIEND,
   SAVE_RECOMMENDATION,
   SET_REMINDER,
+  DELETE_RECOMMENDATION,
 } from './actionTypes';
 
 export function setTitle(title) {
@@ -19,4 +20,8 @@ export function saveRecommendation() {
 
 export function setReminder(recId,reminderDate) {
   return { type: SET_REMINDER, recId, reminderDate }
+}
+
+export function deleteRecommendation(recId) {
+  return { type: DELETE_RECOMMENDATION, recId }
 }

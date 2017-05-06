@@ -1,13 +1,22 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
+import Swipeout from 'react-native-swipeout';
 
 import styles from './styles';
 import SetReminder from '../../components/SetReminder';
 
-const Card = ({ rec, onPress, setReminder, notificationPermission }) => {
+const Card = ({ rec, onPress, setReminder, deleteRecommendation, notificationPermission }) => {
+
+  var swipeoutBtns = [
+    {
+      text: 'DELETE',
+      backgroundColor: 'red',
+      onPress: () => deleteRecommendation(rec.id),
+    }
+  ]
 
   return (
-
+    <Swipeout right={swipeoutBtns} style={{backgroundColor: '#fff'}}>
       <View style={styles.container}>
 
         <View style={styles.textContainer}>
@@ -32,7 +41,7 @@ const Card = ({ rec, onPress, setReminder, notificationPermission }) => {
         </View>
 
       </View>
-
+    </Swipeout>
   );
 };
 

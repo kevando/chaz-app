@@ -9,33 +9,35 @@ import styles from './styles';
 class SetReminder extends Component {
 
   onSetReminderPress() {
-
-    const { setReminder, rec } = this.props;
+    const { rec } = this.props;
 
     Alert.alert(
       rec.friend,
       'Remind me to follow up in:',
       [
-        {text: 'Tomorrow', onPress: () => setReminder(rec.id,'tomorrow')},
-        {text: 'In a few days', onPress: () => setReminder(rec.id,'few days')},
-        {text: 'In a couple weeks', onPress: () => setReminder(rec.id,'couple weeks')},
-        {text: 'In a month or so', onPress: () => setReminder(rec.id,',month')},
+        {text: 'Tomorrow', onPress: this._setReminder.bind(this,1440)},
+        {text: 'In a few days', onPress: this._setReminder.bind(this,4320)},
+        {text: 'In a couple weeks', onPress: this._setReminder.bind(this,21600)},
+        {text: 'In a month or so', onPress: this._setReminder.bind(this,43200)},
         {text: 'Forget it', onPress: () => console.log('forget it'), style: 'cancel'},
       ]
     );
-    // setReminder actually does not handle the 2nd argument yet
+  }
 
-    // ------
+  _setReminder(reminderDateInMinutes) {
+    const { setReminder, rec } = this.props;
 
-    // @todo probly put this code elsewhere
     PushNotification.localNotificationSchedule({
-      message: "Did you check out "+rec.title, // (required)
-      date: new Date(Date.now() + (5000 * 60 * 1000)), // in ~ 3 days
+      message: "Did you check out "+rec.title+'?',
+      date: new Date(Date.now() + (reminderDateInMinutes * 60 * 1000)),
       title: rec.friend, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
       playSound: true, // (optional) default: true
       soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
     });
 
+    setReminder(rec.id);
+    // setReminder actually does not handle the 2nd argument yet
+    // still just a boolean
   }
 
   render() {

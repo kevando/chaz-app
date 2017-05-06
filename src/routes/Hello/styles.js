@@ -9,23 +9,24 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.purple,
+
   },
   title: {
     color: '#fff',
     fontSize: 90,
-    textAlign: 'center',
     paddingTop:80,
     paddingBottom: 0,
     fontWeight: '600',
-    letterSpacing:4
+    letterSpacing:4,
+    paddingLeft: 20,
   },
   tagline: {
     color: '#fff',
     fontSize: 27,
-    textAlign: 'center',
     fontWeight: '300',
     lineHeight:37,
     marginTop:15,
+    paddingLeft: 20,
   },
   button: { // not used but keeping for the dimension code
     marginTop: 100,

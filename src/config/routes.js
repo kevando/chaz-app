@@ -1,4 +1,5 @@
 import React from 'react';
+import ExNavigator from '@exponent/react-native-navigator';
 
 import Dashboard from '../routes/Dashboard';
 import InputTitle from '../routes/InputTitle';
@@ -6,16 +7,7 @@ import InputFriend from '../routes/InputFriend';
 import ConfirmRecommendation from '../routes/ConfirmRecommendation';
 import Debug from '../routes/Debug';
 import Hello from '../routes/Hello';
-// import Rec from '../routes/Rec';
-// import Recr from '../routes/Recr';
-// import Categories from '../routes/Categories';
-// import RecInput from '../routes/RecInput';
-// import RecrInput from '../routes/RecrInput';
-// import Queue from '../routes/Queue';
-
 import * as Nav from '../components/Nav';
-
-import ExNavigator from '@exponent/react-native-navigator';
 
 export const routes = {
 
@@ -31,7 +23,7 @@ export const routes = {
 
       renderTitle(navigator) {
         return (
-          <Nav.DashboardTitle title="Dashboard" navigator={navigator} />
+          <Nav.DashboardTitle title="Saved Recommendations" navigator={navigator} />
         );
       },
 

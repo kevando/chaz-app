@@ -31,7 +31,7 @@ const Hello = ({onButtonPress}) => {
           delay={2000}
           duration={1000}
         >
-          The <Text style={{fontStyle:'italic',fontWeight:'500'}}>fastest</Text> way to save recommendations.
+          Save recommendations
         </Animatable.Text>
 
         <Animatable.Text
@@ -40,7 +40,7 @@ const Hello = ({onButtonPress}) => {
           delay={4000}
           duration={1000}
         >
-          With reminders to follow up
+          Reminders to follow up
         </Animatable.Text>
 
       </ScrollView>

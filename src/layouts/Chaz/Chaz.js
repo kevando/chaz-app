@@ -17,9 +17,9 @@ class Chaz extends Component {
     // const initialStack = [Routes.getDebugRoute()];
     const initialStack = [Routes.getDashboardRoute()];
 
-    // @bug this does not bring up the AddRec as much as I would like
-    // if(store.recommendations.list.length == 0)
-    //   initialStack.push(Routes.getHelloRoute());
+    // Show welcome screen if there are no recs
+    if(store.recommendations.list.length == 0)
+      initialStack.push(Routes.getHelloRoute());
     // else
     //   initialStack.push(Routes.getNewRecommendationRoute());
 

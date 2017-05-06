@@ -6,6 +6,7 @@ import {
   SET_FRIEND,
   SAVE_RECOMMENDATION,
   SET_REMINDER,
+  DELETE_RECOMMENDATION,
 } from './actionTypes';
 
 const initialState =
@@ -62,7 +63,17 @@ export default function recs(recommendations = initialState, action = {}) {
         ...recommendations,
         list: newList,
       }
+    // -------------------------------------------
+    case DELETE_RECOMMENDATION:
 
+      var newList = _.filter(recommendations.list, function(rec) {
+        return rec.id != action.recId;
+      });
+
+      return {
+        ...recommendations,
+        list: newList,
+      }
     // -------------------------------------------
     default:
       return recommendations;
