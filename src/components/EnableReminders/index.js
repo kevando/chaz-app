@@ -11,8 +11,8 @@ class EnableReminders extends Component {
   _alertForNotificationPermission() {
     const { notificationPermission} = this.props.app;
     Alert.alert(
-      'Can chaz send you reminders?',
-      'I need access so you can get notifications.',
+      'Let chaz remind you?',
+      '',
       [
         {text: 'No way', onPress: () => console.log('permission denied'), style: 'cancel'},
         notificationPermission == 'undetermined'?
@@ -40,7 +40,7 @@ class EnableReminders extends Component {
     if(notificationPermission == 'undetermined' || notificationPermission == 'restricted' || notificationPermission == 'denied') {
       return (
         <View style={styles.container}>
-          <Text style={styles.message}>Set reminders to Follow Up on your recommendations.</Text>
+          <Text style={styles.message}>Follow Up with you friends</Text>
           <Button warning onPress={this._alertForNotificationPermission.bind(this)}>Enable Notifications</Button>
         </View>
       );

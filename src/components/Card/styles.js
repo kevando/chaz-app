@@ -11,18 +11,20 @@ export default styles = StyleSheet.create({
 
   container: {
     marginHorizontal: MARGIN_HORIZONTAL,
-    marginVertical: 10,
-    // borderTopWidth: 1,
+    marginVertical: 0,
+    borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: colors.grey,
     flexDirection: 'row',
     width: CARD_WIDTH,
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingLeft: 10,
+    // backgroundColor: 'purple',
   },
 
   textContainer: {
     width: TEXT_WIDTH,
+    // backgroundColor: 'blue',
   },
 
   recContainer: {
@@ -40,7 +42,7 @@ export default styles = StyleSheet.create({
 
   rec: {
     ...text,
-    fontSize: 25,
+    fontSize: 22,
   },
 
   friend: {

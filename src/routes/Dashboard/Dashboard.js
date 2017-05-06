@@ -18,7 +18,7 @@ const Dashboard = (props) => {
       {
         _.map(recommendations,function(rec,i) {
           return(
-            <Card rec={rec} key={i} setReminder={setReminder} />
+            <Card rec={rec} key={i} setReminder={setReminder} notificationPermission={app.notificationPermission} />
           )
         })
       }

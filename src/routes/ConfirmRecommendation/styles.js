@@ -13,7 +13,9 @@ export default styles = StyleSheet.create({
   },
 
   title: {
-    ...title
+    ...title,
+    textAlign: 'center',
+    paddingVertical: 15,
   },
 
   buttonContainer: {

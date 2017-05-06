@@ -17,6 +17,6 @@ export function saveRecommendation() {
   return { type: SAVE_RECOMMENDATION }
 }
 
-export function setReminder(recId) {
-  return { type: SET_REMINDER, recId }
+export function setReminder(recId,reminderDate) {
+  return { type: SET_REMINDER, recId, reminderDate }
 }
