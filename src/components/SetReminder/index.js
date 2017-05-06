@@ -44,7 +44,7 @@ class SetReminder extends Component {
     if(this.props.notificationPermission == 'authorized') {
       return (
         <TouchableOpacity onPress={this.onSetReminderPress.bind(this)} >
-          <Text style={{fontSize:15,color:'#bbb'}} ><Icon name="ios-alarm"  style={{color: '#ffc125',fontSize:20}} />&nbsp;Set a reminder to follow up</Text>
+          <Text style={{fontSize:15,color:'#bbb'}} >Set a reminder to follow up</Text>
         </TouchableOpacity>
       );
     } else {

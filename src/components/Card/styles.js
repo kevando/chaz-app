@@ -4,7 +4,7 @@ import { colors, text } from '../../config/styles';
 const window = Dimensions.get('window');
 const MARGIN_HORIZONTAL = 10;
 const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
-const ICON_WIDTH = CARD_WIDTH / 5;
+const ICON_WIDTH = CARD_WIDTH / 6;
 const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - 5;
 
 export default styles = StyleSheet.create({
@@ -18,10 +18,16 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     width: CARD_WIDTH,
     paddingVertical: 5,
-    paddingLeft: 10,
+    paddingLeft: 0,
     // backgroundColor: 'purple',
   },
 
+  iconContainer: {
+    width: ICON_WIDTH,
+    // backgroundColor: 'yellow',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   textContainer: {
     width: TEXT_WIDTH,
     // backgroundColor: 'blue',

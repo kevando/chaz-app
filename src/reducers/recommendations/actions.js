@@ -4,6 +4,7 @@ import {
   SAVE_RECOMMENDATION,
   SET_REMINDER,
   DELETE_RECOMMENDATION,
+  SET_STATUS,
 } from './actionTypes';
 
 export function setTitle(title) {
@@ -24,4 +25,8 @@ export function setReminder(recId,reminderDate) {
 
 export function deleteRecommendation(recId) {
   return { type: DELETE_RECOMMENDATION, recId }
+}
+
+export function setStatus(recId,status) {
+  return { type: SET_STATUS, recId, status }
 }

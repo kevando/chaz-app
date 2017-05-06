@@ -1,23 +1,50 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Swipeout from 'react-native-swipeout';
+// var Emoji = require('react-native-emoji'); // boke
 
 import styles from './styles';
 import SetReminder from '../../components/SetReminder';
 
-const Card = ({ rec, onPress, setReminder, deleteRecommendation, notificationPermission }) => {
+const Icon = ({status}) => {
+  var icon = '🗯';
+  if(status == 'unfinished')  icon = '🗣';
+  if(status == 'new')         icon = '🗓';
+  if(status == 'watched')     icon = '🖼';
 
-  var swipeoutBtns = [
-    {
-      text: 'DELETE',
-      backgroundColor: 'red',
-      onPress: () => deleteRecommendation(rec.id),
-    }
-  ]
+  return <Text style={{fontSize: 30}}>{icon}</Text>
+}
+
+
+
+const Card = ({ rec, setStatus, setReminder, deleteRecommendation, notificationPermission }) => {
+
+  const swipeButtons = {
+    right: [
+      {
+        text: 'DELETE',
+        backgroundColor: 'red',
+        onPress: () => deleteRecommendation(rec.id),
+      }
+    ],
+    left: [
+        {
+          text: 'Watched',
+          backgroundColor: 'green',
+          onPress: () => setStatus(rec.id, 'watched'),
+        }
+      ]
+  }
+
+
 
   return (
-    <Swipeout right={swipeoutBtns} style={{backgroundColor: '#fff'}}>
+    <Swipeout left={swipeButtons.left} right={swipeButtons.right} style={{backgroundColor: '#fff'}}>
       <View style={styles.container}>
+
+        <View style={styles.iconContainer}>
+          <Icon status={rec.status} />
+        </View>
 
         <View style={styles.textContainer}>
 
