@@ -5,7 +5,8 @@ const window = Dimensions.get('window');
 const MARGIN_HORIZONTAL = 10;
 const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
 const ICON_WIDTH = CARD_WIDTH / 6;
-const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - 5;
+const DATE_WIDTH = CARD_WIDTH / 8;
+const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - DATE_WIDTH - 5;
 
 export default styles = StyleSheet.create({
 
@@ -39,6 +40,18 @@ export default styles = StyleSheet.create({
 
   friendContainer: {
     // backgroundColor: 'red'
+  },
+
+  dateContainer: {
+    width: DATE_WIDTH,
+    // backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dateText: {
+    fontSize: 10,
+    color: '#aaa',
+
   },
 
   icon: {

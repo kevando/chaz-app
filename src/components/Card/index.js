@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import Swipeout from 'react-native-swipeout';
-// var Emoji = require('react-native-emoji'); // boke
+import moment from 'moment';
 
 import styles from './styles';
 import SetReminder from '../../components/SetReminder';
@@ -15,8 +15,6 @@ const Icon = ({status}) => {
   return <Text style={{fontSize: 30}}>{icon}</Text>
 }
 
-
-
 const Card = ({ rec, setStatus, setReminder, deleteRecommendation, notificationPermission }) => {
 
   const swipeButtons = {
@@ -24,22 +22,24 @@ const Card = ({ rec, setStatus, setReminder, deleteRecommendation, notificationP
       {
         text: 'DELETE',
         backgroundColor: 'red',
-        onPress: () => deleteRecommendation(rec.id),
+        onPress: () => {
+          deleteRecommendation(rec.id)
+        },
       }
     ],
     left: [
-        {
-          text: 'Watched',
-          backgroundColor: 'green',
-          onPress: () => setStatus(rec.id, 'watched'),
-        }
-      ]
+      {
+        text: 'Watched',
+        backgroundColor: 'green',
+        onPress: () => setStatus(rec.id, 'watched'),
+      }
+    ]
   }
 
 
 
   return (
-    <Swipeout left={swipeButtons.left} right={swipeButtons.right} style={{backgroundColor: '#fff'}}>
+    <Swipeout left={swipeButtons.left} right={swipeButtons.right} style={{backgroundColor: '#fff'}} autoClose={true}>
       <View style={styles.container}>
 
         <View style={styles.iconContainer}>
@@ -57,14 +57,15 @@ const Card = ({ rec, setStatus, setReminder, deleteRecommendation, notificationP
           </View>
 
           <View style={styles.friendContainer}>
-            {rec.reminder ?
-              null
-              :
+            {!rec.reminder &&
               <SetReminder setReminder={setReminder} rec={rec} notificationPermission={notificationPermission}/>
             }
-
           </View>
 
+        </View>
+
+        <View style={styles.dateContainer}>
+          <Text style={styles.dateText}>{moment(rec.createdAt).fromNow() }</Text>
         </View>
 
       </View>
