@@ -16,10 +16,7 @@ export default styles = StyleSheet.create({
 
     width: CARD_WIDTH,
     padding: 15,
-    backgroundColor: 'red',
-    position: 'absolute',
-    bottom: 70,
-    // zIndex:0
+
   },
 
   message: {
@@ -28,10 +25,10 @@ export default styles = StyleSheet.create({
     marginBottom: 10
   },
   settingsButtonText: {
-    marginLeft: 100,
+    // marginLeft: 100,
     backgroundColor: colors.offWhite,
     height: 50,
-    width: width-50,
+    // width: width-50,
   }
 
 });

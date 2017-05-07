@@ -19,9 +19,9 @@ const Hello = ({onButtonPress}) => {
       <ScrollView>
 
         <Animatable.Text
-          delay={1000}
+          delay={800}
           style={styles.title}
-          duration={1000}
+          duration={800}
           animation="fadeInUp"
         >chaz</Animatable.Text>
 
@@ -29,24 +29,24 @@ const Hello = ({onButtonPress}) => {
           style={styles.tagline}
           animation='fadeInUp'
           delay={2000}
-          duration={1000}
+          duration={500}
         >
-          Save recommendations
+          Follow Up
         </Animatable.Text>
 
         <Animatable.Text
           style={styles.tagline}
           animation='fadeInUp'
-          delay={4000}
-          duration={1000}
+          delay={2700}
+          duration={500}
         >
-          Reminders to follow up
+          When people tell you about interesting things
         </Animatable.Text>
 
       </ScrollView>
 
         <Animatable.View animation='fadeInUp'
-        delay={6000}
+        delay={4000}
         duration={1000}>
         <Button text="Get Started" onPress={onButtonPress} />
 

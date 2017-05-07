@@ -2,9 +2,9 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { colors, text } from '../../config/styles';
 
 const window = Dimensions.get('window');
-const MARGIN_HORIZONTAL = 10;
+const MARGIN_HORIZONTAL = 0;
 const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
-const ICON_WIDTH = CARD_WIDTH / 6;
+const ICON_WIDTH = CARD_WIDTH / 9;
 const DATE_WIDTH = CARD_WIDTH / 8;
 const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - DATE_WIDTH - 5;
 
@@ -18,10 +18,12 @@ export default styles = StyleSheet.create({
     borderColor: colors.lightGrey,
     flexDirection: 'row',
     width: CARD_WIDTH,
-    paddingVertical: 5,
+    paddingVertical: 10,
     paddingLeft: 0,
-    // backgroundColor: 'purple',
-    // zIndex: 11
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    // zIndex: 999
   },
 
   iconContainer: {
@@ -60,18 +62,27 @@ export default styles = StyleSheet.create({
     textAlign: 'right',
   },
 
-  rec: {
+  recText: {
     ...text,
-    fontSize: 22,
+    fontSize: 16,
+    fontWeight: '400',
+    color: colors.black,
+    // backgroundColor: 'red',
+    lineHeight: 16,
   },
 
-  friend: {
-    fontSize: 15,
-    color: '#444',
+  friendText: {
+    fontSize: 11,
+    color: colors.grey,
+    lineHeight: 13,
+    fontWeight: '100'
+    // backgroundColor:'blue',
+
   },
 
   bold: {
-    fontWeight: '700',
+    fontWeight: '500',
+    // color: colors.darkGrey
   },
 
 

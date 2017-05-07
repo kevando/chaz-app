@@ -7,9 +7,10 @@ export default styles = StyleSheet.create({
   // Options Container
 
   optionsContainer: {
-    borderWidth: 1,
+    borderWidth: 0,
     borderColor: colors.white,
     flexDirection: 'row',
+    marginTop: 5,
   },
 
   // ------------------------------
@@ -21,10 +22,12 @@ export default styles = StyleSheet.create({
     fontSize: 18,
     letterSpacing: 0.5,
     fontWeight: '400',
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    paddingVertical: 2,
+    letterSpacing: -0.5,
     borderWidth: 1,
-    borderColor: colors.white
+    borderColor: colors.white,
+    width: 90,
+    textAlign: 'center',
   },
 
   // ------------------------------

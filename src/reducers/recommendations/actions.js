@@ -6,6 +6,7 @@ import {
   DELETE_RECOMMENDATION,
   SET_STATUS,
   SET_FILTER,
+  SET_GRADE,
 } from './actionTypes';
 
 export function setTitle(title) {
@@ -34,4 +35,8 @@ export function setStatus(recId,status) {
 
 export function setFilter(filter) {
   return { type: SET_FILTER, filter }
+}
+
+export function setGrade(recId,grade) {
+  return { type: SET_GRADE, recId, grade }
 }

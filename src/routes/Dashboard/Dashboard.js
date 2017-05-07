@@ -9,7 +9,7 @@ import styles from './styles';
 
 const Dashboard = (props) => {
 
-  const { activeFilter, recommendations, setStatus, onNewRecPress, app, setReminder, deleteRecommendation, setNotificationPermission } = props;
+  const { activeFilter, recommendations, onNewRecPress, app, setNotificationPermission } = props;
 
 
   var filteredRecs;
@@ -19,7 +19,7 @@ const Dashboard = (props) => {
   } else if(activeFilter == 'queue') {
     filteredRecs = _.filter(recommendations,(rec) => { return rec.status == 'new'})
   } else if (activeFilter == 'finished') {
-    filteredRecs = _.filter(recommendations,(rec) => { return rec.status == 'watched'})
+    filteredRecs = _.filter(recommendations,(rec) => { return rec.status == 'finished'})
   }
 
   return (
@@ -29,14 +29,14 @@ const Dashboard = (props) => {
       {
         _.map(filteredRecs,function(rec,i) {
           return(
-            <Card rec={rec} key={i} setReminder={setReminder} deleteRecommendation={deleteRecommendation} notificationPermission={app.notificationPermission} setStatus={setStatus}/>
+            <Card rec={rec} key={i} {...props} notificationPermission={app.notificationPermission}  />
           )
         })
       }
 
-
+        <AppSettings {...props} />
       </ScrollView>
-      <AppSettings {...props} />
+
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>
   );

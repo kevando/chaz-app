@@ -9,6 +9,7 @@ import {
   DELETE_RECOMMENDATION,
   SET_STATUS,
   SET_FILTER,
+  SET_GRADE,
 } from './actionTypes';
 
 const initialState =
@@ -96,6 +97,18 @@ export default function recs(recommendations = initialState, action = {}) {
       return {
         ...recommendations,
         filter: action.filter,
+      }
+
+    // -------------------------------------------
+    case SET_GRADE:
+
+      var newList = _.map(recommendations.list, function(rec) {
+        return rec.id === action.recId ? {...rec,grade: action.grade} : rec;
+      });
+
+      return {
+        ...recommendations,
+        list: newList,
       }
 
     // -------------------------------------------

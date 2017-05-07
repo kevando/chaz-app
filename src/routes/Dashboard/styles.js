@@ -11,6 +11,7 @@ export default styles = StyleSheet.create({
   scrollView: {
     // backgroundColor: 'blue',
     // marginBottom: 200,
-    // zIndex: 1
+    // paddingBottom: 200,
+    // zIndex: 0
   }
 });

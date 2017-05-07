@@ -19,10 +19,12 @@ export const colors = {
 
   black:        "#1E1E1E",
   darkGrey:     "#5E5E5E",
-  grey:         "#C2C2C2",
-  lightGrey:    "#F0F0F0",
+  grey:         "#B3B3B3",
+  lightGrey:    "#F2F2F2",
   offWhite:    "#E8E8E8",
   white:        "#FFF",
+
+  darkPurple:   "#6E4BAD",
 };
 
 export const hearts = {
