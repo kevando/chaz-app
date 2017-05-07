@@ -1,30 +1,42 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import _ from 'lodash';
-import { ListItem, Text, Icon } from 'native-base';
 
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import EnableReminders from '../../components/EnableReminders';
+import AppSettings from '../../components/AppSettings';
 import styles from './styles';
 
 const Dashboard = (props) => {
 
-  const { recommendations, setStatus, onNewRecPress, app, setReminder, deleteRecommendation, setNotificationPermission } = props;
+  const { activeFilter, recommendations, setStatus, onNewRecPress, app, setReminder, deleteRecommendation, setNotificationPermission } = props;
+
+
+  var filteredRecs;
+
+  if(activeFilter == 'all'){
+    filteredRecs = recommendations;
+  } else if(activeFilter == 'queue') {
+    filteredRecs = _.filter(recommendations,(rec) => { return rec.status == 'new'})
+  } else if (activeFilter == 'finished') {
+    filteredRecs = _.filter(recommendations,(rec) => { return rec.status == 'watched'})
+  }
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+
+      <ScrollView style={styles.scrollView}>
       {
-        _.map(recommendations,function(rec,i) {
+        _.map(filteredRecs,function(rec,i) {
           return(
             <Card rec={rec} key={i} setReminder={setReminder} deleteRecommendation={deleteRecommendation} notificationPermission={app.notificationPermission} setStatus={setStatus}/>
           )
         })
       }
 
+
       </ScrollView>
-      <EnableReminders app={app} setNotificationPermission={setNotificationPermission} />
+      <AppSettings {...props} />
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>
   );

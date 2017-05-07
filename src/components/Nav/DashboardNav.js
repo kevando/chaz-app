@@ -1,0 +1,66 @@
+import React, { Component } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+
+import styles from './styles';
+import Routes from '../../config/routes';
+import { colors } from '../../config/styles';
+
+class DashboardNav extends Component {
+
+  state = { selected: 'all' }
+
+  _onOptionPress(option) {
+    this.props.setFilter(option)
+    this.setState({selected:option})
+  }
+
+  _getOptionStyle(option) {
+
+    if(option == this.state.selected)
+      return {backgroundColor: '#fff', color: colors.purple}
+  }
+
+  render() {
+    const { title, navigator } = this.props;
+    const { selected } = this.state;
+    return (
+      <View style={styles.optionsContainer}>
+
+      <TouchableOpacity onPress={ this._onOptionPress.bind(this,'all') } activeOpacity={0.9}>
+          <Text style={[styles.optionText,this._getOptionStyle('all')]}>All</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={ this._onOptionPress.bind(this,'queue') } activeOpacity={0.9}>
+        <Text style={[styles.optionText,this._getOptionStyle('queue')]}>Queue</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={ this._onOptionPress.bind(this,'finished') } activeOpacity={0.9}>
+        <Text style={[styles.optionText,this._getOptionStyle('finished')]}>Finished</Text>
+      </TouchableOpacity>
+
+
+      </View>
+    );
+  }
+
+};
+
+// export default DashboardNav;
+
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as AppActions from '../../reducers/app/actions';
+import * as RecActions from '../../reducers/recommendations/actions';
+
+const mapStateToProps = (state) => {
+  return {
+    recommendations: state.recommendations.list,
+    app: state.app,
+  };
+};
+
+// map dispatch to props
+
+export default connect(mapStateToProps, {...AppActions, ...RecActions})(DashboardNav);

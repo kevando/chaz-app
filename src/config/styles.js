@@ -1,13 +1,14 @@
+import { StyleSheet, Dimensions } from 'react-native';
+const window = Dimensions.get('window');
+
+// ------------------------------
+// Constants
+
+export const width = window.width;
+export const height = window.height;
+
+
 export const colors = {
-  // boilerplate colors
-  // background: '#F4F4F4',
-  // border: '#F4F4F4',
-  // errorText: '#F4F4F4',
-  // headerText: '#F4F4F4',
-  // buttonBackground: '#F4F4F4',
-  // buttonText: '#F4F4F4',
-  // inputBackground: '#F4F4F4',
-  // inputDivider: '#F4F4F4',
 
   // chaz colors
   purple:       "#8a69c6",
@@ -19,8 +20,9 @@ export const colors = {
   black:        "#1E1E1E",
   darkGrey:     "#5E5E5E",
   grey:         "#C2C2C2",
-  lightGrey:    "#E8E8E8",
-  white:        "#F4F4F4",
+  lightGrey:    "#F0F0F0",
+  offWhite:    "#E8E8E8",
+  white:        "#FFF",
 };
 
 export const hearts = {

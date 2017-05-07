@@ -23,7 +23,7 @@ export const routes = {
 
       renderTitle(navigator) {
         return (
-          <Nav.DashboardTitle title="Saved Recommendations" navigator={navigator} />
+          <Nav.DashboardNav navigator={navigator} />
         );
       },
 
@@ -102,8 +102,8 @@ export const routes = {
       configureScene(){
         return ExNavigator.SceneConfigs.FloatFromBottom
       },
-      renderTitle(navigator) {
-        return <Nav.DashboardTitle title="Debug Settings" navigator={navigator} />
+      getTitle() {
+        return "Settings"
       }
     };
   },
@@ -117,12 +117,7 @@ export const routes = {
       renderScene(navigator) {
         return <Hello navigator={navigator} />;
       },
-      // @todo change this, user can still click button
-      renderTitle(navigator) {
-        return (
-          <Nav.DashboardTitle title="" navigator={navigator} />
-        );
-      },
+
       // @todo change this, user can still click button
       renderLeftButton(navigator) {
         return <Nav.Button text="" onPress={() => navigator.pop() } />

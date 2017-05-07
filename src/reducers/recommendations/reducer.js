@@ -8,12 +8,14 @@ import {
   SET_REMINDER,
   DELETE_RECOMMENDATION,
   SET_STATUS,
+  SET_FILTER,
 } from './actionTypes';
 
 const initialState =
   {
     unfinished: { },
     list: [ ],
+    filter: 'all'
   };
 
 export default function recs(recommendations = initialState, action = {}) {
@@ -86,6 +88,14 @@ export default function recs(recommendations = initialState, action = {}) {
       return {
         ...recommendations,
         list: newList,
+      }
+
+    // -------------------------------------------
+    case SET_FILTER:
+
+      return {
+        ...recommendations,
+        filter: action.filter,
       }
 
     // -------------------------------------------

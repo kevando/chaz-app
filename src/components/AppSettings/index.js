@@ -46,9 +46,9 @@ class EnableReminders extends Component {
       );
     } else {
       return (
-
-          <Button onPress={() => this.props.navigator.push(Routes.getDebugRoute())}>Settings</Button>
-
+        <TouchableOpacity onPress={() => this.props.navigator.push(Routes.getDebugRoute())}>
+          <Text style={styles.settingsButtonText}>Settings</Text>
+        </TouchableOpacity>
       );
     }
 

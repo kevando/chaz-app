@@ -5,6 +5,7 @@ import {
   SET_REMINDER,
   DELETE_RECOMMENDATION,
   SET_STATUS,
+  SET_FILTER,
 } from './actionTypes';
 
 export function setTitle(title) {
@@ -29,4 +30,8 @@ export function deleteRecommendation(recId) {
 
 export function setStatus(recId,status) {
   return { type: SET_STATUS, recId, status }
+}
+
+export function setFilter(filter) {
+  return { type: SET_FILTER, filter }
 }

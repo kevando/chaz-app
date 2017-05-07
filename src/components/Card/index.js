@@ -10,7 +10,7 @@ const Icon = ({status}) => {
   var icon = '🗯';
   if(status == 'unfinished')  icon = '🗣';
   if(status == 'new')         icon = '🗓';
-  if(status == 'watched')     icon = '🖼';
+  if(status == 'finished')     icon = '🖼';
 
   return <Text style={{fontSize: 30}}>{icon}</Text>
 }
@@ -29,9 +29,18 @@ const Card = ({ rec, setStatus, setReminder, deleteRecommendation, notificationP
     ],
     left: [
       {
-        text: 'Watched',
-        backgroundColor: 'green',
-        onPress: () => setStatus(rec.id, 'watched'),
+        text: ' 👍 ',
+        backgroundColor: 'blue',
+        onPress: () => {
+          setStatus(rec.id, 'finished')
+        },
+      },
+      {
+        text: ' 👎 ',
+        backgroundColor: 'red',
+        onPress: () => {
+          setStatus(rec.id, 'finished')
+        },
       }
     ]
   }

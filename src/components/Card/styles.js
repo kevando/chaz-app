@@ -13,14 +13,15 @@ export default styles = StyleSheet.create({
   container: {
     marginHorizontal: MARGIN_HORIZONTAL,
     marginVertical: 0,
-    borderTopWidth: 1,
+    // borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: colors.grey,
+    borderColor: colors.lightGrey,
     flexDirection: 'row',
     width: CARD_WIDTH,
     paddingVertical: 5,
     paddingLeft: 0,
     // backgroundColor: 'purple',
+    // zIndex: 11
   },
 
   iconContainer: {
