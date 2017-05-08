@@ -19,28 +19,28 @@ const Hello = ({onButtonPress}) => {
       <ScrollView>
 
         <Animatable.Text
-          delay={800}
+          delay={1000}
           style={styles.title}
-          duration={800}
+          duration={500}
           animation="fadeInUp"
         >chaz</Animatable.Text>
 
         <Animatable.Text
           style={styles.tagline}
           animation='fadeInUp'
-          delay={2000}
-          duration={500}
+          delay={1100}
+          duration={800}
         >
-          Follow Up
+          Write it down & Follow Up
         </Animatable.Text>
 
         <Animatable.Text
           style={styles.tagline}
           animation='fadeInUp'
-          delay={2700}
-          duration={500}
+          delay={1200}
+          duration={800}
         >
-          When people tell you about interesting things
+          chaz helps you organize the interesting content that people recommend to you
         </Animatable.Text>
 
       </ScrollView>
