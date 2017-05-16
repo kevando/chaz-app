@@ -27,6 +27,10 @@ export const routes = {
         );
       },
 
+      renderLeftButton(navigator) {
+        return <Nav.SettingsButton navigator={navigator} />
+      },
+
     };
   },
 

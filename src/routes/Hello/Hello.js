@@ -28,19 +28,10 @@ const Hello = ({onButtonPress}) => {
         <Animatable.Text
           style={styles.tagline}
           animation='fadeInUp'
-          delay={1100}
-          duration={800}
-        >
-          Write it down & Follow Up
-        </Animatable.Text>
-
-        <Animatable.Text
-          style={styles.tagline}
-          animation='fadeInUp'
           delay={1200}
           duration={800}
         >
-          chaz helps you organize the interesting content that people recommend to you
+          The app for saving recommendations from your friends
         </Animatable.Text>
 
       </ScrollView>

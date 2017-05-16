@@ -35,7 +35,7 @@ class DashboardNav extends Component {
       </TouchableOpacity>
 
       <TouchableOpacity onPress={ this._onOptionPress.bind(this,'finished') } activeOpacity={0.9}>
-        <Text style={[styles.optionText,this._getOptionStyle('finished')]}>Finished</Text>
+        <Text style={[styles.optionText,this._getOptionStyle('finished')]}>Done</Text>
       </TouchableOpacity>
 
 

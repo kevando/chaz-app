@@ -19,14 +19,13 @@ export default styles = StyleSheet.create({
   optionText: {
     color: '#fff',
     backgroundColor: colors.purple,
-    fontSize: 18,
-    letterSpacing: 0.5,
+    fontSize: 15,
     fontWeight: '400',
     paddingVertical: 2,
-    letterSpacing: -0.5,
+    letterSpacing: -0,
     borderWidth: 1,
     borderColor: colors.white,
-    width: 90,
+    width: 65,
     textAlign: 'center',
   },
 
@@ -46,8 +45,18 @@ export default styles = StyleSheet.create({
 
   button: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '400',
     padding: 11
+  },
+  settingsButton: {
+    color: '#fff',
+    fontSize: 18,
+    // fontWeight: '400',
+    padding: 11,
+    // backgroundColor: 'yellow',
+    opacity: 0.8,
+    // marginLeft: 5,
+    marginTop: -5,
   },
 });
