@@ -40,7 +40,7 @@ class EnableReminders extends Component {
     if(notificationPermission == 'undetermined' || notificationPermission == 'restricted' || notificationPermission == 'denied') {
       return (
         <View style={styles.container}>
-          <Text style={styles.message}>Follow Up with you friends</Text>
+          <Text style={styles.message}>Follow Up on your recommendations</Text>
           <Button warning onPress={this._alertForNotificationPermission.bind(this)}>Enable Notifications</Button>
         </View>
       );

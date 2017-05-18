@@ -12,7 +12,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
-#import "Mixpanel.h"
+#import "Mixpanel/Mixpanel.h"
 
 @implementation AppDelegate
 
@@ -36,7 +36,8 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-
+  // Added may 16 2017
+  [Mixpanel sharedInstanceWithToken:@"976ab99070f5bcf9c9255e282330f0fe"];
 
   return YES;
 }

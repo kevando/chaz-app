@@ -7,7 +7,7 @@ const SettingsButton = ({navigator}) => {
 
   return (
     <TouchableOpacity onPress={() => navigator.push(Routes.getDebugRoute())} >
-      <Text style={styles.settingsButton}>⚙</Text>
+      <Text style={styles.settingsButton}> </Text>
     </TouchableOpacity>
   );
 };

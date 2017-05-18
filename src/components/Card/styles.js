@@ -64,7 +64,7 @@ export default styles = StyleSheet.create({
 
   recText: {
     ...text,
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '400',
     color: colors.black,
     // backgroundColor: 'red',
@@ -72,9 +72,9 @@ export default styles = StyleSheet.create({
   },
 
   friendText: {
-    fontSize: 11,
-    color: colors.grey,
-    lineHeight: 13,
+    fontSize: 12,
+    color: colors.darkGrey,
+    lineHeight: 17,
     fontWeight: '100'
     // backgroundColor:'blue',
 

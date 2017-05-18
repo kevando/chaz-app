@@ -31,7 +31,17 @@ const Hello = ({onButtonPress}) => {
           delay={1200}
           duration={800}
         >
-          The app for saving recommendations from your friends
+          When you get recommended things like movies, podcasts, and restaurants
+          save them in chaz.
+        </Animatable.Text>
+
+        <Animatable.Text
+          style={styles.tagline}
+          animation='fadeInUp'
+          delay={1200}
+          duration={800}
+        >
+          You can also set reminders to follow up.
         </Animatable.Text>
 
       </ScrollView>
@@ -39,7 +49,7 @@ const Hello = ({onButtonPress}) => {
         <Animatable.View animation='fadeInUp'
         delay={4000}
         duration={1000}>
-        <Button text="Get Started" onPress={onButtonPress} />
+        <Button text="Add 1st Recommendation" onPress={onButtonPress} />
 
         </Animatable.View>
     </View>

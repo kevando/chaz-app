@@ -1,5 +1,9 @@
 import _ from 'lodash';
 var uuid = require('react-native-uuid');
+import Mixpanel from 'react-native-mixpanel';
+
+// required twice?
+Mixpanel.sharedInstanceWithToken('976ab99070f5bcf9c9255e282330f0fe');
 
 import {
   SET_TITLE,
@@ -47,6 +51,9 @@ export default function recs(recommendations = initialState, action = {}) {
 
     // -------------------------------------------
     case SAVE_RECOMMENDATION:
+
+      // Make this middleware
+      Mixpanel.trackWithProperties("Rec Saved", recommendations.unfinished);
 
       var newRec = {...recommendations.unfinished, status: 'new'}
       var newList = [newRec].concat(recommendations.list);

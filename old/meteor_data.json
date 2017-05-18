@@ -1,0 +1,2633 @@
+/* 1 */
+{
+    "_id" : "BJWG7kbFFQfBviGPG",
+    "title" : "hate/ la haine with vincent cassel",
+    "note" : "french hood movie in BW with great discoraphy",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1474687495378.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "HhyFRtLoSaAheBBhy",
+        "name" : "Paul from lux",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476662947499.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "HhyFRtLoSaAheBBhy"
+}
+
+/* 2 */
+{
+    "_id" : "bwvLdTj9BmBWY5obM",
+    "title" : "Mr Nobody",
+    "note" : "talkin sci fi with aiden",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1473464837293.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "4aorC2GhSukQqXsGo",
+        "name" : "Aidan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663048588.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "4aorC2GhSukQqXsGo"
+}
+
+/* 3 */
+{
+    "_id" : "mFE3WKv4yThw4Knm5",
+    "title" : "Everything is a rich mans trick",
+    "note" : "talkin conspiracies, this is a doc",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1437164882000.0,
+    "_version" : 2,
+    "recr" : {
+        "_id" : "YkouEJq5ix4YYtv9P",
+        "name" : "Patrick",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476662961699.0,
+        "score" : {
+            "overall" : 100,
+            "movie" : 100
+        }
+    },
+    "recr_id" : "YkouEJq5ix4YYtv9P",
+    "grade" : 5
+}
+
+/* 4 */
+{
+    "_id" : "GYBwfDAu8pvACgeHh",
+    "title" : "the player of games",
+    "note" : "elon and zucks fav sci fi",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1435782482000.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "bSWJMNjbQG7RzWsvJ",
+        "name" : "Zuckerberg",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478379133604.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "bSWJMNjbQG7RzWsvJ"
+}
+
+/* 5 */
+{
+    "_id" : "Ye6mqGmhzXgbZR4xa",
+    "title" : "Ready player one",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1476062115294.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "LXqJ5zPx6GtLKgKZG",
+        "name" : "Austen",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663019837.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "LXqJ5zPx6GtLKgKZG"
+}
+
+/* 6 */
+{
+    "_id" : "7jsBCu6r8bRqLQNTZ",
+    "title" : "mr robot",
+    "note" : "",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1476549618965.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "jx2CoBS3aHs3pKre7",
+        "name" : "Blake",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663029226.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "jx2CoBS3aHs3pKre7"
+}
+
+/* 7 */
+{
+    "_id" : "Q24hp9mBfi8NQLygj",
+    "title" : "Firefly",
+    "note" : "",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1476663321555.0,
+    "recr_id" : "yLYPKsm9CDH4s2Q78",
+    "recr" : {
+        "_id" : "yLYPKsm9CDH4s2Q78",
+        "name" : "Erwan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663327855.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 8 */
+{
+    "_id" : "mWxbu3MxsLYvydTwA",
+    "title" : "chaz",
+    "note" : "what happened to my last one?",
+    "category" : "uncategorized",
+    "uid" : "rDH6SnNztXb85uxjc",
+    "createdAt" : 1476755046119.0,
+    "recr" : null
+}
+
+/* 9 */
+{
+    "_id" : "TFSj7ig9RXW4Gi8uk",
+    "title" : "caroline cambpell",
+    "note" : "played at wedding ",
+    "category" : "music",
+    "uid" : "rDH6SnNztXb85uxjc",
+    "createdAt" : 1478317239912.0,
+    "recr" : null
+}
+
+/* 10 */
+{
+    "_id" : "TC8g2GDpahHZ6EMoc",
+    "title" : "chaz",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "rDH6SnNztXb85uxjc",
+    "createdAt" : 1478813948521.0,
+    "recr" : null
+}
+
+/* 11 */
+{
+    "_id" : "72i9arpWmkFLEw8wq",
+    "title" : "restaurant",
+    "note" : "",
+    "category" : "food",
+    "uid" : "H2bmA32oT7yPwXbx5",
+    "createdAt" : 1479786535032.0,
+    "_version" : 25,
+    "recr" : null
+}
+
+/* 12 */
+{
+    "_id" : "dN2Kc2x2HQagncmxT",
+    "title" : "show",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "H2bmA32oT7yPwXbx5",
+    "createdAt" : 1479786599732.0,
+    "recr" : null
+}
+
+/* 13 */
+{
+    "_id" : "kESrmRs6fDcSy69MF",
+    "title" : "a feature to save a recommendation in chaz, package it and gift it to my friend.",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "rDH6SnNztXb85uxjc",
+    "createdAt" : 1480187727268.0,
+    "recr" : null
+}
+
+/* 14 */
+{
+    "_id" : "2Kk7ydHPNWs5ApJRM",
+    "title" : "jj abrams ted talk",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "WM8x9CzpjEgaFeYCK",
+    "createdAt" : 1480382184680.0,
+    "recr" : null
+}
+
+/* 15 */
+{
+    "_id" : "Q5Kq3Zr9fFWQtggJ2",
+    "title" : "https://www.nowgamer.com/the-making-of-goldeneye/",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "WM8x9CzpjEgaFeYCK",
+    "createdAt" : 1480384325226.0,
+    "recr" : null
+}
+
+/* 16 */
+{
+    "_id" : "F7fv6LZa2wX4DnZvz",
+    "title" : "restaurant",
+    "note" : "",
+    "category" : "food",
+    "uid" : "H2bmA32oT7yPwXbx5",
+    "createdAt" : 1480610997098.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 17 */
+{
+    "_id" : "wudmKJ3p7BKy7JcpX",
+    "title" : "capturing the freedmans jewish fam new jersery",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "WM8x9CzpjEgaFeYCK",
+    "createdAt" : 1480960432665.0
+}
+
+/* 18 */
+{
+    "_id" : "gFhvaJ4WWG4DSWZ9L",
+    "title" : "restaurant ",
+    "note" : "",
+    "category" : "food",
+    "uid" : "H2bmA32oT7yPwXbx5",
+    "createdAt" : 1481041194388.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 19 */
+{
+    "_id" : "rmtHpiwdKbu7RXuBs",
+    "title" : "Bernies lunch & supper",
+    "note" : "",
+    "category" : "food",
+    "uid" : "H2bmA32oT7yPwXbx5",
+    "createdAt" : 1481041342893.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 20 */
+{
+    "_id" : "YhNBSqm8LxEP2YvfG",
+    "title" : "some Title"
+}
+
+/* 21 */
+{
+    "_id" : "YB2FMN8xTXTuY9ydq",
+    "title" : "todos santos - casa mingo",
+    "note" : "",
+    "category" : "place",
+    "uid" : "rDH6SnNztXb85uxjc",
+    "createdAt" : 1482637826385.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 22 */
+{
+    "_id" : "d2EFumAK9w3Ly2R85",
+    "title" : "fish town, northern liberties  and passyunk ave. jonny brendos in fish town and el bar.",
+    "note" : "",
+    "category" : "place",
+    "uid" : "rDH6SnNztXb85uxjc",
+    "createdAt" : 1482638526352.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 23 */
+{
+    "_id" : "FCYns7wGFbfTngta9",
+    "title" : "jd vance ted talk",
+    "note" : "talks about empathy",
+    "category" : "uncategorized",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483223436275.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 24 */
+{
+    "_id" : "bD2yQxAi3rLCBy49Y",
+    "title" : "test",
+    "note" : "",
+    "category" : "place",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1483312764320.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 25 */
+{
+    "_id" : "zMKrqwrfdAc3tu4Bg",
+    "title" : "viceland",
+    "note" : "cool skat",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1476551397052.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "By43qr4HDjwErHN8R",
+        "name" : "Zak",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663057355.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "By43qr4HDjwErHN8R"
+}
+
+/* 26 */
+{
+    "_id" : "CX2bdRRfXTHYBkoJe",
+    "title" : "Blade Runner",
+    "note" : "pay attention to the last 5 minutes",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1430612037000.0,
+    "recr_id" : "stvNW2RFJhnvcf7gP",
+    "recr" : {
+        "_id" : "stvNW2RFJhnvcf7gP",
+        "name" : "Vince",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663199185.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 27 */
+{
+    "_id" : "XbwHLupoaNtsp3FYp",
+    "title" : "instamax mini 8 fujifilm",
+    "note" : "film is expensive",
+    "category" : "uncategorized",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1473547351457.0,
+    "recr" : {
+        "_id" : "BxYKE9egYaGzqBd7d",
+        "name" : "Christina Augustyn",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1476721141774.0,
+        "score" : {
+            "overall" : 100,
+            "uncategorized" : 100
+        }
+    },
+    "_version" : 4,
+    "recr_id" : "BxYKE9egYaGzqBd7d",
+    "grade" : 5
+}
+
+/* 28 */
+{
+    "_id" : "Q3M8AwNcevn2rXqkc",
+    "title" : "lord of the rings",
+    "note" : "",
+    "category" : "book",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1473547526795.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "BxYKE9egYaGzqBd7d",
+        "name" : "Christina Augustyn",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1476721141774.0,
+        "score" : {
+            "overall" : 100,
+            "uncategorized" : 100
+        }
+    },
+    "recr_id" : "BxYKE9egYaGzqBd7d",
+    "grade" : 5
+}
+
+/* 29 */
+{
+    "_id" : "dtPPfBhhJjsx4ShL3",
+    "title" : "embedded",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1467026142634.0,
+    "recr_id" : "NEenSTeyvNLjMbp99",
+    "recr" : {
+        "_id" : "NEenSTeyvNLjMbp99",
+        "name" : "Sota",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476812811193.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 30 */
+{
+    "_id" : "yoZTwbFeXmX5HQGKe",
+    "title" : "sword and scale",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1467026142634.0,
+    "recr_id" : "NEenSTeyvNLjMbp99",
+    "recr" : {
+        "_id" : "NEenSTeyvNLjMbp99",
+        "name" : "Sota",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476812811193.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 31 */
+{
+    "_id" : "qbGvaDCes5HxdiMuT",
+    "title" : "siracha documentry",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1467087608036.0,
+    "recr_id" : "DmwhSsLSuf99Zd4En",
+    "recr" : {
+        "_id" : "DmwhSsLSuf99Zd4En",
+        "name" : "Christine",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476812986352.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 32 */
+{
+    "_id" : "njnkBpM5pc9EGffnv",
+    "title" : "running man",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1476813019304.0,
+    "recr_id" : "4aorC2GhSukQqXsGo",
+    "recr" : {
+        "_id" : "4aorC2GhSukQqXsGo",
+        "name" : "Aidan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663048588.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 33 */
+{
+    "_id" : "zDGzYwxZctkD2b4gm",
+    "title" : "man in the castle",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1468633400509.0,
+    "recr_id" : "4aorC2GhSukQqXsGo",
+    "recr" : {
+        "_id" : "4aorC2GhSukQqXsGo",
+        "name" : "Aidan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663048588.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 34 */
+{
+    "_id" : "TLspAd2RyGnbZ5yGe",
+    "title" : "gatlinberg",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1468638623162.0,
+    "recr_id" : "sDYSyu9NfpRN4QjCC",
+    "recr" : {
+        "_id" : "sDYSyu9NfpRN4QjCC",
+        "name" : "Anna",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476813105309.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 35 */
+{
+    "_id" : "5ioqLZEjHboB5iveW",
+    "title" : "dragonball z",
+    "note" : "",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1469927251964.0,
+    "recr_id" : "MrQrXy4hRPvuaNt7Q",
+    "recr" : {
+        "_id" : "MrQrXy4hRPvuaNt7Q",
+        "name" : "health coach zach",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476813151900.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 36 */
+{
+    "_id" : "6ANeKXHHaWrTBRNDz",
+    "title" : "black mirror",
+    "note" : "",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1470418290907.0,
+    "recr_id" : "MZs6ZpH7vzktXMhZA",
+    "recr" : {
+        "_id" : "MZs6ZpH7vzktXMhZA",
+        "name" : "james",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476813212818.0,
+        "score" : {
+            "overall" : 100,
+            "tv" : 100
+        }
+    }
+}
+
+/* 37 */
+{
+    "_id" : "TFPoCEL9s6wta7YCY",
+    "title" : "Stranger Things",
+    "note" : "sooo good",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1471125894199.0,
+    "recr_id" : "MZs6ZpH7vzktXMhZA",
+    "recr" : {
+        "_id" : "MZs6ZpH7vzktXMhZA",
+        "name" : "james",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476813212818.0,
+        "score" : {
+            "overall" : 100,
+            "tv" : 100
+        }
+    },
+    "grade" : 5
+}
+
+/* 38 */
+{
+    "_id" : "TqEtCkHbj2PownCpL",
+    "title" : "pho ",
+    "note" : "oakland",
+    "category" : "food",
+    "uid" : "RFSPCkG7d5iqQTGBm",
+    "createdAt" : 1476852463771.0,
+    "recr_id" : "hvPnmwJhzJFBPevXz",
+    "recr" : {
+        "_id" : "hvPnmwJhzJFBPevXz",
+        "name" : "shadia",
+        "uid" : "RFSPCkG7d5iqQTGBm",
+        "createdAt" : 1476852488369.0,
+        "score" : {
+            "overall" : 100,
+            "food" : 100
+        }
+    },
+    "grade" : 5
+}
+
+/* 39 */
+{
+    "_id" : "nPgx7DZbaxzpzFGRC",
+    "title" : "second hand lion",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "rDH6SnNztXb85uxjc",
+    "createdAt" : 1476860264898.0,
+    "recr_id" : "DraM9uKdY5RhTpnSb",
+    "recr" : {
+        "_id" : "DraM9uKdY5RhTpnSb",
+        "name" : "emilys dad",
+        "uid" : "rDH6SnNztXb85uxjc",
+        "createdAt" : 1476860276500.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 40 */
+{
+    "_id" : "oWbxmAbrxjxMN6YPz",
+    "title" : "Jaws",
+    "note" : "best move for the summer. ",
+    "category" : "movie",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1477019357562.0,
+    "recr_id" : "r7qJD8T43Yr27aTcW",
+    "recr" : {
+        "_id" : "r7qJD8T43Yr27aTcW",
+        "name" : "Lucas Blackarms",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019385532.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "tv" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    }
+}
+
+/* 41 */
+{
+    "_id" : "CrQYSbhbZWgBMZFkk",
+    "title" : "Cheese",
+    "note" : "The stinky kind. ",
+    "category" : "food",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1477019459125.0,
+    "recr_id" : "8GT4Xpbc6gNNnkCfk",
+    "recr" : {
+        "_id" : "8GT4Xpbc6gNNnkCfk",
+        "name" : "Kelly Cerf",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019470666.0,
+        "score" : {
+            "overall" : 90,
+            "food" : 100,
+            "book" : 80
+        }
+    },
+    "grade" : 5
+}
+
+/* 42 */
+{
+    "_id" : "8hiGmp9rERxnDw6X8",
+    "title" : "South Park",
+    "note" : "start with season 4 thwn move onto 7 from there. everyrhing in between sucks balls and isnt worth a god damn.",
+    "category" : "tv",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1477019605032.0,
+    "recr_id" : "r7qJD8T43Yr27aTcW",
+    "recr" : {
+        "_id" : "r7qJD8T43Yr27aTcW",
+        "name" : "Lucas Blackarms",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019385532.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "tv" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "_version" : 2,
+    "grade" : 5
+}
+
+/* 43 */
+{
+    "_id" : "kygiNcoYhkdfGxkAF",
+    "title" : "masters of doom",
+    "note" : "awesome book",
+    "category" : "book",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1473547446757.0,
+    "_version" : 6,
+    "recr" : {
+        "_id" : "Qrja437xSXpw2e6k8",
+        "name" : "Kevin Habich",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019757211.0,
+        "score" : {
+            "overall" : 70,
+            "book" : 70
+        }
+    },
+    "recr_id" : "Qrja437xSXpw2e6k8",
+    "grade" : 5
+}
+
+/* 44 */
+{
+    "_id" : "dMbAAtqdhS2KhySN8",
+    "title" : "hot water music",
+    "note" : "",
+    "category" : "music",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1473547636486.0,
+    "recr" : {
+        "_id" : "4cCpdComL6pgGaKJd",
+        "name" : "Micheal Vallas",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019777000.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 4,
+    "recr_id" : "4cCpdComL6pgGaKJd"
+}
+
+/* 45 */
+{
+    "_id" : "pwcggmaRsycpBqSKf",
+    "title" : "japandroids",
+    "note" : "two piece",
+    "category" : "music",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1473547676602.0,
+    "recr" : {
+        "_id" : "4cCpdComL6pgGaKJd",
+        "name" : "Micheal Vallas",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019777000.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 4,
+    "recr_id" : "4cCpdComL6pgGaKJd"
+}
+
+/* 46 */
+{
+    "_id" : "xRFqZrM7uKFWGRJAj",
+    "title" : "Lake Tahoe",
+    "note" : "mike said this place is a lot like aspen ",
+    "category" : "place",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1476494589087.0,
+    "_version" : 4,
+    "recr" : {
+        "_id" : "8GT4Xpbc6gNNnkCfk",
+        "name" : "Kelly Cerf",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019470666.0,
+        "score" : {
+            "overall" : 90,
+            "food" : 100,
+            "book" : 80
+        }
+    },
+    "recr_id" : "8GT4Xpbc6gNNnkCfk"
+}
+
+/* 47 */
+{
+    "_id" : "WGKvwRKGqvqoMuFHK",
+    "title" : "deans cottage cheese ",
+    "note" : "4%",
+    "category" : "food",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1473547755648.0,
+    "recr" : {
+        "_id" : "BxYKE9egYaGzqBd7d",
+        "name" : "Christina Augustyn",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1476721141774.0,
+        "score" : {
+            "overall" : 100,
+            "uncategorized" : 100
+        }
+    },
+    "_version" : 4,
+    "recr_id" : "BxYKE9egYaGzqBd7d"
+}
+
+/* 48 */
+{
+    "_id" : "58kzcwkRj6Y7ynH4G",
+    "title" : "goon",
+    "note" : "hockey movie",
+    "category" : "movie",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1473962971457.0,
+    "recr" : {
+        "_id" : "4cCpdComL6pgGaKJd",
+        "name" : "Micheal Vallas",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019777000.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 4,
+    "recr_id" : "4cCpdComL6pgGaKJd"
+}
+
+/* 49 */
+{
+    "_id" : "FfbhmNkQMfsJ8jpxF",
+    "title" : "Westworld",
+    "note" : "1973 movie",
+    "category" : "tv",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1476721063786.0,
+    "recr" : {
+        "_id" : "BhPmgN5hpPBG2Hz2Y",
+        "name" : "ron felton",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1476721070739.0,
+        "score" : {
+            "overall" : {
+                "score" : 60,
+                "total" : 1
+            },
+            "tv" : {
+                "score" : 60,
+                "total" : 1
+            }
+        }
+    },
+    "_version" : 2,
+    "recr_id" : "BhPmgN5hpPBG2Hz2Y",
+    "grade" : 3
+}
+
+/* 50 */
+{
+    "_id" : "mmnWQBdc3awRcnNnq",
+    "title" : "LOTR",
+    "note" : "best book",
+    "category" : "book",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1477019982594.0,
+    "recr_id" : "8GT4Xpbc6gNNnkCfk",
+    "recr" : {
+        "_id" : "8GT4Xpbc6gNNnkCfk",
+        "name" : "Kelly Cerf",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019470666.0,
+        "score" : {
+            "overall" : 90,
+            "food" : 100,
+            "book" : 80
+        }
+    },
+    "grade" : 4
+}
+
+/* 51 */
+{
+    "_id" : "NXaPJSrogayPY9NwY",
+    "title" : "Girl on the Train",
+    "note" : "good",
+    "category" : "book",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1477020051824.0,
+    "recr_id" : "Qrja437xSXpw2e6k8",
+    "recr" : {
+        "_id" : "Qrja437xSXpw2e6k8",
+        "name" : "Kevin Habich",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019757211.0,
+        "score" : {
+            "overall" : 70,
+            "book" : 70
+        }
+    },
+    "grade" : 2
+}
+
+/* 52 */
+{
+    "_id" : "Zyi97pNk5fJbK5FCS",
+    "title" : "dram",
+    "note" : "",
+    "category" : "music",
+    "uid" : "nw7xaijvjc9BC9p53",
+    "createdAt" : 1477023006254.0,
+    "recr_id" : "8zHz5qJRoyc6gBbDj",
+    "recr" : {
+        "_id" : "8zHz5qJRoyc6gBbDj",
+        "name" : "Chaz",
+        "uid" : "nw7xaijvjc9BC9p53",
+        "createdAt" : 1477023015744.0,
+        "score" : {
+            "overall" : 100,
+            "music" : 100
+        }
+    },
+    "_version" : 3,
+    "grade" : 5
+}
+
+/* 53 */
+{
+    "_id" : "5QEhx6sFiEQgbXfNr",
+    "title" : "Saints Motel ",
+    "note" : "band",
+    "category" : "music",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477106364756.0,
+    "recr_id" : "HhyFRtLoSaAheBBhy",
+    "recr" : {
+        "_id" : "HhyFRtLoSaAheBBhy",
+        "name" : "Paul from lux",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476662947499.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 54 */
+{
+    "_id" : "jFrLcK95fw2AvXN73",
+    "title" : "makeup and vanity set ",
+    "note" : "#enviroment _ musicDev : [ Listen to this 💩]",
+    "category" : "music",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477107766085.0,
+    "recr" : {
+        "_id" : "emf2hmM5XAMWHwESw",
+        "name" : "carlos",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1477107978071.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 2,
+    "recr_id" : "emf2hmM5XAMWHwESw"
+}
+
+/* 55 */
+{
+    "_id" : "NejYtnc36CeZD9mZp",
+    "title" : "au cheval",
+    "note" : "best burger in Chicago",
+    "category" : "food",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477111843410.0,
+    "recr_id" : "HhyFRtLoSaAheBBhy",
+    "recr" : {
+        "_id" : "HhyFRtLoSaAheBBhy",
+        "name" : "Paul from lux",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476662947499.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 56 */
+{
+    "_id" : "TrqqAS5GBCuXg3fAZ",
+    "title" : "ai",
+    "note" : "movie carlos said he watched and shows the rclvolution",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477618278316.0,
+    "recr_id" : "emf2hmM5XAMWHwESw",
+    "recr" : {
+        "_id" : "emf2hmM5XAMWHwESw",
+        "name" : "carlos",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1477107978071.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 1
+}
+
+/* 57 */
+{
+    "_id" : "XAmovRWGmTAtNNSCT",
+    "title" : "rakes end",
+    "note" : "carolis said they have cool music",
+    "category" : "place",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477619823378.0,
+    "recr_id" : "emf2hmM5XAMWHwESw",
+    "recr" : {
+        "_id" : "emf2hmM5XAMWHwESw",
+        "name" : "carlos",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1477107978071.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 58 */
+{
+    "_id" : "4AgGkfFF43mjeiCpM",
+    "title" : "walter mitty ",
+    "note" : "great movie about courage and going into the unknown ",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477617459483.0,
+    "recr" : {
+        "_id" : "HhyFRtLoSaAheBBhy",
+        "name" : "Paul from lux",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476662947499.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 1,
+    "recr_id" : "HhyFRtLoSaAheBBhy"
+}
+
+/* 59 */
+{
+    "_id" : "NZmaG68ko9RsQSXH9",
+    "title" : "wilford",
+    "note" : "kevin thinks ill love it",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477605659113.0,
+    "recr" : {
+        "_id" : "Gc37JE2G5AeLj7Hw6",
+        "name" : "kevin lindsay",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478379162182.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 1,
+    "recr_id" : "Gc37JE2G5AeLj7Hw6"
+}
+
+/* 60 */
+{
+    "_id" : "b68CEZBtTkbxya7ST",
+    "title" : "vacationer",
+    "note" : "joey dresses as skrillex",
+    "category" : "music",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1477802743913.0,
+    "recr" : {
+        "_id" : "xXoatZqAFEitKknj4",
+        "name" : "Joey, dude dressed as skrillex at motr",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478379245226.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 1,
+    "recr_id" : "xXoatZqAFEitKknj4"
+}
+
+/* 61 */
+{
+    "_id" : "wR4Cq9WqNBSxdBFx7",
+    "title" : "Westworld",
+    "note" : "",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1478412156497.0,
+    "recr_id" : "q2sW38ac5ujoF9AHP",
+    "recr" : {
+        "_id" : "q2sW38ac5ujoF9AHP",
+        "name" : "Konrad",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478412215994.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "tv" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "_version" : 1,
+    "grade" : 5
+}
+
+/* 62 */
+{
+    "_id" : "ogpfkyXJSArJLmpsZ",
+    "title" : "this is the end",
+    "note" : "funniest movie",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1478474140359.0,
+    "recr_id" : "4aorC2GhSukQqXsGo",
+    "recr" : {
+        "_id" : "4aorC2GhSukQqXsGo",
+        "name" : "Aidan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663048588.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 63 */
+{
+    "_id" : "wqztkJK6j8h7ypqpH",
+    "title" : "penny dreadful",
+    "note" : "",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1476060905049.0,
+    "_version" : 1,
+    "recr" : {
+        "_id" : "QNvBctbbks5aEBkR3",
+        "name" : "i dont know",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478511739473.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "QNvBctbbks5aEBkR3"
+}
+
+/* 64 */
+{
+    "_id" : "NzZqRKdgsbNR2NWHx",
+    "title" : "strength to love",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1478651417299.0,
+    "_version" : 2,
+    "recr_id" : "9PYyhzZJvHmaBvhZx",
+    "recr" : {
+        "_id" : "9PYyhzZJvHmaBvhZx",
+        "name" : "ryan farmer",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478651447040.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 65 */
+{
+    "_id" : "HDGKDu4TL7DTkWSvM",
+    "title" : "enternal golden braid",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1478651540111.0,
+    "_version" : 2,
+    "recr_id" : "9PYyhzZJvHmaBvhZx",
+    "recr" : {
+        "_id" : "9PYyhzZJvHmaBvhZx",
+        "name" : "ryan farmer",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478651447040.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 66 */
+{
+    "_id" : "wmp7P2qgSASiNPdKh",
+    "title" : "sling blade",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1417423239000.0,
+    "recr" : {
+        "_id" : "dL7b8N6bvTpdpRztd",
+        "name" : "rusconi bartender",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478767405557.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 3,
+    "recr_id" : "dL7b8N6bvTpdpRztd"
+}
+
+/* 67 */
+{
+    "_id" : "9o5g88J8sbeNLkWjo",
+    "title" : "shplongo",
+    "note" : "smoked at konrads and they told me about this band",
+    "category" : "music",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1417423239000.0,
+    "_version" : 3,
+    "recr_id" : "yLYPKsm9CDH4s2Q78",
+    "recr" : {
+        "_id" : "yLYPKsm9CDH4s2Q78",
+        "name" : "Erwan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476663327855.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 68 */
+{
+    "_id" : "Tq7idc2PYFem6foso",
+    "title" : "a band called death",
+    "note" : "",
+    "category" : "music",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1427272839000.0,
+    "_version" : 2,
+    "recr_id" : "oqX4M4Q96eZAQfs9g",
+    "recr" : {
+        "_id" : "oqX4M4Q96eZAQfs9g",
+        "name" : "jeff carr",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478767625760.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 69 */
+{
+    "_id" : "FtLczo7Pvbrtevh5m",
+    "title" : "salon tres",
+    "note" : "facial by nicks girlfriend.",
+    "category" : "place",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1478791945483.0,
+    "_version" : 1,
+    "recr_id" : "fw3tXAfcRdXvWWdRb",
+    "recr" : {
+        "_id" : "fw3tXAfcRdXvWWdRb",
+        "name" : "Nick Vithlocas",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1478791997604.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 70 */
+{
+    "_id" : "RAj57ZRW9ejsR3YFg",
+    "title" : "Phil Colins Not Dead Yet",
+    "note" : "written by phil ",
+    "category" : "book",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1478792115530.0,
+    "_version" : 1,
+    "recr_id" : "tTqukKivds7sisLyD",
+    "recr" : {
+        "_id" : "tTqukKivds7sisLyD",
+        "name" : "Lindsay Huth",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1478792168706.0,
+        "score" : {
+            "overall" : {
+                "score" : 40,
+                "total" : 1
+            },
+            "book" : {
+                "score" : 40,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 2
+}
+
+/* 71 */
+{
+    "_id" : "m7BYY3WfGRt2Xw6XJ",
+    "title" : "cool movie",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1478806188858.0,
+    "_version" : 2,
+    "recr_id" : "QNvBctbbks5aEBkR3",
+    "recr" : {
+        "_id" : "QNvBctbbks5aEBkR3",
+        "name" : "i dont know",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478511739473.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 72 */
+{
+    "_id" : "fzg62x3cvmhS8JREj",
+    "title" : "yo mama",
+    "note" : "",
+    "category" : "place",
+    "uid" : "k7Gj2HPx7NRKXHq5z",
+    "createdAt" : 1478813526273.0,
+    "_version" : 3,
+    "recr_id" : "NmGpMX4TkNbST8XWy",
+    "recr" : {
+        "_id" : "NmGpMX4TkNbST8XWy",
+        "name" : "kev",
+        "uid" : "k7Gj2HPx7NRKXHq5z",
+        "createdAt" : 1478813538209.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 73 */
+{
+    "_id" : "2Fxv7Po8k5qW37HHb",
+    "title" : "author tim wu",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1479240790374.0,
+    "_version" : 2,
+    "recr_id" : "DKB5hnsBTTZmXSmxK",
+    "recr" : {
+        "_id" : "DKB5hnsBTTZmXSmxK",
+        "name" : "albert from usv",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1479240802956.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 74 */
+{
+    "_id" : "S76bgkYiNLyvWEPjd",
+    "title" : "my professor is currently trying to tell me C# is better than Java. I dont believe his recommendation.",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1479847359383.0,
+    "_version" : 1,
+    "recr_id" : "3jGbQkkrFRSBXottA",
+    "recr" : {
+        "_id" : "3jGbQkkrFRSBXottA",
+        "name" : "Robert Rokey",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479847430540.0,
+        "score" : {
+            "overall" : {
+                "score" : 20,
+                "total" : 1
+            },
+            "podcast" : {
+                "score" : 20,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 1
+}
+
+/* 75 */
+{
+    "_id" : "aKw3aijkzGCdagzSP",
+    "title" : "Picnic and Pantry",
+    "note" : "dope food",
+    "category" : "food",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1479927008931.0,
+    "recr" : {
+        "_id" : "NLyoAsyN42S2CCgJj",
+        "name" : "Kevin Habich",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479926986341.0,
+        "score" : {
+            "overall" : {
+                "score" : 96,
+                "total" : 5
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "food" : {
+                "score" : 93,
+                "total" : 3
+            }
+        }
+    },
+    "_version" : 1,
+    "recr_id" : "NLyoAsyN42S2CCgJj",
+    "grade" : 4
+}
+
+/* 76 */
+{
+    "_id" : "buqKhpJpPeZHqKBfG",
+    "title" : "Chaz",
+    "note" : "",
+    "category" : "place",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1479926945599.0,
+    "_version" : 3,
+    "recr" : {
+        "_id" : "NLyoAsyN42S2CCgJj",
+        "name" : "Kevin Habich",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479926986341.0,
+        "score" : {
+            "overall" : {
+                "score" : 96,
+                "total" : 5
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "food" : {
+                "score" : 93,
+                "total" : 3
+            }
+        }
+    },
+    "recr_id" : "NLyoAsyN42S2CCgJj",
+    "grade" : 5
+}
+
+/* 77 */
+{
+    "_id" : "ksibYRRdNxLyHZyB4",
+    "title" : "Dan Mall - Design Star",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1479901714939.0,
+    "_version" : 12,
+    "recr" : {
+        "_id" : "8vYTgCXoBiqLdtxN3",
+        "name" : "Luke Moderwell",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479901810114.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "8vYTgCXoBiqLdtxN3"
+}
+
+/* 78 */
+{
+    "_id" : "XGsAPGC4sSAzKMG22",
+    "title" : "Give this bad boy a search funtion. Also either a tech or App categorization",
+    "note" : "",
+    "category" : "book",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1479847493112.0,
+    "_version" : 12,
+    "recr" : {
+        "_id" : "NLyoAsyN42S2CCgJj",
+        "name" : "Kevin Habich",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479926986341.0,
+        "score" : {
+            "overall" : {
+                "score" : 96,
+                "total" : 5
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "food" : {
+                "score" : 93,
+                "total" : 3
+            }
+        }
+    },
+    "recr_id" : "NLyoAsyN42S2CCgJj"
+}
+
+/* 79 */
+{
+    "_id" : "2br74xyzgKhoAYkD2",
+    "title" : "Washington Park",
+    "note" : "",
+    "category" : "place",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1479928888424.0,
+    "_version" : 1,
+    "recr_id" : "NLyoAsyN42S2CCgJj",
+    "recr" : {
+        "_id" : "NLyoAsyN42S2CCgJj",
+        "name" : "Kevin Habich",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479926986341.0,
+        "score" : {
+            "overall" : {
+                "score" : 96,
+                "total" : 5
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "food" : {
+                "score" : 93,
+                "total" : 3
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 80 */
+{
+    "_id" : "x9kuo3zoMckYHyYoJ",
+    "title" : "Ohio Volkswagon Club Forum",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1480040931857.0,
+    "_version" : 2,
+    "recr_id" : "BP6GtBN4pGsBYGAva",
+    "recr" : {
+        "_id" : "BP6GtBN4pGsBYGAva",
+        "name" : "Ross Young",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1480040956402.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 81 */
+{
+    "_id" : "nkpXy6DDPbvtqnK2f",
+    "title" : "Portillos",
+    "note" : "",
+    "category" : "food",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1480450548655.0,
+    "_version" : 1,
+    "recr_id" : "NLyoAsyN42S2CCgJj",
+    "recr" : {
+        "_id" : "NLyoAsyN42S2CCgJj",
+        "name" : "Kevin Habich",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479926986341.0,
+        "score" : {
+            "overall" : {
+                "score" : 96,
+                "total" : 5
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "food" : {
+                "score" : 93,
+                "total" : 3
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 82 */
+{
+    "_id" : "CzSPmCyag533qxZjC",
+    "title" : "a sense of urgency",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1480608188598.0,
+    "_version" : 2,
+    "recr_id" : "4bWS2jHHhodYFZBEo",
+    "recr" : {
+        "_id" : "4bWS2jHHhodYFZBEo",
+        "name" : "fred wilson",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1480608205734.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 83 */
+{
+    "_id" : "sMDYtwqREwMsLP2Yn",
+    "title" : "Oh Brother where art though",
+    "note" : "so dope.",
+    "category" : "movie",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1480619752847.0,
+    "_version" : 4,
+    "recr_id" : "bjoXdsg2bnX6qXDPW",
+    "recr" : {
+        "_id" : "bjoXdsg2bnX6qXDPW",
+        "name" : "Tyler Smith",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1480619764258.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "movie" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 84 */
+{
+    "_id" : "AGJ44RungCNdo6Axf",
+    "title" : "capitalism, socialism, democracy",
+    "note" : "he talked about it reid hoffmans course",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1480895774251.0,
+    "_version" : 3,
+    "recr_id" : "4YWJuQvG623ZRLKWr",
+    "recr" : {
+        "_id" : "4YWJuQvG623ZRLKWr",
+        "name" : "michael dearing",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1480895798586.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 85 */
+{
+    "_id" : "yPWCgeba4RceScZzn",
+    "title" : "la plays itself",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "WM8x9CzpjEgaFeYCK",
+    "createdAt" : 1480958695440.0,
+    "recr" : {
+        "_id" : "78N55EtGjob289wuh",
+        "name" : "uber driver",
+        "uid" : "WM8x9CzpjEgaFeYCK",
+        "createdAt" : 1480959393685.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 5,
+    "recr_id" : "78N55EtGjob289wuh"
+}
+
+/* 86 */
+{
+    "_id" : "wnH6pcw94R8Pk2T9c",
+    "title" : "you must remember this",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "WM8x9CzpjEgaFeYCK",
+    "createdAt" : 1480959047442.0,
+    "recr" : {
+        "_id" : "78N55EtGjob289wuh",
+        "name" : "uber driver",
+        "uid" : "WM8x9CzpjEgaFeYCK",
+        "createdAt" : 1480959393685.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 4,
+    "recr_id" : "78N55EtGjob289wuh"
+}
+
+/* 87 */
+{
+    "_id" : "3tRwoaeCEBeSoZbJB",
+    "title" : "whiplash",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1481043106786.0,
+    "_version" : 2,
+    "recr_id" : "4bWS2jHHhodYFZBEo",
+    "recr" : {
+        "_id" : "4bWS2jHHhodYFZBEo",
+        "name" : "fred wilson",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1480608205734.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 88 */
+{
+    "_id" : "3nok8a6pLj3yx54b7",
+    "title" : "fsgg",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "WF7ZSmbsqarA2sWJf",
+    "createdAt" : 1481237869621.0,
+    "recr" : null
+}
+
+/* 89 */
+{
+    "_id" : "emLvokJSPmaQw7oTc",
+    "title" : "why we buy",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1481129995274.0,
+    "_version" : 2,
+    "recr_id" : "Svvd8xiuQS6SpdmRw",
+    "recr" : {
+        "_id" : "Svvd8xiuQS6SpdmRw",
+        "name" : "jason fried",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1481130016541.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 90 */
+{
+    "_id" : "6qEw8WadfeLdi8iaP",
+    "title" : "winning friends",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1481144457247.0,
+    "_version" : 1,
+    "recr_id" : "rjaKxmPXg2ZyXSutf",
+    "recr" : {
+        "_id" : "rjaKxmPXg2ZyXSutf",
+        "name" : "patrick henshaw",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1481144470281.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "book" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 91 */
+{
+    "_id" : "S8ddfXjs2pdJfAjzT",
+    "title" : "Nine Giant Brewery",
+    "note" : "",
+    "category" : "place",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1481168009194.0,
+    "_version" : 4,
+    "recr_id" : "bjoXdsg2bnX6qXDPW",
+    "recr" : {
+        "_id" : "bjoXdsg2bnX6qXDPW",
+        "name" : "Tyler Smith",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1480619764258.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "movie" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 92 */
+{
+    "_id" : "fvk95Hn6CSx2AYjyF",
+    "title" : "Death Cab For Cutie",
+    "note" : "",
+    "category" : "music",
+    "uid" : "8cnjxH8ZbtPZNfBkX",
+    "createdAt" : 1481211715130.0,
+    "_version" : 2,
+    "recr_id" : "4cCpdComL6pgGaKJd",
+    "recr" : {
+        "_id" : "4cCpdComL6pgGaKJd",
+        "name" : "Micheal Vallas",
+        "uid" : "8cnjxH8ZbtPZNfBkX",
+        "createdAt" : 1477019777000.0,
+        "score" : {
+            "overall" : 0
+        },
+        "_version" : 1
+    }
+}
+
+/* 93 */
+{
+    "_id" : "4PyB33SNfyF9EzAjn",
+    "title" : "predators",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "WF7ZSmbsqarA2sWJf",
+    "createdAt" : 1481241392693.0,
+    "_version" : 3,
+    "recr_id" : "nhHYdH93Rr7voT7f2",
+    "recr" : {
+        "_id" : "nhHYdH93Rr7voT7f2",
+        "name" : "aaron modulus",
+        "uid" : "WF7ZSmbsqarA2sWJf",
+        "createdAt" : 1481241418876.0,
+        "score" : {
+            "overall" : {
+                "score" : 20,
+                "total" : 1
+            },
+            "movie" : {
+                "score" : 20,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 1
+}
+
+/* 94 */
+{
+    "_id" : "qGCvFpfJ7kDNbp8rx",
+    "title" : "loot crate",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1481242235256.0,
+    "_version" : 1,
+    "recr_id" : "EXQkmmkLgsurtby8j",
+    "recr" : {
+        "_id" : "EXQkmmkLgsurtby8j",
+        "name" : "aaron modulus",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1481242252339.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 95 */
+{
+    "_id" : "gmaZLG26waZCE7jsv",
+    "title" : "trust me PR is dead",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1481294552867.0,
+    "_version" : 2,
+    "recr_id" : "TLQD8c4h8aiGymrvS",
+    "recr" : {
+        "_id" : "TLQD8c4h8aiGymrvS",
+        "name" : "eliot pr",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1481294566385.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 96 */
+{
+    "_id" : "7TtL4of2mASvzEhen",
+    "title" : "Magic by coldplay",
+    "note" : "",
+    "category" : "music",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1481331252826.0,
+    "_version" : 3,
+    "recr_id" : "qedEbsM3c8akexpEi",
+    "recr" : {
+        "_id" : "qedEbsM3c8akexpEi",
+        "name" : "Con Baak",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1481331279217.0,
+        "score" : {
+            "overall" : {
+                "score" : 70,
+                "total" : 2
+            },
+            "music" : {
+                "score" : 80,
+                "total" : 1
+            },
+            "place" : {
+                "score" : 60,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 4
+}
+
+/* 97 */
+{
+    "_id" : "vyh9ZZsQcJ2yaryKp",
+    "title" : "mountainshuttle.com",
+    "note" : "",
+    "category" : "place",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1481382686987.0,
+    "_version" : 1,
+    "recr_id" : "qedEbsM3c8akexpEi",
+    "recr" : {
+        "_id" : "qedEbsM3c8akexpEi",
+        "name" : "Con Baak",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1481331279217.0,
+        "score" : {
+            "overall" : {
+                "score" : 70,
+                "total" : 2
+            },
+            "music" : {
+                "score" : 80,
+                "total" : 1
+            },
+            "place" : {
+                "score" : 60,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 3
+}
+
+/* 98 */
+{
+    "_id" : "6nNp4twuET3YEHQYj",
+    "title" : "Founders All Day IPA",
+    "note" : "",
+    "category" : "food",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1481332990245.0,
+    "_version" : 3,
+    "recr" : {
+        "_id" : "BP6GtBN4pGsBYGAva",
+        "name" : "Ross Young",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1480040956402.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "recr_id" : "BP6GtBN4pGsBYGAva"
+}
+
+/* 99 */
+{
+    "_id" : "9EFKjwSWATKr7Av4S",
+    "title" : "pannino",
+    "note" : "",
+    "category" : "place",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482005517574.0,
+    "_version" : 2,
+    "recr_id" : "q2sW38ac5ujoF9AHP",
+    "recr" : {
+        "_id" : "q2sW38ac5ujoF9AHP",
+        "name" : "Konrad",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1478412215994.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "tv" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    }
+}
+
+/* 100 */
+{
+    "_id" : "mnJpmwRbfsFR2WhyW",
+    "title" : "atlanta",
+    "note" : "donald glover show",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482033260539.0,
+    "_version" : 3,
+    "recr_id" : "wcXA65ApyfP5mmwQB",
+    "recr" : {
+        "_id" : "wcXA65ApyfP5mmwQB",
+        "name" : "josh the doctor",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482033280657.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 101 */
+{
+    "_id" : "RdBvDZjgCCAzJ9fpG",
+    "title" : "start up nation",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482035664654.0,
+    "_version" : 2,
+    "recr_id" : "wcXA65ApyfP5mmwQB",
+    "recr" : {
+        "_id" : "wcXA65ApyfP5mmwQB",
+        "name" : "josh the doctor",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482033280657.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 102 */
+{
+    "_id" : "MdaKcuutExrx3KF7w",
+    "title" : "dune",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482037364688.0,
+    "_version" : 2,
+    "recr_id" : "wcXA65ApyfP5mmwQB",
+    "recr" : {
+        "_id" : "wcXA65ApyfP5mmwQB",
+        "name" : "josh the doctor",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482033280657.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 103 */
+{
+    "_id" : "9ks7tB8AzFLkSQy7W",
+    "title" : "american gods",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482037411576.0,
+    "_version" : 2,
+    "recr_id" : "wcXA65ApyfP5mmwQB",
+    "recr" : {
+        "_id" : "wcXA65ApyfP5mmwQB",
+        "name" : "josh the doctor",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482033280657.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 104 */
+{
+    "_id" : "bKbedoip45qBmXtja",
+    "title" : "Kung Food",
+    "note" : "This is the best american chinese you will ever eat.",
+    "category" : "food",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1482064069712.0,
+    "_version" : 2,
+    "recr_id" : "SqMneBBj2ufJNkHDY",
+    "recr" : {
+        "_id" : "SqMneBBj2ufJNkHDY",
+        "name" : "MP ",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1482064084831.0,
+        "score" : {
+            "overall" : {
+                "score" : 100,
+                "total" : 1
+            },
+            "food" : {
+                "score" : 100,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 5
+}
+
+/* 105 */
+{
+    "_id" : "a9964Sus4uvvW4ozE",
+    "title" : "Atavola",
+    "note" : "",
+    "category" : "food",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1482452802960.0,
+    "recr" : {
+        "_id" : "NLyoAsyN42S2CCgJj",
+        "name" : "Kevin Habich",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1479926986341.0,
+        "score" : {
+            "overall" : {
+                "score" : 96,
+                "total" : 5
+            },
+            "place" : {
+                "score" : 100,
+                "total" : 2
+            },
+            "food" : {
+                "score" : 93,
+                "total" : 3
+            }
+        }
+    },
+    "_version" : 5,
+    "recr_id" : "NLyoAsyN42S2CCgJj",
+    "grade" : 5
+}
+
+/* 106 */
+{
+    "_id" : "Rh46brwqqX2qwmTQx",
+    "title" : "writing tools by peter roy clark",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482557349939.0,
+    "_version" : 2,
+    "recr_id" : "r6E8RCdmZqGi8kLzu",
+    "recr" : {
+        "_id" : "r6E8RCdmZqGi8kLzu",
+        "name" : "jesse marx",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482557360990.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 107 */
+{
+    "_id" : "wjxg57KK25Ptii2Rg",
+    "title" : "those who cant",
+    "note" : "has a candylocker in an episode",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482568255666.0,
+    "_version" : 3,
+    "recr_id" : "AAtmyP6MRG9tyDv2C",
+    "recr" : {
+        "_id" : "AAtmyP6MRG9tyDv2C",
+        "name" : "gar",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482568266904.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 108 */
+{
+    "_id" : "sZunRj2yq8wEMpAEK",
+    "title" : "the ranch",
+    "note" : "says its histerical, saw a clip when ashton kutcher was kn jimmy fallon",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482630845151.0,
+    "_version" : 6,
+    "recr_id" : "E9NtFCtZnd5ksG6qH",
+    "recr" : {
+        "_id" : "E9NtFCtZnd5ksG6qH",
+        "name" : "aunt jan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482630850585.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 109 */
+{
+    "_id" : "Y6igpbr5TFq8XZpkk",
+    "title" : "pichler park green house",
+    "note" : "uncle harry suggested this after i told them about teds green house",
+    "category" : "place",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482632286263.0,
+    "_version" : 3,
+    "recr_id" : "E9NtFCtZnd5ksG6qH",
+    "recr" : {
+        "_id" : "E9NtFCtZnd5ksG6qH",
+        "name" : "aunt jan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482630850585.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 110 */
+{
+    "_id" : "nH7gcKaP2wA792Ecp",
+    "title" : "life changing magic of tydig up",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1482950754312.0,
+    "_version" : 2,
+    "recr_id" : "4dwGHtS3Fr4mw9J4J",
+    "recr" : {
+        "_id" : "4dwGHtS3Fr4mw9J4J",
+        "name" : "jason calcanas",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1482950768059.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 111 */
+{
+    "_id" : "aFkxhXQSrGhdwNM5F",
+    "title" : "dan carlin hardcore history",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483223484975.0,
+    "_version" : 1,
+    "recr_id" : "Af5TDCNFjdvSfj5CG",
+    "recr" : {
+        "_id" : "Af5TDCNFjdvSfj5CG",
+        "name" : "Logan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483223495794.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 112 */
+{
+    "_id" : "Y3fsPvtgRfYjnLRLs",
+    "title" : "theory of moral sentiments by adam smith",
+    "note" : "",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483223541242.0,
+    "_version" : 2,
+    "recr_id" : "Af5TDCNFjdvSfj5CG",
+    "recr" : {
+        "_id" : "Af5TDCNFjdvSfj5CG",
+        "name" : "Logan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483223495794.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 113 */
+{
+    "_id" : "ArSFJntB6tardzjrK",
+    "title" : "wealth of nationa",
+    "note" : "top ten book",
+    "category" : "book",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483223569878.0,
+    "_version" : 3,
+    "recr_id" : "Af5TDCNFjdvSfj5CG",
+    "recr" : {
+        "_id" : "Af5TDCNFjdvSfj5CG",
+        "name" : "Logan",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483223495794.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 114 */
+{
+    "_id" : "xvkujCLHTsSwp8m32",
+    "title" : "chick fil a",
+    "note" : "",
+    "category" : "food",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1483233796842.0,
+    "_version" : 4,
+    "recr_id" : "mBBaumuQ7kRaWD2GH",
+    "recr" : {
+        "_id" : "mBBaumuQ7kRaWD2GH",
+        "name" : "garrett householder",
+        "uid" : "Cu8J4psm7gZYYSpCW",
+        "createdAt" : 1483233808848.0,
+        "score" : {
+            "overall" : {
+                "score" : 80,
+                "total" : 1
+            },
+            "food" : {
+                "score" : 80,
+                "total" : 1
+            }
+        }
+    },
+    "grade" : 4
+}
+
+/* 115 */
+{
+    "_id" : "qMExsTtB8sWnox5rc",
+    "title" : "lala land",
+    "note" : "",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483380791645.0,
+    "_version" : 2,
+    "recr_id" : "4LLJ8QSoMA8TPFa3K",
+    "recr" : {
+        "_id" : "4LLJ8QSoMA8TPFa3K",
+        "name" : "doctor john",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483380816595.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 116 */
+{
+    "_id" : "tgMeXKqFCf2rEu6Yi",
+    "title" : "danger five",
+    "note" : "super fine chicks. woody showed him. weird ass music jokes",
+    "category" : "tv",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483423936480.0,
+    "_version" : 3,
+    "recr_id" : "tyY24gfqiCo3EdkGC",
+    "recr" : {
+        "_id" : "tyY24gfqiCo3EdkGC",
+        "name" : "gar",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483423952049.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 117 */
+{
+    "_id" : "ZyeiXi7MKckEwcNmK",
+    "title" : "Lone survivor",
+    "note" : "because explosions in the sky scored it",
+    "category" : "movie",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483463799227.0,
+    "_version" : 3,
+    "recr_id" : "jD3HztPpWj3A9Q29z",
+    "recr" : {
+        "_id" : "jD3HztPpWj3A9Q29z",
+        "name" : "eron",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483463804047.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 118 */
+{
+    "_id" : "cgNtE9oRcp7ShbBA6",
+    "title" : "andy stanley leadership podcast",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483472195142.0,
+    "_version" : 2,
+    "recr_id" : "4LLJ8QSoMA8TPFa3K",
+    "recr" : {
+        "_id" : "4LLJ8QSoMA8TPFa3K",
+        "name" : "doctor john",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483380816595.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 119 */
+{
+    "_id" : "taXmTYDYxhzidzgDy",
+    "title" : "hello my name is nick and this is a test to see how long it allows okay so it can go two lines but does the box extend when i move to three or four lines deep?",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "Cu8J4psm7gZYYSpCW",
+    "createdAt" : 1483502438618.0,
+    "_version" : 1,
+    "recr" : null
+}
+
+/* 120 */
+{
+    "_id" : "jCyRogiPx5de7byK6",
+    "title" : "fortune noodle house",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483727629350.0,
+    "recr" : null
+}
+
+/* 121 */
+{
+    "_id" : "DLaj9nHo86PDShDKy",
+    "title" : "mardis gras on madison",
+    "note" : "",
+    "category" : "food",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483728007728.0,
+    "_version" : 2,
+    "recr_id" : "h2LQbWaXhbojDhcFT",
+    "recr" : {
+        "_id" : "h2LQbWaXhbojDhcFT",
+        "name" : "josh fendley",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483728024144.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 122 */
+{
+    "_id" : "LWrYbnwb23BHhHTDD",
+    "title" : "frenchie fresh",
+    "note" : "",
+    "category" : "food",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483727974340.0,
+    "recr" : {
+        "_id" : "h2LQbWaXhbojDhcFT",
+        "name" : "josh fendley",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483728024144.0,
+        "score" : {
+            "overall" : 0
+        }
+    },
+    "_version" : 5,
+    "recr_id" : "h2LQbWaXhbojDhcFT"
+}
+
+/* 123 */
+{
+    "_id" : "fTH2cf4QJKC3GtH4G",
+    "title" : "the wire",
+    "note" : "",
+    "category" : "uncategorized",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483732777596.0,
+    "_version" : 1,
+    "recr_id" : "h2LQbWaXhbojDhcFT",
+    "recr" : {
+        "_id" : "h2LQbWaXhbojDhcFT",
+        "name" : "josh fendley",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1483728024144.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
+
+/* 124 */
+{
+    "_id" : "vi782dxgk26TBT3vT",
+    "title" : "generation why",
+    "note" : "",
+    "category" : "podcast",
+    "uid" : "xTKnNXnEWYwsY6wso",
+    "createdAt" : 1483931640258.0,
+    "_version" : 2,
+    "recr_id" : "NEenSTeyvNLjMbp99",
+    "recr" : {
+        "_id" : "NEenSTeyvNLjMbp99",
+        "name" : "Sota",
+        "uid" : "xTKnNXnEWYwsY6wso",
+        "createdAt" : 1476812811193.0,
+        "score" : {
+            "overall" : 0
+        }
+    }
+}
