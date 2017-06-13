@@ -12,11 +12,7 @@ export default styles = StyleSheet.create({
   },
   navBar: {
     backgroundColor: colors.purple,
-    // backgroundColor: 'blue',
-
     borderBottomWidth: 0,
-    // borderTopWidth: 20,
-    // marginTop: 20,
     borderColor: colors.darkPurple
   }
 });

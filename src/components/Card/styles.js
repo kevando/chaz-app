@@ -7,7 +7,8 @@ const MARGIN_VERTICAL = 5;
 const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
 const ICON_WIDTH = CARD_WIDTH / 9;
 const DATE_WIDTH = CARD_WIDTH / 8;
-const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - DATE_WIDTH - 5;
+const CARROT_WIDTH = 25;
+const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - CARROT_WIDTH - 44;
 
 export default styles = StyleSheet.create({
 
@@ -19,10 +20,13 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.white,
     paddingVertical: 10,
-    paddingLeft: 0,
+    paddingLeft: 20,
 
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
   expanded: {
     borderColor: colors.grey,
@@ -31,12 +35,21 @@ export default styles = StyleSheet.create({
   iconContainer: {
     width: ICON_WIDTH,
     // backgroundColor: 'yellow',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    paddingTop: 8,
   },
   textContainer: {
-    width: TEXT_WIDTH,
+    width: TEXT_WIDTH,// might need to change this
     // backgroundColor: 'blue',
+  },
+
+  deleteContainer: {
+    // backgroundColor:'yellow',
+    width: CARROT_WIDTH,
+    position: 'absolute',
+    right: 0,
+    top: 3,
   },
 
   recContainer: {
@@ -66,11 +79,9 @@ export default styles = StyleSheet.create({
 
   recText: {
     ...text,
-    fontSize: 17,
-    fontWeight: '400',
+    fontSize: 19,
+    fontWeight: '500',
     color: colors.black,
-    // backgroundColor: 'red',
-    lineHeight: 16,
   },
 
   friendText: {
@@ -86,6 +97,8 @@ export default styles = StyleSheet.create({
     fontWeight: '500',
     // color: colors.darkGrey
   },
+
+
 
 
 });

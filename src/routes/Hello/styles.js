@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { colors } from '../../config/styles';
+import { colors, text } from '../../config/styles';
 
-const window = Dimensions.get('window');
 const BUTTON_WIDTH = 250;
 const MARGIN_HORIZONTAL = (window.width - BUTTON_WIDTH) / 2;
 
@@ -12,21 +11,23 @@ export default styles = StyleSheet.create({
 
   },
   title: {
-    color: '#fff',
+    ...text,
+    color: colors.white,
     fontSize: 80,
-    paddingTop:60,
+    paddingTop:20,
     paddingBottom: 0,
-    fontWeight: '500',
+    fontWeight: '400',
     letterSpacing:4,
     paddingLeft: 17,
 
   },
-  tagline: {
-    color: '#fff',
-    fontSize: 25,
+  paragraph: {
+    ...text,
+    color: colors.white,
+    fontSize: 22,
     fontWeight: '300',
     lineHeight:30,
-    marginTop:15,
+    marginTop:25,
     paddingLeft: 20,
     paddingRight: 10,
   },

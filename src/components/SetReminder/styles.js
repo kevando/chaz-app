@@ -18,10 +18,12 @@ export default styles = StyleSheet.create({
     padding: 15
   },
 
-  message: {
+  reminderText: {
     ...text,
-    fontSize: 18,
-    marginBottom: 10
+    fontSize: 12,
+    color: colors.darkGrey,
+    lineHeight: 17,
+    // fontWeight: '100'
   },
 
 });

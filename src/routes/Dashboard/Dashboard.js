@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, StatusBar } from 'react-native';
 import _ from 'lodash';
 
 import Button from '../../components/Button';
@@ -24,6 +24,7 @@ const Dashboard = (props) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
 
       <ScrollView style={styles.scrollView}>
       {

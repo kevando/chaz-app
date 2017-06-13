@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, StatusBar } from 'react-native';
 import { InputGroup, Input, Icon } from 'native-base';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 
@@ -17,6 +17,7 @@ class InputTitle extends Component {
 
     return (
       <View style={styles.container}>
+        <StatusBar hidden={true} />
         <InputGroup style={{flex:1,borderWidth:0}}>
           <Input
             placeholder='Type recommendation here'

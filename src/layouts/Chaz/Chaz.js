@@ -20,10 +20,11 @@ class Chaz extends Component {
     // Show welcome screen if there are no recs
     if(store.recommendations.list.length == 0)
       initialStack.push(Routes.getHelloRoute());
-    // else
-      // initialStack.push(Routes.getNewRecommendationRoute());
+    else
+      initialStack.push(Routes.getNewRecommendationRoute());
 
 
+      // initialStack.push(Routes.getConfirmRecommendationRoute());
     // if(process.env.NODE_ENV == 'production')
     //   initialStack.push(Routes.getInitialRecInputRoute());
 

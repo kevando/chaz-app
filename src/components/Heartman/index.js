@@ -8,6 +8,7 @@ import images from '../../config/images';
 class Heartman extends Component {
 
   render() {
+    alert('heartman')
 
     const { text='Hi I am heartman', delay=1000 } = this.props;
 

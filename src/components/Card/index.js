@@ -1,72 +1,57 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, LayoutAnimation } from 'react-native';
+import { Text, View, TouchableOpacity, LayoutAnimation, AlertIOS } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 
+import { colors } from '../../config/styles';
 import styles from './styles';
 import SetReminder from '../../components/SetReminder';
 
 const RecIcon = (props) => {
   const {status, grade, reminder} = props.rec;
-  var icon = 'square-o';
-  var color = 'green';
+  var icon = 'file-text-o';
+  var color = colors.grey;
   // if(status == 'unfinished')  icon = '🗣';
   // if(status == 'new')         icon = '📃';
-  // if(reminder)                icon = '⏰';
+  if(reminder)                icon = 'clock-o';
   // if(grade === 1)             icon = '👍';
   // if(grade === -1)            icon = '👎';
 
-  return <Icon name={icon} size={18} color={color} />
+  return <Icon name={icon} size={25} color={color} />
 }
 class Card extends Component {
 
-  state = { expanded: true }
+  state = { expanded: false }
 
   componentWillUpdate() {
     LayoutAnimation.easeInEaseOut(); // this animates the expanded/collapse
   }
 
-  toggleExpanded() {
+  _toggleExpanded() {
+    if(this.props.unfinished) return; // dont allow expand if rec isnt saved
     this.setState({expanded: !this.state.expanded})
   }
 
+  _onDeletePress() {
+    AlertIOS.alert(
+      'Delete Forever?',
+      'There is no coming back',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+        {text: 'Delete', onPress: () => this.props.deleteRecommendation(this.props.rec.id) ,style:'destructive'},
+      ],
+    );
+  }
 
-  // const swipeButtons = {
-  //   right: [
-  //     {
-  //       text: 'DELETE',
-  //       backgroundColor: 'red',
-  //       onPress: () => deleteRecommendation(rec.id),
-  //     },
-  //   ],
-  //   left: [
-  //     {
-  //       text: ' 👍 ',
-  //       backgroundColor: 'blue',
-  //       onPress: () => {
-  //         setStatus(rec.id, 'finished')
-  //         setGrade(rec.id,1)
-  //       },
-  //     },
-  //     {
-  //       text: ' 👎 ',
-  //       backgroundColor: 'red',
-  //       onPress: () => {
-  //         setStatus(rec.id, 'finished')
-  //         setGrade(rec.id,-1)
-  //       },
-  //     }
-  //   ]
-  // }
   isCardExpanded() {
     if(this.state.expanded)
       return styles.expanded
   }
 
 render() {
-  const { rec, setStatus, setGrade, setReminder, deleteRecommendation, notificationPermission } = this.props;
+  const { rec, setStatus, setGrade, setReminder, notificationPermission } = this.props;
   return (
-    <TouchableOpacity onPress={this.toggleExpanded.bind(this)} activeOpacity={0.9}>
+    <TouchableOpacity onPress={this._toggleExpanded.bind(this)} activeOpacity={0.9}>
       <View style={[styles.container,this.isCardExpanded()]}>
 
         <View style={styles.iconContainer}>
@@ -101,7 +86,13 @@ render() {
         </View>
 
 
-
+        <View style={styles.deleteContainer}>
+        { this.state.expanded &&
+          <TouchableOpacity onPress={this._onDeletePress.bind(this)} activeOpacity={0.9}>
+            <Icon name="times" size={20} color={colors.red} style={{opacity:0.9}} />
+          </TouchableOpacity>
+        }
+        </View>
 
       </View>
     </TouchableOpacity>
@@ -128,3 +119,14 @@ export default Card;
 // <View style={styles.dateContainer}>
 //   <Text style={styles.dateText}>{moment(rec.createdAt).fromNow() }</Text>
 // </View>
+
+
+// left: [
+//     {
+//       text: ' 👍 ',
+//       backgroundColor: 'blue',
+//       onPress: () => {
+//         setStatus(rec.id, 'finished')
+//         setGrade(rec.id,1)
+//       },
+//     },

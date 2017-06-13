@@ -6,6 +6,7 @@ import * as Actions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
   return {
+    recommendations: state.recommendations.list,
     onboard: state.onboard.step
   };
 };

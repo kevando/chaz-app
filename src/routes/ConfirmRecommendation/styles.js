@@ -4,6 +4,7 @@ import { colors, text } from '../../config/styles';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.backgroundGrey,
   },
 
   title: {

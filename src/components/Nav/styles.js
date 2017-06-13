@@ -21,7 +21,7 @@ export default styles = StyleSheet.create({
     borderWidth: 0,
     // borderColor: colors.white,
     flexDirection: 'row',
-    // marginTop: 5,
+    // marginTop: -15,
   },
 
   // ------------------------------
@@ -30,9 +30,11 @@ export default styles = StyleSheet.create({
   title: {
     ...text,
     color: '#fff',
-    fontSize: 25,
-    marginLeft: 3,
-    marginBottom:2
+    fontSize: 30,
+    fontWeight: '500',
+    // paddingLeft: 3,
+    // backgroundColor: 'transparent',
+    // marginBottom:2
     // fontWeight: '500',
     // paddingTop: 7
   },

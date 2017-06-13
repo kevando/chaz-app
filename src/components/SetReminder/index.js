@@ -1,32 +1,44 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Alert } from 'react-native';
 var PushNotification = require('react-native-push-notification');
-import { Icon } from 'native-base';
+const Permissions = require('react-native-permissions');
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
 
-import EnableReminders from '../EnableReminders';
+import { colors } from '../../config/styles';
 import styles from './styles';
 
 
 class SetReminder extends Component {
 
   onSetReminderPress() {
-    const { rec } = this.props;
 
-    Alert.alert(
-      rec.friend,
-      'Remind me to follow up in:',
-      [
-        {text: 'Tomorrow', onPress: this._setReminder.bind(this,1440)},
-        {text: 'In a few days', onPress: this._setReminder.bind(this,4320)},
-        {text: 'In a couple weeks', onPress: this._setReminder.bind(this,21600)},
-        {text: 'In a month or so', onPress: this._setReminder.bind(this,43200)},
-        {text: 'Nevermind', onPress: () => console.log('forget it'), style: 'cancel'},
-      ]
-    );
+    const { rec, notificationPermission } = this.props;
+
+    if(notificationPermission == 'authorized') {
+
+      Alert.alert(
+        rec.friend,
+        'Remind me to follow up in:',
+        [
+          {text: 'Tomorrow', onPress: this._setReminder.bind(this,1440)},
+          {text: 'In a few days', onPress: this._setReminder.bind(this,4320)},
+          {text: 'In a couple weeks', onPress: this._setReminder.bind(this,21600)},
+          {text: 'In a month or so', onPress: this._setReminder.bind(this,43200)},
+          {text: 'Nevermind', onPress: () => console.log('forget it'), style: 'cancel'},
+        ]
+      );
+    } else {
+      this._alertForNotificationPermission();
+    }
+
+
   }
 
   _setReminder(reminderDateInMinutes) {
     const { setReminder, rec } = this.props;
+
+
     const reminderTimestamp = Date.now() + (reminderDateInMinutes * 60 * 1000);
 
     PushNotification.localNotificationSchedule({
@@ -38,29 +50,46 @@ class SetReminder extends Component {
     });
 
     setReminder(rec.id,reminderTimestamp);
-    // setReminder actually does not handle the 2nd argument yet
-    // still just a boolean
+
+  }
+
+  _alertForNotificationPermission() {
+    const { notificationPermission} = this.props.app;
+    Alert.alert(
+      'Let chaz remind you?',
+      '',
+      [
+        {text: 'No way', onPress: () => console.log('permission denied'), style: 'cancel'},
+        notificationPermission == 'undetermined'?
+            {text: 'OK', onPress: this._requestPermission.bind(this)}
+          : {text: 'Open Settings', onPress: Permissions.openSettings}
+      ]
+    )
+  }
+
+  _requestPermission() {
+    const { setNotificationPermission } = this.props;
+    Permissions.requestPermission('notification', ['alert', 'badge', 'sound'])
+      .then(response => {
+        //returns once the user has chosen to 'allow' or to 'not allow' access
+        //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+        setNotificationPermission(response);
+      });
   }
 
   render() {
-    if(this.props.notificationPermission == 'authorized') {
       if(this.props.rec.reminder){
         return (
-          <TouchableOpacity onPress={this.onSetReminderPress.bind(this)} >
-            <Text style={{fontSize:15,color:'#bbb'}} >Reminder is set: {this.props.rec.reminder}</Text>
-          </TouchableOpacity>
+            <Text style={styles.reminderText} >Reminder will go off in {moment(this.props.rec.reminder).fromNow()}</Text>
         );
       } else {
         return (
           <TouchableOpacity onPress={this.onSetReminderPress.bind(this)} >
-            <Text style={{fontSize:15,color:'#bbb'}} >Set Reminder</Text>
+            <Text style={{fontSize:15,color:colors.blue}} ><Icon name="add-alarm" size={13} color={colors.blue} style={{paddingHorizontal:3}}/>Set Reminder</Text>
           </TouchableOpacity>
         );
       }
 
-    } else {
-      return <EnableReminders {...this.props}/>
-    }
   }
 };
 

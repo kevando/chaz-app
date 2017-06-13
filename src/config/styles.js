@@ -19,7 +19,7 @@ export const colors = {
 
   black:        "#1E1E1E",
   darkGrey:     "#5E5E5E",
-  grey:         "#B3B3B3",
+  grey:         "#8C8C8C",
   lightGrey:    "#F2F2F2",
   offWhite:    "#E8E8E8",
   white:        "#FFF",
@@ -28,7 +28,7 @@ export const colors = {
   backgroundGrey:    "#F1F1F1",
 
 
-  darkPurple:   "#6E4BAD",
+  darkPurple:   "#7B40AF",
 
 };
 

@@ -20,12 +20,13 @@ class DashboardNav extends Component {
     if(option == this.state.selected)
       return {backgroundColor: '#fff', color: colors.purple}
   }
+  //
   render() {
     const { title, navigator } = this.props;
     const { selected } = this.state;
     return (
       <View style={styles.titleContainer}>
-        <Icon name="heart" size={18} color="#ffe46a" />
+       <Icon name="heart" size={25} color={colors.yellow} style={{paddingHorizontal:3}}/>
         <Text style={styles.title}>chaz</Text>
 
 
