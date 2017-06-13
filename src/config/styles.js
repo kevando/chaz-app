@@ -24,7 +24,12 @@ export const colors = {
   offWhite:    "#E8E8E8",
   white:        "#FFF",
 
+  cardBorder:       "#D6D6D6",
+  backgroundGrey:    "#F1F1F1",
+
+
   darkPurple:   "#6E4BAD",
+
 };
 
 export const hearts = {
@@ -35,36 +40,15 @@ export const hearts = {
 }
 
 
-// ------------------------------
-// Friend Text
-
-export const friend = {
-  fontSize: 20,
-  // fontFamily: 'Baskerville', // default for now
-  color: colors.black,
-  letterSpacing: 1.1,
-  fontWeight: '400'
-}
 
 // ------------------------------
-// Text
+// Global Text Defaults
 
 export const text = {
   fontSize: 20,
-  fontFamily: 'Helvetica', // default for now
+
+  fontFamily: 'Avenir Next',
   color: colors.black,
   letterSpacing: 0.5,
   fontWeight: '400'
-}
-
-
-// ------------------------------
-// Title Defaults
-
-export const Title = {
-  fontSize: 20,
-  // fontFamily: 'Baskerville', // default for now
-  color: colors.black,
-  letterSpacing: 1.1,
-  fontWeight: '500'
 }

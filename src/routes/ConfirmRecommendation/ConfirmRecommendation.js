@@ -16,7 +16,7 @@ class ConfirmRecommendation extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Does this look right?</Text>
-        <Card rec={unfinished} />
+        <Card rec={unfinished} style={{borderTopWidth: 1}}/>
         <View style={styles.buttonContainer} >
           <Button bgcolor="green" text="Save" onPress={onSaveRecommendationPress} />
         </View>

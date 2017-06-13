@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Alert } from 'react-native';
 const Permissions = require('react-native-permissions');
-import { Button } from 'native-base';
+
 
 import styles from './styles';
 import Routes from '../../config/routes';
@@ -35,19 +35,18 @@ class EnableReminders extends Component {
 
   render() {
 
-    const { notificationPermission } = this.props.app;
+    const { notificationPermission } = this.props;
 
     if(notificationPermission == 'undetermined' || notificationPermission == 'restricted' || notificationPermission == 'denied') {
       return (
         <View style={styles.container}>
-          <Text style={styles.message}>Follow Up with you friends</Text>
-          <Button warning onPress={this._alertForNotificationPermission.bind(this)}>Enable Notifications</Button>
+          <TouchableOpacity  onPress={this._alertForNotificationPermission.bind(this)}><Text>Enable Notifications</Text></TouchableOpacity>
         </View>
       );
     } else {
       return (
 
-          <Button onPress={() => this.props.navigator.push(Routes.getDebugRoute())}>Settings</Button>
+          null
 
       );
     }

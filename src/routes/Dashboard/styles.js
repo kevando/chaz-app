@@ -4,14 +4,7 @@ import { colors } from '../../config/styles';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
-    // backgroundColor: 'yellow',
-    // padding: 12,
+    paddingTop: 5,
+    backgroundColor: colors.backgroundGrey,
   },
-  scrollView: {
-    // backgroundColor: 'blue',
-    // marginBottom: 200,
-    // paddingBottom: 200,
-    // zIndex: 0
-  }
 });

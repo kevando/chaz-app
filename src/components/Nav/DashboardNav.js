@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
 import Routes from '../../config/routes';
@@ -19,8 +20,19 @@ class DashboardNav extends Component {
     if(option == this.state.selected)
       return {backgroundColor: '#fff', color: colors.purple}
   }
-
   render() {
+    const { title, navigator } = this.props;
+    const { selected } = this.state;
+    return (
+      <View style={styles.titleContainer}>
+        <Icon name="heart" size={18} color="#ffe46a" />
+        <Text style={styles.title}>chaz</Text>
+
+
+      </View>
+    );
+  }
+  render_options() {
     const { title, navigator } = this.props;
     const { selected } = this.state;
     return (

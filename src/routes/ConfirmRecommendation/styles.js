@@ -1,19 +1,14 @@
 import { StyleSheet } from 'react-native';
-import { colors, title } from '../../config/styles';
+import { colors, text } from '../../config/styles';
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 
-  input: {
-    flex:1,
-    fontSize: 20,
-    padding: 3
-  },
-
   title: {
-    ...title,
+    ...text,
+    fontSize: 20,
     textAlign: 'center',
     paddingVertical: 15,
   },

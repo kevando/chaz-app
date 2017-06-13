@@ -1,49 +1,68 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../config/styles';
+import { colors, text } from '../../config/styles';
 
 export default styles = StyleSheet.create({
 
+  // // ------------------------------
+  // // Options Container
+  //
+  // optionsContainer: {
+  //   borderWidth: 0,
+  //   borderColor: colors.white,
+  //   flexDirection: 'row',
+  //   marginTop: 5,
+  // },
   // ------------------------------
-  // Options Container
+  // Title Container
 
-  optionsContainer: {
+  titleContainer: {
+    // backgroundColor: 'red',
+    alignItems: 'center',
     borderWidth: 0,
-    borderColor: colors.white,
+    // borderColor: colors.white,
     flexDirection: 'row',
-    marginTop: 5,
-  },
-
-  // ------------------------------
-  // Option Text
-
-  optionText: {
-    color: '#fff',
-    backgroundColor: colors.purple,
-    fontSize: 15,
-    fontWeight: '400',
-    paddingVertical: 2,
-    letterSpacing: -0,
-    borderWidth: 1,
-    borderColor: colors.white,
-    width: 65,
-    textAlign: 'center',
+    // marginTop: 5,
   },
 
   // ------------------------------
   // Title
 
   title: {
+    ...text,
     color: '#fff',
-    fontSize: 18,
-    letterSpacing: 0.5,
-    fontWeight: '500',
-    paddingTop: 7
+    fontSize: 25,
+    marginLeft: 3,
+    marginBottom:2
+    // fontWeight: '500',
+    // paddingTop: 7
   },
+
+
+
+  // ------------------------------
+  // Option Text
+  // not used now. moving to hambyurger menu probly
+
+  // optionText: {
+  //   color: '#fff',
+  //   backgroundColor: colors.purple,
+  //   fontSize: 15,
+  //   fontWeight: '400',
+  //   paddingVertical: 2,
+  //   letterSpacing: -0,
+  //   borderWidth: 1,
+  //   borderColor: colors.white,
+  //   width: 65,
+  //   textAlign: 'center',
+  // },
+
+
 
   // ------------------------------
   // Button
 
   button: {
+    ...text,
     color: '#fff',
     fontSize: 15,
     fontWeight: '400',

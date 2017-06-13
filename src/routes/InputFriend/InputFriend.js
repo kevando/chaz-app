@@ -26,6 +26,7 @@ class InputFriend extends Component {
             autoCorrect={false}
             multiline={false}
             style={styles.input}
+            placeholderTextColor="#aaa"
             onChangeText={(friend) => onKeyPress(friend)}
           />
         </InputGroup>

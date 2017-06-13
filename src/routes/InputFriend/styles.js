@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, friend } from '../../config/styles';
+import { colors, friend, text } from '../../config/styles';
 
 export default styles = StyleSheet.create({
   container: {
@@ -9,19 +9,18 @@ export default styles = StyleSheet.create({
   },
 
   input: {
+    ...text,
     fontSize: 20,
     padding: 3,
-    // backgroundColor: 'yellow',
     height:50
   },
 
   friendsContainer: {
     padding: 3,
-    // backgroundColor: 'red',
   },
 
   friend: {
-    ...friend,
+    ...text,
     color: colors.darkGrey,
     paddingVertical:5,
     paddingLeft:15

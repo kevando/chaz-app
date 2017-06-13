@@ -23,6 +23,7 @@ class InputTitle extends Component {
             ref={ c => this._title = c }
             autoCapitalize="none"
             autoCorrect={false}
+            placeholderTextColor="#aaa"
             multiline={true}
             style={styles.input}
             onChangeText={(title) => updateState({title})}

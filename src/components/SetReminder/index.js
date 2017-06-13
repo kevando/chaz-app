@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, Alert } from 'react-native';
 var PushNotification = require('react-native-push-notification');
 import { Icon } from 'native-base';
 
+import EnableReminders from '../EnableReminders';
 import styles from './styles';
 
 
@@ -19,36 +20,46 @@ class SetReminder extends Component {
         {text: 'In a few days', onPress: this._setReminder.bind(this,4320)},
         {text: 'In a couple weeks', onPress: this._setReminder.bind(this,21600)},
         {text: 'In a month or so', onPress: this._setReminder.bind(this,43200)},
-        {text: 'Forget it', onPress: () => console.log('forget it'), style: 'cancel'},
+        {text: 'Nevermind', onPress: () => console.log('forget it'), style: 'cancel'},
       ]
     );
   }
 
   _setReminder(reminderDateInMinutes) {
     const { setReminder, rec } = this.props;
+    const reminderTimestamp = Date.now() + (reminderDateInMinutes * 60 * 1000);
 
     PushNotification.localNotificationSchedule({
       message: "Did you check out "+rec.title+'?',
-      date: new Date(Date.now() + (reminderDateInMinutes * 60 * 1000)),
+      date: new Date(reminderTimestamp),
       title: rec.friend, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
       playSound: true, // (optional) default: true
       soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
     });
 
-    setReminder(rec.id);
+    setReminder(rec.id,reminderTimestamp);
     // setReminder actually does not handle the 2nd argument yet
     // still just a boolean
   }
 
   render() {
     if(this.props.notificationPermission == 'authorized') {
-      return (
-        <TouchableOpacity onPress={this.onSetReminderPress.bind(this)} >
-          <Text style={{fontSize:15,color:'#bbb'}} >⏲</Text>
-        </TouchableOpacity>
-      );
+      if(this.props.rec.reminder){
+        return (
+          <TouchableOpacity onPress={this.onSetReminderPress.bind(this)} >
+            <Text style={{fontSize:15,color:'#bbb'}} >Reminder is set: {this.props.rec.reminder}</Text>
+          </TouchableOpacity>
+        );
+      } else {
+        return (
+          <TouchableOpacity onPress={this.onSetReminderPress.bind(this)} >
+            <Text style={{fontSize:15,color:'#bbb'}} >Set Reminder</Text>
+          </TouchableOpacity>
+        );
+      }
+
     } else {
-      return null;
+      return <EnableReminders {...this.props}/>
     }
   }
 };

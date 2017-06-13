@@ -34,12 +34,12 @@ const Dashboard = (props) => {
         })
       }
 
-        <AppSettings {...props} />
+
       </ScrollView>
 
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>
   );
 }
-
+// <AppSettings {...props} />
 export default Dashboard;

@@ -21,7 +21,7 @@ class Chaz extends Component {
     if(store.recommendations.list.length == 0)
       initialStack.push(Routes.getHelloRoute());
     // else
-    //   initialStack.push(Routes.getNewRecommendationRoute());
+      // initialStack.push(Routes.getNewRecommendationRoute());
 
 
     // if(process.env.NODE_ENV == 'production')

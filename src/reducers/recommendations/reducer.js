@@ -64,9 +64,10 @@ export default function recs(recommendations = initialState, action = {}) {
 
     // -------------------------------------------
     case SET_REMINDER:
+      // alert(action.reminderDate)
 
       var newList = _.map(recommendations.list, function(rec) {
-        return rec.id === action.recId ? {...rec,reminder: true} : rec;
+        return rec.id === action.recId ? {...rec,reminder: action.reminderDate} : rec;
       });
 
       return {

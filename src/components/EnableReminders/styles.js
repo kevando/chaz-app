@@ -8,13 +8,13 @@ const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
 export default styles = StyleSheet.create({
 
   container: {
-    marginHorizontal: MARGIN_HORIZONTAL,
+    // marginHorizontal: MARGIN_HORIZONTAL,
     marginVertical: 10,
     borderWidth: 1,
     borderColor: colors.grey,
     borderRadius: 10,
 
-    width: CARD_WIDTH,
+    // width: CARD_WIDTH,
     padding: 15
   },
 

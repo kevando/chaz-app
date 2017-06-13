@@ -2,7 +2,8 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { colors, text } from '../../config/styles';
 
 const window = Dimensions.get('window');
-const MARGIN_HORIZONTAL = 0;
+const MARGIN_HORIZONTAL = 10;
+const MARGIN_VERTICAL = 5;
 const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
 const ICON_WIDTH = CARD_WIDTH / 9;
 const DATE_WIDTH = CARD_WIDTH / 8;
@@ -12,18 +13,19 @@ export default styles = StyleSheet.create({
 
   container: {
     marginHorizontal: MARGIN_HORIZONTAL,
-    marginVertical: 0,
-    // borderTopWidth: 1,
-    borderBottomWidth: 1,
-    borderColor: colors.lightGrey,
+    marginVertical: MARGIN_VERTICAL,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
     flexDirection: 'row',
-    width: CARD_WIDTH,
+    backgroundColor: colors.white,
     paddingVertical: 10,
     paddingLeft: 0,
 
     justifyContent: 'center',
     alignItems: 'center',
-    // zIndex: 999
+  },
+  expanded: {
+    borderColor: colors.grey,
   },
 
   iconContainer: {

@@ -11,7 +11,7 @@ class EnableReminders extends Component {
   _alertForNotificationPermission() {
     const { notificationPermission} = this.props.app;
     Alert.alert(
-      'Let chaz remind you?',
+      'Allow chaz alert you?',
       '',
       [
         {text: 'No way', onPress: () => console.log('permission denied'), style: 'cancel'},

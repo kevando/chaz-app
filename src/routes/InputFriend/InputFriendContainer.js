@@ -11,7 +11,7 @@ class InputFriendContainer extends Component {
     super(props);
     this.state = {
       friend: '',
-      friends: this.props.friends
+      friends: this.props.friends.reverse()
     }
   }
 

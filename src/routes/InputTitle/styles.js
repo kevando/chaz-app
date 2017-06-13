@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../config/styles';
+import { colors, text } from '../../config/styles';
 
 export default styles = StyleSheet.create({
   container: {
@@ -8,9 +8,10 @@ export default styles = StyleSheet.create({
   },
 
   input: {
+    ...text,
     flex:1,
     fontSize: 20,
-    padding: 3
+    padding: 3,
   }
 
 });

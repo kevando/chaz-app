@@ -1,63 +1,76 @@
-import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import Swipeout from 'react-native-swipeout';
+import React, { Component } from 'react';
+import { Text, View, TouchableOpacity, LayoutAnimation } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 
 import styles from './styles';
 import SetReminder from '../../components/SetReminder';
 
-const Icon = (props) => {
+const RecIcon = (props) => {
   const {status, grade, reminder} = props.rec;
-  var icon = '🗯';
-  if(status == 'unfinished')  icon = '🗣';
-  if(status == 'new')         icon = '📃';
-  if(reminder)                icon = '⏰';
-  if(grade === 1)             icon = '👍';
-  if(grade === -1)            icon = '👎';
+  var icon = 'square-o';
+  var color = 'green';
+  // if(status == 'unfinished')  icon = '🗣';
+  // if(status == 'new')         icon = '📃';
+  // if(reminder)                icon = '⏰';
+  // if(grade === 1)             icon = '👍';
+  // if(grade === -1)            icon = '👎';
 
-  return <Text style={{fontSize: 15}}>{icon}</Text>
+  return <Icon name={icon} size={18} color={color} />
 }
+class Card extends Component {
 
-const Card = ({ rec, setStatus, setGrade, setReminder, deleteRecommendation, notificationPermission }) => {
+  state = { expanded: true }
 
-  const swipeButtons = {
-    right: [
-      {
-        text: 'DELETE',
-        backgroundColor: 'red',
-        onPress: () => deleteRecommendation(rec.id),
-      },
-    ],
-    left: [
-      {
-        text: ' 👍 ',
-        backgroundColor: 'blue',
-        onPress: () => {
-          setStatus(rec.id, 'finished')
-          setGrade(rec.id,1)
-        },
-      },
-      {
-        text: ' 👎 ',
-        backgroundColor: 'red',
-        onPress: () => {
-          setStatus(rec.id, 'finished')
-          setGrade(rec.id,-1)
-        },
-      }
-    ]
+  componentWillUpdate() {
+    LayoutAnimation.easeInEaseOut(); // this animates the expanded/collapse
+  }
+
+  toggleExpanded() {
+    this.setState({expanded: !this.state.expanded})
   }
 
 
+  // const swipeButtons = {
+  //   right: [
+  //     {
+  //       text: 'DELETE',
+  //       backgroundColor: 'red',
+  //       onPress: () => deleteRecommendation(rec.id),
+  //     },
+  //   ],
+  //   left: [
+  //     {
+  //       text: ' 👍 ',
+  //       backgroundColor: 'blue',
+  //       onPress: () => {
+  //         setStatus(rec.id, 'finished')
+  //         setGrade(rec.id,1)
+  //       },
+  //     },
+  //     {
+  //       text: ' 👎 ',
+  //       backgroundColor: 'red',
+  //       onPress: () => {
+  //         setStatus(rec.id, 'finished')
+  //         setGrade(rec.id,-1)
+  //       },
+  //     }
+  //   ]
+  // }
+  isCardExpanded() {
+    if(this.state.expanded)
+      return styles.expanded
+  }
 
+render() {
+  const { rec, setStatus, setGrade, setReminder, deleteRecommendation, notificationPermission } = this.props;
   return (
-    <Swipeout left={swipeButtons.left} right={swipeButtons.right} style={{backgroundColor: '#fff'}} autoClose={true}>
-
-
-      <View style={styles.container}>
+    <TouchableOpacity onPress={this.toggleExpanded.bind(this)} activeOpacity={0.9}>
+      <View style={[styles.container,this.isCardExpanded()]}>
 
         <View style={styles.iconContainer}>
-          <Icon rec={rec} />
+          <RecIcon rec={rec} />
         </View>
 
         <View style={styles.textContainer}>
@@ -67,23 +80,35 @@ const Card = ({ rec, setStatus, setGrade, setReminder, deleteRecommendation, not
           </View>
 
           <View style={styles.friendContainer}>
-            <Text style={styles.friendText}>Recommended by: <Text style={styles.bold}>{rec.friend}</Text> {rec.status != 'unfinished' && moment(rec.createdAt).fromNow() }</Text>
+            <Text style={styles.friendText}>Recommended by <Text style={styles.bold}>{rec.friend}</Text></Text>
           </View>
 
+          {this.state.expanded &&
+            <View>
+
+              <Text style={styles.friendText}>Saved {rec.status != 'unfinished' && moment(rec.createdAt).fromNow() }</Text>
+
+
+              <SetReminder {...this.props} />
+
+            </View>
+
+          }
+
+
+
 
         </View>
 
-        <View style={styles.dateContainer}>
-        {!rec.reminder &&
-          <SetReminder setReminder={setReminder} rec={rec} notificationPermission={notificationPermission}/>
-        }
 
-        </View>
 
 
       </View>
-    </Swipeout>
+    </TouchableOpacity>
   );
+}
+
+
 };
 
 Card.propTypes = {
