@@ -9,6 +9,14 @@ import Debug from '../routes/Debug';
 import Hello from '../routes/Hello';
 import * as Nav from '../components/Nav';
 
+export const RouteConfigs = {
+  Hello: { screen: Hello },
+  InputTitle: { screen: InputTitle },
+  InputFriend: { screen: InputFriend },
+  ConfirmRecommendation: { screen: ConfirmRecommendation },
+  Dashboard: { screen: Dashboard },
+};
+
 export const routes = {
 
   // -----------------------------------------

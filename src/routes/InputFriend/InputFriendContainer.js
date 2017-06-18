@@ -21,11 +21,14 @@ class InputFriendContainer extends Component {
   }
 
   onNextPress() {
-    const { navigator, setFriend, saveFriend } = this.props;
+    const { setFriend, saveFriend } = this.props;
     const {friend} = this.state;
     setFriend(friend); // Redux
     saveFriend({name: friend}); // Redux
-    navigator.push(Routes.getConfirmRecommendationRoute());
+
+    const { navigate } = this.props.navigation;
+    navigate('ConfirmRecommendation');
+
   }
 
   onKeyPress(friend) {
@@ -37,7 +40,9 @@ class InputFriendContainer extends Component {
   onFriendPress(name) {
     const { navigator, setFriend } = this.props;
     setFriend(name); // Redux
-    navigator.push(Routes.getConfirmRecommendationRoute());
+    // navigator.push(Routes.getConfirmRecommendationRoute());
+    const { navigate } = this.props.navigation;
+    navigate('ConfirmRecommendation');
   }
 
   render() {

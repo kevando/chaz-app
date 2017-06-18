@@ -21,11 +21,13 @@ class DashboardContainer extends Component {
 
   render() {
 
+    const { navigate } = this.props.navigation;
+
     return (
       <Dashboard
         {...this.props}
         {...this.state}
-        onNewRecPress={() => this.props.navigator.push(Routes.getNewRecommendationRoute())}
+        onNewRecPress={() => navigate('InputTitle')}
       />
     );
   }

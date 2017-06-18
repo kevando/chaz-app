@@ -5,12 +5,11 @@ import * as Animatable from 'react-native-animatable';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-// import Heartman from '../../components/Heartman';
 import Button from '../../components/Button';
 
 
 
-const Hello = ({onButtonPress}) => {
+const Hello = ({onPress}) => {
 
 
 
@@ -38,7 +37,7 @@ const Hello = ({onButtonPress}) => {
 
 
       </ScrollView>
-        <Button text="Add 1st Recommendation" onPress={onButtonPress} />
+        <Button text="Add 1st Recommendation" onPress={onPress} />
     </View>
   );
 }

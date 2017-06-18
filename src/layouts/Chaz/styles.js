@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../config/styles';
 
+export const headerStyle = {
+  backgroundColor: colors.purple,
+}
+
 export default styles = StyleSheet.create({
   icon: {
     height: 30,

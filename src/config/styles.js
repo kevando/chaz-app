@@ -1,6 +1,9 @@
 import { StyleSheet, Dimensions } from 'react-native';
 const window = Dimensions.get('window');
 
+const env = process.env.NODE_ENV;
+// alert(env)
+
 // ------------------------------
 // Constants
 
@@ -8,10 +11,15 @@ export const width = window.width;
 export const height = window.height;
 
 
+// ------------------------------
+// Colors
+
+
 export const colors = {
 
+
   // chaz colors
-  purple:       "#8a69c6",
+  purple:       env=='development' ? "purple":'#8a69c6',
   blue:         "#3888EA",
   green:        "#3A931F",
   red:          "#E83A3A",

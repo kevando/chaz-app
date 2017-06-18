@@ -30,7 +30,6 @@ class InputTitle extends Component {
             onChangeText={(title) => updateState({title})}
           />
         </InputGroup>
-        { renderHeartman() }
         { renderButton() }
         <KeyboardSpacer />
       </View>

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import ExNavigator from '@exponent/react-native-navigator';
-import Routes from '../../config/routes';
-import styles from './styles';
+// import {View,Text,Button,Animated} from 'react-native';
+import { StackNavigator, Transitioner } from 'react-navigation';
+import Routes, { RouteConfigs } from '../../config/routes';
+import styles, {headerStyle} from './styles';
+
 
 class Chaz extends Component {
 
@@ -11,31 +13,27 @@ class Chaz extends Component {
     checkNotificationPermission();
   }
 
+
   render() {
 
     const store = this.context.store.getState();
-    // const initialStack = [Routes.getDebugRoute()];
-    const initialStack = [Routes.getDashboardRoute()];
 
-    // Show welcome screen if there are no recs
-    if(store.recommendations.list.length == 0)
-      initialStack.push(Routes.getHelloRoute());
-    // else
-      // initialStack.push(Routes.getNewRecommendationRoute());
+    const initialRoute = store.recommendations.list.length == 0 ? 'Hello' : 'Dashboard';
+    // const initialRoute = 'ConfirmRecommendation';
 
+    const StackNavigatorConfig = {
+      initialRouteName: initialRoute,
+      mode:'modal',
+      navigationOptions: {
+        title: '<3 chaz',
+        headerStyle,
+      }
+    }
 
-      // initialStack.push(Routes.getConfirmRecommendationRoute());
-    // if(process.env.NODE_ENV == 'production')
-    //   initialStack.push(Routes.getInitialRecInputRoute());
+    const SomeStack = StackNavigator(RouteConfigs, StackNavigatorConfig)
 
-    return (
-      <ExNavigator
-        initialRouteStack={initialStack}
-        style={{ flex: 1 }}
-        navigationBarStyle={styles.navBar}
-        sceneStyle={{ paddingTop: 64 }}
-      />
-    );
+    return <SomeStack />
+
   }
 
 }

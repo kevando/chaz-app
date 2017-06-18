@@ -5,6 +5,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundGrey,
+    paddingTop: 5,
   },
 
   title: {

@@ -26,6 +26,7 @@ class InputTitleContainer extends Component {
   }
 
   renderHeartman() {
+    return; //tmp
     // Offer the user some help on their first time if they sit here
     setTimeout( () => {
       if(this.props.recommendations.length == 0 && this.state.title == '') {
@@ -44,9 +45,11 @@ class InputTitleContainer extends Component {
   }
 
   onNextPress() {
-    const { navigator, setTitle } = this.props;
+    const { setTitle } = this.props;
     setTitle(this.state.title); // Redux
-    navigator.push(Routes.getInputFriendRoute());
+
+    const { navigate } = this.props.navigation;
+    navigate('InputFriend')
   }
 
   render() {
@@ -54,7 +57,6 @@ class InputTitleContainer extends Component {
       <InputTitle
         updateState={this.setState.bind(this)}
         renderButton={this.renderButton.bind(this)}
-        renderHeartman={this.renderHeartman.bind(this)}
       />
     );
   }
