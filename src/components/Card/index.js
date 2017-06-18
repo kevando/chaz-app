@@ -6,6 +6,7 @@ import moment from 'moment';
 import { colors } from '../../config/styles';
 import styles from './styles';
 import SetReminder from '../../components/SetReminder';
+import Tooltip from '../../components/Tooltip';
 
 const RecIcon = (props) => {
   const {status, grade, reminder} = props.rec;
@@ -24,7 +25,9 @@ class Card extends Component {
   state = { expanded: false }
 
   componentWillUpdate() {
+    // this.setState({expanded: false})
     LayoutAnimation.easeInEaseOut(); // this animates the expanded/collapse
+
   }
 
   _toggleExpanded() {
@@ -49,8 +52,9 @@ class Card extends Component {
   }
 
 render() {
-  const { rec, setStatus, setGrade, setReminder, notificationPermission } = this.props;
+  const { rec, setStatus, setGrade, setReminder, notificationPermission, totalRecs } = this.props;
   return (
+    <View>
     <TouchableOpacity onPress={this._toggleExpanded.bind(this)} activeOpacity={0.9}>
       <View style={[styles.container,this.isCardExpanded()]}>
 
@@ -96,6 +100,25 @@ render() {
 
       </View>
     </TouchableOpacity>
+    <View>
+    {totalRecs == 1 && !this.state.expanded &&
+    <Tooltip text="^ Tap to expand" />
+    }
+
+    {totalRecs == 1 && this.state.expanded && !rec.reminder && notificationPermission != 'authorized' &&
+    <Tooltip text="^ Tap to enable permission" />
+    }
+
+    {totalRecs == 1 && this.state.expanded && !rec.reminder && notificationPermission == 'authorized' &&
+    <Tooltip text="^ Tap to set a reminder" />
+    }
+
+    {totalRecs == 1 && this.state.expanded && rec.reminder &&
+    <Tooltip text="^ Tap to collapase" />
+    }
+    </View>
+
+    </View>
   );
 }
 

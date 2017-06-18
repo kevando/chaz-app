@@ -9,28 +9,18 @@ import styles from './styles';
 
 const Dashboard = (props) => {
 
-  const { activeFilter, recommendations, onNewRecPress, app, setNotificationPermission } = props;
+  const { recommendations, onNewRecPress, app, setNotificationPermission } = props;
 
-
-  var filteredRecs;
-
-  if(activeFilter == 'all'){
-    filteredRecs = recommendations;
-  } else if(activeFilter == 'queue') {
-    filteredRecs = _.filter(recommendations,(rec) => { return rec.status == 'new'})
-  } else if (activeFilter == 'finished') {
-    filteredRecs = _.filter(recommendations,(rec) => { return rec.status == 'finished'})
-  }
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="light-content" hidden={false} />
 
       <ScrollView style={styles.scrollView}>
       {
-        _.map(filteredRecs,function(rec,i) {
+        _.map(recommendations,function(rec,i) {
           return(
-            <Card rec={rec} key={i} {...props} notificationPermission={app.notificationPermission}  />
+            <Card totalRecs={recommendations.length} rec={rec} key={i} {...props} notificationPermission={app.notificationPermission}  />
           )
         })
       }

@@ -31,6 +31,10 @@ export const routes = {
         return <Nav.SettingsButton navigator={navigator} />
       },
 
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
+      },
+
     };
   },
 
@@ -88,6 +92,10 @@ export const routes = {
 
       renderLeftButton(navigator) {
         return <Nav.Button text="Back" onPress={() => navigator.pop() } />
+      },
+
+      configureScene(){
+        return ExNavigator.SceneConfigs.FloatFromBottom
       },
 
     };

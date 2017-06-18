@@ -21,6 +21,8 @@ class SetReminder extends Component {
         rec.friend,
         'Remind me to follow up in:',
         [
+          {text: 'In one minute', onPress: this._setReminder.bind(this,1)},
+          {text: 'In a 20 minutes', onPress: this._setReminder.bind(this,20)},
           {text: 'Tomorrow', onPress: this._setReminder.bind(this,1440)},
           {text: 'In a few days', onPress: this._setReminder.bind(this,4320)},
           {text: 'In a couple weeks', onPress: this._setReminder.bind(this,21600)},
@@ -56,12 +58,12 @@ class SetReminder extends Component {
   _alertForNotificationPermission() {
     const { notificationPermission} = this.props.app;
     Alert.alert(
-      'Let chaz remind you?',
-      '',
+      'Enable Notification Permissions',
+      'chaz needs this permission to send you reminders',
       [
-        {text: 'No way', onPress: () => console.log('permission denied'), style: 'cancel'},
+        {text: 'No way', onPress: () => console.log('permission denied'), },
         notificationPermission == 'undetermined'?
-            {text: 'OK', onPress: this._requestPermission.bind(this)}
+            {text: 'Sure', onPress: this._requestPermission.bind(this)}
           : {text: 'Open Settings', onPress: Permissions.openSettings}
       ]
     )

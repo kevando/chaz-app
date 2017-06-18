@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { InputGroup, Input, Icon } from 'native-base';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { View, Text } from 'react-native';
 
 import Card from '../../components/Card';
 import Button from '../../components/Button';
@@ -11,11 +9,13 @@ class ConfirmRecommendation extends Component {
 
   render() {
 
-    const { unfinished, onSaveRecommendationPress } = this.props;
+    const { unfinished, onSaveRecommendationPress, showTitle } = this.props;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Does this look right?</Text>
+        {showTitle &&
+          <Text style={styles.title}>Does this look right?</Text>
+        }
         <Card rec={unfinished} unfinished={true} />
         <View style={styles.buttonContainer} >
           <Button bgcolor="green" text="Save" onPress={onSaveRecommendationPress} />

@@ -8,21 +8,31 @@ class ConfirmRecommendationContainer extends Component {
 
   constructor(props) {
     super(props);
-    // this.state = {name: 'friend'}
+    this.state = {showTitle: true}
+  }
+
+  _onSaveRecommendationPress() {
+    this.setState({showTitle: false})
+    setTimeout( () => {
+      this.saveRecommendation();
+    },400)
+
   }
 
   saveRecommendation() {
     const { navigator, saveRecommendation } = this.props;
     saveRecommendation(); // Redux
 
-    navigator.resetTo(Routes.getDashboardRoute());
+    // navigator.pop();
+    navigator.push(Routes.getDashboardRoute());
   }
 
   render() {
     return (
       <ConfirmRecommendation
-        onSaveRecommendationPress={this.saveRecommendation.bind(this)}
+        onSaveRecommendationPress={this._onSaveRecommendationPress.bind(this)}
         {...this.props}
+        {...this.state}
       />
     );
   }
