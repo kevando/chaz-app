@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
-import { InputGroup, Input, Icon } from 'native-base';
+// import { InputGroup, Input, Icon } from 'native-base';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import _ from 'lodash';
 
@@ -9,7 +9,7 @@ import styles from './styles';
 class InputFriend extends Component {
 
   componentDidMount() {
-    this._title._textInput.focus();
+    // this._title._textInput.focus();
   }
 
   render() {
@@ -18,8 +18,8 @@ class InputFriend extends Component {
 
     return (
       <View style={styles.container}>
-        <InputGroup >
-          <Input
+
+          <TextInput
             placeholder='Who recommended this?'
             ref={ c => this._title = c }
             autoCapitalize="none"
@@ -29,7 +29,7 @@ class InputFriend extends Component {
             placeholderTextColor="#aaa"
             onChangeText={(friend) => onKeyPress(friend)}
           />
-        </InputGroup>
+        
 
         <ScrollView keyboardShouldPersistTaps="always" style={styles.friendsContainer}>
           { _.map(friends, function({name},i) {

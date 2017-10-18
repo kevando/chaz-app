@@ -125,11 +125,11 @@ render() {
 
 };
 
-Card.propTypes = {
-  rec: React.PropTypes.object,
-  // friend: React.PropTypes.string,
-  onPress: React.PropTypes.func,
-};
+// Card.propTypes = {
+//   rec: React.PropTypes.object,
+//   // friend: React.PropTypes.string,
+//   onPress: React.PropTypes.func,
+// };
 
 Card.defaultProps = {
   rec: {title: 'DUMMY', friend: 'duude'},
