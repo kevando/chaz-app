@@ -1,21 +1,24 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput, StatusBar } from 'react-native';
+import { View, Text, TextInput, StatusBar, Keyboard } from 'react-native';
 // import { InputGroup, Input, Icon } from 'native-base';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-
+import { Actions } from 'react-native-router-flux';
 import styles from './styles';
 
 class InputTitle extends Component {
 
   componentDidMount() {
-    // this._title._textInput.focus(); // todo
+    if(Actions.currentScene == 'InputTitle')
+      this._title.focus()
   }
+
 
   render() {
 
     const { updateState, renderButton, renderHeartman } = this.props;
 
     return (
+
       <View style={styles.container}>
         <StatusBar hidden={true} />
 
@@ -29,10 +32,10 @@ class InputTitle extends Component {
             style={styles.input}
             onChangeText={(title) => updateState({title})}
           />
-
         { renderButton() }
         <KeyboardSpacer />
       </View>
+
     );
 
   }

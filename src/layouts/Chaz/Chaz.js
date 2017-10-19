@@ -1,63 +1,74 @@
 import React, {Component} from 'react';
-import {View,Text,Button,Animated} from 'react-native';
-// import { StackNavigator, Transitioner } from 'react-navigation';
-import Routes, { RouteConfigs } from '../../config/routes';
-import styles, {headerStyle} from './styles';
-import { StackNavigator } from 'react-navigation';
+import {View,Text,Button,Animated,Easing, Keyboard } from 'react-native';
+// import Routes, { RouteConfigs } from '../../config/routes';
+import styles, { navigationBarStyle, titleStyle } from './styles';
+import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
+import {
+  Scene,
+  Router,
+  Actions,
+  Reducer,
+  ActionConst,
+  Overlay,
+  Tabs,
+  Modal,
+  Drawer,
+  Stack,
+  Lightbox,
+} from 'react-native-router-flux';
 
-class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Welcome'
-  };
+import Dashboard from '../../routes/Dashboard';
+import InputTitle from '../../routes/InputTitle';
+import InputFriend from '../../routes/InputFriend';
+import ConfirmRecommendation from '../../routes/ConfirmRecommendation';
+import Hello from '../../routes/Hello';
+
+
+
+class CloseButton extends Component {
+
+  _onClose() {
+    Keyboard.dismiss()
+    Actions.pop()
+  }
   render() {
-    return <Text>Hello, Navigation!</Text>;
+    return (
+      <Button onPress={this._onClose} title="Close" color="white" />
+    )
   }
 }
-
-const SimpleApp = StackNavigator({
-  Home: { screen: HomeScreen }
-});
 
 
 class Chaz extends Component {
 
-  componentDidMount() {
-    // If this function grows, consider a initializeApp action
-    // const { checkNotificationPermission } = this.props;
-    // checkNotificationPermission();
-  }
-
 
   render() {
-    // return(<View><Text>dude</Text></View>)
+    console.log(this.props)
+    const { showOnboarding } = this.props
 
-    // return <SimpleApp />;
+    return (
 
-    // const store = this.context.store.getState();
-    //
-    const initialRoute =  'Dashboard'//store.recommendations.list.length == 0 ? 'Hello' : 'Dashboard';
-    // // const initialRoute = 'ConfirmRecommendation';
-    //
-    // const StackNavigatorConfig = {}
-    const StackNavigatorConfig = {
-      initialRouteName: initialRoute,
-      mode:'modal',
-      navigationOptions: {
-        title: '<3 chaz',
-        // headerStyle,
-      }
-    }
-    //
-    const SomeStack = StackNavigator(RouteConfigs, StackNavigatorConfig)
-    //
-    return <SomeStack />
+      <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
+        <Modal key="root" hideNavBar={true}>
+          <Stack key="MainStack" initial={true}>
+            <Scene key='Dashboard' component={Dashboard} title='Dashboard' hideNavBar={showOnboarding} initial={!showOnboarding} />
+          </Stack>
+          <Stack key="InputStack" back backTitle="Close" hideBackImage  backButtonTextStyle={{ color:'white' }}  >
+            <Scene key='InputTitle' component={InputTitle} title='' hideNavBar={false} renderBackButton={() => <CloseButton />} />
+            <Scene key='InputFriend' component={InputFriend} title='' hideNavBar={false} backTitle="Back"/>
+            <Scene key='ConfirmRecommendation'  component={ConfirmRecommendation} title='' hideNavBar={false} backTitle="Back" />
+          </Stack>
+
+        </Modal>
+        </Router>
+
+
+    )
 
   }
 
 }
 
-// Chaz.contextTypes = {
-//   store: React.PropTypes.object.isRequired // Gives us store without @connect
-// };
+
 
 export default Chaz;

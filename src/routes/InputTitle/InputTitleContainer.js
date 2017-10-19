@@ -6,6 +6,7 @@ import * as Animatable from 'react-native-animatable';
 import InputTitle from './InputTitle';
 import Routes from '../../config/routes';
 import Heartman from '../../components/Heartman';
+import { Actions } from 'react-native-router-flux';
 
 class InputTitleContainer extends Component {
 
@@ -47,14 +48,14 @@ class InputTitleContainer extends Component {
   onNextPress() {
     const { setTitle } = this.props;
     setTitle(this.state.title); // Redux
-
-    const { navigate } = this.props.navigation;
-    navigate('InputFriend')
+    Actions.push('InputFriend')
   }
 
   render() {
+
     return (
       <InputTitle
+        showKeyboard={this.props.showKeyboard}
         updateState={this.setState.bind(this)}
         renderButton={this.renderButton.bind(this)}
       />

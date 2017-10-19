@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, Keyboard } from 'react-native';
 // import { InputGroup, Input, Icon } from 'native-base';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import _ from 'lodash';
@@ -9,7 +9,7 @@ import styles from './styles';
 class InputFriend extends Component {
 
   componentDidMount() {
-    // this._title._textInput.focus();
+    // this._title.focus();
   }
 
   render() {
@@ -29,7 +29,7 @@ class InputFriend extends Component {
             placeholderTextColor="#aaa"
             onChangeText={(friend) => onKeyPress(friend)}
           />
-        
+
 
         <ScrollView keyboardShouldPersistTaps="always" style={styles.friendsContainer}>
           { _.map(friends, function({name},i) {
@@ -40,6 +40,7 @@ class InputFriend extends Component {
             );
           })}
         </ScrollView>
+
 
         { renderButton() }
         <KeyboardSpacer />

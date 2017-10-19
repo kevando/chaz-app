@@ -20,3 +20,11 @@ export default styles = StyleSheet.create({
     borderColor: colors.darkPurple
   }
 });
+
+export const navigationBarStyle = {
+  backgroundColor: colors.purple
+}
+
+export const titleStyle = {
+  color: 'white'
+}

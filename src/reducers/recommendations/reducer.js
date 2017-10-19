@@ -32,7 +32,7 @@ export default function recs(recommendations = initialState, action = {}) {
       return {
         ...recommendations,
         unfinished: {
-          // id: uuid.v1(),
+          id: 'key_' + Date.now(),
           title: action.title,
           status: 'unfinished',
           createdAt: Date.now()
@@ -78,6 +78,9 @@ export default function recs(recommendations = initialState, action = {}) {
     // -------------------------------------------
     case DELETE_RECOMMENDATION:
 
+      console.log('delete?',recommendations)
+      console.log('delete?',action)
+
       var newList = _.filter(recommendations.list, function(rec) {
         return rec.id != action.recId;
       });
@@ -86,6 +89,7 @@ export default function recs(recommendations = initialState, action = {}) {
         ...recommendations,
         list: newList,
       }
+      // return recommendations
 
     // -------------------------------------------
     case SET_STATUS:

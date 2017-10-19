@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { NavigationActions } from 'react-navigation';
-
-// import BottomButton from '../../components/Button';
-
+// import { Keyboard } from 'react-native'
 import ConfirmRecommendation from './ConfirmRecommendation';
 import Routes from '../../config/routes';
+import { Actions } from 'react-native-router-flux';
 
 class ConfirmRecommendationContainer extends Component {
 
@@ -14,7 +12,6 @@ class ConfirmRecommendationContainer extends Component {
   }
 
   _onSaveRecommendationPress() {
-
     this.setState({showTitle: false});
     setTimeout( () => {
       this.saveRecommendation();
@@ -23,20 +20,9 @@ class ConfirmRecommendationContainer extends Component {
   }
 
   saveRecommendation() {
-    const { navigator, saveRecommendation } = this.props;
+    const { saveRecommendation } = this.props;
     saveRecommendation(); // Redux
-
-
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Dashboard'})
-      ]
-    })
-    this.props.navigation.dispatch(resetAction)
-
-
-
+    Actions.reset('MainStack') 
   }
 
   render() {

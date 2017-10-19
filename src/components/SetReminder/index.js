@@ -11,11 +11,14 @@ import styles from './styles';
 
 class SetReminder extends Component {
 
+
+  // Disabling the actual reminders for now
+  
   onSetReminderPress() {
 
     const { rec, notificationPermission } = this.props;
 
-    if(notificationPermission == 'authorized') {
+    // if(notificationPermission == 'authorized') {
 
       Alert.alert(
         rec.friend,
@@ -30,9 +33,9 @@ class SetReminder extends Component {
           {text: 'Nevermind', onPress: () => console.log('forget it'), style: 'cancel'},
         ]
       );
-    } else {
-      this._alertForNotificationPermission();
-    }
+    // } else {
+    //   this._alertForNotificationPermission();
+    // }
 
 
   }
@@ -43,13 +46,13 @@ class SetReminder extends Component {
 
     const reminderTimestamp = Date.now() + (reminderDateInMinutes * 60 * 1000);
 
-    PushNotification.localNotificationSchedule({
-      message: "Did you check out "+rec.title+'?',
-      date: new Date(reminderTimestamp),
-      title: rec.friend, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
-      playSound: true, // (optional) default: true
-      soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
-    });
+    // PushNotification.localNotificationSchedule({
+    //   message: "Did you check out "+rec.title+'?',
+    //   date: new Date(reminderTimestamp),
+    //   title: rec.friend, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
+    //   playSound: true, // (optional) default: true
+    //   soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
+    // });
 
     setReminder(rec.id,reminderTimestamp);
 
@@ -57,12 +60,13 @@ class SetReminder extends Component {
 
   _alertForNotificationPermission() {
     const { notificationPermission} = this.props.app;
+
     Alert.alert(
       'Enable Notification Permissions',
       'chaz needs this permission to send you reminders',
       [
         {text: 'No way', onPress: () => console.log('permission denied'), },
-        notificationPermission == 'undetermined'?
+        notificationPermission == 'undetermined' || !notificationPermission ?
             {text: 'Sure', onPress: this._requestPermission.bind(this)}
           : {text: 'Open Settings', onPress: Permissions.openSettings}
       ]
@@ -80,6 +84,7 @@ class SetReminder extends Component {
   }
 
   render() {
+    console.log(this.props)
       if(this.props.rec.reminder){
         return (
             <Text style={styles.reminderText} >Reminder will go off in {moment(this.props.rec.reminder).fromNow()}</Text>
