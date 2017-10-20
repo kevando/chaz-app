@@ -51,6 +51,7 @@
 		87944CBD84524CD886E6390B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE5B093C4C94BE791C3F500 /* MaterialIcons.ttf */; };
 		89C243531F9A60DF0052C8B5 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8E2E201E4FFC73006D68F2 /* libReactNativePermissions.a */; };
 		89CC5FA71F99732A0056DB60 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89CC5F821F99732A0056DB60 /* GoogleService-Info.plist */; };
+		89F0D3A01F9A755B00DEA710 /* heart_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 89F0D37B1F9A755B00DEA710 /* heart_yellow.png */; };
 		89FE450ECD02487EA02520F6 /* Courier New.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883BD273D4284BAABE4BADC7 /* Courier New.ttf */; };
 		8C3706FBC6944543A7608586 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF2535A5080642E4A510569A /* Microsoft Sans Serif.ttf */; };
 		8F0C50A00E654EE1AFC92CC1 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D44D8AFC5EDF406CA56C7566 /* SimpleLineIcons.ttf */; };
@@ -373,6 +374,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		883BD273D4284BAABE4BADC7 /* Courier New.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Courier New.ttf"; path = "../node_modules/native-base/Fonts/Courier New.ttf"; sourceTree = "<group>"; };
 		89CC5F821F99732A0056DB60 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "chaz/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		89F0D37B1F9A755B00DEA710 /* heart_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = heart_yellow.png; path = chaz/heart_yellow.png; sourceTree = "<group>"; };
 		976059A55F78149D2168BED0 /* Pods-Chaz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chaz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chaz/Pods-Chaz.release.xcconfig"; sourceTree = "<group>"; };
 		9B1A0A0E029E4504BA7D4213 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		9C14FEED85684359AC918EA7 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 		13B07FAE1A68108700A75B9A /* Chaz */ = {
 			isa = PBXGroup;
 			children = (
+				89F0D37B1F9A755B00DEA710 /* heart_yellow.png */,
 				89CC5F821F99732A0056DB60 /* GoogleService-Info.plist */,
 				0A8E2DC81E4FF5DE006D68F2 /* Chaz.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1157,6 +1160,7 @@
 				A05C29DD27524C0BA064E1BA /* Entypo.ttf in Resources */,
 				C9382519B2A1430FB3DCAEB3 /* EvilIcons.ttf in Resources */,
 				B4F6FB3FBFDB454AB1309556 /* FontAwesome.ttf in Resources */,
+				89F0D3A01F9A755B00DEA710 /* heart_yellow.png in Resources */,
 				536366098C0048FFA2DEEFB3 /* Foundation.ttf in Resources */,
 				273BF6A0CEE14971B8E96EAB /* Ionicons.ttf in Resources */,
 				0239D56615B247628C88843C /* MaterialCommunityIcons.ttf in Resources */,

@@ -10,6 +10,7 @@ import InputFriend from '../../routes/InputFriend';
 import ConfirmRecommendation from '../../routes/ConfirmRecommendation';
 import { CloseButton } from '../../components/Nav';
 import RecView from '../../routes/RecView';
+import Splash from '../../routes/Splash';
 
 
 
@@ -30,8 +31,11 @@ class Chaz extends Component {
     )
   }
   render() {
+    console.log('render chaz.js')
     const { showOnboarding, isAuthenticated } = this.props
 
+    return <Splash />
+    
     if (!isAuthenticated)
       return null;
 
