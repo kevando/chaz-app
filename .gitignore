@@ -40,3 +40,7 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+
+
+ios/Pods
+ios/chaz/Goo*
