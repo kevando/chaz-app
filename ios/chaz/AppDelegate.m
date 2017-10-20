@@ -28,7 +28,7 @@
                                                       moduleName:@"Chaz"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:0.5f];
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:0.54f green:0.41f blue:0.78f alpha:1.0f];
 
   // [UIColor colorWithPatternImage:[UIImage imageNamed:@"heart_yellow.png"]];
 
