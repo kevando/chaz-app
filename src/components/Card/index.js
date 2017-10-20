@@ -32,28 +32,23 @@ render() {
   const { rec, setStatus, setGrade, setReminder, notificationPermission, totalRecs } = this.props;
   return (
     <View>
-    <TouchableOpacity onPress={this._onCardPress.bind(this)} activeOpacity={0.9}>
-      <View style={[styles.container]}>
+      <TouchableOpacity onPress={this._onCardPress.bind(this)} activeOpacity={0.9}>
+        <View style={[styles.container]}>
 
-        <View style={styles.iconContainer}>
-          <RecIcon rec={rec} />
-        </View>
+          <View style={styles.iconContainer}>
+            <RecIcon rec={rec} />
+          </View>
 
         <View style={styles.textContainer}>
-
           <View style={styles.recContainer}>
             <Text style={styles.recText}>{rec.title}</Text>
           </View>
-
-
-
-
         </View>
 
       </View>
     </TouchableOpacity>
     <View>
-    {totalRecs == 1 && !this.state.expanded &&
+    {totalRecs == 1 && false &&
     <Tooltip text="^ Tap to expand" />
     }
 

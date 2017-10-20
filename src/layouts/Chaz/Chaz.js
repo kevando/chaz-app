@@ -31,7 +31,7 @@ class Chaz extends Component {
       <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
         <Modal key="root" hideNavBar={true}>
           <Stack key="MainStack" initial={true}>
-            <Scene key='Dashboard' component={Dashboard} title='Dashboard' hideNavBar={showOnboarding} initial={!showOnboarding} />
+            <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={showOnboarding} initial={!showOnboarding} />
             <Scene key='RecView' component={RecView} title='' hideNavBar={false} hideBackImage backTitle="Back"  backButtonTextStyle={{ color:'white' }} />
           </Stack>
           <Stack key="InputStack" back backTitle="Close" hideBackImage  backButtonTextStyle={{ color:'white' }}  >

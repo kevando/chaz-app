@@ -26,6 +26,7 @@ export function addRecommendation(unfinished) {
   return(dispatch,getState) => {
     unfinished.uid = getState().app.uid // add rec owner
     unfinished.status = 'new'
+    console.log(unfinished)
     RecsRef.add(unfinished)
     .then(docRef => {
       unfinished.id = docRef.id
@@ -50,7 +51,10 @@ export function setReminder(recId,reminderDate) {
 }
 
 export function deleteRecommendation(recId) {
-  return { type: DELETE_RECOMMENDATION, recId }
+  return(dispatch,getState) => {
+    RecsRef.doc(recId).delete() 
+    dispatch({ type: DELETE_RECOMMENDATION, recId })
+  }
 }
 
 export function setStatus(recId,status) {

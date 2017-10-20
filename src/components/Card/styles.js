@@ -24,9 +24,9 @@ export default styles = StyleSheet.create({
 
     // justifyContent: 'center',
     // alignItems: 'center',
-
+    // backgroundColor: 'orange',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'center', // vertical align
   },
   expanded: {
     borderColor: colors.grey,
@@ -37,7 +37,7 @@ export default styles = StyleSheet.create({
     // backgroundColor: 'yellow',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    paddingTop: 8,
+    // paddingTop: 8,
   },
   textContainer: {
     width: TEXT_WIDTH,// might need to change this

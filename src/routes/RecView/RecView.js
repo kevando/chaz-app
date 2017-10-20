@@ -7,18 +7,18 @@ import styles from './styles';
 
 
 
-const RecView = ({rec, onEditPress}) => {
+const RecView = ({ rec, onEditPress, onDeletePress }) => {
 
 
 
   return (
     <View style={styles.container}>
-      <StatusBar hidden={true} />
       <ScrollView>
       <Text style={styles.title}>{rec.title}</Text>
       <Text style={styles.paragraph}>Friend: {rec.friend}</Text>
-      <Text style={styles.paragraph}>{rec.id}</Text>
+
       <Button title="edit" onPress={onEditPress} />
+      <Button title="delete" onPress={onDeletePress} color="red" />
       </ScrollView>
     </View>
   );

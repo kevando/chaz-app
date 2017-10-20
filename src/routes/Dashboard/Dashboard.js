@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import AppSettings from '../../components/AppSettings';
+import OnboardingCard from '../../components/OnboardingCard';
 import styles from './styles';
 
 const Dashboard = (props) => {
@@ -27,6 +27,7 @@ const Dashboard = (props) => {
 
 
       </ScrollView>
+      <OnboardingCard />
 
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>

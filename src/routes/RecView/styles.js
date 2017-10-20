@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
   title: {
     ...text,
     color: colors.black,
-    fontSize: 80,
+    fontSize: 30,
     paddingTop:20,
     paddingBottom: 0,
     fontWeight: '400',
