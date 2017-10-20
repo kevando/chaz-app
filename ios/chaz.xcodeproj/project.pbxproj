@@ -49,6 +49,7 @@
 		82C830F6504248E6AFA79B00 /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17BA14C855EC47A987CA2D5B /* Arial.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		87944CBD84524CD886E6390B /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE5B093C4C94BE791C3F500 /* MaterialIcons.ttf */; };
+		89C243531F9A60DF0052C8B5 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8E2E201E4FFC73006D68F2 /* libReactNativePermissions.a */; };
 		89CC5FA71F99732A0056DB60 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89CC5F821F99732A0056DB60 /* GoogleService-Info.plist */; };
 		89FE450ECD02487EA02520F6 /* Courier New.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 883BD273D4284BAABE4BADC7 /* Courier New.ttf */; };
 		8C3706FBC6944543A7608586 /* Microsoft Sans Serif.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF2535A5080642E4A510569A /* Microsoft Sans Serif.ttf */; };
@@ -401,6 +402,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89C243531F9A60DF0052C8B5 /* libReactNativePermissions.a in Frameworks */,
 				0A8E2DF01E4FF68D006D68F2 /* libRCTPushNotification.a in Frameworks */,
 				0A8E2DA91E4FEF48006D68F2 /* libRNMail.a in Frameworks */,
 				0ACC6A581E2186FE00A9243A /* libicucore.tbd in Frameworks */,

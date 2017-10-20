@@ -3706,9 +3706,9 @@ react-native-mixpanel@0.0.12:
   version "0.0.12"
   resolved "https://registry.yarnpkg.com/react-native-mixpanel/-/react-native-mixpanel-0.0.12.tgz#475e7f49a612d8d39beb2a1821483b9d0f677405"
 
-react-native-permissions@^0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-0.2.7.tgz#92eae05894ed99235707e20ecb8fbf7d765752ae"
+react-native-permissions@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.0.1.tgz#b45c369763c4e298ba52ff9392ca807cbcdd6424"
 
 react-native-push-notification@^3.0.0:
   version "3.0.1"

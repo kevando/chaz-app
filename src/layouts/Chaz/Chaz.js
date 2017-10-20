@@ -20,6 +20,15 @@ class Chaz extends Component {
     this.props.initializeApp() // redux
   }
 
+  render_tmp() {
+    return (
+      <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
+        <Modal key="root" hideNavBar={false}>
+        <Scene key='InputFriend' component={InputFriend} title='' hideNavBar={false} backTitle="Back"/>
+        </Modal>
+        </Router>
+    )
+  }
   render() {
     const { showOnboarding, isAuthenticated } = this.props
 
@@ -46,12 +55,8 @@ class Chaz extends Component {
 
         </Modal>
         </Router>
-
-
     )
-
   }
-
 }
 
 
