@@ -7,12 +7,12 @@ const MARGIN_HORIZONTAL = (window.width - BUTTON_WIDTH) / 2;
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.purple,
+    backgroundColor: 'white',
 
   },
   title: {
     ...text,
-    color: colors.white,
+    color: colors.black,
     fontSize: 80,
     paddingTop:20,
     paddingBottom: 0,
@@ -23,7 +23,7 @@ export default styles = StyleSheet.create({
   },
   paragraph: {
     ...text,
-    color: colors.white,
+    color: colors.black,
     fontSize: 22,
     fontWeight: '300',
     lineHeight:30,

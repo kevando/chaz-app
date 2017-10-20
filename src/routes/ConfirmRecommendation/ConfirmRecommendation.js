@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
-
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 import styles from './styles';
@@ -8,7 +7,6 @@ import styles from './styles';
 class ConfirmRecommendation extends Component {
 
   render() {
-
     const { unfinished, onSaveRecommendationPress, showTitle } = this.props;
 
     return (

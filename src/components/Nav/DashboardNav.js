@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import styles from './styles';
-import Routes from '../../config/routes';
+
 import { colors } from '../../config/styles';
 
 class DashboardNav extends Component {

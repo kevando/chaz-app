@@ -7,7 +7,8 @@ import * as Actions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
   return {
-    unfinished: state.recommendations.unfinished
+    unfinished: state.recommendations.unfinished,
+    recs: state.recommendations,
   };
 };
 

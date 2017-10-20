@@ -14,6 +14,7 @@ class InputTitle extends Component {
 
 
   render() {
+    // console.log('inputtitle render',this.props)
 
     const { updateState, renderButton, renderHeartman } = this.props;
 
@@ -26,6 +27,7 @@ class InputTitle extends Component {
             placeholder='Type recommendation here'
             ref={ c => this._title = c }
             autoCapitalize="none"
+            value={this.props.title}
             autoCorrect={false}
             placeholderTextColor="#aaa"
             multiline={true}

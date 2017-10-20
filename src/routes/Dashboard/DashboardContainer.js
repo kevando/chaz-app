@@ -17,7 +17,10 @@ class DashboardContainer extends Component {
       dataSource: ds.cloneWithRows(this.props.recommendations),
     };
   }
-
+  componentDidMount() {
+    // TMP!!
+    // Actions.push('RecView',{rec: this.props.recommendations[0]})
+  }
 
   componentWillUpdate() {
     LayoutAnimation.easeInEaseOut();
@@ -28,6 +31,7 @@ class DashboardContainer extends Component {
     const { showOnboarding } = this.props;
 
     if(showOnboarding) {
+    // if(false) {
       return (
         <Welcome
           {...this.props}

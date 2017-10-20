@@ -19,7 +19,7 @@ export const colors = {
 
 
   // chaz colors
-  purple:       env=='development' ? "purple":'#8a69c6',
+  purple:       env=='development' ? "#8a69c6":'#8a69c6',
   blue:         "#3888EA",
   green:        "#3A931F",
   red:          "#E83A3A",

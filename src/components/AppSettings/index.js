@@ -4,7 +4,7 @@ const Permissions = require('react-native-permissions');
 // import { Button } from 'native-base';
 
 import styles from './styles';
-import Routes from '../../config/routes';
+
 
 class EnableReminders extends Component {
 

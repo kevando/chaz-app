@@ -4,57 +4,51 @@ import Button from '../../components/Button';
 import * as Animatable from 'react-native-animatable';
 
 import InputTitle from './InputTitle';
-import Routes from '../../config/routes';
-import Heartman from '../../components/Heartman';
+
 import { Actions } from 'react-native-router-flux';
 
 class InputTitleContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {title: ''}
+    this.state = {title: '', buttonText: 'Next'}
+  }
+  componentDidMount() {
+    if(this.props.rec) // if Editing..
+      this.setState({title:this.props.rec.title, buttonText: 'Save' })
   }
 
   renderButton() {
-    if(this.state.title)
+    const { title, buttonText } = this.state
+    if(title)
       return (
         <Animatable.View animation='fadeInUp'
           duration={500}
         >
-          <Button text="Next" onPress={this.onNextPress.bind(this)} />
+          <Button text={buttonText} onPress={this.onNextPress.bind(this)} />
         </Animatable.View>
       )
   }
 
-  renderHeartman() {
-    return; //tmp
-    // Offer the user some help on their first time if they sit here
-    setTimeout( () => {
-      if(this.props.recommendations.length == 0 && this.state.title == '') {
-        Alert.alert(
-          'Hey, did you know..',
-          'Shawshank Redemption was written by Stephen King?',
-          [
-            {text: 'Thanks!', onPress: () => console.log('thanks heartman'), style: 'cancel'},
-          ]
-        );
-      }
-    },7000); // give users seven seconds to figure it out
-    // if(this.props.onboard == 0 && !this.state.title && false){ // disabling onboarding fo now cause i dont know what i want to do exactly
-      // return <Heartman delay={4000} text='Hi, type your first rec' />
-    // }
-  }
-
   onNextPress() {
-    const { setTitle } = this.props;
-    setTitle(this.state.title); // Redux
-    Actions.push('InputFriend')
+    const { setTitle, rec, updateRecommendation } = this.props;
+
+    if(rec) {// if Editing..
+      rec.title = this.state.title
+      updateRecommendation(rec); // Redux
+      Actions.pop()
+    } else {
+      setTitle(this.state.title); // Redux
+      Actions.push('InputFriend')
+    }
   }
 
   render() {
 
+
     return (
       <InputTitle
+        title={this.state.title}
         showKeyboard={this.props.showKeyboard}
         updateState={this.setState.bind(this)}
         renderButton={this.renderButton.bind(this)}

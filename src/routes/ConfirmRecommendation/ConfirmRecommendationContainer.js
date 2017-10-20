@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { Keyboard } from 'react-native'
 import ConfirmRecommendation from './ConfirmRecommendation';
-import Routes from '../../config/routes';
 import { Actions } from 'react-native-router-flux';
 
 class ConfirmRecommendationContainer extends Component {
@@ -11,21 +9,26 @@ class ConfirmRecommendationContainer extends Component {
     this.state = {showTitle: true}
   }
 
-  _onSaveRecommendationPress() {
-    this.setState({showTitle: false});
-    setTimeout( () => {
-      this.saveRecommendation();
-    },400)
-
+  componentWillMount() {
+    if(!this.props.unfinished.title) {
+      this.setState({showTitle: false});
+    }
+  }
+  componentDidMount() {
+    // Not sure why this entire component re mounts..
+    if(!this.props.unfinished.title) {
+      Actions.reset('MainStack')
+    }
   }
 
-  saveRecommendation() {
-    const { saveRecommendation } = this.props;
-    saveRecommendation(); // Redux
-    Actions.reset('MainStack') 
+  _onSaveRecommendationPress() {
+    const { addRecommendation, unfinished } = this.props;
+    this.setState({showTitle: false});
+    addRecommendation(unfinished); // Redux
   }
 
   render() {
+
     return (
       <ConfirmRecommendation
         onSaveRecommendationPress={this._onSaveRecommendationPress.bind(this)}
