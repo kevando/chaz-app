@@ -1,13 +1,10 @@
 import React from 'react';
-import { View, Text, ScrollView, StatusBar } from 'react-native';
+import { View, Text, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
+import { colors, text } from '../../config/styles';
 
-import { colors } from '../../config/styles';
-import styles from './styles';
-// import Button from '../../components/Button';
-
-const Welcome = ({onNewRecPress}) => {
+const Splash = ({onNewRecPress}) => {
 
 
 
@@ -36,4 +33,26 @@ const Welcome = ({onNewRecPress}) => {
   );
 }
 // <AppSettings {...props} />
-export default Welcome;
+export default Splash;
+
+
+const styles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: colors.purple,
+
+  },
+  title: {
+    ...text,
+    color: colors.white,
+    fontSize: 80,
+    paddingTop:70,
+    paddingBottom: 0,
+    fontWeight: '400',
+    letterSpacing:4,
+    paddingLeft: 17,
+
+  },
+
+});
