@@ -8,7 +8,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-
+    backgroundColor: colors.backgroundGrey,
   },
   title: {
     ...text,
@@ -35,6 +35,16 @@ export default styles = StyleSheet.create({
     marginTop: 100,
     width: BUTTON_WIDTH,
     marginLeft: MARGIN_HORIZONTAL,
-
   },
+
+  label: {
+    ...text,
+    color: colors.darkGrey,
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight:20,
+    marginTop:25,
+    marginLeft: 12,
+    paddingRight: 10,
+  }
 });

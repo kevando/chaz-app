@@ -3,8 +3,8 @@ import { View, ScrollView, StatusBar } from 'react-native';
 import _ from 'lodash';
 
 import Button from '../../components/Button';
-import Card from '../../components/Card';
-import OnboardingCard from '../../components/OnboardingCard';
+import RecCard from '../../components/Card/Rec';
+import NotificationPermission from '../../components/Card/NotificationPermission';
 import styles from './styles';
 
 const Dashboard = (props) => {
@@ -20,14 +20,14 @@ const Dashboard = (props) => {
       {
         _.map(recommendations,function(rec,i) {
           return(
-            <Card totalRecs={recommendations.length} rec={rec} key={i} {...props} notificationPermission={app.notificationPermission}  />
+            <RecCard totalRecs={recommendations.length} rec={rec} key={i} {...props} notificationPermission={app.notificationPermission}  />
           )
         })
       }
 
-
+      <NotificationPermission />
       </ScrollView>
-      <OnboardingCard />
+
 
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>

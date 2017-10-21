@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Alert  } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Text, View, TouchableOpacity, Alert, Image  } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 // import moment from 'moment';
 import { Actions} from 'react-native-router-flux';
 
-// import { colors } from '../../config/styles';
+import { colors } from '../../config/styles';
 import styles from './styles';
 // import SetReminder from '../../components/SetReminder';
 import Button from '../../components/Button';
@@ -62,17 +62,39 @@ render() {
 
   // const { rec, setStatus, setGrade, setReminder, notificationPermission, totalRecs } = this.props;
   return (
+    <View>
+      <TouchableOpacity onPress={this._alertForNotificationPermission} activeOpacity={0.9}>
+        <View style={[styles.container]}>
 
-        <View style={styles.container}>
-          <Text style={styles.title}>Be a Good Friend</Text>
-          <Text style={styles.paragraph}>Let chaz remind you to follow up on this recommendation</Text>
-          <Button text="Enable Notifications" bgcolor ="orange" onPress={this._alertForNotificationPermission} />
+          <View style={styles.iconContainer}>
+            <Icon name="feather" color={colors.purple} size={25} />
+          </View>
 
+        <View style={styles.textContainer}>
+          <View style={styles.recContainer}>
+            <Text style={styles.recText}>Follow Up</Text>
+          </View>
+        </View>
 
       </View>
+    </TouchableOpacity>
+    <View>
+
+
+    </View>
+
+    </View>
 
   );
 }
+
+  //   <View style={styles.container}>
+  //     <Text style={styles.title}>Be a Good Friend</Text>
+  //     <Text style={styles.paragraph}>Let chaz remind you to follow up on this recommendation</Text>
+  //     <Button text="Enable Notifications" bgcolor ="orange" onPress={this._alertForNotificationPermission} />
+  //
+  //
+  // </View>
 
 
 };

@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity,  } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import { Actions} from 'react-native-router-flux';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-import SetReminder from '../../components/SetReminder';
+import { CategoryIcon } from '../../components/Category/Icon';
 import Tooltip from '../../components/Tooltip';
 
-const RecIcon = (props) => {
-  const {status, grade, reminder} = props.rec;
-  var icon = 'file-text-o';
-  var color = colors.grey;
-  // if(status == 'unfinished')  icon = '🗣';
-  // if(status == 'new')         icon = '📃';
-  if(reminder)                icon = 'clock-o';
-  // if(grade === 1)             icon = '👍';
-  // if(grade === -1)            icon = '👎';
-
-  return <Icon name={icon} size={25} color={color} />
-}
 class Card extends Component {
 
   _onCardPress() {
@@ -36,7 +24,7 @@ render() {
         <View style={[styles.container]}>
 
           <View style={styles.iconContainer}>
-            <RecIcon rec={rec} />
+            <CategoryIcon category={rec.category} size={25} color="grey" />
           </View>
 
         <View style={styles.textContainer}>

@@ -9,6 +9,7 @@ class RecViewContainer extends Component {
     this._deleteRecommendation = this._deleteRecommendation.bind(this)
     this._onDeletePress = this._onDeletePress.bind(this)
     this._onEditPress = this._onEditPress.bind(this)
+    this._onCategoryPress = this._onCategoryPress.bind(this)
   }
 
   _onEditPress() {
@@ -30,6 +31,10 @@ class RecViewContainer extends Component {
     deleteRecommendation(rec.id) // redux and firestore
     Actions.pop()
   }
+  _onCategoryPress(rec,category) {
+    rec.category = category
+    this.props.updateRecommendation(rec)
+  }
 
   render() {
 
@@ -39,6 +44,7 @@ class RecViewContainer extends Component {
         rec={this.props.rec}
         onDeletePress={this._onDeletePress}
         onEditPress={this._onEditPress}
+        onCategoryPress={this._onCategoryPress}
       />
     );
   }
