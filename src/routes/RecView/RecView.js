@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, ScrollView, StatusBar, Button } from 'react-native';
-import { TitleCard, FriendCard, CategoryCard, CategoryPicker  } from '../../components/Card/RecView'
+import { TitleCard, FriendCard, CategoryCard, CategoryPicker, ReminderCard  } from '../../components/Card/RecView'
 import styles from './styles';
 
 
@@ -24,7 +24,7 @@ const Category = ({ rec, onCategoryPress }) => {
 
 }
 
-const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress }) => {
+const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress, updateRecommendation }) => {
 
 
 
@@ -38,6 +38,9 @@ const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress }) => {
 
       <Text style={styles.label}>Recommended by</Text>
       <FriendCard rec={rec} />
+
+      <Text style={styles.label}>Follow Up</Text>
+      <ReminderCard rec={rec} updateRecommendation={updateRecommendation} />
 
 
       <Button title="delete" onPress={onDeletePress} color="red" />

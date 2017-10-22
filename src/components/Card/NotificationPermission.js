@@ -20,12 +20,12 @@ class OnboardingCard extends Component {
     this._requestPermission = this._requestPermission.bind(this)
   }
   componentWillMount() {
-    console.log(Permissions)
+    // console.log(Permissions)
     Permissions.check('notification')
       .then(response => {
         //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
         // this.setState({ photoPermission: response })
-        console.log(response)
+        // console.log(response)
         if(response == 'undetermined')
           this.setState({showCard: true, notificationPermission: response})
       });

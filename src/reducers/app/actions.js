@@ -10,7 +10,7 @@ export function initializeApp() {
   return dispatch => {
     firebase.auth().signInAnonymously()
       .then(() => {
-        console.log(firebase.auth().currentUser)
+        // console.log(firebase.auth().currentUser)
         dispatch({ type: INITIALIZE_APP, uid: firebase.auth().currentUser._user.uid })
       });
   }

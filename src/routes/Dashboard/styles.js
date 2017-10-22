@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
   welcomeContainer: {
     flex: 1,
     backgroundColor: colors.purple,
-    paddingTop: 30,
+    paddingTop: 10,
   },
   title: {
     ...text,

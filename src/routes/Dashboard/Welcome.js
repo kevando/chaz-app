@@ -42,7 +42,7 @@ class Welcome extends Component  {
           <View style={[{width: 70},styles.iconsContainer]}>
             <Icon name="music" size={15} color={colors.yellow} style={[styles.icon,{top: 8,left: 40,}]}/>
             <Icon name="message-square" size={35} color={'white'} style={[styles.icon,{top: 0,left: 30,}]}/>
-            <Icon name="user" size={30} color={colors.blue} style={[styles.icon,{top: 28,left: 0,}]}/>
+            <Icon name="user" size={30} color={colors.black} style={[styles.icon,{top: 28,left: 0,}]}/>
           </View>
         </View>
         <View style={styles.step} >
@@ -50,7 +50,7 @@ class Welcome extends Component  {
           <View style={[{width: 70},styles.iconsContainer]}>
             <Icon name="music" size={25} color={colors.yellow} style={[styles.icon,{top: 0,left: 40,}]}/>
             <Icon name="file-text" size={35} color={'white'} style={[styles.icon,{top: 10,left: 0,}]}/>
-            <Icon name="user" size={25} color={colors.blue} style={[styles.icon,{top: 30,left: 40,}]}/>
+            <Icon name="user" size={25} color={colors.black} style={[styles.icon,{top: 30,left: 40,}]}/>
           </View>
         </View>
         <View style={styles.step} >

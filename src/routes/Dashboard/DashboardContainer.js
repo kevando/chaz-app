@@ -14,7 +14,7 @@ class DashboardContainer extends Component {
   }
   componentDidMount() {
     // TMP!!
-    Actions.push('RecView',{rec: this.props.recommendations[0]})
+    // Actions.push('RecView',{rec: this.props.recommendations[0]})
   }
 
   componentWillUpdate() {

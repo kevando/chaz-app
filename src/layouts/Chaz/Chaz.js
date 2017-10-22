@@ -31,7 +31,7 @@ class Chaz extends Component {
     )
   }
   render() {
-    console.log('render chaz.js')
+    // console.log('render chaz.js')
     const { showOnboarding, isAuthenticated } = this.props
 
     // return <Splash />

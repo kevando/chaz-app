@@ -45,6 +45,7 @@ class RecViewContainer extends Component {
         onDeletePress={this._onDeletePress}
         onEditPress={this._onEditPress}
         onCategoryPress={this._onCategoryPress}
+        updateRecommendation={this.props.updateRecommendation}
       />
     );
   }

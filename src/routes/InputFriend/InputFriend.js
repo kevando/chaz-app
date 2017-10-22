@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, Keyboard } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Feather';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import _ from 'lodash';
 import { Actions } from 'react-native-router-flux';
@@ -38,7 +38,7 @@ class InputFriend extends Component {
           { _.map(friends, function({name},i) {
             return (
               <TouchableOpacity key={i} onPress={onFriendPress.bind(this,name)} style={styles.friendTouchable}>
-                <Text style={styles.friendText}><Icon name='user-circle' size={25}  style={styles.friendIcon}/>&nbsp;&nbsp;{name}</Text>
+                <Text style={styles.friendText}><Icon name='user' size={20}  style={styles.friendIcon}/>&nbsp;&nbsp;{name}</Text>
               </TouchableOpacity>
             );
           })}
