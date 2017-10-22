@@ -6,7 +6,10 @@ import * as Actions from '../../reducers/app/actions';
 
 const mapStateToProps = (state) => {
   return {
-    app: state.app
+    // app: state.app,
+    isAuthenticated: state.app.isAuthenticated,
+    showOnboarding: state.recommendations.list.length == 0,
+    recs: state.recommendations.list
   };
 };
 

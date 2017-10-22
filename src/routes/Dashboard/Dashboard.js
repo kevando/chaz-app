@@ -1,15 +1,19 @@
 import React from 'react';
-import { View, ScrollView, StatusBar } from 'react-native';
+import { View, ScrollView, StatusBar ,Text} from 'react-native';
 import _ from 'lodash';
 
 import Button from '../../components/Button';
-import Card from '../../components/Card';
-import AppSettings from '../../components/AppSettings';
+import RecCard from '../../components/Card/Rec';
+import Filter from '../../components/Nav/Filter';
+import NotificationPermission from '../../components/Card/NotificationPermission';
 import styles from './styles';
 
 const Dashboard = (props) => {
+  // console.log(props)
+  const { recommendations, onNewRecPress, app, activeFilter, changeActiveFilter } = props;
 
-  const { recommendations, onNewRecPress, app, setNotificationPermission } = props;
+
+  const filteredRecs = activeFilter === 'Everything' ? recommendations : _.filter(recommendations, function(rec) { return rec.category.title == activeFilter; });
 
 
   return (
@@ -17,16 +21,19 @@ const Dashboard = (props) => {
       <StatusBar barStyle="light-content" hidden={false} />
 
       <ScrollView style={styles.scrollView}>
+      {recommendations.length > 6 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
+
       {
-        _.map(recommendations,function(rec,i) {
+        _.map(filteredRecs,function(rec,i) {
           return(
-            <Card totalRecs={recommendations.length} rec={rec} key={i} {...props} notificationPermission={app.notificationPermission}  />
+            <RecCard totalRecs={recommendations.length} rec={rec} key={i} {...props}  />
           )
         })
       }
 
-
+      <NotificationPermission />
       </ScrollView>
+
 
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>

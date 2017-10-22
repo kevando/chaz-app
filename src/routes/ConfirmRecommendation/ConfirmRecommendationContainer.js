@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { NavigationActions } from 'react-navigation';
-
-// import BottomButton from '../../components/Button';
-
 import ConfirmRecommendation from './ConfirmRecommendation';
-import Routes from '../../config/routes';
+import { Actions } from 'react-native-router-flux';
 
 class ConfirmRecommendationContainer extends Component {
 
@@ -13,33 +9,26 @@ class ConfirmRecommendationContainer extends Component {
     this.state = {showTitle: true}
   }
 
-  _onSaveRecommendationPress() {
-
-    this.setState({showTitle: false});
-    setTimeout( () => {
-      this.saveRecommendation();
-    },400)
-
+  componentWillMount() {
+    if(!this.props.unfinished.title) {
+      this.setState({showTitle: false});
+    }
+  }
+  componentDidMount() {
+    // Not sure why this entire component re mounts..
+    if(!this.props.unfinished.title) {
+      Actions.reset('MainStack')
+    }
   }
 
-  saveRecommendation() {
-    const { navigator, saveRecommendation } = this.props;
-    saveRecommendation(); // Redux
-
-
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Dashboard'})
-      ]
-    })
-    this.props.navigation.dispatch(resetAction)
-
-
-
+  _onSaveRecommendationPress() {
+    const { addRecommendation, unfinished } = this.props;
+    this.setState({showTitle: false});
+    addRecommendation(unfinished); // Redux
   }
 
   render() {
+
     return (
       <ConfirmRecommendation
         onSaveRecommendationPress={this._onSaveRecommendationPress.bind(this)}

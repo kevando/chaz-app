@@ -12,7 +12,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
-#import "Mixpanel/Mixpanel.h"
+#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -28,7 +28,10 @@
                                                       moduleName:@"Chaz"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:0.54f green:0.41f blue:0.78f alpha:1.0f];
+
+  // [UIColor colorWithPatternImage:[UIImage imageNamed:@"heart_yellow.png"]];
+
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
@@ -36,8 +39,7 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
 
-  // Added may 16 2017
-  [Mixpanel sharedInstanceWithToken:@"976ab99070f5bcf9c9255e282330f0fe"];
+  [FIRApp configure];
 
   return YES;
 }

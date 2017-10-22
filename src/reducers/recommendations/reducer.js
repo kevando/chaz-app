@@ -1,9 +1,9 @@
 import _ from 'lodash';
-var uuid = require('react-native-uuid');
-import Mixpanel from 'react-native-mixpanel';
+// var uuid = require('react-native-uuid');
+// import Mixpanel from 'react-native-mixpanel';
 
 // required twice?
-Mixpanel.sharedInstanceWithToken('976ab99070f5bcf9c9255e282330f0fe');
+// Mixpanel.sharedInstanceWithToken('976ab99070f5bcf9c9255e282330f0fe');
 
 import {
   SET_TITLE,
@@ -14,11 +14,12 @@ import {
   SET_STATUS,
   SET_FILTER,
   SET_GRADE,
+  UPDATE_RECOMMENDATION,
 } from './actionTypes';
 
 const initialState =
   {
-    unfinished: { },
+    unfinished: {},
     list: [ ],
     filter: 'all'
   };
@@ -32,7 +33,7 @@ export default function recs(recommendations = initialState, action = {}) {
       return {
         ...recommendations,
         unfinished: {
-          id: uuid.v1(),
+          // id: 'key_' + Date.now(),
           title: action.title,
           status: 'unfinished',
           createdAt: Date.now()
@@ -51,17 +52,25 @@ export default function recs(recommendations = initialState, action = {}) {
 
     // -------------------------------------------
     case SAVE_RECOMMENDATION:
+      console.log('SAVE_RECOMMENDATION')
+      var newList = [action.unfinished].concat(recommendations.list);
+      return {
+        ...recommendations,
+        list: newList,
+        unfinished: {},
+      }
 
-      // Make this middleware
-      Mixpanel.trackWithProperties("Rec Saved", recommendations.unfinished);
+    // -------------------------------------------
+    case UPDATE_RECOMMENDATION:
 
-      var newRec = {...recommendations.unfinished, status: 'new'}
-      var newList = [newRec].concat(recommendations.list);
+      var newList = _.map(recommendations.list, function(rec) {
+        return rec.id === action.rec.id ? action.rec : rec; // better way to do this for sure
+      });
+
       return {
         ...recommendations,
         list: newList,
       }
-
     // -------------------------------------------
     case SET_REMINDER:
       // alert(action.reminderDate)
@@ -78,6 +87,9 @@ export default function recs(recommendations = initialState, action = {}) {
     // -------------------------------------------
     case DELETE_RECOMMENDATION:
 
+      console.log('delete?',recommendations)
+      console.log('delete?',action)
+
       var newList = _.filter(recommendations.list, function(rec) {
         return rec.id != action.recId;
       });
@@ -86,6 +98,7 @@ export default function recs(recommendations = initialState, action = {}) {
         ...recommendations,
         list: newList,
       }
+      // return recommendations
 
     // -------------------------------------------
     case SET_STATUS:

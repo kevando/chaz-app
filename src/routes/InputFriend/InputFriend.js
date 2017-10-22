@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
-import { InputGroup, Input, Icon } from 'native-base';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, Keyboard } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import _ from 'lodash';
+import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
 
 class InputFriend extends Component {
 
   componentDidMount() {
-    this._title._textInput.focus();
+    if(Actions.currentScene == 'InputFriend')
+      this._title.focus()
+
   }
 
   render() {
@@ -18,8 +21,8 @@ class InputFriend extends Component {
 
     return (
       <View style={styles.container}>
-        <InputGroup >
-          <Input
+
+          <TextInput
             placeholder='Who recommended this?'
             ref={ c => this._title = c }
             autoCapitalize="none"
@@ -29,17 +32,18 @@ class InputFriend extends Component {
             placeholderTextColor="#aaa"
             onChangeText={(friend) => onKeyPress(friend)}
           />
-        </InputGroup>
+
 
         <ScrollView keyboardShouldPersistTaps="always" style={styles.friendsContainer}>
           { _.map(friends, function({name},i) {
             return (
-              <TouchableOpacity key={i} onPress={onFriendPress.bind(this,name)}>
-                <Text style={styles.friend}>{name}</Text>
+              <TouchableOpacity key={i} onPress={onFriendPress.bind(this,name)} style={styles.friendTouchable}>
+                <Text style={styles.friendText}><Icon name='user' size={20}  style={styles.friendIcon}/>&nbsp;&nbsp;{name}</Text>
               </TouchableOpacity>
             );
           })}
         </ScrollView>
+
 
         { renderButton() }
         <KeyboardSpacer />

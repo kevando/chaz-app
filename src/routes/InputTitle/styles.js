@@ -11,7 +11,8 @@ export default styles = StyleSheet.create({
     ...text,
     flex:1,
     fontSize: 20,
-    padding: 3,
+    padding: 5,
+    paddingLeft: 10,
   }
 
 });

@@ -1,14 +1,14 @@
 package com.chaz;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.horcrux.svg.SvgPackage;
+import io.invertase.firebase.RNFirebasePackage;
 import com.kevinejohn.RNMixpanel.RNMixpanel;
 import com.joshblour.reactnativepermissions.ReactNativePermissionsPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.chirag.RNMail.RNMail;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -23,7 +23,7 @@ public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
-    protected boolean getUseDeveloperSupport() {
+    public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
 
@@ -31,11 +31,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SvgPackage(),
+            new RNFirebasePackage(),
             new RNMixpanel(),
             new ReactNativePermissionsPackage(),
             new ReactNativePushNotificationPackage(),
             new RNMail(),
-            new RNDeviceInfo(),
             new VectorIconsPackage()
       );
     }

@@ -24,9 +24,9 @@ export default styles = StyleSheet.create({
 
     // justifyContent: 'center',
     // alignItems: 'center',
-
+    // backgroundColor: 'orange',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'center', // vertical align
   },
   expanded: {
     borderColor: colors.grey,
@@ -37,7 +37,7 @@ export default styles = StyleSheet.create({
     // backgroundColor: 'yellow',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    paddingTop: 8,
+    // paddingTop: 8,
   },
   textContainer: {
     width: TEXT_WIDTH,// might need to change this
@@ -98,7 +98,35 @@ export default styles = StyleSheet.create({
     // color: colors.darkGrey
   },
 
+  pickerContainer: {
+    marginHorizontal: MARGIN_HORIZONTAL,
+    marginVertical: MARGIN_VERTICAL,
+    borderWidth: 1,
+    borderColor: colors.cardBorder,
+    flexDirection: 'column',
+    backgroundColor: colors.white,
+    paddingVertical: 10,
 
+    justifyContent: 'flex-start',
+    // alignItems: 'center', // vertical align
+  },
+
+  categoryTouchable: {
+    // flexDirection: 'column',
+    // backgroundColor: 'red',
+    borderColor: colors.lightGrey,
+    borderBottomWidth: 1,
+    marginHorizontal: MARGIN_HORIZONTAL,
+    paddingVertical: MARGIN_VERTICAL,
+  },
+
+  categoryOptionText: {
+    ...text,
+    fontSize: 14,
+    fontWeight: '300',
+    color: colors.blue,
+    
+  },
 
 
 });

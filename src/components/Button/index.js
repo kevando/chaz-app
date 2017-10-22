@@ -27,10 +27,10 @@ const Button = (props) => {
   );
 };
 
-Button.propTypes = {
-  text: React.PropTypes.string,
-  onPress: React.PropTypes.func,
-};
+// Button.propTypes = {
+//   text: React.PropTypes.string,
+//   onPress: React.PropTypes.func,
+// };
 
 Button.defaultProps = {
   text: 'Button Text',

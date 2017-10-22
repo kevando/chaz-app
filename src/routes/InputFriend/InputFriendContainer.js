@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import Button from '../../components/Button';
 import InputFriend from './InputFriend';
-import Routes from '../../config/routes';
+import { Actions } from 'react-native-router-flux';
 
 class InputFriendContainer extends Component {
 
@@ -21,13 +21,12 @@ class InputFriendContainer extends Component {
   }
 
   onNextPress() {
-    const { setFriend, saveFriend } = this.props;
+    const { setFriend, addFriend } = this.props;
     const {friend} = this.state;
     setFriend(friend); // Redux
-    saveFriend({name: friend}); // Redux
+    addFriend({name: friend}); // Redux
 
-    const { navigate } = this.props.navigation;
-    navigate('ConfirmRecommendation');
+    Actions.push('ConfirmRecommendation');
 
   }
 
@@ -40,9 +39,8 @@ class InputFriendContainer extends Component {
   onFriendPress(name) {
     const { navigator, setFriend } = this.props;
     setFriend(name); // Redux
-    // navigator.push(Routes.getConfirmRecommendationRoute());
-    const { navigate } = this.props.navigation;
-    navigate('ConfirmRecommendation');
+
+    Actions.push('ConfirmRecommendation');
   }
 
   render() {
