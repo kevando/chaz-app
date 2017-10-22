@@ -9,7 +9,7 @@ import * as RecActions from '../../reducers/recommendations/actions';
 const mapStateToProps = (state) => {
   return {
     recommendations: state.recommendations.list,
-    activeFilter: state.recommendations.filter,
+    // activeFilter: state.recommendations.filter,
     app: state.app,
     showOnboarding: state.recommendations.list.length == 0,
   };

@@ -22,7 +22,7 @@
     "react-native-mail": "^3.0.1",
     "react-native-mixpanel": "0.0.12",
     "react-native-permissions": "^1.0.1",
-    "react-native-push-notification": "^3.0.0",
+    "react-native-push-notification": "^3.0.1",
     "react-native-router-flux": "^4.0.0-beta.22",
     "react-native-svg": "^5.4.2",
     "react-native-uuid": "^1.4.9",
