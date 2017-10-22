@@ -13,13 +13,13 @@ export default styles = StyleSheet.create({
   welcomeContainer: {
     flex: 1,
     backgroundColor: colors.purple,
-
+    paddingTop: 30,
   },
   title: {
     ...text,
     color: colors.white,
     fontSize: 80,
-    paddingTop:70,
+    paddingTop:50,
     paddingBottom: 0,
     fontWeight: '400',
     letterSpacing:4,
@@ -42,4 +42,49 @@ export default styles = StyleSheet.create({
     marginLeft: MARGIN_HORIZONTAL,
 
   },
+
+  stepsContainer: {
+    flex: 1,
+    // backgroundColor: 'blue'
+  },
+  step: {
+    margin: 10,
+    padding: 10,
+    flex: 1,
+    // backgroundColor: 'red',
+    alignItems: 'center', // h align
+  },
+  stepText: {
+    ...text,
+    color: colors.white,
+    textAlign: 'center',
+    fontSize: 19,
+    fontWeight: '300',
+
+  },
+  iconsContainer: {
+    flex: 1,
+    marginTop:5,
+    // backgroundColor: 'green',
+    //
+    justifyContent: 'center' // v center
+  },
+  icon: {
+    position: 'absolute',
+    backgroundColor:'transparent',
+  },
+  howButton: {
+    fontSize: 15,
+    color: 'white',
+    borderColor: 'white',
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    paddingVertical: 10,
+    // paddingHorizontal: 20,
+    width: 150,
+    textAlign: 'center',
+    marginTop: 20,
+    marginLeft: 17,
+  }
+
 });

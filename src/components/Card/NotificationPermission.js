@@ -45,10 +45,10 @@ class OnboardingCard extends Component {
     const { notificationPermission } = this.state;
 
     Alert.alert(
-      'Enable Notification Permissions',
-      'chaz needs this permission to send you reminders',
+      'Enable Notifications?',
+      'Let chaz send you reminders',
       [
-        {text: 'No way', onPress: () => console.log('permission denied'), },
+        {text: 'Not now', onPress: () => console.log('permission denied'), },
         notificationPermission == 'undetermined' || !notificationPermission ?
             {text: 'Sure', onPress: this._requestPermission}
           : {text: 'Open Settings', onPress: Permissions.openSettings}
