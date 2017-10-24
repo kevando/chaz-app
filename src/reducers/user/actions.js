@@ -20,7 +20,7 @@ export function createUser(email, password, username,cb) {
       console.log("Anonymous account successfully upgraded", user);
       // not sure why authStateChanged isnt called
       // so calling this manually
-      dispatch({ type: USER_SIGNED_IN, user })
+      dispatch({ type: USER_SIGNED_IN, user: {...user, username} })
       dispatch(setUserToken())
       // Now add the username
       user.updateProfile({

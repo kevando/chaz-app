@@ -5,10 +5,13 @@ import * as FriendActions from '../../reducers/friends/actions';
 import * as RecActions from '../../reducers/recommendations/actions';
 import _ from 'lodash'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  // console.log('map props',props)
   return {
     app: state.app,
-    myRecs: state.recommendations.myRecs,
+    user: state.user,
+    myRecs: _.filter(state.recommendations.myRecs,rec => rec.friendId == props.friend.id),
+    givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.to == props.friend.uid),
   };
 };
 

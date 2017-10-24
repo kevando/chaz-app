@@ -11,18 +11,19 @@ class FriendViewContainer extends Component {
     super(props)
     this.state = { input: '', user: null }
     // this._deleteRecommendation = this._deleteRecommendation.bind(this)
-    // this._onDeletePress = this._onDeletePress.bind(this)
+    this._onGiveRecPress = this._onGiveRecPress.bind(this)
     this._assignUser = this._assignUser.bind(this)
     this._onKeyPress = this._onKeyPress.bind(this)
   }
-  componentDidMount() {
-    this.setState({
-      friendRecs: _.filter(this.props.myRecs,rec => rec.friendId == this.props.friend.id)
-    })
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     friendRecs: _.filter(this.props.myRecs,rec => rec.friendId == this.props.friend.id)
+  //   })
+  // }
 
   _onKeyPress(input){
     // might want to throw this in redux
+    this.setState({user: null}) // reset user obj
     usersRef.where("username", "==", input)
     .get()
     .then((querySnapshot) => {
@@ -42,22 +43,33 @@ class FriendViewContainer extends Component {
   _assignUser() {
     const { assignUserToFriend, friend, assignUserToRecs } = this.props
     const { user } = this.state
-    assignUserToFriend(user,friend)
-    assignUserToRecs(user,friend)
+    if(!user){
+      alert('No user found, sorry')
+    } else {
+      assignUserToFriend(user,friend)
+      assignUserToRecs(user,friend)
+    }
+
+  }
+  _onGiveRecPress() {
+    const { initNewRec,friend, user } = this.props
+    initNewRec({from: user.uid, to: friend.uid, friend: {name: 'me'}})
+    Actions.push('InputStack')
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
 
     if(!this.props.friend)  { return null }
     return (
       <FriendView
+        givenRecs={this.props.givenRecs}
         friend={this.props.friend}
-        friendRecs={this.state.friendRecs}
+        myRecs={this.props.myRecs}
         onKeyPress={this._onKeyPress}
         user={this.state.user}
         onAssignUserPress={this._assignUser}
-
+        onGiveRecPress={this._onGiveRecPress}
       />
     );
   }

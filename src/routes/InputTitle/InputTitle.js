@@ -16,7 +16,7 @@ class InputTitle extends Component {
   render() {
     // console.log('inputtitle render',this.props)
 
-    const { updateState, renderButton, renderHeartman } = this.props;
+    const { updateState, renderButton, placeholderText } = this.props;
 
     return (
 
@@ -24,7 +24,7 @@ class InputTitle extends Component {
         <StatusBar hidden={true} />
 
           <TextInput
-            placeholder='Type recommendation here'
+            placeholder={placeholderText}
             ref={ c => this._title = c }
             autoCapitalize="none"
             value={this.props.title}

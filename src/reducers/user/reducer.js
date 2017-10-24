@@ -32,7 +32,7 @@ export default function user(user = initialState, action = {}) {
         uid: action.user.uid,
         isAnonymous: action.user.isAnonymous,
         email: action.user.email,
-        // token: action.user.refreshToken,
+        username: action.user.username,
       }
 
     // -------------------------------------------

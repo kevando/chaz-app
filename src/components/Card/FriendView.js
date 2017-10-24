@@ -5,6 +5,8 @@ import moment from 'moment';
 import _ from 'lodash'
 import { Actions} from 'react-native-router-flux';
 import { Categories, CategoryIcon } from '../../components/Category/Icon';
+import { Label, Button } from '../../components/Generic/';
+
 import { colors } from '../../config/styles';
 import styles from './styles';
 // const Permissions = require('react-native-permissions');
@@ -18,11 +20,14 @@ render() {
     <View>
         <View style={[styles.container]}>
         <View style={styles.iconContainer}>
-                  <Icon name='user' color={colors.green} size={25} />
+                  <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={25} />
                 </View>
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
-            <Text style={styles.recText}>{friend.name}</Text>
+          {friend.uid ?
+            <Text style={styles.recText}>{friend.name}</Text> :
+            <Text style={[styles.recText,{color:colors.darkGrey}]}>{friend.name}</Text>
+          }
           </View>
         </View>
       </View>
@@ -50,32 +55,39 @@ render() {
 };
 
 export class FindUserCard extends Component {
+  onSubmitPress() {
+    alert('dude')
+  }
 render() {
   const { friend, onKeyPress, user, onAssignUserPress } = this.props;
   return (
     <View>
 
-      <Text style={styles.label}>Find this person to chaz</Text>
+      <Label center>Invite your friends to chaz and you can send them recommendations directly in the app</Label>
 
-        <View style={[styles.container]}>
+        <View style={[styles.container,user&&{borderColor: colors.green}]}>
+        <View style={styles.iconContainer}>
+                  <Icon name='at-sign' color={colors.grey} size={25} />
+                </View>
         <View style={styles.inputContainer}>
 
           <TextInput
-            placeholder='Search for Username'
+            placeholder='Search for a username'
             autoCapitalize="none"
             autoCorrect={false}
             multiline={false}
             style={styles.input}
-            placeholderTextColor="#aaa"
+            placeholderTextColor={colors.grey}
             onChangeText={(input) => onKeyPress(input)}
+            returnKeyType='go'
+            onSubmitEditing={onAssignUserPress}
           />
 
-          {
-            user &&
-            <Text onPress={onAssignUserPress}>User found!</Text>
-          }
+
         </View>
+
       </View>
+      { user && <Text style={[styles.label,user&&{color: colors.green}]}>User found!</Text> }
     </View>
   );
 }

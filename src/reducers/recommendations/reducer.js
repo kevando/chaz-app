@@ -12,6 +12,7 @@ import {
   REFRESH_MY_RECS,
   REFRESH_GIVEN_RECS,
   SET_REC_TO,
+  INIT_REC,
 } from '../actionTypes';
 
 const initialState =
@@ -25,16 +26,23 @@ export default function recs(recommendations = initialState, action = {}) {
 
   switch (action.type) {
 
+  // -------------------------------------------
+  case INIT_REC:
+    return {
+      ...recommendations,
+      unfinished: {
+        ...action.payload, // contains to/from
+        status: 'unfinished',
+        createdAt: Date.now(),
+
+      }
+    }
     // -------------------------------------------
     case SET_TITLE:
       return {
         ...recommendations,
         unfinished: {
-          // id: 'key_' + Date.now(),
           title: action.title,
-          status: 'unfinished',
-          createdAt: Date.now(),
-
         }
       }
 

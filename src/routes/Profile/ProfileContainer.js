@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LayoutAnimation, ListView } from 'react-native';
+import { LayoutAnimation, ListView, Alert } from 'react-native';
 import Profile from './Profile';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
@@ -29,20 +29,24 @@ class ProfileContainer extends Component {
     }
   }
   _onLogoutPress() {
-    const { logoutUser } = this.props
-    logoutUser()
+    Alert.alert(
+      'Log Out?', null,
+      [
+        {text: 'No' },
+        {text: 'Yes', onPress: () => this.props.logoutUser(), },
+      ]
+    )
+  
   }
-  // _onGivePress() {
-  //   const { giveRec } = this.props
-  //   giveRec()
-  // }
+
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
       return (
         <Profile
           onLogoutPress={this._onLogoutPress}
           user={this.props.user}
+          friends={this.props.friends}
         />
       )
 

@@ -80,7 +80,7 @@ export default styles = StyleSheet.create({
   recText: {
     ...text,
     fontSize: 19,
-    fontWeight: '500',
+    fontWeight: '400',
     color: colors.black,
   },
 
@@ -130,16 +130,17 @@ export default styles = StyleSheet.create({
 
   // searching for user
   inputContainer: {
-    flex: 1,
+    // flex: 1,
+    width: TEXT_WIDTH,// might need to change this
   },
   input: {
     ...text,
     fontSize: 20,
-    paddingLeft: 15,
+    paddingLeft: 0,
     paddingTop: 5,
     height: 50,
-    borderColor: colors.lightGrey,
-    borderBottomWidth: 1,
+    // borderColor: colors.lightGrey,
+    borderBottomWidth: 0,
     // backgroundColor: 'yellow',
   },
 
@@ -149,7 +150,7 @@ export default styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     lineHeight:20,
-    marginTop:25,
+    // marginTop:25,
     marginLeft: 12,
     paddingRight: 10,
   },

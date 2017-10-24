@@ -11,7 +11,7 @@ class DashboardContainer extends Component {
     super(props)
     // this.state = {activeFilter: 'everything'}
     this._changeActiveFilter = this._changeActiveFilter.bind(this)
-    // this._onFilterPress = this._onFilterPress.bind(this)
+    this._onNewRecPress = this._onNewRecPress.bind(this)
   }
   componentWillMount() {
     // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -21,7 +21,7 @@ class DashboardContainer extends Component {
     // TMP!!
     // Actions.push('Profile')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[0]})
+    Actions.push('FriendView',{friend: this.props.friends[0]})
   }
 
   componentWillUpdate() {
@@ -35,6 +35,12 @@ class DashboardContainer extends Component {
 
     this.setState({activeFilter})
   }
+  _onNewRecPress() {
+    const { initNewRec, user } = this.props
+    initNewRec({to: user.uid})
+    Actions.push('InputStack')
+  }
+
 
   render() {
     // console.log('Dash',this.props)
@@ -47,7 +53,7 @@ class DashboardContainer extends Component {
         <Welcome
           {...this.props}
           {...this.state}
-          onNewRecPress={() => Actions.push('InputStack')}
+          onNewRecPress={this._onNewRecPress}
         />
       )
     } else {

@@ -50,17 +50,20 @@ render() {
 class FriendCard extends Component {
 
   render() {
-    const { rec } = this.props;
+    const { friend } = this.props;
     return (
-      <TouchableOpacity onPress={()=>Actions.push('FriendView',{friend: rec.friend})}>
+      <TouchableOpacity onPress={()=>Actions.push('FriendView',{friend})}>
       <View style={[styles.container]}>
 
         <View style={styles.iconContainer}>
-          <Icon name='user' color={colors.green} size={25} />
+          <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={25} />
         </View>
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
-            <Text style={styles.recText}>{rec.friend.name}</Text>
+            {friend.uid ?
+              <Text style={styles.recText}>{friend.name}</Text> :
+              <Text style={[styles.recText,{color:colors.darkGrey}]}>{friend.name}</Text>
+            }
           </View>
         </View>
 

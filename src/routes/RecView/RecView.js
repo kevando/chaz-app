@@ -38,7 +38,7 @@ const RecView = ({ rec, app, onEditPress, onDeletePress, onCategoryPress, update
       <Category rec={rec} onCategoryPress={onCategoryPress} />
 
       <Text style={styles.label}>Recommended by</Text>
-      <FriendCard rec={rec} />
+      <FriendCard friend={rec.friend} />
 
       <Text style={styles.label}>Follow Up</Text>
       <ReminderCard rec={rec} updateRecommendation={updateRecommendation} app={app}/>

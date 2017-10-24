@@ -10,27 +10,29 @@ export default styles = StyleSheet.create({
     paddingTop: 5,
     backgroundColor: colors.backgroundGrey,
   },
-  buttonContainer: {
-    margin: 10,
-    padding: 10,
+  signoutButton: {
+    fontSize: 8,
+
+    color: colors.lightGrey,
     // backgroundColor: colors.grey,
   },
+  //
+  // inputContainer: {
+  //   // backgroundColor: 'yellow',
+  //   margin: 10,
+  //   padding: 2,
+  // },
 
-  inputContainer: {
-    // backgroundColor: 'yellow',
-    margin: 10,
-    padding: 2,
-  },
-
-  input: {
+  title: {
     ...text,
-    fontSize: 20,
+    textAlign: 'center',
+    fontSize: 30,
     paddingLeft: 15,
     paddingTop: 5,
     height: 50,
     borderColor: colors.lightGrey,
     borderWidth: 1,
-    backgroundColor: 'white',
+    color: colors.grey
   },
 
 });

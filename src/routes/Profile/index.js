@@ -9,7 +9,7 @@ import * as UserActions from '../../reducers/user/actions';
 const mapStateToProps = (state) => {
   return {
     // recommendations: state.recommendations.list,
-    // friends: state.friends,
+    friends: state.friends,
     // activeFilter: state.recommendations.filter,
     // app: state.app,
     user: state.user,

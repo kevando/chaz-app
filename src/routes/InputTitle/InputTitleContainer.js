@@ -11,11 +11,21 @@ class InputTitleContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {title: '', buttonText: 'Next'}
+    this.state = {
+      title: '',
+      buttonText: 'Next',
+      placeholderText: 'Type recommendation here',
+      nextRoute: 'InputFriend',
+    }
   }
   componentDidMount() {
-    if(this.props.rec) // if Editing..
-      this.setState({title:this.props.rec.title, buttonText: 'Save' })
+    const { rec, unfinished } = this.props;
+
+    if(rec) // EDITING rec.
+      this.setState({title:rec.title, buttonText: 'Save' })
+
+    if(unfinished.from) // GIVING rec
+      this.setState({placeholderText: 'What are you recommending?', nextRoute: 'ConfirmRecommendation' })
   }
 
   renderButton() {
@@ -35,11 +45,11 @@ class InputTitleContainer extends Component {
 
     if(rec) {// if Editing..
       rec.title = this.state.title
-      updateRecommendation(rec); // Redux
+      updateRecommendation(rec);
       Actions.pop()
     } else {
-      setTitle(this.state.title); // Redux
-      Actions.push('InputFriend')
+      setTitle(this.state.title)
+      Actions.push(this.state.nextRoute)
     }
   }
 
@@ -49,6 +59,7 @@ class InputTitleContainer extends Component {
     return (
       <InputTitle
         title={this.state.title}
+        placeholderText={this.state.placeholderText}
         showKeyboard={this.props.showKeyboard}
         updateState={this.setState.bind(this)}
         renderButton={this.renderButton.bind(this)}

@@ -13,10 +13,16 @@ import {
   REFRESH_MY_RECS,
   REFRESH_GIVEN_RECS,
   SET_REC_TO,
+  INIT_REC,
 } from '../actionTypes';
 
 
 const recsRef = firebase.firestore().collection("recommendations")
+
+
+export function initNewRec(payload) {
+  return { type: INIT_REC, payload }
+}
 
 export function setTitle(title) {
   return { type: SET_TITLE, title }
@@ -33,7 +39,7 @@ export function setRecTo(uid) {
 
 export function addRecommendation(unfinished) {
   return(dispatch,getState) => {
-    unfinished.to = getState().user.uid // may change based on give rec UI
+    // unfinished.to = getState().user.uid // may change based on give rec UI
     unfinished.createdBy = getState().user.uid // add rec owner
     unfinished.status = 'new'
     // console.log('unfinished',unfinished)
@@ -138,33 +144,7 @@ export function assignUserToRecs(user,friend) {
 export function listenForRecs(uid) {
   return dispatch => {
 
-    // tmp adding only for new recs
-    firebase.firestore().collection("recommendations")
-    .onSnapshot(function(snapshot) {
-      // console.log('on snapshot?')
-        snapshot.docChanges.forEach(function(change) {
-          // console.log('on snapshot change',change)
-            if (change.type === "added") {
-                // console.log("New Rec: ", change.doc.data());
-                if(change.doc.data().from){
-                  // then the friend who gave this rec is on chaz!
-                  // get their token
-                  var userRef = firebase.firestore().collection("users").doc(change.doc.data().from);
-                  userRef.get().then(function(doc) {
-                    if (doc.exists) {
-                        console.log("Document data:", doc.data());
-                        var token = doc.data().token
-                    } else {
-                        console.log("No such document!");
-                    }
-                }).catch(function(error) {
-                    console.log("Error getting document:", error);
-                });
-                }
-            }
 
-        });
-    });
 
     // My recs
     console.log('start listening')

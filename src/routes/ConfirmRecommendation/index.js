@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
   return {
     unfinished: state.recommendations.unfinished,
     // recs: state.recommendations,
-    friend: _.find(state.friends,friend => friend.id === state.recommendations.unfinished.friendId)
+    friend: _.find(state.friends,friend => friend.id === state.recommendations.unfinished.friendId) || {name: 'me'}
   };
 };
 
