@@ -44,3 +44,5 @@ buck-out/
 
 ios/Pods
 ios/chaz/Goo*
+
+cloudFunctions/*.log

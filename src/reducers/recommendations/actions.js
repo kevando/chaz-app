@@ -138,6 +138,34 @@ export function assignUserToRecs(user,friend) {
 export function listenForRecs(uid) {
   return dispatch => {
 
+    // tmp adding only for new recs
+    firebase.firestore().collection("recommendations")
+    .onSnapshot(function(snapshot) {
+      // console.log('on snapshot?')
+        snapshot.docChanges.forEach(function(change) {
+          // console.log('on snapshot change',change)
+            if (change.type === "added") {
+                // console.log("New Rec: ", change.doc.data());
+                if(change.doc.data().from){
+                  // then the friend who gave this rec is on chaz!
+                  // get their token
+                  var userRef = firebase.firestore().collection("users").doc(change.doc.data().from);
+                  userRef.get().then(function(doc) {
+                    if (doc.exists) {
+                        console.log("Document data:", doc.data());
+                        var token = doc.data().token
+                    } else {
+                        console.log("No such document!");
+                    }
+                }).catch(function(error) {
+                    console.log("Error getting document:", error);
+                });
+                }
+            }
+
+        });
+    });
+
     // My recs
     console.log('start listening')
     recsRef.where("to", "==", uid)
