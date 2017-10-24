@@ -8,7 +8,7 @@ import styles from './styles';
 
 const Register = (props) => {
   // console.log(props)
-  const { onRegisterPress, updateState, status } = props;
+  const { onRegisterPress, updateState, status, onLoginPress } = props;
 
   return (
     <View style={styles.container}>
@@ -43,6 +43,10 @@ const Register = (props) => {
 
       <View style={styles.buttonContainer}>
         <Button style={styles.button} text="Create Account" onPress={onRegisterPress} />
+      </View>
+
+      <View style={styles.buttonContainer}>
+        <Button style={styles.button} text="Sign In" onPress={onLoginPress} />
       </View>
 
     </View>

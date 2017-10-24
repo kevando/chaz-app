@@ -26,12 +26,13 @@ const Category = ({ rec, onCategoryPress }) => {
 
 const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress, updateRecommendation,onAssignPress }) => {
 
+  console.log('RecView',rec)
 
 
   return (
     <View style={styles.container}>
 
-      <Text style={styles.label}>Recommendation</Text>
+      <Text style={styles.label}>Recommendation {rec.title}</Text>
       <TitleCard rec={rec} onEditPress={onEditPress}/>
 
       <Category rec={rec} onCategoryPress={onCategoryPress} />

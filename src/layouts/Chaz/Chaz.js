@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import { View, Text } from 'react-native'
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
-// import firebase from 'react-native-firebase';
+import firebase from 'react-native-firebase';
 // var PushNotification = require('react-native-push-notification');
 import Dashboard from '../../routes/Dashboard';
 import InputTitle from '../../routes/InputTitle';
@@ -18,12 +19,55 @@ import Profile from '../../routes/Profile';
 
 
 class Chaz extends Component {
-
+  // state = {}
   componentWillMount() {
     this.props.initializeApp() // redux
   }
 
 
+
+  componentDidMount() {
+
+    const messaging = firebase.messaging();
+
+//
+// // Get Instance ID token. Initially this makes a network call, once retrieved
+//   // subsequent calls to getToken will return from cache.
+//   messaging.getToken()
+//   .then(function(currentToken) {
+//     console.log('token',currentToken)
+//
+//   })
+//   .catch(function(err) {
+//     console.log('An error occurred while retrieving token. ', err);
+//
+//   });
+//
+//
+
+
+//
+// messaging.getInitialNotification().then(function(notif){
+//   console.log('getInitialNotification',notif)
+// })
+//
+// messaging.onMessage((notif) => {
+//   console.log('onMessage',notif)
+//   alert('OnMessage');
+// });
+
+
+
+  }
+
+  // render() {
+  //   return (
+  //     <View>
+  //     <Text>yeah</Text>
+  //     <Text style={{marginTop:200}}>sched notif</Text>
+  //     </View>
+  //   )
+  // }
 
   render_tmp() {
     return (

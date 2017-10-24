@@ -16,7 +16,9 @@ class TitleCard extends Component {
 
 
 render() {
+
   const { rec, onEditPress } = this.props;
+  console.log('titlecard render',rec)
   return (
     <View>
       <TouchableOpacity onPress={onEditPress} activeOpacity={0.9}>
@@ -25,6 +27,7 @@ render() {
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
             <Text style={styles.recText}>{rec.title}</Text>
+            
           </View>
         </View>
 

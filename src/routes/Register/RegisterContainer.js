@@ -47,9 +47,10 @@ class RegisterContainer extends Component {
     const { username, email, password } = this.state
     createUser(email,password,username)
   }
-  _onLoginPress(email) {
+  _onLoginPress() {
     const { loginUser } = this.props
-    loginUser(email,'12345678')
+    const { username, email, password } = this.state
+    loginUser(email,password)
   }
   _onLogoutPress() {
     const { logoutUser } = this.props
@@ -69,6 +70,7 @@ class RegisterContainer extends Component {
           {...this.state}
           onRegisterPress={this._onRegisterPress}
           updateState={this.updateState}
+          onLoginPress={this._onLoginPress}
         />
       )
 

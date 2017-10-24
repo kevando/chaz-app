@@ -9,8 +9,8 @@ const mapStateToProps = (state) => {
     // app: state.app,
     isAuthenticated: state.app.isAuthenticated,
     user: state.user,
-    showOnboarding: state.recommendations.myRecs.length == 0,
-    myRecsCount: state.recommendations.myRecs.length,
+    // showOnboarding: state.recommendations.myRecs.length == 0,
+    // myRecsCount: state.recommendations.myRecs.length,
   };
 };
 
