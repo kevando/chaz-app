@@ -7,9 +7,12 @@ import {
 } from '../actionTypes';
 import { listenForRecs } from '../recommendations/actions'
 import { listenForFriends } from '../friends/actions'
+import { setUserToken } from '../user/actions'
 
 export function initializeApp() {
   return (dispatch, getState) => {
+
+
 
       // Kick off auth listener to handle updating user object
       // This will fire every time the app loads no matter what
@@ -26,7 +29,10 @@ export function initializeApp() {
           dispatch(listenForRecs(user.uid))
           dispatch(listenForFriends(user.uid))
 
-          // if(!user.isAnonymous) {}
+          // console.log('user',user)
+          if(!user.isAnonymous) {
+              dispatch(setUserToken())
+          }
 
         } else {
           // No user is signed in. so lets authenticate anon
@@ -40,6 +46,9 @@ export function initializeApp() {
 
 
 }
+
+
+
 
 export function setNotificationPermission(response) {
   return { type: SET_NOTIFICATION_PERMISSION, response}

@@ -42,11 +42,12 @@ class RecViewContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log('View',this.props)
 
     if(!this.props.rec)  { return null }
     return (
       <RecView
+        app={this.props.app}
         rec={this.props.rec}
         onDeletePress={this._onDeletePress}
         onEditPress={this._onEditPress}

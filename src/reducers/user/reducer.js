@@ -2,6 +2,7 @@ import {
   INITIALIZE_APP,
   USER_SIGNED_IN,
   USER_SIGNED_OUT,
+  SET_TOKEN
 } from '../actionTypes';
 
 const initialState = {
@@ -17,15 +18,15 @@ export default function user(user = initialState, action = {}) {
   switch (action.type) {
 
     // -------------------------------------------
-    // case INITIALIZE_APP:
-    //   return {
-    //     ...user,
-    //     uid: action.uid
-    //   }
+    case SET_TOKEN:
+      return {
+        ...user,
+        token: action.token,
+      }
 
     // -------------------------------------------
     case USER_SIGNED_IN:
-      console.log('USER_SIGNED_IN',action.user)
+      // console.log('USER_SIGNED_IN',action.user)
       return {
         ...user,
         uid: action.user.uid,

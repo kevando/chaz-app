@@ -20,7 +20,7 @@ class DashboardContainer extends Component {
   componentDidMount() {
     // TMP!!
     // Actions.push('Profile')
-    // Actions.push('RecView',{rec: this.props.recommendations[0]})
+    // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[0]})
   }
 
@@ -37,7 +37,7 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log('Dash',this.props)
     // console.log(firebase.auth())
     const { showOnboarding } = this.props;
 

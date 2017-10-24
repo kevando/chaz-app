@@ -40,7 +40,7 @@ render() {
         <View style={[styles.container]}>
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
-            <Text style={styles.recText}>{friend.name} is on chaz!</Text>
+            <Text style={styles.recText}>{friend.name} is @{friend.username} on chaz!</Text>
           </View>
         </View>
       </View>
@@ -55,7 +55,7 @@ render() {
   return (
     <View>
 
-      <Text style={styles.label}>Invite this person to chaz</Text>
+      <Text style={styles.label}>Find this person to chaz</Text>
 
         <View style={[styles.container]}>
         <View style={styles.inputContainer}>
@@ -80,7 +80,22 @@ render() {
   );
 }
 };
-
+export class RecCard extends Component {
+render() {
+  const { rec } = this.props;
+  return (
+    <View>
+        <View style={[styles.container]}>
+        <View style={styles.textContainer}>
+          <View style={styles.recContainer}>
+            <Text style={styles.recText}>{rec.title}</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+}
+};
 //
 // class FriendCard extends Component {
 //

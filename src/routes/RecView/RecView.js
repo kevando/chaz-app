@@ -24,15 +24,15 @@ const Category = ({ rec, onCategoryPress }) => {
 
 }
 
-const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress, updateRecommendation,onAssignPress }) => {
+const RecView = ({ rec, app, onEditPress, onDeletePress, onCategoryPress, updateRecommendation,onAssignPress }) => {
 
-  console.log('RecView',rec)
+  // console.log('RecView',rec)
 
 
   return (
     <View style={styles.container}>
 
-      <Text style={styles.label}>Recommendation {rec.title}</Text>
+      <Text style={styles.label}>Recommendation</Text>
       <TitleCard rec={rec} onEditPress={onEditPress}/>
 
       <Category rec={rec} onCategoryPress={onCategoryPress} />
@@ -41,7 +41,7 @@ const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress, updateRecom
       <FriendCard rec={rec} />
 
       <Text style={styles.label}>Follow Up</Text>
-      <ReminderCard rec={rec} updateRecommendation={updateRecommendation} />
+      <ReminderCard rec={rec} updateRecommendation={updateRecommendation} app={app}/>
 
 
       <Button title="delete" onPress={onDeletePress} color="red" />

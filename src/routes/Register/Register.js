@@ -8,12 +8,12 @@ import styles from './styles';
 
 const Register = (props) => {
   // console.log(props)
-  const { onRegisterPress, updateState, status, onLoginPress } = props;
+  const { onRegisterPress, updateState, status, error, onLoginPress } = props;
 
   return (
     <View style={styles.container}>
 
-      <Text style={styles.status}>{status}</Text>
+
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -34,6 +34,7 @@ const Register = (props) => {
           ref={ c => this._title = c }
           autoCapitalize="none"
           autoCorrect={false}
+          keyboardType="email-address"
           multiline={false}
           style={styles.input}
           placeholderTextColor="#aaa"
@@ -41,13 +42,28 @@ const Register = (props) => {
         />
       </View>
 
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder='Password'
+          ref={ c => this._title = c }
+          autoCapitalize="none"
+          autoCorrect={false}
+          secureTextEntry={true}
+          multiline={false}
+          style={styles.input}
+          placeholderTextColor="#aaa"
+          onChangeText={(input) => updateState({password: input})}
+        />
+      </View>
+      <Text style={styles.error}>{error}</Text>
+      <Text style={styles.status}>{status}</Text>
+
+
       <View style={styles.buttonContainer}>
         <Button style={styles.button} text="Create Account" onPress={onRegisterPress} />
       </View>
 
-      <View style={styles.buttonContainer}>
-        <Button style={styles.button} text="Sign In" onPress={onLoginPress} />
-      </View>
+
 
     </View>
   );

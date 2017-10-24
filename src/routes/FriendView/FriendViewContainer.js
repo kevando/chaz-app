@@ -3,7 +3,7 @@ import FriendView from './FriendView';
 import { Actions } from 'react-native-router-flux';
 import { AlertIOS } from 'react-native';
 import firebase from 'react-native-firebase';
-
+import _ from 'lodash'
 const usersRef = firebase.firestore().collection("users")
 
 class FriendViewContainer extends Component {
@@ -14,6 +14,11 @@ class FriendViewContainer extends Component {
     // this._onDeletePress = this._onDeletePress.bind(this)
     this._assignUser = this._assignUser.bind(this)
     this._onKeyPress = this._onKeyPress.bind(this)
+  }
+  componentDidMount() {
+    this.setState({
+      friendRecs: _.filter(this.props.myRecs,rec => rec.friendId == this.props.friend.id)
+    })
   }
 
   _onKeyPress(input){
@@ -42,12 +47,13 @@ class FriendViewContainer extends Component {
   }
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
 
     if(!this.props.friend)  { return null }
     return (
       <FriendView
         friend={this.props.friend}
+        friendRecs={this.state.friendRecs}
         onKeyPress={this._onKeyPress}
         user={this.state.user}
         onAssignUserPress={this._assignUser}

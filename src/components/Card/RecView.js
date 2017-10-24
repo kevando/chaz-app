@@ -7,6 +7,7 @@ import { Actions} from 'react-native-router-flux';
 import { Categories, CategoryIcon } from '../../components/Category/Icon';
 import { colors } from '../../config/styles';
 import styles from './styles';
+import firebase from 'react-native-firebase'
 const Permissions = require('react-native-permissions');
 var PushNotification = require('react-native-push-notification');
 
@@ -18,7 +19,7 @@ class TitleCard extends Component {
 render() {
 
   const { rec, onEditPress } = this.props;
-  console.log('titlecard render',rec)
+  // console.log('titlecard render',rec)
   return (
     <View>
       <TouchableOpacity onPress={onEditPress} activeOpacity={0.9}>
@@ -27,7 +28,7 @@ render() {
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
             <Text style={styles.recText}>{rec.title}</Text>
-            
+
           </View>
         </View>
 
@@ -59,7 +60,7 @@ class FriendCard extends Component {
         </View>
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
-            <Text style={styles.recText}>{rec.friend.name} ({rec.friend.recs && rec.friend.recs.length})</Text>
+            <Text style={styles.recText}>{rec.friend.name}</Text>
           </View>
         </View>
 
@@ -128,27 +129,22 @@ export class ReminderCard extends Component {
   }
   componentWillMount() {
     // console.log(Permissions)
-    Permissions.check('notification')
-      .then(response => {
-        //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-        // this.setState({ photoPermission: response })
-        console.log(response)
-        if(response == 'authorized')
-          this.setState({showCard: true, notificationPermission: response})
-      });
+    // Permissions.check('notification')
+    //   .then(response => {
+    //     //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
+    //     // this.setState({ photoPermission: response })
+    //     console.log(response)
+    //     if(response == 'authorized')
+    //       this.setState({showCard: true, notificationPermission: response})
+    //   });
   }
 
   _onSetReminderPress() {
 
-    PushNotification.localNotificationSchedule({
-  message: "My Notification Message", // (required)
-  date: new Date(Date.now() + (60 * 1000)) // in 60 secs
-});
-
     const { rec } = this.props;
 
       Alert.alert(
-        rec.friend,
+        rec.friend.name,
         'Remind me to follow up in:',
         [
           {text: 'In one minute', onPress: this._setReminder.bind(this,1)},
@@ -169,13 +165,21 @@ export class ReminderCard extends Component {
 
     const reminderTimestamp = Date.now() + (reminderDateInMinutes * 60 * 1000);
 
-    PushNotification.localNotificationSchedule({
-      message: "Did you check out "+rec.title+'?',
-      date: new Date(reminderTimestamp),
-      title: rec.friend, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
-      playSound: true, // (optional) default: true
-      soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
-    });
+    firebase.messaging().scheduleLocalNotification({
+            title:'some title',
+            fire_date: new Date(reminderTimestamp),      //RN's converter is used, accept epoch time and whatever that converter supports
+            id: rec.id,    //REQUIRED! this is what you use to lookup and delete notification. In android notification with same ID will override each other
+            body: "from future past",
+            // repeat_interval: "week" //day, hour
+        })
+
+    // PushNotification.localNotificationSchedule({
+    //   message: "Did you check out "+rec.title+'?',
+    //   date: new Date(reminderTimestamp),
+    //   title: rec.friend, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
+    //   playSound: true, // (optional) default: true
+    //   soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
+    // });
 
     rec.reminder = reminderTimestamp
     updateRecommendation(rec);
@@ -183,9 +187,14 @@ export class ReminderCard extends Component {
   }
 
   render() {
-    if(!this.state.showCard) { return null }
+    // console.log(firebase.messaging())
+    firebase.messaging().getScheduledLocalNotifications().then(notif=>console.log(notif));
+    // if(!this.state.showCard) { return null }
 
-    const { rec } = this.props;
+    const { rec, app } = this.props;
+
+    if(app.notificationPermission != 'authorized') { return null }
+
     return (
       <View style={[styles.container]}>
         <View style={styles.iconContainer}>

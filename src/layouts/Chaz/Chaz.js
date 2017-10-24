@@ -28,7 +28,7 @@ class Chaz extends Component {
 
   componentDidMount() {
 
-    const messaging = firebase.messaging();
+    // const messaging = firebase.messaging();
 
 //
 // // Get Instance ID token. Initially this makes a network call, once retrieved
@@ -42,7 +42,7 @@ class Chaz extends Component {
 //     console.log('An error occurred while retrieving token. ', err);
 //
 //   });
-//
+// //
 //
 
 

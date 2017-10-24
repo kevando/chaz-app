@@ -11,7 +11,12 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.backgroundGrey,
   },
   status: {
-    textAlign: 'center',
+    marginLeft: 10,
+    color: 'grey',
+  },
+  error: {
+    marginLeft: 10,
+    color: 'red',
   },
   buttonContainer: {
     margin: 10,
