@@ -4,20 +4,17 @@ import {
   SET_NOTIFICATION_PERMISSION,
   INITIALIZE_APP,
   USER_SIGNED_IN,
-  // SYNC_USER_RECS,
-  // SET_MY_RECS,
 } from '../actionTypes';
 import { listenForRecs } from '../recommendations/actions'
 import { listenForFriends } from '../friends/actions'
 
 export function initializeApp() {
   return (dispatch, getState) => {
-    // console.log('initializeApp',firebase.auth())
 
       // Kick off auth listener to handle updating user object
       // This will fire every time the app loads no matter what
       firebase.auth().onAuthStateChanged(function(user) {
-
+        console.log('auth state change')
         // Add user data to redux (registered or anon)
         // Fire off event listeners
         if (user) {

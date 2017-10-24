@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash'
 import DashboardContainer from './DashboardContainer';
 
-import * as AppActions from '../../reducers/app/actions';
+// import * as AppActions from '../../reducers/app/actions';
 import * as RecActions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
     // givenRecs: _.filter(allRecs,rec=> rec.friend.uid === state.user.uid),
     friends: state.friends,
     // activeFilter: state.recommendations.filter,
-    app: state.app,
+    // app: state.app,
     showOnboarding: state.recommendations.list.length == 0,
     user: state.user,
   };
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => {
 
 // map dispatch to props
 
-export default connect(mapStateToProps, {...AppActions, ...RecActions})(DashboardContainer);
+export default connect(mapStateToProps, {...RecActions})(DashboardContainer);

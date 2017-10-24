@@ -9,6 +9,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     backgroundColor: colors.backgroundGrey,
+    paddingTop: 20,
   },
   title: {
     ...text,

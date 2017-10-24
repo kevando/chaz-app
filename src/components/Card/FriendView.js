@@ -17,6 +17,9 @@ render() {
   return (
     <View>
         <View style={[styles.container]}>
+        <View style={styles.iconContainer}>
+                  <Icon name='user' color={colors.green} size={25} />
+                </View>
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
             <Text style={styles.recText}>{friend.name}</Text>
@@ -33,6 +36,7 @@ render() {
   const { friend } = this.props;
   return (
     <View>
+      <Text style={styles.label}>This person is on chaz!</Text>
         <View style={[styles.container]}>
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
@@ -50,12 +54,14 @@ render() {
   const { friend, onKeyPress, user, onAssignUserPress } = this.props;
   return (
     <View>
-        <View style={[styles.container]}>
-        <View style={styles.textContainer}>
-          <View style={styles.recContainer}>
-          <TextInput
-            placeholder='Username'
 
+      <Text style={styles.label}>Invite this person to chaz</Text>
+
+        <View style={[styles.container]}>
+        <View style={styles.inputContainer}>
+
+          <TextInput
+            placeholder='Search for Username'
             autoCapitalize="none"
             autoCorrect={false}
             multiline={false}
@@ -63,11 +69,10 @@ render() {
             placeholderTextColor="#aaa"
             onChangeText={(input) => onKeyPress(input)}
           />
-          </View>
+
           {
-            user ?
-            <Text onPress={onAssignUserPress}>User found!</Text> :
-            <Text>No user found</Text>
+            user &&
+            <Text onPress={onAssignUserPress}>User found!</Text>
           }
         </View>
       </View>

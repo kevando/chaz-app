@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
-import firebase from 'react-native-firebase';
+// import firebase from 'react-native-firebase';
 // var PushNotification = require('react-native-push-notification');
 import Dashboard from '../../routes/Dashboard';
 import InputTitle from '../../routes/InputTitle';
@@ -13,17 +13,17 @@ import RecView from '../../routes/RecView';
 import FriendView from '../../routes/FriendView';
 import Splash from '../../routes/Splash';
 import Register from '../../routes/Register';
-
+import Profile from '../../routes/Profile';
 
 
 
 class Chaz extends Component {
 
   componentWillMount() {
-    // console.log('chaz.js',firebase.auth())
     this.props.initializeApp() // redux
-
   }
+
+
 
   render_tmp() {
     return (
@@ -35,8 +35,9 @@ class Chaz extends Component {
     )
   }
   render() {
+    // return null
     // console.log('render chaz.js')
-    const { showOnboarding, isAuthenticated } = this.props
+    const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
 
     // return <Splash />
 
@@ -48,10 +49,11 @@ class Chaz extends Component {
       <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
         <Modal key="root" hideNavBar={true}>
           <Stack key="MainStack" initial={true} hideBackImage back>
-            <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={!showOnboarding} renderRightButton={() => <ProfileButton />}/>
+            <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={showOnboarding} initial={!showOnboarding} renderRightButton={() => <ProfileButton myRecsCount={myRecsCount} user={user} />}/>
             <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
             <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
             <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+            <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
           </Stack>
           <Stack key="InputStack" back backTitle="Close" hideBackImage  backButtonTextStyle={{ color:'white' }}  >
             <Scene key='InputTitle' component={InputTitle} title='' hideNavBar={false} renderBackButton={() => <CloseButton />} />

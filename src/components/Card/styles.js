@@ -129,6 +129,9 @@ export default styles = StyleSheet.create({
   },
 
   // searching for user
+  inputContainer: {
+    flex: 1,
+  },
   input: {
     ...text,
     fontSize: 20,
@@ -138,6 +141,17 @@ export default styles = StyleSheet.create({
     borderColor: colors.lightGrey,
     borderBottomWidth: 1,
     // backgroundColor: 'yellow',
+  },
+
+  label: {
+    ...text,
+    color: colors.darkGrey,
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight:20,
+    marginTop:25,
+    marginLeft: 12,
+    paddingRight: 10,
   },
 
 

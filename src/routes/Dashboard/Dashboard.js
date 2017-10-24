@@ -6,11 +6,12 @@ import Button from '../../components/Button';
 import RecCard from '../../components/Card/Rec';
 import Filter from '../../components/Nav/Filter';
 import NotificationPermission from '../../components/Card/NotificationPermission';
+import * as Onboarding from '../../components/Onboarding'
 import styles from './styles';
 
 const Dashboard = (props) => {
-  console.log(props)
-  const { myRecs, onNewRecPress, onNewGivenRecPress, app, activeFilter, changeActiveFilter, givenRecs } = props;
+  // console.log(props)
+  const { myRecs, onNewRecPress, onNewGivenRecPress, activeFilter, changeActiveFilter, givenRecs } = props;
 
 
   const filteredRecs = activeFilter === 'Everything' ? myRecs : _.filter(myRecs, function(rec) { return rec.category.title == activeFilter; });
@@ -31,23 +32,12 @@ const Dashboard = (props) => {
         })
       }
 
-      <Text>given:</Text>
-      {
-        _.map(givenRecs,function(rec,i) {
-          return(
-            <RecCard rec={rec} key={i}  />
-          )
-        })
-      }
+
+      <Onboarding.NotificationPermission />
 
 
-      <NotificationPermission />
       </ScrollView>
-      <View>
-      <Text onPress={onNewGivenRecPress} >uid: {props.user.uid}</Text>
-      <Text>email: {props.user.email}</Text>
-      <Text>anon: {props.user.isAnonymous ? 'yes' : 'no'}</Text>
-      </View>
+
 
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>

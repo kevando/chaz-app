@@ -31,9 +31,27 @@ export class BackButton extends Component {
 
 export class ProfileButton extends Component {
 
+  _onPress(isAnonymous) {
+
+
+    if(isAnonymous)
+      Actions.push('Register')
+    else
+      Actions.push('Profile')
+  }
+
   render() {
+    const { myRecsCount,user:{isAnonymous} } = this.props
+
+    if(myRecsCount < 2 ) { return null }
+
     return (
-      <Icon onPress={()=>Actions.push('Register')} name="user" size={25} style={[styles.buttonIcon,{marginTop: StatusBar.hidden ? -10 : 0,}]}/>
+      <Icon
+        onPress={()=>this._onPress(isAnonymous)}
+        name={isAnonymous ? "user-plus" : "user"} 
+        size={25}
+        style={[styles.buttonIcon,{marginTop: StatusBar.hidden ? -10 : 0,}]}
+      />
     )
   }
 }

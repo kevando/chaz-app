@@ -10,9 +10,6 @@ export default styles = StyleSheet.create({
     paddingTop: 5,
     backgroundColor: colors.backgroundGrey,
   },
-  status: {
-    textAlign: 'center',
-  },
   buttonContainer: {
     margin: 10,
     padding: 10,

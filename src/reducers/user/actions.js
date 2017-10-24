@@ -1,12 +1,8 @@
-
-
-
-
 import firebase from 'react-native-firebase';
 import {
   CREATE_USER,
   USER_SIGNED_OUT,
-  // SYNC_USER_RECS,
+  USER_SIGNED_IN,
 } from '../actionTypes';
 
 const UsersRef = firebase.firestore().collection("users")
@@ -16,10 +12,13 @@ export function createUser(email, password, username) {
   return dispatch => {
 
     var credential = firebase.auth.EmailAuthProvider.credential(email, password);
-    console.log('credential',credential)
+    // console.log('credential',credential)
 
-    firebase.auth().currentUser.linkWithCredential(credential).then(function(user) {
+    firebase.auth().currentUser.linkWithCredential(credential).then((user) => {
       console.log("Anonymous account successfully upgraded", user);
+      // not sure why authStateChanged isnt called
+      // so calling this manually
+      dispatch({ type: USER_SIGNED_IN, user })
       // Now add the username
       user.updateProfile({
         displayName: username,

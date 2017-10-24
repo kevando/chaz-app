@@ -25,7 +25,7 @@ export default function user(user = initialState, action = {}) {
 
     // -------------------------------------------
     case USER_SIGNED_IN:
-      // console.log('reducer',action.user)
+      console.log('USER_SIGNED_IN',action.user)
       return {
         ...user,
         uid: action.user.uid,

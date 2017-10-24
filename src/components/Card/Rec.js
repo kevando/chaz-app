@@ -16,7 +16,7 @@ class Card extends Component {
   }
 
 render() {
-  console.log(this.props)
+  // console.log(this.props)
   const { rec } = this.props;
   return (
     <View>
@@ -32,7 +32,6 @@ render() {
             <Text style={styles.recText}>{rec.title}</Text>
           </View>
           <View style={styles.friendContainer}>
-            <Text style={styles.friendText}>uid: {rec.uid}</Text>
             <Text style={styles.friendText}>friend: {rec.friend.name}</Text>
           </View>
         </View>
