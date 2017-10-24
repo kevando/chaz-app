@@ -11,18 +11,24 @@ import {
   SET_GRADE,
   UPDATE_RECOMMENDATION,
   REFRESH_MY_RECS,
-  REFRESH_GIVEN_RECS
+  REFRESH_GIVEN_RECS,
+  SET_REC_TO,
 } from '../actionTypes';
 
 
 const recsRef = firebase.firestore().collection("recommendations")
 
-export function setTitle(title,given) {
-  return { type: SET_TITLE, title, given }
+export function setTitle(title) {
+  return { type: SET_TITLE, title }
 }
 
 export function setFriendId(friendId) {
   return { type: SET_FRIEND_ID, friendId }
+}
+
+// given
+export function setRecTo(uid) {
+  return { type: SET_REC_TO, uid }
 }
 
 export function addRecommendation(unfinished) {

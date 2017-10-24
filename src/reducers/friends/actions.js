@@ -11,7 +11,7 @@ const usersRef = firebase.firestore().collection("users")
 
 export function addFriend(friend) {
   return(dispatch,getState) => {
-    friend.owner = getState().app.uid // add rec owner
+    friend.owner = getState().user.uid // add friend owner
 
     friendsRef.add(friend)
     .then(docRef => {

@@ -11,6 +11,7 @@ import {
   // UPDATE_RECOMMENDATION,
   REFRESH_MY_RECS,
   REFRESH_GIVEN_RECS,
+  SET_REC_TO,
 } from '../actionTypes';
 
 const initialState =
@@ -32,7 +33,8 @@ export default function recs(recommendations = initialState, action = {}) {
           // id: 'key_' + Date.now(),
           title: action.title,
           status: 'unfinished',
-          createdAt: Date.now()
+          createdAt: Date.now(),
+
         }
       }
 
@@ -43,6 +45,16 @@ export default function recs(recommendations = initialState, action = {}) {
         unfinished: {
           ...recommendations.unfinished,
           friendId: action.friendId
+        }
+      }
+
+    // -------------------------------------------
+    case SET_REC_TO:
+      return {
+        ...recommendations,
+        unfinished: {
+          ...recommendations.unfinished,
+          to: action.uid
         }
       }
 
