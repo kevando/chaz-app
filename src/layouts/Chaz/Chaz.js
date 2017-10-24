@@ -2,57 +2,26 @@ import React, {Component} from 'react';
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
-// import firebase from 'react-native-firebase';
-
+import firebase from 'react-native-firebase';
+// var PushNotification = require('react-native-push-notification');
 import Dashboard from '../../routes/Dashboard';
 import InputTitle from '../../routes/InputTitle';
 import InputFriend from '../../routes/InputFriend';
 import ConfirmRecommendation from '../../routes/ConfirmRecommendation';
-import { CloseButton, BackButton } from '../../components/Nav';
+import { CloseButton, BackButton, ProfileButton } from '../../components/Nav';
 import RecView from '../../routes/RecView';
+import FriendView from '../../routes/FriendView';
 import Splash from '../../routes/Splash';
-var PushNotification = require('react-native-push-notification');
+import Register from '../../routes/Register';
+
 
 
 
 class Chaz extends Component {
 
   componentWillMount() {
+    // console.log('chaz.js',firebase.auth())
     this.props.initializeApp() // redux
-
-    PushNotification.configure({
-
-    // (optional) Called when Token is generated (iOS and Android)
-    onRegister: function(token) {
-        console.log( 'TOKEN:', token );
-    },
-
-    // (required) Called when a remote or local notification is opened or received
-    onNotification: function(notification) {
-        console.log( 'NOTIFICATION:', notification );
-    },
-
-    // ANDROID ONLY: GCM Sender ID (optional - not required for local notifications, but is need to receive remote push notifications)
-    senderID: "YOUR GCM SENDER ID",
-
-    // IOS ONLY (optional): default: all - Permissions to register.
-    permissions: {
-        alert: true,
-        badge: true,
-        sound: true
-    },
-
-    // Should the initial notification be popped automatically
-    // default: true
-    popInitialNotification: true,
-
-    /**
-      * (optional) default: true
-      * - Specified if permissions (ios) and token (android and ios) will requested or not,
-      * - if not, you must call PushNotificationsHandler.requestPermissions() later
-      */
-    requestPermissions: true,
-});
 
   }
 
@@ -79,8 +48,10 @@ class Chaz extends Component {
       <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
         <Modal key="root" hideNavBar={true}>
           <Stack key="MainStack" initial={true} hideBackImage back>
-            <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={showOnboarding} initial={!showOnboarding} />
-            <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton nav={true} />} />
+            <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={!showOnboarding} renderRightButton={() => <ProfileButton />}/>
+            <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+            <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+            <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
           </Stack>
           <Stack key="InputStack" back backTitle="Close" hideBackImage  backButtonTextStyle={{ color:'white' }}  >
             <Scene key='InputTitle' component={InputTitle} title='' hideNavBar={false} renderBackButton={() => <CloseButton />} />

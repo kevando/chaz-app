@@ -12,10 +12,10 @@ class InputFriend extends Component {
   componentDidMount() {
     if(Actions.currentScene == 'InputFriend')
       this._title.focus()
-
   }
 
   render() {
+    // console.log(this.props)
 
     const { onKeyPress, renderButton, friends, onFriendPress } = this.props;
 
@@ -35,10 +35,10 @@ class InputFriend extends Component {
 
 
         <ScrollView keyboardShouldPersistTaps="always" style={styles.friendsContainer}>
-          { _.map(friends, function({name},i) {
+          { _.map(friends, function(friend,i) {
             return (
-              <TouchableOpacity key={i} onPress={onFriendPress.bind(this,name)} style={styles.friendTouchable}>
-                <Text style={styles.friendText}><Icon name='user' size={20}  style={styles.friendIcon}/>&nbsp;&nbsp;{name}</Text>
+              <TouchableOpacity key={i} onPress={onFriendPress.bind(this,friend)} style={styles.friendTouchable}>
+                <Text style={styles.friendText}><Icon name='user' size={20} style={styles.friendIcon}/>&nbsp;&nbsp;{friend.name}{friend.uid&&'!'}</Text>
               </TouchableOpacity>
             );
           })}

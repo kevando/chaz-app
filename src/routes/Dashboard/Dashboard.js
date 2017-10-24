@@ -9,11 +9,11 @@ import NotificationPermission from '../../components/Card/NotificationPermission
 import styles from './styles';
 
 const Dashboard = (props) => {
-  // console.log(props)
-  const { recommendations, onNewRecPress, app, activeFilter, changeActiveFilter } = props;
+  console.log(props)
+  const { myRecs, onNewRecPress, onNewGivenRecPress, app, activeFilter, changeActiveFilter, givenRecs } = props;
 
 
-  const filteredRecs = activeFilter === 'Everything' ? recommendations : _.filter(recommendations, function(rec) { return rec.category.title == activeFilter; });
+  const filteredRecs = activeFilter === 'Everything' ? myRecs : _.filter(myRecs, function(rec) { return rec.category.title == activeFilter; });
 
 
   return (
@@ -21,19 +21,33 @@ const Dashboard = (props) => {
       <StatusBar barStyle="light-content" hidden={false} />
 
       <ScrollView style={styles.scrollView}>
-      {recommendations.length > 6 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
+      {myRecs.length > 6 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
 
       {
         _.map(filteredRecs,function(rec,i) {
           return(
-            <RecCard totalRecs={recommendations.length} rec={rec} key={i} {...props}  />
+            <RecCard rec={rec} key={i} />
           )
         })
       }
 
+      <Text>given:</Text>
+      {
+        _.map(givenRecs,function(rec,i) {
+          return(
+            <RecCard rec={rec} key={i}  />
+          )
+        })
+      }
+
+
       <NotificationPermission />
       </ScrollView>
-
+      <View>
+      <Text onPress={onNewGivenRecPress} >uid: {props.user.uid}</Text>
+      <Text>email: {props.user.email}</Text>
+      <Text>anon: {props.user.isAnonymous ? 'yes' : 'no'}</Text>
+      </View>
 
       <Button text="New Recommendation" onPress={onNewRecPress} />
     </View>

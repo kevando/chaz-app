@@ -1,8 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import RecViewContainer from './RecViewContainer';
-import * as RecActions from '../../reducers/recommendations/actions';
+import FriendViewContainer from './FriendViewContainer';
 import * as FriendActions from '../../reducers/friends/actions';
+import * as RecActions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -10,4 +10,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {...RecActions, ...FriendActions})(RecViewContainer);
+export default connect(mapStateToProps, {...FriendActions,...RecActions})(FriendViewContainer);

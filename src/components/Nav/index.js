@@ -22,14 +22,18 @@ export class CloseButton extends Component {
 }
 
 export class BackButton extends Component {
-
-  _onClose() {
-    // Keyboard.dismiss()
-    Actions.pop()
-  }
   render() {
     return (
-      <Icon onPress={this._onClose} name="arrow-left" size={25} style={[styles.buttonIcon,{marginTop: StatusBar.hidden ? -10 : 0,}]}/>
+      <Icon onPress={Actions.pop} name="arrow-left" size={25} style={[styles.buttonIcon,{marginTop: StatusBar.hidden ? -10 : 0,}]}/>
+    )
+  }
+}
+
+export class ProfileButton extends Component {
+
+  render() {
+    return (
+      <Icon onPress={()=>Actions.push('Register')} name="user" size={25} style={[styles.buttonIcon,{marginTop: StatusBar.hidden ? -10 : 0,}]}/>
     )
   }
 }

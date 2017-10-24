@@ -14,12 +14,22 @@ class ConfirmRecommendationContainer extends Component {
       this.setState({showTitle: false});
     }
   }
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
     // Not sure why this entire component re mounts..
-    if(!this.props.unfinished.title) {
+    // console.log('confRec new props',nextProps)
+    if(!nextProps.unfinished.title) {
       Actions.reset('MainStack')
     }
   }
+
+  // seems to work differently now
+  // componentDidMount() {
+  //   // Not sure why this entire component re mounts..
+  //   console.log('confRec did mount',this.props)
+  //   if(!this.props.unfinished.title) {
+  //     Actions.reset('MainStack')
+  //   }
+  // }
 
   _onSaveRecommendationPress() {
     const { addRecommendation, unfinished } = this.props;
@@ -28,7 +38,7 @@ class ConfirmRecommendationContainer extends Component {
   }
 
   render() {
-
+    // console.log('confRec render',this.props)
     return (
       <ConfirmRecommendation
         onSaveRecommendationPress={this._onSaveRecommendationPress.bind(this)}

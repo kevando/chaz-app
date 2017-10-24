@@ -21,13 +21,10 @@ class InputFriendContainer extends Component {
   }
 
   onNextPress() {
-    const { setFriend, addFriend } = this.props;
+    const { addFriend } = this.props;
     const {friend} = this.state;
-    setFriend(friend); // Redux
-    addFriend({name: friend}); // Redux
-
+    addFriend({name: friend}); // Redux (also sets friendId)
     Actions.push('ConfirmRecommendation');
-
   }
 
   onKeyPress(friend) {
@@ -36,10 +33,9 @@ class InputFriendContainer extends Component {
     this.setState({friends: filteredFriends, friend })
   }
 
-  onFriendPress(name) {
-    const { navigator, setFriend } = this.props;
-    setFriend(name); // Redux
-
+  onFriendPress(friend) {
+    const { setFriendId } = this.props;
+    setFriendId(friend.id); // Redux
     Actions.push('ConfirmRecommendation');
   }
 

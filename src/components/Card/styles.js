@@ -85,7 +85,7 @@ export default styles = StyleSheet.create({
   },
 
   friendText: {
-    fontSize: 12,
+    fontSize: 10,
     color: colors.darkGrey,
     lineHeight: 17,
     fontWeight: '100'
@@ -125,7 +125,19 @@ export default styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '300',
     color: colors.blue,
-    
+
+  },
+
+  // searching for user
+  input: {
+    ...text,
+    fontSize: 20,
+    paddingLeft: 15,
+    paddingTop: 5,
+    height: 50,
+    borderColor: colors.lightGrey,
+    borderBottomWidth: 1,
+    // backgroundColor: 'yellow',
   },
 
 

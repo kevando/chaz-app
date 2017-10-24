@@ -1402,7 +1402,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevaid.chaz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevaid.chaz.dev;
 				PRODUCT_NAME = Chaz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1429,7 +1429,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevaid.chaz;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevaid.chaz.dev;
 				PRODUCT_NAME = Chaz;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

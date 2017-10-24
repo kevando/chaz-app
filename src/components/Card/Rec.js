@@ -16,7 +16,8 @@ class Card extends Component {
   }
 
 render() {
-  const { rec, setStatus, setGrade, setReminder, notificationPermission, totalRecs } = this.props;
+  console.log(this.props)
+  const { rec } = this.props;
   return (
     <View>
       <TouchableOpacity onPress={this._onCardPress.bind(this)} activeOpacity={0.9}>
@@ -29,6 +30,10 @@ render() {
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
             <Text style={styles.recText}>{rec.title}</Text>
+          </View>
+          <View style={styles.friendContainer}>
+            <Text style={styles.friendText}>uid: {rec.uid}</Text>
+            <Text style={styles.friendText}>friend: {rec.friend.name}</Text>
           </View>
         </View>
 
@@ -49,7 +54,12 @@ export class ConfirmationCard extends Component {
 
 
 render() {
-  const { rec, setStatus, setGrade, setReminder, notificationPermission, totalRecs } = this.props;
+  // console.log('conf',this.props)
+  const { rec, friend } = this.props;
+
+  // For some reason this reloads without data
+  if(!friend) { return null }
+
   return (
     <View>
         <View style={[styles.container]}>
@@ -63,7 +73,7 @@ render() {
             <Text style={styles.recText}>{rec.title}</Text>
           </View>
           <View style={styles.friendContainer}>
-            <Text style={styles.friendText}>Recommended by:<Text style={styles.bold}>{rec.friend}</Text></Text>
+            <Text style={styles.friendText}>Recommended by:<Text style={styles.bold}>{friend.name}</Text></Text>
           </View>
         </View>
 

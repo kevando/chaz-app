@@ -10,6 +10,7 @@ class RecViewContainer extends Component {
     this._onDeletePress = this._onDeletePress.bind(this)
     this._onEditPress = this._onEditPress.bind(this)
     this._onCategoryPress = this._onCategoryPress.bind(this)
+    this._onAssignPress = this._onAssignPress.bind(this)
   }
 
   _onEditPress() {
@@ -28,12 +29,16 @@ class RecViewContainer extends Component {
   }
   _deleteRecommendation() {
     const { deleteRecommendation, rec } = this.props
-    deleteRecommendation(rec.id) // redux and firestore
+    deleteRecommendation(rec) // redux and firestore
     Actions.pop()
   }
   _onCategoryPress(rec,category) {
     rec.category = category
     this.props.updateRecommendation(rec)
+  }
+  _onAssignPress(username){
+    const { assignUserToFriend, rec } = this.props
+    assignUserToFriend(rec, username) // i think we should know for sure if this user exists
   }
 
   render() {
@@ -46,6 +51,7 @@ class RecViewContainer extends Component {
         onEditPress={this._onEditPress}
         onCategoryPress={this._onCategoryPress}
         updateRecommendation={this.props.updateRecommendation}
+        onAssignPress={this._onAssignPress}
       />
     );
   }

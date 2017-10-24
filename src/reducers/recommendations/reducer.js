@@ -1,21 +1,17 @@
 import _ from 'lodash';
-// var uuid = require('react-native-uuid');
-// import Mixpanel from 'react-native-mixpanel';
-
-// required twice?
-// Mixpanel.sharedInstanceWithToken('976ab99070f5bcf9c9255e282330f0fe');
-
 import {
   SET_TITLE,
-  SET_FRIEND,
-  SAVE_RECOMMENDATION,
+  SET_FRIEND_ID,
+  SAVE_RECOMMENDATION_SUCCESS,
   SET_REMINDER,
-  DELETE_RECOMMENDATION,
+  // DELETE_RECOMMENDATION,
   SET_STATUS,
   SET_FILTER,
   SET_GRADE,
-  UPDATE_RECOMMENDATION,
-} from './actionTypes';
+  // UPDATE_RECOMMENDATION,
+  REFRESH_MY_RECS,
+  REFRESH_GIVEN_RECS,
+} from '../actionTypes';
 
 const initialState =
   {
@@ -41,36 +37,35 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SET_FRIEND:
+    case SET_FRIEND_ID:
       return {
         ...recommendations,
         unfinished: {
           ...recommendations.unfinished,
-          friend: action.friend
+          friendId: action.friendId
         }
       }
 
     // -------------------------------------------
-    case SAVE_RECOMMENDATION:
-      console.log('SAVE_RECOMMENDATION')
-      var newList = [action.unfinished].concat(recommendations.list);
+    // Saved rec to firestore, clear unfinished so UI refreshes
+    case SAVE_RECOMMENDATION_SUCCESS:
+      // console.log('SAVE_RECOMMENDATION_SUCCESS')
       return {
         ...recommendations,
-        list: newList,
         unfinished: {},
       }
 
     // -------------------------------------------
-    case UPDATE_RECOMMENDATION:
-
-      var newList = _.map(recommendations.list, function(rec) {
-        return rec.id === action.rec.id ? action.rec : rec; // better way to do this for sure
-      });
-
-      return {
-        ...recommendations,
-        list: newList,
-      }
+    // case UPDATE_RECOMMENDATION:
+    //
+    //   var newList = _.map(recommendations.list, function(rec) {
+    //     return rec.id === action.rec.id ? action.rec : rec; // better way to do this for sure
+    //   });
+    //
+    //   return {
+    //     ...recommendations,
+    //     list: newList,
+    //   }
     // -------------------------------------------
     case SET_REMINDER:
       // alert(action.reminderDate)
@@ -85,20 +80,17 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case DELETE_RECOMMENDATION:
-
-      console.log('delete?',recommendations)
-      console.log('delete?',action)
-
-      var newList = _.filter(recommendations.list, function(rec) {
-        return rec.id != action.recId;
-      });
-
-      return {
-        ...recommendations,
-        list: newList,
-      }
-      // return recommendations
+    // case DELETE_RECOMMENDATION:
+    //
+    //   var newList = _.filter(recommendations.list, function(rec) {
+    //     return rec.id != action.rec.id;
+    //   });
+    //
+    //   return {
+    //     ...recommendations,
+    //     list: newList,
+    //   }
+    //   // return recommendations
 
     // -------------------------------------------
     case SET_STATUS:
@@ -131,6 +123,43 @@ export default function recs(recommendations = initialState, action = {}) {
         ...recommendations,
         list: newList,
       }
+
+    // -------------------------------------------
+    // Take recs from firestore and add them here
+    // case SYNC_USER_RECS:
+    //   // console.log('userrecs',action.userRecs)
+    //   // console.log('list',recommendations.list)
+    //   // var newList = _.map(, function(rec) {
+    //   //   return rec.id === action.recId ? {...rec,grade: action.grade} : rec;
+    //   // });
+    //   var newList = _.merge(action.userRecs,recommendations.list)
+    //
+    //   // console.log('newList',newList)
+    //
+    //   return {
+    //     ...recommendations,
+    //     list: newList,
+    //   }
+
+      // -------------------------------------------
+      // right now this pulls from a listener on the appInitialized fn
+      case REFRESH_MY_RECS:
+
+        return {
+          ...recommendations,
+          list: action.myRecs,
+          myRecs: action.myRecs,
+        }
+
+      // -------------------------------------------
+      // right now this pulls from a listener on the appInitialized fn
+      case REFRESH_GIVEN_RECS:
+
+        return {
+          ...recommendations,
+          // list: action.myRecs,
+          givenRecs: action.givenRecs,
+        }
 
     // -------------------------------------------
     default:

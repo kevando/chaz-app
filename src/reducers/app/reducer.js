@@ -5,7 +5,8 @@ import _ from 'lodash';
 import {
   SET_NOTIFICATION_PERMISSION,
   INITIALIZE_APP,
-} from './actionTypes';
+  USER_SIGNED_IN,
+} from '../actionTypes';
 
 const initialState = {
   isAuthenticated: false,
@@ -16,15 +17,16 @@ const initialState = {
 };
 
 
-export default function recs(app = initialState, action = {}) {
+export default function app(app = initialState, action = {}) {
 
   switch (action.type) {
     // -------------------------------------------
-    case INITIALIZE_APP:
+    case USER_SIGNED_IN:
       return {
         ...app,
         isAuthenticated: true,
-        uid: action.uid
+        isAnonymous: action.user.isAnonymous,
+        uid: action.user.uid,
       }
 
     // -------------------------------------------

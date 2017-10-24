@@ -31,14 +31,19 @@ class InputTitleContainer extends Component {
   }
 
   onNextPress() {
-    const { setTitle, rec, updateRecommendation } = this.props;
+    const { setTitle, rec, updateRecommendation, given } = this.props;
 
     if(rec) {// if Editing..
       rec.title = this.state.title
       updateRecommendation(rec); // Redux
       Actions.pop()
     } else {
-      setTitle(this.state.title); // Redux
+      // if giving this rec
+      if(given)
+        setTitle(this.state.title); // Redux
+      else
+        setTitle(this.state.title); // Redux
+
       Actions.push('InputFriend')
     }
   }

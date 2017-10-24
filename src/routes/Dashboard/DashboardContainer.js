@@ -4,6 +4,7 @@ import Dashboard from './Dashboard';
 import Welcome from './Welcome'
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
+import firebase from 'react-native-firebase';
 
 class DashboardContainer extends Component {
   constructor(props) {
@@ -18,11 +19,13 @@ class DashboardContainer extends Component {
   }
   componentDidMount() {
     // TMP!!
+    // Actions.push('Register')
     // Actions.push('RecView',{rec: this.props.recommendations[0]})
+    // Actions.push('FriendView',{friend: this.props.friends[0]})
   }
 
   componentWillUpdate() {
-    LayoutAnimation.easeInEaseOut();
+    // LayoutAnimation.easeInEaseOut(); // todo figure this out later
   }
 
   _changeActiveFilter(activeFilter) {
@@ -34,11 +37,12 @@ class DashboardContainer extends Component {
   }
 
   render() {
-
+    // console.log(this.props)
+    // console.log(firebase.auth())
     const { showOnboarding } = this.props;
 
-    if(showOnboarding) {
-    // if(false) {
+    // if(showOnboarding) {
+    if(false) {
       return (
         <Welcome
           {...this.props}
@@ -53,7 +57,7 @@ class DashboardContainer extends Component {
           {...this.state}
           onNewRecPress={() => Actions.push('InputStack')}
           changeActiveFilter={this._changeActiveFilter}
-
+          onNewGivenRecPress={() => Actions.push('InputStack',{given: true})}
         />
       )
     }

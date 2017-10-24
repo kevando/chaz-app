@@ -7,14 +7,16 @@ import styles from './styles';
 class ConfirmRecommendation extends Component {
 
   render() {
-    const { unfinished, onSaveRecommendationPress, showTitle } = this.props;
+    const { unfinished, onSaveRecommendationPress, showTitle, friend } = this.props;
 
     return (
       <View style={styles.container}>
         {showTitle &&
           <Text style={styles.title}>Does this look right?</Text>
         }
-        <ConfirmationCard rec={unfinished}/>
+
+        <ConfirmationCard friend={friend} rec={unfinished} />
+
         <View style={styles.buttonContainer} >
           <Button bgcolor="green" text="Save" onPress={onSaveRecommendationPress} />
         </View>

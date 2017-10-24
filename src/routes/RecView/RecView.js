@@ -24,7 +24,7 @@ const Category = ({ rec, onCategoryPress }) => {
 
 }
 
-const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress, updateRecommendation }) => {
+const RecView = ({ rec, onEditPress, onDeletePress, onCategoryPress, updateRecommendation,onAssignPress }) => {
 
 
 
