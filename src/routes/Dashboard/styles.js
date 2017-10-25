@@ -10,11 +10,7 @@ export default styles = StyleSheet.create({
     paddingTop: 5,
     backgroundColor: colors.backgroundGrey,
   },
-  welcomeContainer: {
-    flex: 1,
-    backgroundColor: colors.purple,
-    paddingTop: 10,
-  },
+
   title: {
     ...text,
     color: colors.white,
@@ -62,13 +58,7 @@ export default styles = StyleSheet.create({
     fontWeight: '300',
 
   },
-  iconsContainer: {
-    flex: 1,
-    marginTop:5,
-    // backgroundColor: 'green',
-    //
-    justifyContent: 'center' // v center
-  },
+
   icon: {
     position: 'absolute',
     backgroundColor:'transparent',
@@ -85,6 +75,124 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
     marginLeft: 17,
-  }
+  },
+
+  welcomeContainer: {
+    flex: 1,
+    backgroundColor: colors.purple,
+    paddingTop: 10,
+    justifyContent: 'flex-end',
+    // borderColor: 'white',
+    // borderWidth: 5
+  },
+  touchableBlue: {
+    // backgroundColor: 'yellow',
+    flex: 1,
+  },
+  blueContainer: {
+    backgroundColor: colors.blue,
+    // flex: 1,
+    // height: 200,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    color: colors.purple
+  },
+
+
+  topView : {
+    // backgroundColor: 'red',
+    // borderColor: 'green',
+    // borderWidth: 5,
+    // justifyContent: 'flex-start',
+    flex: 1,
+  },
+
+  blueView: {
+    // flex: 1,
+  },
+  purpleView: {
+    // flex: 1,
+    // backgroundColor: 'yellow',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+  },
+
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+
+
+  title: {
+    ...text,
+    color: colors.white,
+    fontSize: 27,
+    marginBottom: 10,
+    fontWeight: '700',
+    letterSpacing:2,
+    textAlign: 'center',
+    // marginTop: 20, // spacing w pagination
+  },
+  text: {
+    ...text,
+    color: colors.white,
+    fontSize: 18,
+    fontWeight: '300',
+    lineHeight:22,
+    textAlign: 'center',
+    marginHorizontal:25,
+    // paddingLeft: 20,
+    // paddingRight: 10,
+  },
+
+  nextText: {
+    ...text,
+    color: colors.white,
+    fontSize: 18,
+    fontWeight: '100',
+    lineHeight:22,
+    textAlign: 'center',
+    marginHorizontal:25,
+    marginTop: 70,
+    // paddingLeft: 20,
+    // paddingRight: 10,
+  },
+
+  // Swiper
+  wrapper: {
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.blue,
+  },
+  slideFinal: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.purple,
+  },
+
+  textContainer: {
+    flex: 2,
+    // backgroundColor: 'orange',
+  },
+  imageContainer: {
+    flex: 3,
+    // backgroundColor: 'blue',
+    justifyContent: 'center'
+  },
+  iconsContainer: {
+    height: 200,
+    // backgroundColor: 'green',
+    //
+    justifyContent: 'center' // v center
+  },
 
 });

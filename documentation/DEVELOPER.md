@@ -120,3 +120,7 @@ var result = map.find(function(obj){return obj.get('id') === 4;});
 
 append to map
 var recWithRecr = rec.set('recr', recr)
+
+
+
+https://cloud.google.com/firestore/docs/extend-with-functions

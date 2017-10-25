@@ -21,7 +21,7 @@ class DashboardContainer extends Component {
     // TMP!!
     // Actions.push('Profile')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    Actions.push('FriendView',{friend: this.props.friends[0]})
+    // Actions.push('FriendView',{friend: this.props.friends[0]})
   }
 
   componentWillUpdate() {
@@ -47,8 +47,8 @@ class DashboardContainer extends Component {
     // console.log(firebase.auth())
     const { showOnboarding } = this.props;
 
-    if(showOnboarding) {
-    // if(false) {
+    // if(showOnboarding) {
+    if(false) {
       return (
         <Welcome
           {...this.props}
