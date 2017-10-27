@@ -46,12 +46,32 @@ export function addRecommendation(unfinished) {
     recsRef.add(unfinished)
     .then(docRef => {
       dispatch({ type: SAVE_RECOMMENDATION_SUCCESS})
+      addMessage(unfinished,getState().user.username)
     })
     .catch(error => {
       console.error("Error adding document: ", error);
     });
   }
 }
+function addMessage(newRec,username) {
+  firebase.firestore().collection("users").doc(newRec.to).get().then(function(user) {
+    if (user.exists) {
+        // console.log("user data:", user.data());
+        var token = user.data().token
+        var payload = {
+          notification: {
+            // title: 'new rec given to you',
+            body: username + ' sent you a recommendation'
+          }
+        }
+        firebase.firestore().collection("messages").add({token,payload})
+    } else {
+        console.log("No such user!");
+    }
+})
+
+}
+
 
 export function giveRec() {
   // in this case, user is the friend

@@ -19,30 +19,36 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-// 
-// exports.createRec = functions.firestore
-//   .document('recommendations/{recId}')
-//   .onCreate(event => {
-//     // Get an object representing the document
-//     // e.g. {'name': 'Marie', 'age': 66}
-//     var newRec = event.data.data();
-//
-//     // check if this rec has an attached user
-//     console.log(newRec)
-//     var myToken = "fQMeVoPava0:APA91bFM34A61IDjC3j_llXtFDYiRVZsS-PtzEWbludjUedY3ksRqP3gc2Mr9lrVWS2qG2uLVXZH8F_Uj2yTvcQS3iwULMp-GQCXf8AlpGkc0gz7VHaQONinB_7ppnP6vwAWADKyw_mn"
-//
-//     // Notification details.
-//     const payload = {
-//       notification: {
-//         title: 'You have a notif from firebase Cloud!',
-//         body: `now following you.`,
-//       }
-//     };
-//
-//     admin.messaging().sendToDevice(myToken, payload).then(response => {
-//       console.log('response',response)
-//       // For each message check if there was an error.
-//     });
-//
-//     // perform desired operations ...
-// });
+// Moving to a messages driven system
+
+exports.createRec = functions.firestore
+  .document('messages/{messageId}')
+  .onCreate(event => {
+    // Get an object representing the document
+    // e.g. {'name': 'Marie', 'age': 66}
+    var message = event.data.data();
+
+    // check if this rec has an attached user
+    console.log(message)
+
+    // Notification details.
+    // const payload = {
+    //   notification: {
+    //     title: message.title,
+    //     body: message.body,
+    //   }
+    // };
+
+    return admin.messaging().sendToDevice(message.token, message.payload).then(response => {
+      console.log('response',response)
+      // For each message check if there was an error.
+
+      // Was save response to object
+      return event.data.ref.set({
+        response: response
+      }, {merge: true});
+
+    });
+
+    // perform desired operations ...
+});

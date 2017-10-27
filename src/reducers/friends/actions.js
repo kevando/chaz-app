@@ -34,14 +34,16 @@ export function saveFriend(friend) {
 
 export function assignUserToFriend(user,friend) {
   console.log('assignUserToFriend')
+
   // Query for uid based on username
   // this will actually happen in the RecView container
-  return dispatch => {
-    // var userId = null
+  return (dispatch, getState) => {
+    const myUsername = getState().user.username
         // ok now that we have the user id, lets update the friend object
         friendsRef.doc(friend.id).update({uid:user.uid,username:user.username })
         .then(function() {
           console.log("Friend Doc successfully updated!");
+          addMessage(user.uid,myUsername)
         })
         .catch(function(error) {
             // The document probably doesn't exist.
@@ -49,6 +51,25 @@ export function assignUserToFriend(user,friend) {
         });
   }
   //
+
+}
+
+function addMessage(uid,username) {
+  firebase.firestore().collection("users").doc(uid).get().then(function(user) {
+    if (user.exists) {
+        // console.log("user data:", user.data());
+        var token = user.data().token
+        var payload = {
+          notification: {
+            // title: 'new rec given to you',
+            body: username + ' added you on chaz'
+          }
+        }
+        firebase.firestore().collection("messages").add({token,payload})
+    } else {
+        console.log("No such user!");
+    }
+})
 
 }
 
