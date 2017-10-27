@@ -22,15 +22,6 @@ class ConfirmRecommendationContainer extends Component {
     }
   }
 
-  // seems to work differently now
-  // componentDidMount() {
-  //   // Not sure why this entire component re mounts..
-  //   console.log('confRec did mount',this.props)
-  //   if(!this.props.unfinished.title) {
-  //     Actions.reset('MainStack')
-  //   }
-  // }
-
   _onSaveRecommendationPress() {
     const { addRecommendation, unfinished } = this.props;
     this.setState({showTitle: false});

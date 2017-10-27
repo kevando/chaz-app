@@ -63,7 +63,7 @@ render() {
   return (
     <View>
 
-      <Label center>Invite your friends to chaz and you can send them recommendations directly in the app</Label>
+      <Label center>Find your friends to chaz and you can send them recommendations directly in the app</Label>
 
         <View style={[styles.container,user&&{borderColor: colors.green}]}>
         <View style={styles.iconContainer}>

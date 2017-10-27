@@ -4,8 +4,22 @@ import _ from 'lodash';
 
 import { Label } from '../../components/Generic';
 import { FriendCard } from '../../components/Card/RecView';
+import Card  from '../../components/Card/Rec';
 
 import styles from './styles';
+
+const GivenRecs = ({givenRecs}) => {
+  return (
+    <View>
+    <Label>Recommendations that I gave</Label>
+    {
+    _.map(givenRecs,rec => {
+      return <Card key={rec.id} rec={rec} />
+    })
+  }
+  </View>
+  )
+}
 
 const Profile = (props) => {
   // console.log(props)
@@ -15,7 +29,7 @@ const Profile = (props) => {
     <View style={styles.container}>
 
 
-      <Text style={styles.title} onPress={onLogoutPress}>username{user.username}</Text>
+      <Text style={styles.title} onPress={onLogoutPress}>@{user.username}</Text>
 
 
       <Label>Your Friends</Label>
@@ -26,10 +40,9 @@ const Profile = (props) => {
       }
 
       {
-          givenRecs ?
-          <Label>Your given</Label>
-          :
-          <Label center>Recommend your favorite stuff to people on chaz</Label>
+          givenRecs.length > 0 &&
+            <GivenRecs givenRecs={givenRecs} />
+          
       }
 
 

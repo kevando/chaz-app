@@ -7,8 +7,8 @@ const MARGIN_VERTICAL = 5;
 const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
 const ICON_WIDTH = CARD_WIDTH / 9;
 const DATE_WIDTH = CARD_WIDTH / 8;
-const CARROT_WIDTH = 25;
-const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - CARROT_WIDTH - 44;
+const ARROW_WIDTH = 25;
+const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - ARROW_WIDTH - 44;
 
 export default styles = StyleSheet.create({
 
@@ -44,9 +44,14 @@ export default styles = StyleSheet.create({
     // backgroundColor: 'blue',
   },
 
+  arrowContainer: {
+    width: ARROW_WIDTH,// might need to change this
+    // backgroundColor: 'blue',
+  },
+
   deleteContainer: {
     // backgroundColor:'yellow',
-    width: CARROT_WIDTH,
+    width: ARROW_WIDTH,
     position: 'absolute',
     right: 0,
     top: 3,
@@ -154,6 +159,18 @@ export default styles = StyleSheet.create({
     marginLeft: 12,
     paddingRight: 10,
   },
+
+  backgroundShadow: {
+    borderColor: '#aaa',
+    shadowColor: '#555',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 15,
+    shadowOpacity: 1.0
+
+  }
 
 
 });

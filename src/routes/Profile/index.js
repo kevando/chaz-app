@@ -8,12 +8,9 @@ import * as UserActions from '../../reducers/user/actions';
 
 const mapStateToProps = (state) => {
   return {
-    // recommendations: state.recommendations.list,
+    givenRecs: state.recommendations.givenRecs,
     friends: state.friends,
-    // activeFilter: state.recommendations.filter,
-    // app: state.app,
     user: state.user,
-    // showOnboarding: state.recommendations.list.length == 0,
   };
 };
 

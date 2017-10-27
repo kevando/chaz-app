@@ -2,7 +2,7 @@ import React from 'react';
 import { View ,Text, TextInput } from 'react-native';
 import _ from 'lodash';
 
-import Button from '../../components/Button';
+import { Button, Label } from '../../components/Generic';
 
 import styles from './styles';
 
@@ -12,9 +12,7 @@ const Register = (props) => {
 
   return (
     <View style={styles.container}>
-
-
-
+      
       <View style={styles.inputContainer}>
         <TextInput
           placeholder='Username'
@@ -28,33 +26,8 @@ const Register = (props) => {
         />
       </View>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder='Email'
-          ref={ c => this._title = c }
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          multiline={false}
-          style={styles.input}
-          placeholderTextColor="#aaa"
-          onChangeText={(input) => updateState({email: input})}
-        />
-      </View>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder='Password'
-          ref={ c => this._title = c }
-          autoCapitalize="none"
-          autoCorrect={false}
-          secureTextEntry={true}
-          multiline={false}
-          style={styles.input}
-          placeholderTextColor="#aaa"
-          onChangeText={(input) => updateState({password: input})}
-        />
-      </View>
+
       <Text style={styles.error}>{error}</Text>
       <Text style={styles.status}>{status}</Text>
 

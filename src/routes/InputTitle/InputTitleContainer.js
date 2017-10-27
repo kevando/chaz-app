@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert } from 'react-native';
-import Button from '../../components/Button';
+import { Button } from '../../components/Generic';
 import * as Animatable from 'react-native-animatable';
 
 import InputTitle from './InputTitle';

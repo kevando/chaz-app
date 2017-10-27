@@ -27,14 +27,18 @@ render() {
             <CategoryIcon category={rec.category} size={25} color="grey" />
           </View>
 
-        <View style={styles.textContainer}>
-          <View style={styles.recContainer}>
-            <Text style={styles.recText}>{rec.title}</Text>
+          <View style={styles.textContainer}>
+            <View style={styles.recContainer}>
+              <Text style={styles.recText}>{rec.title}</Text>
+            </View>
+            <View style={styles.friendContainer}>
+              <Text style={styles.friendText}>Recommended by: {rec.friend ? rec.friend.name : 'Me'}</Text>
+            </View>
           </View>
-          <View style={styles.friendContainer}>
-            <Text style={styles.friendText}>friend: {rec.friend.name}</Text>
+
+          <View style={styles.arrowContainer}>
+            <Icon name="chevron-right" size={30} color="grey" />
           </View>
-        </View>
 
       </View>
     </TouchableOpacity>
@@ -73,6 +77,42 @@ render() {
           </View>
           <View style={styles.friendContainer}>
             <Text style={styles.friendText}>Recommended by:<Text style={styles.bold}>{friend.name}</Text></Text>
+          </View>
+        </View>
+
+      </View>
+
+    </View>
+  );
+}
+
+
+};
+
+export class PreviewCard extends Component {
+
+
+render() {
+  // console.log('conf',this.props)
+  // const { rec, friend } = this.props;
+
+  // For some reason this reloads without data
+  // if(!friend) { return null }
+
+  return (
+    <View>
+        <View style={[styles.container,styles.backgroundShadow]} >
+
+          <View style={styles.iconContainer}>
+            <CategoryIcon category={{icon:'music'}} size={25} color={"blue"}/>
+          </View>
+
+        <View style={styles.textContainer}>
+          <View style={styles.recContainer}>
+            <Text style={styles.recText}>Green Day</Text>
+          </View>
+          <View style={styles.friendContainer}>
+            <Text style={styles.friendText}>Recommended by:<Text style={styles.bold}>Dad</Text></Text>
           </View>
         </View>
 

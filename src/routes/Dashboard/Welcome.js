@@ -9,7 +9,8 @@ import Swiper from 'react-native-swiper';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-import Button from '../../components/Button';
+import { Button } from '../../components/Generic';
+import { PreviewCard } from '../../components/Card/Rec';
 
 const window = Dimensions.get('window');
 
@@ -39,7 +40,7 @@ const Listen = () => {
     </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>Listen</Text>
-        <Text style={styles.text}>Friends give us great recommendations, but we don't always remember.</Text>
+        <Text style={styles.text}>Your friends probably give you great recommendations all the time, but do you always remember?</Text>
 
       </View>
     </View>
@@ -57,8 +58,8 @@ const CheckItOut = () => {
     </View>
     </View>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Check it out</Text>
-        <Text style={styles.text}>Save recommendations in chaz so you can remember them for later</Text>
+        <Text style={styles.title}>Save</Text>
+        <Text style={styles.text}>Use chaz to save recommendations from your friends so you can remember later.</Text>
       </View>
     </View>
   )
@@ -74,22 +75,23 @@ const FollowUp = () => {
     </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>Follow Up</Text>
-        <Text style={styles.text}>Your friends like to know what you think about their recommendation.</Text>
+        <Text style={styles.text}>Your friends like to know what you think about their recommendation and chaz helps remind you.</Text>
       </View>
     </View>
 
   )
 }
 
-const GetStarted = () => {
+const GetStarted = ({onNewRecPress}) => {
   return (
     <View style={styles.slideFinal}>
-      <View style={{flex:1,alignItems: 'center',marginTop: 50}}>
-      <AwesomeIcon name="heart" color={colors.yellow} size={70} />
-      <Text style={styles.text}>Lets get started</Text>
-      </View>
+      <Animatable.View style={{flex:1,alignItems: 'center',marginTop: 50}}>
+
+      <Text style={[styles.text,{marginBottom:40,marginTop:100,}]}>Here's what a recommendation from your dad might look</Text>
+      <PreviewCard />
+      </Animatable.View>
       <View style={{width: W}}>
-      <Button text="Add First Recommendation" onPress={() => Actions.push('InputStack')}/>
+      <Button text="Add First Recommendation" onPress={onNewRecPress}/>
       </View>
     </View>
   )
@@ -100,7 +102,7 @@ class Welcome extends Component  {
 
   constructor(props){
     super(props)
-    this.state = { showHow: false, currentStage: 1 }
+    this.state = { showsPagination: true  }
     // this.onProceedPress = this.onProceedPress.bind(this)
     // this.onBackPress = this.onBackPress.bind(this)
     // this.transitionScenes = this.transitionScenes.bind(this)
@@ -116,29 +118,25 @@ class Welcome extends Component  {
   render() {
 
     const swiperProps = {
+      index: 0,
       style: styles.wrapper,
       // dot: (<View style={{backgroundColor:'rgba(255,255,255,.25)', width: 20, height: 20,borderRadius: 25, marginLeft: 10, marginRight: 10, marginTop: 3, marginBottom: 50,}} />),
       // activeDot: (<View style={{backgroundColor: 'rgba(255,255,255,.6)', width: 25, height: 25, borderRadius: 25, marginLeft: 10, marginRight: 10, marginTop: 3, marginBottom: 50,}} />),
-      // dotColor: 'rgba(255,255,255,.25)',
-      // activeDotColor: 'rgba(255,255,255,.6)',
+      dotColor: 'rgba(255,255,255,.25)',
+      activeDotColor: 'rgba(255,255,255,.6)',
       // showsButtons: true,
-      // showPagination: false,
+      showsPagination: this.state.showsPagination,
       loop: false,
+      onIndexChanged: (index) => {this.setState({showsPagination: index !== 4}) }
     }
 
     return (
       <Swiper {...swiperProps} showsButtons={true}>
-      
         <WelcomeToChaz />
         <Listen />
         <CheckItOut />
         <FollowUp />
-
-        <GetStarted />
-
-
-
-
+        <GetStarted onNewRecPress={this.props.onNewRecPress} />
       </Swiper>
     )
   }
@@ -146,5 +144,5 @@ class Welcome extends Component  {
 
 
 }
-// <AppSettings {...props} />
+
 export default Welcome;

@@ -7,6 +7,8 @@ import * as FriendActions from '../../reducers/friends/actions';
 const mapStateToProps = (state) => {
   return {
     app: state.app,
+    myRecs: state.recommendations.myRecs, // required to refresh RecView after editing
+    friends: state.friends, // needed for view refresh?
   };
 };
 

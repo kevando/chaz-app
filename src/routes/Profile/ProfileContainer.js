@@ -24,7 +24,7 @@ class ProfileContainer extends Component {
     if(!user.uid){ // User signed out!
       // this.setState({status: 'User Created!'})
       setTimeout(() => {
-        Actions.pop()
+        Actions.reset('MainStack')
       }, 1000);
     }
   }
@@ -36,7 +36,7 @@ class ProfileContainer extends Component {
         {text: 'Yes', onPress: () => this.props.logoutUser(), },
       ]
     )
-  
+
   }
 
 
@@ -47,6 +47,7 @@ class ProfileContainer extends Component {
           onLogoutPress={this._onLogoutPress}
           user={this.props.user}
           friends={this.props.friends}
+          givenRecs={this.props.givenRecs}
         />
       )
 

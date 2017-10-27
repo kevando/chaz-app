@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
 import {ConfirmationCard} from '../../components/Card/Rec';
-import Button from '../../components/Button';
+import { Button } from '../../components/Generic';
 import styles from './styles';
 
 class ConfirmRecommendation extends Component {

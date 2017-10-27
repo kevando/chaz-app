@@ -19,6 +19,7 @@ class DashboardContainer extends Component {
   }
   componentDidMount() {
     // TMP!!
+    // Actions.push('Register')
     // Actions.push('Profile')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[0]})
@@ -36,6 +37,7 @@ class DashboardContainer extends Component {
     this.setState({activeFilter})
   }
   _onNewRecPress() {
+    // console.log('new rec')
     const { initNewRec, user } = this.props
     initNewRec({to: user.uid})
     Actions.push('InputStack')
@@ -43,12 +45,12 @@ class DashboardContainer extends Component {
 
 
   render() {
-    // console.log('Dash',this.props)
+    // console.log('Dash',this.props.user)
     // console.log(firebase.auth())
     const { showOnboarding } = this.props;
 
-    // if(showOnboarding) {
-    if(false) {
+    if(showOnboarding) {
+    // if(false) {
       return (
         <Welcome
           {...this.props}
@@ -61,7 +63,7 @@ class DashboardContainer extends Component {
         <Dashboard
           {...this.props}
           {...this.state}
-          onNewRecPress={() => Actions.push('InputStack')}
+          onNewRecPress={this._onNewRecPress}
           changeActiveFilter={this._changeActiveFilter}
           onNewGivenRecPress={() => Actions.push('InputStack',{given: true})}
         />

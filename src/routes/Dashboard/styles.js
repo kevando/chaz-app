@@ -80,45 +80,13 @@ export default styles = StyleSheet.create({
   welcomeContainer: {
     flex: 1,
     backgroundColor: colors.purple,
+
     paddingTop: 10,
     justifyContent: 'flex-end',
     // borderColor: 'white',
     // borderWidth: 5
   },
-  touchableBlue: {
-    // backgroundColor: 'yellow',
-    flex: 1,
-  },
-  blueContainer: {
-    backgroundColor: colors.blue,
-    // flex: 1,
-    // height: 200,
-  },
-  backButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    color: colors.purple
-  },
 
-
-  topView : {
-    // backgroundColor: 'red',
-    // borderColor: 'green',
-    // borderWidth: 5,
-    // justifyContent: 'flex-start',
-    flex: 1,
-  },
-
-  blueView: {
-    // flex: 1,
-  },
-  purpleView: {
-    // flex: 1,
-    // backgroundColor: 'yellow',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
 
   slide1: {
     flex: 1,
@@ -177,6 +145,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.purple,
+    // backgroundColor: colors.backgroundGrey,
   },
 
   textContainer: {

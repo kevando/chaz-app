@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 
-import Button from '../../components/Button';
+import { Button } from '../../components/Generic';
 import InputFriend from './InputFriend';
 import { Actions } from 'react-native-router-flux';
 

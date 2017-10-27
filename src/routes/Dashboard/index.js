@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
     friends: state.friends,
     // activeFilter: state.recommendations.filter,
     // app: state.app,
-    showOnboarding: state.recommendations.list.length == 0,
+    showOnboarding: state.recommendations.myRecs.length == 0,
     user: state.user,
   };
 };

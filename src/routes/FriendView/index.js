@@ -12,6 +12,7 @@ const mapStateToProps = (state, props) => {
     user: state.user,
     myRecs: _.filter(state.recommendations.myRecs,rec => rec.friendId == props.friend.id),
     givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.to == props.friend.uid),
+    friends: state.friends, // when adding a friend as a user, need to refresh friendview
   };
 };
 

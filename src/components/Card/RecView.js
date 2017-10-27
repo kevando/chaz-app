@@ -51,25 +51,53 @@ class FriendCard extends Component {
 
   render() {
     const { friend } = this.props;
-    return (
-      <TouchableOpacity onPress={()=>Actions.push('FriendView',{friend})}>
-      <View style={[styles.container]}>
+    if(!friend) {  // me
+      return (
 
-        <View style={styles.iconContainer}>
-          <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={25} />
-        </View>
-        <View style={styles.textContainer}>
-          <View style={styles.recContainer}>
-            {friend.uid ?
-              <Text style={styles.recText}>{friend.name}</Text> :
-              <Text style={[styles.recText,{color:colors.darkGrey}]}>{friend.name}</Text>
-            }
+        <View style={[styles.container]}>
+
+          <View style={styles.iconContainer}>
+            <Icon name='user' color={colors.grey} size={25} />
           </View>
+          <View style={styles.textContainer}>
+            <View style={styles.recContainer}>
+                <Text style={[styles.recText,{color:colors.darkGrey}]}>me</Text>
+            </View>
+          </View>
+
+
         </View>
 
-      </View>
-      </TouchableOpacity>
-    );
+      );
+
+    } else { // not me
+      return (
+        <TouchableOpacity onPress={()=>Actions.push('FriendView',{friend})}>
+        <View style={[styles.container]}>
+
+          <View style={styles.iconContainer}>
+            <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={25} />
+          </View>
+          <View style={styles.textContainer}>
+            <View style={styles.recContainer}>
+              {friend.uid ?
+                <Text style={styles.recText}>{friend.name}</Text> :
+                <Text style={[styles.recText,{color:colors.darkGrey}]}>{friend.name}</Text>
+              }
+            </View>
+          </View>
+
+          <View style={styles.arrowContainer}>
+            <Icon name="chevron-right" size={30} color="grey" />
+          </View>
+
+        </View>
+        </TouchableOpacity>
+      );
+    }
+
+
+
   }
 
 };

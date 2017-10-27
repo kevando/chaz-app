@@ -42,7 +42,7 @@ class RecViewContainer extends Component {
   }
 
   render() {
-    // console.log('View',this.props)
+    // console.log('RecViewContainer',this.props)
 
     if(!this.props.rec)  { return null }
     return (

@@ -8,7 +8,7 @@ import * as Animatable from 'react-native-animatable';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-import Button from '../../components/Button';
+import { Button } from '../../components/Generic';
 
 const window = Dimensions.get('window');
 

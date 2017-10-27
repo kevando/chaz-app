@@ -32,7 +32,7 @@ class NotificationPermissionContainer extends Component {
       .catch(()=>console.log('notification permission rejected'));
   }
   _alertForNotificationPermission() {
-    const { notificationPermission } = this.state;
+    const { notificationPermission } = this.props;
 
     Alert.alert(
       'Enable Notifications?',

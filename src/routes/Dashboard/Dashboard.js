@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, ScrollView, StatusBar ,Text} from 'react-native';
 import _ from 'lodash';
-
-import Button from '../../components/Button';
+import { Button } from '../../components/Generic';
 import RecCard from '../../components/Card/Rec';
 import Filter from '../../components/Nav/Filter';
 import NotificationPermission from '../../components/Card/NotificationPermission';
@@ -22,7 +21,9 @@ const Dashboard = (props) => {
       <StatusBar barStyle="light-content" hidden={false} />
 
       <ScrollView style={styles.scrollView}>
-      {myRecs.length > 6 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
+
+        {myRecs.length > 6 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
+
 
       {
         _.map(filteredRecs,function(rec,i) {

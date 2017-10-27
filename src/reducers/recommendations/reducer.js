@@ -19,11 +19,15 @@ const initialState =
   {
     unfinished: {},
     list: [ ],
+    myRecs: [],
+    givenRecs: [],
     filter: 'all'
   };
 
 export default function recs(recommendations = initialState, action = {}) {
-
+  // console.log(action)
+  // console.log(recommendations)
+  // console.log(recommendations.unfinished)
   switch (action.type) {
 
   // -------------------------------------------
@@ -42,6 +46,7 @@ export default function recs(recommendations = initialState, action = {}) {
       return {
         ...recommendations,
         unfinished: {
+          ...recommendations.unfinished,
           title: action.title,
         }
       }

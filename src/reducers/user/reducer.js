@@ -2,7 +2,8 @@ import {
   INITIALIZE_APP,
   USER_SIGNED_IN,
   USER_SIGNED_OUT,
-  SET_TOKEN
+  SET_TOKEN,
+  USER_CREATED,
 } from '../actionTypes';
 
 const initialState = {
@@ -26,15 +27,29 @@ export default function user(user = initialState, action = {}) {
 
     // -------------------------------------------
     case USER_SIGNED_IN:
-      // console.log('USER_SIGNED_IN',action.user)
+      console.log('USER_SIGNED_IN',action.user)
+      console.log('USER_SIGNED_IN',action.user.email)
       return {
         ...user,
         uid: action.user.uid,
         isAnonymous: action.user.isAnonymous,
         email: action.user.email,
-        username: action.user.username,
+        username: action.user.displayName,
+        displayName: action.user.displayName
       }
 
+    // -------------------------------------------
+    case USER_CREATED:
+      console.log('USER_CREATED',action.user)
+      // console.log('USER_SIGNED_IN',action.user.email)
+      return {
+        ...user,
+        // uid: action.user.uid,
+        isAnonymous: action.user.isAnonymous,
+        email: action.user.email,
+        username: action.user.username,
+        displayName: action.user.displayName
+      }
     // -------------------------------------------
     case USER_SIGNED_OUT:
       return {

@@ -17,7 +17,7 @@ export function initializeApp() {
       // Kick off auth listener to handle updating user object
       // This will fire every time the app loads no matter what
       firebase.auth().onAuthStateChanged(function(user) {
-        console.log('auth state change')
+        console.log('auth state changed')
         // Add user data to redux (registered or anon)
         // Fire off event listeners
         if (user) {
@@ -29,10 +29,10 @@ export function initializeApp() {
           dispatch(listenForRecs(user.uid))
           dispatch(listenForFriends(user.uid))
 
-          // console.log('user',user)
-          if(!user.isAnonymous) {
-              dispatch(setUserToken())
-          }
+          // I handle this when user registers
+          // if(!user.isAnonymous) {
+          //     dispatch(setUserToken())
+          // }
 
         } else {
           // No user is signed in. so lets authenticate anon

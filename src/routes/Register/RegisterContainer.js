@@ -10,44 +10,43 @@ class RegisterContainer extends Component {
     this.state = {
       username: '',
       email: '',
-      password: '',
+      password: '12345678',
       status: '',
       error: '',
     };
     this._onLogoutPress = this._onLogoutPress.bind(this)
     this._onRegisterPress = this._onRegisterPress.bind(this)
     this._onLoginPress = this._onLoginPress.bind(this)
-    this._onGivePress = this._onGivePress.bind(this)
+    // this._onGivePress = this._onGivePress.bind(this)
     this.updateState = this.updateState.bind(this)
+    this._createUserCallback = this._createUserCallback.bind(this)
   }
-  componentWillMount() {
-    // const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    // this.state = {activeFilter: 'Everything'};
-  }
+
   componentDidMount() {
     // TMP!!
     // Actions.push('FriendView',{friend: this.props.friends[0]})
   }
 
-  componentWillReceiveProps({user}) {
-    if(!user.isAnonymous){
-      this.setState({status: 'User Created!'})
-      setTimeout(() => {
-        Actions.replace('Profile')
-      }, 1000);
-    }
+  _createUserCallback() {
+    console.log('user call back')
+    Actions.replace('Profile')
   }
   updateState(state) {
     this.setState(state)
   }
 
   _onRegisterPress() {
-    this.setState({status: 'Creating User'})
 
+    // this._createUserCallback()
+    //
+    // this.setState({status: 'Creating User'})
+    //
     const { createUser } = this.props
-    const { username, email, password } = this.state
-    createUser(email,password,username,this.updateState)
+    const { username, password } = this.state
+    const email = username+"@kevaid.com"
+    createUser(email,password,username,this._createUserCallback)
   }
+
   _onLoginPress() {
     const { loginUser } = this.props
     const { username, email, password } = this.state
@@ -57,15 +56,9 @@ class RegisterContainer extends Component {
     const { logoutUser } = this.props
     logoutUser()
   }
-  _onGivePress() {
-    const { giveRec } = this.props
-    giveRec()
-  }
 
   render() {
-    console.log(this.props)
-
-
+    // console.log(this.props)
       return (
         <Register
           {...this.state}
@@ -74,9 +67,6 @@ class RegisterContainer extends Component {
           onLoginPress={this._onLoginPress}
         />
       )
-
-
-
   }
 }
 

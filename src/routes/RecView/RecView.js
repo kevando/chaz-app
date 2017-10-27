@@ -30,7 +30,7 @@ const RecView = ({ rec, app, onEditPress, onDeletePress, onCategoryPress, update
 
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
 
       <Text style={styles.label}>Recommendation</Text>
       <TitleCard rec={rec} onEditPress={onEditPress}/>
@@ -43,10 +43,11 @@ const RecView = ({ rec, app, onEditPress, onDeletePress, onCategoryPress, update
       <Text style={styles.label}>Follow Up</Text>
       <ReminderCard rec={rec} updateRecommendation={updateRecommendation} app={app}/>
 
+      <View style={{marginTop:200}}>
+        <Button title="delete" onPress={onDeletePress} color="red" />
+      </View>
 
-      <Button title="delete" onPress={onDeletePress} color="red" />
-
-    </View>
+    </ScrollView>
   );
 }
 
