@@ -26,65 +26,8 @@ class Chaz extends Component {
 
 
 
-  componentDidMount() {
-
-    // const messaging = firebase.messaging();
-
-//
-// // Get Instance ID token. Initially this makes a network call, once retrieved
-//   // subsequent calls to getToken will return from cache.
-//   messaging.getToken()
-//   .then(function(currentToken) {
-//     console.log('token',currentToken)
-//
-//   })
-//   .catch(function(err) {
-//     console.log('An error occurred while retrieving token. ', err);
-//
-//   });
-// //
-//
-
-
-//
-// messaging.getInitialNotification().then(function(notif){
-//   console.log('getInitialNotification',notif)
-// })
-//
-// messaging.onMessage((notif) => {
-//   console.log('onMessage',notif)
-//   alert('OnMessage');
-// });
-
-
-
-  }
-
-  // render() {
-  //   return (
-  //     <View>
-  //     <Text>yeah</Text>
-  //     <Text style={{marginTop:200}}>sched notif</Text>
-  //     </View>
-  //   )
-  // }
-
-  render_tmp() {
-    return (
-      <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
-        <Modal key="root" hideNavBar={false}>
-        <Scene key='InputFriend' component={InputFriend} title='' hideNavBar={false} backTitle="Back"/>
-        </Modal>
-        </Router>
-    )
-  }
   render() {
-    // return null
-    // console.log('render chaz.js',this.props)
-    // alert('f')
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
-
-    // return <Splash />
 
     if (!isAuthenticated)
       return null;
@@ -114,6 +57,16 @@ class Chaz extends Component {
         </Router>
     )
   }
+
+  // render_tmp() {
+  //   return (
+  //     <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
+  //       <Modal key="root" hideNavBar={false}>
+  //       <Scene key='InputFriend' component={InputFriend} title='' hideNavBar={false} backTitle="Back"/>
+  //       </Modal>
+  //       </Router>
+  //   )
+  // }
 }
 
 

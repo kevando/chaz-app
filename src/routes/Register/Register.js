@@ -18,6 +18,7 @@ const Register = (props) => {
 
       <Text>app status: {props.app.status}</Text>
       <Text>app error: {props.error.message}</Text>
+      <Text onPress={props.devLogin}>@KEVIN LOGIN</Text>
 
     </View>
   );
@@ -40,12 +41,13 @@ const Steps = (props) => {
     )
   }
 
+
   const activeStep = props.app.activeStep || 1
 
   return (
     <View>
     <Label center>{activeStep == 1 ? 'Activate chaz by entering your phone number.' : activeStep ==2 ? 'Enter Verification code you got via text' : 'Active your account'}</Label>
-    <View style={{padding: 2, flexDirection: 'row'}}>
+    <View style={{padding: 2, flexDirection: 'row',marginHorizontal: 60,}}>
 
       <Circle step={1} active={activeStep} text="Phone" />
       <Circle step={2} active={activeStep} text="Code" />
@@ -87,7 +89,9 @@ const PhoneNumberInput = (props) => {
       />
     </View>
 
-    <Button text="Sign In" onPress={onSignInPress} />
+    <View style={styles.buttonContainer}>
+      <Button text="Get Code" onPress={onSignInPress} />
+    </View>
 
     </View>
   )
@@ -119,8 +123,9 @@ const VerificationCodeInput = (props) => {
           />
         </View>
 
-
+        <View style={styles.buttonContainer}>
         <Button text="Confirm Code"  onPress={confirmCode} />
+        </View>
       </View>
 
   )

@@ -2,7 +2,7 @@ import {
   INITIALIZE_APP,
   USER_SIGNED_IN,
   USER_SIGNED_OUT,
-  SET_TOKEN,
+  // SET_TOKEN,
   USER_CREATED,
   // SIGN_IN_CONFIRM_RESULT,
   // SIGN_IN_ERROR,
@@ -13,7 +13,7 @@ import {
 
 const initialState = {
   uid: null,
-  name: 'Default Test Name'
+  // name: 'Default Test Name'
   // deviceId: DeviceInfo.getUniqueID(),
   // deviceName: DeviceInfo.getDeviceName(),
   // appVersion: DeviceInfo.getReadableVersion(),
@@ -23,17 +23,17 @@ export default function user(user = initialState, action = {}) {
 
   switch (action.type) {
 
-    // -------------------------------------------
-    case SET_TOKEN:
-      return {
-        ...user,
-        token: action.token,
-      }
+    // // -------------------------------------------
+    // case SET_TOKEN:
+    //   return {
+    //     ...user,
+    //     token: action.token,
+    //   }
 
     // -------------------------------------------
     case USER_SIGNED_IN:
       console.log('USER_SIGNED_IN',action.user)
-      console.log('USER_SIGNED_IN',action.user.email)
+      console.log('USER_SIGNED_IN',action.user.uid)
       return {
         ...user,
         uid: action.user.uid,
@@ -65,7 +65,7 @@ export default function user(user = initialState, action = {}) {
         // token: action.user.refreshToken,
       }
 
-    
+
     default:
       return user;
   }

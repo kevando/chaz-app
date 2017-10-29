@@ -9,7 +9,8 @@ import {
   SIGN_IN_ATTEMPT,
   CONFIRM_CODE_SUCCESS,
   CONFIRM_CODE_ERROR,
-  CONFIRM_CODE_ATTEMPT
+  CONFIRM_CODE_ATTEMPT,
+  SET_TOKEN
 } from '../actionTypes';
 import { listenForRecs } from '../recommendations/actions'
 import { listenForFriends } from '../friends/actions'
@@ -18,12 +19,9 @@ import { setUserToken } from '../user/actions'
 export function initializeApp() {
   return (dispatch, getState) => {
 
-
-
       // Kick off auth listener to handle updating user object
       // This will fire every time the app loads no matter what
       firebase.auth().onAuthStateChanged(function(user) {
-        console.log('auth state changed')
         // Add user data to redux (registered or anon)
         // Fire off event listeners
         if (user) {
@@ -35,24 +33,36 @@ export function initializeApp() {
           dispatch(listenForRecs(user.uid))
           dispatch(listenForFriends(user.uid))
 
-          // I handle this when user registers
-          // if(!user.isAnonymous) {
-          //     dispatch(setUserToken())
-          // }
-
         } else {
           // No user is signed in. so lets authenticate anon
           firebase.auth().signInAnonymously()
-              .then(() => {
-                console.log('signInAnonymously SUCCESS')
-              });
         }
       });
+
+      dispatch(setToken())
   }
-
-
 }
 
+function setToken() {
+  return (dispatch, getState) => {
+    const user = getState().user
+    const app = getState().app
+    // console.log(user)
+    // return
+
+    // If there isnt a token set, then grab it and set it
+    if(!app.token) {
+      firebase.messaging().getToken().then(token => {
+        console.log('set token',token)
+        var userDoc = firebase.firestore().collection("users").doc(user.uid)
+        userDoc.set({
+          token,
+        })
+        dispatch({type: SET_TOKEN, token})
+      })
+    }
+  }
+}
 
 
 export function signInLink(phoneNumber) {
@@ -61,93 +71,28 @@ export function signInLink(phoneNumber) {
 
     const formatedNumber = `+1${phoneNumber}`
 
-
-
     firebase.auth().signInWithPhoneNumber(formatedNumber)
       .then(confirmResult => dispatch({type: SIGN_IN_CONFIRM_RESULT, confirmResult, formatedNumber }) )
       .catch(error =>  dispatch({type: SIGN_IN_ERROR, status: error.message })  );
 
-    // return
-    // var credential = firebase.auth.PhoneAuthProvider.credential(email, password);
-
-    // firebase.auth().currentUser.linkWithCredential(credential)
-    // .then((confirmationResult) => {
-    //   console.log('confirmationResult',confirmationResult)
-    //   // At this point SMS is sent. Ask user for code.
-    //   // let code = window.prompt('Please enter the 6 digit code');
-    //   // return confirmationResult.confirm(code);
-    // })
-    //
-    // .then((firebaseUser) => {
-    //   console.log("Anonymous account successfully upgraded", firebaseUser);
-    //   // not sure why authStateChanged isnt called
-    //   // so calling this manually
-    //   // console.log('usernane')
-    //
-    // }, function(error) {
-    //   // cb({error:'Error: '+error})
-    //   console.log("Error upgrading anonymous account", error);
-    //
-    //
-    // });
-
-
-    // firebase.auth().currentUser.linkWithPhoneNumber(formatedNumber)
-    //   .then((confirmationResult) => {
-    //     console.log('confirmationResult',confirmationResult)
-    //     // At this point SMS is sent. Ask user for code.
-    //     // let code = window.prompt('Please enter the 6 digit code');
-    //     // return confirmationResult.confirm(code);
-    //   })
-    //   .then((result) => {
-    //     // Phone credential now linked to current user.
-    //     // User now can sign in with email/pass or phone.
-    //     console.log('result',result)
-    //   })
-    //   .catch((error) => {
-    //     console.log('error',error)
-    //     // Error occurred.
-    //   });
-
-
 
   }
 }
 
-export function signIn(phoneNumber) {
-  return dispatch => {
-    dispatch({type: SIGN_IN_ATTEMPT })
-
-    const formatedNumber = `+1${phoneNumber}`
-
-    // tmp
-    // dispatch({type: SIGN_IN_CONFIRM_RESULT, confirmResult: ()=> alert('confirm result')})
-
-    firebase.auth().signInWithPhoneNumber(formatedNumber)
-      .then(confirmResult => dispatch({type: SIGN_IN_CONFIRM_RESULT, confirmResult }) )
-      .catch(error =>  dispatch({type: SIGN_IN_ERROR, status: error.message })  );
-
-  }
-}
 
 export function confirmCode(codeInput) {
   return (dispatch, getState) => {
-    // console.log('confirmCode')
+
     dispatch({type: CONFIRM_CODE_ATTEMPT, status: 'attempting'})
     const confirmResult = getState().app.confirmResult
-    // const formatedNumber = getState().app.formatedNumber
-    console.log('verfId',confirmResult.verificationId)
-    console.log('_verfId',confirmResult._verificationId)
-    var credential = firebase.auth.PhoneAuthProvider.credential(confirmResult._verificationId, codeInput);
-    console.log('cred',credential)
 
-    console.log('confirmResult',confirmResult)
-    console.log('codeInput',codeInput)
+    var credential = firebase.auth.PhoneAuthProvider.credential(confirmResult._verificationId, codeInput);
+
 
     firebase.auth().currentUser.linkWithCredential(credential)
     .then((confirmationResult) => {
       console.log('confirmationResult',confirmationResult)
-      dispatch({type: CONFIRM_CODE_ATTEMPT, status: 'confirmationResult'})
+      dispatch({type: CONFIRM_CODE_SUCCESS, status: 'confirmationResult success'})
       // At this point SMS is sent. Ask user for code.
       // let code = window.prompt('Please enter the 6 digit code');
       // return confirmationResult.confirm(code);
@@ -155,7 +100,8 @@ export function confirmCode(codeInput) {
 
     .then((firebaseUser) => {
       console.log("Anonymous account successfully upgraded", firebaseUser);
-      dispatch({type: CONFIRM_CODE_ATTEMPT, status: 'confirmationResult'})
+      dispatch({type: CONFIRM_CODE_SUCCESS, status: 'Anonymous account successfully upgraded'})
+      // dispatch({type: CONFIRM_CODE_ATTEMPT, status: 'confirmationResult'})
       // not sure why authStateChanged isnt called
       // so calling this manually
       // console.log('usernane')
@@ -180,9 +126,39 @@ export function confirmCode(codeInput) {
   }
 }
 
+export function logoutUser() {
+  console.log('logout?')
+  return dispatch => {
+    console.log('logout?????')
+    firebase.auth().signOut().then(function() {
+      console.log('signout successful')
+      dispatch({type: USER_SIGNED_OUT})
+    }).catch(function(error) {
+      console.log('signout err',error)
+      // An error happened.
+    });
+  }
+}
 
 
 
 export function setNotificationPermission(response) {
   return { type: SET_NOTIFICATION_PERMISSION, response}
+}
+
+
+// Temp for dev
+export function devLogin() {
+
+  return dispatch => {
+    const email = 'kevin@kevaid.com'
+    const password = '12345678'
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      console.log('login!',error)
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
+  }
 }

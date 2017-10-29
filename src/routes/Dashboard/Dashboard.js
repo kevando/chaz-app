@@ -7,6 +7,7 @@ import Filter from '../../components/Nav/Filter';
 import NotificationPermission from '../../components/Card/NotificationPermission';
 import * as Onboarding from '../../components/Onboarding'
 import styles from './styles';
+import firebase from 'react-native-firebase'
 
 const Dashboard = (props) => {
   // console.log(props)
@@ -35,7 +36,6 @@ const Dashboard = (props) => {
 
 
       <Onboarding.NotificationPermission />
-
 
       </ScrollView>
 

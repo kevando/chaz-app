@@ -10,6 +10,7 @@ import {
   CONFIRM_CODE_ATTEMPT,
   CONFIRM_CODE_SUCCESS,
   CONFIRM_CODE_ERROR,
+  SET_TOKEN,
 } from '../actionTypes';
 
 const initialState = {
@@ -40,10 +41,11 @@ export default function app(app = initialState, action = {}) {
       })
 
     // -------------------------------------------
-
-
-
-
+    case SET_TOKEN:
+      return {
+        ...app,
+        token: action.token,
+      }
 
     // -------------------------------------------
     // Phone auth
@@ -90,7 +92,7 @@ export default function app(app = initialState, action = {}) {
     case CONFIRM_CODE_SUCCESS:
       return {
         ...app,
-        status: 'Code confirmed',
+        status: action.status,
         error: null,
       }
 

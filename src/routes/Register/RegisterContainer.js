@@ -6,40 +6,34 @@ import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
 import firebase from 'react-native-firebase';
 
-// const successImageUri = 'https://cdn.pixabay.com/photo/2015/06/09/16/12/icon-803718_1280.png';
-
-
 class RegisterContainer extends Component {
 
 
   constructor(props) {
     super(props);
-    // this.unsubscribe = null;
     this.state = {
-
       phoneInput: '',
-      email: '',
-      password: '12345678',
       error: '',
-
-      user: null,
       message: '',
       codeInput: '',
       phoneNumber: '',
       confirmResult: null,
-      status: '...'
     };
 
     this.updateState = this.updateState.bind(this)
-    this._createUserCallback = this._createUserCallback.bind(this)
   }
 
-
-
-  _createUserCallback() {
-    console.log('user call back')
-    Actions.replace('Profile')
+  componentWillReceiveProps(nextProps) {
+    if(!nextProps.user.isAnonymous) {
+      alert('user is logged in and not anon')
+    }
   }
+
+  // _createUserCallback() {
+  //   console.log('user call back')
+  //   Actions.replace('Profile')
+  // }
+
   updateState(state) {
     this.setState(state)
   }
@@ -59,8 +53,6 @@ class RegisterContainer extends Component {
 
 
   render() {
-    // console.log(this.props)
-    // console.log(this.state)
       return (
         <Register
           onSignInPress={this._onSignInPress}
@@ -70,6 +62,7 @@ class RegisterContainer extends Component {
           user={this.props.user}
           app={this.props.app}
           confirmCode={this._onConfirmCode}
+          devLogin={this.props.devLogin}
         />
       )
   }
