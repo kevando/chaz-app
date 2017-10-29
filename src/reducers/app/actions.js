@@ -10,7 +10,9 @@ import {
   CONFIRM_CODE_SUCCESS,
   CONFIRM_CODE_ERROR,
   CONFIRM_CODE_ATTEMPT,
-  SET_TOKEN
+  SET_TOKEN,
+  SET_APP_STATUS,
+  SET_APP_ERROR,
 } from '../actionTypes';
 import { listenForRecs } from '../recommendations/actions'
 import { listenForFriends } from '../friends/actions'
@@ -19,27 +21,61 @@ import { setUserToken } from '../user/actions'
 export function initializeApp() {
   return (dispatch, getState) => {
 
-      // Kick off auth listener to handle updating user object
-      // This will fire every time the app loads no matter what
-      firebase.auth().onAuthStateChanged(function(user) {
-        // Add user data to redux (registered or anon)
-        // Fire off event listeners
-        if (user) {
+    // We may want to do certain things if the app is opened from a message
+    // currently getInitialNotification isnt working
+    dispatch(handleNotifications())
 
-          dispatch({ type: USER_SIGNED_IN, user })
+    // Kick off auth listener to handle updating user object
+    // This will fire every time the app loads no matter what
+    firebase.auth().onAuthStateChanged(function(user) {
 
-          // Start some Firestore data listeners to handle ALL data
-          // Note: this may become an issue if user is without internet
-          dispatch(listenForRecs(user.uid))
-          dispatch(listenForFriends(user.uid))
+      // Add user data to redux (registered or anon)
+      // Fire off event listeners
+      if (user) {
 
-        } else {
-          // No user is signed in. so lets authenticate anon
-          firebase.auth().signInAnonymously()
-        }
-      });
+        dispatch({ type: USER_SIGNED_IN, user })
 
-      dispatch(setToken())
+        // Start some Firestore data listeners to handle ALL data
+        // Note: this may become an issue if user is without internet
+        dispatch(listenForRecs(user.uid))
+        dispatch(listenForFriends(user.uid))
+
+      } else {
+
+        // No user is signed in. so lets authenticate anon
+        firebase.auth().signInAnonymously()
+      }
+    });
+
+    dispatch(setToken())
+  }
+}
+
+function handleNotifications() {
+  return dispatch => {
+
+    const messaging = firebase.messaging()
+
+    messaging.onMessage( (notif) => {
+      // console.warn('onMessage!!')
+      // console.log(notif)
+      dispatch({type: SET_APP_STATUS, status: 'OnMessage fired'})
+    })
+
+    // @todo
+    // this is bugging right now per github issues threads
+
+    messaging.getInitialNotification().then(notif=>{
+      // console.warn('getInitialNotification')
+      // console.log(notif)
+      if(!notif) {
+        dispatch({type: SET_APP_ERROR, error: {message: 'InitialNotification is empty'} })
+      } else {
+        // this apperantly works. not sure what the notif object is like
+        // and not too sure how to redirect the user to a different page
+        dispatch({type: SET_APP_STATUS, status: 'Initial Notification is not empty!'})
+      }
+    });
   }
 }
 
@@ -47,18 +83,31 @@ function setToken() {
   return (dispatch, getState) => {
     const user = getState().user
     const app = getState().app
-    // console.log(user)
-    // return
 
-    // If there isnt a token set, then grab it and set it
+
     if(!app.token) {
+    // if(true) {
       firebase.messaging().getToken().then(token => {
-        console.log('set token',token)
-        var userDoc = firebase.firestore().collection("users").doc(user.uid)
-        userDoc.set({
-          token,
+
+        var userRef = firebase.firestore().collection("users").doc(user.uid)
+
+        userRef.get().then(userDoc => {
+          if(userDoc.exists){
+            // simply update the doc
+            userRef.update({ token }).then(() => dispatch({type: SET_APP_STATUS, status: 'UPDATED user to database'}))
+          } else {
+            // need to create user
+            userRef.set({
+              token,
+              createdAt: Date.now(),
+              uid: user.uid,
+              // phoneNumber: user.phoneNumber
+            }).then(() => dispatch({type: SET_APP_STATUS, status: 'ADDED user to database'}))
+          }
         })
+
         dispatch({type: SET_TOKEN, token})
+        dispatch({type: SET_APP_STATUS, status: 'token set!'})
       })
     }
   }

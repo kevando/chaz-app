@@ -3,7 +3,8 @@ import { View, Text } from 'react-native'
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
-import firebase from 'react-native-firebase';
+// import firebase from 'react-native-firebase';
+import Toast from 'react-native-root-toast';
 // var PushNotification = require('react-native-push-notification');
 import Dashboard from '../../routes/Dashboard';
 import InputTitle from '../../routes/InputTitle';
@@ -19,9 +20,42 @@ import Profile from '../../routes/Profile';
 
 
 class Chaz extends Component {
-  // state = {}
+  constructor(props) {
+    super(props)
+    this.state = { visibleToasts: 0 }
+    this._renderToast = this._renderToast.bind(this)
+    this._shouldToastDisplay = this._shouldToastDisplay.bind(this)
+  }
   componentWillMount() {
     this.props.initializeApp() // redux
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._shouldToastDisplay(nextProps)
+  }
+
+  _shouldToastDisplay(nextProps) {
+    const { status, error } = this.props.app
+    if(nextProps.app.status != status)
+      this._renderToast(nextProps.app.status,'green')
+
+    if(nextProps.app.error != error)
+      this._renderToast(nextProps.app.error.message,'red')
+  }
+
+  _renderToast(message, color) {
+
+    const OFFSET = this.state.visibleToasts * 60
+    this.setState({visibleToasts: ++this.state.visibleToasts})
+
+    let toast = Toast.show(message, {
+        duration: 14000, //Toast.durations.LONG,
+        position: Toast.positions.TOP + OFFSET,
+        backgroundColor: color,
+        onHidden: () => {
+            this.setState({visibleToasts: --this.state.visibleToasts})
+        }
+    });
   }
 
 

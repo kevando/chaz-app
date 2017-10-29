@@ -5,7 +5,7 @@ import styles from './styles';
 import { NameCard, UserCard, FindUserCard, RecCard } from '../../components/Card/FriendView'
 import { Label, Button } from '../../components/Generic/';
 
-const FriendView = ({ friend, myRecs, givenRecs, onKeyPress, user, userFound, onAssignUserPress, onGiveRecPress }) => {
+const FriendView = ({ friend, app, myRecs, givenRecs, onKeyPress, user, validPhoneNumber, sendInvite, onGiveRecPress }) => {
 
 
 
@@ -16,8 +16,13 @@ const FriendView = ({ friend, myRecs, givenRecs, onKeyPress, user, userFound, on
       <NameCard friend={friend} />
 
       {
-        !friend.uid && !user.isAnonymous &&
-        <FindUserCard friend={friend} onKeyPress={onKeyPress} user={userFound} onAssignUserPress={onAssignUserPress} />
+        !friend.uid && !user.isAnonymous && !friend.phoneNumber &&
+        <FindUserCard friend={friend} onKeyPress={onKeyPress} validPhoneNumber={validPhoneNumber} sendInvite={sendInvite} />
+      }
+
+      {
+        !friend.uid && friend.phoneNumber &&
+        <Label center>You sent an invite to this user</Label>
       }
 
       <Text style={styles.label}>Recommendations from this user</Text>

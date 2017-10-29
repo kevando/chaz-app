@@ -11,13 +11,13 @@ import {
   CONFIRM_CODE_SUCCESS,
   CONFIRM_CODE_ERROR,
   SET_TOKEN,
+  SET_APP_STATUS,
+  SET_APP_ERROR,
 } from '../actionTypes';
 
 const initialState = {
   isAuthenticated: false,
   uid: null,
-  // version: DeviceInfo.getReadableVersion(),
-  // deviceName: DeviceInfo.getDeviceName(),
   notificationPermission: null,
 };
 
@@ -96,6 +96,18 @@ export default function app(app = initialState, action = {}) {
         error: null,
       }
 
+    // -------------------------------------------
+    case SET_APP_STATUS:
+      return {
+        ...app,
+        status: action.status,
+      }
+    // -------------------------------------------
+    case SET_APP_ERROR:
+      return {
+        ...app,
+        error: action.error,
+      }
 
     default:
       return app;

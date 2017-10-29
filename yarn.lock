@@ -3649,6 +3649,10 @@ react-native-checkbox@~1.0.8:
   version "1.0.17"
   resolved "https://registry.yarnpkg.com/react-native-checkbox/-/react-native-checkbox-1.0.17.tgz#94c61f190ef728c38763f48cd7ab91a6ad9fd4e2"
 
+react-native-communications@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
+
 react-native-device-info@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.11.0.tgz#e96dd0e3f8a7d7e3022c1f441f51fa912fdc7444"
@@ -3713,6 +3717,19 @@ react-native-permissions@^1.0.1:
 react-native-push-notification@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.0.1.tgz#0e23db302d03bb4a3f28dc072dcaf2a9a1178ed8"
+
+react-native-root-siblings@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-root-siblings/-/react-native-root-siblings-1.2.1.tgz#6f8d0e711dbf9aef4e57e73aea751372b5aefcff"
+  dependencies:
+    static-container "^1.0.0"
+
+react-native-root-toast@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-root-toast/-/react-native-root-toast-1.3.0.tgz#ebe2772d1fa97fde40e79da579ed15137a539841"
+  dependencies:
+    prop-types "^15.5.10"
+    react-native-root-siblings "^1.2.1"
 
 react-native-router-flux@^4.0.0-beta.22:
   version "4.0.0-beta.22"
@@ -4397,6 +4414,10 @@ sshpk@^1.7.0:
 stacktrace-parser@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/stacktrace-parser/-/stacktrace-parser-0.1.4.tgz#01397922e5f62ecf30845522c95c4fe1d25e7d4e"
+
+static-container@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/static-container/-/static-container-1.2.0.tgz#1c6e92b869da47d32abe47f45f50bf39661d9c2f"
 
 statuses@1:
   version "1.3.1"

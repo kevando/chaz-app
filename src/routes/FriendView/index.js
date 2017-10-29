@@ -10,9 +10,10 @@ const mapStateToProps = (state, props) => {
   return {
     app: state.app,
     user: state.user,
-    myRecs: _.filter(state.recommendations.myRecs,rec => rec.friendId == props.friend.id),
-    givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.to == props.friend.uid),
-    friends: state.friends, // when adding a friend as a user, need to refresh friendview
+    myRecs: _.filter(state.recommendations.myRecs,rec => rec.friendId == props.friendObject.id),
+    givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.to == props.friendObject.uid),
+    // Doing it this way so that friends listener fires new changes to the UI
+    friend: _.find(state.friends,(friend) => friend.id === props.friendObject.id)
   };
 };
 

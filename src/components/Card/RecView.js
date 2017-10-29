@@ -72,7 +72,7 @@ class FriendCard extends Component {
 
     } else { // not me
       return (
-        <TouchableOpacity onPress={()=>Actions.push('FriendView',{friend})}>
+        <TouchableOpacity onPress={()=>Actions.push('FriendView',{friendObject: friend})}>
         <View style={[styles.container]}>
 
           <View style={styles.iconContainer}>

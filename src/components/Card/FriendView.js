@@ -18,9 +18,9 @@ render() {
   const { friend } = this.props;
   return (
     <View>
-        <View style={[styles.container]}>
+        <View style={[styles.container,{marginHorizontal:0,marginVertical: 0,paddingVertical: 20}]}>
         <View style={styles.iconContainer}>
-                  <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={25} />
+                  <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={30} />
                 </View>
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
@@ -59,35 +59,28 @@ export class FindUserCard extends Component {
     alert('dude')
   }
 render() {
-  const { friend, onKeyPress, user, onAssignUserPress } = this.props;
+  const { friend, onKeyPress, validPhoneNumber, sendInvite } = this.props;
   return (
     <View>
 
       <Label center>Find your friends to chaz and you can send them recommendations directly in the app</Label>
 
-        <View style={[styles.container,user&&{borderColor: colors.green}]}>
-        <View style={styles.iconContainer}>
-                  <Icon name='at-sign' color={colors.grey} size={25} />
-                </View>
-        <View style={styles.inputContainer}>
+        <View style={[styles.container]}>
 
+        <View style={styles.inputContainer}>
           <TextInput
-            placeholder='Search for a username'
-            autoCapitalize="none"
+            placeholder='Phone Number'
+            keyboardType='phone-pad'
             autoCorrect={false}
             multiline={false}
             style={styles.input}
             placeholderTextColor={colors.grey}
-            onChangeText={(input) => onKeyPress(input)}
-            returnKeyType='go'
-            onSubmitEditing={onAssignUserPress}
+            onChangeText={(phoneNumber) => onKeyPress(phoneNumber)}
           />
-
-
         </View>
 
       </View>
-      { user && <Text style={[styles.label,user&&{color: colors.green}]}>User found!</Text> }
+      { validPhoneNumber && <Button text="Send Invite" onPress={sendInvite}/> }
     </View>
   );
 }

@@ -32,8 +32,8 @@ export default function user(user = initialState, action = {}) {
 
     // -------------------------------------------
     case USER_SIGNED_IN:
-      console.log('USER_SIGNED_IN',action.user)
-      console.log('USER_SIGNED_IN',action.user.uid)
+      // console.log('USER_SIGNED_IN',action.user)
+      // console.log('USER_SIGNED_IN',action.user.uid)
       return {
         ...user,
         uid: action.user.uid,
