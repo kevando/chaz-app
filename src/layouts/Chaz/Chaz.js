@@ -80,7 +80,8 @@ class Chaz extends Component {
   }
   render() {
     // return null
-    // console.log('render chaz.js')
+    // console.log('render chaz.js',this.props)
+    // alert('f')
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
 
     // return <Splash />

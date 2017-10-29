@@ -4,6 +4,11 @@ import {
   USER_SIGNED_OUT,
   SET_TOKEN,
   USER_CREATED,
+  // SIGN_IN_CONFIRM_RESULT,
+  // SIGN_IN_ERROR,
+  // SIGN_IN_ATTEMPT,
+  // CONFIRM_CODE_SUCCESS,
+  CONFIRM_CODE_ERROR,
 } from '../actionTypes';
 
 const initialState = {
@@ -60,6 +65,7 @@ export default function user(user = initialState, action = {}) {
         // token: action.user.refreshToken,
       }
 
+    
     default:
       return user;
   }
