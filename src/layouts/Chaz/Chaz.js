@@ -3,9 +3,8 @@ import { View, Text } from 'react-native'
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
-// import firebase from 'react-native-firebase';
 import Toast from 'react-native-root-toast';
-// var PushNotification = require('react-native-push-notification');
+
 import Dashboard from '../../routes/Dashboard';
 import InputTitle from '../../routes/InputTitle';
 import InputFriend from '../../routes/InputFriend';
@@ -16,8 +15,10 @@ import FriendView from '../../routes/FriendView';
 import Splash from '../../routes/Splash';
 import Register from '../../routes/Register';
 import Profile from '../../routes/Profile';
+import LoggedOut from '../../routes/LoggedOut';
+import Loading from '../../routes/Loading';
 
-
+const AppToasts = () => { return (<Text>dude</Text>)}
 
 class Chaz extends Component {
   constructor(props) {
@@ -49,7 +50,8 @@ class Chaz extends Component {
     this.setState({visibleToasts: ++this.state.visibleToasts})
 
     let toast = Toast.show(message, {
-        duration: 14000, //Toast.durations.LONG,
+        // duration: 14000,
+        duration: 2000,//Toast.durations.SHORT,
         position: Toast.positions.TOP + OFFSET,
         backgroundColor: color,
         onHidden: () => {
@@ -64,7 +66,7 @@ class Chaz extends Component {
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
 
     if (!isAuthenticated)
-      return null;
+      return <Loading />;
 
     return (
 
@@ -87,7 +89,9 @@ class Chaz extends Component {
             <Scene key='EditTitleScene' back component={InputTitle} title='Editing' hideNavBar={false} renderBackButton={() => <CloseButton />} />
           </Stack>
 
+          <Scene key='LoggedOut' component={LoggedOut} title='LoggedOut' hideNavBar={false}  />
         </Modal>
+
         </Router>
     )
   }

@@ -13,6 +13,8 @@ import {
   SET_TOKEN,
   SET_APP_STATUS,
   SET_APP_ERROR,
+  USER_SIGNED_OUT,
+  USERS_LINKED
 } from '../actionTypes';
 
 const initialState = {
@@ -25,6 +27,7 @@ const initialState = {
 export default function app(app = initialState, action = {}) {
 
   switch (action.type) {
+
     // -------------------------------------------
     case USER_SIGNED_IN:
       return {
@@ -34,6 +37,28 @@ export default function app(app = initialState, action = {}) {
         uid: action.user.uid,
       }
 
+    // -------------------------------------------
+    case USER_SIGNED_OUT:
+    console.log('signed out app')
+      return {
+        ...app,
+        isAuthenticated: false,
+        isAnonymous: false,
+        uid: null,
+      }
+
+    // -------------------------------------------
+    case USERS_LINKED:
+      // console.log('USERS_LINKED',action.user)
+      // console.log('USER_SIGNED_IN',action.user.email)
+      return {
+        ...app,
+        // uid: action.user.uid,
+        isAnonymous: action.user.isAnonymous,
+        // email: action.user.email,
+        // username: action.user.username,
+        // displayName: action.user.displayName
+      }
     // -------------------------------------------
     case SET_NOTIFICATION_PERMISSION:
       return Object.assign({}, app, {

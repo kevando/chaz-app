@@ -16,9 +16,11 @@ const Register = (props) => {
       <PhoneNumberInput {...props} />
       <VerificationCodeInput {...props} />
 
-      <Text>app status: {props.app.status}</Text>
-      <Text>app error: {props.error.message}</Text>
-      <Text onPress={props.devLogin}>@KEVIN LOGIN</Text>
+      <Text onPress={props.loginAsTest}>TEST LOGIN</Text>
+      <Text>.</Text>
+      <Text>.</Text>
+      <Text>.</Text>
+      <Text onPress={props.registerAsTest}>TEST REGISTER</Text>
 
     </View>
   );

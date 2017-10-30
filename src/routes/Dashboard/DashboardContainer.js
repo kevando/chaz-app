@@ -33,7 +33,7 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    // console.log('Dash',this.props.user)
+    // console.log('Dash',this.props)
     const { showOnboarding } = this.props;
 
     if(showOnboarding) {

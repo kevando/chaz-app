@@ -24,8 +24,10 @@ class RegisterContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps',nextProps)
     if(!nextProps.user.isAnonymous) {
-      alert('user is logged in and not anon')
+      console.log('user is now logged in and not anon')
+      // Actions.push('Profile')
     }
   }
 
@@ -53,6 +55,7 @@ class RegisterContainer extends Component {
 
 
   render() {
+    console.log('RegisterContainer props',this.props)
       return (
         <Register
           onSignInPress={this._onSignInPress}
@@ -62,7 +65,8 @@ class RegisterContainer extends Component {
           user={this.props.user}
           app={this.props.app}
           confirmCode={this._onConfirmCode}
-          devLogin={this.props.devLogin}
+          registerAsTest={this.props.registerAsTest}
+          loginAsTest={this.props.loginAsTest}
         />
       )
   }

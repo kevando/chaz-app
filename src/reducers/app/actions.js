@@ -1,5 +1,6 @@
 const Permissions = require('react-native-permissions');
 import firebase from 'react-native-firebase';
+import { Actions } from 'react-native-router-flux';
 import {
   SET_NOTIFICATION_PERMISSION,
   INITIALIZE_APP,
@@ -13,10 +14,19 @@ import {
   SET_TOKEN,
   SET_APP_STATUS,
   SET_APP_ERROR,
+  USER_SIGNED_OUT,
+  USERS_LINKED
 } from '../actionTypes';
 import { listenForRecs } from '../recommendations/actions'
 import { listenForFriends } from '../friends/actions'
 import { setUserToken } from '../user/actions'
+
+
+
+// --------------------------------------------------------------
+//    INIT APP
+// --------------------------------------------------------------
+
 
 export function initializeApp() {
   return (dispatch, getState) => {
@@ -28,7 +38,7 @@ export function initializeApp() {
     // Kick off auth listener to handle updating user object
     // This will fire every time the app loads no matter what
     firebase.auth().onAuthStateChanged(function(user) {
-
+      console.log('onAuthStateChanged', user)
       // Add user data to redux (registered or anon)
       // Fire off event listeners
       if (user) {
@@ -41,7 +51,7 @@ export function initializeApp() {
         dispatch(listenForFriends(user.uid))
 
       } else {
-
+        console.log('signing in as anon')
         // No user is signed in. so lets authenticate anon
         firebase.auth().signInAnonymously()
       }
@@ -50,6 +60,10 @@ export function initializeApp() {
     dispatch(setToken())
   }
 }
+
+// --------------------------------
+//    HANDLE NOTIFICATIONS
+// --------------------------------
 
 function handleNotifications() {
   return dispatch => {
@@ -69,7 +83,8 @@ function handleNotifications() {
       // console.warn('getInitialNotification')
       // console.log(notif)
       if(!notif) {
-        dispatch({type: SET_APP_ERROR, error: {message: 'InitialNotification is empty'} })
+        // turning this off cause its annoying
+        // dispatch({type: SET_APP_ERROR, error: {message: 'InitialNotification is empty'} })
       } else {
         // this apperantly works. not sure what the notif object is like
         // and not too sure how to redirect the user to a different page
@@ -79,12 +94,17 @@ function handleNotifications() {
   }
 }
 
+// --------------------------------
+//    GET FCM TOKEN
+// --------------------------------
+
 function setToken() {
   return (dispatch, getState) => {
     const user = getState().user
     const app = getState().app
 
-
+    // console.log('setToken',app)
+    // @todo might be a bug here
     if(!app.token) {
     // if(true) {
       firebase.messaging().getToken().then(token => {
@@ -175,32 +195,67 @@ export function confirmCode(codeInput) {
   }
 }
 
-export function logoutUser() {
-  console.log('logout?')
+// --------------------------------
+//    SIGN OUT
+// --------------------------------
+
+export function signOut() {
   return dispatch => {
-    console.log('logout?????')
-    firebase.auth().signOut().then(function() {
-      console.log('signout successful')
+    // Actions.push('LoggedOut')
+    // dispatch({type: USER_SIGNED_OUT})
+    firebase.auth().signOut().then(() => {
+      console.log('signined out!')
+      dispatch({type: SET_APP_STATUS, status: 'User successfully signed out' })
       dispatch({type: USER_SIGNED_OUT})
-    }).catch(function(error) {
-      console.log('signout err',error)
-      // An error happened.
-    });
+
+      // Doesnt feel right to navigate from redux but it works well
+      Actions.push('LoggedOut')
+    })
+    .catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
   }
 }
 
 
+
+// --------------------------------
+//    SET PERMISSION
+// --------------------------------
 
 export function setNotificationPermission(response) {
   return { type: SET_NOTIFICATION_PERMISSION, response}
 }
 
 
+// --------------------------------
+//    UPDATE USER IN FIRESTORE
+// --------------------------------
+
+function updateUser(data) {
+  return (dispatch, getState) => {
+    const user = getState().user
+    if(!user.uid) {
+      alert('No UID, something is terribly wrong')
+    } else {
+      firebase.firestore().collection("users").doc(user.uid).update(data)
+        .then(() =>  dispatch({type: SET_APP_STATUS, status: 'Updated User in firestore'}) )
+        .catch(error =>  dispatch({type: SET_APP_ERROR, error}) )
+    }
+  }
+}
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------
 // Temp for dev
-export function devLogin() {
+export function loginAsTest() {
 
   return dispatch => {
-    const email = 'kevin@kevaid.com'
+    const email = 'test@kevaid.com'
     const password = '12345678'
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
@@ -209,5 +264,47 @@ export function devLogin() {
       var errorMessage = error.message;
       // ...
     });
+  }
+}
+
+// --------------------------------------------------------------
+// Temp for dev
+export function registerAsTest() {
+  // This will link the anon account w a new account
+  const email = 'test@kevaid.com'
+  const password = '12345678'
+
+  console.log('registerAsTest')
+
+  return dispatch => {
+    console.log('registerAsTest dispatched')
+
+
+
+    var credential = firebase.auth.EmailAuthProvider.credential(email, password);
+
+        firebase.auth().currentUser.linkWithCredential(credential).then((firebaseUser) => {
+          console.log("Anonymous account successfully upgraded", firebaseUser);
+          console.log("firebaseUser._user", firebaseUser._user);
+          console.warn("Anonymous account successfully upgraded");
+
+          // Need to be careful because authStateChanged isnt fired
+          // by linking accounts
+          // so we need to call some of that manually
+
+          // const user = {...firebaseUser._user}
+          dispatch({ type: USERS_LINKED, user: firebaseUser._user })
+
+
+          // Now lets add the info to the user doc
+          // this times its email, next time its phone
+
+          dispatch(updateUser({email, linkedAt: Date.now() }))
+
+        }, function(error) {
+          console.warn("Error upgrading anonymous account", error);
+          dispatch({type: SET_APP_ERROR, error})
+        });
+
   }
 }

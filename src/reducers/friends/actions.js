@@ -146,7 +146,7 @@ export function listenForFriends(uid) {
   // or recs that ive given
     .onSnapshot(function(querySnapshot) {
         var myFriends = [];
-        console.log('friend listner fired!')
+        // console.log('friend listner fired!')
         querySnapshot.forEach(function(doc) {
             // console.log('recs listner',doc.data())
             myFriends.push({...doc.data(),id: doc.id});

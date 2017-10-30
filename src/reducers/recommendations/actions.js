@@ -167,11 +167,11 @@ export function listenForRecs(uid) {
 
 
     // My recs
-    console.log('start listening')
+    // console.log('start listening')
     recsRef.where("to", "==", uid)
       .onSnapshot(querySnapshot => {
           var myRecs = [];
-          console.log('listner fired!')
+          // console.log('listner fired!')
           querySnapshot.forEach(function(doc) {
               // console.log('recs listner',doc.data())
               myRecs.push({...doc.data(),id: doc.id});

@@ -2,9 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import ProfileContainer from './ProfileContainer';
-
-// import * as RecActions from '../../reducers/recommendations/actions';
-import * as UserActions from '../../reducers/user/actions';
+import { signOut } from '../../reducers/app/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,6 +12,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-// map dispatch to props
-
-export default connect(mapStateToProps, {...UserActions})(ProfileContainer);
+export default connect(mapStateToProps, { signOut })(ProfileContainer);
