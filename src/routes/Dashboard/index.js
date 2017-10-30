@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
     // givenRecs: _.filter(allRecs,rec=> rec.friend.uid === state.user.uid),
     friends: state.friends,
     // activeFilter: state.recommendations.filter,
-    // app: state.app,
+    app: state.app,
     showOnboarding: state.recommendations.myRecs.length == 0,
     user: state.user,
   };

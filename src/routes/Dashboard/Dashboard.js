@@ -38,7 +38,7 @@ const Dashboard = (props) => {
         })
       }
 
-
+      <Text>{props.user.isAnonymous ? 'anon' : 'not anon'}</Text>
       <Onboarding.NotificationPermission />
 
       </ScrollView>

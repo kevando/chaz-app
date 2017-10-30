@@ -3,7 +3,8 @@ import {
   USER_SIGNED_IN,
   USER_SIGNED_OUT,
   CONFIRM_CODE_ERROR,
-  USERS_LINKED
+  USERS_LINKED,
+  SET_USER_PHONE
 } from '../actionTypes';
 
 const initialState = {
@@ -16,24 +17,36 @@ export default function user(user = initialState, action = {}) {
 
     // -------------------------------------------
     case USER_SIGNED_IN:
-      // console.log('USER_SIGNED_IN',action.user)
+
+      // TMP!!
+      // right now isAnon not working quite right
+      // hardcoding displayname on auth link
+      var isAnon = action.user.displayName === null ? true : false
+
       return {
         ...user,
         uid: action.user.uid,
-        isAnonymous: action.user.isAnonymous,
+        // isAnonymous: action.user.isAnonymous, // tmp
+        isAnonymous: isAnon,
         // email: action.user.email,
         // username: action.user.displayName,
-        // displayName: action.user.displayName
+        displayName: action.user.displayName
       }
 
     // -------------------------------------------
     case USERS_LINKED:
       console.log('USERS_LINKED',action.user)
+
+      // TMP!!
+      // right now isAnon not working quite right
+      // hardcoding displayname on auth link
+      var isAnon = action.user.displayName === null ? true : false
       return {
         ...user,
-        isAnonymous: action.user.isAnonymous,
-        email: action.user.email,
-        
+        // isAnonymous: action.user.isAnonymous, // tmp
+        isAnonymous: isAnon,
+        // email: action.user.email,
+
       }
 
     // -------------------------------------------
@@ -42,6 +55,12 @@ export default function user(user = initialState, action = {}) {
       return {
         uid: null,
         isAuthenticated: false,
+      }
+
+    case SET_USER_PHONE:
+      return {
+        ...user,
+        phoneNumber: action.phoneNumber,
       }
 
     // -------------------------------------------

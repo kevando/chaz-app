@@ -18,9 +18,12 @@ const Register = (props) => {
 
       <Text onPress={props.loginAsTest}>TEST LOGIN</Text>
       <Text>.</Text>
-      <Text>.</Text>
+
       <Text>.</Text>
       <Text onPress={props.registerAsTest}>TEST REGISTER</Text>
+      <Text>.</Text>
+      <Text>.</Text>
+      <Text onPress={props.onLogoutPress}>LOGOUT</Text>
 
     </View>
   );

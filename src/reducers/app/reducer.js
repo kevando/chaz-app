@@ -90,6 +90,7 @@ export default function app(app = initialState, action = {}) {
         activeStep: 2,
         status: 'code has been sent!',
         confirmResult: action.confirmResult,
+        verificationId: action.verificationId,
         formatedNumber: action.formatedNumber,
       }
 

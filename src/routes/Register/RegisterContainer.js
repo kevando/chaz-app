@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { LayoutAnimation, ListView, View, Button, Text, TextInput, Image } from 'react-native';
+import { Alert, ListView, View, Button, Text, TextInput, Image } from 'react-native';
 import Register from './Register';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
@@ -25,10 +25,22 @@ class RegisterContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('componentWillReceiveProps',nextProps)
-    if(!nextProps.user.isAnonymous) {
-      console.log('user is now logged in and not anon')
+    if(this.props.user.isAnonymous == true && nextProps.user.isAnonymous == false) {
+      alert('THROW ACTIVATION PARTY')
       // Actions.push('Profile')
     }
+  }
+
+  _onLogoutPress = () => {
+    // Actions.push('LoggedOut')
+    // return
+    Alert.alert(
+      'Log Out?', null,
+      [
+        {text: 'No' },
+        {text: 'Yes', onPress: () => this.props.signOut(), },
+      ]
+    )
   }
 
   // _createUserCallback() {
@@ -67,6 +79,7 @@ class RegisterContainer extends Component {
           confirmCode={this._onConfirmCode}
           registerAsTest={this.props.registerAsTest}
           loginAsTest={this.props.loginAsTest}
+          onLogoutPress={this._onLogoutPress}
         />
       )
   }
