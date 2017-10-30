@@ -11,16 +11,34 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.backgroundGrey,
   },
 
-  title: {
+  titleContainer: {
+    paddingLeft: MARGIN_HORIZONTAL,
+//     backgroundColor: 'yellow',
+//     margin: 10,
+// flex: 1,
+// backgroundColor: 'transparent',
+// borderColor: 'white',
+// borderWidth: 3,
+// overflow: 'hidden',
+// shadowColor: 'black',
+// shadowRadius: 10,
+// shadowOpacity: 1,
+  },
+  recommendationsTitle: {
     ...text,
-    color: colors.white,
-    fontSize: 80,
-    paddingTop:50,
-    paddingBottom: 0,
-    fontWeight: '400',
-    letterSpacing:4,
-    paddingLeft: 17,
+    color: '#444',
+    fontSize: 30,
+    // paddingTop:50,
+    // paddingBottom: 0,
+    fontWeight: '700',
+    letterSpacing:0.5,
 
+    paddingLeft: 12,
+    marginTop: 20,
+    marginBottom: 5,
+    // textShadowColor: 'red',
+    // textShadowOffset: {width: 10, height: 10},
+    // textShadowRadius: 20
   },
   paragraph: {
     ...text,

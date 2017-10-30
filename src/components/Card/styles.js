@@ -1,10 +1,10 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { colors, text } from '../../config/styles';
+import { StyleSheet } from 'react-native';
+import { colors, text, width, height } from '../../config/styles';
 
-const window = Dimensions.get('window');
+// const window = Dimensions.get('window');
 const MARGIN_HORIZONTAL = 10;
 const MARGIN_VERTICAL = 5;
-const CARD_WIDTH = (window.width - (MARGIN_HORIZONTAL*2));
+const CARD_WIDTH = (width - (MARGIN_HORIZONTAL*2));
 const ICON_WIDTH = CARD_WIDTH / 9;
 const DATE_WIDTH = CARD_WIDTH / 8;
 const ARROW_WIDTH = 25;
@@ -17,20 +17,39 @@ export default styles = StyleSheet.create({
     marginVertical: MARGIN_VERTICAL,
     borderWidth: 1,
     borderColor: colors.cardBorder,
-    flexDirection: 'row',
     backgroundColor: colors.white,
-    paddingVertical: 10,
-    paddingLeft: 20,
-
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    // paddingVertical: 10,
+    // paddingLeft: 20,
+    flex: 1,
     // backgroundColor: 'orange',
     justifyContent: 'flex-start',
-    alignItems: 'center', // vertical align
+
   },
-  expanded: {
-    borderColor: colors.grey,
+
+  headerContainer: {
+    backgroundColor: colors.cardHeader,
+    // flex: 1,
+    paddingLeft: 10,
+    height: 25,
+    // alignItems: 'center', // h
+    justifyContent: 'center', // v
   },
+  bodyContainer: {
+    backgroundColor: 'white',
+    // flex: 1,
+    height: 70,
+    flexDirection: 'row',
+    alignItems: 'center', // v
+    justifyContent: 'center', // h (sorta)
+  },
+
+  headerText: {
+    ...text,
+    fontSize: 12,
+    color: 'black',
+  },
+
+
 
   iconContainer: {
     width: ICON_WIDTH,
@@ -99,7 +118,7 @@ export default styles = StyleSheet.create({
   },
 
   bold: {
-    fontWeight: '500',
+    fontWeight: '700',
     // color: colors.darkGrey
   },
 

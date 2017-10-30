@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text } from 'react-native'
+import { View, Text, LayoutAnimation } from 'react-native'
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
@@ -23,7 +23,7 @@ const AppToasts = () => { return (<Text>dude</Text>)}
 class Chaz extends Component {
   constructor(props) {
     super(props)
-    this.state = { visibleToasts: 0 }
+    this.state = { visibleToasts: 0, isReady: false, }
     this._renderToast = this._renderToast.bind(this)
     this._shouldToastDisplay = this._shouldToastDisplay.bind(this)
   }
@@ -33,6 +33,10 @@ class Chaz extends Component {
 
   componentWillReceiveProps(nextProps) {
     this._shouldToastDisplay(nextProps)
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.linear(); // set the fade
   }
 
   _shouldToastDisplay(nextProps) {
@@ -60,13 +64,18 @@ class Chaz extends Component {
     });
   }
 
+  updateState = (state) => {
+    this.setState(state)
+  }
+
 
 
   render() {
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
+    const { isReady } = this.state
 
-    if (!isAuthenticated)
-      return <Loading />;
+    if (!isReady || !isAuthenticated)
+      return <Loading updateState={this.updateState} />;
 
     return (
 

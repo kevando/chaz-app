@@ -8,7 +8,7 @@ import { colors } from '../../config/styles';
 import styles from './styles';
 import { CategoryIcon } from '../../components/Category/Icon';
 
-class Card extends Component {
+class RecCard extends Component {
 
   _onCardPress() {
     if(this.props.unfinished) return; // dont allow expand if rec isnt saved
@@ -50,6 +50,70 @@ render() {
   );
 }
 
+
+};
+
+// -----------
+// attempt at a new card design
+
+export class Card extends Component {
+
+  _onCardPress() {
+    if(this.props.unfinished) return; // dont allow expand if rec isnt saved
+    Actions.push('RecView',{rec: this.props.rec})
+  }
+
+render() {
+  // console.log(this.props)
+  const { rec } = this.props;
+  return (
+
+    <TouchableOpacity onPress={this._onCardPress.bind(this)} activeOpacity={0.9}>
+        <View style={[styles.container]}>
+
+
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText}>
+              <Text style={styles.bold}>{rec.friend ? rec.friend.name : 'Me?'}</Text>
+               &nbsp;Recommended
+            </Text>
+          </View>
+
+          <View style={styles.bodyContainer}>
+           <View style={styles.iconContainer}>
+            <CategoryIcon category={rec.category} size={25} color="grey" />
+          </View>
+          <View style={styles.textContainer}>
+            <View style={styles.recContainer}>
+              <Text style={styles.recText}>{rec.title}</Text>
+            </View>
+
+          </View>
+
+          </View>
+
+
+
+
+
+      </View>
+      </TouchableOpacity>
+
+  );
+}
+//
+// <View style={styles.iconContainer}>
+//   <CategoryIcon category={rec.category} size={25} color="grey" />
+// </View>
+//
+// <View style={styles.textContainer}>
+//   <View style={styles.recContainer}>
+//     <Text style={styles.recText}>{rec.title}</Text>
+//   </View>
+//   <View style={styles.friendContainer}>
+//     <Text style={styles.friendText}>Recommended by: {rec.friend ? rec.friend.name : 'Me'}</Text>
+//   </View>
+// </View>
 
 };
 
@@ -125,4 +189,4 @@ render() {
 
 };
 
-export default Card;
+export default RecCard;

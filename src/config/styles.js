@@ -23,7 +23,7 @@ export const colors = {
   blue:         "#3888EA",
   green:        "#3A931F",
   red:          "#E83A3A",
-  yellow:       "#ffe46a",
+  yellow:       "#FFC64F",
   orange:       "#FF8801",
 
   black:        "#1E1E1E",
@@ -33,11 +33,18 @@ export const colors = {
   offWhite:    "#E8E8E8",
   white:        "#FFF",
 
-  cardBorder:       "#D6D6D6",
+  // cardBorder:       "#D6D6D6",
   backgroundGrey:    "#F1F1F1",
 
-
   darkPurple:   "#7B40AF",
+
+  // attempting new card UI
+  // cardHeader:    'rgba(138,105,198,0.6)',
+  // cardHeader: '#285A99',
+  cardHeader: '#D6D1E3',
+  cardBorder:    '#DDDCDC',
+
+  yellowOld:       "#ffe46a",
 
 };
 

@@ -11,8 +11,8 @@ const LoggedOut = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Logged out</Text>
-      <Text style={styles.text}>user.uid is {user.uid || "NOT FOUND"}</Text>
-      <Text style={styles.text}>app.isAuthenticated is {app.isAuthenticated ? ' TRUE' : "FALSE"}</Text>
+      <Text style={styles.text}>{user.uid || "NO USER ID FOUND"}</Text>
+      <Text style={styles.text}>is {!app.isAuthenticated && "NOT"} Authenticated and {!app.isAnonymous && "NOT"} Anonymous</Text>
     </View>
   );
 }

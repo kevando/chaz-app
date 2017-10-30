@@ -30,7 +30,7 @@ import { setUserToken } from '../user/actions'
 
 export function initializeApp() {
   return (dispatch, getState) => {
-
+    console.log('init')
     // We may want to do certain things if the app is opened from a message
     // currently getInitialNotification isnt working
     dispatch(handleNotifications())
@@ -254,11 +254,14 @@ function updateUser(data) {
 // Temp for dev
 export function loginAsTest() {
 
+  const email = 'test@kevaid.com'
+  const password = '12345678'
+
   return dispatch => {
-    const email = 'test@kevaid.com'
-    const password = '12345678'
+
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
+      dispatch({type: SET_APP_ERROR, error})
       console.log('login!',error)
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -303,7 +306,10 @@ export function registerAsTest() {
 
         }, function(error) {
           console.warn("Error upgrading anonymous account", error);
+          console.log('code?',error.code)
           dispatch({type: SET_APP_ERROR, error})
+          // if we reach here, most likely the account already exists, so lets try to just login
+          dispatch(loginAsTest())
         });
 
   }

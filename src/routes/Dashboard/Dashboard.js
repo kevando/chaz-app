@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, StatusBar ,Text} from 'react-native';
 import _ from 'lodash';
 import { Button } from '../../components/Generic';
-import RecCard from '../../components/Card/Rec';
+import { Card } from '../../components/Card/Rec';
 import Filter from '../../components/Nav/Filter';
 import NotificationPermission from '../../components/Card/NotificationPermission';
 import * as Onboarding from '../../components/Onboarding'
@@ -21,7 +21,11 @@ const Dashboard = (props) => {
     <View style={styles.container}>
       <StatusBar barStyle="light-content" hidden={false} />
 
-      <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}>
+
+          <View style={styles.titleContainer}>
+            <Text style={styles.recommendationsTitle}>Recommendations</Text>
+          </View>
 
         {myRecs.length > 6 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
 
@@ -29,7 +33,7 @@ const Dashboard = (props) => {
       {
         _.map(filteredRecs,function(rec,i) {
           return(
-            <RecCard rec={rec} key={i} />
+            <Card rec={rec} key={i} />
           )
         })
       }
