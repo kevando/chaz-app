@@ -2,7 +2,9 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/styles';
 
 export const headerStyle = {
-  backgroundColor: colors.purple,
+  // backgroundColor: colors.green,
+  // borderWith: 5,
+  // borderColor: 'red'
 }
 
 export default styles = StyleSheet.create({
@@ -22,7 +24,8 @@ export default styles = StyleSheet.create({
 });
 
 export const navigationBarStyle = {
-  backgroundColor: colors.purple
+  backgroundColor: colors.purple,
+  borderBottomWidth: 0,
 }
 
 export const titleStyle = {

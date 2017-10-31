@@ -125,3 +125,5 @@ var recWithRecr = rec.set('recr', recr)
 
 https://cloud.google.com/firestore/docs/extend-with-functions
 https://developers.google.com/cloud-messaging/ios/certs
+
+/Users/k2/.gem/ruby/2.0.0/bin/pod install  

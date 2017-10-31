@@ -87,7 +87,7 @@ const GetStarted = ({onNewRecPress}) => {
     <View style={styles.slideFinal}>
       <Animatable.View style={{flex:1,alignItems: 'center',marginTop: 50}}>
 
-      <Text style={[styles.text,{marginBottom:40,marginTop:100,}]}>Here's what a recommendation from your dad might look</Text>
+      <Text style={[styles.text,{marginBottom:40,marginTop:100,}]}>Here is what a recommendation from your dad might look</Text>
       <PreviewCard />
       </Animatable.View>
       <View style={{width: W}}>

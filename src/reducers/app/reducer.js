@@ -58,6 +58,7 @@ export default function app(app = initialState, action = {}) {
         // email: action.user.email,
         // username: action.user.username,
         // displayName: action.user.displayName
+        activeStep: 3,
       }
     // -------------------------------------------
     case SET_NOTIFICATION_PERMISSION:

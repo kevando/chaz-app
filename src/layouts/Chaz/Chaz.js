@@ -3,7 +3,7 @@ import { View, Text, LayoutAnimation } from 'react-native'
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
-import Toast from 'react-native-root-toast';
+// import Toast from 'react-native-root-toast';
 
 import Dashboard from '../../routes/Dashboard';
 import InputTitle from '../../routes/InputTitle';
@@ -24,45 +24,45 @@ class Chaz extends Component {
   constructor(props) {
     super(props)
     this.state = { visibleToasts: 0, isReady: false, }
-    this._renderToast = this._renderToast.bind(this)
-    this._shouldToastDisplay = this._shouldToastDisplay.bind(this)
+    // this._renderToast = this._renderToast.bind(this)
+    // this._shouldToastDisplay = this._shouldToastDisplay.bind(this)
   }
   componentWillMount() {
     this.props.initializeApp() // redux
   }
 
   componentWillReceiveProps(nextProps) {
-    this._shouldToastDisplay(nextProps)
+    // this._shouldToastDisplay(nextProps)
   }
 
   componentWillUpdate() {
-    LayoutAnimation.linear(); // set the fade
+    // LayoutAnimation.linear(); // set the fade
   }
 
-  _shouldToastDisplay(nextProps) {
-    const { status, error } = this.props.app
-    if(nextProps.app.status != status)
-      this._renderToast(nextProps.app.status,'green')
+  // _shouldToastDisplay(nextProps) {
+  //   const { status, error } = this.props.app
+  //   if(nextProps.app.status != status)
+  //     this._renderToast(nextProps.app.status,'green')
+  //
+  //   if(nextProps.app.error != error)
+  //     this._renderToast(nextProps.app.error.message,'red')
+  // }
 
-    if(nextProps.app.error != error)
-      this._renderToast(nextProps.app.error.message,'red')
-  }
-
-  _renderToast(message, color) {
-
-    const OFFSET = this.state.visibleToasts * 60
-    this.setState({visibleToasts: ++this.state.visibleToasts})
-
-    let toast = Toast.show(message, {
-        // duration: 14000,
-        duration: 2000,//Toast.durations.SHORT,
-        position: Toast.positions.TOP + OFFSET,
-        backgroundColor: color,
-        onHidden: () => {
-            this.setState({visibleToasts: --this.state.visibleToasts})
-        }
-    });
-  }
+  // _renderToast(message, color) {
+  //
+  //   const OFFSET = this.state.visibleToasts * 60
+  //   this.setState({visibleToasts: ++this.state.visibleToasts})
+  //
+  //   let toast = Toast.show(message, {
+  //       // duration: 14000,
+  //       duration: 2000,//Toast.durations.SHORT,
+  //       position: Toast.positions.TOP + OFFSET,
+  //       backgroundColor: color,
+  //       onHidden: () => {
+  //           this.setState({visibleToasts: --this.state.visibleToasts})
+  //       }
+  //   });
+  // }
 
   updateState = (state) => {
     this.setState(state)
@@ -74,8 +74,12 @@ class Chaz extends Component {
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
     const { isReady } = this.state
 
-    if (!isReady || !isAuthenticated)
-      return <Loading updateState={this.updateState} />;
+    // Animate beginning
+    // if (!isReady || !isAuthenticated)
+      // return <Loading updateState={this.updateState} />;
+
+    if (!isAuthenticated)
+      return null
 
     return (
 

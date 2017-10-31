@@ -5,7 +5,7 @@ import { colors, text, width, height } from '../../config/styles';
 const MARGIN_HORIZONTAL = 10;
 const MARGIN_VERTICAL = 5;
 const CARD_WIDTH = (width - (MARGIN_HORIZONTAL*2));
-const ICON_WIDTH = CARD_WIDTH / 9;
+const ICON_WIDTH = CARD_WIDTH / 8;
 const DATE_WIDTH = CARD_WIDTH / 8;
 const ARROW_WIDTH = 25;
 const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - ARROW_WIDTH - 44;
@@ -13,14 +13,15 @@ const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - ARROW_WIDTH - 44;
 export default styles = StyleSheet.create({
 
   container: {
-    marginHorizontal: MARGIN_HORIZONTAL,
+    marginHorizontal: 0,
     marginVertical: MARGIN_VERTICAL,
     borderWidth: 1,
     borderColor: colors.cardBorder,
     backgroundColor: colors.white,
+    // borderRadius: 10,
     // paddingVertical: 10,
     // paddingLeft: 20,
-    flex: 1,
+    // flex: 1,
     // backgroundColor: 'orange',
     justifyContent: 'flex-start',
 
@@ -46,7 +47,7 @@ export default styles = StyleSheet.create({
   headerText: {
     ...text,
     fontSize: 12,
-    color: 'black',
+    color: 'grey',
   },
 
 
@@ -103,7 +104,7 @@ export default styles = StyleSheet.create({
 
   recText: {
     ...text,
-    fontSize: 19,
+    fontSize: 15,
     fontWeight: '400',
     color: colors.black,
   },

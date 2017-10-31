@@ -71,19 +71,15 @@ render() {
     <TouchableOpacity onPress={this._onCardPress.bind(this)} activeOpacity={0.9}>
         <View style={[styles.container]}>
 
-
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>
-              <Text style={styles.bold}>{rec.friend ? rec.friend.name : 'Me?'}</Text>
-               &nbsp;Recommended
-            </Text>
-          </View>
-
           <View style={styles.bodyContainer}>
            <View style={styles.iconContainer}>
-            <CategoryIcon category={rec.category} size={25} color="grey" />
+            <CategoryIcon category={rec.category} size={30} color="grey" />
           </View>
           <View style={styles.textContainer}>
+          <Text style={styles.headerText}>
+            <Text style={styles.bold}>{rec.friend ? rec.friend.name : 'Me?'}</Text>
+             &nbsp;Recommended
+          </Text>
             <View style={styles.recContainer}>
               <Text style={styles.recText}>{rec.title}</Text>
             </View>
@@ -127,24 +123,30 @@ render() {
   // For some reason this reloads without data
   if(!friend) { return null }
 
+
   return (
-    <View>
-        <View style={[styles.container]}>
+    <View style={[styles.container]}>
 
-          <View style={styles.iconContainer}>
-            <CategoryIcon category={rec.category} size={25} color="grey" />
-          </View>
-
-        <View style={styles.textContainer}>
-          <View style={styles.recContainer}>
-            <Text style={styles.recText}>{rec.title}</Text>
-          </View>
-          <View style={styles.friendContainer}>
-            <Text style={styles.friendText}>Recommended by:<Text style={styles.bold}>{friend.name}</Text></Text>
-          </View>
+      <View style={styles.bodyContainer}>
+       <View style={styles.iconContainer}>
+        <CategoryIcon category={rec.category} size={30} color="grey" />
+      </View>
+      <View style={styles.textContainer}>
+      <Text style={styles.headerText}>
+        <Text style={styles.bold}>{friend ? friend.name : 'Me?'}</Text>
+         &nbsp;Recommended
+      </Text>
+        <View style={styles.recContainer}>
+          <Text style={styles.recText}>{rec.title}</Text>
         </View>
 
       </View>
+
+      </View>
+
+
+
+
 
     </View>
   );
@@ -157,33 +159,42 @@ export class PreviewCard extends Component {
 
 
 render() {
-  // console.log('conf',this.props)
-  // const { rec, friend } = this.props;
-
-  // For some reason this reloads without data
-  // if(!friend) { return null }
-
   return (
-    <View>
-        <View style={[styles.container,styles.backgroundShadow]} >
 
-          <View style={styles.iconContainer}>
+
+        <View style={[styles.container]}>
+
+
+          <View style={styles.headerContainer}>
+            <Text style={[styles.headerText,{color: 'white'}]}>
+              <Text style={styles.bold}>Dad</Text>
+               &nbsp;Recommended
+            </Text>
+          </View>
+
+          <View style={[styles.bodyContainer,{paddingHorizontal:10}]}>
+           <View style={[styles.iconContainer]}>
             <CategoryIcon category={{icon:'music'}} size={25} color={"blue"}/>
           </View>
+          <View style={styles.textContainer}>
+            <View style={styles.recContainer}>
+              <Text style={styles.recText}>Pinkfloyd dark side of the moon</Text>
+            </View>
 
-        <View style={styles.textContainer}>
-          <View style={styles.recContainer}>
-            <Text style={styles.recText}>Green Day</Text>
           </View>
-          <View style={styles.friendContainer}>
-            <Text style={styles.friendText}>Recommended by:<Text style={styles.bold}>Dad</Text></Text>
+
           </View>
-        </View>
+
+
+
+
 
       </View>
 
-    </View>
+
   );
+
+
 }
 
 

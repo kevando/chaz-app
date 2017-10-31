@@ -41,8 +41,8 @@ export const colors = {
   // attempting new card UI
   // cardHeader:    'rgba(138,105,198,0.6)',
   // cardHeader: '#285A99',
-  cardHeader: '#D6D1E3',
-  cardBorder:    '#DDDCDC',
+  cardHeader: '#285A99',
+  cardBorder:    '#94A2B4',
 
   yellowOld:       "#ffe46a",
 

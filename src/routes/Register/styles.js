@@ -8,8 +8,40 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 5,
-    backgroundColor: colors.backgroundGrey,
+    backgroundColor: colors.purple,
   },
+
+  contentContainer: {
+    flex: 1,
+    paddingTop: 5,
+    // backgroundColor: colors.green,
+  },
+  buttonContainer: {
+    margin: 0,
+    padding: 0,
+    // backgroundColor: colors.grey,
+  },
+
+  title: {
+    ...text,
+    color: colors.white,
+    fontSize: 26,
+    fontWeight: '400',
+    textAlign: 'center',
+    marginBottom: 20,
+    marginTop: 10,
+  },
+
+  text: {
+    ...text,
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '400',
+    textAlign: 'center',
+    marginHorizontal: 20,
+  },
+
+
   status: {
     marginLeft: 10,
     color: 'grey',
@@ -18,15 +50,15 @@ export default styles = StyleSheet.create({
     marginLeft: 10,
     color: 'red',
   },
-  buttonContainer: {
-    margin: 10,
-    padding: 10,
-    // backgroundColor: colors.grey,
-  },
+
+
+
+
 
   inputContainer: {
     // backgroundColor: 'yellow',
-    margin: 10,
+    marginTop: 50,
+    marginHorizontal: 40,
     padding: 2,
   },
 

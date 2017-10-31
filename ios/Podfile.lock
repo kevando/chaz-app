@@ -95,6 +95,19 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - Protobuf (3.4.0)
+  - React/ART (0.48.4):
+    - React/Core
+  - React/Core (0.48.4):
+    - Yoga (= 0.48.4.React)
+  - React/DevSupport (0.48.4):
+    - React/Core
+    - React/RCTWebSocket
+  - React/RCTBlob (0.48.4):
+    - React/Core
+  - React/RCTWebSocket (0.48.4):
+    - React/Core
+    - React/RCTBlob
+  - Yoga (0.48.4.React)
 
 DEPENDENCIES:
   - Firebase/Auth
@@ -103,6 +116,15 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/Messaging
+  - React/ART (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - Yoga (from `../node_modules/react-native/ReactCommon/yoga/Yoga.podspec`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  Yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga/Yoga.podspec
 
 SPEC CHECKSUMS:
   BoringSSL: 19083b821ef3ae0f758fae15482e183003b1e265
@@ -124,7 +146,9 @@ SPEC CHECKSUMS:
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
+  React: 6d68659481a8a56e0f6b3dbecd984d5b9bb2d6c5
+  Yoga: ccefa1454b2e9825dce3b2df98088b7f0e3c2675
 
-PODFILE CHECKSUM: 4fe7370851ab32a0a3282745d4351663a8dfa122
+PODFILE CHECKSUM: d63e207b9a950c2033adf27afdfa7d18e029d471
 
 COCOAPODS: 1.3.1

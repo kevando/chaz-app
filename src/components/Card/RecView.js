@@ -23,7 +23,7 @@ render() {
   return (
     <View>
       <TouchableOpacity onPress={onEditPress} activeOpacity={0.9}>
-        <View style={[styles.container]}>
+        <View style={[styles.container,{padding: 5}]}>
 
         <View style={styles.textContainer}>
           <View style={styles.recContainer}>
@@ -73,7 +73,7 @@ class FriendCard extends Component {
     } else { // not me
       return (
         <TouchableOpacity onPress={()=>Actions.push('FriendView',{friendObject: friend})}>
-        <View style={[styles.container]}>
+        <View style={[styles.container,{flexDirection: 'row',paddingVertical: 10,}]}>
 
           <View style={styles.iconContainer}>
             <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={25} />
@@ -135,7 +135,7 @@ class CategoryCard extends Component {
   render() {
     const { rec } = this.props;
     return (
-      <View style={[styles.container]}>
+      <View style={[styles.container,{flexDirection: 'row',paddingVertical: 10,}]}>
         <View style={styles.iconContainer}>
           <CategoryIcon category={rec.category} size={20}/>
         </View>
@@ -227,7 +227,7 @@ export class ReminderCard extends Component {
     if(app.notificationPermission != 'authorized') { return null }
 
     return (
-      <View style={[styles.container]}>
+      <View style={[styles.container,{flexDirection: 'row',paddingVertical: 10,}]}>
         <View style={styles.iconContainer}>
           <Icon name="watch" size={20} color={colors.orange}/>
         </View>

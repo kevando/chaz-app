@@ -18,7 +18,7 @@ render() {
   const { friend } = this.props;
   return (
     <View>
-        <View style={[styles.container,{marginHorizontal:0,marginVertical: 0,paddingVertical: 20}]}>
+        <View style={[styles.container,{marginHorizontal:0,marginVertical: 0, flexDirection: 'row',paddingVertical: 20}]}>
         <View style={styles.iconContainer}>
                   <Icon name='user' color={friend.uid ? colors.orange : colors.grey} size={30} />
                 </View>

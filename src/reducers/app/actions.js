@@ -31,7 +31,7 @@ import { setUserToken } from '../user/actions'
 
 export function initializeApp() {
   return (dispatch, getState) => {
-    console.log('INIT',firebase.auth())
+    // console.log('INIT',firebase.auth())
     // We may want to do certain things if the app is opened from a message
     // currently getInitialNotification isnt working
     dispatch(handleNotifications())
@@ -40,16 +40,16 @@ export function initializeApp() {
     // This will fire every time the app loads no matter what
     firebase.auth().onAuthStateChanged(function(user) {
       // console.log('onAuthStateChanged', user)
-      console.warn('onAuthStateChanged ',user.uid)
+      // console.warn('onAuthStateChanged ',user.uid)
       // Add user data to redux (registered or anon)
       // Fire off event listeners
       if (user) {
 
 
         dispatch({ type: USER_SIGNED_IN, user })
-        console.warn(user.isAnonymous)
+        // console.warn(user.isAnonymous)
 
-        console.warn(user.displayName)
+        // console.warn(user.displayName)
 
         // Start some Firestore data listeners to handle ALL data
         // Note: this may become an issue if user is without internet
@@ -141,44 +141,21 @@ function setToken() {
 
 
 
+
 // --------------------------------
 //    VERIFY PHONE NUMBER
 // --------------------------------
 
 export function verifyPhone(phoneNumber) {
+// console.warn('callb')
   return (dispatch, getState) => {
     // Following code is from https://github.com/invertase/react-native-firebase/issues/119
 
-    const formatedNumber = `+1${phoneNumber}`
 
-    firebase.auth()
-  .verifyPhoneNumber(formatedNumber)
-  .then((phoneAuthSnapshot) => {
-    console.log(phoneAuthSnapshot);
-    console.warn('verifyPhoneNumber.then()')
-    // wait / get users code input then:
-    // const { verificationId } = phoneAuthSnapshot;
-    // const { codeInput } = this.state; // tied to your input box, for example
-    // const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, codeInput);
+    // TMP
+    // setTimeout( () => {successCallback()},900)
+    // return
 
-    // Do something with your new credential, e.g.:
-    // firebase.auth().signInWithCredential(credential);
-    // firebase.auth().linkWithCredential(credential);
-  })
-  .catch((error) => {
-    console.log(error);
-    console.log(error.verificationId);
-  });
-  }
-}
-
-
-// --------------------------------
-//    GET AUTH INVITE CODE
-// --------------------------------
-
-export function signInLink(phoneNumber) {
-  return dispatch => {
     dispatch({type: SIGN_IN_ATTEMPT })
 
     const formatedNumber = `+1${phoneNumber}`
@@ -191,12 +168,40 @@ export function signInLink(phoneNumber) {
         dispatch({type: SIGN_IN_CONFIRM_RESULT, confirmResult: phoneAuthSnapshot, verificationId, formatedNumber })
         dispatch({type: SET_APP_STATUS, status: 'code sent!'})
         dispatch({type: SET_USER_PHONE, phoneNumber: phoneNumber})
+
       })
       .catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
 
 
+
+
   }
 }
+
+// --------------------------------
+//    GET AUTH INVITE CODE
+// --------------------------------
+//
+// export function signInLink(phoneNumber) {
+//   return dispatch => {
+//     dispatch({type: SIGN_IN_ATTEMPT })
+//
+//     const formatedNumber = `+1${phoneNumber}`
+//
+//     firebase.auth().verifyPhoneNumber(formatedNumber)
+//       .then(phoneAuthSnapshot => {
+//
+//         const { verificationId } = phoneAuthSnapshot;
+//
+//         dispatch({type: SIGN_IN_CONFIRM_RESULT, confirmResult: phoneAuthSnapshot, verificationId, formatedNumber })
+//         dispatch({type: SET_APP_STATUS, status: 'code sent!'})
+//         dispatch({type: SET_USER_PHONE, phoneNumber: phoneNumber})
+//       })
+//       .catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
+//
+//
+//   }
+// }
 
 
 
@@ -205,7 +210,7 @@ export function signInLink(phoneNumber) {
 // @todo need to change this to actually handle users coming back and simply logging in
 // --------------------------------
 
-export function confirmCode(codeInput) {
+export function confirmCode(codeInput, successCallback) {
   return (dispatch, getState) => {
     // const phoneNumber = getState().user.phoneNumber
     // const token = getState().app.token
@@ -246,6 +251,7 @@ export function confirmCode(codeInput) {
       // User should already exist with their fcm token
       dispatch( createUser() )
 
+      successCallback() // for UI
     }, function(error) {
       // cb({error:'Error: '+error})
       console.log("Error upgrading anonymous account", error);

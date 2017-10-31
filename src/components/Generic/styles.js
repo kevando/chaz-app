@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
   },
 
 
-  button: {
+  buttonText: {
     ...text,
     paddingVertical: 12,
     paddingHorizontal: 20,
@@ -24,5 +24,5 @@ export default styles = StyleSheet.create({
     fontWeight: '500',
     borderWidth: 1,
   },
-  
+
 });

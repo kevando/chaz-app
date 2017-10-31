@@ -1,9 +1,111 @@
 import React from 'react';
 import { View, Text, TextInput, Image } from 'react-native';
 import _ from 'lodash';
-import { Button, Label } from '../../components/Generic';
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+import { FancyButton, Button, Label } from '../../components/Generic';
 import styles from './styles';
 import { colors } from '../../config/styles'
+import * as Animatable from 'react-native-animatable';
+import { Actions } from 'react-native-router-flux';
+//
+
+
+export const PhoneInput = (props) => {
+
+  const { getCode, phoneNumber, fadeOut, updateState, updateInput, isPhoneValid, verifyingPhone, phoneRef } = props
+
+
+  // if(fadeOut) {
+  //   this._phoneRef.bounce(800)//.then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
+  // }
+  return (
+
+    <View style={styles.container}>
+      <View style={styles.contentContainer}>
+
+      <Text style={styles.title}>Activate chaz</Text>
+      <Text style={styles.text}>Enjoy all the benefits of an activated chaz account by verifying your phone number</Text>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+
+          keyboardType='phone-pad'
+          multiline={false}
+          style={styles.input}
+          placeholderTextColor="#aaa"
+          onChangeText={value => updateInput({ phoneNumber: value })}
+          placeholder={'Phone number'}
+          value={phoneNumber}
+        />
+      </View>
+    </View>
+
+      { isPhoneValid &&
+        <FancyButton loading={verifyingPhone} text={verifyingPhone ? 'Getting Code' : "Get Code"} onPress={getCode} />}
+    <KeyboardSpacer />
+    </View>
+  )
+}
+
+export const CodeInput = (props) => {
+
+  const { confirmCode, verificationCode, updateInput, isCodeValid, verifyingCode } = props
+
+
+  return (
+
+    <View style={styles.container}>
+      <View style={styles.contentContainer}>
+
+      <Text style={styles.title}>Enter Code:</Text>
+      <Text style={styles.text}></Text>
+      <Text style={styles.text}></Text>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+
+          keyboardType='phone-pad'
+          multiline={false}
+          style={styles.input}
+          placeholderTextColor="#aaa"
+          onChangeText={value => updateInput({ verificationCode: value })}
+          placeholder={'Code'}
+          value={verificationCode}
+        />
+      </View>
+    </View>
+
+      { isCodeValid &&
+        <FancyButton loading={verifyingCode} text={verifyingCode ? 'Confirming' : "Confirm Code"} onPress={confirmCode} />}
+    <KeyboardSpacer />
+    </View>
+  )
+}
+
+export const Confirmation = (props) => {
+
+  const { getCode } = props
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.contentContainer}>
+        <Text style={styles.title}>Activated!</Text>
+        <Animatable.View animation="bounceIn" delay={400} style={{alignItems: 'center'}}>
+          <AwesomeIcon name="heart" size={160} color={colors.yellow} />
+        </Animatable.View>
+
+        </View>
+
+        <FancyButton text="Back to Dashboard" onPress={()=> Actions.reset('MainStack')} />
+    </View>
+  )
+}
+
+
+
+
+// ------------------------------------
 
 
 const Register = (props) => {

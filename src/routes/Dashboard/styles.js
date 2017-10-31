@@ -9,6 +9,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     paddingTop: 5,
     backgroundColor: colors.backgroundGrey,
+
   },
 
   titleContainer: {
@@ -24,6 +25,9 @@ export default styles = StyleSheet.create({
 // shadowRadius: 10,
 // shadowOpacity: 1,
   },
+  scrollView: {
+    paddingHorizontal: 20,
+  },
   recommendationsTitle: {
     ...text,
     color: '#444',
@@ -33,7 +37,7 @@ export default styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing:0.5,
 
-    paddingLeft: 12,
+    // paddingLeft: 12,
     marginTop: 20,
     marginBottom: 5,
     // textShadowColor: 'red',

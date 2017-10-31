@@ -10,6 +10,9 @@ export const Categories = {
   "tv" : {icon: "tv", title: "TV Series"},
   "book" : {icon: "book", title: "Book"},
   "music" : {icon: "music", title: "Music"},
+  "podcast" : {icon: "mic", title: "Podcast"},
+  "documentary" : {icon: "video", title: "Documentary"},
+  "internet" : {icon: "link", title: "Internet"},
   "other" : {icon: "zap", title: "Other"},
 }
 
