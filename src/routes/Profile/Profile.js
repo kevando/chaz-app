@@ -29,7 +29,7 @@ const Profile = (props) => {
     <View style={styles.container}>
 
 
-      <Text style={styles.title} onPress={onLogoutPress}>@{user.username}</Text>
+      <Text style={styles.title} onPress={onLogoutPress}>Your Profile</Text>
 
 
       <Label>Your Friends</Label>
@@ -42,7 +42,7 @@ const Profile = (props) => {
       {
           givenRecs.length > 0 &&
             <GivenRecs givenRecs={givenRecs} />
-          
+
       }
 
 

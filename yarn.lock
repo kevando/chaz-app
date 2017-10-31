@@ -3692,6 +3692,13 @@ react-native-firebase@^3.0.4:
     bows "^1.6.0"
     prop-types "^15.6.0"
 
+"react-native-firebase@https://github.com/invertase/react-native-firebase#v3.0.x":
+  version "3.0.6"
+  resolved "https://github.com/invertase/react-native-firebase#36c936779b9badf72a0a3d789efafd2dcdb5ba36"
+  dependencies:
+    bows "^1.6.0"
+    prop-types "^15.6.0"
+
 react-native-keyboard-aware-scroll-view@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.2.0.tgz#d9a94b358cbf92693750b16b4364d64d70060f20"

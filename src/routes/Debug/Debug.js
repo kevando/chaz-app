@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-// import { Container, Content, Left, Body, Right, Radio, Switch, List, ListItem, Text, Icon, Button, Badge } from 'native-base';
+
 
 
 import styles from './styles';
@@ -15,7 +15,7 @@ const Debug = (props) => {
   //   <Container>
   //     <Content>
   //       <List>
-  // 
+  //
   //         <ListItem itemDivider style={styles.headerr}>
   //           <Text>Application Info</Text>
   //         </ListItem>

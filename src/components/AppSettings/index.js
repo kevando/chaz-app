@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Alert } from 'react-native';
 const Permissions = require('react-native-permissions');
-// import { Button } from 'native-base';
 
 import styles from './styles';
 

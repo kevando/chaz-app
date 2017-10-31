@@ -23,11 +23,11 @@ target 'Chaz' do
   # pod 'Firebase/Storage'
 
   # Adding 10/30/2017 for progress animations
-  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga/Yoga.podspec'
-  pod 'React', path: '../node_modules/react-native', subspecs: [
-    'ART',
-    'DevSupport'
-  ]
+  # pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga/Yoga.podspec'
+  # pod 'React', path: '../node_modules/react-native', subspecs: [
+  #   'ART',
+  #   'DevSupport'
+  # ]
 
 
 end

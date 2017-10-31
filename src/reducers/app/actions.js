@@ -40,10 +40,12 @@ export function initializeApp() {
     // This will fire every time the app loads no matter what
     firebase.auth().onAuthStateChanged(function(user) {
       // console.log('onAuthStateChanged', user)
-      // console.warn('onAuthStateChanged ',user.uid)
+
       // Add user data to redux (registered or anon)
       // Fire off event listeners
       if (user) {
+        // console.warn('onAuthStateChanged ',user)
+        // console.warn('onAuthStateChanged ',user)
 
 
         dispatch({ type: USER_SIGNED_IN, user })
@@ -151,11 +153,6 @@ export function verifyPhone(phoneNumber) {
   return (dispatch, getState) => {
     // Following code is from https://github.com/invertase/react-native-firebase/issues/119
 
-
-    // TMP
-    // setTimeout( () => {successCallback()},900)
-    // return
-
     dispatch({type: SIGN_IN_ATTEMPT })
 
     const formatedNumber = `+1${phoneNumber}`
@@ -210,7 +207,7 @@ export function verifyPhone(phoneNumber) {
 // @todo need to change this to actually handle users coming back and simply logging in
 // --------------------------------
 
-export function confirmCode(codeInput, successCallback) {
+export function confirmCode(codeInput) {
   return (dispatch, getState) => {
     // const phoneNumber = getState().user.phoneNumber
     // const token = getState().app.token
@@ -251,7 +248,6 @@ export function confirmCode(codeInput, successCallback) {
       // User should already exist with their fcm token
       dispatch( createUser() )
 
-      successCallback() // for UI
     }, function(error) {
       // cb({error:'Error: '+error})
       console.log("Error upgrading anonymous account", error);
@@ -284,6 +280,7 @@ export function signOut() {
       console.log('signined out!')
       dispatch({type: SET_APP_STATUS, status: 'User successfully signed out' })
       dispatch({type: USER_SIGNED_OUT})
+      dispatch({type: 'PURGE_DATA'}) // resets state to undefined
 
       // Doesnt feel right to navigate from redux but it works well
       Actions.push('LoggedOut')
@@ -354,11 +351,12 @@ function createUser() {
 // --------------------------------------------------------------
 // Temp for dev
 export function loginAsTest() {
-
+  console.log('loginAsTest')
   const email = 'test@kevaid.com'
   const password = '12345678'
 
   return dispatch => {
+    console.log('loginAsTest d')
 
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.

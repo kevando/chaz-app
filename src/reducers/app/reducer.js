@@ -54,7 +54,7 @@ export default function app(app = initialState, action = {}) {
       return {
         ...app,
         // uid: action.user.uid,
-        isAnonymous: action.user.isAnonymous,
+        isAnonymous: true,//action.user.isAnonymous,
         // email: action.user.email,
         // username: action.user.username,
         // displayName: action.user.displayName

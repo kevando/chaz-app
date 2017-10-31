@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { View, Text, TextInput, StatusBar, Keyboard } from 'react-native';
-// import { InputGroup, Input, Icon } from 'native-base';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Actions } from 'react-native-router-flux';
 import styles from './styles';

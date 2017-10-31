@@ -13,17 +13,12 @@ class RegisterContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // phoneInput: '',
-      // error: '',
-      // message: '',
+
       verificationCode: '',
       phoneNumber: '',
-      // confirmResult: null,
-
-
 
       isPhoneVerified: false,
-      isPhoneValid: false,
+      isPhoneValid: true,
       isCodeConfirmed: false,
       isCodeValid: false,
 
@@ -73,6 +68,8 @@ class RegisterContainer extends Component {
 
 
   _getCode = () => {
+    // this.props.loginAsTest(); return; // FOR TESTING
+
     const { phoneNumber } = this.state
     const { verifyPhone } = this.props
     // Set loading state

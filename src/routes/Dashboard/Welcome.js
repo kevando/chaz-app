@@ -107,7 +107,7 @@ class Welcome extends Component  {
   render() {
 
     const swiperProps = {
-      index: 4,
+      // index: 4,
       style: styles.wrapper,
       // dot: (<View style={{backgroundColor:'rgba(255,255,255,.25)', width: 20, height: 20,borderRadius: 25, marginLeft: 10, marginRight: 10, marginTop: 3, marginBottom: 50,}} />),
       // activeDot: (<View style={{backgroundColor: 'rgba(255,255,255,.6)', width: 25, height: 25, borderRadius: 25, marginLeft: 10, marginRight: 10, marginTop: 3, marginBottom: 50,}} />),

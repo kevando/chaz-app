@@ -21,7 +21,8 @@ export default function user(user = initialState, action = {}) {
       // TMP!!
       // right now isAnon not working quite right
       // hardcoding displayname on auth link
-      var isAnon = action.user.displayName === null ? true : false
+
+      var isAnon = action.user.providerData.length ? false : true
 
       return {
         ...user,
@@ -40,7 +41,7 @@ export default function user(user = initialState, action = {}) {
       // TMP!!
       // right now isAnon not working quite right
       // hardcoding displayname on auth link
-      var isAnon = action.user.displayName === null ? true : false
+      var isAnon = action.user.providerData.length ? false : true
       return {
         ...user,
         // isAnonymous: action.user.isAnonymous, // tmp
