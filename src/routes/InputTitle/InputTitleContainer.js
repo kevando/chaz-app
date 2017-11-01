@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import { Button } from '../../components/Generic';
 import * as Animatable from 'react-native-animatable';
-
-import InputTitle from './InputTitle';
-
+import NewRec from './NewRec';
 import { Actions } from 'react-native-router-flux';
 
 class InputTitleContainer extends Component {
@@ -13,9 +11,13 @@ class InputTitleContainer extends Component {
     super(props);
     this.state = {
       title: '',
+      friendName: '',
       buttonText: 'Next',
       placeholderText: 'Type recommendation here',
       nextRoute: 'InputFriend',
+
+      updateState: (state) => this.setState(state),
+
     }
   }
   componentDidMount() {
@@ -41,6 +43,7 @@ class InputTitleContainer extends Component {
   }
 
   onNextPress() {
+
     const { setTitle, rec, updateRecommendation } = this.props;
 
     if(rec) {// if Editing..
@@ -49,23 +52,36 @@ class InputTitleContainer extends Component {
       Actions.pop()
     } else {
       setTitle(this.state.title)
-      Actions.push(this.state.nextRoute)
+      // Actions.push(this.state.nextRoute)
     }
   }
+  _setTitle = () => {
+    this.props.setTitle(this.state.title)
+  }
+
+  _setFriend = () => {
+    // TMP saving the rec for now
+
+    this.props.addRecommendationDev(this.state.friendName); // Redux
+    Actions.pop()
+  }
+
+
 
   render() {
-
+    // console.log(this.props)
 
     return (
-      <InputTitle
-        title={this.state.title}
-        placeholderText={this.state.placeholderText}
-        showKeyboard={this.props.showKeyboard}
-        updateState={this.setState.bind(this)}
+      <NewRec
+        {...this.state}
         renderButton={this.renderButton.bind(this)}
+        unfinished={this.props.unfinished}
+        setTitle={this._setTitle}
+        setFriend={this._setFriend}
       />
     );
   }
+
 
 }
 

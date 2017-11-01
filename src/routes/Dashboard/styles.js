@@ -8,7 +8,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 5,
-    backgroundColor: colors.backgroundGrey,
+    backgroundColor: colors.blueBG,
 
   },
 
@@ -30,14 +30,11 @@ export default styles = StyleSheet.create({
   },
   recommendationsTitle: {
     ...text,
-    color: '#444',
-    fontSize: 30,
-    // paddingTop:50,
-    // paddingBottom: 0,
+    color: 'white',
+    fontSize: 33,
     fontWeight: '700',
     letterSpacing:0.5,
 
-    // paddingLeft: 12,
     marginTop: 20,
     marginBottom: 5,
     // textShadowColor: 'red',

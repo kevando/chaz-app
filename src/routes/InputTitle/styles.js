@@ -1,10 +1,27 @@
 import { StyleSheet } from 'react-native';
-import { colors, text } from '../../config/styles';
+import { colors, text, width } from '../../config/styles';
 
 export default styles = StyleSheet.create({
   container: {
+    // borderWidth: 4,
+    // borderColor: 'green',
+    position: 'absolute',
+    top: 60,
+    bottom: 0,
+    left: 0,
+    width: width,
+    right: 0,
+    // backgroundColor: 'blue',
+    justifyContent: 'flex-start',
+  },
+  TOP: {
     flex: 1,
-    backgroundColor: colors.white,
+  },
+  CARD: {
+    // backgroundColor:'yellow',
+    // border: ''
+    // flex: 1,
+    height: 350,
   },
 
   input: {

@@ -16,7 +16,7 @@ class DashboardContainer extends Component {
   }
   componentDidMount() {
     // TMP!!
-    // Actions.push('Register')
+    Actions.push('NewRecLightbox')
     // Actions.push('Profile')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friendObject: this.props.friends[2]})
@@ -29,15 +29,15 @@ class DashboardContainer extends Component {
   _onNewRecPress() {
     const { initNewRec, user } = this.props
     initNewRec({to: user.uid})
-    Actions.push('InputStack')
+    Actions.push('NewRecLightbox')
   }
 
   render() {
-    // console.log('Dash',this.props)
+    console.log('Dash',this.props)
     const { showOnboarding } = this.props;
 
-    if(showOnboarding) {
-    // if(false) {
+    // if(showOnboarding) {
+    if(false) {
       return (
         <Welcome
           {...this.props}

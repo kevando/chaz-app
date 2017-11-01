@@ -13,88 +13,63 @@ const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - ARROW_WIDTH - 44;
 export default styles = StyleSheet.create({
 
   container: {
-    marginHorizontal: 0,
-    marginVertical: MARGIN_VERTICAL,
-    borderWidth: 1,
-    borderColor: colors.cardBorder,
-    backgroundColor: colors.white,
-    // borderRadius: 10,
-    // paddingVertical: 10,
-    // paddingLeft: 20,
-    // flex: 1,
-    // backgroundColor: 'orange',
-    justifyContent: 'flex-start',
-
-  },
-
-  headerContainer: {
-    backgroundColor: colors.cardHeader,
-    // flex: 1,
-    paddingLeft: 10,
-    height: 25,
-    // alignItems: 'center', // h
-    justifyContent: 'center', // v
-  },
-  bodyContainer: {
+    borderWidth: 0,
+    borderColor: colors.borderColor,
+    borderRadius: 10,
+    padding: 15,
+    margin: 5,
     backgroundColor: 'white',
-    // flex: 1,
-    height: 70,
-    flexDirection: 'row',
-    alignItems: 'center', // v
-    justifyContent: 'center', // h (sorta)
   },
-
-  headerText: {
-    ...text,
-    fontSize: 12,
-    color: 'grey',
-  },
-
-
-
-  iconContainer: {
-    width: ICON_WIDTH,
+  headerContainer: {
     // backgroundColor: 'yellow',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    // paddingTop: 8,
+    flexDirection: 'row',
+    height: 25,
+    justifyContent: 'center', // v
+    marginBottom: 5,
   },
-  textContainer: {
-    width: TEXT_WIDTH,// might need to change this
-    // backgroundColor: 'blue',
-  },
-
-  arrowContainer: {
-    width: ARROW_WIDTH,// might need to change this
-    // backgroundColor: 'blue',
-  },
-
-  deleteContainer: {
-    // backgroundColor:'yellow',
-    width: ARROW_WIDTH,
-    position: 'absolute',
-    right: 0,
-    top: 3,
-  },
-
-  recContainer: {
-    // backgroundColor: 'yellow'
-  },
-
   friendContainer: {
-    // backgroundColor: 'red'
+    // backgroundColor: 'grey',
+    flex: 6
+  },
+  iconContainer: {
+    flex: 1,
+    // backgroundColor: 'green',
   },
 
-  dateContainer: {
-    width: DATE_WIDTH,
-    // backgroundColor: 'blue',
-    justifyContent: 'center',
-    alignItems: 'center',
+  bodyContainer: {
+    // backgroundColor: 'green',
+    flexDirection: 'row',
+    alignItems: 'flex-start', // v
+    // flex: 1,
   },
-  dateText: {
-    fontSize: 10,
-    color: '#aaa',
 
+  inputTitle: {
+    ...text,
+    // flex:1,
+    // fontSize: 20,
+    // padding: 5,
+    // paddingLeft: 10,
+    // backgroundColor: 'grey',
+    // height: 250,
+    // flex: 1,
+    // maxHeight: 160,
+    height: 100
+  //
+  },
+  inputFriend: {
+    ...text,
+    // flex:1,
+    fontSize: 20,
+    // padding: 5,
+    // paddingLeft: 10,
+    color: colors.pink,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.borderColor,
+    // height: 250,
+    // flex: 1,
+    // maxHeight: 160,
+    // height: 100
+  //
   },
 
   icon: {
@@ -104,7 +79,7 @@ export default styles = StyleSheet.create({
 
   recText: {
     ...text,
-    fontSize: 15,
+    fontSize: 19,
     fontWeight: '400',
     color: colors.black,
   },

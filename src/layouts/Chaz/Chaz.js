@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { View, Text, LayoutAnimation } from 'react-native'
 import styles, { navigationBarStyle, titleStyle } from './styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
-import { Scene, Router, Actions, Modal, Stack, } from 'react-native-router-flux';
+import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-native-router-flux';
 // import Toast from 'react-native-root-toast';
 
 import Dashboard from '../../routes/Dashboard';
@@ -20,13 +20,15 @@ import Loading from '../../routes/Loading';
 
 const AppToasts = () => { return (<Text>dude</Text>)}
 
+
+
 class Chaz extends Component {
   constructor(props) {
     super(props)
     this.state = { visibleToasts: 0, isReady: false, }
   }
   componentWillMount() {
-    this.props.initializeApp() // redux
+    // this.props.initializeApp() // redux
   }
 
   componentWillReceiveProps(nextProps) {
@@ -69,6 +71,38 @@ class Chaz extends Component {
 
 
   render() {
+    const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
+    const { isReady } = this.state
+
+    // PROD Animate screen loading
+    // if (!isReady || !isAuthenticated)
+      // return <Loading updateState={this.updateState} />;
+
+    // DEV
+    // if (!isAuthenticated)
+    //   return null
+
+
+    return (
+
+      <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
+        <Overlay key="overlay">
+          <Modal key="root" hideNavBar={true}>
+            <Lightbox key="lightbox">
+              <Stack key="myStack"  >
+                <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} />
+                <Scene key='NewRecLightboxRight' component={InputTitle} title='' hideNavBar={false}/>
+              </Stack>
+              <Scene key='NewRecLightbox' component={InputTitle} title=''hideNavBar={true} hideNavBar={true} />
+
+              </Lightbox>
+              <Scene key='NewRecLightboxModal' component={InputTitle} title='' />
+            </Modal>
+          </Overlay>
+        </Router>
+    )
+  }
+  render_og() {
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
     const { isReady } = this.state
 

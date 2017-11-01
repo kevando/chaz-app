@@ -11,23 +11,17 @@ class InputTitle extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      collapseInput: false,
+      // collapseInput: false,
       // updateState: (state) => this.setState({state}),
     }
   }
-  componentDidMount() {
-    // if(Actions.currentScene == 'InputTitle')
-      // this._title.focus()
-  }
+
 
   saveTitle = () => {
-    var collapaseDuration = 2000
-    this.setState({collapaseInput: true})
 
-    setTimeout(()=> {
-      // this.setState({title: 'dude'})
-      // this.props.setTitle()
-    },collapaseDuration)
+    // not good cause it
+    this.refs.CARD.transitionTo({height:200},1200)
+    this.props.setTitle()
 
   }
 
@@ -36,16 +30,22 @@ class InputTitle extends Component {
     const { updateState, renderButton, placeholderText, unfinished, setTitle } = this.props;
 
     return (
-      <Animatable.View animation="bounceIn" duration={10} delay={0} style={styles.container}>
 
-        <Unfinished {...this.state} {...this.props} updateState={updateState} unfinished={unfinished} />
+      <View  style={styles.container}>
+        <View style={styles.TOP}>
+          <Animatable.View ref="CARD" style={styles.CARD}>
+            <Unfinished {...this.props} />
+          </Animatable.View>
+        </View>
 
+        {!unfinished.title && this.props.title !== '' && <Button text="Save Title" onPress={this.saveTitle} />}
 
-        {!unfinished.title && <Button text="save title" onPress={this.saveTitle} /> }
-        {unfinished.title && <Button text="save friend" onPress={Actions.pop} /> }
+        {unfinished.title && <Button text="save friend" onPress={this.props.setFriend} /> }
+
         <KeyboardSpacer />
+      </View>
 
-      </Animatable.View>
+
 
     )
   }

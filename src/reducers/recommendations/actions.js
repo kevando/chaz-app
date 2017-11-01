@@ -53,6 +53,16 @@ export function addRecommendation(unfinished) {
     });
   }
 }
+
+export function addRecommendationDev(friendName) {
+  return(dispatch,getState) => {
+
+    const unfinished = getState().recommendations.unfinished
+
+    dispatch({type: 'ADD_REC', rec: {...unfinished, friend: {name:friendName}}})
+
+  }
+}
 function addMessage(newRec,username) {
   firebase.firestore().collection("users").doc(newRec.to).get().then(function(user) {
     if (user.exists) {

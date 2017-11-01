@@ -20,7 +20,7 @@ export const Label = (props) => {
 export const Button = (props) => {
 
   // Defaults
-  const { text, onPress, color='white', bgcolor='blue' } = props;
+  const { text, onPress, color='white', bgcolor='green' } = props;
 
   const customStyles =
   {

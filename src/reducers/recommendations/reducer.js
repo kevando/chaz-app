@@ -15,11 +15,24 @@ import {
   INIT_REC,
 } from '../actionTypes';
 
+const Rec = {
+  id: '1',
+  title: 'pink floyd',
+  friend: {name: 'Blake', id:'2'},
+  category: 'music',
+}
+
+const UnfinishedRec = {
+  // id: '1',
+  title: 'pink floyd',
+  // friend: {name: 'Blake', id:'2'},
+  // category: 'music',
+}
 const initialState =
   {
-    unfinished: {},
+    unfinished: UnfinishedRec,
     list: [ ],
-    myRecs: [],
+    myRecs: [Rec],
     givenRecs: [],
     filter: 'all'
   };
@@ -29,7 +42,11 @@ export default function recs(recommendations = initialState, action = {}) {
   // console.log(recommendations)
   // console.log(recommendations.unfinished)
   switch (action.type) {
-
+    case 'ADD_REC':
+      return {
+        ...recommendations,
+        myRecs: recommendations.myRecs.concat([action.rec])
+      }
   // -------------------------------------------
   case INIT_REC:
     return {

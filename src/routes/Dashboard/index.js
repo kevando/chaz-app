@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
   const givenRecsWithFriends =  _.map(state.recommendations.givenRecs, rec => {return {...rec,friend: _.find(state.friends,friend => friend.id === rec.friendId) || {} } })
   return {
     // recommendations: _.map(state.recommendations.list, rec => {return {...rec,friend:_.find(state.friends,friend => friend.id === rec.friendId)} }),
-    myRecs: myRecsWithFriends,//_.filter(allRecs,rec=> rec.uid === state.user.uid),
+    myRecs: state.recommendations.myRecs, // TMP NEW UI!!! myRecsWithFriends,
     givenRecs: givenRecsWithFriends,
     // givenRecs: _.filter(allRecs,rec=> rec.friend.uid === state.user.uid),
     friends: state.friends,

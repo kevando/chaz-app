@@ -21,7 +21,7 @@ export const colors = {
   // chaz colors
   purple:       env=='development' ? "#8a69c6":'#8a69c6',
   blue:         "#3888EA",
-  green:        "#3A931F",
+  green:        "#51D429",
   red:          "#E83A3A",
   yellow:       "#FFC64F",
   orange:       "#FF8801",
@@ -46,6 +46,13 @@ export const colors = {
 
   yellowOld:       "#ffe46a",
 
+  blueBG: '#5C7FFC',
+  newBlue: '#3557E6',
+  pink: '#FF0AB1',
+
+
+  borderColor: '#CECECE',
+
 };
 
 export const hearts = {
@@ -61,10 +68,10 @@ export const hearts = {
 // Global Text Defaults
 
 export const text = {
-  fontSize: 20,
+  fontSize: 30,
 
-  fontFamily: 'Avenir Next',
+  fontFamily: 'System',
   color: colors.black,
   letterSpacing: 0.5,
-  fontWeight: '400'
+  fontWeight: '500'
 }
