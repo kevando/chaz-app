@@ -6,7 +6,8 @@ import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-na
 // import Toast from 'react-native-root-toast';
 
 import Dashboard from '../../routes/Dashboard';
-import InputTitle from '../../routes/InputTitle';
+import RecInput from '../../routes/RecInput';
+// import Walkthrough from '../../routes/Walkthrough';
 import InputFriend from '../../routes/InputFriend';
 import ConfirmRecommendation from '../../routes/ConfirmRecommendation';
 import { CloseButton, BackButton, ProfileButton } from '../../components/Nav';
@@ -90,13 +91,17 @@ class Chaz extends Component {
           <Modal key="root" hideNavBar={true}>
             <Lightbox key="lightbox">
               <Stack key="myStack"  >
-                <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} />
-                <Scene key='NewRecLightboxRight' component={InputTitle} title='' hideNavBar={false}/>
+                <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true}/>
+                <Scene key='RecView' component={RecView} title='' hideNavBar={false}/>
               </Stack>
-              <Scene key='NewRecLightbox' component={InputTitle} title=''hideNavBar={true} hideNavBar={true} />
+
+
+              <Scene key='NewRecLightbox' component={RecInput} title=''hideNavBar={true} hideNavBar={true} />
+
 
               </Lightbox>
-              <Scene key='NewRecLightboxModal' component={InputTitle} title='' />
+              <Scene key='NewRecLightboxModal' component={RecInput} title='' />
+
             </Modal>
           </Overlay>
         </Router>

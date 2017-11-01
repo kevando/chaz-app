@@ -10,50 +10,6 @@ import { CategoryIcon } from '../../components/Category/Icon';
 import * as Friend from '../../components/Generic/Friend';
 import * as Rec from '../../components/Generic/Rec'
 
-class RecCard extends Component {
-
-  _onCardPress() {
-    if(this.props.unfinished) return; // dont allow expand if rec isnt saved
-    Actions.push('RecView',{rec: this.props.rec})
-  }
-
-render() {
-  // console.log(this.props)
-  const { rec } = this.props;
-  return (
-    <View>
-      <TouchableOpacity onPress={this._onCardPress.bind(this)} activeOpacity={0.9}>
-        <View style={[styles.container]}>
-
-          <View style={styles.iconContainer}>
-            <CategoryIcon category={rec.category} size={25} color="grey" />
-          </View>
-
-          <View style={styles.textContainer}>
-            <View style={styles.recContainer}>
-              <Text style={styles.recText}>{rec.title}</Text>
-            </View>
-            <View style={styles.friendContainer}>
-              <Text style={styles.friendText}>Recommended by: {rec.friend ? rec.friend.name : 'Me'}</Text>
-            </View>
-          </View>
-
-          <View style={styles.arrowContainer}>
-            <Icon name="chevron-right" size={30} color="grey" />
-          </View>
-
-      </View>
-    </TouchableOpacity>
-    <View>
-
-    </View>
-
-    </View>
-  );
-}
-
-
-};
 
 // ---------------------------------------
 // Abstract to a super generic card
@@ -66,7 +22,7 @@ render() {
   const { rec } = this.props;
   return (
 
-        <View style={[styles.container]}>
+        <View style={[styles.container,styles.waterBackdrop]}>
 
           <View style={styles.headerContainer}>
             <View style={styles.friendContainer}>
@@ -212,5 +168,3 @@ render() {
 
 
 };
-
-export default RecCard;

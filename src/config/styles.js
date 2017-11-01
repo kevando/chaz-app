@@ -10,6 +10,7 @@ const env = process.env.NODE_ENV;
 export const width = window.width;
 export const height = window.height;
 
+export const MARGIN_LEFT = 20
 
 // ------------------------------
 // Colors

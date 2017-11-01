@@ -15,6 +15,7 @@ class InputTitleContainer extends Component {
       buttonText: 'Next',
       placeholderText: 'Type recommendation here',
       nextRoute: 'InputFriend',
+      inputHeight: 0,
 
       updateState: (state) => this.setState(state),
 
@@ -30,17 +31,6 @@ class InputTitleContainer extends Component {
       this.setState({placeholderText: 'What are you recommending?', nextRoute: 'ConfirmRecommendation' })
   }
 
-  renderButton() {
-    const { title, buttonText } = this.state
-    if(title)
-      return (
-        <Animatable.View animation='fadeInUp'
-          duration={500}
-        >
-          <Button text={buttonText} onPress={this.onNextPress.bind(this)} />
-        </Animatable.View>
-      )
-  }
 
   onNextPress() {
 
@@ -61,9 +51,11 @@ class InputTitleContainer extends Component {
 
   _setFriend = () => {
     // TMP saving the rec for now
-
+    this.setState({hideKeyboard: 'yes now'})
     this.props.addRecommendationDev(this.state.friendName); // Redux
-    Actions.pop()
+
+    // setTimeout(()=>{ Actions.pop()},400)
+
   }
 
 
@@ -74,7 +66,8 @@ class InputTitleContainer extends Component {
     return (
       <NewRec
         {...this.state}
-        renderButton={this.renderButton.bind(this)}
+        walkthrough={this.props.walkthrough}
+        category={this.props.category}
         unfinished={this.props.unfinished}
         setTitle={this._setTitle}
         setFriend={this._setFriend}

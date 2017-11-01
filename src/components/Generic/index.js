@@ -3,6 +3,10 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import * as Progress from 'react-native-progress';
 import styles from './styles';
 import { colors } from '../../config/styles';
+import * as Animatable from 'react-native-animatable';
+
+// FancyButton = Animatable.createAnimatableComponent(Button);
+
 
 
 export const Label = (props) => {
@@ -44,7 +48,7 @@ export const Button = (props) => {
 export const FancyButton = (props) => {
 
   // Defaults
-  const { text, onPress, color='white', bgcolor='blue', loading=false } = props;
+  const { text, onPress, color='white', bgcolor='green', loading=false } = props;
 
   const customStyles =
   {
@@ -54,7 +58,9 @@ export const FancyButton = (props) => {
     fontStyle: loading ? 'italic' : 'normal',
   }
 
+
   return (
+    <Animatable.View animation='fadeInUp' delay={300} duration={500}>
     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
       <View style={styles.container}>
 
@@ -63,5 +69,6 @@ export const FancyButton = (props) => {
         </Text>
       </View>
     </TouchableOpacity>
+    </Animatable.View>
   );
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dashboard from './Dashboard';
-import Welcome from './Welcome'
+import Hello from '../Hello'
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
 import firebase from 'react-native-firebase';
@@ -14,9 +14,16 @@ class DashboardContainer extends Component {
   componentWillMount() {
     this.state = {activeFilter: 'Everything'};
   }
+  componentWillMount() {
+
+    // const { showOnboarding } = this.props;
+    // if(showOnboarding)
+    //   Actions.push('Walkthrough')
+
+  }
   componentDidMount() {
     // TMP!!
-    Actions.push('NewRecLightbox')
+    // Actions.push('NewRecLightbox')
     // Actions.push('Profile')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friendObject: this.props.friends[2]})
@@ -32,17 +39,24 @@ class DashboardContainer extends Component {
     Actions.push('NewRecLightbox')
   }
 
+  _onBrandNewRecPress = () => {
+    const { initNewRec, user } = this.props
+    initNewRec({to: user.uid})
+    Actions.push('NewRecLightbox',{walkthrough: true, category:'movie'})
+  }
+
   render() {
-    console.log('Dash',this.props)
+    // console.log('Dash',this.props)
+    // return null
     const { showOnboarding } = this.props;
 
-    // if(showOnboarding) {
-    if(false) {
+    if(showOnboarding) {
+    // if(false) {
       return (
-        <Welcome
+        <Hello
           {...this.props}
           {...this.state}
-          onNewRecPress={this._onNewRecPress}
+          onNewRecPress={this._onBrandNewRecPress}
         />
       )
     } else {

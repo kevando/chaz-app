@@ -18,7 +18,7 @@ export default styles = StyleSheet.create({
 });
 
 export const navigationBarStyle = {
-  backgroundColor: colors.newBlue,
+  backgroundColor: colors.blueBG,
   borderBottomWidth: 0,
 }
 

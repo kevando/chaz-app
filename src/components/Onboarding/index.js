@@ -47,9 +47,9 @@ class NotificationPermissionContainer extends Component {
   }
 
 render() {
-  // console.log(this.props)
+  // console.log('OB',this.props)
   const { notificationPermission } = this.props;
-  if(notificationPermission !== 'authorized') {
+  if(notificationPermission != null && notificationPermission !== 'authorized') {
     return (<NotificationPermissionCard onPress={this._alertForNotificationPermission} />);
   } else {
     return null

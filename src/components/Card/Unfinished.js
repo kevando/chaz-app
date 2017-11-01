@@ -10,7 +10,7 @@ import { colors } from '../../config/styles';
 import styles from './styles';
 import { CategoryIcon } from '../../components/Category/Icon';
 import { Button } from '../../components/Generic';
-import { Title } from '../../components/Generic/Rec'
+import * as Rec from '../../components/Generic/Rec'
 import * as Friend from '../../components/Generic/Friend';
 
 MyCustomComponent = Animatable.createAnimatableComponent(TextInput);
@@ -49,7 +49,8 @@ render() {
 
         <Animatable.View ref="Card" style={[styles.container,{margin:15,flex:1}]} animation="fadeInUp" duration={500} delay={50}>
 
-        <View style={styles.headerContainer}>
+        {unfinished.title &&
+        <Animatable.View style={styles.headerContainer} animation={{from:{height:0},to:{height:25}}}>
 
 
           <View style={styles.friendContainer}>
@@ -63,6 +64,7 @@ render() {
               placeholderTextColor="#aaa"
               multiline={false}
               autoFocus={true}
+              editable={this.props.hideKeyboard != 'yes now'}
               style={styles.inputFriend}
               onChangeText={(friendName) => updateState({friendName})}
             /> }
@@ -74,23 +76,31 @@ render() {
           <View style={styles.iconContainer}>
 
           </View>
-        </View>
+        </Animatable.View>}
+
+
         <View style={[styles.bodyContainer,{flex: 1}]}>
         {!unfinished.title ?
           <TextInput
-            placeholder='What?'
+            placeholder='Type here...'
             ref={ c => this._titleInput = c }
             autoCapitalize="none"
             value={title}
             autoCorrect={false}
             autoFocus={true}
-            placeholderTextColor="#aaa"
+            placeholderTextColor="#bbb"
             multiline={true}
             style={styles.inputTitle}
+
             onChangeText={(title) => updateState({title})}
+            onLayout={(event) => {
+              var {x, y, width, height} = event.nativeEvent.layout;
+              console.log('input height',height)
+              updateState({inputHeight: height})
+            }}
           /> :
 
-          <Title rec={unfinished} />
+          <Rec.Title rec={unfinished} />
         }
           </View>
 

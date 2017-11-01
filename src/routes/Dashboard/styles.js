@@ -9,7 +9,6 @@ export default styles = StyleSheet.create({
     flex: 1,
     paddingTop: 5,
     backgroundColor: colors.blueBG,
-
   },
 
   titleContainer: {
@@ -26,7 +25,7 @@ export default styles = StyleSheet.create({
 // shadowOpacity: 1,
   },
   scrollView: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   recommendationsTitle: {
     ...text,

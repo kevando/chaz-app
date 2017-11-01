@@ -10,6 +10,7 @@ export const Title = ({rec}) => {
     {
       ...text,
       // color: colors.blue,
+      // backgroundColor: '#cdd'
     }
 
 

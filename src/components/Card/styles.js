@@ -13,12 +13,33 @@ const TEXT_WIDTH = CARD_WIDTH - ICON_WIDTH - ARROW_WIDTH - 44;
 export default styles = StyleSheet.create({
 
   container: {
-    borderWidth: 0,
+    borderWidth: 1,
     borderColor: colors.borderColor,
     borderRadius: 10,
     padding: 15,
     margin: 5,
     backgroundColor: 'white',
+    flex: 1,
+
+  },
+
+  // waterBackdrop: {
+  //   shadowColor: 'blue',
+  //   shadowRadius: 5,
+  //   shadowOpacity: 1.0
+  //
+  // },
+
+  backgroundShadow: {
+    borderColor: '#aaa',
+    shadowColor: '#555',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 15,
+    shadowOpacity: 1.0
+
   },
   headerContainer: {
     // backgroundColor: 'yellow',
@@ -45,7 +66,7 @@ export default styles = StyleSheet.create({
 
   inputTitle: {
     ...text,
-    // flex:1,
+    flex:1,
     // fontSize: 20,
     // padding: 5,
     // paddingLeft: 10,
@@ -53,7 +74,8 @@ export default styles = StyleSheet.create({
     // height: 250,
     // flex: 1,
     // maxHeight: 160,
-    height: 100
+    // height: 100
+
   //
   },
   inputFriend: {

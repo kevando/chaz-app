@@ -24,7 +24,7 @@ const Rec = {
 
 const UnfinishedRec = {
   // id: '1',
-  title: 'pink floyd',
+  // title: 'Rockin like a hurricane',
   // friend: {name: 'Blake', id:'2'},
   // category: 'music',
 }
@@ -33,6 +33,7 @@ const initialState =
     unfinished: UnfinishedRec,
     list: [ ],
     myRecs: [Rec],
+    // myRecs: [],
     givenRecs: [],
     filter: 'all'
   };
@@ -45,7 +46,7 @@ export default function recs(recommendations = initialState, action = {}) {
     case 'ADD_REC':
       return {
         ...recommendations,
-        myRecs: recommendations.myRecs.concat([action.rec])
+        myRecs: [action.rec].concat(recommendations.myRecs)
       }
   // -------------------------------------------
   case INIT_REC:

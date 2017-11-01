@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { colors, text, width } from '../../config/styles';
+import { colors, text, width, MARGIN_LEFT } from '../../config/styles';
 
 export default styles = StyleSheet.create({
-  container: {
+
+  CONTAINER: {
     // borderWidth: 4,
     // borderColor: 'green',
     position: 'absolute',
@@ -11,7 +12,8 @@ export default styles = StyleSheet.create({
     left: 0,
     width: width,
     right: 0,
-    // backgroundColor: 'blue',
+    // backgroundColor: 'transparent',// probly idea
+    backgroundColor: colors.blueBG,
     justifyContent: 'flex-start',
   },
   TOP: {
@@ -21,7 +23,8 @@ export default styles = StyleSheet.create({
     // backgroundColor:'yellow',
     // border: ''
     // flex: 1,
-    height: 350,
+    // height: 300,
+    // overflow: 'hidden',
   },
 
   input: {
@@ -30,6 +33,15 @@ export default styles = StyleSheet.create({
     fontSize: 20,
     padding: 5,
     paddingLeft: 10,
-  }
+  },
+
+  title: {
+    ...text,
+    color: 'white',
+    fontSize: 22,
+    fontWeight: '700',
+    // paddingVertical: 5,
+    marginHorizontal: MARGIN_LEFT,
+  },
 
 });

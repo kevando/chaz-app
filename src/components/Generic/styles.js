@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
 
   buttonText: {
     ...text,
-    paddingVertical: 12,
+    paddingVertical: 22,
     paddingHorizontal: 20,
     margin: 0,
     fontSize: 17,
