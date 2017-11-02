@@ -15,14 +15,4 @@ export default styles = StyleSheet.create({
   },
 
 
-  buttonText: {
-    ...text,
-    paddingVertical: 22,
-    paddingHorizontal: 20,
-    margin: 0,
-    fontSize: 17,
-    fontWeight: '500',
-    borderWidth: 1,
-  },
-
 });

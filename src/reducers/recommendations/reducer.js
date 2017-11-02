@@ -8,19 +8,33 @@ import {
   SET_STATUS,
   SET_FILTER,
   SET_GRADE,
-  // UPDATE_RECOMMENDATION,
+  UPDATE_RECOMMENDATION,
   REFRESH_MY_RECS,
   REFRESH_GIVEN_RECS,
   SET_REC_TO,
   INIT_REC,
 } from '../actionTypes';
 
-const Rec = {
-  id: '1',
-  title: 'pink floyd',
-  friend: {name: 'Blake', id:'2'},
-  category: 'music',
-}
+const Recs = [
+  {
+    id: '1',
+    title: 'pink floyd',
+    friend: {name: 'Blake', id:'2'},
+    category: 'music',
+  },
+  {
+    id: '2',
+    title: 'Shawshank Redemption',
+    friend: {name: 'Kevin', id:'3'},
+    category: 'movie',
+  },
+  {
+    id: '3',
+    title: 'Barbarsol',
+    friend: {name: 'John Older Lions End', id:'3'},
+    // category: 'music',
+  },
+]
 
 const UnfinishedRec = {
   // id: '1',
@@ -32,7 +46,7 @@ const initialState =
   {
     unfinished: UnfinishedRec,
     list: [ ],
-    myRecs: [Rec],
+    myRecs: Recs,
     // myRecs: [],
     givenRecs: [],
     filter: 'all'
@@ -99,16 +113,16 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    // case UPDATE_RECOMMENDATION:
-    //
-    //   var newList = _.map(recommendations.list, function(rec) {
-    //     return rec.id === action.rec.id ? action.rec : rec; // better way to do this for sure
-    //   });
-    //
-    //   return {
-    //     ...recommendations,
-    //     list: newList,
-    //   }
+    case UPDATE_RECOMMENDATION: // TEMP!!!!!! DEV
+    // console.warn('UPDATE REC')
+      var newList = _.map(recommendations.myRecs, function(rec) {
+        return rec.id === action.rec.id ? action.rec : rec; // better way to do this for sure
+      });
+
+      return {
+        ...recommendations,
+        myRecs: newList,
+      }
     // -------------------------------------------
     case SET_REMINDER:
       // alert(action.reminderDate)

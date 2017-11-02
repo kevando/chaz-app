@@ -116,11 +116,14 @@ export function giveRec() {
 }
 
 export function updateRecommendation(rec) {
-  return(dispatch,getState) => {
-    rec.updatedAt = Date.now()
-    recsRef.doc(rec.id).update(rec) // might want to do this per field
-    // dispatch({ type: UPDATE_RECOMMENDATION, rec })
-  }
+  // DEV
+  return { type: UPDATE_RECOMMENDATION, rec }
+  
+  // return(dispatch,getState) => {
+  //   rec.updatedAt = Date.now()
+  //   recsRef.doc(rec.id).update(rec) // might want to do this per field
+  //   // dispatch({ type: UPDATE_RECOMMENDATION, rec })
+  // }
 }
 
 export function setReminder(recId,reminderDate) {

@@ -8,7 +8,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-import { CategoryIcon } from '../../components/Category/Icon';
+import { CategoryIcon } from '../../components/Category';
 import { Button } from '../../components/Generic';
 import * as Rec from '../../components/Generic/Rec'
 import * as Friend from '../../components/Generic/Friend';

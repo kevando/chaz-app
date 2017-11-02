@@ -1,54 +1,49 @@
 import React from 'react';
-import { View, Text, ScrollView, StatusBar, Button } from 'react-native';
-import { TitleCard, FriendCard, CategoryCard, CategoryPicker, ReminderCard  } from '../../components/Card/RecView'
+import { View, Text, ScrollView, StatusBar } from 'react-native';
+import { SetReminderButton, EnableNotificationsButton  } from '../../components/SetReminder'
+import { CardDetails } from '../../components/Card/Rec'
 import styles from './styles';
+//
 
-
-const Category = ({ rec, onCategoryPress }) => {
-
-  if(!rec.category || rec.category == 'uncategorized')  {
-    return (
-      <View>
-      <Text style={styles.label}>Pick a Category</Text>
-      <CategoryPicker rec={rec} onCategoryPress={onCategoryPress} />
-      </View>
-    )
-  } else {
-    return (
-      <View>
-      <Text style={styles.label}>Category</Text>
-      <CategoryCard rec={rec} />
-      </View>
-    )
-  }
-
-}
-
-const RecView = ({ rec, app, onEditPress, onDeletePress, onCategoryPress, updateRecommendation,onAssignPress }) => {
-
-  // console.log('RecView',rec)
-
+const RecView = ({ rec, app, onEditPress, onDeletePress, updateRecommendation,onAssignPress }) => {
 
   return (
     <ScrollView style={styles.container}>
 
-      <Text style={styles.label}>Recommendation</Text>
-      <TitleCard rec={rec} onEditPress={onEditPress}/>
+      <CardDetails rec={rec} />
+      {
+        app.notificationPermission == 'authorized' ?
 
-      <Category rec={rec} onCategoryPress={onCategoryPress} />
+        <SetReminderButton rec={rec} updateRecommendation={updateRecommendation} app={app}/>
 
-      <Text style={styles.label}>Recommended by</Text>
-      <FriendCard friend={rec.friend} />
+        :
 
-      <Text style={styles.label}>Follow Up</Text>
-      <ReminderCard rec={rec} updateRecommendation={updateRecommendation} app={app}/>
-
-      <View style={{marginTop:200}}>
-        <Button title="delete" onPress={onDeletePress} color="red" />
-      </View>
+        <EnableNotificationsButton rec={rec} updateRecommendation={updateRecommendation} app={app}/>
+      }
 
     </ScrollView>
   );
+
+  // return (
+  //   <ScrollView style={styles.container}>
+  //
+  //     <Text style={styles.label}>Recommendation</Text>
+  //     <TitleCard rec={rec} onEditPress={onEditPress}/>
+  //
+  //     <Category rec={rec} onCategoryPress={onCategoryPress} />
+  //
+  //     <Text style={styles.label}>Recommended by</Text>
+  //     <FriendCard friend={rec.friend} />
+  //
+  //     <Text style={styles.label}>Follow Up</Text>
+  //     <ReminderCard rec={rec} updateRecommendation={updateRecommendation} app={app}/>
+  //
+  //     <View style={{marginTop:200}}>
+  //       <Button title="delete" onPress={onDeletePress} color="red" />
+  //     </View>
+  //
+  //   </ScrollView>
+  // );
 }
 
 export default RecView;

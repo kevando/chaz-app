@@ -6,9 +6,10 @@ import { Actions} from 'react-native-router-flux';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-import { CategoryIcon } from '../../components/Category/Icon';
+import { CategoryIcon, CategoryPicker, Category } from '../../components/Category';
 import * as Friend from '../../components/Generic/Friend';
 import * as Rec from '../../components/Generic/Rec'
+import { Divider } from '../../components/Generic'
 
 
 // ---------------------------------------
@@ -29,7 +30,7 @@ render() {
               <Friend.Name friend={rec.friend} />
             </View>
             <View style={styles.iconContainer}>
-
+              {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
             </View>
           </View>
           <View style={styles.bodyContainer}>
@@ -65,6 +66,53 @@ render() {
       </TouchableOpacity>
 
   );
+}
+}
+
+// ---------------------------------------
+//  Card detail aka RecView
+// ---------------------------------------
+
+export class CardDetails extends Component {
+
+render() {
+  // console.log(this.props)
+  const { rec } = this.props;
+  return (
+
+        <View style={[styles.container,{paddingBottom: 150}]}>
+
+          <View style={styles.headerContainer}>
+            <View style={styles.friendContainer}>
+              <Friend.Name friend={rec.friend} />
+            </View>
+            <View style={styles.iconContainer}>
+
+            </View>
+          </View>
+          <View style={styles.bodyContainer}>
+              <Rec.Title rec={rec} />
+          </View>
+
+          <Divider />
+
+          {
+            rec.category ?
+
+              <Category rec={rec} />
+
+            :
+
+            <CategoryPicker rec={rec} />
+          }
+
+
+        </View>
+
+
+
+  );
+
 }
 //
 // <View style={styles.iconContainer}>

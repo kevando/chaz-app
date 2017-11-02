@@ -22,25 +22,18 @@ export default styles = StyleSheet.create({
     flex: 1,
 
   },
-
-  // waterBackdrop: {
-  //   shadowColor: 'blue',
-  //   shadowRadius: 5,
+  // backgroundShadow: {
+  //   borderColor: '#aaa',
+  //   shadowColor: '#555',
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 3
+  //   },
+  //   shadowRadius: 15,
   //   shadowOpacity: 1.0
   //
   // },
 
-  backgroundShadow: {
-    borderColor: '#aaa',
-    shadowColor: '#555',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 15,
-    shadowOpacity: 1.0
-
-  },
   headerContainer: {
     // backgroundColor: 'yellow',
     flexDirection: 'row',
@@ -49,54 +42,30 @@ export default styles = StyleSheet.create({
     marginBottom: 5,
   },
   friendContainer: {
-    // backgroundColor: 'grey',
-    flex: 6
+    // backgroundColor: 'yellow',
+    flex: 6,
   },
   iconContainer: {
+    // backgroundColor: 'yellow',
     flex: 1,
-    // backgroundColor: 'green',
+    alignItems: 'flex-end', // align right
   },
-
   bodyContainer: {
     // backgroundColor: 'green',
     flexDirection: 'row',
     alignItems: 'flex-start', // v
-    // flex: 1,
   },
 
   inputTitle: {
     ...text,
     flex:1,
-    // fontSize: 20,
-    // padding: 5,
-    // paddingLeft: 10,
-    // backgroundColor: 'grey',
-    // height: 250,
-    // flex: 1,
-    // maxHeight: 160,
-    // height: 100
-
-  //
   },
   inputFriend: {
     ...text,
-    // flex:1,
     fontSize: 20,
-    // padding: 5,
-    // paddingLeft: 10,
     color: colors.pink,
     borderBottomWidth: 1,
     borderBottomColor: colors.borderColor,
-    // height: 250,
-    // flex: 1,
-    // maxHeight: 160,
-    // height: 100
-  //
-  },
-
-  icon: {
-    fontSize: 35,
-    textAlign: 'right',
   },
 
   recText: {
@@ -120,35 +89,6 @@ export default styles = StyleSheet.create({
     // color: colors.darkGrey
   },
 
-  pickerContainer: {
-    marginHorizontal: MARGIN_HORIZONTAL,
-    marginVertical: MARGIN_VERTICAL,
-    borderWidth: 1,
-    borderColor: colors.cardBorder,
-    flexDirection: 'column',
-    backgroundColor: colors.white,
-    paddingVertical: 10,
-
-    justifyContent: 'flex-start',
-    // alignItems: 'center', // vertical align
-  },
-
-  categoryTouchable: {
-    // flexDirection: 'column',
-    // backgroundColor: 'red',
-    borderColor: colors.lightGrey,
-    borderBottomWidth: 1,
-    marginHorizontal: MARGIN_HORIZONTAL,
-    paddingVertical: MARGIN_VERTICAL,
-  },
-
-  categoryOptionText: {
-    ...text,
-    fontSize: 14,
-    fontWeight: '300',
-    color: colors.blue,
-
-  },
 
   // searching for user
   inputContainer: {
@@ -186,7 +126,19 @@ export default styles = StyleSheet.create({
     },
     shadowRadius: 15,
     shadowOpacity: 1.0
+  },
 
+  translucentBackground: {
+    backgroundColor: 'rgba(255,255,255,0.9)',
+
+    borderColor: 'purple',
+    shadowColor: '#aaa',
+    shadowOffset: {
+      width: 3,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 0.7,
   }
 
 

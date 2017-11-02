@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Progress from 'react-native-progress';
-import styles from './styles';
-import { colors } from '../../config/styles';
+// import styles from './styles';
+import { colors, text } from '../../config/styles';
 import * as Animatable from 'react-native-animatable';
 
 // FancyButton = Animatable.createAnimatableComponent(Button);
@@ -24,19 +24,47 @@ export const Label = (props) => {
 export const Button = (props) => {
 
   // Defaults
-  const { text, onPress, color='white', bgcolor='green' } = props;
+  const { text, onPress, color='white', bgcolor='green', rounded=false } = props;
 
-  const customStyles =
-  {
-    backgroundColor: colors[bgcolor],
-    borderColor: colors[bgcolor],
-    color: color,
-  }
+  const styles = StyleSheet.create({
+
+    container:
+    {
+      backgroundColor: colors[bgcolor],
+      borderColor: colors[bgcolor],
+      // color: color,
+      borderRadius: rounded ? 40 : 0,
+      borderWidth: 10,
+      // borderColor: 'red',
+    },
+
+    text:
+    {
+      // ...text,
+      fontSize: 30,
+
+      fontFamily: 'System',
+      // color: colors.black,
+      letterSpacing: 0.5,
+      fontWeight: '500',
+      // ^^^^ ...text not working for some reason
+      margin: 0,
+      fontSize: 17,
+      fontWeight: '500',
+      borderWidth: 0,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+      margin: 0,
+      fontSize: 17,
+      color: color,
+    }
+  })
+
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
       <View style={styles.container}>
-        <Text style={[styles.buttonText,customStyles]}>
+        <Text style={styles.text}>
           {text}
         </Text>
       </View>
@@ -72,3 +100,25 @@ export const FancyButton = (props) => {
     </Animatable.View>
   );
 };
+
+
+// ---------------------------------------
+//  Divider
+// ---------------------------------------
+
+
+export const Divider = (props) => {
+  const dividerStyles = [
+    // styles.label,
+    {
+      flex: 1,
+      backgroundColor: '#ddd',
+      padding: 0,
+      height: 2,
+      marginVertical: 20,
+    }
+  ]
+  return (
+    <View style={dividerStyles} />
+  )
+}

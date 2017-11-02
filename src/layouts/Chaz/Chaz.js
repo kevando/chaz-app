@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, LayoutAnimation } from 'react-native'
-import styles, { navigationBarStyle, titleStyle } from './styles';
+import { navigationBarStyle, titleStyle } from '../../config/styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-native-router-flux';
 // import Toast from 'react-native-root-toast';
@@ -90,9 +90,9 @@ class Chaz extends Component {
         <Overlay key="overlay">
           <Modal key="root" hideNavBar={true}>
             <Lightbox key="lightbox">
-              <Stack key="myStack"  >
+              <Stack key="myStack"  hideBackImage back>
                 <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true}/>
-                <Scene key='RecView' component={RecView} title='' hideNavBar={false}/>
+                <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
               </Stack>
 
 

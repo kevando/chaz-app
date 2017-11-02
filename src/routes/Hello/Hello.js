@@ -5,7 +5,7 @@ import { Button } from '../../components/Generic';
 import { RecListItem } from '../../components/Card/Rec';
 import Filter from '../../components/Nav/Filter';
 import NotificationPermission from '../../components/Card/NotificationPermission';
-import * as Onboarding from '../../components/Onboarding'
+// import * as Onboarding from '../../components/Onboarding'
 import styles from './styles';
 import firebase from 'react-native-firebase'
 

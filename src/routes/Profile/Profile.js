@@ -3,7 +3,7 @@ import { View ,Text, TextInput, Button } from 'react-native';
 import _ from 'lodash';
 
 import { Label } from '../../components/Generic';
-import { FriendCard } from '../../components/Card/RecView';
+// import { FriendCard } from '../../components/Card/RecView';
 import Card  from '../../components/Card/Rec';
 
 import styles from './styles';
@@ -35,7 +35,7 @@ const Profile = (props) => {
       <Label>Your Friends</Label>
       {
         _.map(friends,friend => {
-          return <FriendCard key={friend.id} friend={friend} />
+          // return <FriendCard key={friend.id} friend={friend} />
         })
       }
 

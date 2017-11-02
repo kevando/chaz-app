@@ -25,7 +25,7 @@ class DashboardContainer extends Component {
     // TMP!!
     // Actions.push('NewRecLightbox')
     // Actions.push('Profile')
-    // Actions.push('RecView',{rec: this.props.myRecs[0]})
+    Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friendObject: this.props.friends[2]})
   }
 

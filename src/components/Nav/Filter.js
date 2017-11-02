@@ -3,7 +3,7 @@ import {View, Text, Button, Keyboard, StyleSheet,StatusBar, ScrollView } from 'r
 import { colors, text } from '../../config/styles';
 import { Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Feather';
-import { Categories } from '../../components/Category/Icon'
+import { Categories } from '../../components/Category'
 import _ from 'lodash'
 
 // --------------------------------

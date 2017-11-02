@@ -53,6 +53,7 @@ export const colors = {
 
 
   borderColor: '#CECECE',
+  dividerColor: '#CECECE',
 
 };
 
@@ -75,4 +76,18 @@ export const text = {
   color: colors.black,
   letterSpacing: 0.5,
   fontWeight: '500'
+}
+
+// ------------------------------
+// Navigation
+
+export const navigationBarStyle = {
+  backgroundColor: colors.blueBG,
+  borderBottomWidth: 0,
+  borderTopWidth: 22,
+  borderTopColor: colors.newBlue,
+}
+
+export const titleStyle = {
+  color: 'white'
 }
