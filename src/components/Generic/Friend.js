@@ -47,27 +47,3 @@ export const Name = ({friend}) => {
 // };
 //
 //
-// export const FancyButton = (props) => {
-//
-//   // Defaults
-//   const { text, onPress, color='white', bgcolor='blue', loading=false } = props;
-//
-//   const customStyles =
-//   {
-//     backgroundColor: colors[bgcolor],
-//     borderColor: colors[bgcolor],
-//     color: color,
-//     fontStyle: loading ? 'italic' : 'normal',
-//   }
-//
-//   return (
-//     <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
-//       <View style={styles.container}>
-//
-//         <Text style={[styles.buttonText,customStyles]}>
-//           {text}
-//         </Text>
-//       </View>
-//     </TouchableOpacity>
-//   );
-// };

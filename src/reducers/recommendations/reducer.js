@@ -16,30 +16,30 @@ import {
 } from '../actionTypes';
 
 const Recs = [
-  {
-    id: '1',
-    title: 'pink floyd',
-    friend: {name: 'Blake', id:'2'},
-    category: 'music',
-  },
-  {
-    id: '2',
-    title: 'Shawshank Redemption',
-    friend: {name: 'Kevin', id:'3'},
-    category: 'movie',
-  },
-  {
-    id: '3',
-    title: 'Barbarsol',
-    friend: {name: 'John Older Lions End', id:'3'},
-    // category: 'music',
-  },
+  // {
+  //   id: '1',
+  //   title: 'pink floyd',
+  //   friend: {name: 'Blake', id:'2'},
+  //   category: 'music',
+  // },
+  // {
+  //   id: '2',
+  //   title: 'Shawshank Redemption',
+  //   friend: {name: 'Kevin', id:'3'},
+  //   category: 'movie',
+  // },
+  // {
+  //   id: '3',
+  //   title: 'Barbarsol',
+  //   friend: {name: 'John Older Lions End', id:'3'},
+  //   // category: 'music',
+  // },
 ]
 
 const UnfinishedRec = {
   // id: '1',
-  // title: 'Rockin like a hurricane',
-  // friend: {name: 'Blake', id:'2'},
+  title: 'Rockin like a hurricane',
+  friend: {name: 'Blake', id:'2'},
   // category: 'music',
 }
 const initialState =

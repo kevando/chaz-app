@@ -99,7 +99,7 @@ class OnboardingCardContainer extends Component {
   // }
 
 render() {
-
+  return null // probly not gonna do onbioarding cards anymore. to confusing
   // Right now we pretty much have only 1 onboard message, enable notification
 
   const { notificationPermission, setNotificationPermission } = this.props;

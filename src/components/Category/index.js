@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity,  } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import _ from 'lodash'
-import { colors, text } from '../../config/styles';
+import { colors, text, width, MARGIN_LEFT } from '../../config/styles';
 
 import * as RecActions from '../../reducers/recommendations/actions';
 import { connect } from 'react-redux';
@@ -50,7 +50,6 @@ export const Category = ({rec, size=22, color="yellow"}) => {
       color: colors.yellow,
       marginLeft: 10,
     }
-
   }
   const icon = rec.category ? Categories[rec.category].icon : 'file-text'
   const iconColor = colors[color]
@@ -71,28 +70,148 @@ export const Category = ({rec, size=22, color="yellow"}) => {
 
 class CategoryPickerComponent extends Component {
 
-  _onCategoryPress = (rec,category) => {
-    rec.category = 'movie'
-    // console.log(this.props)
-    this.props.dispatch(RecActions.updateRecommendation(rec))
-    // this.props.updateRecommendation(rec)
+  _onCategoryPress = (category) => {
+    const { rec, callback } = this.props
+
+    if(rec) {
+      // We are updating a rec
+      const newRec = {...rec, category}
+      this.props.dispatch(RecActions.updateRecommendation(newRec))
+    } else {
+      // this is a new rec so we need to run the callback fn too
+      // this.props.dispatch(RecActions.setCategory(category))
+      callback(category)
+    }
+
   }
 
 
   render() {
-    const { rec, onCategoryPress } = this.props;
+    const { onCategoryPress } = this.props;
+
+    // const ICON_CONTAINER = width / 6
+    // const ICON_WIDTH = ICON_CONTAINER - 10
+
+    // NOT USING BUT THIS WILL WORK GOOD FOR A GRID
+    // const styles = {
+    //   container: {
+    //     flex: 1,
+    //     flexDirection: 'row',
+    //     flexWrap: 'wrap',
+    //     borderWidth: 0,
+    //     borderColor: 'white',
+    //     // alignItems: 'center',
+    //     justifyContent: 'center', // v
+    //
+    //   },
+    //   iconContainer: {
+    //     marginHorizontal: 10,
+    //     marginVertical: 20,
+    //     padding: 1,
+    //     // backgroundColor: 'yellow',
+    //     // flex: 3,
+    //     width: ICON_CONTAINER,
+    //     height: ICON_CONTAINER,
+    //   },
+    //   touchContainer: {
+    //     flex: 1,
+    //     alignItems: 'center',
+    //     justifyContent: 'center', // v
+    //     margin: 0,
+    //     padding: 0,
+    //     // backgroundColor: 'red',
+    //   },
+    //   iconCircle: {
+    //     // flex: 1,
+    //     alignItems: 'center',
+    //     justifyContent: 'center', // v
+    //
+    //     margin: 0,
+    //     padding: 0,
+    //     // backgroundColor: 'blue',
+    //     // borderColor: 'green',
+    //     // borderWidth: 4,
+    //     height: ICON_WIDTH,
+    //     width: ICON_WIDTH,
+    //     borderRadius: ICON_WIDTH,
+    //   },
+    // }
+    const ICON_WIDTH = 40
+
+    const styles = {
+      container: {
+        flex: 1,
+        flexDirection: 'column',
+        borderWidth: 0,
+        borderColor: 'white',
+        // alignItems: 'center',
+        justifyContent: 'center', // v
+        marginHorizontal: MARGIN_LEFT
+      },
+      iconContainer: {
+        flex: 1,
+        marginBottom: 10,
+        alignItems: 'flex-start',
+        justifyContent: 'center', // v
+      },
+      touchContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        // alignItems: 'flex-start',
+        justifyContent: 'center', // v
+        margin: 0,
+        padding: 0,
+        // backgroundColor: 'red',
+      },
+      iconCircle: {
+        // flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center', // v
+
+        margin: 0,
+        padding: 0,
+        backgroundColor: colors.yellow,
+        borderColor: colors.yellow,
+        borderWidth: 4,
+        width: ICON_WIDTH,
+        height: ICON_WIDTH,
+        borderRadius: ICON_WIDTH,
+      },
+      textContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        marginLeft: 5,
+        paddingLeft: 10,
+        borderBottomColor: 'rgba(255,255,255,0.3)',
+        borderBottomWidth: 2,
+        paddingBottom: 10,
+        paddingTop: 10,
+      },
+      categoryText: {
+        ...text,
+        fontSize: 18,
+        color: 'white',
+        fontWeight: '100',
+      }
+    }
+
+    // !rec means we are adding a new rec
+
     return (
-      <View style={styles.pickerContainer}>
+      <View style={styles.container}>
         {
-          _.map(Categories, (category,i) => {
+          _.map(Categories, (Category,category) => {
             return (
-              <View style={styles.categoryTouchable} key={i} >
-              <TouchableOpacity onPress={() => this._onCategoryPress(rec,category)}>
-              <View style={styles.textContainer}>
-                <View style={styles.recContainer}>
-                  <Text style={styles.categoryOptionText}><CategoryIcon category={i} size={16} color="blue" />&nbsp;{category.title}</Text>
-                </View>
+              <View style={styles.iconContainer} key={category} >
+              <TouchableOpacity style={styles.touchContainer} onPress={() => this._onCategoryPress(category)}>
+              <View style={styles.iconCircle}>
+
+                  <CategoryIcon category={category} size={20} color="white" />
+
               </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.categoryText}>{Category.title}</Text>
+                </View>
               </TouchableOpacity>
               </View>
             )

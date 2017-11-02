@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image } from 'react-native';
 import _ from 'lodash';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { FancyButton, Button, Label } from '../../components/Generic';
+import { Button, Label } from '../../components/Generic';
 import styles from './styles';
 import { colors } from '../../config/styles'
 import * as Animatable from 'react-native-animatable';
@@ -42,7 +42,7 @@ export const PhoneInput = (props) => {
     </View>
 
       { isPhoneValid &&
-        <FancyButton loading={verifyingPhone} text={verifyingPhone ? 'Getting Code' : "Get Code"} onPress={getCode} />}
+        <Button loading={verifyingPhone} text={verifyingPhone ? 'Getting Code' : "Get Code"} onPress={getCode} />}
     <KeyboardSpacer />
     </View>
   )
@@ -77,7 +77,7 @@ export const CodeInput = (props) => {
     </View>
 
       { isCodeValid &&
-        <FancyButton loading={verifyingCode} text={verifyingCode ? 'Confirming' : "Confirm Code"} onPress={confirmCode} />}
+        <Button loading={verifyingCode} text={verifyingCode ? 'Confirming' : "Confirm Code"} onPress={confirmCode} />}
     <KeyboardSpacer />
     </View>
   )
@@ -97,7 +97,7 @@ export const Confirmation = (props) => {
 
         </View>
 
-        <FancyButton text="Back to Dashboard" onPress={()=> Actions.reset('MainStack')} />
+        <Button text="Back to Dashboard" onPress={()=> Actions.reset('MainStack')} />
     </View>
   )
 }

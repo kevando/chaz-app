@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, LayoutAnimation } from 'react-native'
-import { navigationBarStyle, titleStyle } from '../../config/styles';
+import { navigationBarStyle, titleStyle, colors } from '../../config/styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-native-router-flux';
 // import Toast from 'react-native-root-toast';
@@ -75,6 +75,7 @@ class Chaz extends Component {
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
     const { isReady } = this.state
 
+    const navBorderColor = showOnboarding ? colors.blueBG : colors.newBlue
     // PROD Animate screen loading
     // if (!isReady || !isAuthenticated)
       // return <Loading updateState={this.updateState} />;
@@ -86,7 +87,7 @@ class Chaz extends Component {
 
     return (
 
-      <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
+      <Router navigationBarStyle={[navigationBarStyle,{borderTopColor: navBorderColor}]} titleStyle={titleStyle}>
         <Overlay key="overlay">
           <Modal key="root" hideNavBar={true}>
             <Lightbox key="lightbox">

@@ -95,7 +95,7 @@ render() {
             onChangeText={(title) => updateState({title})}
             onLayout={(event) => {
               var {x, y, width, height} = event.nativeEvent.layout;
-              console.log('input height',height)
+              // console.log('input height',height)
               updateState({inputHeight: height})
             }}
           /> :

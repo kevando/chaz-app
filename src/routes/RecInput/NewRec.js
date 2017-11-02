@@ -6,6 +6,7 @@ import styles from './styles';
 import * as Animatable from 'react-native-animatable'
 import Unfinished from '../../components/Card/Unfinished'
 import { Button } from '../../components/Generic';
+import { CategoryIcon } from '../../components/Category';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 CARD_HEIGHT = 220
@@ -84,7 +85,7 @@ class InputTitle extends Component {
       this.refs.BUTTON.fadeOutDown().then(()=>{
         this._throwParty()
       })
-      this.props.setFriend()
+
     },collapseDuration)
 
 
@@ -93,6 +94,7 @@ class InputTitle extends Component {
     // console.log(this.refs.CARD)
     this.refs.CARD.throwParty(700).then(()=> {
       this.refs.CONTAINER.fadeOut(200).then(()=>{
+        this.props.setFriend() // this is bad to have here cause we are assuming everything saved properly before we know it did
         Actions.pop()
       })
     })
@@ -100,10 +102,11 @@ class InputTitle extends Component {
   }
 
   _closeLightbox = () => {
-    this.props.updateState({hideKeyboard: 'yes now'})
-    this.refs.CARD.fadeOutDown()
-    this.refs.TITLE.fadeOutUp() // hack
-    this.refs.BUTTON.fadeOutDown(800).then(()=>{
+    // this.props.updateState({hideKeyboard: 'yes now'})
+    Keyboard.dismiss()
+    this.refs.CARD.fadeOutDown(200)
+    this.refs.TITLE.fadeOutDown(200)
+    this.refs.BUTTON.fadeOutDown(200).then(()=>{
       this.refs.CONTAINER.fadeOut(400).then(()=>{
         Actions.pop()
       })
@@ -150,8 +153,9 @@ class InputTitle extends Component {
         <StatusBar hidden={true} animated={true} />
         <Text onPress={this._close} style={{zIndex: 999, position:'absolute',top: 0, color: 'white', right: 10,backgroundColor: 'transparent',padding:10}}>Close</Text>
         <Animatable.View ref="TITLE">
-          {walkthrough && <Text style={styles.title}>What {category}?</Text>}
-          {!walkthrough && <Text style={styles.title}>What?</Text>}
+          {walkthrough && !unfinished.title && <Text style={styles.title}>What {category}?</Text>}
+          {!walkthrough && !unfinished.title && <Text style={styles.title}>What?</Text>}
+          {unfinished.title && <Text style={styles.title}>Who told you?</Text>}
           </Animatable.View>
         <View style={styles.TOP}>
           <Animatable.View ref="CARD" style={[styles.CARD,{height: CARD_HEIGHT }]}>
@@ -171,9 +175,9 @@ class InputTitle extends Component {
 
 
         <Animatable.View ref="BUTTON">
-        {!unfinished.title && this.props.title !== '' && <Button text="Save Title" onPress={()=>this.saveTitle(inputHeight)} />}
+        {!unfinished.title && this.props.title !== '' && <Button text="Next" onPress={()=>this.saveTitle(inputHeight)} />}
 
-        {unfinished.title && this.props.friendName !== '' &&<Button text="save friend" onPress={this._setFriend} /> }
+        {unfinished.title && this.props.friendName !== '' &&<Button text="Save" onPress={this._setFriend} /> }
         </Animatable.View>
         <KeyboardSpacer />
       </Animatable.View>

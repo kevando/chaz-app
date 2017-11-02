@@ -6,11 +6,9 @@ import _ from 'lodash'
 import firebase from 'react-native-firebase';
 
 class DashboardContainer extends Component {
-  constructor(props) {
-    super(props)
-    this._changeActiveFilter = this._changeActiveFilter.bind(this)
-    this._onNewRecPress = this._onNewRecPress.bind(this)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
   componentWillMount() {
     this.state = {activeFilter: 'Everything'};
   }
@@ -25,24 +23,24 @@ class DashboardContainer extends Component {
     // TMP!!
     // Actions.push('NewRecLightbox')
     // Actions.push('Profile')
-    Actions.push('RecView',{rec: this.props.myRecs[0]})
+    // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friendObject: this.props.friends[2]})
   }
 
-  _changeActiveFilter(activeFilter) {
+  _changeActiveFilter = (activeFilter) => {
     this.setState({activeFilter})
   }
 
-  _onNewRecPress() {
+  _onNewRecPress = () => {
     const { initNewRec, user } = this.props
     initNewRec({to: user.uid})
     Actions.push('NewRecLightbox')
   }
 
-  _onBrandNewRecPress = () => {
+  _onBrandNewRecPress = (category) => {
     const { initNewRec, user } = this.props
-    initNewRec({to: user.uid})
-    Actions.push('NewRecLightbox',{walkthrough: true, category:'movie'})
+    initNewRec({to: user.uid, category})
+    Actions.push('NewRecLightbox',{walkthrough: true, category})
   }
 
   render() {
