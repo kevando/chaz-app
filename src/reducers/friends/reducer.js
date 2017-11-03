@@ -1,13 +1,4 @@
 import _ from 'lodash';
-
-// import {
-//   SAVE_FRIEND,
-//   ADD_REC_TO_FRIEND,
-//   DELETE_RECOMMENDATION,
-//   // SAVE_RECOMMENDATION,
-//   REFRESH_FRIENDS
-// } from '../actionTypes';
-
 import * as t from '../actionTypes'
 
 
@@ -26,6 +17,7 @@ export default function recs(friends = initialState, action = {}) {
     // called from listener
     case t.REFRESH_FRIENDS:
       return action.myFriends
+
 
     // -------------------------------------------
     // case t.SAVE_RECOMMENDATION:

@@ -23,10 +23,12 @@ export const colors = {
   purple:       env=='development' ? "#8a69c6":'#8a69c6',
   blue:         "#3888EA",
   // green:        "#51D429",
-  green:        "#1DDB90",
+  green:        "#51D429",
+  // green:        "#1DDB90", sort of a weird aqua green
   red:          "#E83A3A",
   yellow:       "#FFC64F",
   orange:       "#FF8801",
+  pink:         "#FF0AB1",
 
   black:        "#1E1E1E",
   darkGrey:     "#5E5E5E",

@@ -8,7 +8,7 @@ import { colors } from '../../config/styles';
 import styles from './styles';
 import { CategoryIcon, CategoryPicker, Category,CategoryPickerEditing } from '../../components/Category';
 import * as Friend from '../../components/Friend';
-import * as Rec from '../../components/Generic/Rec'
+import * as Rec from '../../components/Rec'
 import { Divider, Button } from '../../components/Generic'
 import { InputRecTitle } from '../../components/Card/Unfinished'
 import { Reminder } from '../../components/Reminder'

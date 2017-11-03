@@ -5,12 +5,33 @@ import moment from 'moment';
 import { Actions} from 'react-native-router-flux';
 
 import { colors, text } from '../config/styles';
-// import styles from './components/Card/styles';
 import { CategoryIcon, CategoryPicker, Category,CategoryPickerEditing } from './Category';
 import * as Friend from './Friend';
-import * as Rec from './Generic/Rec'
+// import * as Rec from './Generic/Rec'
 import { Divider, Button } from './Generic'
 import { Reminder } from './Reminder'
+
+
+
+// ---------------------------------------
+// Title
+// ---------------------------------------
+
+export const Title = ({rec, small, large}) => {
+
+  const fontSize = small ? 14 : large && 50 
+  const textStyles =
+    {
+      ...text,
+      fontSize,
+    }
+
+  return (
+    <Text style={textStyles}>{rec.title}</Text>
+  )
+}
+
+
 
 // ---------------------------------------
 // Abstract to a super generic card
@@ -33,7 +54,30 @@ render() {
         </View>
       </View>
       <View style={cardStyles.bodyContainer}>
-          <Rec.Title rec={rec} />
+          <Title rec={rec} />
+        </View>
+    </View>
+    )
+  }
+}
+
+class SkinnyCard extends Component {
+
+render() {
+  // console.log(this.props)
+  const { rec } = this.props;
+  return (
+    <View style={cardStyles.container}>
+      <View style={cardStyles.headerContainer}>
+        <View style={cardStyles.friendContainer}>
+          <Friend.Name friend={rec.friend} small />
+        </View>
+        <View style={cardStyles.iconContainer}>
+          {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
+        </View>
+      </View>
+      <View style={cardStyles.bodyContainer}>
+          <Title rec={rec} small />
         </View>
     </View>
     )
@@ -168,20 +212,23 @@ const cardStyles = StyleSheet.create({
 
 export class Card extends Component {
 
-  _onCardPress() {
-    if(this.props.unfinished) return; // dont allow expand if rec isnt saved
+  _onCardPress = () => {
     Actions.push('RecView',{rec: this.props.rec})
   }
 
   render() {
     // console.log(this.props)
-    const { rec, listItem, detail } = this.props;
+    const { rec, listItem, skinny } = this.props;
 
-    if(listItem) {
+    if(listItem) { // Dashboard
       return (
-        <TouchableOpacity onPress={this._onCardPress.bind(this)} activeOpacity={0.9}>
+        <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
           <GenericCard rec={rec} />
         </TouchableOpacity>
+      )
+    } else if(skinny) {  // FriendView
+      return (
+          <SkinnyCard rec={rec} />
       )
     } else {
       return null
@@ -207,7 +254,7 @@ render() {
 
           <View style={cardStyles.headerContainer}>
             <View style={cardStyles.friendContainer}>
-              <Friend.Name friend={rec.friend} />
+              <Friend.Name friend={rec.friend} onPress={() => Actions.push('FriendView',{friend: rec.friend})} />
             </View>
 
           </View>
@@ -215,7 +262,7 @@ render() {
           {
             isEditing ?
               <InputRecTitle title={rec.title} updateRec={updateRec} updateState={updateState} /> :
-              <Rec.Title rec={rec} />
+              <Title rec={rec} />
           }
 
           </View>

@@ -10,7 +10,7 @@ import {
 
 import * as t from '../actionTypes'
 
-import { recsRef, friendsRef } from '../../config/firebase'
+import { recsRef, friendsRef, usersRef } from '../../config/firebase'
 
 
 export function addFriend(friend) {
@@ -37,50 +37,51 @@ export function saveFriend(friend) {
 
 
 // ----------------------------------------------------
-// Called from FriendView
+// Called from Invite
 // check if phone# is in db
 // if not: save # to friend obj, save an invite obj, open imsg
 // if found: save # and uid to db,
 
-export function sendInvite(friend, phoneNumber) {
-  // console.log('sendInvite', phoneNumber)
-
-
+export function searchUsers(friend,phoneNumber) {
+  console.log('search users',phoneNumber)
   return (dispatch, getState) => {
-    const user = getState().user
-    // See if phone# exists for a user
     usersRef.where("phoneNumber", "==", phoneNumber)
       .get()
       .then(querySnapshot => {
         let userWithPhoneNumber = null
         querySnapshot.forEach(doc =>  userWithPhoneNumber = doc.data() )
 
-        if(!userWithPhoneNumber) {
+          if(!userWithPhoneNumber) {
 
-          // no user found, lets save this phone# to the friend obj for later
-          dispatch(updateFriend(friend,{phoneNumber,invitedAt: Date.now()}))
-
-          // create an invite obj, not sure how im going to use this yet
-          dispatch(createInvite(user,friend))
-
-          // now open imessage
-          text(phoneNumber, 'Hey, check out this new app called chaz')
-
-          dispatch({type: SET_APP_STATUS, status: 'Sending invite'})
-        } else {
-          // user does exist w that phonenumber,
-          // update friend w phonenumber and uid. uid assumes we want to make a connection
-          // which again, not sure how i want to do connections just yet
-          dispatch(assignUserToFriend(userWithPhoneNumber,friend))
-          // alert('we found the user! and we added him as ur friend')
-          dispatch({type: SET_APP_STATUS, status: 'Found the user!'})
-          // dispatch({type: SET_APP_STATUS, status: 'Found the user! for sure'})
-
-        }
+            // no user found,
+            dispatch(updateFriend(friend,{searchResults: 'no user found'}))
+          } else {
+            // user found!
+            dispatch(updateFriend(friend,{searchResults: 'user found',found: userWithPhoneNumber}))
+          }
       })
-      .catch(error => dispatch({type: SET_APP_ERROR, error}) )
   }
 }
+
+export function sendInvite(friend, phoneNumber) {
+
+  return (dispatch, getState) => {
+    const user = getState().user
+
+
+    // no user found, lets save this phone# to the friend obj for later
+    dispatch(updateFriend(friend,{searchResults: 'invitation sent',phoneNumber,invitedAt: Date.now()}))
+
+    // create an invite obj, not sure how im going to use this yet
+    dispatch(createInvite(user,friend))
+
+    // now open imessage
+    text(phoneNumber, 'Hey, check out this new app called chaz')
+
+
+  }
+}
+
 
 function updateFriend(friend,data) {
   return dispatch => {
@@ -103,14 +104,16 @@ function createInvite(user,friend) {
 }
 
 
-export function assignUserToFriend(user,friend) {
+export function assignUserToFriend(friend) {
+
+  console.log('assign user')
 
   // Query for uid based on username
   // this will actually happen in the RecView container
   return (dispatch, getState) => {
-    const myUsername = getState().user.username
+    // const myUsername = getState().user.username
       // ok now that we have the user id, lets update the friend object
-      friendsRef.doc(friend.id).update({uid:user.uid})
+      friendsRef.doc(friend.id).update({uid:friend.found.uid, found: null, searchResults: 'Found and connected',})
         // tmp not sending messages for now
         // .then( () =>  addMessage(user.uid,myUsername) )
         .catch(error => dispatch({type: SET_APP_ERROR, error}))

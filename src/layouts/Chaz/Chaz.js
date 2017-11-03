@@ -8,7 +8,6 @@ import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-na
 import Dashboard from '../../routes/Dashboard';
 import RecInput from '../../routes/RecInput';
 // import Walkthrough from '../../routes/Walkthrough';
-import InputFriend from '../../routes/InputFriend';
 import ConfirmRecommendation from '../../routes/ConfirmRecommendation';
 import { CloseButton, BackButton, ProfileButton, DashboardRightButton } from '../../components/Nav';
 import RecView from '../../routes/RecView';
@@ -18,6 +17,7 @@ import Register from '../../routes/Register';
 import Profile from '../../routes/Profile';
 import LoggedOut from '../../routes/LoggedOut';
 import Loading from '../../routes/Loading';
+import Invite from '../../routes/Invite';
 
 const AppToasts = () => { return (<Text>dude</Text>)}
 
@@ -108,7 +108,12 @@ class Chaz extends Component {
               </Lightbox>
               <Scene key='NewRecLightboxModal' component={RecInput} title='' />
 
+              <Stack key="InviteModall"  back hideNavBar={false}>
 
+              <Scene key='InviteScenee' component={Invite} title='' renderBackButton={() => <CloseButton />} />
+              </Stack>
+
+<Scene key='InviteModal' hideNavBar={false} back component={Invite} title='' renderBackButton={() => <CloseButton />} />
             </Modal>
           </Overlay>
         </Router>

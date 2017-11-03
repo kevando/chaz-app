@@ -8,18 +8,43 @@ import * as Animatable from 'react-native-animatable';
 // FancyButton = Animatable.createAnimatableComponent(Button);
 
 
+// ---------------------------------------
+//  Label
+// ---------------------------------------
+
 
 export const Label = (props) => {
-  const labelStyles = [
-    styles.label,
+  const styles = [
+    labelStyles.text,
     props.center && {textAlign: 'center',marginVertical: 20,paddingHorizontal: 40,},
-    props.title && {fontSize: 20,fontWeight: '600'}
+    props.title && {fontSize: 20,fontWeight: '600'},
+    props.large && {fontSize: 20,fontWeight: '700'},
   ]
   return (
-    <Text style={labelStyles}>{props.children}</Text>
+    <Text style={styles}>{props.children}</Text>
   )
 }
 
+const labelStyles = StyleSheet.create({
+
+  text: {
+    ...text,
+    color: 'white',
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight:20,
+    marginTop:25,
+    marginHorizontal: 12,
+    // marginRight: 12,
+  },
+
+
+});
+
+
+// ---------------------------------------
+//  Button
+// ---------------------------------------
 
 export const Button = (props) => {
 

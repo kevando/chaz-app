@@ -38,6 +38,8 @@ export const CONFIRM_CODE_ERROR = 'CONFIRM_CODE_ERROR'
 export const CONFIRM_CODE_ATTEMPT = 'CONFIRM_CODE_ATTEMPT'
 export const USERS_LINKED = 'USERS_LINKED'
 export const SET_USER_DATA = 'SET_USER_DATA'
+export const USER_FOUND = 'USER_FOUND'
+export const USER_NOT_FOUND = 'USER_NOT_FOUND'
 
 // App data for UI
 export const SET_APP_STATUS = 'SET_APP_STATUS'

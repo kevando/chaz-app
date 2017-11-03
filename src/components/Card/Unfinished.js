@@ -10,7 +10,7 @@ import { colors } from '../../config/styles';
 import styles from './styles';
 import { CategoryIcon } from '../../components/Category';
 import { Button } from '../../components/Generic';
-import * as Rec from '../../components/Generic/Rec'
+import * as Rec from '../../components/Rec'
 import * as Friend from '../../components/Friend';
 
 MyCustomComponent = Animatable.createAnimatableComponent(TextInput);

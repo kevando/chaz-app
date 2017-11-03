@@ -24,7 +24,8 @@ class DashboardContainer extends Component {
     // Actions.push('NewRecLightbox')
     // Actions.push('Register')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[1]})
+    // Actions.push('FriendView',{friend: this.props.friends[0]})
+    Actions.push('InviteModal',{friend: this.props.friends[0]})
   }
 
   _changeActiveFilter = (activeFilter) => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FriendView from './FriendView';
+import Invite from './Invite';
 import { Actions } from 'react-native-router-flux';
 import { AlertIOS } from 'react-native';
 import firebase from 'react-native-firebase';
@@ -7,24 +7,20 @@ import _ from 'lodash'
 
 // const usersRef = firebase.firestore().collection("users")
 
-class FriendViewContainer extends Component {
+class InviteContainer extends Component {
   constructor(props) {
     super(props)
+    console.log('InviteContainer',props)
     this.state = {
       phoneNumber: '',
-      validPhoneNumber: false
+      validPhoneNumber: false,
+      invitation: null,
+      updateState: state => this.setState(state),
+      userFound: null,
     }
-    // this._deleteRecommendation = this._deleteRecommendation.bind(this)
-    this._onGiveRecPress = this._onGiveRecPress.bind(this)
-    // this._assignUser = this._assignUser.bind(this)
-    this._onKeyPress = this._onKeyPress.bind(this)
   }
-
-  _onKeyPress(phoneNumber){
-    this.setState({
-      phoneNumber,
-      validPhoneNumber: phoneNumber.length === 10
-    })
+  componentDidMount() {
+    console.log('mounted?')
   }
 
   // _assignUser() {
@@ -46,34 +42,29 @@ class FriendViewContainer extends Component {
     const { sendInvite, friend } = this.props
     const { phoneNumber } = this.state
     sendInvite(friend, phoneNumber)
+    // update the UI
+    this.setState({invitation: 'sending'})
   }
 
-  _onGiveRecPress() {
-    const { initNewRec,friend, user } = this.props
-    initNewRec({from: user.uid, to: friend.uid, friend: {name: 'me'}})
-    Actions.push('InputStack')
-  }
 
   render() {
-    console.log('FriendViewContainer',this.props)
-
-    if(!this.props.friend)  { return null } // SOME ERROR
+    console.log('InviteContainer',this.props)
 
     return (
-      <FriendView
-        givenRecs={this.props.givenRecs}
+      <Invite
+        {...this.state}
+
         friend={this.props.friend}
-        myRecs={this.props.myRecs}
-        onKeyPress={this._onKeyPress}
         user={this.props.user}
         sendInvite={this._sendInvite}
-        onGiveRecPress={this._onGiveRecPress}
-        {...this.state}
         app={this.props.app}
+        searchUsers={() => this.props.searchUsers(this.props.friend,this.state.phoneNumber)}
+        sendInvite={() => this.props.sendInvite(this.props.friend,this.state.phoneNumber)}
+        assignFriend={() => this.props.assignUserToFriend(this.props.friend)}
       />
     );
   }
 
 }
 
-export default FriendViewContainer;
+export default InviteContainer;
