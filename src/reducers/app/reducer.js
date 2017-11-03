@@ -17,6 +17,8 @@ import {
   USERS_LINKED
 } from '../actionTypes';
 
+import * as t from '../actionTypes'
+
 const initialState = {
   isAuthenticated: false,
   uid: null,
@@ -29,16 +31,17 @@ export default function app(app = initialState, action = {}) {
   switch (action.type) {
 
     // -------------------------------------------
-    case USER_SIGNED_IN:
+    case t.USER_IS_AUTHENTICATED:
       return {
         ...app,
         isAuthenticated: true,
-        isAnonymous: action.user.isAnonymous,
+        providerData: action.user.providerData,
+        providerId: action.user.providerId,
         uid: action.user.uid,
       }
 
     // -------------------------------------------
-    case USER_SIGNED_OUT:
+    case t.USER_SIGNED_OUT:
     console.log('signed out app')
       return {
         ...app,
@@ -48,7 +51,7 @@ export default function app(app = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case USERS_LINKED:
+    case t.USERS_LINKED:
       // console.log('USERS_LINKED',action.user)
       // console.log('USER_SIGNED_IN',action.user.email)
       return {
@@ -61,13 +64,13 @@ export default function app(app = initialState, action = {}) {
         activeStep: 3,
       }
     // -------------------------------------------
-    case SET_NOTIFICATION_PERMISSION:
+    case t.SET_NOTIFICATION_PERMISSION:
       return Object.assign({}, app, {
         notificationPermission: action.response
       })
 
     // -------------------------------------------
-    case SET_TOKEN:
+    case t.SET_TOKEN:
       return {
         ...app,
         token: action.token,
@@ -75,7 +78,7 @@ export default function app(app = initialState, action = {}) {
 
     // -------------------------------------------
     // Phone auth
-    case SIGN_IN_ATTEMPT:
+    case t.SIGN_IN_ATTEMPT:
       return {
         ...app,
         status: 'Signing In..',
@@ -83,7 +86,7 @@ export default function app(app = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SIGN_IN_CONFIRM_RESULT:
+    case t.SIGN_IN_CONFIRM_RESULT:
       console.log(action)
 
       return {
@@ -96,27 +99,27 @@ export default function app(app = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SIGN_IN_ERROR:
+    case t.SIGN_IN_ERROR:
       return {
         ...app,
         status: action.status
       }
     // -------------------------------------------
-    case CONFIRM_CODE_ATTEMPT:
+    case t.CONFIRM_CODE_ATTEMPT:
       return {
         ...app,
         status: action.status,
         // error: action.error,
       }
     // -------------------------------------------
-    case CONFIRM_CODE_ERROR:
+    case t.CONFIRM_CODE_ERROR:
       return {
         ...app,
         status: 'Confirm code error' + action.error.message,
         error: action.error,
       }
     // -------------------------------------------
-    case CONFIRM_CODE_SUCCESS:
+    case t.CONFIRM_CODE_SUCCESS:
       return {
         ...app,
         status: action.status,
@@ -124,13 +127,13 @@ export default function app(app = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SET_APP_STATUS:
+    case t.SET_APP_STATUS:
       return {
         ...app,
         status: action.status,
       }
     // -------------------------------------------
-    case SET_APP_ERROR:
+    case t.SET_APP_ERROR:
       return {
         ...app,
         error: action.error,

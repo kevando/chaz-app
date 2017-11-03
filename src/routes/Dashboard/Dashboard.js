@@ -2,15 +2,15 @@ import React from 'react';
 import { View, ScrollView, StatusBar ,Text} from 'react-native';
 import _ from 'lodash';
 import { Button } from '../../components/Generic';
-import { RecListItem } from '../../components/Card/Rec';
+import { Card } from '../../components/Rec'
 import Filter from '../../components/Nav/Filter';
-import NotificationPermission from '../../components/Card/NotificationPermission';
+
 import { OnboardingCard } from '../../components/Card/Onboarding'
 import styles from './styles';
 import firebase from 'react-native-firebase'
 
 const Dashboard = (props) => {
-  // console.log(props)
+  // console.log('Dashboard.js', props)
   const { myRecs, onNewRecPress, onNewGivenRecPress, activeFilter, changeActiveFilter, givenRecs } = props;
 
 
@@ -33,7 +33,7 @@ const Dashboard = (props) => {
       {
         _.map(filteredRecs,function(rec,i) {
           return(
-            <RecListItem rec={rec} key={i} />
+            <Card rec={rec} key={i} listItem />
           )
         })
       }

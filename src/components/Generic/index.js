@@ -34,6 +34,7 @@ export const Button = (props) => {
       borderColor: bgcolor ? colors[bgcolor] : colors.green,
       borderRadius: rounded ? 40 : 0,
       borderWidth: 10,
+      // backgroundColor:'blue'
     },
 
     text:
@@ -50,11 +51,12 @@ export const Button = (props) => {
       margin: 0,
       fontSize: 17,
       color: color || 'white',
+      // backgroundColor:'green'
     }
   })
 
   let ButtonContainer = (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8} >
       <View style={styles.container}>
         <Text style={styles.text}>
           {text}

@@ -1,14 +1,9 @@
-import firebase from 'react-native-firebase';
-import {
-  CREATE_USER,
-  USER_SIGNED_OUT,
-  USER_SIGNED_IN,
-  SET_TOKEN,
-  USER_CREATED,
-} from '../actionTypes';
 
-const UsersRef = firebase.firestore().collection("users")
+import * as t from '../actionTypes'
 
+export function setUserData(data) {
+  return { type: t.SET_USER_DATA, data }
+}
 
 // export function createUser(email, password, username,cb) {
 //   return dispatch => {

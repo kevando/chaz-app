@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // const Permissions = require('react-native-permissions');
 // import firebase from 'react-native-firebase';
-import NotificationPermissionCard from './NotificationPermission';
+// import NotificationPermissionCard from './NotificationPermission';
 
 import * as AppActions from '../../reducers/app/actions';
 //

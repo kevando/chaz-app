@@ -6,14 +6,21 @@ import { AlertIOS } from 'react-native';
 class RecViewContainer extends Component {
   constructor(props) {
     super(props)
+    // console.log('PROPS!!!!!',props)
+    this.state = {
+      isEditing: false,
+      rec: props.rec,
+      updateState: (state) => this.setState(state),
+      updateRec: (recData) => this.setState({rec: {...this.state.rec, ...recData }}),
+    }
     this._deleteRecommendation = this._deleteRecommendation.bind(this)
     this._onDeletePress = this._onDeletePress.bind(this)
-    this._onEditPress = this._onEditPress.bind(this)
     this._onAssignPress = this._onAssignPress.bind(this)
   }
 
-  _onEditPress() {
-    Actions.push('EditTitle',{rec: this.props.rec })
+  _saveRec = () => {
+    this.props.updateRecommendation(this.state.rec)
+    this.setState({isEditing: false})
   }
 
   _onDeletePress() {
@@ -38,15 +45,15 @@ class RecViewContainer extends Component {
   }
 
   render() {
-    // console.log('RecViewContainer',this.props)
+    // console.log('RecViewContainer STATE',this.state)
 
     if(!this.props.rec)  { return null }
     return (
       <RecView
+        {...this.state}
         app={this.props.app}
-        rec={this.props.rec}
+        saveRec={this._saveRec}
         onDeletePress={this._onDeletePress}
-        onEditPress={this._onEditPress}
         updateRecommendation={this.props.updateRecommendation}
         onAssignPress={this._onAssignPress}
       />

@@ -1,27 +1,49 @@
 import React from 'react';
 import { View, Text, ScrollView, StatusBar } from 'react-native';
-import { SetReminderButton, EnableNotificationsButton  } from '../../components/SetReminder'
-import { CardDetails } from '../../components/Card/Rec'
+import KeyboardSpacer from 'react-native-keyboard-spacer'
+import { SetReminderButton  } from '../../components/SetReminder'
+import EnableNotifications from '../../components/EnableNotifications'
+import { CardDetails, CardDetailsEditing } from '../../components/Card/Rec'
+import { CardDetail } from '../../components/Rec'
 import styles from './styles';
+import { Button } from '../../components/Generic'
 //
 
-const RecView = ({ rec, app, onEditPress, onDeletePress, updateRecommendation,onAssignPress }) => {
-
+const RecView = ({ rec, app, isEditing, updateRec, updateState, saveRec, onDeletePress, updateRecommendation,onAssignPress }) => {
   return (
+    <View style={{flex:1}}>
     <ScrollView style={styles.container}>
 
-      <CardDetails rec={rec} />
+
+    {
+      isEditing ?
+        <Text onPress={()=>updateState({isEditing: false})}>Cancel</Text> :
+        <Text onPress={()=>updateState({isEditing: !isEditing})}>Toggle edit</Text>
+    }
+
+    {
+      isEditing ?
+        <CardDetail isEditing rec={rec} updateRec={updateRec} updateState={updateState} saveRec={saveRec} /> :
+        <CardDetail rec={rec} />
+    }
+
+
       {
         app.notificationPermission == 'authorized' ?
-
-        <SetReminderButton rec={rec} updateRecommendation={updateRecommendation} app={app}/>
-
-        :
-
-        <EnableNotificationsButton rec={rec} updateRecommendation={updateRecommendation} app={app}/>
+          <SetReminderButton rec={rec} updateRecommendation={updateRecommendation} app={app}/> :
+          <EnableNotifications button />
       }
 
+
+
+
+
     </ScrollView>
+    { isEditing &&
+      <Button text="Save" onPress={saveRec} />
+    }
+    <KeyboardSpacer />
+    </View>
   );
 
   // return (

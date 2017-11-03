@@ -57,7 +57,8 @@ class FriendViewContainer extends Component {
   render() {
     // console.log('FriendViewContainer',this.props)
 
-    if(!this.props.friend)  { return null }
+    if(!this.props.friend)  { return null } // SOME ERROR
+
     return (
       <FriendView
         givenRecs={this.props.givenRecs}

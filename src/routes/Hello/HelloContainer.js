@@ -13,19 +13,6 @@ import * as Animatable from 'react-native-animatable';
 
 NameInput = Animatable.createAnimatableComponent(TextInput);
 
-// const Content = ({contentIndex, contents}) => {
-//   return contents[contentIndex]
-// }
-
-// const HelloInput = (props) => {
-//   return (<Text style={styles.greetingText}>Hello____</Text>)
-// }
-//
-// const HelloGreeting = (props) => {
-//   return (<Text style={styles.greetingText}>Hello Kevin,</Text>)
-// }
-
-
 Animatable.initializeRegistryWithDefinitions({
   textDance: {
     0: {
@@ -43,8 +30,8 @@ class HelloContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: 'Kevando',
-      nameSaved: true,
+      name: 'kevo',
+      nameSaved: false,
 
       category: null,
     }
@@ -53,8 +40,13 @@ class HelloContainer extends Component {
 
 
   _saveName = () => {
+    console.log(this.props)
+    const { name } = this.state
     this.refs.INPUT.textDance(800)
-      .then(()=> this.setState({nameSaved: true}))
+      .then(()=> {
+        this.setState({nameSaved: true})
+        this.props.setUserData({name})
+      })
     // this.refs.GREETING.flash()
 
   }

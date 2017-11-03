@@ -36,6 +36,23 @@ render() {
 }
 };
 
+
+export class FriendHeader extends Component {
+render() {
+  const { friend } = this.props;
+  return (
+    <View>
+        <View style={{flex:1,marginTop: 40,}}>
+
+        <View style={styles.textContainer}>
+
+            <Text style={{fontSize: 30,textAlign: 'center', color: 'white'}}>{friend.name}</Text>
+          </View>
+        </View>
+      </View>
+  );
+}
+};
 export class UserCard extends Component {
 render() {
   const { friend } = this.props;

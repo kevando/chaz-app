@@ -6,10 +6,12 @@ import { Actions} from 'react-native-router-flux';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-import { CategoryIcon, CategoryPicker, Category } from '../../components/Category';
-import * as Friend from '../../components/Generic/Friend';
+import { CategoryIcon, CategoryPicker, Category,CategoryPickerEditing } from '../../components/Category';
+import * as Friend from '../../components/Friend';
 import * as Rec from '../../components/Generic/Rec'
-import { Divider } from '../../components/Generic'
+import { Divider, Button } from '../../components/Generic'
+import { InputRecTitle } from '../../components/Card/Unfinished'
+import { Reminder } from '../../components/Reminder'
 
 
 // ---------------------------------------
@@ -84,28 +86,26 @@ render() {
 
           <View style={styles.headerContainer}>
             <View style={styles.friendContainer}>
-              <Friend.Name friend={rec.friend} />
+              <Friend.Name friend={rec.friend} clickable />
             </View>
             <View style={styles.iconContainer}>
-
             </View>
           </View>
           <View style={styles.bodyContainer}>
               <Rec.Title rec={rec} />
           </View>
-
           <Divider />
-
           {
             rec.category ?
-
               <Category rec={rec} />
-
             :
-
             <CategoryPicker rec={rec} />
           }
-
+<Reminder rec={rec} />
+          {
+            rec.reminder &&
+<Reminder rec={rec} />
+          }
 
         </View>
 
@@ -114,19 +114,42 @@ render() {
   );
 
 }
-//
-// <View style={styles.iconContainer}>
-//   <CategoryIcon category={rec.category} size={25} color="grey" />
-// </View>
-//
-// <View style={styles.textContainer}>
-//   <View style={styles.recContainer}>
-//     <Text style={styles.recText}>{rec.title}</Text>
-//   </View>
-//   <View style={styles.friendContainer}>
-//     <Text style={styles.friendText}>Recommended by: {rec.friend ? rec.friend.name : 'Me'}</Text>
-//   </View>
-// </View>
+}
+
+export class CardDetailsEditing extends Component {
+
+render() {
+  // console.log(this.props)
+  const { rec, updateRec,updateState, saveRec } = this.props;
+  return (
+    <View style={{flex: 1}}>
+        <View style={[styles.container,{paddingBottom: 15,marginTop: -10}]}>
+
+          <View style={styles.headerContainer}>
+            <View style={styles.friendContainer}>
+              <Friend.Name friend={rec.friend} />
+            </View>
+            <View style={styles.iconContainer}>
+            </View>
+          </View>
+          <View style={styles.bodyContainer}>
+              <InputRecTitle title={rec.title} updateRec={updateRec} updateState={updateState} />
+          </View>
+          <Divider />
+
+            <CategoryPickerEditing category={rec.category} updateRec={updateRec} />
+
+        </View>
+
+        <Button text="Save" onPress={saveRec} />
+        </View>
+
+
+
+  );
+
+}
+
 
 };
 

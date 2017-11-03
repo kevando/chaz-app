@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import { View, Text, TextInput, StatusBar, Keyboard } from 'react-native';
+import { View, Text, TextInput, StatusBar, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
+import _ from 'lodash'
 import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import * as Animatable from 'react-native-animatable'
 import Unfinished from '../../components/Card/Unfinished'
@@ -72,6 +74,29 @@ class InputTitle extends Component {
     this.props.setTitle()
 
   }
+
+  // _onFriendPress = (friend) => {
+  //   var collapseDuration = 800
+  //
+  //   this.refs.CARD.transitionTo({marginTop:38},collapseDuration) // hack
+  //   //
+  //   // this.props.updateState({})
+  //   setTimeout(()=>{
+  //
+  //     this.refs.TITLE.fadeOutUp() // hack
+  //     this.refs.BUTTON.fadeOutDown().then(()=>{
+  //       this._throwParty()
+  //     })
+  //
+  //   },collapseDuration)
+  //
+  //   const { setFriendId } = this.props;
+  //   setFriendId(friend.id); // Redux
+  //
+  //   this.props.addRecommendation(); // Redux
+  //   // Actions.pop() // might error
+  //
+  // }
 
   _setFriend = () => {
     var collapseDuration = 800
@@ -145,11 +170,11 @@ class InputTitle extends Component {
 
 
 
-    const { updateState, renderButton, placeholderText, unfinished, setTitle, walkthrough, category, inputHeight } = this.props;
+    const { updateState, renderButton, placeholderText, onFriendPress, friends, unfinished, setTitle, walkthrough, category, inputHeight } = this.props;
 
     return (
 
-      <Animatable.View  ref="CONTAINER" style={styles.CONTAINER}>
+      <Animatable.View  ref="CONTAINER" style={styles.container}>
         <StatusBar hidden={true} animated={true} />
         <Text onPress={this._close} style={{zIndex: 999, position:'absolute',top: 0, color: 'white', right: 10,backgroundColor: 'transparent',padding:10}}>Close</Text>
         <Animatable.View ref="TITLE">
@@ -174,10 +199,27 @@ class InputTitle extends Component {
         </View>
 
 
+
+        {unfinished.title  &&
+        <View keyboardShouldPersistTaps="always" style={styles.friendsContainer}>
+
+          { _.map(friends, function(friend,i) {
+            return (
+              <TouchableOpacity key={i} onPress={() => onFriendPress(friend)} style={styles.friendTouchable}>
+                <Text style={styles.friendText}>{friend.name}{friend.uid&&'!'}</Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      }
+
+
+
+
         <Animatable.View ref="BUTTON">
         {!unfinished.title && this.props.title !== '' && <Button text="Next" onPress={()=>this.saveTitle(inputHeight)} />}
 
-        {unfinished.title && this.props.friendName !== '' &&<Button text="Save" onPress={this._setFriend} /> }
+        {unfinished.title && this.props.friendName !== '' && <Button text="Save" onPress={this._setFriend} /> }
         </Animatable.View>
         <KeyboardSpacer />
       </Animatable.View>

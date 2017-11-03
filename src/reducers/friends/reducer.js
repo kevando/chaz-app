@@ -1,12 +1,14 @@
 import _ from 'lodash';
 
-import {
-  SAVE_FRIEND,
-  ADD_REC_TO_FRIEND,
-  DELETE_RECOMMENDATION,
-  // SAVE_RECOMMENDATION,
-  REFRESH_FRIENDS
-} from '../actionTypes';
+// import {
+//   SAVE_FRIEND,
+//   ADD_REC_TO_FRIEND,
+//   DELETE_RECOMMENDATION,
+//   // SAVE_RECOMMENDATION,
+//   REFRESH_FRIENDS
+// } from '../actionTypes';
+
+import * as t from '../actionTypes'
 
 
 const initialState = [ ];
@@ -17,16 +19,16 @@ export default function recs(friends = initialState, action = {}) {
   switch (action.type) {
 
     // -------------------------------------------
-    case SAVE_FRIEND:
+    case t.SAVE_FRIEND:
       return friends.concat([action.friend])
 
     // -------------------------------------------
     // called from listener
-    case REFRESH_FRIENDS:
+    case t.REFRESH_FRIENDS:
       return action.myFriends
 
     // -------------------------------------------
-    // case SAVE_RECOMMENDATION:
+    // case t.SAVE_RECOMMENDATION:
     //   // return friends
     //   console.log('friends',friends)
     //
@@ -36,7 +38,7 @@ export default function recs(friends = initialState, action = {}) {
     //   return newFriendsList
 
     // -------------------------------------------
-    // case DELETE_RECOMMENDATION:
+    // case t.DELETE_RECOMMENDATION:
     //   // remove from
     //   // console.log('friends',friends)
     //

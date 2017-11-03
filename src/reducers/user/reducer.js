@@ -1,11 +1,13 @@
-import {
-  INITIALIZE_APP,
-  USER_SIGNED_IN,
-  USER_SIGNED_OUT,
-  CONFIRM_CODE_ERROR,
-  USERS_LINKED,
-  SET_USER_PHONE
-} from '../actionTypes';
+// import {
+//   INITIALIZE_APP,
+//   USER_SIGNED_IN,
+//   USER_SIGNED_OUT,
+//   CONFIRM_CODE_ERROR,
+//   USERS_LINKED,
+//   SET_USER_PHONE,
+//   USER_IS_AUTHENTICATED
+// } from '../actionTypes';
+import * as t from '../actionTypes'
 
 const initialState = {
   uid: null,
@@ -16,26 +18,16 @@ export default function user(user = initialState, action = {}) {
   switch (action.type) {
 
     // -------------------------------------------
-    case USER_SIGNED_IN:
-
-      // TMP!!
-      // right now isAnon not working quite right
-      // hardcoding displayname on auth link
-
-      var isAnon = action.user.providerData.length ? false : true
-
+    case t.USER_IS_AUTHENTICATED:
       return {
         ...user,
         uid: action.user.uid,
-        // isAnonymous: action.user.isAnonymous, // tmp
-        isAnonymous: isAnon,
-        // email: action.user.email,
-        // username: action.user.displayName,
-        displayName: action.user.displayName
+        displayName: action.user.displayName,
+        providerData: action.user.providerData,
       }
 
     // -------------------------------------------
-    case USERS_LINKED:
+    case t.USERS_LINKED:
       console.log('USERS_LINKED',action.user)
 
       // TMP!!
@@ -51,17 +43,17 @@ export default function user(user = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case USER_SIGNED_OUT:
+    case t.USER_SIGNED_OUT:
     console.log('signed out user')
       return {
         uid: null,
         isAuthenticated: false,
       }
 
-    case SET_USER_PHONE:
+    case t.SET_USER_DATA:
       return {
         ...user,
-        phoneNumber: action.phoneNumber,
+        ...action.data,
       }
 
     // -------------------------------------------

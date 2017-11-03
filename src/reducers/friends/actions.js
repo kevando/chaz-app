@@ -8,8 +8,9 @@ import {
   SET_APP_ERROR,
 } from '../actionTypes';
 
-const friendsRef = firebase.firestore().collection("friends")
-const usersRef = firebase.firestore().collection("users")
+import * as t from '../actionTypes'
+
+import { recsRef, friendsRef } from '../../config/firebase'
 
 
 export function addFriend(friend) {
@@ -18,13 +19,13 @@ export function addFriend(friend) {
 
     friendsRef.add(friend)
     .then(docRef => {
-      console.log('friebnd',friend)
+      console.log('friend saved',friend)
       const newFriend = {
         ...friend,
         id: docRef.id
       }
       dispatch({ type: SAVE_FRIEND, friend: newFriend })
-      dispatch({ type: SET_FRIEND_ID, friendId: docRef.id })
+      dispatch({ type: SET_FRIEND_ID, friendId: docRef.id }) // unfinished
     })
   }
 }
@@ -135,23 +136,4 @@ function addMessage(uid,username) {
     }
 })
 
-}
-
-
-
-// Firestore Listener (called on appInitialized)
-export function listenForFriends(uid) {
-  return dispatch => {
-  friendsRef.where("owner", "==", uid)
-  // or recs that ive given
-    .onSnapshot(function(querySnapshot) {
-        var myFriends = [];
-        // console.log('friend listner fired!')
-        querySnapshot.forEach(function(doc) {
-            // console.log('recs listner',doc.data())
-            myFriends.push({...doc.data(),id: doc.id});
-        });
-        dispatch({type: REFRESH_FRIENDS, myFriends})
-    });
-  }
 }

@@ -15,6 +15,8 @@ import {
   INIT_REC,
 } from '../actionTypes';
 
+import * as t from '../actionTypes'
+
 const Recs = [
   // {
   //   id: '1',
@@ -53,17 +55,17 @@ const initialState =
   };
 
 export default function recs(recommendations = initialState, action = {}) {
-  // console.log(action)
-  // console.log(recommendations)
-  // console.log(recommendations.unfinished)
+  // // console.log(action)
+  // // console.log(recommendations)
+  // // console.log(recommendations.unfinished)
   switch (action.type) {
-    case 'ADD_REC':
-      return {
-        ...recommendations,
-        myRecs: [action.rec].concat(recommendations.myRecs)
-      }
+  //   // case t.'ADD_REC':
+  //     return {
+  //       ...recommendations,
+  //       myRecs: [action.rec].concat(recommendations.myRecs)
+  //     }
   // -------------------------------------------
-  case INIT_REC:
+  case t.INIT_REC:
     return {
       ...recommendations,
       unfinished: {
@@ -74,7 +76,7 @@ export default function recs(recommendations = initialState, action = {}) {
       }
     }
     // -------------------------------------------
-    case SET_TITLE:
+    case t.SET_TITLE:
       return {
         ...recommendations,
         unfinished: {
@@ -84,7 +86,8 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SET_FRIEND_ID:
+    case t.SET_FRIEND_ID:
+    console.log('SET_FRIEND_ID')
       return {
         ...recommendations,
         unfinished: {
@@ -94,7 +97,7 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SET_REC_TO:
+    case t.SET_REC_TO:
       return {
         ...recommendations,
         unfinished: {
@@ -105,7 +108,7 @@ export default function recs(recommendations = initialState, action = {}) {
 
     // -------------------------------------------
     // Saved rec to firestore, clear unfinished so UI refreshes
-    case SAVE_RECOMMENDATION_SUCCESS:
+    case t.SAVE_RECOMMENDATION_SUCCESS:
       // console.log('SAVE_RECOMMENDATION_SUCCESS')
       return {
         ...recommendations,
@@ -113,7 +116,7 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case UPDATE_RECOMMENDATION: // TEMP!!!!!! DEV
+    case t.UPDATE_RECOMMENDATION: // TEMP!!!!!! DEV
     // console.warn('UPDATE REC')
       var newList = _.map(recommendations.myRecs, function(rec) {
         return rec.id === action.rec.id ? action.rec : rec; // better way to do this for sure
@@ -124,7 +127,7 @@ export default function recs(recommendations = initialState, action = {}) {
         myRecs: newList,
       }
     // -------------------------------------------
-    case SET_REMINDER:
+    case t.SET_REMINDER:
       // alert(action.reminderDate)
 
       var newList = _.map(recommendations.list, function(rec) {
@@ -137,7 +140,7 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    // case DELETE_RECOMMENDATION:
+    // case t.DELETE_RECOMMENDATION:
     //
     //   var newList = _.filter(recommendations.list, function(rec) {
     //     return rec.id != action.rec.id;
@@ -150,7 +153,7 @@ export default function recs(recommendations = initialState, action = {}) {
     //   // return recommendations
 
     // -------------------------------------------
-    case SET_STATUS:
+    case t.SET_STATUS:
 
       var newList = _.map(recommendations.list, function(rec) {
         return rec.id === action.recId ? {...rec,status: action.status} : rec;
@@ -162,7 +165,7 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SET_FILTER:
+    case t.SET_FILTER:
 
       return {
         ...recommendations,
@@ -170,7 +173,7 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case SET_GRADE:
+    case t.SET_GRADE:
 
       var newList = _.map(recommendations.list, function(rec) {
         return rec.id === action.recId ? {...rec,grade: action.grade} : rec;
@@ -183,7 +186,7 @@ export default function recs(recommendations = initialState, action = {}) {
 
     // -------------------------------------------
     // Take recs from firestore and add them here
-    // case SYNC_USER_RECS:
+    // case t.SYNC_USER_RECS:
     //   // console.log('userrecs',action.userRecs)
     //   // console.log('list',recommendations.list)
     //   // var newList = _.map(, function(rec) {
@@ -200,7 +203,7 @@ export default function recs(recommendations = initialState, action = {}) {
 
       // -------------------------------------------
       // right now this pulls from a listener on the appInitialized fn
-      case REFRESH_MY_RECS:
+      case t.REFRESH_MY_RECS:
 
         return {
           ...recommendations,
@@ -210,7 +213,7 @@ export default function recs(recommendations = initialState, action = {}) {
 
       // -------------------------------------------
       // right now this pulls from a listener on the appInitialized fn
-      case REFRESH_GIVEN_RECS:
+      case t.REFRESH_GIVEN_RECS:
 
         return {
           ...recommendations,

@@ -11,7 +11,7 @@ import styles from './styles';
 import { CategoryIcon } from '../../components/Category';
 import { Button } from '../../components/Generic';
 import * as Rec from '../../components/Generic/Rec'
-import * as Friend from '../../components/Generic/Friend';
+import * as Friend from '../../components/Friend';
 
 MyCustomComponent = Animatable.createAnimatableComponent(TextInput);
 
@@ -119,3 +119,41 @@ render() {
 };
 
 export default Unfinished;
+
+
+
+
+
+
+// ------------------
+
+//
+// export class InputRecTitle extends Component {
+//
+// render() {
+//   // console.log(this.props)
+//   const { updateRec, updateState, title } = this.props;
+//   return (
+//
+//           <TextInput
+//             placeholder='Type here...'
+//             ref={ c => this._titleInput = c }
+//             autoCapitalize="none"
+//             value={title}
+//             autoCorrect={false}
+//             autoFocus={false}
+//             placeholderTextColor="#bbb"
+//             multiline={true}
+//             style={styles.inputTitle}
+//             onChangeText={(title) => updateRec({title})}
+//             onLayout={(event) => {
+//               var {x, y, width, height} = event.nativeEvent.layout;
+//               // console.log('input height',height)
+//               updateState({inputHeight: height})
+//             }}
+//           />
+//   );
+// }
+//
+//
+// };

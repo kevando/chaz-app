@@ -16,8 +16,9 @@ import {
   INIT_REC,
 } from '../actionTypes';
 
+import { recsRef } from '../../config/firebase'
 
-const recsRef = firebase.firestore().collection("recommendations")
+// const recsRef = firebase.firestore().collection("recommendations")
 
 
 export function initNewRec(payload) {
@@ -37,93 +38,55 @@ export function setRecTo(uid) {
   return { type: SET_REC_TO, uid }
 }
 
-export function addRecommendation(unfinished) {
+export function addRecommendation() {
   return(dispatch,getState) => {
-    // unfinished.to = getState().user.uid // may change based on give rec UI
-    unfinished.createdBy = getState().user.uid // add rec owner
-    unfinished.status = 'new'
-    // console.log('unfinished',unfinished)
-    recsRef.add(unfinished)
-    .then(docRef => {
-      dispatch({ type: SAVE_RECOMMENDATION_SUCCESS})
-      addMessage(unfinished,getState().user.username)
-    })
-    .catch(error => {
-      console.error("Error adding document: ", error);
-    });
-  }
-}
-
-export function addRecommendationDev(friendName) {
-  return(dispatch,getState) => {
-
     const unfinished = getState().recommendations.unfinished
+    const user = getState().user
+    console.log('unfinished',unfinished)
 
-    dispatch({type: 'ADD_REC', rec: {...unfinished, friend: {name:friendName}}})
+    const newRec = {...unfinished, status: 'new', createdBy: user.uid }
 
+    recsRef.add(newRec)
+      .then(docRef => {
+        // dispatch({ type: SAVE_RECOMMENDATION_SUCCESS})
+        addMessage(unfinished,getState().user.username) // disabled for now
+      })
+      .catch(error => console.warn("Error adding document: ", error) )
   }
 }
+
+
 function addMessage(newRec,username) {
-  firebase.firestore().collection("users").doc(newRec.to).get().then(function(user) {
-    if (user.exists) {
-        // console.log("user data:", user.data());
-        var token = user.data().token
-        var payload = {
-          notification: {
-            // title: 'new rec given to you',
-            body: username + ' sent you a recommendation'
-          }
-        }
-        firebase.firestore().collection("messages").add({token,payload})
-    } else {
-        console.log("No such user!");
-    }
-})
+  // TMP DISABLONG FOR NOW
+//   firebase.firestore().collection("users").doc(newRec.to).get().then(function(user) {
+//     if (user.exists) {
+//         // console.log("user data:", user.data());
+//         var token = user.data().token
+//         var payload = {
+//           notification: {
+//             // title: 'new rec given to you',
+//             body: username + ' sent you a recommendation'
+//           }
+//         }
+//         firebase.firestore().collection("messages").add({token,payload})
+//     } else {
+//         console.log("No such user!");
+//     }
+// })
 
 }
 
 
-export function giveRec() {
-  // in this case, user is the friend
-  return(dispatch,getState) => {
-    // unfinished.uid = getState().user.uid // add rec owner
-
-    // console.log('unfinished',unfinished)
-    var unfinished = {
-      title: 'rec given',
-      createdAt: Date.now(),
-      status: 'new',
-      friend: {
-        uid: getState().user.uid,
-        name: 'me',
-      },
-      owner: 'Other person'
-    }
-    reqecsRef.add(unfinished)
-    .then(docRef => {
-      // unfinished.id = docRef.id
-      const newRec = {
-        ...unfinished,
-        id: docRef.id
-      }
-      dispatch({ type: SAVE_RECOMMENDATION, rec: newRec })
-      // dispatch({ type: ADD_REC_TO_FRIEND, rec: newRec })
-    })
-    .catch(error => { // save in redux but as a firestore error todo
-      console.error("Error adding document: ", error);
-    });
-  }
-}
 
 export function updateRecommendation(rec) {
   // DEV
-  return { type: UPDATE_RECOMMENDATION, rec }
-  
-  // return(dispatch,getState) => {
-  //   rec.updatedAt = Date.now()
-  //   recsRef.doc(rec.id).update(rec) // might want to do this per field
-  //   // dispatch({ type: UPDATE_RECOMMENDATION, rec })
-  // }
+  // return { type: UPDATE_RECOMMENDATION, rec }
+
+  return(dispatch,getState) => {
+    rec.updatedAt = Date.now()
+    recsRef.doc(rec.id).update(rec) 
+    // dispatch({ type: UPDATE_RECOMMENDATION, rec })
+  }
 }
 
 export function setReminder(recId,reminderDate) {
@@ -170,36 +133,4 @@ export function assignUserToRecs(user,friend) {
   }
   //
 
-}
-
-
-// Firestore Listener (called on appInitialized)
-export function listenForRecs(uid) {
-  return dispatch => {
-
-
-
-    // My recs
-    // console.log('start listening')
-    recsRef.where("to", "==", uid)
-      .onSnapshot(querySnapshot => {
-          var myRecs = [];
-          // console.log('listner fired!')
-          querySnapshot.forEach(function(doc) {
-              // console.log('recs listner',doc.data())
-              myRecs.push({...doc.data(),id: doc.id});
-          });
-          dispatch({type: REFRESH_MY_RECS, myRecs})
-      });
-
-      // Recommendations that I have given
-      recsRef.where("from", "==", uid)
-        .onSnapshot(querySnapshot => {
-            var givenRecs = [];
-            querySnapshot.forEach(doc => {
-                givenRecs.push({...doc.data(),id: doc.id});
-            });
-            dispatch({type: REFRESH_GIVEN_RECS, givenRecs})
-        });
-  }
 }

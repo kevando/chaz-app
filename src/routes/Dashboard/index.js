@@ -9,11 +9,11 @@ import * as RecActions from '../../reducers/recommendations/actions';
 const mapStateToProps = (state) => {
   // Append friend data do list of recs
   // console.log('friends',state.friends)
-  const myRecsWithFriends =  _.map(state.recommendations.myRecs, rec => {return {...rec,friend: _.find(state.friends,friend => friend.id === rec.friendId) || {} } })
   const givenRecsWithFriends =  _.map(state.recommendations.givenRecs, rec => {return {...rec,friend: _.find(state.friends,friend => friend.id === rec.friendId) || {} } })
+  // console.log(myRecsWithFriends)
   return {
     // recommendations: _.map(state.recommendations.list, rec => {return {...rec,friend:_.find(state.friends,friend => friend.id === rec.friendId)} }),
-    myRecs: state.recommendations.myRecs, // TMP NEW UI!!! myRecsWithFriends,
+    myRecs: state.recommendations.myRecs,//state.recommendations.myRecs, // TMP NEW UI!!! myRecsWithFriends,
     givenRecs: givenRecsWithFriends,
     // givenRecs: _.filter(allRecs,rec=> rec.friend.uid === state.user.uid),
     friends: state.friends,

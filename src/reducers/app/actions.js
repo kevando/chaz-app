@@ -16,10 +16,12 @@ import {
   SET_APP_ERROR,
   USER_SIGNED_OUT,
   USERS_LINKED,
-  SET_USER_PHONE
+  SET_USER_PHONE,
+  USER_IS_AUTHENTICATED,
 } from '../actionTypes';
-import { listenForRecs } from '../recommendations/actions'
-import { listenForFriends } from '../friends/actions'
+import * as t from '../actionTypes'
+
+import { addFirestoreListeners } from '../../config/firebase'
 import { setUserToken } from '../user/actions'
 
 
@@ -31,76 +33,65 @@ import { setUserToken } from '../user/actions'
 
 export function initializeApp() {
   return (dispatch, getState) => {
-    // console.log('INIT',firebase.auth())
-    // We may want to do certain things if the app is opened from a message
-    // currently getInitialNotification isnt working
-    dispatch(handleNotifications())
+    console.log('initializeApp()')
 
-    // Kick off auth listener to handle updating user object
+    // Kick everything off
     // This will fire every time the app loads no matter what
     firebase.auth().onAuthStateChanged(function(user) {
-      // console.log('onAuthStateChanged', user)
+      console.log('onAuthStateChanged()', user)
 
       // Add user data to redux (registered or anon)
       // Fire off event listeners
       if (user) {
-        // console.warn('onAuthStateChanged ',user)
-        // console.warn('onAuthStateChanged ',user)
 
+        dispatch({ type: t.USER_IS_AUTHENTICATED, user })
 
-        dispatch({ type: USER_SIGNED_IN, user })
-        // console.warn(user.isAnonymous)
-
-        // console.warn(user.displayName)
-
-        // Start some Firestore data listeners to handle ALL data
         // Note: this may become an issue if user is without internet
-        dispatch(listenForRecs(user.uid))
-        dispatch(listenForFriends(user.uid))
+        dispatch(addFirestoreListeners(user.uid))
 
       } else {
-        console.log('signing in as anon')
+        console.log('signInAnonymously()')
         // No user is signed in. so lets authenticate anon
         firebase.auth().signInAnonymously()
       }
     });
 
-    dispatch(setToken())
+
   }
 }
 
 // --------------------------------
 //    HANDLE NOTIFICATIONS
 // --------------------------------
-
-function handleNotifications() {
-  return dispatch => {
-
-    const messaging = firebase.messaging()
-
-    messaging.onMessage( (notif) => {
-      // console.warn('onMessage!!')
-      // console.log(notif)
-      dispatch({type: SET_APP_STATUS, status: 'OnMessage fired'})
-    })
-
-    // @todo
-    // this is bugging right now per github issues threads
-
-    messaging.getInitialNotification().then(notif=>{
-      // console.warn('getInitialNotification')
-      // console.log(notif)
-      if(!notif) {
-        // turning this off cause its annoying
-        // dispatch({type: SET_APP_ERROR, error: {message: 'InitialNotification is empty'} })
-      } else {
-        // this apperantly works. not sure what the notif object is like
-        // and not too sure how to redirect the user to a different page
-        dispatch({type: SET_APP_STATUS, status: 'Initial Notification is not empty!'})
-      }
-    });
-  }
-}
+//
+// function handleNotifications() {
+//   return dispatch => {
+//
+//     const messaging = firebase.messaging()
+//
+//     messaging.onMessage( (notif) => {
+//       // console.warn('onMessage!!')
+//       // console.log(notif)
+//       dispatch({type: SET_APP_STATUS, status: 'OnMessage fired'})
+//     })
+//
+//     // @todo
+//     // this is bugging right now per github issues threads
+//
+//     messaging.getInitialNotification().then(notif=>{
+//       // console.warn('getInitialNotification')
+//       // console.log(notif)
+//       if(!notif) {
+//         // turning this off cause its annoying
+//         // dispatch({type: SET_APP_ERROR, error: {message: 'InitialNotification is empty'} })
+//       } else {
+//         // this apperantly works. not sure what the notif object is like
+//         // and not too sure how to redirect the user to a different page
+//         dispatch({type: SET_APP_STATUS, status: 'Initial Notification is not empty!'})
+//       }
+//     });
+//   }
+// }
 
 // --------------------------------
 //    GET FCM TOKEN

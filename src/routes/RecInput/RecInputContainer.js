@@ -18,6 +18,7 @@ class InputTitleContainer extends Component {
       inputHeight: 0,
 
       updateState: (state) => this.setState(state),
+      friends: this.props.friends.reverse(),
 
     }
   }
@@ -50,11 +51,19 @@ class InputTitleContainer extends Component {
   }
 
   _setFriend = () => {
-    // TMP saving the rec for now
-    this.setState({hideKeyboard: 'yes now'})
-    this.props.addRecommendationDev(this.state.friendName); // Redux
+    const { friendName } = this.state
+    this.props.addFriend({name: friendName}); // Redux (also sets friendId)
 
-    // setTimeout(()=>{ Actions.pop()},400)
+    this.props.addRecommendation(); // Redux
+
+  }
+
+  _onFriendPress = (friend) => {
+    const { setFriendId } = this.props;
+    setFriendId(friend.id); // Redux
+
+    this.props.addRecommendation(); // Redux
+    // Actions.pop() // might error
 
   }
 
@@ -71,6 +80,7 @@ class InputTitleContainer extends Component {
         unfinished={this.props.unfinished}
         setTitle={this._setTitle}
         setFriend={this._setFriend}
+        onFriendPress={this._onFriendPress}
       />
     );
   }

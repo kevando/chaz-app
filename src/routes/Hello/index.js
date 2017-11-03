@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash'
 import HelloContainer from './HelloContainer';
 
-// import * as AppActions from '../../reducers/app/actions';
+import * as UserActions from '../../reducers/user/actions';
 import * as RecActions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => {
 
 // map dispatch to props
 
-export default connect(mapStateToProps, {...RecActions})(HelloContainer);
+export default connect(mapStateToProps, {...RecActions, UserActions})(HelloContainer);

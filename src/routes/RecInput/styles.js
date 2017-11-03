@@ -3,7 +3,7 @@ import { colors, text, width, MARGIN_LEFT } from '../../config/styles';
 
 export default styles = StyleSheet.create({
 
-  CONTAINER: {
+  container: {
     // borderWidth: 4,
     // borderColor: 'green',
     position: 'absolute',
@@ -43,5 +43,45 @@ export default styles = StyleSheet.create({
     // paddingVertical: 5,
     marginHorizontal: MARGIN_LEFT,
   },
+
+
+
+   // friend list stuff
+
+   friendsContainer: {
+     padding: 3,
+     marginTop: 60,
+     marginHorizontal: 20,
+    //  backgroundColor: 'blue',
+     flexDirection: 'row',
+     flex: 1,
+     flexWrap: 'wrap',
+   },
+   friendTouchable: {
+     backgroundColor: colors.yellow,
+     margin: 5,
+     padding: 5,
+     borderColor: colors.lightGrey,
+     borderBottomWidth: 1,
+     flexDirection: 'column',
+    //  flex: 1,
+    height: 40,
+   },
+   friendText: {
+     ...text,
+     fontSize: 12,
+     color: 'black',
+     paddingVertical:2,
+     paddingLeft:15,
+    //  backgroundColor: 'purple',
+    //  flexDirection: 'row',
+    //  flex: 1,
+
+   },
+   friendIcon: {
+     // backgroundColor: 'green',
+     color: colors.grey,
+
+   },
 
 });

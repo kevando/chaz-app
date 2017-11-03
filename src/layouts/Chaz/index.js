@@ -10,7 +10,6 @@ const mapStateToProps = (state) => {
     isAuthenticated: state.app.isAuthenticated,
     user: state.user,
     showOnboarding: state.recommendations.myRecs.length == 0,
-    // myRecsCount: state.recommendations.myRecs.length,
   };
 };
 

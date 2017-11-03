@@ -10,7 +10,7 @@ import RecInput from '../../routes/RecInput';
 // import Walkthrough from '../../routes/Walkthrough';
 import InputFriend from '../../routes/InputFriend';
 import ConfirmRecommendation from '../../routes/ConfirmRecommendation';
-import { CloseButton, BackButton, ProfileButton } from '../../components/Nav';
+import { CloseButton, BackButton, ProfileButton, DashboardRightButton } from '../../components/Nav';
 import RecView from '../../routes/RecView';
 import FriendView from '../../routes/FriendView';
 import Splash from '../../routes/Splash';
@@ -29,7 +29,7 @@ class Chaz extends Component {
     this.state = { visibleToasts: 0, isReady: false, }
   }
   componentWillMount() {
-    // this.props.initializeApp() // redux
+    this.props.initializeApp() // redux
   }
 
   componentWillReceiveProps(nextProps) {
@@ -72,6 +72,7 @@ class Chaz extends Component {
 
 
   render() {
+    console.log('Chaz.js Rendered',this.props)
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
     const { isReady } = this.state
 
@@ -92,8 +93,10 @@ class Chaz extends Component {
           <Modal key="root" hideNavBar={true}>
             <Lightbox key="lightbox">
               <Stack key="myStack"  hideBackImage back>
-                <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true}/>
+                <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
                 <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
               </Stack>
 
 
@@ -102,6 +105,7 @@ class Chaz extends Component {
 
               </Lightbox>
               <Scene key='NewRecLightboxModal' component={RecInput} title='' />
+
 
             </Modal>
           </Overlay>
