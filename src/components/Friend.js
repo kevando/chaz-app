@@ -17,6 +17,8 @@ export const Name = ({friend}) => {
     }
 
   ]
+
+  if(!friend) { return null }
   return (
     <Text style={textStyles}>{friend.name}</Text>
   )

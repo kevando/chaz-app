@@ -19,8 +19,7 @@ class ProfileContainer extends Component {
   //   }
   // }
   _onLogoutPress() {
-    // Actions.push('LoggedOut')
-    // return
+
     Alert.alert(
       'Log Out?', null,
       [

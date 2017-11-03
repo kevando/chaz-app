@@ -1,21 +1,21 @@
 import _ from 'lodash';
-
-import {
-  SET_NOTIFICATION_PERMISSION,
-  INITIALIZE_APP,
-  USER_SIGNED_IN,
-  SIGN_IN_CONFIRM_RESULT,
-  SIGN_IN_ERROR,
-  SIGN_IN_ATTEMPT,
-  CONFIRM_CODE_ATTEMPT,
-  CONFIRM_CODE_SUCCESS,
-  CONFIRM_CODE_ERROR,
-  SET_TOKEN,
-  SET_APP_STATUS,
-  SET_APP_ERROR,
-  USER_SIGNED_OUT,
-  USERS_LINKED
-} from '../actionTypes';
+//
+// import {
+//   SET_NOTIFICATION_PERMISSION,
+//   INITIALIZE_APP,
+//   USER_SIGNED_IN,
+//   SIGN_IN_CONFIRM_RESULT,
+//   SIGN_IN_ERROR,
+//   SIGN_IN_ATTEMPT,
+//   CONFIRM_CODE_ATTEMPT,
+//   CONFIRM_CODE_SUCCESS,
+//   CONFIRM_CODE_ERROR,
+//   SET_TOKEN,
+//   SET_APP_STATUS,
+//   SET_APP_ERROR,
+//   USER_SIGNED_OUT,
+//   USERS_LINKED
+// } from '../actionTypes';
 
 import * as t from '../actionTypes'
 
@@ -23,6 +23,7 @@ const initialState = {
   isAuthenticated: false,
   uid: null,
   notificationPermission: null,
+  // isAnon: true,
 };
 
 
@@ -38,11 +39,12 @@ export default function app(app = initialState, action = {}) {
         providerData: action.user.providerData,
         providerId: action.user.providerId,
         uid: action.user.uid,
+        isAnon: action.user.providerData.length == 0 ? true : false,
       }
 
     // -------------------------------------------
     case t.USER_SIGNED_OUT:
-    console.log('signed out app')
+    // console.log('signed out app')
       return {
         ...app,
         isAuthenticated: false,
@@ -56,12 +58,9 @@ export default function app(app = initialState, action = {}) {
       // console.log('USER_SIGNED_IN',action.user.email)
       return {
         ...app,
-        // uid: action.user.uid,
-        isAnonymous: true,//action.user.isAnonymous,
-        // email: action.user.email,
-        // username: action.user.username,
-        // displayName: action.user.displayName
+        linked: true,
         activeStep: 3,
+        isAnon: action.user.providerData.length == 0 ? true : false,
       }
     // -------------------------------------------
     case t.SET_NOTIFICATION_PERMISSION:
@@ -87,13 +86,12 @@ export default function app(app = initialState, action = {}) {
 
     // -------------------------------------------
     case t.SIGN_IN_CONFIRM_RESULT:
-      console.log(action)
 
       return {
         ...app,
         activeStep: 2,
         status: 'code has been sent!',
-        confirmResult: action.confirmResult,
+        // confirmResult: action.confirmResult,
         verificationId: action.verificationId,
         formatedNumber: action.formatedNumber,
       }
@@ -134,6 +132,8 @@ export default function app(app = initialState, action = {}) {
       }
     // -------------------------------------------
     case t.SET_APP_ERROR:
+      console.log(action)
+      console.warn(action.error.message)
       return {
         ...app,
         error: action.error,

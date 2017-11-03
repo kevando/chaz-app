@@ -30,61 +30,54 @@ class HelloContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: 'kevo',
+      name: '',
       nameSaved: false,
-
       category: null,
     }
-
   }
 
-
   _saveName = () => {
-    console.log(this.props)
     const { name } = this.state
     this.refs.INPUT.textDance(800)
       .then(()=> {
         this.setState({nameSaved: true})
         this.props.setUserData({name})
       })
-    // this.refs.GREETING.flash()
-
   }
 
   _selectCategory = (category) => {
     this.setState({category})
     // possibly run an animation before this
     this.props.onNewRecPress(category)
-    // console.warn('_selectCategory')
   }
 
   render() {
-
+    console.log(this.props.user)
     // const { }
 
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" hidden={true} />
-        <ScrollView>
-        <Animatable.View style={styles.greetingContainer} ref="GREETING">
-        <Text style={styles.greetingText}>Hello</Text>
+          <ScrollView>
+            <Animatable.View style={styles.greetingContainer} ref="GREETING">
+              <Text style={styles.greetingText}>Hello</Text>
 
-        <NameInput
-          placeholder=''
-          ref="INPUT"
-          autoCapitalize="none"
-          value={this.state.name}
-          autoCorrect={false}
-          autoFocus={true}
-          placeholderTextColor="#aaa"
-          multiline={false}
-          style={styles.inputName}
-          onChangeText={(name) => this.setState({name})}
-          caretHidden={false}
-          selectionColor={'rgba(255,255,255,0.4)'}
-          editable={!this.state.nameSaved}
-        />
-        </Animatable.View>
+                <NameInput
+                  placeholder=''
+                  ref="INPUT"
+                  autoCapitalize="none"
+                  value={this.state.name}
+                  autoCorrect={false}
+                  autoFocus={true}
+                  placeholderTextColor="#aaa"
+                  multiline={false}
+                  style={styles.inputName}
+                  onChangeText={(name) => this.setState({name})}
+                  caretHidden={false}
+                  selectionColor={'rgba(255,255,255,0.4)'}
+                  editable={!this.state.nameSaved}
+                />
+              </Animatable.View>
 
 
         { this.state.nameSaved &&

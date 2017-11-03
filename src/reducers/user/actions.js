@@ -1,8 +1,39 @@
 
 import * as t from '../actionTypes'
 
+
+import { usersRef } from '../../config/firebase'
+
+
 export function setUserData(data) {
   return { type: t.SET_USER_DATA, data }
+}
+
+
+
+
+// --------------------------------
+//    CREATE USER IN FIRESTORE
+// --------------------------------
+
+export function createUserInFirestore() {
+  return (dispatch, getState) => {
+
+    const user = getState().user
+    const app = getState().app
+
+    const initialData = {
+      uid: user.uid,
+      token: app.token,
+      phoneNumber: user.phoneNumber,
+      linkedAt: Date.now(),
+      displayName: user.name,
+    }
+
+    usersRef.doc(user.uid).set(initialData)
+      .then(() =>  dispatch({type: t.SET_APP_STATUS, status: 'Updated User in firestore'}) )
+      .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) )
+  }
 }
 
 // export function createUser(email, password, username,cb) {

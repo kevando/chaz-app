@@ -13,7 +13,7 @@ export const usersRef = firebase.firestore().collection(`${env}_users`)
 // Firestore Listener (called on appInitialized)
 export function addFirestoreListeners(uid) {
   return (dispatch, getState) => {
-
+    console.log(getState().app)
     let myFriends = getState().friends // this might be empty
     // console.log('myFriends',myFriends)
 

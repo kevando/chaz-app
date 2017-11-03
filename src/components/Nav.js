@@ -3,7 +3,7 @@ import {Button, Keyboard, StyleSheet,StatusBar, Text, View, TouchableOpacity, Al
 import { colors, text } from '../config/styles';
 import { Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Feather';
-
+import _ from 'lodash'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import { Button } from './Generic'
@@ -61,6 +61,7 @@ export class ProfileButton extends Component {
 }
 
 
+const ICON_CONTAINER = 35
 const styles = StyleSheet.create({
 
   buttonIcon: {
@@ -70,6 +71,22 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
 
   },
+  navIconContainer: {
+    height: ICON_CONTAINER,
+    width: ICON_CONTAINER,
+    alignItems: 'center',
+    justifyContent: 'center',
+    // borderColor: 'white',
+    // borderWidth: 1,
+    marginHorizontal: 4,
+    marginTop: -5
+  },
+  navIcon: {
+    // flex: 1,
+
+    // padding:5,
+
+  }
 
 });
 
@@ -86,31 +103,63 @@ class DashboardButtonContainer extends Component {
 render() {
   const { app, myRecs, user } = this.props;
 
+  // user.providerData.length > 0 && console.warn('we are a real user, bitchin')
+  // console.warn(app.notificationPermission)
+  // console.warn(app.isAnon)
+
   // this should turn out to be pretty much the onboarding steps
+  let buttonIcons = []
+
+  // buttonIcons.push(
+  //   <Icon
+  //     name={"mail"}
+  //     size={20}
+  //     color={colors.yellow}
+  //     style={[styles.navIcon,{color: colors.yellow, marginTop: StatusBar.hidden ? -10 : 0,}]}
+  //   />)
 
   if(app.notificationPermission != "authorized" && myRecs.length > 0) {
     // STEP 1
-    return (
-      <Text>enable</Text>
-    )
-  }
-  else if(myRecs.length > 0 && app.notificationPermission == "authorized" && !user.displayName) {
-
-    // INVITE THE USER TO SIGN UP
-    return (
+    buttonIcons.push(
       <Icon
-        onPress={()=> Actions.push('Register')}
-        name={"user"}
+        name={"bell"}
         size={20}
         color={colors.yellow}
-        style={[styles.buttonIcon,{marginTop: StatusBar.hidden ? -10 : 0,}]}
+        style={[styles.navIcon,{color: colors.yellow, marginTop: StatusBar.hidden ? -10 : 0,}]}
       />
     )
+  }
+  else if(myRecs.length > 0 && app.notificationPermission == "authorized" && app.isAnon) {
+
+    // INVITE THE USER TO SIGN UP
+    buttonIcons.push (
+      <Icon
+        onPress={()=> Actions.push('Register')}
+        name={"users"}
+        size={25}
+        color={colors.yellow}
+        style={[styles.navIcon,{color: colors.yellow, marginTop: StatusBar.hidden ? -10 : 0,}]}
+      />
+    )
+  } else if(myRecs.length > 0 && !app.isAnon) {
+    // LET USER ACCESS THEIR ACCOUNT
+    buttonIcons.push (
+      <Icon
+        onPress={()=> Actions.push('Profile')}
+        name={"user"}
+        style={[styles.navIcon,{color: 'rgba(255,255,255,0.5)', fontSize: 20,marginTop: StatusBar.hidden ? -10 : 0,}]}
+      />
+    )
+
   } else {
-    return null
+
   }
 
-
+  return (
+    <View style={{flexDirection: 'row'}}>
+      {_.map(buttonIcons,(icon,i) => <View style={styles.navIconContainer} key={i}>{icon}</View>)}
+    </View>
+  )
 
 }
 

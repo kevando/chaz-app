@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 const Permissions = require('react-native-permissions');
+import firebase from 'react-native-firebase'
 import { colors } from '../config/styles';
 import { Button } from './Generic'
 import { setNotificationPermission } from '../reducers/app/actions';

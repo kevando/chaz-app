@@ -72,7 +72,7 @@ class Chaz extends Component {
 
 
   render() {
-    console.log('Chaz.js Rendered',this.props)
+    // console.log('Chaz.js Rendered',this.props.user)
     const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
     const { isReady } = this.state
 
@@ -97,6 +97,8 @@ class Chaz extends Component {
                 <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                 <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                 <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                <Scene key='LoggedOut' component={LoggedOut} title='LoggedOut' hideNavBar={false}  />
               </Stack>
 
 

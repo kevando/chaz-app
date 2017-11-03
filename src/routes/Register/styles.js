@@ -8,7 +8,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 5,
-    backgroundColor: colors.purple,
+    backgroundColor: colors.blueBG,
   },
 
   contentContainer: {
@@ -51,18 +51,35 @@ export default styles = StyleSheet.create({
     color: 'red',
   },
 
-
-
-
-
   inputContainer: {
     // backgroundColor: 'yellow',
     marginTop: 50,
-    marginHorizontal: 40,
+    marginHorizontal: 50,
     padding: 2,
   },
 
-  input: {
+  errorText: {
+    // color: colors.red,
+    color: 'white',
+    fontSize: 12,
+    marginTop: 2,
+    padding: 3,
+    fontFamily: 'Courier'
+  },
+  inputPhone: {
+    ...text,
+    fontSize: 30,
+    paddingLeft: 15,
+    paddingTop: 5,
+    height: 50,
+    borderColor: colors.lightGrey,
+    color: colors.darkGrey,
+    borderWidth: 1,
+    backgroundColor: 'white',
+    letterSpacing: 13,
+
+  },
+  inputCode: {
     ...text,
     fontSize: 20,
     paddingLeft: 15,

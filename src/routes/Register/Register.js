@@ -15,7 +15,6 @@ export const PhoneInput = (props) => {
 
   const { getCode, phoneNumber, fadeOut, updateState, updateInput, isPhoneValid, verifyingPhone, phoneRef } = props
 
-
   // if(fadeOut) {
   //   this._phoneRef.bounce(800)//.then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
   // }
@@ -24,25 +23,25 @@ export const PhoneInput = (props) => {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
 
-      <Text style={styles.title}>Activate chaz</Text>
-      <Text style={styles.text}>Enjoy all the benefits of an activated chaz account by verifying your phone number</Text>
+      <Text style={styles.title} onPress={props.registerAsTest}>Activate chaz</Text>
+      <Text style={styles.text} onPress={props.loginAsTest}>Enjoy all the benefits of an activated chaz account by verifying your phone number</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
-
+          autoFocus={true}
           keyboardType='phone-pad'
           multiline={false}
-          style={styles.input}
+          style={styles.inputPhone}
           placeholderTextColor="#aaa"
-          onChangeText={value => updateInput({ phoneNumber: value })}
+          onChangeText={value => updateInput({ phoneNumber: value})}
           placeholder={'Phone number'}
           value={phoneNumber}
         />
+        <Text style={styles.errorText}>{props.errorMessage}</Text>
       </View>
     </View>
 
-      { isPhoneValid &&
-        <Button loading={verifyingPhone} text={verifyingPhone ? 'Getting Code' : "Get Code"} onPress={getCode} />}
+      {isPhoneValid && <Button loading={verifyingPhone} text={verifyingPhone ? 'Getting Code' : "Get Code"} onPress={getCode} />}
     <KeyboardSpacer />
     </View>
   )
@@ -64,10 +63,10 @@ export const CodeInput = (props) => {
 
       <View style={styles.inputContainer}>
         <TextInput
-
+          autoFocus={true}
           keyboardType='phone-pad'
           multiline={false}
-          style={styles.input}
+          style={styles.inputCode}
           placeholderTextColor="#aaa"
           onChangeText={value => updateInput({ verificationCode: value })}
           placeholder={'Code'}
@@ -97,7 +96,7 @@ export const Confirmation = (props) => {
 
         </View>
 
-        <Button text="Back to Dashboard" onPress={()=> Actions.reset('MainStack')} />
+        <Button text="Back to Dashboard" onPress={()=> Actions.reset('lightbox')} />
     </View>
   )
 }

@@ -14,11 +14,12 @@ const initialState = {
 };
 
 export default function user(user = initialState, action = {}) {
-
+  // console.log(action)
   switch (action.type) {
 
     // -------------------------------------------
     case t.USER_IS_AUTHENTICATED:
+    // console.warn('USER',action)
       return {
         ...user,
         uid: action.user.uid,
@@ -28,18 +29,13 @@ export default function user(user = initialState, action = {}) {
 
     // -------------------------------------------
     case t.USERS_LINKED:
-      console.log('USERS_LINKED',action.user)
-
-      // TMP!!
-      // right now isAnon not working quite right
-      // hardcoding displayname on auth link
-      var isAnon = action.user.providerData.length ? false : true
+    console.warn('LINKED',action.user.displayName)
       return {
         ...user,
-        // isAnonymous: action.user.isAnonymous, // tmp
-        isAnonymous: isAnon,
-        // email: action.user.email,
-
+        // isAnonymous: isAnon, // doesnt work w phone auth
+        linked: true,
+        providerData: action.user.providerData,
+        displayName: action.user.displayName,
       }
 
     // -------------------------------------------
@@ -50,6 +46,7 @@ export default function user(user = initialState, action = {}) {
         isAuthenticated: false,
       }
 
+    // -------------------------------------------
     case t.SET_USER_DATA:
       return {
         ...user,

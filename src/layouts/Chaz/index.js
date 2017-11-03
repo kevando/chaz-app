@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
   return {
     app: state.app,
     isAuthenticated: state.app.isAuthenticated,
-    user: state.user,
+    // user: state.user, // when this shit changes, chaz.js rerenders the whole shabang
     showOnboarding: state.recommendations.myRecs.length == 0,
   };
 };

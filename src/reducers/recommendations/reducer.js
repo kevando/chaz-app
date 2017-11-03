@@ -221,6 +221,12 @@ export default function recs(recommendations = initialState, action = {}) {
           givenRecs: action.givenRecs,
         }
 
+      case t.SET_USER_DATA:
+        return {
+          ...recommendations,
+          ...action.data,
+        }
+
     // -------------------------------------------
     default:
       return recommendations;

@@ -18,7 +18,7 @@ class RegisterContainer extends Component {
       phoneNumber: '',
 
       isPhoneVerified: false,
-      isPhoneValid: true,
+      isPhoneValid: false,
       isCodeConfirmed: false,
       isCodeValid: false,
 
@@ -30,37 +30,32 @@ class RegisterContainer extends Component {
 
       fadeOut: false,
       phoneRef: true,
+      errorMessage: '',
     };
 
 
   }
+  componentDidMount(){
+    console.log('MOUNT')
+  }
   componentWillReceiveProps({app}) {
+    console.log('new props',app)
     if(app.activeStep !== this.props.app.activeStep) {
       this.setState({activeStep: app.activeStep})
+    }
+    if(app.error !== this.props.app.error) {
+      this.setState({errorMessage: app.error.message})
     }
   }
 
 
-  //
-  // _onLogoutPress = () => {
-  //   // Actions.push('LoggedOut')
-  //   // return
-  //   Alert.alert(
-  //     'Log Out?', null,
-  //     [
-  //       {text: 'No' },
-  //       {text: 'Yes', onPress: () => this.props.signOut(), },
-  //     ]
-  //   )
-  // }
-
-
   _updateInput = ({phoneNumber, verificationCode}) => {
+
     this.setState({
-      phoneNumber: phoneNumber || this.state.phoneNumber,
+      phoneNumber: phoneNumber === '' ? '' : phoneNumber === null ? this.state.phoneNumber : phoneNumber,
       verificationCode: verificationCode || this.state.verificationCode,
-      isPhoneValid: phoneNumber && phoneNumber.length === 10,
-      isCodeValid: verificationCode && verificationCode.length === 6,
+      isPhoneValid: phoneNumber && phoneNumber !== '' ? phoneNumber.length === 10 : false,
+      isCodeValid: verificationCode ? verificationCode.length === 6 : false,
     })
 
   }
@@ -76,11 +71,11 @@ class RegisterContainer extends Component {
     this.setState({verifyingPhone: true})
 
     // dispatch redux action
-    const successCallback = () => {
-      // this.setState({fadeOut: true})
-      this.setState({isPhoneVerified: true})
-    }
-    verifyPhone(phoneNumber,successCallback)
+    // const successCallback = () => {
+    //   // this.setState({fadeOut: true})
+    //   this.setState({isPhoneVerified: true})
+    // }
+    verifyPhone(phoneNumber)
 
   }
 
@@ -101,22 +96,15 @@ class RegisterContainer extends Component {
 
 
   render() {
-    console.log('RegisterContainer props',this.state)
+    // console.log('RegisterContainer props',this.state)
 
     const { app } = this.props
     const { isPhoneVerified, isCodeConfirmed } = this.state
 
-    // if phone is not verified, show phone input
-
-    // once phone is verified show code input
-
-    // once phone and code are verified show conf
-
-
     // if(!isPhoneVerified){
     if(app.activeStep == 1 || !app.activeStep) {
       return (
-        <PhoneInput getCode={this._getCode} {...this.state} />
+        <PhoneInput getCode={this._getCode} {...this.state} {...this.props} />
       )
     // } else if(isPhoneVerified && !isCodeConfirmed) {
     } else if(app.activeStep == 2) {
@@ -133,40 +121,9 @@ class RegisterContainer extends Component {
       return null
     }
 
-      //
-      // return (
-      //   <Register
-      //     onSignInPress={this._onSignInPress}
-      //     updateState={this.updateState}
-      //     onLoginPress={this._onLoginPress}
-      //     {...this.state}
-      //     user={this.props.user}
-      //     app={this.props.app}
-      //     confirmCode={this._onConfirmCode}
-      //     registerAsTest={this.props.registerAsTest}
-      //     loginAsTest={this.props.loginAsTest}
-      //     onLogoutPress={this._onLogoutPress}
-      //   />
-      // )
+
   }
 
-  // render() {
-  //   console.log('RegisterContainer props',this.props)
-  //     return (
-  //       <Register
-  //         onSignInPress={this._onSignInPress}
-  //         updateState={this.updateState}
-  //         onLoginPress={this._onLoginPress}
-  //         {...this.state}
-  //         user={this.props.user}
-  //         app={this.props.app}
-  //         confirmCode={this._onConfirmCode}
-  //         registerAsTest={this.props.registerAsTest}
-  //         loginAsTest={this.props.loginAsTest}
-  //         onLogoutPress={this._onLogoutPress}
-  //       />
-  //     )
-  // }
 }
 
 export default RegisterContainer;

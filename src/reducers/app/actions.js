@@ -22,7 +22,7 @@ import {
 import * as t from '../actionTypes'
 
 import { addFirestoreListeners } from '../../config/firebase'
-import { setUserToken } from '../user/actions'
+import { createUserInFirestore } from '../user/actions'
 
 
 
@@ -33,12 +33,13 @@ import { setUserToken } from '../user/actions'
 
 export function initializeApp() {
   return (dispatch, getState) => {
-    console.log('initializeApp()')
+    const app = getState().app
+    // console.warn('initializeApp()')
 
     // Kick everything off
     // This will fire every time the app loads no matter what
     firebase.auth().onAuthStateChanged(function(user) {
-      console.log('onAuthStateChanged()', user)
+      // console.warn('onAuthStateChanged()', user)
 
       // Add user data to redux (registered or anon)
       // Fire off event listeners
@@ -50,13 +51,14 @@ export function initializeApp() {
         dispatch(addFirestoreListeners(user.uid))
 
       } else {
-        console.log('signInAnonymously()')
+
         // No user is signed in. so lets authenticate anon
         firebase.auth().signInAnonymously()
       }
     });
 
-
+    if(!app.token)
+      dispatch(setToken())
   }
 }
 
@@ -144,8 +146,7 @@ export function verifyPhone(phoneNumber) {
   return (dispatch, getState) => {
     // Following code is from https://github.com/invertase/react-native-firebase/issues/119
 
-    dispatch({type: SIGN_IN_ATTEMPT })
-
+    //
     const formatedNumber = `+1${phoneNumber}`
 
     firebase.auth().verifyPhoneNumber(formatedNumber)
@@ -153,108 +154,55 @@ export function verifyPhone(phoneNumber) {
 
         const { verificationId } = phoneAuthSnapshot;
 
-        dispatch({type: SIGN_IN_CONFIRM_RESULT, confirmResult: phoneAuthSnapshot, verificationId, formatedNumber })
-        dispatch({type: SET_APP_STATUS, status: 'code sent!'})
-        dispatch({type: SET_USER_PHONE, phoneNumber: phoneNumber})
+        dispatch({type: t.SIGN_IN_CONFIRM_RESULT, verificationId, formatedNumber })
+        // dispatch({type: SET_APP_STATUS, status: 'code sent!'})
+        dispatch({type: t.SET_USER_DATA, data: {phoneNumber: phoneNumber} })
 
       })
-      .catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
-
-
+      .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
 
 
   }
 }
 
-// --------------------------------
-//    GET AUTH INVITE CODE
-// --------------------------------
-//
-// export function signInLink(phoneNumber) {
-//   return dispatch => {
-//     dispatch({type: SIGN_IN_ATTEMPT })
-//
-//     const formatedNumber = `+1${phoneNumber}`
-//
-//     firebase.auth().verifyPhoneNumber(formatedNumber)
-//       .then(phoneAuthSnapshot => {
-//
-//         const { verificationId } = phoneAuthSnapshot;
-//
-//         dispatch({type: SIGN_IN_CONFIRM_RESULT, confirmResult: phoneAuthSnapshot, verificationId, formatedNumber })
-//         dispatch({type: SET_APP_STATUS, status: 'code sent!'})
-//         dispatch({type: SET_USER_PHONE, phoneNumber: phoneNumber})
-//       })
-//       .catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
-//
-//
-//   }
-// }
-
 
 
 // --------------------------------
 //    CONFIRM AUTH CODE
-// @todo need to change this to actually handle users coming back and simply logging in
+//    @todo need to change this to actually handle users coming back and simply logging in
 // --------------------------------
 
 export function confirmCode(codeInput) {
   return (dispatch, getState) => {
-    // const phoneNumber = getState().user.phoneNumber
-    // const token = getState().app.token
 
-    dispatch({type: CONFIRM_CODE_ATTEMPT, status: 'attempting'})
-    dispatch({type: SET_APP_STATUS, status: 'attempting to confirm code'})
-    const verificationId =  getState().app.confirmResult.verificationId //getState().app.verificationId
-
-    // if(!verificationId) {
-    //   alert('no verificationId something went way wrong')
-    //   return
-    // }
-    //TMP
-
-
-    var credential = firebase.auth.PhoneAuthProvider.credential(verificationId, codeInput)
+    const verificationId =  getState().app.verificationId //getState().app.verificationId
+    const user = getState().user
+    !user.name && console.warn('oh no, no name saved',user)
+    const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, codeInput)
 
     // this works, but user comes out anon still
     // @todo need to fix
     firebase.auth().currentUser.linkWithCredential(credential)
 
-    // this creates a new user that is not anon
-    // firebase.auth().signInWithCredential(credential)
-    // as of now, this will create a new user
-
     .then((firebaseUser) => {
-      console.warn("Anonymous account successfully upgraded", firebaseUser);
-      dispatch({type: SET_APP_STATUS, status: 'Anonymous account successfully upgraded, dispatch USERS_LINKED'})
-      dispatch({ type: USERS_LINKED, user: firebaseUser._user })
+      console.warn("Anonymous account successfully upgraded", firebaseUser.displayName);
+      console.warn("Anonymous account successfully upgraded", firebaseUser.providerData);
+      // dispatch({type: SET_APP_STATUS, status: 'Anonymous account successfully upgraded, dispatch USERS_LINKED'})
+      dispatch({ type: t.USERS_LINKED, user: firebaseUser })
 
       // now update user displayName because isAnon isnt working right now
       firebaseUser.updateProfile({
-        displayName: 'TEMP',
-      }).catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
+        displayName: user.name || 'BAD ERROR',
+      }).catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
 
 
       // Now update user data in Firestore
-      // User should already exist with their fcm token
-      dispatch( createUser() )
+      dispatch(createUserInFirestore())
 
     }, function(error) {
       // cb({error:'Error: '+error})
-      console.log("Error upgrading anonymous account", error);
-      dispatch({type: SET_APP_ERROR, error})
-
-
+      dispatch({type: t.SET_APP_ERROR, error})
     });
-
-
-    // if (confirmResult && codeInput.length) {
-    //   confirmResult.confirm(codeInput)
-    //     .then((user) => {
-    //       dispatch({type: CONFIRM_CODE_SUCCESS})
-    //     })
-    //     .catch(error => this.setState({ message: `Code Confirm Error: ${error.message}` , status: 'error confirm error'}));
-    // }
 
   }
 }
@@ -265,16 +213,11 @@ export function confirmCode(codeInput) {
 
 export function signOut() {
   return dispatch => {
-    // Actions.push('LoggedOut')
-    // dispatch({type: USER_SIGNED_OUT})
+
     firebase.auth().signOut().then(() => {
-      console.log('signined out!')
-      dispatch({type: SET_APP_STATUS, status: 'User successfully signed out' })
       dispatch({type: USER_SIGNED_OUT})
       dispatch({type: 'PURGE_DATA'}) // resets state to undefined
-
-      // Doesnt feel right to navigate from redux but it works well
-      Actions.push('LoggedOut')
+      Actions.replace('LoggedOut')
     })
     .catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
   }
@@ -308,31 +251,6 @@ function updateUser(data) {
   }
 }
 
-// --------------------------------
-//    CREATE USER IN FIRESTORE
-// --------------------------------
-
-function createUser() {
-  return (dispatch, getState) => {
-    const user = getState().user
-    const app = getState().app
-    if(!user.uid) {
-      alert('No UID, something is terribly wrong')
-    } else {
-      const initialData = {
-        uid: user.uid,
-        token: app.token,
-        phoneNumber: user.phoneNumber,
-        linkedAt: Date.now(),
-        displayName: user.displayName,
-      }
-      firebase.firestore().collection("users").doc(user.uid).set(initialData)
-        .then(() =>  dispatch({type: SET_APP_STATUS, status: 'Updated User in firestore'}) )
-        .catch(error =>  dispatch({type: SET_APP_ERROR, error}) )
-    }
-  }
-}
-
 
 
 
@@ -349,10 +267,14 @@ export function loginAsTest() {
   return dispatch => {
     console.log('loginAsTest d')
 
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+
+
+    .then(dispatch(createUserInFirestore()))
+
+    .catch(function(error) {
       // Handle Errors here.
       dispatch({type: SET_APP_ERROR, error})
-      console.log('login!',error)
       var errorCode = error.code;
       var errorMessage = error.message;
       // ...

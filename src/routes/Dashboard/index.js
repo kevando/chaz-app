@@ -10,7 +10,7 @@ const mapStateToProps = (state) => {
   // Append friend data do list of recs
   // console.log('friends',state.friends)
   const givenRecsWithFriends =  _.map(state.recommendations.givenRecs, rec => {return {...rec,friend: _.find(state.friends,friend => friend.id === rec.friendId) || {} } })
-  // console.log(myRecsWithFriends)
+  // console.log('recs',state.recommendations)
   return {
     // recommendations: _.map(state.recommendations.list, rec => {return {...rec,friend:_.find(state.friends,friend => friend.id === rec.friendId)} }),
     myRecs: state.recommendations.myRecs,//state.recommendations.myRecs, // TMP NEW UI!!! myRecsWithFriends,
@@ -21,6 +21,7 @@ const mapStateToProps = (state) => {
     app: state.app,
     showOnboarding: state.recommendations.myRecs.length == 0,
     user: state.user,
+    recommendations: state.recommendations
   };
 };
 
