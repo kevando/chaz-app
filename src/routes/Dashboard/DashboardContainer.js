@@ -25,17 +25,26 @@ class DashboardContainer extends Component {
     // Actions.push('Register')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[0]})
-    Actions.push('InviteModal',{friend: this.props.friends[0]})
+    // Actions.push('InviteModal',{friend: this.props.friends[0]})
   }
 
   _changeActiveFilter = (activeFilter) => {
     this.setState({activeFilter})
   }
 
-  _onNewRecPress = () => {
+  chain = () => {
     const { initNewRec, user } = this.props
-    initNewRec({to: user.uid})
-    Actions.push('NewRecLightbox')
+    return (
+      new Promise(function(resolve,reject) {
+      initNewRec({to: user.uid})
+    })
+  )
+  }
+
+  _onNewRecPress = () => {
+
+    this.chain().then(Actions.push('NewRecLightbox'))
+
   }
 
   _onBrandNewRecPress = (category) => {

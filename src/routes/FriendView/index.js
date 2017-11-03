@@ -6,11 +6,12 @@ import * as RecActions from '../../reducers/recommendations/actions';
 import _ from 'lodash'
 
 const mapStateToProps = (state, props) => {
-  // console.log('map props',props)
+  console.log('map props',state)
   return {
     app: state.app,
     user: state.user,
     myRecs: _.filter(state.recommendations.myRecs,rec => rec.friendId == props.friend.id),
+    givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.friendId == props.friend.id),
     // givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.to == props.friend.uid),
 
     // Doing it this way so that friends listener fires new changes to the UI

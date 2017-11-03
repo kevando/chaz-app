@@ -73,9 +73,10 @@ class Chaz extends Component {
 
   render() {
     // console.log('Chaz.js Rendered',this.props.user)
-    const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
+    const { showOnboarding, isAuthenticated, app, user } = this.props
     const { isReady } = this.state
 
+    // console.log('chaz',this.props)
     const navBorderColor = showOnboarding ? colors.blueBG : colors.newBlue
     // PROD Animate screen loading
     // if (!isReady || !isAuthenticated)
@@ -92,7 +93,7 @@ class Chaz extends Component {
         <Overlay key="overlay">
           <Modal key="root" hideNavBar={true}>
             <Lightbox key="lightbox">
-              <Stack key="myStack"  hideBackImage back>
+              <Stack key="myStack"  hideBackImage back >
                 <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
                 <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                 <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
@@ -102,7 +103,7 @@ class Chaz extends Component {
               </Stack>
 
 
-              <Scene key='NewRecLightbox' component={RecInput} title=''hideNavBar={true} hideNavBar={true} />
+              <Scene key='NewRecLightbox' component={RecInput} title='' hideNavBar={true}  />
 
 
               </Lightbox>
@@ -138,7 +139,7 @@ class Chaz extends Component {
           <Stack key="MainStack" initial={true} hideBackImage back>
             <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={showOnboarding} initial={!showOnboarding} renderRightButton={() => <ProfileButton myRecsCount={myRecsCount} user={user} />}/>
             <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-            <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+            <Scene key='FriendView'  component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
             <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
             <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
           </Stack>

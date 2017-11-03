@@ -19,11 +19,11 @@ import { Reminder } from './Reminder'
 
 export const Title = ({rec, small, large}) => {
 
-  const fontSize = small ? 14 : large && 50 
+  // const fontSize = small ? 14 : large && 50
   const textStyles =
     {
       ...text,
-      fontSize,
+      // fontSize,
     }
 
   return (

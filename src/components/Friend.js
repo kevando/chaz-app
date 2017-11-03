@@ -5,10 +5,17 @@ import * as Progress from 'react-native-progress';
 import { colors, text } from '../config/styles';
 
 
+
+
+// ---------------------------------------
+//    NAME
+// ---------------------------------------
+
+
 export const Name = ({friend, onPress, small, large}) => {
   if(!friend) { console.warn('no friend data'); return null; }
 
-  const fontSize = small ? 10 : large ? 30 : 21
+  const fontSize = small ? 10 : large ? 30 : 29
 
   const textStyles = [
     ...text,
@@ -47,7 +54,7 @@ export class Header extends Component {
     return (
       <View style={headerStyles.container}>
 
-          <View style={styles.textContainer}>
+          <View style={headerStyles.textContainer}>
 
               <Text style={headerStyles.text}>{friend.name}</Text>
             </View>
@@ -60,19 +67,37 @@ export class Header extends Component {
 
 const headerStyles = StyleSheet.create({
   container: {
-    height: 150,
+    height: 80,
     marginBottom: 50,
     paddingBottom: 30,
     backgroundColor: colors.blueBG,
-    borderBottomWidth: 10,
-    borderBottomColor: colors.green,
-    justifyContent: 'center'
+    borderBottomWidth: 1,
+    borderBottomColor: colors.newBlue,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textContainer: {
+    // borderColor: 'red',
+    borderWidth: 5,
+    backgroundColor: 'transparent',
+    height: 40,
+    width: 240,
+    borderRadius: 40,
+    borderColor: 'transparent',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowRadius: 2,
+    shadowOpacity: 1.0
   },
   text: {
     ...text,
     fontSize: 30,
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    backgroundColor: 'transparent',
   }
 
 })

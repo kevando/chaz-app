@@ -19,26 +19,23 @@ const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress }) =>
       <Friend.Header friend={friend} />
 
       <View style={{marginHorizontal: 20}}>
-        <Text style={{color: 'white', fontSize: 20,marginBottom: 10}} >Recs I gave to this person</Text>
+        <Text style={{color: 'white', fontSize: 20,marginBottom: 10}} >Things {friend.name} told me about</Text>
       {
         _.map(myRecs,rec => <Card skinny rec={rec} key={rec.id} />)
       }
       </View>
 
+      <View style={{marginHorizontal: 20}}>
+        <Text style={{color: 'white', fontSize: 20,marginBottom: 10}} >Things I told {friend.name} about</Text>
       {
-        app.isAnon && // User is anon
-          <Text>You should think about creating an account</Text>
-        }
-        {
-          friend.uid && // ok lets offer the option to invite this user
-
-         // offer the option to send this friend a rec
-        <Button text="Give a Recommendation" onPress={()=>Actions.push('InviteModal',{friend})} />
+        _.map(givenRecs,rec => <Card skinny rec={rec} key={rec.id} />)
       }
+      </View>
+
 
 
       </ScrollView>
-      { friend.uid && <Button text="Give a Recommendation" onPress={onGiveRecPress} /> }
+      { friend.uid && <Button text="Send a Recommendation" onPress={onGiveRecPress} /> }
       { !friend.uid && !app.isAnon && <Button bgcolor="pink" text="Invite" onPress={()=>Actions.push('InviteModal',{friend})} /> }
     </View>
   );

@@ -14,48 +14,18 @@ class FriendViewContainer extends Component {
       phoneNumber: '',
       validPhoneNumber: false
     }
-    // this._deleteRecommendation = this._deleteRecommendation.bind(this)
-    this._onGiveRecPress = this._onGiveRecPress.bind(this)
-    // this._assignUser = this._assignUser.bind(this)
-    this._onKeyPress = this._onKeyPress.bind(this)
+
+
   }
 
-  _onKeyPress(phoneNumber){
-    this.setState({
-      phoneNumber,
-      validPhoneNumber: phoneNumber.length === 10
-    })
-  }
-
-  // _assignUser() {
-  //   const { assignUserToFriend, friend, assignUserToRecs } = this.props
-  //   const { userFound } = this.state
-  //   if(!userFound){
-  //     alert('No user found, sorry')
-  //   } else {
-  //     alert('User connected!')
-  //     Actions.refresh({friend: {...friend,uid:userFound.uid}}) // tmp bad code
-  //     // this.setState({input:''})
-  //     assignUserToFriend(userFound,friend)
-  //     assignUserToRecs(userFound,friend)
-  //   }
-  //
-  // }
-
-  _sendInvite = () => {
-    const { sendInvite, friend } = this.props
-    const { phoneNumber } = this.state
-    sendInvite(friend, phoneNumber)
-  }
-
-  _onGiveRecPress() {
-    const { initNewRec,friend, user } = this.props
-    initNewRec({from: user.uid, to: friend.uid, friend: {name: 'me'}})
-    Actions.push('InputStack')
+  _onGiveRecPress = () => {
+    const { initNewRec, friend, user } = this.props
+    initNewRec({from: user.uid, to: friend.uid, to_name: friend.name, friendId: friend.id, friend: {name: user.name}})
+    Actions.push('NewRecLightbox')
   }
 
   render() {
-    console.log('FriendViewContainer',this.props)
+    // console.log('FriendViewContainer',this.props)
 
     if(!this.props.friend)  { return null } // SOME ERROR
 

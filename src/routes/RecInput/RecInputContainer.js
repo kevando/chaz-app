@@ -51,10 +51,9 @@ class InputTitleContainer extends Component {
   }
 
   _setFriend = () => {
-    const { friendName } = this.state
-    this.props.addFriend({name: friendName}); // Redux (also sets friendId)
-
-    this.props.addRecommendation(); // Redux
+    const { addFriend, addRecommendation } = this.props
+    addFriend({name: this.state.friendName}); // Redux (also sets friendId)
+    // addRecommendation(); // Redux
 
   }
 
@@ -67,10 +66,17 @@ class InputTitleContainer extends Component {
 
   }
 
+  _sendRec = () => {
+    // console.warn(this.state.title)
+    this.props.setTitle(this.state.title)
+    // this.props.addRecommendation(); // Redux
+
+  }
+
 
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
 
     return (
       <NewRec
@@ -81,6 +87,8 @@ class InputTitleContainer extends Component {
         setTitle={this._setTitle}
         setFriend={this._setFriend}
         onFriendPress={this._onFriendPress}
+        user={this.props.user}
+        sendRec={this._sendRec}
       />
     );
   }

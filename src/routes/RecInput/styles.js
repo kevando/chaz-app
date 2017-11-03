@@ -4,10 +4,10 @@ import { colors, text, width, MARGIN_LEFT } from '../../config/styles';
 export default styles = StyleSheet.create({
 
   container: {
-    // borderWidth: 4,
-    // borderColor: 'green',
+    borderTopWidth: 60,
+    borderTopColor: colors.blueBG,
     position: 'absolute',
-    top: 60,
+    top: 0,
     bottom: 0,
     left: 0,
     width: width,
@@ -15,6 +15,15 @@ export default styles = StyleSheet.create({
     // backgroundColor: 'transparent',// probly idea
     backgroundColor: colors.blueBG,
     justifyContent: 'flex-start',
+  },
+  closeButton: {
+    position: 'absolute',
+    top: -40,
+    left: 10,
+    padding: 5,
+    // backgroundColor:'green',
+    zIndex:99,
+    color: 'white',
   },
   TOP: {
     flex: 1,

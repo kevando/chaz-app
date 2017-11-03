@@ -14,15 +14,18 @@ import { recsRef, friendsRef, usersRef } from '../../config/firebase'
 
 
 export function addFriend(friend) {
+  // console.log('addFriend?')
   return(dispatch,getState) => {
     friend.owner = getState().user.uid // add friend owner
-
+    friend.createdAt = Date.now()
+    // console.log('addFriend?')
     friendsRef.add(friend)
     .then(docRef => {
-      console.log('friend saved',friend)
+      // console.log('friend saved',friend)
       const newFriend = {
         ...friend,
-        id: docRef.id
+        id: docRef.id,
+
       }
       dispatch({ type: SAVE_FRIEND, friend: newFriend })
       dispatch({ type: SET_FRIEND_ID, friendId: docRef.id }) // unfinished

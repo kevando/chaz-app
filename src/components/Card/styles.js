@@ -63,7 +63,7 @@ export default styles = StyleSheet.create({
   inputFriend: {
     ...text,
     fontSize: 20,
-    color: colors.pink,
+    color: colors.grey,
     borderBottomWidth: 1,
     borderBottomColor: colors.borderColor,
   },

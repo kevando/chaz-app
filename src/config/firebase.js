@@ -4,10 +4,12 @@ import * as t from '../reducers/actionTypes'
 
 
 const env = process.env.NODE_ENV;
+const dataVersion = 'v1'
+const PREFIX = env + '_' + dataVersion + '_'
 
-export const recsRef = firebase.firestore().collection(`${env}_recommendations`)
-export const friendsRef = firebase.firestore().collection(`${env}_friends`)
-export const usersRef = firebase.firestore().collection(`${env}_users`)
+export const recsRef = firebase.firestore().collection(`${PREFIX}_recommendations`)
+export const friendsRef = firebase.firestore().collection(`${PREFIX}_friends`)
+export const usersRef = firebase.firestore().collection(`${PREFIX}_users`)
 
 
 // Firestore Listener (called on appInitialized)
@@ -57,7 +59,8 @@ export function addFirestoreListeners(uid) {
                 givenRecs.push({...doc.data(),id: doc.id});
             })
             // TODO join w friend data
-            dispatch({type: t.REFRESH_GIVEN_RECS, givenRecs})
+            const givenRecsWithFriendData =  _.map(givenRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.friendId) || {} } })
+            dispatch({type: t.REFRESH_GIVEN_RECS, givenRecs: givenRecsWithFriendData})
         });
 
 

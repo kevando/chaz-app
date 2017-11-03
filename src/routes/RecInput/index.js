@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
   return {
     unfinished: state.recommendations.unfinished,
     friends: state.friends,
+    user: state.user,
   };
 };
 

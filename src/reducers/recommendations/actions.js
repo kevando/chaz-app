@@ -21,7 +21,37 @@ import { recsRef } from '../../config/firebase'
 // const recsRef = firebase.firestore().collection("recommendations")
 
 
-export function initNewRec(payload) {
+export const testPromise = () => (dispatch, getState) =>
+
+  new Promise(function(resolve, reject) {
+    console.log('tt')
+    dispatch({
+      type: 'SET_SAVING',
+      saving: true
+    });
+
+    console.log('ttt')
+    // // Function is expected to return a promise
+    // callUpdateApi(todoId, isDone).then(updatedTodo => {
+    //   dispatch({
+    //     type: 'SET_SAVING',
+    //     saving: false
+    //   });
+    //
+    //   resolve(updatedTodo);
+    // }).catch(error => {
+    //   // TBD: Handle errors for Redux
+    //
+    //   reject(error);
+    // })
+  });
+export const initNewRec = (payload) => (dispatch) => 
+  new Promise(function(resolve,reject) {
+    dispatch({ type: INIT_REC, payload })
+  })
+
+
+export function initNewRecc(payload) {
   return { type: INIT_REC, payload }
 }
 
@@ -84,7 +114,7 @@ export function updateRecommendation(rec) {
 
   return(dispatch,getState) => {
     rec.updatedAt = Date.now()
-    recsRef.doc(rec.id).update(rec) 
+    recsRef.doc(rec.id).update(rec)
     // dispatch({ type: UPDATE_RECOMMENDATION, rec })
   }
 }
