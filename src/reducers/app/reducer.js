@@ -1,21 +1,5 @@
 import _ from 'lodash';
 //
-// import {
-//   SET_NOTIFICATION_PERMISSION,
-//   INITIALIZE_APP,
-//   USER_SIGNED_IN,
-//   SIGN_IN_CONFIRM_RESULT,
-//   SIGN_IN_ERROR,
-//   SIGN_IN_ATTEMPT,
-//   CONFIRM_CODE_ATTEMPT,
-//   CONFIRM_CODE_SUCCESS,
-//   CONFIRM_CODE_ERROR,
-//   SET_TOKEN,
-//   SET_APP_STATUS,
-//   SET_APP_ERROR,
-//   USER_SIGNED_OUT,
-//   USERS_LINKED
-// } from '../actionTypes';
 
 import * as t from '../actionTypes'
 
@@ -24,6 +8,7 @@ const initialState = {
   uid: null,
   notificationPermission: null,
   // isAnon: true,
+  signInAttempts: 0,
 };
 
 
@@ -54,8 +39,6 @@ export default function app(app = initialState, action = {}) {
 
     // -------------------------------------------
     case t.USERS_LINKED:
-      // console.log('USERS_LINKED',action.user)
-      // console.log('USER_SIGNED_IN',action.user.email)
       return {
         ...app,
         linked: true,
@@ -80,8 +63,9 @@ export default function app(app = initialState, action = {}) {
     case t.SIGN_IN_ATTEMPT:
       return {
         ...app,
-        status: 'Signing In..',
+        // status: 'Signing In..',
         activeStep: 1,
+        signInAttempts: ++app.signInAttempts,
       }
 
     // -------------------------------------------
@@ -96,6 +80,19 @@ export default function app(app = initialState, action = {}) {
         formatedNumber: action.formatedNumber,
       }
 
+    // -------------------------------------------
+    case t.RESET_PHONE:
+      return {
+          ...app,
+          phoneNumber: null,
+          activeStep: 1,
+      }
+    // -------------------------------------------
+    case t.APP_SHOULD_SIGN_IN:
+      return {
+          ...app,
+          shouldSignIn: true,
+      }
     // -------------------------------------------
     case t.SIGN_IN_ERROR:
       return {

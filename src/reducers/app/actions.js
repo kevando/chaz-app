@@ -21,7 +21,7 @@ import {
 } from '../actionTypes';
 import * as t from '../actionTypes'
 
-import { listenForAuthChanges } from '../../config/firebase'
+import { listenForAuthChanges, usersRef } from '../../config/firebase'
 import { createUserInFirestore } from '../user/actions'
 
 
@@ -33,6 +33,7 @@ import { createUserInFirestore } from '../user/actions'
 export function initializeApp() {
   return (dispatch, getState) => {
     const app = getState().app
+    const userr = getState().user
 
     // Kick everything off
     dispatch(listenForAuthChanges())
@@ -88,33 +89,15 @@ function setToken() {
     const user = getState().user
     const app = getState().app
 
-    // console.log('setToken',app)
-    // @todo might be a bug here
-    if(!app.token) {
-    // if(true) {
       firebase.messaging().getToken().then(token => {
 
-        var userRef = firebase.firestore().collection("users").doc(user.uid)
+        if(token !== app.token) {
+          console.warn('Local token is different than fcm getToken()')
+          dispatch({type: t.SET_TOKEN, token})
+        }
 
-        userRef.get().then(userDoc => {
-          if(userDoc.exists){
-            // simply update the doc
-            userRef.update({ token }).then(() => dispatch({type: SET_APP_STATUS, status: 'UPDATED user to database'}))
-          } else {
-            // need to create user
-            userRef.set({
-              token,
-              createdAt: Date.now(),
-              uid: user.uid,
-              // phoneNumber: user.phoneNumber
-            }).then(() => dispatch({type: SET_APP_STATUS, status: 'ADDED user to database'}))
-          }
-        })
-
-        dispatch({type: SET_TOKEN, token})
-        dispatch({type: SET_APP_STATUS, status: 'token set!'})
       })
-    }
+
   }
 }
 
@@ -126,68 +109,108 @@ function setToken() {
 // --------------------------------
 
 export function verifyPhone(phoneNumber) {
-// console.warn('callb')
   return (dispatch, getState) => {
-    // Following code is from https://github.com/invertase/react-native-firebase/issues/119
 
-    //
+    dispatch({type: t.SIGN_IN_ATTEMPT })
+    dispatch(shouldAppSignIn(phoneNumber)) // find out if this is a returning user
+
     const formatedNumber = `+1${phoneNumber}`
 
     firebase.auth().verifyPhoneNumber(formatedNumber)
       .then(phoneAuthSnapshot => {
-
         const { verificationId } = phoneAuthSnapshot;
-
         dispatch({type: t.SIGN_IN_CONFIRM_RESULT, verificationId, formatedNumber })
-        // dispatch({type: SET_APP_STATUS, status: 'code sent!'})
         dispatch({type: t.SET_USER_DATA, data: {phoneNumber: phoneNumber} })
-
       })
-      .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
-
-
+      .catch(error => dispatch({type: t.SET_APP_ERROR, error }) );
   }
 }
 
 
-
 // --------------------------------
 //    CONFIRM AUTH CODE
-//    @todo need to change this to actually handle users coming back and simply logging in
 // --------------------------------
 
 export function confirmCode(codeInput) {
   return (dispatch, getState) => {
 
-    const verificationId =  getState().app.verificationId //getState().app.verificationId
     const user = getState().user
-    !user.name && console.warn('oh no, no name saved',user)
-    const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, codeInput)
+    const app = getState().app
 
-    // this works, but user comes out anon still
-    // @todo need to fix
+    const credential = firebase.auth.PhoneAuthProvider.credential(app.verificationId, codeInput)
+
+    // user might be new or returning (likely the user is new)
+    // If we try to link the user with the credential and it doesnt work,
+    // then we cannot use that credential again
+
+    // So lets query the user list and see if we find that phone number
+
+    if(app.shouldSignIn)
+      dispatch(signIn(credential))
+    else
+      dispatch(linkUser(credential))
+
+  }
+}
+
+
+function linkUser(credential) {
+  return (dispatch, getState) => {
     firebase.auth().currentUser.linkWithCredential(credential)
-
-    .then((firebaseUser) => {
-      console.warn("Anonymous account successfully upgraded", firebaseUser.displayName);
-      console.warn("Anonymous account successfully upgraded", firebaseUser.providerData);
-      // dispatch({type: SET_APP_STATUS, status: 'Anonymous account successfully upgraded, dispatch USERS_LINKED'})
-      dispatch({ type: t.USERS_LINKED, user: firebaseUser })
-
-      // now update user displayName because isAnon isnt working right now
-      firebaseUser.updateProfile({
-        displayName: user.name || 'BAD ERROR',
-      }).catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
-
-
-      // Now update user data in Firestore
-      dispatch(createUserInFirestore())
-
+      .then((firebaseUser) => {
+        dispatch({ type: t.USERS_LINKED, user: firebaseUser })
+        dispatch(createUserInFirestore())
     }, function(error) {
-      // cb({error:'Error: '+error})
       dispatch({type: t.SET_APP_ERROR, error})
     });
+  }
+}
+// This function works
+function signIn(credential) {
+  return (dispatch, getState) => {
 
+    firebase.auth().signInWithCredential(credential)
+      .then(function (handleResolve) {
+        // Auth handler will fire and take care of everything else
+      }).catch(function (error) {
+        dispatch({type: t.SET_APP_ERROR, error})
+      });
+  }
+}
+
+// --------------------------------
+//    DOES USER EXIST
+//    See if a user already created an account w this phone
+// --------------------------------
+function shouldAppSignIn(phoneNumber) {
+  return (dispatch, getState) => {
+
+    let userFound = false
+
+    usersRef.where("phoneNumber", "==", phoneNumber)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          userFound = doc
+        });
+
+        if(userFound !== false)
+          dispatch({type: t.APP_SHOULD_SIGN_IN})
+    })
+    .catch(function(error) {
+        dispatch({type: t.SET_APP_ERROR, error})
+    });
+  }
+}
+
+// --------------------------------
+//    RESET PHONE NUMBER
+//    So the user can try getting a different code
+// --------------------------------
+
+export function resetPhoneNumber(phoneNumber) {
+  return (dispatch, getState) => {
+    dispatch({type: t.RESET_PHONE })
   }
 }
 
@@ -217,7 +240,7 @@ export function checkNotificationPermission() {
   return dispatch => {
     Permissions.check('notification')
       .then(response => {
-        console.warn('check',response)
+        // console.warn('check',response)
         dispatch({ type: t.SET_NOTIFICATION_PERMISSION, response})
       })
   }
@@ -227,7 +250,7 @@ export function requestNotificationPermission() {
   return dispatch => {
     firebase.messaging().requestPermissions()
       .then((response)=> {
-        console.warn('response: ',response)
+        // console.warn('response: ',response)
         dispatch(checkNotificationPermission())
       })
       .catch((error)=>console.warn('notification permission rejected',error));

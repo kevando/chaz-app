@@ -30,7 +30,7 @@ const Profile = (props) => {
     <View style={styles.container}>
 
 
-      <Text style={styles.title} onPress={onLogoutPress}>{user.name}</Text>
+      <Text style={styles.title} onPress={onLogoutPress}>{user.displayName}</Text>
 
 
       { onlineFriends.length == 0 &&

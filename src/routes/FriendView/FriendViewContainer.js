@@ -20,7 +20,7 @@ class FriendViewContainer extends Component {
 
   _onGiveRecPress = () => {
     const { initNewRec, friend, user } = this.props
-    initNewRec({from: user.uid, to: friend.uid, to_name: friend.name, friendId: friend.id, friend: {name: user.name}})
+    initNewRec({from: user.uid, to: friend.uid, to_name: friend.name, friendId: friend.id, friend: {name: user.displayName}})
     Actions.push('NewRecLightbox')
   }
 

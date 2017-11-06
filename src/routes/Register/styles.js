@@ -59,8 +59,8 @@ export default styles = StyleSheet.create({
   },
 
   errorText: {
-    // color: colors.red,
-    color: 'white',
+    color: colors.red,
+    backgroundColor: 'white',
     fontSize: 12,
     marginTop: 2,
     padding: 3,

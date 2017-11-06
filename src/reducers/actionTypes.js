@@ -40,6 +40,8 @@ export const USERS_LINKED = 'USERS_LINKED'
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const USER_FOUND = 'USER_FOUND'
 export const USER_NOT_FOUND = 'USER_NOT_FOUND'
+export const RESET_PHONE = 'RESET_PHONE'
+export const APP_SHOULD_SIGN_IN = 'APP_SHOULD_SIGN_IN'
 
 // App data for UI
 export const SET_APP_STATUS = 'SET_APP_STATUS'

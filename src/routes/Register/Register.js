@@ -8,12 +8,12 @@ import styles from './styles';
 import { colors } from '../../config/styles'
 import * as Animatable from 'react-native-animatable';
 import { Actions } from 'react-native-router-flux';
-//
+
 
 
 export const PhoneInput = (props) => {
 
-  const { getCode, phoneNumber, fadeOut, updateState, updateInput, isPhoneValid, verifyingPhone, phoneRef } = props
+  const { getCode, phoneNumber, fadeOut, updateState, updateInput, isPhoneValid, verifyingPhone, phoneRef, app } = props
 
   // if(fadeOut) {
   //   this._phoneRef.bounce(800)//.then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
@@ -37,7 +37,7 @@ export const PhoneInput = (props) => {
           placeholder={'Phone number'}
           value={phoneNumber}
         />
-        <Text style={styles.errorText}>{props.errorMessage}</Text>
+        
       </View>
     </View>
 
@@ -47,9 +47,13 @@ export const PhoneInput = (props) => {
   )
 }
 
+// --------------------------------
+//    VERIFY CONFIRMATION CODE
+// --------------------------------
+
 export const CodeInput = (props) => {
 
-  const { confirmCode, verificationCode, updateInput, isCodeValid, verifyingCode } = props
+  const { confirmCode, verificationCode, updateInput, isCodeValid, verifyingCode, resetPhoneNumber, app } = props
 
 
   return (
@@ -58,8 +62,8 @@ export const CodeInput = (props) => {
       <View style={styles.contentContainer}>
 
       <Text style={styles.title}>Enter Code:</Text>
-      <Text style={styles.text}></Text>
-      <Text style={styles.text}></Text>
+      <Text style={styles.text}>{app.shouldSignIn && 'Welcome back'}</Text>
+      <Text style={styles.text} onPress={resetPhoneNumber}>{app.signInAttemps > 0 && 'Get new code'}</Text>
 
       <View style={styles.inputContainer}>
         <TextInput

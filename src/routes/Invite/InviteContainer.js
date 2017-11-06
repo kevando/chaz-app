@@ -20,7 +20,7 @@ class InviteContainer extends Component {
     }
   }
   componentDidMount() {
-    // console.log('mounted?')
+    console.log('Invite Container mounted')
   }
 
   // _assignUser() {
@@ -48,7 +48,7 @@ class InviteContainer extends Component {
 
 
   render() {
-    // console.log('InviteContainer',this.props)
+    console.log('InviteContainer',this.props)
 
     return (
       <Invite

@@ -41,7 +41,7 @@ export const Title = ({rec, small, large}) => {
 class GenericCard extends Component {
 
 render() {
-  // console.log(this.props)
+  // console.log('card props',this.props)
   const { rec } = this.props;
   return (
     <View style={cardStyles.container}>

@@ -18,10 +18,22 @@ Animatable.initializeRegistryWithDefinitions({
     0: {
       borderBottomColor: 'rgba(255,255,255,0.4)',
       color: 'rgba(255,255,255,0.8)',
+      fontSize: 35,
     },
-    1: {
+    0.4: {
       borderBottomColor: 'rgba(255,255,255,0)',
       color: 'rgba(255,255,255,1.0)',
+      fontSize: 35,
+    },
+    0.7: {
+      // borderBottomColor: 'rgba(255,255,255,0)',
+      // color: 'rgba(255,255,255,1.0)',
+      fontSize: 38,
+    },
+    1: {
+      // borderBottomColor: 'rgba(255,255,255,0)',
+      // color: 'rgba(255,255,255,1.0)',
+      fontSize: 35,
     },
   }
 });
@@ -39,12 +51,15 @@ class HelloContainer extends Component {
   }
 
   _saveName = () => {
-    const { name } = this.state
     this.refs.INPUT.textDance(800)
-      .then(()=> {
-        this.setState({nameSaved: true})
-        this.props.setUserData({name})
+    const { name } = this.state
+    this.props.saveDisplayName(name)
+      .then(response => {
+        // this.refs.INPUT.textDance(800) too much delay
+        this.setState({nameSaved: true,name: name+','})
       })
+      .catch(error => console.warn('updateProfile err', error.message))
+
   }
 
   _selectCategory = (category) => {
@@ -52,16 +67,17 @@ class HelloContainer extends Component {
     // possibly run an animation before this
     this.props.onNewRecPress(category)
   }
-  _explore = () => {
-    this.refs.WELCOME.fadeOutLeft().then(this.setState({explore:true}))
-  }
 
-  _getStarted = () => {
-    this.refs.WELCOME.fadeOutUp().then(this.setState({getStarted:true}))
-  }
+  // _explore = () => {
+  //   this.refs.WELCOME.fadeOutLeft().then(this.setState({explore:true}))
+  // }
+  //
+  // _getStarted = () => {
+  //   this.refs.WELCOME.fadeOutUp().then(this.setState({getStarted:true}))
+  // }
 
   render() {
-    console.log(this.props.user)
+    // console.log(this.props.user)
     // const { }
 
     return (

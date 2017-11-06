@@ -15,14 +15,13 @@ export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 
 // --------------------------------
 //    AUTH LISTENER
+//  (called on appInitialized)
 // --------------------------------
 
 
-// Firestore Listener (called on appInitialized)
 export function listenForAuthChanges() {
   return (dispatch, getState) => {
     firebase.auth().onAuthStateChanged(function(user) {
-
       if (user) {
         dispatch({ type: t.USER_IS_AUTHENTICATED, user })
         // Note: this may become an issue if user is without internet

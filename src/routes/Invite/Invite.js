@@ -37,9 +37,7 @@ const Invite = (props) => {
     return (
     <View style={styles.container}>
       <Label center large>Invitation Sent</Label>
-        <Label center>You invited this user, nice. lets hope they accept. lets hope youre cool in their book</Label>
-
-
+        <Label center>You invited this {friend.name}. Nice. Lets hope they accept. Lets hope they think you're cool.</Label>
       </View>
     )
   }
@@ -47,9 +45,8 @@ const Invite = (props) => {
   let SendInvitation = () => {
     return (
     <View style={styles.container}>
-      <Label center large>Invite?</Label>
-        <Label center>no user found, send invite?</Label>
-
+      <Label center large>No user found</Label>
+        <Label center>{friend.name} did not activate an account. You can invite them to download chaz.</Label>
       </View>
     )
   }
@@ -67,9 +64,10 @@ const Invite = (props) => {
   let PhoneNumberSearch = () => {
     return (
     <View style={styles.container}>
-      <Label center large>Find {friend.name}</Label>
+      <Label center large>Is {friend.name} on chaz?</Label>
+      <Label center>All users active chaz by phone number. Type in their phone number and see if they already activated a chaz account.</Label>
       <PhoneInput {...props} />
-      <Label center>Find your friends to chaz and you can send them recommendations directly in the app</Label>
+
       </View>
     )
   }

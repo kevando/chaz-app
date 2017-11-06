@@ -5,7 +5,7 @@ import Register from './Register';
 import { PhoneInput, CodeInput, Confirmation } from './Register';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
-import firebase from 'react-native-firebase';
+import styles from './styles';
 
 class RegisterContainer extends Component {
 
@@ -35,15 +35,12 @@ class RegisterContainer extends Component {
 
 
   }
-  componentDidMount(){
-    console.log('MOUNT')
-  }
+  // componentDidMount(){
+  //   console.log('MOUNT')
+  // }
   componentWillReceiveProps({app}) {
-    console.log('new props',app)
-    if(app.activeStep !== this.props.app.activeStep) {
-      this.setState({activeStep: app.activeStep})
-    }
     if(app.error !== this.props.app.error) {
+      console.warn('set err')
       this.setState({errorMessage: app.error.message})
     }
   }
@@ -63,18 +60,12 @@ class RegisterContainer extends Component {
 
 
   _getCode = () => {
-    // this.props.loginAsTest(); return; // FOR TESTING
 
     const { phoneNumber } = this.state
     const { verifyPhone } = this.props
     // Set loading state
     this.setState({verifyingPhone: true})
 
-    // dispatch redux action
-    // const successCallback = () => {
-    //   // this.setState({fadeOut: true})
-    //   this.setState({isPhoneVerified: true})
-    // }
     verifyPhone(phoneNumber)
 
   }
@@ -85,41 +76,35 @@ class RegisterContainer extends Component {
     // Set loading state
     this.setState({verifyingCode: true})
 
-    // dispatch redux action
-    const successCallback = () => {
-      // this.setState({fadeOut: true})
-      this.setState({isCodeConfirmed: true})
-    }
     confirmCode(verificationCode)
 
   }
 
 
   render() {
-    // console.log('RegisterContainer props',this.state)
+    // console.log('RegisterContainer props',this.props)
 
     const { app } = this.props
-    const { isPhoneVerified, isCodeConfirmed } = this.state
+    const { isPhoneVerified, isCodeConfirmed, errorMessage } = this.state
 
-    // if(!isPhoneVerified){
+    let Content = null
+
     if(app.activeStep == 1 || !app.activeStep) {
-      return (
-        <PhoneInput getCode={this._getCode} {...this.state} {...this.props} />
-      )
-    // } else if(isPhoneVerified && !isCodeConfirmed) {
-    } else if(app.activeStep == 2) {
-      return (
-        <CodeInput confirmCode={this._confirmCode} {...this.state} />
-      )
-    // } else if(isPhoneVerified && isCodeConfirmed) {
-    } else if(app.activeStep == 3) {
-      return (
-        <Confirmation />
-      )
-    } else {
-      console.warn('Some var state error')
-      return null
+      Content = <PhoneInput getCode={this._getCode} {...this.state} {...this.props} />
+
+    } else if(app.activeStep == 2 && app.isAnon) {
+      Content = <CodeInput confirmCode={this._confirmCode} resetPhoneNumber={this.props.resetPhoneNumber} app={this.props.app} {...this.state} />
+
+    } else if(app.activeStep == 3 || !app.isAnon) {
+      Content =  <Confirmation />
     }
+
+    return (
+      <View style={styles.container}>
+        {errorMessage != '' && <Text style={styles.errorText}>{errorMessage}</Text>}
+        {Content}
+      </View>
+    )
 
 
   }
