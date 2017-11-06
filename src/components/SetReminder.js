@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 var PushNotification = require('react-native-push-notification');
 // const Permissions = require('react-native-permissions');
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import firebase from 'react-native-firebase'
 import { colors, text } from '../config/styles';
@@ -11,7 +11,7 @@ import { Button } from './Generic'
 
 
 
-export class SetReminderButton extends Component {
+export class SetReminderIcon extends Component {
 
     constructor(props){
       super(props)
@@ -87,15 +87,19 @@ export class SetReminderButton extends Component {
 
       if(app.notificationPermission != 'authorized') { return null }
 
-      return (
-        <View style={styles.container}>
 
-            {rec.reminder && moment(rec.reminder).isAfter() ?
-              <Text style={styles.recText}>{moment(rec.reminder).fromNow()}</Text> :
-              <Button bgcolor="yellow" rounded onPress={this._onSetReminderPress} text="Set a reminder" />
-            }
-        </View>
-      );
+      return (
+        <Icon style={styles.optionIcon} onPress={this._onSetReminderPress} name="bell" color="white" />
+      )
+
+      // rec.reminder && moment(rec.reminder).isAfter() &&
+      //   return (<Icon onPress={this._onSetReminderPress} name="bell" color="yellow" />)
+      //
+      // rec.reminder && moment(rec.reminder).isBefore() &&
+      //   return <Icon onPress={this._onSetReminderPress} name="bell" color="white" />
+
+
+
     }
 
 };
@@ -112,6 +116,12 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.darkGrey,
     lineHeight: 17,
+  },
+  optionIcon: {
+    padding: 5,
+    margin: 5,
+    fontSize: 17,
+    // backgroundColor: 'yellow',
   },
 
 });

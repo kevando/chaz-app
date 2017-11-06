@@ -19,21 +19,17 @@ export default styles = StyleSheet.create({
   closeButton: {
     position: 'absolute',
     top: -40,
-    left: 10,
+    right: 10,
     padding: 5,
     // backgroundColor:'green',
     zIndex:99,
     color: 'white',
   },
-  TOP: {
-    flex: 1,
+  topContainer: {
+    // flex: 1,
+    // backgroundColor: 'yellow'
   },
   CARD: {
-    // backgroundColor:'yellow',
-    // border: ''
-    // flex: 1,
-    // height: 300,
-    // overflow: 'hidden',
   },
 
   input: {
@@ -59,29 +55,33 @@ export default styles = StyleSheet.create({
 
    friendsContainer: {
      padding: 3,
-     marginTop: 60,
+     marginTop: 10,
      marginHorizontal: 20,
     //  backgroundColor: 'blue',
      flexDirection: 'row',
-     flex: 1,
+    //  flex: 1,
      flexWrap: 'wrap',
+     justifyContent: 'center',
    },
    friendTouchable: {
-     backgroundColor: colors.yellow,
+    //  backgroundColor: colors.yellow,
      margin: 5,
      padding: 5,
      borderColor: colors.lightGrey,
-     borderBottomWidth: 1,
+     borderWidth: 1,
+     borderRadius: 5,
      flexDirection: 'column',
     //  flex: 1,
-    height: 40,
+      height: 25,
+      alignItems: 'center',
+      justifyContent: 'center',
    },
    friendText: {
      ...text,
      fontSize: 12,
-     color: 'black',
-     paddingVertical:2,
-     paddingLeft:15,
+     color: 'white',
+     paddingHorizontal: 4,
+    //  paddingLeft:15,
     //  backgroundColor: 'purple',
     //  flexDirection: 'row',
     //  flex: 1,

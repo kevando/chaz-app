@@ -1,61 +1,34 @@
 import _ from 'lodash';
-import {
-  SET_TITLE,
-  SET_FRIEND_ID,
-  SAVE_RECOMMENDATION_SUCCESS,
-  SET_REMINDER,
-  // DELETE_RECOMMENDATION,
-  SET_STATUS,
-  SET_FILTER,
-  SET_GRADE,
-  UPDATE_RECOMMENDATION,
-  REFRESH_MY_RECS,
-  REFRESH_GIVEN_RECS,
-  SET_REC_TO,
-  INIT_REC,
-} from '../actionTypes';
+// import {
+//   SET_TITLE,
+//   SET_FRIEND_ID,
+//   SAVE_RECOMMENDATION_SUCCESS,
+//   SET_REMINDER,
+//   // DELETE_RECOMMENDATION,
+//   SET_STATUS,
+//   SET_FILTER,
+//   SET_GRADE,
+//   UPDATE_RECOMMENDATION,
+//   REFRESH_MY_RECS,
+//   REFRESH_GIVEN_RECS,
+//   SET_REC_TO,
+//   INIT_REC,
+// } from '../actionTypes';
 
 import * as t from '../actionTypes'
 
-const Recs = [
-  // {
-  //   id: '1',
-  //   title: 'pink floyd',
-  //   friend: {name: 'Blake', id:'2'},
-  //   category: 'music',
-  // },
-  // {
-  //   id: '2',
-  //   title: 'Shawshank Redemption',
-  //   friend: {name: 'Kevin', id:'3'},
-  //   category: 'movie',
-  // },
-  // {
-  //   id: '3',
-  //   title: 'Barbarsol',
-  //   friend: {name: 'John Older Lions End', id:'3'},
-  //   // category: 'music',
-  // },
-]
 
-const UnfinishedRec = {
-  // id: '1',
-  title: 'Rockin like a hurricane',
-  friend: {name: 'Blake', id:'2'},
-  // category: 'music',
-}
 const initialState =
   {
-    unfinished: UnfinishedRec,
+    unfinished: {},
     list: [ ],
-    myRecs: Recs,
-    // myRecs: [],
+    myRecs: [],
     givenRecs: [],
     filter: 'all'
   };
 
 export default function recs(recommendations = initialState, action = {}) {
-  // // console.log(action)
+  // console.log(action)
   // // console.log(recommendations)
   // // console.log(recommendations.unfinished)
   switch (action.type) {
@@ -86,30 +59,20 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case t.SET_FRIEND_ID:
-    console.log('SET_FRIEND_ID')
+    case t.SET_FRIEND:
+      console.log(action)
       return {
         ...recommendations,
         unfinished: {
           ...recommendations.unfinished,
-          friendId: action.friendId
+          friendId: action.friend.id,
+          friendName: action.friend.name
         }
       }
 
     // -------------------------------------------
-    case t.SET_REC_TO:
-      return {
-        ...recommendations,
-        unfinished: {
-          ...recommendations.unfinished,
-          to: action.uid
-        }
-      }
-
-    // -------------------------------------------
-    // Saved rec to firestore, clear unfinished so UI refreshes
+    // Saved rec to firestore, clear unfinished
     case t.SAVE_RECOMMENDATION_SUCCESS:
-      // console.log('SAVE_RECOMMENDATION_SUCCESS')
       return {
         ...recommendations,
         unfinished: {},

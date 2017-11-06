@@ -3,13 +3,14 @@ import { Text, View, TouchableOpacity, StyleSheet, TextInput } from 'react-nativ
 import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import { Actions} from 'react-native-router-flux';
-
+import * as Animatable from 'react-native-animatable';
 import { colors, text } from '../config/styles';
 import { CategoryIcon, CategoryPicker, Category,CategoryPickerEditing } from './Category';
 import * as Friend from './Friend';
 // import * as Rec from './Generic/Rec'
 import { Divider, Button } from './Generic'
 import { Reminder } from './Reminder'
+import { SetReminderIcon  } from './SetReminder'
 
 
 
@@ -49,8 +50,11 @@ render() {
           <Friend.Name friend={rec.friend} />
         </View>
         <View style={cardStyles.iconContainer}>
-          {rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5}}/>}
+          {moment().diff(rec.createdAt) < 60000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
+          {rec.friend.invitedAt && !rec.friend.uid && <Icon name="mail" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
+          {rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
           {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
+
         </View>
       </View>
       <View style={cardStyles.bodyContainer}>
@@ -103,10 +107,11 @@ const cardStyles = StyleSheet.create({
   },
   friendContainer: {
     // backgroundColor: 'yellow',
-    flex: 6,
+    flex: 4,
   },
   iconContainer: {
-    // backgroundColor: 'yellow',
+    // borderColor: 'black',
+    // borderWidth: 1,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-start', //
@@ -116,6 +121,19 @@ const cardStyles = StyleSheet.create({
     // backgroundColor: 'green',
     flexDirection: 'row',
     alignItems: 'flex-start', // v
+  },
+
+  optionsContainer: {
+    // borderColor: 'white',
+    // borderWidth: 1,
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+  },
+  optionIcon: {
+    padding: 5,
+    margin: 5,
+    fontSize: 17,
+    // backgroundColor: 'yellow',
   },
 
   // inputTitle: {
@@ -247,7 +265,7 @@ export class CardDetail extends Component {
 
 render() {
   // console.log(this.props)
-  const { rec, updateRec, updateState, isEditing } = this.props;
+  const { rec, updateRec, updateState, isEditing, onDelete, updateRecommendation, app } = this.props;
   return (
     <View style={{flex: 1}}>
         <View style={[cardStyles.container]}>
@@ -280,8 +298,12 @@ render() {
 
           {
             !rec.category &&
-              <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
+              <View>
+                <Text>What is this?</Text>
+                <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
+              </View>
           }
+
 
           {rec.reminder &&
 <Reminder rec={rec} />
@@ -290,6 +312,12 @@ render() {
 
 
         </View>
+        {!isEditing &&
+        <View style={cardStyles.optionsContainer} >
+          <Icon name="trash" color="white" style={cardStyles.optionIcon} onPress={onDelete} />
+          <Icon name="edit" color="white" style={cardStyles.optionIcon} onPress={()=>updateState({isEditing: true})} />
+          <SetReminderIcon rec={rec} updateRecommendation={updateRecommendation} app={app} />
+        </View> }
 
         </View>
 

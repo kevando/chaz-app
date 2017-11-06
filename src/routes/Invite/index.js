@@ -6,7 +6,6 @@ import * as RecActions from '../../reducers/recommendations/actions';
 import _ from 'lodash'
 
 const mapStateToProps = (state, props) => {
-  console.log(props)
   return {
     app: state.app,
     user: state.user,

@@ -29,10 +29,10 @@ const Profile = (props) => {
     <View style={styles.container}>
 
 
-      <Text style={styles.title} onPress={onLogoutPress}>Your Profile</Text>
+      <Text style={styles.title} onPress={onLogoutPress}>{user.name}</Text>
 
 
-      <Label>Your Friends</Label>
+      <Label></Label>
       {
         _.map(friends,friend => {
           // return <FriendCard key={friend.id} friend={friend} />
@@ -42,7 +42,6 @@ const Profile = (props) => {
       {
           givenRecs.length > 0 &&
             <GivenRecs givenRecs={givenRecs} />
-
       }
 
 

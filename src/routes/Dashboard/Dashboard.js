@@ -27,7 +27,7 @@ const Dashboard = (props) => {
             <Text style={styles.recommendationsTitle}>Recommendations</Text>
           </View>
 
-        {myRecs.length > 6 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
+        {myRecs.length > 16 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
 
 
       {

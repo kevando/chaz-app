@@ -15,6 +15,15 @@ import * as Friend from '../../components/Friend';
 
 MyCustomComponent = Animatable.createAnimatableComponent(TextInput);
 
+Animatable.initializeRegistryWithDefinitions({
+  collapseCard: {
+    from: {minHeight: 200},
+    to: {minHeight: 0},
+  },
+
+
+});
+
 class Unfinished extends Component {
 
   constructor(props) {
@@ -22,39 +31,45 @@ class Unfinished extends Component {
     this.state = {
       title: '',
 
-      // updateState: (state) => this.setState({state}),
+      rec: this.props.unfinished,
     }
   }
 
-  componentDidMount() {
-    // if(Actions.currentScene == 'InputTitle')
-      // this._titleInput.focus()
-  }
+  // componentDidMount() {}
+
   componentWillReceiveProps(nextProps) {
     if(nextProps.unfinished.title != this.props.unfinished.title) {
-      // do not dismiss the keyboard
-      // this._titleFriend.focus()
+      // User saved the rec title!!!
+      // lets animate the card for the friend input
+      this._transitionToFriendInput()
     }
+  }
+  _transitionToFriendInput = () => {
+    this.refs.CONTAINER.collapseCard(500)
   }
 
   onSave = () => {
     // this.refs.Card.transitionTo({height:150})
     // this.setState({title: 'dude'})
   }
+  // <Animatable.View ref="Card" style={[styles.container,{margin:15,flex:1}]} animation="fadeInUp" duration={500} delay={50}>
+  //
+  // {unfinished.title &&
+  // <Animatable.View style={styles.headerContainer} animation={{from:{height:0},to:{height:25}}}>
 
 render() {
-  // console.log(this.props)
+  // console.log('UN',this.props)
   const { rec, updateState, title, unfinished, friendName, setTitle,placeholderText } = this.props;
   return (
 
-        <Animatable.View ref="Card" style={[styles.container,{margin:15,flex:1}]} animation="fadeInUp" duration={500} delay={50}>
+        <Animatable.View ref="CONTAINER" style={[styles.container,{minHeight: 200, margin:15}]} >
 
         {unfinished.title &&
-        <Animatable.View style={styles.headerContainer} animation={{from:{height:0},to:{height:25}}}>
+        <Animatable.View style={styles.headerContainer} animation={{from:{height:0},to:{height:25}}} duration={500} delay={200} >
 
 
           <View style={styles.friendContainer}>
-          {unfinished.title && !unfinished.friend &&
+          {unfinished.title && !unfinished.friendName &&
             <TextInput
               placeholder='friend name'
               ref={ c => this._titleFriend = c }
@@ -69,7 +84,7 @@ render() {
               onChangeText={(friendName) => updateState({friendName})}
             /> }
 
-            {unfinished.friend && <Friend.Name friend={unfinished.friend} /> }
+            {unfinished.friendName && <Friend.Name friend={{name:unfinished.friendName}} /> }
           </View>
 
 
@@ -79,7 +94,7 @@ render() {
         </Animatable.View>}
 
 
-        <View style={[styles.bodyContainer,{flex: 1}]}>
+        <View style={[styles.bodyContainer]}>
         {!unfinished.title ?
           <TextInput
             placeholder='Type here...'
@@ -91,13 +106,11 @@ render() {
             placeholderTextColor="#bbb"
             multiline={true}
             style={styles.inputTitle}
+            autoGrow={true}
+            maxHeight={200}
 
             onChangeText={(title) => updateState({title})}
-            onLayout={(event) => {
-              var {x, y, width, height} = event.nativeEvent.layout;
-              // console.log('input height',height)
-              updateState({inputHeight: height})
-            }}
+
           /> :
 
           <Rec.Title rec={unfinished} />
@@ -112,6 +125,7 @@ render() {
 
 
 
+
   );
 }
 
@@ -120,8 +134,12 @@ render() {
 
 export default Unfinished;
 
-
-
+// <TextInput....
+// onLayout={(event) => {
+//   var {x, y, width, height} = event.nativeEvent.layout;
+//   // console.log('input height',height)
+//   updateState({inputHeight: height})
+// }}
 
 
 

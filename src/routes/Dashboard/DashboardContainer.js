@@ -3,7 +3,6 @@ import Dashboard from './Dashboard';
 import Hello from '../Hello'
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
-import firebase from 'react-native-firebase';
 
 class DashboardContainer extends Component {
   // constructor(props) {
@@ -21,8 +20,8 @@ class DashboardContainer extends Component {
   }
   componentDidMount() {
     // TMP!!
-    // Actions.push('NewRecLightbox')
-    // Actions.push('Register')
+    Actions.push('NewRecLightbox')
+    // Actions.push('Profile')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[0]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
@@ -42,9 +41,7 @@ class DashboardContainer extends Component {
   }
 
   _onNewRecPress = () => {
-
     this.chain().then(Actions.push('NewRecLightbox'))
-
   }
 
   _onBrandNewRecPress = (category) => {

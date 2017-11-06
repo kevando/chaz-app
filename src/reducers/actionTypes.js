@@ -11,7 +11,7 @@ export const SAVE_FRIEND = 'SAVE_FRIEND';
 export const ADD_REC_TO_FRIEND = 'ADD_REC_TO_FRIEND'
 
 export const SET_TITLE = 'SET_TITLE';
-export const SET_FRIEND_ID = 'SET_FRIEND_ID';
+export const SET_FRIEND = 'SET_FRIEND';
 export const SAVE_RECOMMENDATION = 'SAVE_RECOMMENDATION';
 export const SET_REMINDER = 'SET_REMINDER';
 export const DELETE_RECOMMENDATION = 'DELETE_RECOMMENDATION';
@@ -44,3 +44,34 @@ export const USER_NOT_FOUND = 'USER_NOT_FOUND'
 // App data for UI
 export const SET_APP_STATUS = 'SET_APP_STATUS'
 export const SET_APP_ERROR = 'SET_APP_ERROR'
+
+
+
+// Test initial data
+// const Recs = [
+//   {
+//     id: '1',
+//     title: 'pink floyd',
+//     friend: {name: 'Blake', id:'2'},
+//     category: 'music',
+//   },
+//   {
+//     id: '2',
+//     title: 'Shawshank Redemption',
+//     friend: {name: 'Kevin', id:'3'},
+//     category: 'movie',
+//   },
+//   {
+//     id: '3',
+//     title: 'Barbarsol',
+//     friend: {name: 'John Older Lions End', id:'3'},
+//     // category: 'music',
+//   },
+// ]
+//
+// const UnfinishedRec = {
+//   // id: '1',
+//   title: 'Rockin like a hurricane',
+//   friend: {name: 'Blake', id:'2'},
+//   // category: 'music',
+// }

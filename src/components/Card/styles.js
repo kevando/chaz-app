@@ -19,20 +19,10 @@ export default styles = StyleSheet.create({
     padding: 15,
     margin: 5,
     backgroundColor: 'white',
-    flex: 1,
-
+    // flex: 1,
+    // backgroundColor: 'yellow',
+    // minHeight: 200,
   },
-  // backgroundShadow: {
-  //   borderColor: '#aaa',
-  //   shadowColor: '#555',
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 3
-  //   },
-  //   shadowRadius: 15,
-  //   shadowOpacity: 1.0
-  //
-  // },
 
   headerContainer: {
     // backgroundColor: 'yellow',
@@ -59,6 +49,7 @@ export default styles = StyleSheet.create({
   inputTitle: {
     ...text,
     flex:1,
+    // backgroundColor: '#ddd',
   },
   inputFriend: {
     ...text,

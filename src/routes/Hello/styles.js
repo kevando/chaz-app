@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     // borderWidth: 2,
     // borderColor: 'red',
-    // paddingRight: 100,
+    paddingRight: 70,
     // paddingLeft: 10,
   },
 

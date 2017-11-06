@@ -36,7 +36,8 @@ const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress }) =>
 
       </ScrollView>
       { friend.uid && <Button text="Send a Recommendation" onPress={onGiveRecPress} /> }
-      { !friend.uid && !app.isAnon && <Button bgcolor="pink" text="Invite" onPress={()=>Actions.push('InviteModal',{friend})} /> }
+      { !friend.uid && !app.isAnon && !friend.invitedAt &&<Button bgcolor="pink" text="Invite" onPress={()=>Actions.push('InviteModal',{friend})} /> }
+      { !friend.uid && !app.isAnon && friend.invitedAt && <Button bgcolor="pink" text="Invited" onPress={()=>Actions.push('InviteModal',{friend})} /> }
     </View>
   );
 }

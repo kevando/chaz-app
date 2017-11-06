@@ -7,15 +7,38 @@ const env = process.env.NODE_ENV;
 const dataVersion = 'v1'
 const PREFIX = env + '_' + dataVersion + '_'
 
-export const recsRef = firebase.firestore().collection(`${PREFIX}_recommendations`)
-export const friendsRef = firebase.firestore().collection(`${PREFIX}_friends`)
-export const usersRef = firebase.firestore().collection(`${PREFIX}_users`)
+export const recsRef = firebase.firestore().collection(`${PREFIX}recommendations`)
+export const friendsRef = firebase.firestore().collection(`${PREFIX}friends`)
+export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 
+
+
+// --------------------------------
+//    AUTH LISTENER
+// --------------------------------
+
+
+// Firestore Listener (called on appInitialized)
+export function listenForAuthChanges() {
+  return (dispatch, getState) => {
+    firebase.auth().onAuthStateChanged(function(user) {
+
+      if (user) {
+        dispatch({ type: t.USER_IS_AUTHENTICATED, user })
+        // Note: this may become an issue if user is without internet
+        dispatch(addFirestoreListeners(user.uid))
+      } else {
+        // No user is signed in. so lets authenticate anon
+        firebase.auth().signInAnonymously()
+      }
+    }) // Auth Listener
+  }
+}
 
 // Firestore Listener (called on appInitialized)
 export function addFirestoreListeners(uid) {
   return (dispatch, getState) => {
-    console.log(getState().app)
+    // console.log(getState().app)
     let myFriends = getState().friends // this might be empty
     let myRecs = getState().recommendations.myRecs
     let givenRecs = getState().recommendations.givenRecs
@@ -48,7 +71,7 @@ export function addFirestoreListeners(uid) {
               // console.log('myFriends in rec listener, could be from state or listener',myFriends)
           })
           const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.friendId) || {} } })
-          dispatch({type: t.REFRESH_MY_RECS, myRecs: myRecsWithFriendData})
+          dispatch({type: t.REFRESH_MY_RECS, myRecs: _.orderBy(myRecsWithFriendData,['createdAt'],['desc']) })
       })
 
       // GIVEN RECS

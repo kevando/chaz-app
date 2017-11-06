@@ -16,7 +16,7 @@ export const Categories = {
   "music" : {icon: "music", title: "Music"},
   "podcast" : {icon: "mic", title: "Podcast"},
   "documentary" : {icon: "video", title: "Documentary"},
-  "internet" : {icon: "link", title: "Websitesadf"},
+  "internet" : {icon: "link", title: "Website"},
   "other" : {icon: "zap", title: "Other"},
 }
 

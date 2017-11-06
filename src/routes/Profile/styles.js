@@ -8,7 +8,7 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 5,
-    backgroundColor: colors.backgroundGrey,
+    backgroundColor: colors.blueBG,
   },
   signoutButton: {
     fontSize: 8,
@@ -28,11 +28,11 @@ export default styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 30,
     paddingLeft: 15,
-    paddingTop: 5,
-    height: 50,
-    borderColor: colors.lightGrey,
-    borderWidth: 1,
-    color: colors.grey
+    paddingVertical: 25,
+    // height: 50,
+    // borderColor: colors.lightGrey,
+    // borderWidth: 1,
+    color: colors.white
   },
 
 });

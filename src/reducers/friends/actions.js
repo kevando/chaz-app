@@ -1,41 +1,40 @@
 import firebase from 'react-native-firebase';
 import { text } from 'react-native-communications'; // might not want this in redux
-import {
-  SAVE_FRIEND,
-  SET_FRIEND_ID,
-  REFRESH_FRIENDS,
-  SET_APP_STATUS,
-  SET_APP_ERROR,
-} from '../actionTypes';
 
 import * as t from '../actionTypes'
 
 import { recsRef, friendsRef, usersRef } from '../../config/firebase'
 
 
-export function addFriend(friend) {
-  // console.log('addFriend?')
-  return(dispatch,getState) => {
-    friend.owner = getState().user.uid // add friend owner
-    friend.createdAt = Date.now()
-    // console.log('addFriend?')
-    friendsRef.add(friend)
-    .then(docRef => {
-      // console.log('friend saved',friend)
-      const newFriend = {
-        ...friend,
-        id: docRef.id,
+// ----------------------------------------------------
+//   Save new friend to firestore
+// ----------------------------------------------------
+export const addFriend = (friendName) => (dispatch, getState) =>
 
-      }
-      dispatch({ type: SAVE_FRIEND, friend: newFriend })
-      dispatch({ type: SET_FRIEND_ID, friendId: docRef.id }) // unfinished
+  new Promise(function(resolve,reject) {
+
+    if(!friendName) { return reject('no friendName')}
+
+    let friend = {
+      name: friendName,
+      owner: getState().user.uid,
+      createdAt: Date.now(),
+    }
+
+    friendsRef.add(friend)
+      .then(docRef => {
+        friend.id = docRef.id
+        resolve(friend)
+      // dispatch({ type: t.SAVE_FRIEND, friend: newFriend })
+      // dispatch({ type: t.SET_FRIEND_ID, friendId: docRef.id }) // unfinished
     })
-  }
-}
+    .catch(error => reject(error))
+  }) // Promise
+
 
 
 export function saveFriend(friend) {
-  return { type: SAVE_FRIEND, friend }
+  return { type: t.SAVE_FRIEND, friend }
 }
 
 
@@ -89,7 +88,7 @@ export function sendInvite(friend, phoneNumber) {
 function updateFriend(friend,data) {
   return dispatch => {
     friendsRef.doc(friend.id).update(data)
-      .catch(error =>  dispatch({type: SET_APP_ERROR, error}) );
+      .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) );
   }
 }
 
@@ -102,7 +101,7 @@ function createInvite(user,friend) {
       invitedAt: Date.now()
     }
     firebase.firestore().collection("invites").add(inviteObject)
-      .catch(error => dispatch({type: SET_APP_ERROR, error}))
+      .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
   }
 }
 
@@ -119,7 +118,7 @@ export function assignUserToFriend(friend) {
       friendsRef.doc(friend.id).update({uid:friend.found.uid, found: null, searchResults: 'Found and connected',})
         // tmp not sending messages for now
         // .then( () =>  addMessage(user.uid,myUsername) )
-        .catch(error => dispatch({type: SET_APP_ERROR, error}))
+        .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
   }
 }
 

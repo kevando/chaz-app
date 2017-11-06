@@ -21,44 +21,27 @@ import {
 } from '../actionTypes';
 import * as t from '../actionTypes'
 
-import { addFirestoreListeners } from '../../config/firebase'
+import { listenForAuthChanges } from '../../config/firebase'
 import { createUserInFirestore } from '../user/actions'
 
 
 
-// --------------------------------------------------------------
+// --------------------------------
 //    INIT APP
-// --------------------------------------------------------------
-
+// --------------------------------
 
 export function initializeApp() {
   return (dispatch, getState) => {
     const app = getState().app
-    // console.warn('initializeApp()')
 
     // Kick everything off
-    // This will fire every time the app loads no matter what
-    firebase.auth().onAuthStateChanged(function(user) {
-      // console.warn('onAuthStateChanged()', user)
-
-      // Add user data to redux (registered or anon)
-      // Fire off event listeners
-      if (user) {
-
-        dispatch({ type: t.USER_IS_AUTHENTICATED, user })
-
-        // Note: this may become an issue if user is without internet
-        dispatch(addFirestoreListeners(user.uid))
-
-      } else {
-
-        // No user is signed in. so lets authenticate anon
-        firebase.auth().signInAnonymously()
-      }
-    });
+    dispatch(listenForAuthChanges())
 
     if(!app.token)
       dispatch(setToken())
+
+    if(!app.notificationPermission)
+      dispatch(checkNotificationPermission())
   }
 }
 
@@ -226,13 +209,18 @@ export function signOut() {
 
 
 // --------------------------------
-//    SET PERMISSION
+//    NOTIFICATION PERMISSION
 // --------------------------------
 
-export function setNotificationPermission(response) {
-  return { type: SET_NOTIFICATION_PERMISSION, response}
+export function checkNotificationPermission() {
+  return dispatch => {
+    Permissions.check('notification')
+      .then(response => {
+        console.log('check',response)
+        dispatch({ type: t.SET_NOTIFICATION_PERMISSION, response})
+      })
+  }
 }
-
 
 // --------------------------------
 //    UPDATE USER IN FIRESTORE

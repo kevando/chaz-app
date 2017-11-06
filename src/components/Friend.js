@@ -15,13 +15,16 @@ import { colors, text } from '../config/styles';
 export const Name = ({friend, onPress, small, large}) => {
   if(!friend) { console.warn('no friend data'); return null; }
 
-  const fontSize = small ? 10 : large ? 30 : 29
+  // const fontSize = small ? 10 : large ? 30 : 29
 
   const textStyles = [
     ...text,
+
     // props.center && {textAlign: 'center',marginVertical: 20,paddingHorizontal: 40,},
     // props.title && {fontSize: 20,fontWeight: '600'}
+
     {
+      fontSize: 18,
       color: friend.uid ? colors.pink : colors.grey,
       fontWeight: '600',
     }

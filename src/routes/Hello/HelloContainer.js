@@ -65,7 +65,7 @@ class HelloContainer extends Component {
                 <NameInput
                   placeholder=''
                   ref="INPUT"
-                  autoCapitalize="none"
+                  autoCapitalize="words"
                   value={this.state.name}
                   autoCorrect={false}
                   autoFocus={true}
@@ -77,7 +77,11 @@ class HelloContainer extends Component {
                   selectionColor={'rgba(255,255,255,0.4)'}
                   editable={!this.state.nameSaved}
                 />
+
+                
               </Animatable.View>
+
+
 
 
         { this.state.nameSaved &&

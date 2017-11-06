@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, StatusBar } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer'
-import { SetReminderButton  } from '../../components/SetReminder'
+// import { SetReminderButton  } from '../../components/SetReminder'
 import EnableNotifications from '../../components/EnableNotifications'
 import { CardDetails, CardDetailsEditing } from '../../components/Card/Rec'
 import { CardDetail } from '../../components/Rec'
@@ -16,21 +16,19 @@ const RecView = ({ rec, app, isEditing, updateRec, updateState, saveRec, onDelet
 
 
     {
-      isEditing ?
-        <Text onPress={()=>updateState({isEditing: false})}>Cancel</Text> :
-        <Text onPress={()=>updateState({isEditing: !isEditing})}>Toggle edit</Text>
+      isEditing &&
+        <Text style={{color: 'white',marginLeft: 10}} onPress={()=>updateState({isEditing: false})}>Cancel</Text> 
     }
 
     {
       isEditing ?
         <CardDetail isEditing rec={rec} updateRec={updateRec} updateState={updateState} saveRec={saveRec} /> :
-        <CardDetail rec={rec} />
+        <CardDetail updateState={updateState} rec={rec} onDelete={onDeletePress} updateRecommendation={updateRecommendation} app={app} />
     }
 
 
       {
-        app.notificationPermission == 'authorized' ?
-          <SetReminderButton rec={rec} updateRecommendation={updateRecommendation} app={app}/> :
+        app.notificationPermission != 'authorized' &&
           <EnableNotifications button />
       }
 

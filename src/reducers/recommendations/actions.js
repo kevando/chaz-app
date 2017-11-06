@@ -2,7 +2,7 @@ import firebase from 'react-native-firebase';
 // var uuid = require('react-native-uuid');
 import {
   SET_TITLE,
-  SET_FRIEND_ID,
+  // SET_FRIEND_ID,
   SAVE_RECOMMENDATION_SUCCESS,
   SET_REMINDER,
   DELETE_RECOMMENDATION,
@@ -15,6 +15,8 @@ import {
   SET_REC_TO,
   INIT_REC,
 } from '../actionTypes';
+
+import * as t from '../actionTypes';
 
 import { recsRef } from '../../config/firebase'
 
@@ -29,23 +31,8 @@ export const testPromise = () => (dispatch, getState) =>
       type: 'SET_SAVING',
       saving: true
     });
-
-    console.log('ttt')
-    // // Function is expected to return a promise
-    // callUpdateApi(todoId, isDone).then(updatedTodo => {
-    //   dispatch({
-    //     type: 'SET_SAVING',
-    //     saving: false
-    //   });
-    //
-    //   resolve(updatedTodo);
-    // }).catch(error => {
-    //   // TBD: Handle errors for Redux
-    //
-    //   reject(error);
-    // })
   });
-export const initNewRec = (payload) => (dispatch) => 
+export const initNewRec = (payload) => (dispatch) =>
   new Promise(function(resolve,reject) {
     dispatch({ type: INIT_REC, payload })
   })
@@ -59,22 +46,70 @@ export function setTitle(title) {
   return { type: SET_TITLE, title }
 }
 
-export function setFriendId(friendId) {
-  return { type: SET_FRIEND_ID, friendId }
-}
+// ----------------------------------------------------
+//   Save new friend to firestore
+// ----------------------------------------------------
+
+
+// new
+export const setFriend = (friend) => (dispatch, getState) =>
+
+  new Promise(function(resolve, reject) {
+
+    let dude = dispatch({
+      type: t.SET_FRIEND,
+      friend
+    });
+    resolve(dude) // testing how to return dispatches
+  });
+
+// ----------------------------------------------------
+
+
+
 
 // given
 export function setRecTo(uid) {
   return { type: SET_REC_TO, uid }
 }
 
-export function addRecommendation() {
-  return(dispatch,getState) => {
+
+// ----------------------------------------------------
+//   Save new rec to fire store
+// ----------------------------------------------------
+export const saveRec = () => (dispatch, getState) =>
+
+
+
+  new Promise(function(resolve,reject) {
+
+    const unfinished = getState().recommendations.unfinished
+    const user = getState().user
+
+    const newRec = {...unfinished, status: 'new', createdBy: user.uid }
+
+    if(!unfinished.friendId) {reject('o shit, no friendId in unfinished')}
+
+    recsRef.add(newRec)
+      .then(docRef => {
+        // addMessage(unfinished,getState().user.username) // disabled for now @todo
+        // dispatch({ type: t.SAVE_RECOMMENDATION_SUCCESS}) // might cause issue
+        resolve(newRec)
+      })
+      .catch(error => console.warn("Error adding document: ", error) )
+  }) // Promise
+
+
+
+export const addRecommendation = () => (dispatch, getState) =>
+
+  new Promise(function(resolve, reject) {
     const unfinished = getState().recommendations.unfinished
     const user = getState().user
     console.log('unfinished',unfinished)
-
     const newRec = {...unfinished, status: 'new', createdBy: user.uid }
+
+    if(!unfinished.friendId) {alert('o shit, no friendId in unfinished')}
 
     recsRef.add(newRec)
       .then(docRef => {
@@ -82,8 +117,25 @@ export function addRecommendation() {
         addMessage(unfinished,getState().user.username) // disabled for now
       })
       .catch(error => console.warn("Error adding document: ", error) )
-  }
-}
+  });
+// ----------------------------------------------------
+//
+// export function addRecommendationn() {
+//   return(dispatch,getState) => {
+//     const unfinished = getState().recommendations.unfinished
+//     const user = getState().user
+//     console.log('unfinished',unfinished)
+//
+//     const newRec = {...unfinished, status: 'new', createdBy: user.uid }
+//
+//     recsRef.add(newRec)
+//       .then(docRef => {
+//         // dispatch({ type: SAVE_RECOMMENDATION_SUCCESS})
+//         addMessage(unfinished,getState().user.username) // disabled for now
+//       })
+//       .catch(error => console.warn("Error adding document: ", error) )
+//   }
+// }
 
 
 function addMessage(newRec,username) {
