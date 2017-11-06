@@ -37,6 +37,7 @@ class ProfileContainer extends Component {
           user={this.props.user}
           friends={this.props.friends}
           givenRecs={this.props.givenRecs}
+          onlineFriends={this.props.onlineFriends}
         />
       )
   }

@@ -13,17 +13,18 @@ class RecViewContainer extends Component {
       updateState: (state) => this.setState(state),
       updateRec: (recData) => this.setState({rec: {...this.state.rec, ...recData }}),
     }
-    this._deleteRecommendation = this._deleteRecommendation.bind(this)
-    this._onDeletePress = this._onDeletePress.bind(this)
-    this._onAssignPress = this._onAssignPress.bind(this)
-  }
 
+  }
+  componentWillReceiveProps({recLive}) {
+    // console.log('new perops came in', recLive)
+    this.setState({rec: recLive})
+  }
   _saveRec = () => {
     this.props.updateRecommendation(this.state.rec)
     this.setState({isEditing: false})
   }
 
-  _onDeletePress() {
+  _onDeletePress = () => {
     AlertIOS.alert(
       'Are you sure?',
       null,
@@ -33,19 +34,20 @@ class RecViewContainer extends Component {
       ],
     )
   }
-  _deleteRecommendation() {
+  _deleteRecommendation = () => {
     const { deleteRecommendation, rec } = this.props
     deleteRecommendation(rec) // redux and firestore
     Actions.pop()
   }
 
-  _onAssignPress(username){
+  _onAssignPress = (username) => {
     const { assignUserToFriend, rec } = this.props
     assignUserToFriend(rec, username) // i think we should know for sure if this user exists
   }
 
   render() {
-    // console.log('RecViewContainer STATE',this.state)
+    // console.log('RecViewContainer props',this.props)
+    // console.log('RecViewContainer state',this.state)
 
     if(!this.props.rec)  { return null }
     return (

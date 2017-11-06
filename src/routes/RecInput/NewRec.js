@@ -223,7 +223,7 @@ class InputTitle extends Component {
             // console.log(friend)
             return (
               <TouchableOpacity key={i} onPress={() => this._setFriend(friend)} style={styles.friendTouchable}>
-                <Text style={styles.friendText}>{friend.name}{friend.uid&&'!'}</Text>
+                <Text style={[styles.friendText,{color: friend.uid ? colors.pink : 'white'}]}>{friend.name}{friend.uid&&'!'}</Text>
               </TouchableOpacity>
             );
           })}

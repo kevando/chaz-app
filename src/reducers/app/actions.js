@@ -40,6 +40,7 @@ export function initializeApp() {
     if(!app.token)
       dispatch(setToken())
 
+      // console.warn(app.notificationPermission)
     if(!app.notificationPermission)
       dispatch(checkNotificationPermission())
   }
@@ -216,9 +217,20 @@ export function checkNotificationPermission() {
   return dispatch => {
     Permissions.check('notification')
       .then(response => {
-        console.log('check',response)
+        console.warn('check',response)
         dispatch({ type: t.SET_NOTIFICATION_PERMISSION, response})
       })
+  }
+}
+
+export function requestNotificationPermission() {
+  return dispatch => {
+    firebase.messaging().requestPermissions()
+      .then((response)=> {
+        console.warn('response: ',response)
+        dispatch(checkNotificationPermission())
+      })
+      .catch((error)=>console.warn('notification permission rejected',error));
   }
 }
 

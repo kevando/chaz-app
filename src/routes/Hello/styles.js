@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions} from 'react-native';
-import { colors, text, MARGIN_LEFT } from '../../config/styles';
+import { colors, text, MARGIN_LEFT, width } from '../../config/styles';
 
 export default styles = StyleSheet.create({
 
@@ -63,5 +63,20 @@ export default styles = StyleSheet.create({
     fontWeight: '400',
     marginBottom: 30,
   },
+  ghostButton: {
+    ...text,
+    color: 'white',
+    fontSize: 15,
+    borderWidth: 1,
+    borderColor: 'white',
+    paddingVertical: 15,
+    // paddingHorizontal: 10,
+    marginTop: 10,
+    marginBottom: 30,
+    marginLeft: 10,
+    // flex: 1,
+    width: width-140,
+    textAlign: 'center',
+  }
 
 });

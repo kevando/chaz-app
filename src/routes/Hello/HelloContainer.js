@@ -33,6 +33,8 @@ class HelloContainer extends Component {
       name: '',
       nameSaved: false,
       category: null,
+      takeTour: false,
+      getStarted: false,
     }
   }
 
@@ -49,6 +51,13 @@ class HelloContainer extends Component {
     this.setState({category})
     // possibly run an animation before this
     this.props.onNewRecPress(category)
+  }
+  _explore = () => {
+    this.refs.WELCOME.fadeOutLeft().then(this.setState({explore:true}))
+  }
+
+  _getStarted = () => {
+    this.refs.WELCOME.fadeOutUp().then(this.setState({getStarted:true}))
   }
 
   render() {
@@ -78,8 +87,10 @@ class HelloContainer extends Component {
                   editable={!this.state.nameSaved}
                 />
 
-                
+
               </Animatable.View>
+
+
 
 
 
@@ -95,7 +106,7 @@ class HelloContainer extends Component {
 </ScrollView>
         {this.state.name != '' && !this.state.nameSaved && <Button animated text="Yep. That's my name" onPress={this._saveName} />}
 
-
+        {!this.state.name && <Animatable.Text animation="fadeIn" delay={10000} style={{color:'white',fontSize:12,}}>What's your name?</Animatable.Text>}
         <KeyboardSpacer />
 
       </View>

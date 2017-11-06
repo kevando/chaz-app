@@ -7,7 +7,8 @@ import _ from 'lodash'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import { Button } from './Generic'
-
+import * as Animatable from 'react-native-animatable'
+import EnableNotifications from './EnableNotifications'
 
 // --------------------------------
 // Close Button for InputTitle
@@ -121,12 +122,17 @@ render() {
   if(app.notificationPermission != "authorized" && myRecs.length > 0) {
     // STEP 1
     buttonIcons.push(
+      <Animatable.View animation="tada" iterationCount={'infinite'} duration={2000}>
+      <EnableNotifications wrapper>
       <Icon
+
         name={"bell"}
-        size={20}
+        size={25}
         color={colors.yellow}
         style={[styles.navIcon,{color: colors.yellow, marginTop: StatusBar.hidden ? -10 : 0,}]}
       />
+      </EnableNotifications>
+      </Animatable.View>
     )
   }
   else if(myRecs.length > 0 && app.notificationPermission == "authorized" && app.isAnon) {
@@ -135,7 +141,7 @@ render() {
     buttonIcons.push (
       <Icon
         onPress={()=> Actions.push('Register')}
-        name={"users"}
+        name={"upload-cloud"}
         size={25}
         color={colors.yellow}
         style={[styles.navIcon,{color: colors.yellow, marginTop: StatusBar.hidden ? -10 : 0,}]}
@@ -147,7 +153,7 @@ render() {
       <Icon
         onPress={()=> Actions.push('Profile')}
         name={"user"}
-        style={[styles.navIcon,{color: 'rgba(255,255,255,0.5)', fontSize: 20,marginTop: StatusBar.hidden ? -10 : 0,}]}
+        style={[styles.navIcon,{color: 'rgba(255,255,255,0.7)', fontSize: 25,marginTop: StatusBar.hidden ? -10 : 0,}]}
       />
     )
 
@@ -156,7 +162,7 @@ render() {
   }
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={{flexDirection: 'row', marginRight: 12,marginTop: 8}}>
       {_.map(buttonIcons,(icon,i) => <View style={styles.navIconContainer} key={i}>{icon}</View>)}
     </View>
   )

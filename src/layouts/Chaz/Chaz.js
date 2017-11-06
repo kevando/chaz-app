@@ -78,9 +78,10 @@ class Chaz extends Component {
 
     // console.log('chaz',this.props)
     const navBorderColor = showOnboarding ? colors.blueBG : colors.newBlue
+
     // PROD Animate screen loading
-    // if (!isReady || !isAuthenticated)
-      // return <Loading updateState={this.updateState} />;
+    if (!isReady || !isAuthenticated)
+      return <Loading updateState={this.updateState} />;
 
     // DEV
     // if (!isAuthenticated)

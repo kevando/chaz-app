@@ -9,9 +9,10 @@ import { OnboardingCard } from '../../components/Card/Onboarding'
 import styles from './styles';
 import firebase from 'react-native-firebase'
 
+
 const Dashboard = (props) => {
   // console.log('Dashboard.js', props)
-  const { myRecs, onNewRecPress, onNewGivenRecPress, activeFilter, changeActiveFilter, givenRecs } = props;
+  const { myRecs, onNewRecPress, onNewGivenRecPress, activeFilter, changeActiveFilter, givenRecs, Confetti } = props;
 
 
   const filteredRecs = myRecs// TMP UI!! activeFilter === 'Everything' ? myRecs : _.filter(myRecs, function(rec) { return rec.category.title == activeFilter; });
@@ -20,7 +21,7 @@ const Dashboard = (props) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" hidden={false} />
-
+        <Confetti />
         <ScrollView style={styles.scrollView}>
 
           <View style={styles.titleContainer}>

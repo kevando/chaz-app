@@ -9,7 +9,7 @@ import styles from './styles';
 import { Button } from '../../components/Generic'
 //
 
-const RecView = ({ rec, app, isEditing, updateRec, updateState, saveRec, onDeletePress, updateRecommendation,onAssignPress }) => {
+const RecView = ({ rec, reco, app, isEditing, updateRec, updateState, saveRec, onDeletePress, updateRecommendation,onAssignPress }) => {
   return (
     <View style={{flex:1}}>
     <ScrollView style={styles.container}>
@@ -17,7 +17,7 @@ const RecView = ({ rec, app, isEditing, updateRec, updateState, saveRec, onDelet
 
     {
       isEditing &&
-        <Text style={{color: 'white',marginLeft: 10}} onPress={()=>updateState({isEditing: false})}>Cancel</Text> 
+        <Text style={{color: 'white',marginLeft: 10}} onPress={()=>updateState({isEditing: false})}>Cancel</Text>
     }
 
     {

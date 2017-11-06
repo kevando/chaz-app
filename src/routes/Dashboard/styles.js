@@ -11,6 +11,7 @@ export default styles = StyleSheet.create({
   titleContainer: {
     // marginLeft: MARGIN_HORIZONTAL+10,
     // backgroundColor: 'yellow',
+    marginTop: 10,
   },
   scrollView: {
     paddingHorizontal: 10,
