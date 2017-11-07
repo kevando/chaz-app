@@ -44,7 +44,7 @@ export const RESET_PHONE = 'RESET_PHONE'
 export const APP_SHOULD_SIGN_IN = 'APP_SHOULD_SIGN_IN'
 
 // App data for UI
-export const SET_APP_STATUS = 'SET_APP_STATUS'
+export const SET_APP_DATA = 'SET_APP_DATA'
 export const SET_APP_ERROR = 'SET_APP_ERROR'
 
 export const PUSH_LOCAL_REMINDERS = 'PUSH_LOCAL_REMINDERS'

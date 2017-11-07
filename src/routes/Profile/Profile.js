@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import { Label } from '../../components/Generic';
 // import { FriendCard } from '../../components/Card/RecView';
-import Card  from '../../components/Card/Rec';
+// import Card  from '../../components/Card/Rec';
 import * as Animatable from 'react-native-animatable'
 
 import styles from './styles';
@@ -15,7 +15,7 @@ const GivenRecs = ({givenRecs}) => {
     <Label>Recommendations that I gave</Label>
     {
     _.map(givenRecs,rec => {
-      return <Card key={rec.id} rec={rec} />
+      return <Text key={rec.id}>{rec.title}</Text>
     })
   }
   </View>

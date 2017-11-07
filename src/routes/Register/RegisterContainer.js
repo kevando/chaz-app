@@ -84,13 +84,14 @@ class RegisterContainer extends Component {
   render() {
     // console.log('RegisterContainer props',this.props)
 
+
     const { app, user } = this.props
     const { isPhoneVerified, isCodeConfirmed, errorMessage } = this.state
 
     let Content = null
 
 
-    if(!user.isAnon)
+    if(!app.isAnon)
         Content =  <Confirmation user={user} />
 
     else if(app.activeStep == 1 || !app.activeStep) {

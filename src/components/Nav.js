@@ -202,10 +202,10 @@ render() {
   if(myRecs.length > 0 && !app.isAnon) {
     // LET USER ACCESS THEIR ACCOUNT
     buttonIcons.push (
-      <Icon
+      <NavButton
         onPress={()=> Actions.push('Profile')}
-        name={"user"}
-        style={[styles.navIcon,{color: 'rgba(255,255,255,0.7)', fontSize: 25,marginTop: StatusBar.hidden ? -10 : 0,}]}
+        icon="user"
+        color={colors.lightWhite}
       />
     )
 
@@ -223,8 +223,8 @@ render() {
     )
   }
 
-  // SETTINGS TMP
-  buttonIcons.push (<NavButton onPress={()=> Actions.push('Settings')} icon="settings" color={colors.lightWhite} />)
+  // SETTINGS FOR DEV MODE
+  app.devMode && buttonIcons.push (<NavButton onPress={()=> Actions.push('Settings')} icon="settings" color={colors.lightWhite} />)
 
   return (
     <View style={{flexDirection: 'row', marginRight: 12,marginTop: 8}}>

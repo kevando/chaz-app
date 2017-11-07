@@ -10,6 +10,7 @@ const initialState = {
   // isAnon: true,
   signInAttempts: 0,
   invites: [],
+  devMode: false,
 };
 
 
@@ -123,10 +124,10 @@ export default function app(app = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    case t.SET_APP_STATUS:
+    case t.SET_APP_DATA:
       return {
         ...app,
-        status: action.status,
+        ...action.data,
       }
     // -------------------------------------------
     case t.SET_APP_ERROR:

@@ -12,7 +12,7 @@ export const friendsRef = firebase.firestore().collection(`${PREFIX}friends`)
 export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 export const invitesRef = firebase.firestore().collection(`${PREFIX}invites`)
 
-// import { addMessage } from '../friends/actions'
+import { assignUserToFriend } from '../reducers/friends/actions'
 
 
 // --------------------------------
@@ -134,6 +134,8 @@ export function connectUsers(myInvites) {
       _.forEach(myInvites,invite => {
         addInviterAsFriend(invite)
         addMessage(invite.from.uid,`Hey ${invite.to.name} just joined chaz. Your invitation worked!`) // send inviter message that his innvite worked
+        const newFriendObject = {...invite.to, uid: getState().user.uid} // this is me getting saved to inviters friend list
+        assignUserToFriend(newFriendObject) // someone accepted MY invite, now add their userid to my friend object
       })
   }
 }

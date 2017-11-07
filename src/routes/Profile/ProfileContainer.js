@@ -25,6 +25,9 @@ class ProfileContainer extends Component {
       [
         {text: 'No' },
         {text: 'Yes', onPress: () => this.props.signOut(), },
+        {text: 'Refresh Token', onPress: () => this.props.refreshServerToken(), },
+        {text: 'Turn Dev Mode On', onPress: () => this.props.setAppData({devMode: true}), },
+        {text: 'Turn Dev Mode Off', onPress: () => this.props.setAppData({devMode: false}), },
       ]
     )
   }

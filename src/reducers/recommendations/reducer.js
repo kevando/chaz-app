@@ -1,19 +1,4 @@
 import _ from 'lodash';
-// import {
-//   SET_TITLE,
-//   SET_FRIEND_ID,
-//   SAVE_RECOMMENDATION_SUCCESS,
-//   SET_REMINDER,
-//   // DELETE_RECOMMENDATION,
-//   SET_STATUS,
-//   SET_FILTER,
-//   SET_GRADE,
-//   UPDATE_RECOMMENDATION,
-//   REFRESH_MY_RECS,
-//   REFRESH_GIVEN_RECS,
-//   SET_REC_TO,
-//   INIT_REC,
-// } from '../actionTypes';
 
 import * as t from '../actionTypes'
 
@@ -67,7 +52,8 @@ export default function recs(recommendations = initialState, action = {}) {
         unfinished: {
           ...recommendations.unfinished,
           friendId: action.friend.id,
-          friendName: action.friend.name
+          friendName: action.friend.name,
+          from: action.friend, // not always tho
         }
       }
 
@@ -168,8 +154,6 @@ export default function recs(recommendations = initialState, action = {}) {
       // -------------------------------------------
       // right now this pulls from a listener on the appInitialized fn
       case t.REFRESH_MY_RECS:
-        console.log('REFRESH_MY_RECS',action.myRecs)
-        console.log('REFRESH_MY_RECS',recommendations.myRecs)
         return {
           ...recommendations,
           // list: action.myRecs,

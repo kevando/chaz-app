@@ -24,7 +24,7 @@ class RemindersContainer extends Component {
 
 
   render() {
-    // console.log(this.state)
+    console.log('reminders',this.props)
       return (
         <Reminders
           {...this.props}

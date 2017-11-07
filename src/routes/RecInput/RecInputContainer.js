@@ -48,7 +48,7 @@ class InputTitleContainer extends Component {
   //   }
   // }
   _setTitle = () => {
-    // alert(this.state.title)
+
     this.props.setTitle(this.state.title)
   }
 
@@ -92,8 +92,8 @@ class InputTitleContainer extends Component {
         unfinished={this.props.unfinished}
         onNextPress={this._setTitle}
         setFriend={this._setFriend}
-        setFriendRedux={this.props.setFriend}
-        addFriendRedux={this.props.addFriend}
+        setFriend={this.props.setFriend}
+        addFriend={this.props.addFriend}
         saveRecRedux={this.props.saveRec}
         onFriendPress={this._onFriendPress}
         user={this.props.user}

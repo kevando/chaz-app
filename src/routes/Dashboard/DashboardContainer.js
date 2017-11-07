@@ -83,6 +83,7 @@ class DashboardContainer extends Component {
     // return null
     const { showOnboarding } = this.props;
 
+    // console.warn(this.props.user.name)
     if(showOnboarding) {
     // if(false) {
       return (

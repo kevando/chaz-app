@@ -92,11 +92,11 @@ class InputTitle extends Component {
   // componentDidMount() {}
 
   _onSavePress = () => {
-    
+
     // this._saveSuccessPreAnimation()
 
-    this.props.addFriendRedux(this.props.friendName)
-      .then(friend => this.props.setFriendRedux(friend))
+    this.props.addFriend(this.props.friendName)
+      .then(friend => this.props.setFriend(friend))
       .then(friend => this._saveRec() )
       .catch(error => console.warn('add friend redux error',error))
   }
@@ -105,7 +105,7 @@ class InputTitle extends Component {
 
     // this._saveSuccessPreAnimation()
 
-    this.props.setFriendRedux(friend)
+    this.props.setFriend(friend)
       .then(friend => this._saveRec() )
       .catch(error => console.warn('set friend redux error',error))
   }
@@ -121,6 +121,27 @@ class InputTitle extends Component {
 
       })
       .catch(error => console.warn('save rec redux error',error.message))
+  }
+
+  _sendRec = () => {
+    this.props.onNextPress() // sets the title
+
+    // TMP HACK
+    setTimeout(() => {
+
+      this.props.saveRecRedux()
+        .then(rec => {
+          this.refs.CONTAINER.fadeBackground(400).then(Actions.pop)
+          //now the rec is totally saved, fade the bg and pop
+          this.refs.CLOSE.fadeOutUp(200)
+
+        })
+        .catch(error => console.warn('save rec redux error',error.message))
+
+
+    },200) // just enough time to set title
+
+
   }
 
 
@@ -252,37 +273,3 @@ class InputTitle extends Component {
 }
 
 export default InputTitle;
-
-
-// _throwParty = () => {
-//   // console.log(this.refs.CARD)
-//   this.refs.CARD.throwParty(500).then(()=> {
-//     this.refs.CONTAINER.fadeOut(200).then(()=>{
-//       this.props.setFriend() // this is bad to have here cause we are assuming everything saved properly before we know it did
-//       // Actions.pop()
-//     })
-//   })
-//
-// }
-// _onFriendPress = (friend) => {
-//   var collapseDuration = 800
-//
-//   this.refs.CARD.transitionTo({marginTop:38},collapseDuration) // hack
-//   //
-//   // this.props.updateState({})
-//   setTimeout(()=>{
-//
-//     this.refs.TITLE.fadeOutUp() // hack
-//     this.refs.BUTTON.fadeOutDown().then(()=>{
-//       this._throwParty()
-//     })
-//
-//   },collapseDuration)
-//
-//   const { setFriendId } = this.props;
-//   setFriendId(friend.id); // Redux
-//
-//   this.props.addRecommendation(); // Redux
-//   // Actions.pop() // might error
-//
-// }

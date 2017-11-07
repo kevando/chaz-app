@@ -19,7 +19,7 @@ export default styles = StyleSheet.create({
   recommendationsTitle: {
     ...text,
     color: 'white',
-    fontSize: 33,
+    fontSize: 30,
     fontWeight: '700',
     letterSpacing:0.5,
     marginBottom: 20,

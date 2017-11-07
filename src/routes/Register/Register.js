@@ -104,7 +104,7 @@ export const Confirmation = (props) => {
           <View style={styles.invitationsContainer}>
             <Label center >You were invited by:</Label>
             {
-              _.map(user.myInvites,(invite,i) => {return (<Label key={i} center>{invite.inviter}</Label>)})
+              _.map(user.myInvites,(invite,i) => {return (<Label key={i} center>{invite.from.displayName}</Label>)})
             }
           </View>
         }

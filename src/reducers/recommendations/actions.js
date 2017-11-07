@@ -18,7 +18,7 @@ import {
 
 import * as t from '../actionTypes';
 
-import { recsRef } from '../../config/firebase'
+import { recsRef, usersRef } from '../../config/firebase'
 
 // const recsRef = firebase.firestore().collection("recommendations")
 
@@ -68,11 +68,11 @@ export const setFriend = (friend) => (dispatch, getState) =>
 
 
 
-// given
-export function setRecTo(uid) {
-  return { type: SET_REC_TO, uid }
-}
-
+// // given
+// export function setRecTo(uid) {
+//   return { type: SET_REC_TO, uid }
+// }
+//
 
 // ----------------------------------------------------
 //   Save new rec to fire store
@@ -93,7 +93,14 @@ export const saveRec = () => (dispatch, getState) =>
     recsRef.add(newRec)
       .then(docRef => {
         console.log('newRec saved')
-        // addMessage(unfinished,getState().user.username) // disabled for now @todo
+        if(unfinished.from.uid) { // then I am saving a rec FROM a live user, notify them
+          addMessage(unfinished.from.uid,`Hey dingbat, ${user.displayName} saved something to their chaz with your name on it`) // disabled for now @todo
+        }
+        if(unfinished.to_name) { // then I am saving a rec TO a live user, notify them
+          // @todo bad code. bad way to organize rec data
+          addMessage(unfinished.to,`Incoming message. ** Front Page News ** ${user.displayName} sent you something...`) // disabled for now @todo
+        }
+
         // dispatch({ type: t.SAVE_RECOMMENDATION_SUCCESS}) // might cause issue
         resolve(newRec)
       })
@@ -101,33 +108,16 @@ export const saveRec = () => (dispatch, getState) =>
   }) // Promise
 
 
-
-export const addRecommendation = () => (dispatch, getState) =>
-
-  new Promise(function(resolve, reject) {
-    const unfinished = getState().recommendations.unfinished
-    const user = getState().user
-    console.log('unfinished',unfinished)
-    const newRec = {...unfinished, status: 'new', createdBy: user.uid }
-
-    if(!unfinished.friendId) {alert('o shit, no friendId in unfinished')}
-
-    recsRef.add(newRec)
-      .then(docRef => {
-        // dispatch({ type: SAVE_RECOMMENDATION_SUCCESS})
-        addMessage(unfinished,getState().user.username) // disabled for now
-      })
-      .catch(error => console.warn("Error adding document: ", error) )
-  });
-// ----------------------------------------------------
 //
-// export function addRecommendationn() {
-//   return(dispatch,getState) => {
+// export const addRecommendation = () => (dispatch, getState) =>
+//
+//   new Promise(function(resolve, reject) {
 //     const unfinished = getState().recommendations.unfinished
 //     const user = getState().user
 //     console.log('unfinished',unfinished)
-//
 //     const newRec = {...unfinished, status: 'new', createdBy: user.uid }
+//
+//     if(!unfinished.friendId) {alert('o shit, no friendId in unfinished')}
 //
 //     recsRef.add(newRec)
 //       .then(docRef => {
@@ -135,27 +125,26 @@ export const addRecommendation = () => (dispatch, getState) =>
 //         addMessage(unfinished,getState().user.username) // disabled for now
 //       })
 //       .catch(error => console.warn("Error adding document: ", error) )
-//   }
-// }
+//   });
+// // ----------------------------------------------------
 
+function addMessage(uid,body) {
 
-function addMessage(newRec,username) {
-  // TMP DISABLONG FOR NOW
-//   firebase.firestore().collection("users").doc(newRec.to).get().then(function(user) {
-//     if (user.exists) {
-//         // console.log("user data:", user.data());
-//         var token = user.data().token
-//         var payload = {
-//           notification: {
-//             // title: 'new rec given to you',
-//             body: username + ' sent you a recommendation'
-//           }
-//         }
-//         firebase.firestore().collection("messages").add({token,payload})
-//     } else {
-//         console.log("No such user!");
-//     }
-// })
+  usersRef.doc(uid).get().then(function(user) {
+    if (user.exists) {
+        // console.log("user data:", user.data());
+        var token = user.data().token
+        var payload = {
+          notification: {
+            // title: 'new rec given to you',
+            body
+          }
+        }
+        firebase.firestore().collection("messages").add({token,payload})
+    } else {
+        console.warn("No such user to send message to");
+    }
+})
 
 }
 

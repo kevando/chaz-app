@@ -113,12 +113,13 @@ export function assignUserToFriend(friend) {
 
 
   return (dispatch, getState) => {
-    // const myUsername = getState().user.username
+    const user = getState().user
       // ok now that we have the user id, lets update the friend object
       friendsRef.doc(friend.id).update({uid:friend.found.uid, found: null, searchResults: 'Found and connected',})
 
-        // tmp not sending messages for now
-        // .then( () =>  addMessage(user.uid,myUsername) )
+        // @todo
+        // this should probably eventually become its own firebase function listener
+        .then( () =>  addMessage(friend.found.uid,`Hey Dingo, ${user.displayName} just added you on chaz`) )
 
         // Now we also want to connect this user to their new friend
         // Maybe that user doesnt want this, but for now we are forcing it
@@ -136,6 +137,7 @@ export function assignFriendToUser(newFriend) {
   // adding THIS user as a new friend with friendship pending and deal w it later
 
   return (dispatch, getState) => {
+    console.log('assignFriendToUser',newFriend)
 
     friendsRef.add({
       owner: newFriend.uid,
@@ -148,20 +150,20 @@ export function assignFriendToUser(newFriend) {
 }
 // ----------------------------------------------------
 
-function addMessage(uid,username) {
-  firebase.firestore().collection("users").doc(uid).get().then(function(user) {
+function addMessage(uid,body) {
+  usersRef.doc(uid).get().then(function(user) {
     if (user.exists) {
         // console.log("user data:", user.data());
         var token = user.data().token
         var payload = {
           notification: {
             // title: 'new rec given to you',
-            body: username + ' added you on chaz'
+            body,
           }
         }
         firebase.firestore().collection("messages").add({token,payload})
     } else {
-        console.log("No such user!");
+        console.warn("No such user!");
     }
 })
 

@@ -61,8 +61,9 @@ export const getScheduledReminders = () => (dispatch) =>
 
         // do somrtghing on a notification
       messaging.onMessage( (notification) => {
-        console.warn('onMessage!!', notification)
-        dispatch({type: t.ADD_REMOTE_REMINDER, notification: {...notification, receivedAt: Date.now()}})
+        // console.warn('onMessage!!', notification)
+        if(!notification.local_notification)
+          dispatch({type: t.ADD_REMOTE_REMINDER, notification: {...notification, receivedAt: Date.now()}})
       })
 
       // @todo

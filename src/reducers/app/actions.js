@@ -33,6 +33,13 @@ export function initializeApp() {
   }
 }
 
+
+export function setAppData(data) {
+  return (dispatch, getState) => {
+    
+    dispatch({type: t.SET_APP_DATA, data })
+  }
+}
 // --------------------------------
 //    GET FCM TOKEN
 // --------------------------------
@@ -47,7 +54,14 @@ function setToken() {
       })
   }
 }
-
+// In case things get out of whack
+export function refreshServerToken() {
+  return (dispatch, getState) => {
+      firebase.messaging().getToken().then(token => {
+          usersRef.doc(getState().user.uid).update({token})
+      })
+  }
+}
 
 // --------------------------------
 //    VERIFY PHONE NUMBER
@@ -60,7 +74,7 @@ export function verifyPhone(phoneNumber) {
     dispatch(shouldAppSignIn(phoneNumber)) // find out if this is a returning user
     dispatch(checkForInvites(phoneNumber)) // see if anyone invited this user
 
-    
+
     const formatedNumber = `+1${phoneNumber}`
 
     firebase.auth().verifyPhoneNumber(formatedNumber)
@@ -215,7 +229,6 @@ function updateUser(data) {
       alert('No UID, something is terribly wrong')
     } else {
       firebase.firestore().collection("users").doc(user.uid).update(data)
-        .then(() =>  dispatch({type: t.SET_APP_STATUS, status: 'Updated User in firestore'}) )
         .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) )
     }
   }

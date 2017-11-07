@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash'
 import ProfileContainer from './ProfileContainer';
-import { signOut } from '../../reducers/app/actions';
+import { signOut, refreshServerToken, setAppData } from '../../reducers/app/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -13,4 +13,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { signOut })(ProfileContainer);
+export default connect(mapStateToProps, { refreshServerToken, signOut, setAppData })(ProfileContainer);
