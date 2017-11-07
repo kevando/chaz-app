@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import Invite from './Invite';
 import { Actions } from 'react-native-router-flux';
 import { AlertIOS } from 'react-native';
-import firebase from 'react-native-firebase';
 import _ from 'lodash'
 
-// const usersRef = firebase.firestore().collection("users")
+
 
 class InviteContainer extends Component {
   constructor(props) {
@@ -61,6 +60,7 @@ class InviteContainer extends Component {
         searchUsers={() => this.props.searchUsers(this.props.friend,this.state.phoneNumber)}
         sendInvite={() => this.props.sendInvite(this.props.friend,this.state.phoneNumber)}
         assignFriend={() => this.props.assignUserToFriend(this.props.friend)}
+        updateFriend={this.props.updateFriend}
       />
     );
   }

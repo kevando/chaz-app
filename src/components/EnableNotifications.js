@@ -64,28 +64,6 @@ render() {
   }
 
   return null
-
-  // return (
-  //   <View>
-  //     <TouchableOpacity onPress={this._alertForNotificationPermission} activeOpacity={0.9}>
-  //       <View style={[styles.container, styles.translucentBackground,{marginTop: 20}]}>
-  //
-  //         <View style={styles.iconContainer}>
-  //           <Icon name="feather" color={colors.purple} size={25} />
-  //         </View>
-  //
-  //       <View style={styles.textContainer}>
-  //         <View style={styles.recContainer}>
-  //           <Text style={styles.recText}>Follow Up</Text>
-  //         </View>
-  //       </View>
-  //
-  //     </View>
-  //   </TouchableOpacity>
-  //
-  //   </View>
-  //
-  // );
 }
 
 };

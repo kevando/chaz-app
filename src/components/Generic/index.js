@@ -33,7 +33,7 @@ const labelStyles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     lineHeight:20,
-    marginTop:25,
+    marginTop:15,
     marginHorizontal: 12,
     // marginRight: 12,
   },
@@ -69,12 +69,11 @@ export const Button = (props) => {
       fontWeight: '500',
       // ^^^^ ...text not working for some reason
       margin: 0,
-      fontSize: 17,
+      fontSize: rounded ? 15 : 17,
       borderWidth: 0,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
+      paddingVertical: rounded ? 3 : 10,
+      paddingHorizontal: rounded ? 10 : 20,
       margin: 0,
-      fontSize: 17,
       color: color || 'white',
       // backgroundColor:'green'
     }

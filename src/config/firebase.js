@@ -10,7 +10,9 @@ const PREFIX = env + '_' + dataVersion + '_'
 export const recsRef = firebase.firestore().collection(`${PREFIX}recommendations`)
 export const friendsRef = firebase.firestore().collection(`${PREFIX}friends`)
 export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
+export const invitesRef = firebase.firestore().collection(`${PREFIX}invites`)
 
+// import { addMessage } from '../friends/actions'
 
 
 // --------------------------------
@@ -18,17 +20,19 @@ export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 //  (called on appInitialized)
 // --------------------------------
 
-
 export function listenForAuthChanges() {
   return (dispatch, getState) => {
+    console.log('listenForAuthChanges')
     firebase.auth().onAuthStateChanged(function(user) {
+      console.log('onAuthStateChanged',user)
       if (user) {
         dispatch({ type: t.USER_IS_AUTHENTICATED, user })
         // Note: this may become an issue if user is without internet
         dispatch(addFirestoreListeners(user.uid))
       } else {
-        // No user is signed in. so lets authenticate anon
+        // BRAND NEW USER OPENING APP FOR FIRST TIME
         firebase.auth().signInAnonymously()
+        // console.warn('signInAnonymously')
       }
     }) // Auth Listener
   }
@@ -87,4 +91,89 @@ export function addFirestoreListeners(uid) {
 
 
       }
+}
+
+
+
+// --------------------------------
+//    CHECK IF USER WAS INVITED
+// --------------------------------
+
+export function checkForInvites(phoneNumber) {
+  return (dispatch, getState) => {
+    let myInvites = []
+
+    invitesRef.where("to.phoneNumber", "==", phoneNumber)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          myInvites.push({...doc.data(),id: doc.id})
+        })
+        if(myInvites.length > 0){
+          console.log('hey we found some invites!')
+          dispatch({type: t.SET_USER_DATA, data: {myInvites} })
+          dispatch(connectUsers(myInvites)) // add as friends
+
+        }
+      })
+  }
+}
+
+
+
+// ----------------------------------------------------------------
+//    CONNECT USERS
+//    if theres an invite, the person invited needs the inviter
+//    added to their friend list, and the inviter needs to know
+//    the uid of the person he invited that just created an accnt
+// ----------------------------------------------------------------
+
+export function connectUsers(myInvites) {
+  return (dispatch, getState) => {
+
+      _.forEach(myInvites,invite => {
+        addInviterAsFriend(invite)
+        addMessage(invite.from.uid,`Hey ${invite.to.name} just joined chaz. Your invitation worked!`) // send inviter message that his innvite worked
+      })
+  }
+}
+
+function addInviterAsFriend(invite) {
+  let friend = {
+    name: invite.from.displayName,
+    owner: invite.to.uid,
+    createdAt: Date.now(),
+    type: 'inviter',
+    uid: invite.from.uid,
+  }
+  friendsRef.add(friend)
+    .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
+}
+
+function assignInvitedUserToFriend(invite) {
+  friendsRef.doc(invite.to.friendId)
+    .update({uid:invite.to.uid, connectedAt: Date.now()})
+    .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
+}
+
+
+function addMessage(uid,body) {
+  console.log('addMessage',uid)
+  usersRef.doc(uid).get().then(function(user) {
+    if (user.exists) {
+        console.log("user data:", user.data());
+        var token = user.data().token
+        var payload = {
+          notification: {
+            // title: 'new rec given to you',
+            body: body
+          }
+        }
+        firebase.firestore().collection("messages").add({token,payload})
+          .catch(error=>console.warn(error.message))
+    } else {
+        console.warn("No such user!");
+    }
+})
+
 }

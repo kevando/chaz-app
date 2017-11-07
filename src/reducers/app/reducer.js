@@ -9,6 +9,7 @@ const initialState = {
   notificationPermission: null,
   // isAnon: true,
   signInAttempts: 0,
+  invites: [],
 };
 
 

@@ -52,7 +52,7 @@ render() {
         <View style={cardStyles.iconContainer}>
           {moment().diff(rec.createdAt) < 200000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
           {rec.friend.invitedAt && !rec.friend.uid && <Icon name="mail" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
-          {rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
+          {moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
           {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
 
         </View>
@@ -264,10 +264,11 @@ export class Card extends Component {
 export class CardDetail extends Component {
 
 render() {
+
   // console.log(this.props)
   // i guess this can get called w new rec
   if(!this.props.rec) { return null}
-  const { rec, updateRec, updateState, isEditing, onDelete, updateRecommendation, app } = this.props;
+  const { rec, updateRec, updateState, isEditing, onDelete, updateRecommendation, app, setRecReminder } = this.props;
   return (
     <View style={{flex: 1}}>
         <View style={[cardStyles.container]}>
@@ -308,7 +309,7 @@ render() {
 
 
           {rec.reminder &&
-<Reminder rec={rec} />
+            <Reminder rec={rec} />
         }
 
 
@@ -318,7 +319,7 @@ render() {
         <View style={cardStyles.optionsContainer} >
           <Icon name="trash" color="white" style={cardStyles.optionIcon} onPress={onDelete} />
           <Icon name="edit" color="white" style={cardStyles.optionIcon} onPress={()=>updateState({isEditing: true})} />
-          <SetReminderIcon rec={rec} updateRecommendation={updateRecommendation} app={app} />
+          <SetReminderIcon rec={rec} updateRecommendation={updateRecommendation} app={app} setRecReminder={setRecReminder} />
         </View> }
 
         </View>

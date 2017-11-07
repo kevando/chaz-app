@@ -84,7 +84,7 @@ class RegisterContainer extends Component {
   render() {
     // console.log('RegisterContainer props',this.props)
 
-    const { app } = this.props
+    const { app, user } = this.props
     const { isPhoneVerified, isCodeConfirmed, errorMessage } = this.state
 
     let Content = null
@@ -96,8 +96,10 @@ class RegisterContainer extends Component {
       Content = <CodeInput confirmCode={this._confirmCode} resetPhoneNumber={this.props.resetPhoneNumber} app={this.props.app} {...this.state} />
 
     } else if(app.activeStep == 3 || !app.isAnon) {
-      Content =  <Confirmation />
+      Content =  <Confirmation user={user} />
     }
+
+    // Content =  <Confirmation user={user} />
 
     return (
       <View style={styles.container}>

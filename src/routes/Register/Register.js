@@ -37,7 +37,7 @@ export const PhoneInput = (props) => {
           placeholder={'Phone number'}
           value={phoneNumber}
         />
-        
+
       </View>
     </View>
 
@@ -88,7 +88,7 @@ export const CodeInput = (props) => {
 
 export const Confirmation = (props) => {
 
-  const { getCode } = props
+  const { getCode, user } = props
 
   return (
     <View style={styles.container}>
@@ -98,147 +98,19 @@ export const Confirmation = (props) => {
           <AwesomeIcon name="heart" size={160} color={colors.yellow} />
         </Animatable.View>
 
-        </View>
+        {
+          user.myInvites && user.myInvites.length > 0 &&
 
+          <View style={styles.invitationsContainer}>
+            <Label center >You were invited by:</Label>
+            {
+              _.map(user.myInvites,(invite,i) => {return (<Label key={i} center>{invite.inviter}</Label>)})
+            }
+          </View>
+        }
+
+</View>
         <Button text="Back to Dashboard" onPress={()=> Actions.reset('lightbox')} />
     </View>
   )
 }
-
-
-
-
-// ------------------------------------
-
-
-const Register = (props) => {
-
-  return (
-    <View style={styles.container}>
-
-      <Steps app={props.app} />
-
-      <PhoneNumberInput {...props} />
-      <VerificationCodeInput {...props} />
-
-      <Text onPress={props.loginAsTest}>TEST LOGIN</Text>
-      <Text>.</Text>
-
-      <Text>.</Text>
-      <Text onPress={props.registerAsTest}>TEST REGISTER</Text>
-      <Text>.</Text>
-      <Text>.</Text>
-      <Text onPress={props.onLogoutPress}>LOGOUT</Text>
-
-    </View>
-  );
-}
-
-const Steps = (props) => {
-
-  const Circle = ({step, active, text}) => {
-    const status = active == step ? 'active' : active > step ? 'complete' : 'pending'
-
-    return (
-
-      <View style={{height: 70, flex: 1, margin: 5, justifyContent: 'flex-start', alignItems: 'center'}} >
-        <View style={{borderWidth: 2, borderRadius: 40,width: 30, height: 30,justifyContent: 'center', alignItems: 'center', borderColor: status=='pending' ? 'grey' : colors.blue ,backgroundColor: status=='active' ? 'white' : status=='complete' ? colors.blue : 'transparent'}}>
-          <Text style={{textAlign: 'center', color: status=='active' ? colors.blue : status=='complete' ? 'white' : 'grey',  }}>{step}</Text>
-          </View>
-        <Text style={{textAlign: 'center', fontSize: 10,marginTop: 5, color: status=='active' ? colors.blue: 'grey'}}>{text}</Text>
-      </View>
-
-    )
-  }
-
-
-  const activeStep = props.app.activeStep || 1
-
-  return (
-    <View>
-    <Label center>{activeStep == 1 ? 'Activate chaz by entering your phone number.' : activeStep ==2 ? 'Enter Verification code you got via text' : 'Active your account'}</Label>
-    <View style={{padding: 2, flexDirection: 'row',marginHorizontal: 60,}}>
-
-      <Circle step={1} active={activeStep} text="Phone" />
-      <Circle step={2} active={activeStep} text="Code" />
-      <Circle step={3} active={activeStep} text="Active" />
-
-    </View>
-
-    </View>
-
-  );
-}
-
-
-const PhoneNumberInput = (props) => {
-
-  // return null
-  if(props.app.confirmResult) { return null }
-
-  const { phoneNumber, updateState, onSignInPress } = props
-
-  return (
-    <View>
-
-
-
-    <View style={styles.inputContainer}>
-      <TextInput
-        ref={ c => this._title = c }
-        autoCapitalize="none"
-        autoCorrect={false}
-        keyboardType='phone-pad'
-        multiline={false}
-        style={styles.input}
-        placeholderTextColor="#aaa"
-
-        onChangeText={value => updateState({ phoneNumber: value })}
-        placeholder={'Phone number ... '}
-        value={phoneNumber}
-      />
-    </View>
-
-    <View style={styles.buttonContainer}>
-      <Button text="Get Code" onPress={onSignInPress} />
-    </View>
-
-    </View>
-  )
-}
-
-const VerificationCodeInput = (props) => {
-  // return null
-  if(!props.app.confirmResult) { return null }
-
-  const { updateState, confirmCode, codeInput } = props
-
-  return (
-
-      <View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            ref={ c => this._title = c }
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType='phone-pad'
-            multiline={false}
-            style={styles.input}
-            placeholderTextColor="#aaa"
-
-            onChangeText={value => updateState({ codeInput: value })}
-            placeholder={'Code ... '}
-            value={codeInput}
-          />
-        </View>
-
-        <View style={styles.buttonContainer}>
-        <Button text="Confirm Code"  onPress={confirmCode} />
-        </View>
-      </View>
-
-  )
-}
-
-export default Register;

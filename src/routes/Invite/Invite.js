@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StatusBar, TextInput } from 'react-native';
+import { View, Text, ScrollView, StatusBar, TextInput, TouchableOpacity } from 'react-native';
 import _ from 'lodash'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { Actions } from 'react-native-router-flux';
@@ -13,7 +13,7 @@ import * as Animatable from 'react-native-animatable'
 
 const Invite = (props) => {
 
-  const { friend, app, invitation, updateState, searchUsers, phoneNumber, userFound, user,assignFriend, validPhoneNumber, sendInvite } = props
+  const { friend, app, invitation, updateState, updateFriend, searchUsers, phoneNumber, userFound, user,assignFriend, validPhoneNumber, sendInvite } = props
 
   let UserFound = () => {
     return (
@@ -37,7 +37,7 @@ const Invite = (props) => {
     return (
     <View style={styles.container}>
       <Label center large>Invitation Sent</Label>
-        <Label center>You invited this {friend.name}. Nice. Lets hope they accept. Lets hope they think you're cool.</Label>
+        <Label center>You invited this {friend.name}. Nice. Lets hope {friend.name} accepts.</Label>
       </View>
     )
   }
@@ -45,16 +45,16 @@ const Invite = (props) => {
   let SendInvitation = () => {
     return (
     <View style={styles.container}>
-      <Label center large>No user found</Label>
-        <Label center>{friend.name} did not activate an account. You can invite them to download chaz.</Label>
+      <Label center large>Nobody found</Label>
+        <Label center>{friend.name} did not activate an account with {friend.phoneNumber}. Lets invite them!</Label>
+        <TouchableOpacity onPress={()=>updateFriend(friend,{searchResults: null})}><Label center>Try a different number</Label></TouchableOpacity>
       </View>
     )
   }
   let Connect = () => {
     return (
     <View style={styles.container}>
-      <Label center large>Found {friend.name}</Label>
-
+      <Label center large>{friend.name} has chaz!</Label>
         <Label center>{friend.phoneNumber} is correct and this person is on chaz.</Label>
         <Label center>Connecting will notify them</Label>
 
@@ -64,8 +64,8 @@ const Invite = (props) => {
   let PhoneNumberSearch = () => {
     return (
     <View style={styles.container}>
-      <Label center large>Is {friend.name} on chaz?</Label>
-      <Label center>All users active chaz by phone number. Type in their phone number and see if they already activated a chaz account.</Label>
+      <Label center large>Find {friend.name}</Label>
+      <Label center>Enter {friend.name}'s phone number.</Label>
       <PhoneInput {...props} />
 
       </View>
@@ -75,14 +75,17 @@ const Invite = (props) => {
 
   return (
     <View style={styles.container}>
-    <Text onPress={Actions.pop} style={styles.closeButton}>close</Text>
+      <TouchableOpacity onPress={Actions.pop} style={styles.closeButton}>
+        <Icon name="x" size={25} color="white"/>
+
+      </TouchableOpacity>
 
       {
         friend.uid ?
           <UserFound />
         : friend.invitedAt ?
           <InvitationSent />
-          : friend.searchResults == 'no user found' ?
+          : friend.searchResults == 'no user found'  ?
             <SendInvitation />
             : friend.searchResults == 'user found' ?
               <Connect />
@@ -93,7 +96,7 @@ const Invite = (props) => {
 
       {
         friend.searchResults == 'no user found' ?
-            <Button bgcolor="pink" text="Yes lets invite them" onPress={sendInvite} />
+            <Button bgcolor="pink" text="Yes lets send an invite" onPress={sendInvite} />
             : friend.searchResults == 'user found' ?
               <Button bgcolor="pink" text="Connect!" onPress={assignFriend} />
               : !friend.searchResults ?

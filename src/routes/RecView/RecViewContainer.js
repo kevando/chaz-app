@@ -46,7 +46,8 @@ class RecViewContainer extends Component {
   }
 
   render() {
-    // console.log('RecViewContainer props',this.props)
+    console.log('RecViewContainer props',this.props)
+    
     // console.log('RecViewContainer state',this.state)
 
     if(!this.props.rec)  { return null }
@@ -58,6 +59,7 @@ class RecViewContainer extends Component {
         onDeletePress={this._onDeletePress}
         updateRecommendation={this.props.updateRecommendation}
         onAssignPress={this._onAssignPress}
+        setRecReminder={this.props.setRecReminder}
       />
     );
   }

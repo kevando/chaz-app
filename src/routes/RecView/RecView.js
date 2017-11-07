@@ -9,7 +9,8 @@ import styles from './styles';
 import { Button } from '../../components/Generic'
 //
 
-const RecView = ({ rec, reco, app, isEditing, updateRec, updateState, saveRec, onDeletePress, updateRecommendation,onAssignPress }) => {
+const RecView = ({ rec, reco, app, isEditing, updateRec, updateState, saveRec, onDeletePress, updateRecommendation,onAssignPress, setRecReminder }) => {
+  
   return (
     <View style={{flex:1}}>
     <ScrollView style={styles.container}>
@@ -23,7 +24,7 @@ const RecView = ({ rec, reco, app, isEditing, updateRec, updateState, saveRec, o
     {
       isEditing ?
         <CardDetail isEditing rec={rec} updateRec={updateRec} updateState={updateState} saveRec={saveRec} /> :
-        <CardDetail updateState={updateState} rec={rec} onDelete={onDeletePress} updateRecommendation={updateRecommendation} app={app} />
+        <CardDetail setRecReminder={setRecReminder} updateState={updateState} rec={rec} onDelete={onDeletePress} updateRecommendation={updateRecommendation} app={app} />
     }
 
 

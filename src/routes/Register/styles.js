@@ -90,4 +90,11 @@ export default styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 
+  invitationsContainer: {
+    flex: 1,
+    paddingTop: 5,
+    marginTop: 10,
+    // backgroundColor: colors.green,
+  },
+
 });

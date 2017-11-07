@@ -2,18 +2,16 @@ import { combineReducers } from 'redux'
 
 import user from './user/reducer';
 import recommendations from './recommendations/reducer';
-import onboard from './onboard/reducer';
+import reminders from './reminders/reducer';
 import friends from './friends/reducer';
 import app from './app/reducer';
-// import widgets from './widgets/reducer';
 
 const reducers = {
   user,
   recommendations,
-  onboard,
+  reminders,
   friends,
   app,
-  // widgets,
 };
 
 const appReducer = combineReducers(reducers);

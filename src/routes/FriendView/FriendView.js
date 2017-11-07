@@ -18,19 +18,22 @@ const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress }) =>
 
       <Friend.Header friend={friend} />
 
-      <View style={{marginHorizontal: 20}}>
-        <Text style={{color: 'white', fontSize: 20,marginBottom: 10}} >Things {friend.name} told me about</Text>
-      {
-        _.map(myRecs,rec => <Card skinny rec={rec} key={rec.id} />)
-      }
-      </View>
 
-      <View style={{marginHorizontal: 20}}>
-        <Text style={{color: 'white', fontSize: 20,marginBottom: 10}} >Things I told {friend.name} about</Text>
-      {
-        _.map(givenRecs,rec => <Card skinny rec={rec} key={rec.id} />)
-      }
-      </View>
+        {!friend.uid && !friend.invitedAt &&
+          <View style={{marginHorizontal: 20}}>
+          <Label center>Want to tell {friend.name} about chaz?</Label>
+
+          </View>
+        }
+
+        {!friend.uid && friend.invitedAt &&
+          <View style={{marginHorizontal: 20}}>
+          <Label center>Any minute...</Label>
+
+          </View>
+        }
+
+
 
 
 

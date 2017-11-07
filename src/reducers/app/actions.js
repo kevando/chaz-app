@@ -1,28 +1,12 @@
 const Permissions = require('react-native-permissions');
 import firebase from 'react-native-firebase';
 import { Actions } from 'react-native-router-flux';
-import {
-  SET_NOTIFICATION_PERMISSION,
-  INITIALIZE_APP,
-  USER_SIGNED_IN,
-  SIGN_IN_CONFIRM_RESULT,
-  SIGN_IN_ERROR,
-  SIGN_IN_ATTEMPT,
-  CONFIRM_CODE_SUCCESS,
-  CONFIRM_CODE_ERROR,
-  CONFIRM_CODE_ATTEMPT,
-  SET_TOKEN,
-  SET_APP_STATUS,
-  SET_APP_ERROR,
-  USER_SIGNED_OUT,
-  USERS_LINKED,
-  SET_USER_PHONE,
-  USER_IS_AUTHENTICATED,
-} from '../actionTypes';
+
 import * as t from '../actionTypes'
 
-import { listenForAuthChanges, usersRef } from '../../config/firebase'
+import { listenForAuthChanges, usersRef, checkForInvites } from '../../config/firebase'
 import { createUserInFirestore } from '../user/actions'
+import { listenForNotifications } from '../reminders/actions'
 
 
 
@@ -35,50 +19,19 @@ export function initializeApp() {
     const app = getState().app
     const userr = getState().user
 
-    // Kick everything off
+    // dispatch(checkForInvites('1231231234'))
+    //
+    // // Kick everything off
     dispatch(listenForAuthChanges())
-
+    dispatch(listenForNotifications())
+    //
     if(!app.token)
       dispatch(setToken())
 
-      // console.warn(app.notificationPermission)
     if(!app.notificationPermission)
       dispatch(checkNotificationPermission())
   }
 }
-
-// --------------------------------
-//    HANDLE NOTIFICATIONS
-// --------------------------------
-//
-// function handleNotifications() {
-//   return dispatch => {
-//
-//     const messaging = firebase.messaging()
-//
-//     messaging.onMessage( (notif) => {
-//       // console.warn('onMessage!!')
-//       // console.log(notif)
-//       dispatch({type: SET_APP_STATUS, status: 'OnMessage fired'})
-//     })
-//
-//     // @todo
-//     // this is bugging right now per github issues threads
-//
-//     messaging.getInitialNotification().then(notif=>{
-//       // console.warn('getInitialNotification')
-//       // console.log(notif)
-//       if(!notif) {
-//         // turning this off cause its annoying
-//         // dispatch({type: SET_APP_ERROR, error: {message: 'InitialNotification is empty'} })
-//       } else {
-//         // this apperantly works. not sure what the notif object is like
-//         // and not too sure how to redirect the user to a different page
-//         dispatch({type: SET_APP_STATUS, status: 'Initial Notification is not empty!'})
-//       }
-//     });
-//   }
-// }
 
 // --------------------------------
 //    GET FCM TOKEN
@@ -86,22 +39,14 @@ export function initializeApp() {
 
 function setToken() {
   return (dispatch, getState) => {
-    const user = getState().user
-    const app = getState().app
-
       firebase.messaging().getToken().then(token => {
-
-        if(token !== app.token) {
-          console.warn('Local token is different than fcm getToken()')
+        if(token !== getState().app.token) {
+          // console.warn('Local token is different than fcm getToken()')
           dispatch({type: t.SET_TOKEN, token})
         }
-
       })
-
   }
 }
-
-
 
 
 // --------------------------------
@@ -113,7 +58,9 @@ export function verifyPhone(phoneNumber) {
 
     dispatch({type: t.SIGN_IN_ATTEMPT })
     dispatch(shouldAppSignIn(phoneNumber)) // find out if this is a returning user
+    dispatch(checkForInvites(phoneNumber)) // see if anyone invited this user
 
+    
     const formatedNumber = `+1${phoneNumber}`
 
     firebase.auth().verifyPhoneNumber(formatedNumber)
@@ -222,11 +169,11 @@ export function signOut() {
   return dispatch => {
 
     firebase.auth().signOut().then(() => {
-      dispatch({type: USER_SIGNED_OUT})
+      dispatch({type: t.USER_SIGNED_OUT})
       dispatch({type: 'PURGE_DATA'}) // resets state to undefined
       Actions.replace('LoggedOut')
     })
-    .catch(error =>  dispatch({type: SET_APP_ERROR, error })  );
+    .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
   }
 }
 
@@ -268,8 +215,8 @@ function updateUser(data) {
       alert('No UID, something is terribly wrong')
     } else {
       firebase.firestore().collection("users").doc(user.uid).update(data)
-        .then(() =>  dispatch({type: SET_APP_STATUS, status: 'Updated User in firestore'}) )
-        .catch(error =>  dispatch({type: SET_APP_ERROR, error}) )
+        .then(() =>  dispatch({type: t.SET_APP_STATUS, status: 'Updated User in firestore'}) )
+        .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) )
     }
   }
 }
@@ -297,7 +244,7 @@ export function loginAsTest() {
 
     .catch(function(error) {
       // Handle Errors here.
-      dispatch({type: SET_APP_ERROR, error})
+      dispatch({type: t.SET_APP_ERROR, error})
       var errorCode = error.code;
       var errorMessage = error.message;
       // ...
@@ -331,7 +278,7 @@ export function registerAsTest() {
           // so we need to call some of that manually
 
           // const user = {...firebaseUser._user}
-          dispatch({ type: USERS_LINKED, user: firebaseUser._user })
+          dispatch({ type: t.USERS_LINKED, user: firebaseUser._user })
 
 
           // Now lets add the info to the user doc
@@ -342,7 +289,7 @@ export function registerAsTest() {
         }, function(error) {
           console.warn("Error upgrading anonymous account", error);
           console.log('code?',error.code)
-          dispatch({type: SET_APP_ERROR, error})
+          dispatch({type: t.SET_APP_ERROR, error})
           // if we reach here, most likely the account already exists, so lets try to just login
           dispatch(loginAsTest())
         });

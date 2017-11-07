@@ -4,7 +4,7 @@ import _ from 'lodash'
 import RecViewContainer from './RecViewContainer';
 import * as RecActions from '../../reducers/recommendations/actions';
 import * as FriendActions from '../../reducers/friends/actions';
-
+import { setRecReminder } from '../../reducers/reminders/actions'
 const mapStateToProps = (state, props) => {
   return {
     app: state.app,
@@ -13,4 +13,4 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps, {...RecActions, ...FriendActions})(RecViewContainer);
+export default connect(mapStateToProps, {...RecActions, ...FriendActions, setRecReminder})(RecViewContainer);

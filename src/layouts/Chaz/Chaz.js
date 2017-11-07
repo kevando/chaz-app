@@ -18,6 +18,8 @@ import Profile from '../../routes/Profile';
 import LoggedOut from '../../routes/LoggedOut';
 import Loading from '../../routes/Loading';
 import Invite from '../../routes/Invite';
+import Reminders from '../../routes/Reminders';
+import Boilerplate from '../../routes/Boilerplate';
 
 const AppToasts = () => { return (<Text>dude</Text>)}
 
@@ -31,6 +33,10 @@ class Chaz extends Component {
   componentWillMount() {
     this.props.initializeApp() // redux
   }
+
+  // componentDidMount() {
+  //   console.log('chaz.js mounted')
+  // }
 
   componentWillReceiveProps(nextProps) {
     this._shouldToastDisplay(nextProps)
@@ -80,12 +86,9 @@ class Chaz extends Component {
     const navBorderColor = showOnboarding ? colors.blueBG : colors.newBlue
 
     // PROD Animate screen loading
-    if (!isReady || !isAuthenticated)
-      return <Loading updateState={this.updateState} />;
+    // if (!isReady || !isAuthenticated)
+      // return <Loading updateState={this.updateState} />;
 
-    // DEV
-    // if (!isAuthenticated)
-    //   return null
 
 
     return (
@@ -97,10 +100,12 @@ class Chaz extends Component {
               <Stack key="myStack"  hideBackImage back >
                 <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
                 <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-                <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} navigationBarStyle={[navigationBarStyle,{backgroundColor: navBorderColor, borderTopColor: navBorderColor}]} />
                 <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                 <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                 <Scene key='LoggedOut' component={LoggedOut} title='' hideNavBar={false}  />
+                <Scene key='Reminders' component={Reminders} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                <Scene key='Settings' component={Boilerplate} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
               </Stack>
 
 

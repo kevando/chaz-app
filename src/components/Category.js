@@ -10,14 +10,14 @@ import { connect } from 'react-redux';
 
 export const Categories = {
   // "uncategorized" : {icon: "file-text", title: "Uncategorized"},
-  "movie" : {icon: "film", title: "Movie"},
-  "tv" : {icon: "tv", title: "TV Series"},
-  "book" : {icon: "book", title: "Book"},
-  "music" : {icon: "music", title: "Music"},
-  "podcast" : {icon: "mic", title: "Podcast"},
-  "documentary" : {icon: "video", title: "Documentary"},
-  "internet" : {icon: "link", title: "Website"},
-  "other" : {icon: "zap", title: "Other"},
+  "movie" : {icon: "film", title: "Movie", verb:'watch'},
+  "tv" : {icon: "tv", title: "TV Series", verb:'watch'},
+  "book" : {icon: "book", title: "Book", verb:'read'},
+  "music" : {icon: "music", title: "Music", verb: 'listen to'},
+  "podcast" : {icon: "mic", title: "Podcast", verb:'listen to'},
+  "documentary" : {icon: "video", title: "Documentary", verb: 'watch'},
+  "internet" : {icon: "link", title: "Website", verb: 'look into'},
+  "other" : {icon: "zap", title: "Other", verb: 'look into'},
 }
 
 
@@ -38,17 +38,18 @@ export const CategoryIcon = ({rec, category, size=25, color="purple"}) => {
 //  Display on Card Detail
 // ---------------------------------------
 
-export const Category = ({rec, size=22, color="yellow"}) => {
+export const Category = ({rec, size=18, color="yellow"}) => {
   const styles = {
     container: {
       flex: 1,
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginTop: 10,
     },
     categoryText: {
       ...text,
-      fontSize: 18,
-      color: colors.yellow,
-      marginLeft: 10,
+      fontSize: 16,
+      color: colors.grey,
+      marginLeft: 8,
     }
   }
   const icon = rec.category ? Categories[rec.category].icon : 'file-text'

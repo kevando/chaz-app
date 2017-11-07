@@ -9,10 +9,12 @@ export default styles = StyleSheet.create({
   },
   closeButton: {
     position: 'absolute',
-    top: 40,
-    right: 30,
-    color: 'white',
+    top: 30,
+    right: 20,
+    // color: 'white',
     zIndex: 999,
+    // backgroundColor: 'red',
+    padding: 5,
   },
 
 

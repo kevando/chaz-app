@@ -19,17 +19,6 @@ export class SetReminderIcon extends Component {
       // this._setReminder = this._setReminder.bind(this)
       this._onSetReminderPress = this._onSetReminderPress.bind(this)
     }
-    componentWillMount() {
-      // console.log(Permissions)
-      // Permissions.check('notification')
-      //   .then(response => {
-      //     //response is one of: 'authorized', 'denied', 'restricted', or 'undetermined'
-      //     // this.setState({ photoPermission: response })
-      //     console.log(response)
-      //     if(response == 'authorized')
-      //       this.setState({showCard: true, notificationPermission: response})
-      //   });
-    }
 
     _onSetReminderPress() {
 
@@ -40,7 +29,8 @@ export class SetReminderIcon extends Component {
           'Remind me to follow up in:',
           [
             {text: 'In one minute', onPress: this._setReminder.bind(this,1)},
-            // {text: 'In a 20 minutes', onPress: this._setReminder.bind(this,20)},
+            {text: 'In 5 minutes', onPress: this._setReminder.bind(this,5)},
+            {text: 'In 20 minutes', onPress: this._setReminder.bind(this,20)},
             {text: 'Tomorrow', onPress: this._setReminder.bind(this,1440)},
             {text: 'In a few days', onPress: this._setReminder.bind(this,4320)},
             {text: 'In a couple weeks', onPress: this._setReminder.bind(this,21600)},
@@ -52,29 +42,14 @@ export class SetReminderIcon extends Component {
 
     }
     _setReminder(reminderDateInMinutes) {
-      const { updateRecommendation, rec } = this.props;
-
-
-      const reminderTimestamp = Date.now() + (reminderDateInMinutes * 60 * 1000);
-
-      firebase.messaging().scheduleLocalNotification({
-              title:'some title',
-              fire_date: new Date(reminderTimestamp),      //RN's converter is used, accept epoch time and whatever that converter supports
-              id: rec.id,    //REQUIRED! this is what you use to lookup and delete notification. In android notification with same ID will override each other
-              body: "from future past",
-              // repeat_interval: "week" //day, hour
-          })
-
-      // PushNotification.localNotificationSchedule({
-      //   message: "Did you check out "+rec.title+'?',
-      //   date: new Date(reminderTimestamp),
-      //   title: rec.friend, // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
-      //   playSound: true, // (optional) default: true
-      //   soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
-      // });
-
-      rec.reminder = reminderTimestamp
-      updateRecommendation(rec);
+      const { updateRecommendation, rec, setRecReminder } = this.props;
+      !rec.friend.name && console.warn('no friend name!!')
+      setRecReminder(reminderDateInMinutes, rec)
+        .then(reminderTimestamp => {
+          // console.warn(reminderTimestamp)
+          rec.reminder = reminderTimestamp
+          updateRecommendation(rec);
+        })
 
     }
 

@@ -26,13 +26,9 @@ Animatable.initializeRegistryWithDefinitions({
       fontSize: 35,
     },
     0.7: {
-      // borderBottomColor: 'rgba(255,255,255,0)',
-      // color: 'rgba(255,255,255,1.0)',
       fontSize: 38,
     },
     1: {
-      // borderBottomColor: 'rgba(255,255,255,0)',
-      // color: 'rgba(255,255,255,1.0)',
       fontSize: 35,
     },
   }

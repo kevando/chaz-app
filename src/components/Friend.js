@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import * as Progress from 'react-native-progress';
+import Icon from 'react-native-vector-icons/Feather'
 // import styles from './styles';
-import { colors, text } from '../config/styles';
+import { colors, text, width } from '../config/styles';
 
 
 
@@ -54,14 +54,18 @@ export class Header extends Component {
 
   render() {
     const { friend } = this.props;
+    let icon = (friend.invitedAt ? 'navigation' : 'user')
+
     return (
       <View style={headerStyles.container}>
+          <Icon name={icon} size={90} color={'rgba(255,255,255,0.4)'} />
 
           <View style={headerStyles.textContainer}>
 
               <Text style={headerStyles.text}>{friend.name}</Text>
+
             </View>
-          </View>
+        </View>
     );
   }
 };
@@ -70,37 +74,32 @@ export class Header extends Component {
 
 const headerStyles = StyleSheet.create({
   container: {
-    height: 80,
+    // height: 150,
     marginBottom: 50,
-    paddingBottom: 30,
-    backgroundColor: colors.blueBG,
-    borderBottomWidth: 1,
+    paddingBottom: 0,
+    backgroundColor: colors.newBlue,
+    borderBottomWidth: 0,
     borderBottomColor: colors.newBlue,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textContainer: {
     // borderColor: 'red',
-    borderWidth: 5,
-    backgroundColor: 'transparent',
-    height: 40,
-    width: 240,
-    borderRadius: 40,
-    borderColor: 'transparent',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 0
-    },
-    shadowRadius: 2,
-    shadowOpacity: 1.0
+    // borderWidth: 5,
+    backgroundColor: colors.blueBG,
+    width,
+    marginTop: 30,
+    paddingTop: 20,
+    marginBottom: 0
+
   },
   text: {
     ...text,
-    fontSize: 30,
+    fontSize: 35,
     textAlign: 'center',
     color: 'white',
     backgroundColor: 'transparent',
+    color: colors.yellow
   }
 
 })
