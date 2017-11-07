@@ -29,8 +29,9 @@ const initialState =
 
 export default function recs(recommendations = initialState, action = {}) {
   // console.log(action)
-  // // console.log(recommendations)
-  // // console.log(recommendations.unfinished)
+  // console.log('Reducer Action: ',action)
+  // console.log('Reducer recommendations: ',recommendations)
+
   switch (action.type) {
   //   // case t.'ADD_REC':
   //     return {
@@ -167,10 +168,11 @@ export default function recs(recommendations = initialState, action = {}) {
       // -------------------------------------------
       // right now this pulls from a listener on the appInitialized fn
       case t.REFRESH_MY_RECS:
-
+        console.log('REFRESH_MY_RECS',action.myRecs)
+        console.log('REFRESH_MY_RECS',recommendations.myRecs)
         return {
           ...recommendations,
-          list: action.myRecs,
+          // list: action.myRecs,
           myRecs: action.myRecs,
         }
 

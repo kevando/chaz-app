@@ -92,7 +92,7 @@ class InputTitle extends Component {
   // componentDidMount() {}
 
   _onSavePress = () => {
-
+    
     // this._saveSuccessPreAnimation()
 
     this.props.addFriendRedux(this.props.friendName)
@@ -111,24 +111,30 @@ class InputTitle extends Component {
   }
 
   _saveRec = () => {
+
     this._saveSuccessPreAnimation()
     this.props.saveRecRedux()
-      // .then(rec => this._saveSuccessPreAnimation(rec))
-      .catch(error => console.warn('save rec redux error',error))
+      .then(rec => {
+        this.refs.CONTAINER.fadeBackground(200).then(Actions.pop)
+        //now the rec is totally saved, fade the bg and pop
+        this.refs.CLOSE.fadeOutUp(200)
+
+      })
+      .catch(error => console.warn('save rec redux error',error.message))
   }
 
 
   _saveSuccessPreAnimation = () => {
     Keyboard.dismiss()
     this.refs.TITLE.fadeOutUp(200)
-    this.refs.CLOSE.fadeOutUp(200)
 
-    this.refs.CONTAINER.fadeBackground(200)
-    this.refs.CARD.transitionTo({marginTop:27},400)
+
+
+    this.refs.CARD.transitionTo({marginTop:37},400)
     this.refs.FRIENDS.fadeOutDown(200)//.then(()=> {
     //   this.refs.CONTAINER.fadeBackground(200)
     // })
-    this.refs.BUTTON.fadeOutDown(400).then(Actions.pop)
+    this.refs.BUTTON.fadeOutDown(400)
   }
 
 

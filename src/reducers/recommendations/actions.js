@@ -82,7 +82,7 @@ export const saveRec = () => (dispatch, getState) =>
 
 
   new Promise(function(resolve,reject) {
-
+    console.log('saveRec')
     const unfinished = getState().recommendations.unfinished
     const user = getState().user
 
@@ -92,6 +92,7 @@ export const saveRec = () => (dispatch, getState) =>
 
     recsRef.add(newRec)
       .then(docRef => {
+        console.log('newRec saved')
         // addMessage(unfinished,getState().user.username) // disabled for now @todo
         // dispatch({ type: t.SAVE_RECOMMENDATION_SUCCESS}) // might cause issue
         resolve(newRec)

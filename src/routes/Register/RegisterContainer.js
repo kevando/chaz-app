@@ -89,7 +89,11 @@ class RegisterContainer extends Component {
 
     let Content = null
 
-    if(app.activeStep == 1 || !app.activeStep) {
+
+    if(!user.isAnon)
+        Content =  <Confirmation user={user} />
+
+    else if(app.activeStep == 1 || !app.activeStep) {
       Content = <PhoneInput getCode={this._getCode} {...this.state} {...this.props} />
 
     } else if(app.activeStep == 2 && app.isAnon) {

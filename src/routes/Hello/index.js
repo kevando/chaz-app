@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     friends: state.friends,
     unfinished: state.recommendations.unfinished,
     app: state.app,
-    showOnboarding: state.recommendations.myRecs.length == 0,
+    // showOnboarding: state.recommendations.myRecs.length == 0,
     user: state.user,
   };
 };

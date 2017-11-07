@@ -130,7 +130,7 @@ class DashboardButtonContainer extends Component {
 
 
 render() {
-  const { app, myRecs, user, localReminders } = this.props;
+  const { app, myRecs, user, reminders } = this.props;
 
   // user.providerData.length > 0 && console.warn('we are a real user, bitchin')
   // console.warn(app.notificationPermission)
@@ -159,7 +159,7 @@ render() {
       </Animatable.View>
     )
   }
-  if(app.notificationPermission == "authorized" && localReminders.length > 0 ) {
+  if(app.notificationPermission == "authorized" && reminders.localReminders.length > 0 ) {
     // STEP 1
     buttonIcons.push(
       <Icon
@@ -180,7 +180,7 @@ render() {
       <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
       <NavButton
         onPress={()=> Actions.push('Register')}
-        icon="upload-cloud"
+        icon="zap"
         color={colors.yellow}
 
       />
@@ -210,7 +210,7 @@ render() {
     )
 
   }
-  if(app.notificationPermission == "authorized") {
+  if(reminders.newRemoteNotifications && reminders.newRemoteNotifications.length > 0) {
 
     // INVITE THE USER TO SIGN UP
     buttonIcons.push (
@@ -224,7 +224,7 @@ render() {
   }
 
   // SETTINGS TMP
-  // buttonIcons.push (<NavButton onPress={()=> Actions.push('Settings')} icon="settings" color={colors.lightWhite} />)
+  buttonIcons.push (<NavButton onPress={()=> Actions.push('Settings')} icon="settings" color={colors.lightWhite} />)
 
   return (
     <View style={{flexDirection: 'row', marginRight: 12,marginTop: 8}}>
@@ -242,7 +242,7 @@ const mapStateToProps = (state) => {
     app: state.app,
     myRecs: state.recommendations.myRecs,
     user: state.user,
-    localReminders: state.reminders.localReminders,
+    reminders: state.reminders,
   };
 };
 

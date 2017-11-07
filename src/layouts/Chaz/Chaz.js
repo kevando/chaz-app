@@ -34,9 +34,9 @@ class Chaz extends Component {
     this.props.initializeApp() // redux
   }
 
-  // componentDidMount() {
-  //   console.log('chaz.js mounted')
-  // }
+  componentDidMount() {
+    console.log('chaz.js mounted')
+  }
 
   componentWillReceiveProps(nextProps) {
     this._shouldToastDisplay(nextProps)

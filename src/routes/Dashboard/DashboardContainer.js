@@ -21,8 +21,8 @@ class DashboardContainer extends Component {
 
   componentDidMount() {
     // TMP!!
-    // console.log('dash mounted',this.props)
-    if(this.props.recommendations.myRecs.length == 1)
+    console.log('dash mounted',this.props)
+    if(this.props.myRecs.length == 1)
       this._throwParty()
     // Actions.push('NewRecLightbox')
     // Actions.push('Profile')

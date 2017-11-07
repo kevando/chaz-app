@@ -17,7 +17,7 @@ export const Categories = {
   "podcast" : {icon: "mic", title: "Podcast", verb:'listen to'},
   "documentary" : {icon: "video", title: "Documentary", verb: 'watch'},
   "internet" : {icon: "link", title: "Website", verb: 'look into'},
-  "other" : {icon: "zap", title: "Other", verb: 'look into'},
+  "other" : {icon: "file", title: "Other", verb: 'look into'},
 }
 
 
