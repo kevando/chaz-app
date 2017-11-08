@@ -18,13 +18,13 @@ import { SetReminderIcon  } from './SetReminder'
 // Title
 // ---------------------------------------
 
-export const Title = ({rec, small, large}) => {
+export const Title = ({rec, styles}) => {
 
   // const fontSize = small ? 14 : large && 50
   const textStyles =
     {
       ...text,
-      // fontSize,
+      ...styles,
     }
 
   return (
@@ -76,12 +76,10 @@ render() {
         <View style={cardStyles.friendContainer}>
           <Friend.Name friend={rec.friend} small />
         </View>
-        <View style={cardStyles.iconContainer}>
-          {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
-        </View>
       </View>
-      <View style={cardStyles.bodyContainer}>
-          <Title rec={rec} small />
+      <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
+        <CategoryIcon rec={rec} size={17} color={"yellow"}/>
+        <Title rec={rec} styles={{fontSize: 20, marginLeft: 20}} />
         </View>
     </View>
     )
@@ -135,92 +133,6 @@ const cardStyles = StyleSheet.create({
     fontSize: 17,
     // backgroundColor: 'yellow',
   },
-
-  // inputTitle: {
-  //   ...text,
-  //   flex:1,
-  // },
-  // inputFriend: {
-  //   ...text,
-  //   fontSize: 20,
-  //   color: colors.pink,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: colors.borderColor,
-  // },
-  //
-  // recText: {
-  //   ...text,
-  //   fontSize: 19,
-  //   fontWeight: '400',
-  //   color: colors.black,
-  // },
-  //
-  // friendText: {
-  //   fontSize: 10,
-  //   color: colors.darkGrey,
-  //   lineHeight: 17,
-  //   fontWeight: '100'
-  //   // backgroundColor:'blue',
-  //
-  // },
-  //
-  // bold: {
-  //   fontWeight: '700',
-  //   // color: colors.darkGrey
-  // },
-  //
-  //
-  // // searching for user
-  // inputContainer: {
-  //   // flex: 1,
-  //   // width: TEXT_WIDTH,// might need to change this
-  // },
-  // input: {
-  //   ...text,
-  //   fontSize: 20,
-  //   paddingLeft: 0,
-  //   paddingTop: 5,
-  //   height: 50,
-  //   // borderColor: colors.lightGrey,
-  //   borderBottomWidth: 0,
-  //   // backgroundColor: 'yellow',
-  // },
-  //
-  // label: {
-  //   ...text,
-  //   color: colors.darkGrey,
-  //   fontSize: 14,
-  //   fontWeight: '400',
-  //   lineHeight:20,
-  //   // marginTop:25,
-  //   marginLeft: 12,
-  //   paddingRight: 10,
-  // },
-  //
-  // backgroundShadow: {
-  //   borderColor: '#aaa',
-  //   shadowColor: '#555',
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 3
-  //   },
-  //   shadowRadius: 15,
-  //   shadowOpacity: 1.0
-  // },
-  //
-  // translucentBackground: {
-  //   backgroundColor: 'rgba(255,255,255,0.9)',
-  //
-  //   borderColor: 'purple',
-  //   shadowColor: '#aaa',
-  //   shadowOffset: {
-  //     width: 3,
-  //     height: 3
-  //   },
-  //   shadowRadius: 5,
-  //   shadowOpacity: 0.7,
-  // }
-
 
 });
 
@@ -377,3 +289,90 @@ const inputStyles = StyleSheet.create({
     flex:1,
   },
 })
+
+
+
+  // inputTitle: {
+  //   ...text,
+  //   flex:1,
+  // },
+  // inputFriend: {
+  //   ...text,
+  //   fontSize: 20,
+  //   color: colors.pink,
+  //   borderBottomWidth: 1,
+  //   borderBottomColor: colors.borderColor,
+  // },
+  //
+  // recText: {
+  //   ...text,
+  //   fontSize: 19,
+  //   fontWeight: '400',
+  //   color: colors.black,
+  // },
+  //
+  // friendText: {
+  //   fontSize: 10,
+  //   color: colors.darkGrey,
+  //   lineHeight: 17,
+  //   fontWeight: '100'
+  //   // backgroundColor:'blue',
+  //
+  // },
+  //
+  // bold: {
+  //   fontWeight: '700',
+  //   // color: colors.darkGrey
+  // },
+  //
+  //
+  // // searching for user
+  // inputContainer: {
+  //   // flex: 1,
+  //   // width: TEXT_WIDTH,// might need to change this
+  // },
+  // input: {
+  //   ...text,
+  //   fontSize: 20,
+  //   paddingLeft: 0,
+  //   paddingTop: 5,
+  //   height: 50,
+  //   // borderColor: colors.lightGrey,
+  //   borderBottomWidth: 0,
+  //   // backgroundColor: 'yellow',
+  // },
+  //
+  // label: {
+  //   ...text,
+  //   color: colors.darkGrey,
+  //   fontSize: 14,
+  //   fontWeight: '400',
+  //   lineHeight:20,
+  //   // marginTop:25,
+  //   marginLeft: 12,
+  //   paddingRight: 10,
+  // },
+  //
+  // backgroundShadow: {
+  //   borderColor: '#aaa',
+  //   shadowColor: '#555',
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 3
+  //   },
+  //   shadowRadius: 15,
+  //   shadowOpacity: 1.0
+  // },
+  //
+  // translucentBackground: {
+  //   backgroundColor: 'rgba(255,255,255,0.9)',
+  //
+  //   borderColor: 'purple',
+  //   shadowColor: '#aaa',
+  //   shadowOffset: {
+  //     width: 3,
+  //     height: 3
+  //   },
+  //   shadowRadius: 5,
+  //   shadowOpacity: 0.7,
+  // }

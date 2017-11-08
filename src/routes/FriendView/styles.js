@@ -1,14 +1,16 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { colors, text } from '../../config/styles';
+import { colors, text, MARGIN_LEFT } from '../../config/styles';
 
-const BUTTON_WIDTH = 250;
-const MARGIN_HORIZONTAL = (window.width - BUTTON_WIDTH) / 2;
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.blueBG,
     paddingTop: 0,
+  },
+  scrollContainer: {
+    paddingHorizontal: MARGIN_LEFT,
+    paddingTop: 30,
   },
   title: {
     ...text,
@@ -31,11 +33,7 @@ export default styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 10,
   },
-  button: { // not used but keeping for the dimension code
-    marginTop: 100,
-    width: BUTTON_WIDTH,
-    marginLeft: MARGIN_HORIZONTAL,
-  },
+
 
   label: {
     ...text,

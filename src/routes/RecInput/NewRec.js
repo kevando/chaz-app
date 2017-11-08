@@ -151,7 +151,7 @@ class InputTitle extends Component {
 
 
 
-    this.refs.CARD.transitionTo({marginTop:37},400)
+    this.refs.CARD.transitionTo({marginTop:35},400)
     this.refs.FRIENDS.fadeOutDown(200)//.then(()=> {
     //   this.refs.CONTAINER.fadeBackground(200)
     // })

@@ -11,6 +11,19 @@ import { Label, Button } from '../../components/Generic/';
 import { PhoneInput } from '../../components/Input';
 import * as Animatable from 'react-native-animatable'
 
+
+
+const PhoneNumberSearch = (props) => {
+  return (
+  <View style={styles.container}>
+    <Label center large>Find {props.friend.name}</Label>
+    <Label center>Enter {props.friend.name}'s phone number.</Label>
+    <PhoneInput {...props} />
+
+    </View>
+  )
+}
+
 const Invite = (props) => {
 
   const { friend, app, invitation, updateState, updateFriend, searchUsers, phoneNumber, userFound, user,assignFriend, validPhoneNumber, sendInvite } = props
@@ -61,16 +74,7 @@ const Invite = (props) => {
       </View>
     )
   }
-  let PhoneNumberSearch = () => {
-    return (
-    <View style={styles.container}>
-      <Label center large>Find {friend.name}</Label>
-      <Label center>Enter {friend.name}'s phone number.</Label>
-      <PhoneInput {...props} />
 
-      </View>
-    )
-  }
 
 
   return (
@@ -90,7 +94,7 @@ const Invite = (props) => {
             : friend.searchResults == 'user found' ?
               <Connect />
               :
-              <PhoneNumberSearch />
+              <PhoneNumberSearch {...props } />
       }
 
 
@@ -99,7 +103,7 @@ const Invite = (props) => {
             <Button bgcolor="pink" text="Yes lets send an invite" onPress={sendInvite} />
             : friend.searchResults == 'user found' ?
               <Button bgcolor="pink" text="Connect!" onPress={assignFriend} />
-              : !friend.searchResults ?
+              : !friend.searchResults && validPhoneNumber ?
               <Button bgcolor="pink" text="Search" onPress={searchUsers} />
               : null
       }

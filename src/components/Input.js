@@ -13,6 +13,7 @@ import { colors, text } from '../config/styles'
 
 export class PhoneInput extends Component {
 
+
   _onChange = (phoneNumber) => {
     const { updateState } = this.props
     updateState({
@@ -22,12 +23,13 @@ export class PhoneInput extends Component {
   }
 
   render() {
+    // console.log('input',this.props)
     const { phoneNumber, errorMessage, inputProps } = this.props
 
     return (
       <View style={styles.container}>
         <TextInput
-          autoFocus={true}
+          autoFocus={false}
           keyboardType='phone-pad'
           multiline={false}
           style={styles.inputPhone}

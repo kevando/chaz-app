@@ -77,6 +77,13 @@ export default styles = StyleSheet.create({
     // flex: 1,
     width: width-140,
     textAlign: 'center',
+  },
+  buttonContainer: {
+    marginVertical: 10,
+    marginHorizontal: 20,
+    // width: 200,
+    alignItems: 'flex-start',
+    // justifyContent: 'center',
   }
 
 });

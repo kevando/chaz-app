@@ -11,6 +11,7 @@ export const recsRef = firebase.firestore().collection(`${PREFIX}recommendations
 export const friendsRef = firebase.firestore().collection(`${PREFIX}friends`)
 export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 export const invitesRef = firebase.firestore().collection(`${PREFIX}invites`)
+export const messagesRef = firebase.firestore().collection(`${env}_messages`)
 
 import { assignUserToFriend } from '../reducers/friends/actions'
 
@@ -103,17 +104,17 @@ export function checkForInvites(phoneNumber) {
   return (dispatch, getState) => {
     let myInvites = []
 
-    invitesRef.where("to.phoneNumber", "==", phoneNumber)
+    invitesRef.where("to.phoneNumber", "==", phoneNumber).where("status", "==", "open")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           myInvites.push({...doc.data(),id: doc.id})
+          invitesRef.doc(doc.id).update({status: 'accepted'}) // close this invite otherwise it can get triggered again
         })
         if(myInvites.length > 0){
           console.log('hey we found some invites!')
           dispatch({type: t.SET_USER_DATA, data: {myInvites} })
           dispatch(connectUsers(myInvites)) // add as friends
-
         }
       })
   }
@@ -160,7 +161,7 @@ function assignInvitedUserToFriend(invite) {
 
 
 function addMessage(uid,body) {
-  console.log('addMessage',uid)
+
   usersRef.doc(uid).get().then(function(user) {
     if (user.exists) {
         console.log("user data:", user.data());
@@ -171,7 +172,7 @@ function addMessage(uid,body) {
             body: body
           }
         }
-        firebase.firestore().collection("messages").add({token,payload})
+        messagesRef.add({token,payload})
           .catch(error=>console.warn(error.message))
     } else {
         console.warn("No such user!");

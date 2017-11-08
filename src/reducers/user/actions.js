@@ -2,7 +2,7 @@
 import * as t from '../actionTypes'
 import firebase from 'react-native-firebase'
 
-import { usersRef } from '../../config/firebase'
+import { usersRef, invitesRef } from '../../config/firebase'
 
 
 // --------------------------------
@@ -26,7 +26,29 @@ export const saveDisplayName = (displayName) => (dispatch, getState) =>
       .catch(error =>  reject(error)  )
   });
 
+// --------------------------------
+//    SEE IF INVITE EXISTS
+// --------------------------------
 
+export function checkForInvites(name) {
+  return (dispatch, getState) => {
+    let myInvites = []
+
+    invitesRef.where("to.name", "==", name.toLowerCase()).where("status", "==", "open")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          myInvites.push({...doc.data(),id: doc.id})
+          // invitesRef.doc(doc.id).update({status: 'accepted'}) // close this invite otherwise it can get triggered again
+        })
+        // if(myInvites.length > 0){
+          // console.log('hey we found some invites!')
+          dispatch({type: t.SET_USER_DATA, data: {myInvites} })
+          // dispatch(connectUsers(myInvites)) // add as friends
+        // }
+      })
+  }
+}
 // --------------------------------
 //    CREATE USER IN FIRESTORE
 // --------------------------------

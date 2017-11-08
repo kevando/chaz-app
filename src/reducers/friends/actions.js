@@ -3,7 +3,7 @@ import { text } from 'react-native-communications'; // might not want this in re
 
 import * as t from '../actionTypes'
 
-import { recsRef, friendsRef, usersRef, invitesRef, } from '../../config/firebase'
+import { recsRef, friendsRef, usersRef, invitesRef, messagesRef} from '../../config/firebase'
 
 
 // ----------------------------------------------------
@@ -16,7 +16,7 @@ export const addFriend = (friendName) => (dispatch, getState) =>
     if(!friendName) { return reject('no friendName')}
 
     let friend = {
-      name: friendName,
+      name: friendName.toLowerCase(),
       owner: getState().user.uid,
       createdAt: Date.now(),
     }
@@ -161,7 +161,7 @@ function addMessage(uid,body) {
             body,
           }
         }
-        firebase.firestore().collection("messages").add({token,payload})
+        messagesRef.add({token,payload})
     } else {
         console.warn("No such user!");
     }

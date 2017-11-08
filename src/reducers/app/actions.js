@@ -17,9 +17,9 @@ import { listenForNotifications } from '../reminders/actions'
 export function initializeApp() {
   return (dispatch, getState) => {
     const app = getState().app
-    const userr = getState().user
+    const user = getState().user
 
-    // dispatch(checkForInvites('1231231234'))
+    
     //
     // // Kick everything off
     dispatch(listenForAuthChanges())
@@ -36,7 +36,7 @@ export function initializeApp() {
 
 export function setAppData(data) {
   return (dispatch, getState) => {
-    
+
     dispatch({type: t.SET_APP_DATA, data })
   }
 }
@@ -72,7 +72,7 @@ export function verifyPhone(phoneNumber) {
 
     dispatch({type: t.SIGN_IN_ATTEMPT })
     dispatch(shouldAppSignIn(phoneNumber)) // find out if this is a returning user
-    dispatch(checkForInvites(phoneNumber)) // see if anyone invited this user
+
 
 
     const formatedNumber = `+1${phoneNumber}`
@@ -111,6 +111,7 @@ export function confirmCode(codeInput) {
     else
       dispatch(linkUser(credential))
 
+    dispatch(checkForInvites(user.phoneNumber)) // see if anyone invited this user
   }
 }
 

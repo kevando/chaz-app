@@ -22,20 +22,6 @@ class InviteContainer extends Component {
     console.log('Invite Container mounted')
   }
 
-  // _assignUser() {
-  //   const { assignUserToFriend, friend, assignUserToRecs } = this.props
-  //   const { userFound } = this.state
-  //   if(!userFound){
-  //     alert('No user found, sorry')
-  //   } else {
-  //     alert('User connected!')
-  //     Actions.refresh({friend: {...friend,uid:userFound.uid}}) // tmp bad code
-  //     // this.setState({input:''})
-  //     assignUserToFriend(userFound,friend)
-  //     assignUserToRecs(userFound,friend)
-  //   }
-  //
-  // }
 
   _sendInvite = () => {
     const { sendInvite, friend } = this.props
@@ -47,7 +33,7 @@ class InviteContainer extends Component {
 
 
   render() {
-    console.log('InviteContainer',this.props)
+    // console.log('InviteContainer',this.props)
 
     return (
       <Invite

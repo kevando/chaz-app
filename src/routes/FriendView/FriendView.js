@@ -14,17 +14,18 @@ const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress }) =>
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-
       <Friend.Header friend={friend} />
+      <ScrollView style={styles.scrollContainer}>
 
 
-        {!friend.uid && !friend.invitedAt &&
-          <View style={{marginHorizontal: 20}}>
-          <Label center>Want to tell {friend.name} about chaz?</Label>
 
-          </View>
-        }
+
+
+      {
+        _.map(myRecs,(rec,i) => {return (
+          <Card skinny key={i} rec={rec} />
+        )})
+      }
 
         {!friend.uid && friend.invitedAt &&
           <View style={{marginHorizontal: 20}}>

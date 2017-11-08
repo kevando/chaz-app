@@ -28,7 +28,7 @@ class DashboardContainer extends Component {
     // Actions.push('Profile')
     // Actions.push('Reminders')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[0]})
+    Actions.push('FriendView',{friend: this.props.friends[0]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
 
   }
@@ -68,6 +68,13 @@ class DashboardContainer extends Component {
     initNewRec({to: user.uid, category})
     Actions.push('NewRecLightbox',{walkthrough: true, category})
   }
+
+  _onStartWithChaz = () => {
+    const { initNewRec, user } = this.props
+    initNewRec({to: user.uid, category: 'app', title: 'chaz'})
+    Actions.push('NewRecLightbox',{walkthrough: true})
+  }
+
   _confettiComponent = () => {
     return (
       <Confetti
@@ -91,6 +98,7 @@ class DashboardContainer extends Component {
           {...this.props}
           {...this.state}
           onNewRecPress={this._onBrandNewRecPress}
+          startWithChaz={this._onStartWithChaz}
         />
       )
     } else {

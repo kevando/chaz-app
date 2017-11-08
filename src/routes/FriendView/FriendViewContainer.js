@@ -17,6 +17,9 @@ class FriendViewContainer extends Component {
 
 
   }
+  componentDidMount() {
+    console.log('FriendView Container mounted')
+  }
 
   _onGiveRecPress = () => {
     const { initNewRec, friend, user } = this.props

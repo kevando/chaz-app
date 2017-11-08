@@ -18,9 +18,7 @@ import {
 
 import * as t from '../actionTypes';
 
-import { recsRef, usersRef } from '../../config/firebase'
-
-// const recsRef = firebase.firestore().collection("recommendations")
+import { recsRef, usersRef, messagesRef } from '../../config/firebase'
 
 
 export const testPromise = () => (dispatch, getState) =>
@@ -140,7 +138,7 @@ function addMessage(uid,body) {
             body
           }
         }
-        firebase.firestore().collection("messages").add({token,payload})
+        messagesRef.add({token,payload})
     } else {
         console.warn("No such user to send message to");
     }

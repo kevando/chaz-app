@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
 
     myRecs: state.recommendations.myRecs,//state.recommendations.myRecs, // TMP NEW UI!!! myRecsWithFriends,
     // givenRecs: givenRecsWithFriends,
-    // friends: state.friends,
+    friends: state.friends, // mostly for testing
     // app: state.app,
     showOnboarding: state.recommendations.myRecs.length == 0,
     user: state.user,

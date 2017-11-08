@@ -49,7 +49,7 @@ const labelStyles = StyleSheet.create({
 export const Button = (props) => {
 
   // Defaults
-  const { text, onPress, color, bgcolor, rounded, animated } = props;
+  const { text, onPress, color, bgcolor, rounded, animated, ghost, center } = props;
 
   const styles = StyleSheet.create({
 
@@ -60,6 +60,14 @@ export const Button = (props) => {
       borderRadius: rounded ? 40 : 0,
       borderWidth: 10,
       // backgroundColor:'blue'
+    },
+    ghost: {
+      // color: 'white',
+      borderWidth: 1,
+      borderColor: 'white',
+      backgroundColor: 'transparent',
+      marginBottom: 50,
+      paddingHorizontal: 50,
     },
 
     text:
@@ -75,13 +83,14 @@ export const Button = (props) => {
       paddingHorizontal: rounded ? 10 : 20,
       margin: 0,
       color: color || 'white',
+      textAlign: center ? 'center' : 'left',
       // backgroundColor:'green'
     }
   })
 
   let ButtonContainer = (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} >
-      <View style={styles.container}>
+      <View style={[styles.container,ghost && styles.ghost]}>
         <Text style={styles.text}>
           {text}
         </Text>

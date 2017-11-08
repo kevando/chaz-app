@@ -43,12 +43,18 @@ class HelloContainer extends Component {
       category: null,
       takeTour: false,
       getStarted: false,
+      question: null,
+      // inviter: null,
     }
   }
 
   _saveName = () => {
+
     this.refs.INPUT.textDance(800)
     const { name } = this.state
+
+    this.props.checkForInvites(name)
+
     this.props.saveDisplayName(name)
       .then(response => {
         // this.refs.INPUT.textDance(800) too much delay
@@ -64,6 +70,10 @@ class HelloContainer extends Component {
     this.props.onNewRecPress(category)
   }
 
+  _startWithChaz = () => {
+    this.props.startWithChaz()
+  }
+
   // _explore = () => {
   //   this.refs.WELCOME.fadeOutLeft().then(this.setState({explore:true}))
   // }
@@ -74,7 +84,8 @@ class HelloContainer extends Component {
 
   render() {
     // console.log(this.props.user)
-    // const { }
+    const { question, nameSaved } = this.state
+    const { user } = this.props
 
     return (
       <View style={styles.container}>
@@ -98,20 +109,66 @@ class HelloContainer extends Component {
                   selectionColor={'rgba(255,255,255,0.4)'}
                   editable={!this.state.nameSaved}
                 />
-
-
               </Animatable.View>
 
 
 
-
-
-
-        { this.state.nameSaved &&
+        { nameSaved && user.myInvites && user.myInvites.length > 0 && !question &&
           <Animatable.View animation="fadeInUp" >
-            <Text style={styles.subTitle}>Welcome to chaz.</Text>
-            <Text style={styles.paragraph}>What is the most recent thing someone recommended to you?</Text>
+            <Text style={styles.subTitle}>Welcome.</Text>
+            <Text style={styles.paragraph}>Did {user.myInvites[0].from.displayName} tell you about chaz?</Text>
+            <View style={styles.buttonContainer}>
+              <Button ghost text="Yes" onPress={()=>this.setState({question:'Did they explain it well?'})}/>
+              <Button ghost text="No" onPress={()=>this.setState({question:'Did anyone tell you about chaz?'})}/>
+            </View>
+            </Animatable.View>
+        }
+        { nameSaved && user.myInvites && user.myInvites.length == 0 && !question &&
+            <Animatable.View animation="fadeInUp" >
+              <Text style={styles.subTitle}>Welcome.</Text>
+              <Text style={styles.paragraph}>Do you know how chaz works?</Text>
+              <View style={styles.buttonContainer}>
+                <Button ghost text="Yes" onPress={()=>this.setState({question:'What is something someone recommended?'})}/>
+                <Button ghost text="No" onPress={()=>this.setState({question:'Did anyone tell you about chaz?'})}/>
+              </View>
+              </Animatable.View>
+          }
+
+
+
+        { nameSaved && question == 'Did they explain it well?' &&
+          <Animatable.View animation="fadeInUp" >
+            <Text style={styles.subTitle}>Wonderful.</Text>
+            <Text style={styles.paragraph}>{question}</Text>
+            <View style={styles.buttonContainer}>
+              <Button ghost text="Yes" onPress={()=>this.setState({question:'What is something they recommended to you?'})}/>
+              <Button ghost text="No" onPress={()=>alert('Well call them and ask them to explain it')}/>
+            </View>
+            </Animatable.View>
+        }
+        { this.state.nameSaved && question == 'What is something someone recommended?' &&
+          <Animatable.View animation="fadeInUp" >
+            <Text style={styles.subTitle}>Wonderful.</Text>
+            <Text style={styles.paragraph}>{question}</Text>
             <CategoryPicker callback={this._selectCategory} />
+            </Animatable.View>
+        }
+        { this.state.nameSaved && question == 'What is something they recommended to you?' &&
+          <Animatable.View animation="fadeInUp" >
+            <Text style={styles.subTitle}>Awesome.</Text>
+            <Text style={styles.paragraph}>{question}</Text>
+            <CategoryPicker callback={this._selectCategory} />
+          </Animatable.View>
+        }
+
+        { this.state.nameSaved && question == 'Did anyone tell you about chaz?' &&
+          <Animatable.View animation="fadeInUp" >
+            <Text style={styles.subTitle}>hmmm.</Text>
+            <Text style={styles.paragraph}>{question}</Text>
+            <View style={styles.buttonContainer}>
+              <Button ghost text="Yes" onPress={this._startWithChaz}/>
+              <Button ghost text="No" onPress={()=>alert('well how did you get here??')}/>
+            </View>
             </Animatable.View>
         }
 

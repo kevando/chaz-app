@@ -58,7 +58,7 @@ export class Header extends Component {
 
     return (
       <View style={headerStyles.container}>
-          <Icon name={icon} size={90} color={'rgba(255,255,255,0.4)'} />
+          <Icon name={icon} size={90} color={colors.lightWhite} />
 
           <View style={headerStyles.textContainer}>
 
@@ -75,22 +75,28 @@ export class Header extends Component {
 const headerStyles = StyleSheet.create({
   container: {
     // height: 150,
-    marginBottom: 50,
+    marginBottom: 0,
     paddingBottom: 0,
     backgroundColor: colors.newBlue,
     borderBottomWidth: 0,
     borderBottomColor: colors.newBlue,
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: colors.blueBG,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+    zIndex:999
   },
   textContainer: {
     // borderColor: 'red',
     // borderWidth: 5,
-    backgroundColor: colors.blueBG,
+    // backgroundColor: colors.blueBG,
+    backgroundColor: colors.newBlue,
     width,
-    marginTop: 30,
-    paddingTop: 20,
-    marginBottom: 0
+    marginTop: 0,
+    paddingTop: 10,
+    marginBottom: 10
 
   },
   text: {
@@ -99,7 +105,7 @@ const headerStyles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     backgroundColor: 'transparent',
-    color: colors.yellow
+    color: colors.lightWhite
   }
 
 })
