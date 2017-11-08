@@ -28,7 +28,7 @@ class DashboardContainer extends Component {
     // Actions.push('Profile')
     // Actions.push('Reminders')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    Actions.push('FriendView',{friend: this.props.friends[0]})
+    // Actions.push('FriendView',{friend: this.props.friends[1]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
 
   }
@@ -50,29 +50,29 @@ class DashboardContainer extends Component {
     this.setState({activeFilter})
   }
 
-  chain = () => {
-    const { initNewRec, user } = this.props
-    return (
-      new Promise(function(resolve,reject) {
-      initNewRec({to: user.uid})
-    })
-  )
-  }
+
 
   _onNewRecPress = () => {
-    this.chain().then(Actions.push('NewRecLightbox'))
+    // this.chain().then(Actions.push('NewRecLightbox'))
+    const { initNewRec, user } = this.props
+    initNewRec({to: {uid: user.uid, displayName: user.displayName}}).then(
+      Actions.push('NewRecLightbox')
+    )
   }
 
   _onBrandNewRecPress = (category) => {
     const { initNewRec, user } = this.props
-    initNewRec({to: user.uid, category})
-    Actions.push('NewRecLightbox',{walkthrough: true, category})
+    initNewRec({to: {uid: user.uid, displayName: user.displayName}, category}).then(
+      Actions.push('NewRecLightbox',{walkthrough: true})
+    )
+
   }
 
-  _onStartWithChaz = () => {
+  _onStartWithChaz = (friendName) => {
     const { initNewRec, user } = this.props
-    initNewRec({to: user.uid, category: 'app', title: 'chaz'})
-    Actions.push('NewRecLightbox',{walkthrough: true})
+    initNewRec({to: {uid: user.uid, displayName: user.displayName}, from:{name: friendName},category: 'app', title: 'chaz'}).then(
+      Actions.push('NewRecLightbox',{walkthrough: true})
+    )
   }
 
   _confettiComponent = () => {

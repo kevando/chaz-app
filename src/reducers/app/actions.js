@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 
 import * as t from '../actionTypes'
 
-import { listenForAuthChanges, usersRef, checkForInvites } from '../../config/firebase'
+import { listenForAuthChanges, usersRef, checkForInvitesByPhoneNumber } from '../../config/firebase'
 import { createUserInFirestore } from '../user/actions'
 import { listenForNotifications } from '../reminders/actions'
 
@@ -19,7 +19,7 @@ export function initializeApp() {
     const app = getState().app
     const user = getState().user
 
-    
+
     //
     // // Kick everything off
     dispatch(listenForAuthChanges())
@@ -106,20 +106,23 @@ export function confirmCode(codeInput) {
 
     // So lets query the user list and see if we find that phone number
 
+
     if(app.shouldSignIn)
       dispatch(signIn(credential))
     else
       dispatch(linkUser(credential))
 
-    dispatch(checkForInvites(user.phoneNumber)) // see if anyone invited this user
+    dispatch(checkForInvitesByPhoneNumber(user.phoneNumber)) // see if anyone invited this user
   }
 }
 
 
 function linkUser(credential) {
   return (dispatch, getState) => {
+    console.log('linkUser')
     firebase.auth().currentUser.linkWithCredential(credential)
       .then((firebaseUser) => {
+        console.log('linkedUser')
         dispatch({ type: t.USERS_LINKED, user: firebaseUser })
         dispatch(createUserInFirestore())
     }, function(error) {
@@ -232,81 +235,5 @@ function updateUser(data) {
       firebase.firestore().collection("users").doc(user.uid).update(data)
         .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) )
     }
-  }
-}
-
-
-
-
-
-
-
-// --------------------------------------------------------------
-// Temp for dev
-export function loginAsTest() {
-  console.log('loginAsTest')
-  const email = 'test@kevaid.com'
-  const password = '12345678'
-
-  return dispatch => {
-    console.log('loginAsTest d')
-
-    firebase.auth().signInWithEmailAndPassword(email, password)
-
-
-    .then(dispatch(createUserInFirestore()))
-
-    .catch(function(error) {
-      // Handle Errors here.
-      dispatch({type: t.SET_APP_ERROR, error})
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-    });
-  }
-}
-
-// --------------------------------------------------------------
-// Temp for dev
-export function registerAsTest() {
-  // This will link the anon account w a new account
-  const email = 'test@kevaid.com'
-  const password = '12345678'
-
-  console.log('registerAsTest')
-
-  return dispatch => {
-    console.log('registerAsTest dispatched')
-
-
-
-    var credential = firebase.auth.EmailAuthProvider.credential(email, password);
-
-        firebase.auth().currentUser.linkWithCredential(credential).then((firebaseUser) => {
-          console.log("Anonymous account successfully upgraded", firebaseUser);
-          console.log("firebaseUser._user", firebaseUser._user);
-          console.warn("Anonymous account successfully upgraded");
-
-          // Need to be careful because authStateChanged isnt fired
-          // by linking accounts
-          // so we need to call some of that manually
-
-          // const user = {...firebaseUser._user}
-          dispatch({ type: t.USERS_LINKED, user: firebaseUser._user })
-
-
-          // Now lets add the info to the user doc
-          // this times its email, next time its phone
-
-          dispatch(updateUser({email, linkedAt: Date.now() }))
-
-        }, function(error) {
-          console.warn("Error upgrading anonymous account", error);
-          console.log('code?',error.code)
-          dispatch({type: t.SET_APP_ERROR, error})
-          // if we reach here, most likely the account already exists, so lets try to just login
-          dispatch(loginAsTest())
-        });
-
   }
 }

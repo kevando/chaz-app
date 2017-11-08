@@ -49,7 +49,8 @@ const Reminders = (props) => {
             _.map(reminders.remoteNotifications, (notif,i) => {
               return (
                 <View key={i} style={styles.row}>
-                <Label>{notif.notification.body} ({moment(notif.receivedAt).fromNow()})</Label>
+                <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
+                <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
                 </View>
               )
             })
@@ -65,7 +66,8 @@ const Reminders = (props) => {
             _.map(reminders.remoteNotifications, (notif,i) => {
               return (
                 <View key={i} style={styles.row}>
-                <Label>{notif.notification.body} ({moment(notif.receivedAt).fromNow()})</Label>
+                <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
+                <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
                 </View>
               )
             })

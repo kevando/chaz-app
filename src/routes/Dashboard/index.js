@@ -8,8 +8,6 @@ import * as RecActions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
 
-  // const givenRecsWithFriends =  _.map(state.recommendations.givenRecs, rec => {return {...rec,friend: _.find(state.friends,friend => friend.id === rec.friendId) || {} } })
-
   return {
 
     myRecs: state.recommendations.myRecs,//state.recommendations.myRecs, // TMP NEW UI!!! myRecsWithFriends,

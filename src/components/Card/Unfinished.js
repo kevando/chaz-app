@@ -59,17 +59,21 @@ class Unfinished extends Component {
 
 render() {
   // console.log('UN',this.props)
+
   const { rec, updateState, title, unfinished, friendName, setTitle,placeholderText } = this.props;
+  // console.warn(unfinished.to.name)
   return (
 
         <Animatable.View ref="CONTAINER" style={[styles.container,{minHeight: 200, margin:15}]} >
 
-        {unfinished.title &&
+        {unfinished.to.name && <Friend.Name friend={{name:unfinished.to.name}} /> }
+
+        {unfinished.title && !unfinished.to.name &&
         <Animatable.View style={styles.headerContainer} animation={{from:{height:0},to:{height:25}}} duration={500} delay={200} >
 
 
           <View style={styles.friendContainer}>
-          {unfinished.title && !unfinished.friendName &&
+          {unfinished.title && !unfinished.to.name &&
             <TextInput
               placeholder='friend name'
               ref={ c => this._titleFriend = c }
@@ -84,7 +88,7 @@ render() {
               onChangeText={(friendName) => updateState({friendName})}
             /> }
 
-            {unfinished.friendName && <Friend.Name friend={{name:unfinished.friendName}} /> }
+
           </View>
 
 

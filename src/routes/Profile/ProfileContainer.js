@@ -21,10 +21,10 @@ class ProfileContainer extends Component {
   _onLogoutPress() {
 
     Alert.alert(
-      'Log Out?', null,
+      'Developer Options', null,
       [
-        {text: 'No' },
-        {text: 'Yes', onPress: () => this.props.signOut(), },
+        {text: 'Cancel' },
+        {text: 'Log Out', onPress: () => this.props.signOut(), },
         {text: 'Refresh Token', onPress: () => this.props.refreshServerToken(), },
         {text: 'Turn Dev Mode On', onPress: () => this.props.setAppData({devMode: true}), },
         {text: 'Turn Dev Mode Off', onPress: () => this.props.setAppData({devMode: false}), },

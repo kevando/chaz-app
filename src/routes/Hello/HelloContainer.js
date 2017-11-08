@@ -53,7 +53,7 @@ class HelloContainer extends Component {
     this.refs.INPUT.textDance(800)
     const { name } = this.state
 
-    this.props.checkForInvites(name)
+    this.props.checkForInvitesByName(name)
 
     this.props.saveDisplayName(name)
       .then(response => {
@@ -71,7 +71,7 @@ class HelloContainer extends Component {
   }
 
   _startWithChaz = () => {
-    this.props.startWithChaz()
+    this.props.startWithChaz((this.state.friendName))
   }
 
   // _explore = () => {
@@ -118,7 +118,7 @@ class HelloContainer extends Component {
             <Text style={styles.subTitle}>Welcome.</Text>
             <Text style={styles.paragraph}>Did {user.myInvites[0].from.displayName} tell you about chaz?</Text>
             <View style={styles.buttonContainer}>
-              <Button ghost text="Yes" onPress={()=>this.setState({question:'Did they explain it well?'})}/>
+              <Button ghost text="Yes" onPress={()=>this.setState({question:'Did they explain it well?',friendName: user.myInvites[0].from.displayName})}/>
               <Button ghost text="No" onPress={()=>this.setState({question:'Did anyone tell you about chaz?'})}/>
             </View>
             </Animatable.View>

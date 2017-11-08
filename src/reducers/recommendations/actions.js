@@ -33,12 +33,9 @@ export const testPromise = () => (dispatch, getState) =>
 export const initNewRec = (payload) => (dispatch) =>
   new Promise(function(resolve,reject) {
     dispatch({ type: INIT_REC, payload })
+    resolve()
   })
 
-
-export function initNewRecc(payload) {
-  return { type: INIT_REC, payload }
-}
 
 export function setTitle(title) {
   return { type: SET_TITLE, title }
@@ -77,16 +74,12 @@ export const setFriend = (friend) => (dispatch, getState) =>
 // ----------------------------------------------------
 export const saveRec = () => (dispatch, getState) =>
 
-
-
   new Promise(function(resolve,reject) {
     console.log('saveRec')
     const unfinished = getState().recommendations.unfinished
     const user = getState().user
 
     const newRec = {...unfinished, status: 'new', createdBy: user.uid }
-
-    if(!unfinished.friendId) {reject('o shit, no friendId in unfinished')}
 
     recsRef.add(newRec)
       .then(docRef => {
@@ -106,24 +99,6 @@ export const saveRec = () => (dispatch, getState) =>
   }) // Promise
 
 
-//
-// export const addRecommendation = () => (dispatch, getState) =>
-//
-//   new Promise(function(resolve, reject) {
-//     const unfinished = getState().recommendations.unfinished
-//     const user = getState().user
-//     console.log('unfinished',unfinished)
-//     const newRec = {...unfinished, status: 'new', createdBy: user.uid }
-//
-//     if(!unfinished.friendId) {alert('o shit, no friendId in unfinished')}
-//
-//     recsRef.add(newRec)
-//       .then(docRef => {
-//         // dispatch({ type: SAVE_RECOMMENDATION_SUCCESS})
-//         addMessage(unfinished,getState().user.username) // disabled for now
-//       })
-//       .catch(error => console.warn("Error adding document: ", error) )
-//   });
 // // ----------------------------------------------------
 
 function addMessage(uid,body) {
@@ -190,7 +165,7 @@ export function assignUserToRecs(user,friend) {
   console.log('assignUserToRecs')
 
   return dispatch => {
-    recsRef.where("friendId", "==", friend.id)
+    recsRef.where("from.id", "==", friend.id)
     // or recs that ive given
       .onSnapshot(function(querySnapshot) {
           // var myFriends = [];

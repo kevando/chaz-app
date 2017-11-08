@@ -69,17 +69,20 @@ class SkinnyCard extends Component {
 
 render() {
   // console.log(this.props)
-  const { rec } = this.props;
+  const { rec, given } = this.props;
   return (
     <View style={cardStyles.container}>
       <View style={cardStyles.headerContainer}>
         <View style={cardStyles.friendContainer}>
-          <Friend.Name friend={rec.friend} small />
+          <Text style={cardStyles.dateText}>
+          {moment(rec.createdAt).fromNow()}
+          {given ? ' (Given)' : ' (Received)'}
+          </Text>
         </View>
       </View>
       <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
-        <CategoryIcon rec={rec} size={17} color={"yellow"}/>
-        <Title rec={rec} styles={{fontSize: 20, marginLeft: 20}} />
+        <CategoryIcon rec={rec} size={25} color={"yellow"}/>
+        <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
         </View>
     </View>
     )
@@ -133,6 +136,12 @@ const cardStyles = StyleSheet.create({
     fontSize: 17,
     // backgroundColor: 'yellow',
   },
+  dateText: {
+    ...text,
+    fontSize: 12,
+    color: colors.darkGrey,
+    fontWeight: '200',
+  }
 
 });
 
@@ -148,7 +157,7 @@ export class Card extends Component {
 
   render() {
     // console.log(this.props)
-    const { rec, listItem, skinny } = this.props;
+    const { rec, listItem, skinny, given } = this.props;
 
     if(listItem) { // Dashboard
       return (
@@ -158,7 +167,9 @@ export class Card extends Component {
       )
     } else if(skinny) {  // FriendView
       return (
-          <SkinnyCard rec={rec} />
+        <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
+          <SkinnyCard given={given} rec={rec} />
+        </TouchableOpacity>
       )
     } else {
       return null

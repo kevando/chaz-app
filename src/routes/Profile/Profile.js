@@ -3,8 +3,8 @@ import { View ,Text, TextInput, Button } from 'react-native';
 import _ from 'lodash';
 
 import { Label } from '../../components/Generic';
-// import { FriendCard } from '../../components/Card/RecView';
-// import Card  from '../../components/Card/Rec';
+// import { FriendCard } from '../../components/Friend';
+
 import * as Animatable from 'react-native-animatable'
 
 import styles from './styles';
@@ -23,7 +23,7 @@ const GivenRecs = ({givenRecs}) => {
 }
 
 const Profile = (props) => {
-  console.log(props)
+  // console.log(props)
   const { onLogoutPress, user, friends, givenRecs, onlineFriends } = props;
 
   return (
@@ -33,7 +33,7 @@ const Profile = (props) => {
       <Text style={styles.title} onPress={onLogoutPress}>{user.displayName}</Text>
 
 
-      { onlineFriends.length == 0 &&
+      { friends.length == 0 &&
         <View>
         <Label center>You are alone.</Label>
         <Animatable.View animation="fadeIn" delay={1000}>
@@ -42,24 +42,20 @@ const Profile = (props) => {
         </View>
       }
 
-      { onlineFriends.length == 1 &&
-        <Label center>You have 1 friend.</Label>
+      { friends.length == 1 &&
+        <Label center title>You have 1 friend.</Label>
       }
 
-      { onlineFriends.length > 1 &&
-        <Label center>You have {onlineFriends.length} friends.</Label>
+      { friends.length > 1 &&
+        <Label center title>You have {friends.length} friends.</Label>
       }
 
       {
-        _.map(friends,friend => {
-          // return <FriendCard key={friend.id} friend={friend} />
+        _.map(friends,(friend,i) => {
+          return <Label center key={i}>{friend.name} {friend.uid && '(online)'}</Label>
         })
       }
 
-      {
-          givenRecs.length > 0 &&
-            <GivenRecs givenRecs={givenRecs} />
-      }
 
 
 

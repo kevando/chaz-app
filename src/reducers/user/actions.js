@@ -2,8 +2,8 @@
 import * as t from '../actionTypes'
 import firebase from 'react-native-firebase'
 
-import { usersRef, invitesRef } from '../../config/firebase'
-
+import { usersRef, recsRef } from '../../config/firebase'
+import { addFriend } from '../friends/actions'
 
 // --------------------------------
 //    SET USER DATA IN REDUX
@@ -30,22 +30,24 @@ export const saveDisplayName = (displayName) => (dispatch, getState) =>
 //    SEE IF INVITE EXISTS
 // --------------------------------
 
-export function checkForInvites(name) {
+export function checkForInvitesByName(name) {
   return (dispatch, getState) => {
     let myInvites = []
 
-    invitesRef.where("to.name", "==", name.toLowerCase()).where("status", "==", "open")
+    recsRef
+      .where("type", "==", "invite")
+      .where("to.name", "==", name.toLowerCase())
+      .where("status", "==", "open")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           myInvites.push({...doc.data(),id: doc.id})
-          // invitesRef.doc(doc.id).update({status: 'accepted'}) // close this invite otherwise it can get triggered again
+          dispatch(addFriend({name: doc.data().from.displayName,uid: doc.data().from.uid}))
+          // set to = THIS user uid
         })
-        // if(myInvites.length > 0){
-          // console.log('hey we found some invites!')
+
           dispatch({type: t.SET_USER_DATA, data: {myInvites} })
-          // dispatch(connectUsers(myInvites)) // add as friends
-        // }
+
       })
   }
 }
@@ -70,7 +72,6 @@ export function createUserInFirestore() {
     }
 
     usersRef.doc(user.uid).set(initialData)
-      .then(() =>  dispatch({type: t.SET_APP_STATUS, status: 'Updated User in firestore'}) )
       .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) )
   }
 }

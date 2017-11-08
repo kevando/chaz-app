@@ -58,9 +58,9 @@ const Invite = (props) => {
   let SendInvitation = () => {
     return (
     <View style={styles.container}>
-      <Label center large>Nobody found</Label>
-        <Label center>{friend.name} did not activate an account with {friend.phoneNumber}. Lets invite them!</Label>
-        <TouchableOpacity onPress={()=>updateFriend(friend,{searchResults: null})}><Label center>Try a different number</Label></TouchableOpacity>
+      <Label center large>Send Invite</Label>
+        <Label center>Lets send a text to {friend.phoneNumber}</Label>
+        <TouchableOpacity onPress={()=>updateFriend(friend,{searchResults: null})}><Label center>OR try a different number</Label></TouchableOpacity>
       </View>
     )
   }

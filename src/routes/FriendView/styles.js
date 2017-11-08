@@ -7,10 +7,14 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.blueBG,
     paddingTop: 0,
+
   },
   scrollContainer: {
     paddingHorizontal: MARGIN_LEFT,
-    paddingTop: 30,
+    // paddingTop: 30,
+    paddingBottom:200,
+    marginBottom:0,
+    // backgroundColor: 'yellow'
   },
   title: {
     ...text,

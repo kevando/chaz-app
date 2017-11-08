@@ -10,7 +10,6 @@ const PREFIX = env + '_' + dataVersion + '_'
 export const recsRef = firebase.firestore().collection(`${PREFIX}recommendations`)
 export const friendsRef = firebase.firestore().collection(`${PREFIX}friends`)
 export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
-export const invitesRef = firebase.firestore().collection(`${PREFIX}invites`)
 export const messagesRef = firebase.firestore().collection(`${env}_messages`)
 
 import { assignUserToFriend } from '../reducers/friends/actions'
@@ -61,32 +60,34 @@ export function addFirestoreListeners(uid) {
           dispatch({type: t.REFRESH_FRIENDS, myFriends})
 
           // this might cause issues, but friend data in rec objects isnt refreshing
-          const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.friendId) || {} } })
+          const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
           dispatch({type: t.REFRESH_MY_RECS, myRecs: myRecsWithFriendData})
       });
 
 
     // MY RECS
-    recsRef.where("to", "==", uid)
+    recsRef
+      .where("to.uid", "==", uid)
       .onSnapshot(querySnapshot => {
           myRecs = []
           querySnapshot.forEach(doc => {
-              myRecs.push({...doc.data(),id: doc.id});
-              // console.log('myFriends in rec listener, could be from state or listener',myFriends)
+              if(doc.data().status != "open")
+                myRecs.push({...doc.data(),id: doc.id});
+
           })
-          const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.friendId) || {} } })
+          const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
           dispatch({type: t.REFRESH_MY_RECS, myRecs: _.orderBy(myRecsWithFriendData,['createdAt'],['desc']) })
       })
 
       // GIVEN RECS
-      recsRef.where("from", "==", uid)
+      recsRef.where("from.uid", "==", uid)
         .onSnapshot(querySnapshot => {
             var givenRecs = [];
             querySnapshot.forEach(doc => {
                 givenRecs.push({...doc.data(),id: doc.id});
             })
             // TODO join w friend data
-            const givenRecsWithFriendData =  _.map(givenRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.friendId) || {} } })
+            const givenRecsWithFriendData =  _.map(givenRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.to.id) || {} } })
             dispatch({type: t.REFRESH_GIVEN_RECS, givenRecs: givenRecsWithFriendData})
         });
 
@@ -100,16 +101,20 @@ export function addFirestoreListeners(uid) {
 //    CHECK IF USER WAS INVITED
 // --------------------------------
 
-export function checkForInvites(phoneNumber) {
+export function checkForInvitesByPhoneNumber(phoneNumber) {
   return (dispatch, getState) => {
+    console.log('check for invites')
     let myInvites = []
 
-    invitesRef.where("to.phoneNumber", "==", phoneNumber).where("status", "==", "open")
+    recsRef
+      .where("type", "==", "invite")
+      .where("status", "==", "open")
+      .where("to.phoneNumber", "==", phoneNumber)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           myInvites.push({...doc.data(),id: doc.id})
-          invitesRef.doc(doc.id).update({status: 'accepted'}) // close this invite otherwise it can get triggered again
+          recsRef.doc(doc.id).update({status: 'accepted', acceptedAt: Date.now()}) // close this invite otherwise it can get triggered again
         })
         if(myInvites.length > 0){
           console.log('hey we found some invites!')
@@ -131,9 +136,9 @@ export function checkForInvites(phoneNumber) {
 
 export function connectUsers(myInvites) {
   return (dispatch, getState) => {
-
+    console.log('connectUesrs')
       _.forEach(myInvites,invite => {
-        addInviterAsFriend(invite)
+        dispatch(addInviterAsFriend(invite))
         addMessage(invite.from.uid,`Hey ${invite.to.name} just joined chaz. Your invitation worked!`) // send inviter message that his innvite worked
         const newFriendObject = {...invite.to, uid: getState().user.uid} // this is me getting saved to inviters friend list
         assignUserToFriend(newFriendObject) // someone accepted MY invite, now add their userid to my friend object
@@ -142,20 +147,24 @@ export function connectUsers(myInvites) {
 }
 
 function addInviterAsFriend(invite) {
-  let friend = {
-    name: invite.from.displayName,
-    owner: invite.to.uid,
-    createdAt: Date.now(),
-    type: 'inviter',
-    uid: invite.from.uid,
-  }
-  friendsRef.add(friend)
-    .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
+  return (dispatch,getState) => {
+    console.log('addInviterAsFriend', invite)
+    // adds a duplicate user, need a way to link inviter to chaz rec
+    let friend = {
+      name: invite.from.displayName,
+      owner: getState().user.uid,//invite.to.uid,
+      createdAt: Date.now(),
+      type: 'inviter',
+      uid: invite.from.uid,
+    }
+    friendsRef.add(friend)
+      .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
+}
 }
 
 function assignInvitedUserToFriend(invite) {
-  friendsRef.doc(invite.to.friendId)
-    .update({uid:invite.to.uid, connectedAt: Date.now()})
+  friendsRef.doc(invite.to.id)
+    .update({uid:invite.to.uid, connectedAt: Date.now(), dev:'assignInvitedUserToFriend'})
     .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
 }
 

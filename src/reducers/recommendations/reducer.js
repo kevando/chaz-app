@@ -25,6 +25,7 @@ export default function recs(recommendations = initialState, action = {}) {
   //     }
   // -------------------------------------------
   case t.INIT_REC:
+  // console.warn('a',action.payload)
     return {
       ...recommendations,
       unfinished: {
@@ -51,8 +52,7 @@ export default function recs(recommendations = initialState, action = {}) {
         ...recommendations,
         unfinished: {
           ...recommendations.unfinished,
-          friendId: action.friend.id,
-          friendName: action.friend.name,
+          friend: action.friend,
           from: action.friend, // not always tho
         }
       }

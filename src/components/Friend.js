@@ -58,11 +58,11 @@ export class Header extends Component {
 
     return (
       <View style={headerStyles.container}>
-          <Icon name={icon} size={90} color={colors.lightWhite} />
+          <Icon name={icon} size={90} color={friend.uid ? 'white' : colors.lightWhite} />
 
           <View style={headerStyles.textContainer}>
 
-              <Text style={headerStyles.text}>{friend.name}</Text>
+              <Text style={[headerStyles.text,{color: friend.uid ? 'white' : colors.lightWhite}]}>{friend.name}</Text>
 
             </View>
         </View>
@@ -89,15 +89,11 @@ const headerStyles = StyleSheet.create({
     zIndex:999
   },
   textContainer: {
-    // borderColor: 'red',
-    // borderWidth: 5,
-    // backgroundColor: colors.blueBG,
     backgroundColor: colors.newBlue,
     width,
     marginTop: 0,
     paddingTop: 10,
     marginBottom: 10
-
   },
   text: {
     ...text,
@@ -105,7 +101,7 @@ const headerStyles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     backgroundColor: 'transparent',
-    color: colors.lightWhite
+
   }
 
 })

@@ -52,25 +52,7 @@ class InputTitleContainer extends Component {
     this.props.setTitle(this.state.title)
   }
 
-  // _setFriend = () => {
-  //   // alert(this.state.friendName)
-  //   // return
-  //   const { addFriend, addRecommendation } = this.props
-  //   addFriend({name: this.state.friendName})
-  //
-  //   setTimeout(() => {
-  //     addRecommendation().then(Actions.pop()
-  //   )},400)
-  // }
 
-  // _onFriendPress = (friend) => { // add existing friend
-  //   const { setFriendId } = this.props;
-  //   setFriendId(friend.id); // Redux
-  //
-  //   this.props.addRecommendation(); // Redux
-  //   Actions.pop() // might error
-  //
-  // }
 
   _sendRec = () => {
     // console.warn(this.state.title)

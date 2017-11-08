@@ -3,30 +3,29 @@ import { text } from 'react-native-communications'; // might not want this in re
 
 import * as t from '../actionTypes'
 
-import { recsRef, friendsRef, usersRef, invitesRef, messagesRef} from '../../config/firebase'
-
+import { recsRef, friendsRef, usersRef, messagesRef} from '../../config/firebase'
+import { initNewRec } from '../recommendations/actions'
 
 // ----------------------------------------------------
 //   Save new friend to firestore
 // ----------------------------------------------------
-export const addFriend = (friendName) => (dispatch, getState) =>
+export const addFriend = ({name,uid}) => (dispatch, getState) =>
 
   new Promise(function(resolve,reject) {
 
-    if(!friendName) { return reject('no friendName')}
+    if(!name) { return reject('no friendName')}
 
     let friend = {
-      name: friendName.toLowerCase(),
+      name: name.toLowerCase(),
       owner: getState().user.uid,
       createdAt: Date.now(),
+      uid,
     }
 
     friendsRef.add(friend)
       .then(docRef => {
         friend.id = docRef.id
         resolve(friend)
-      // dispatch({ type: t.SAVE_FRIEND, friend: newFriend })
-      // dispatch({ type: t.SET_FRIEND_ID, friendId: docRef.id }) // unfinished
     })
     .catch(error => reject(error))
   }) // Promise
@@ -70,18 +69,11 @@ export function sendInvite(friend, phoneNumber) {
   return (dispatch, getState) => {
     const user = getState().user
 
-
-    // no user found, lets save this phone# to the friend obj for later
-    dispatch(updateFriend(friend,{searchResults: 'invitation sent',phoneNumber,invitedAt: Date.now()}))
-
-    // create an invite obj, not sure how im going to use this yet
-    // @todo this is essential a rec for chaz
-    dispatch(createInvite(user,friend))
+    const friendWithPhone = {...friend,phoneNumber}
+    dispatch(createInvite(user,friendWithPhone))
 
     // now open imessage
-    text(phoneNumber, 'Hey, check out this new app called chaz')
-
-
+    text(phoneNumber, 'Hey, check out this new app called chaz http://chaz.co/i')
   }
 }
 
@@ -93,26 +85,51 @@ export function updateFriend(friend,data) {
   }
 }
 
-function createInvite(user,friend) {
-  return dispatch => {
-    const inviteObject = {
-      from: user,
+
+// ----------------------------------------------------
+//   Add new rec thats an invite and update the user object
+// ----------------------------------------------------
+export const createInvite = (user,friend) => (dispatch, getState) =>
+
+  new Promise(function(resolve, reject) {
+    console.log('invite',friend)
+    console.log('invite',user)
+    const recInvite = {
+      from: {uid: user.uid, displayName: user.displayName},
       to: friend,
       status: 'open',
-      invitedAt: Date.now()
+      type: 'invite',
+      invitedAt: Date.now(),
+      createdAt: Date.now(),
+      category: 'app',
+      title: 'chaz',
+      createdBy: user.uid
     }
-    invitesRef.add(inviteObject)
-      .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
-  }
-}
+    dispatch(initNewRec(recInvite).then(
+      recsRef.add(recInvite)
+        .then(docRef => {
+          // Then update friend with recInvite data
+          dispatch(updateFriend(friend,{recInviteId: docRef.id, searchResults: 'invitation sent',phoneNumber: friend.phoneNumber,invitedAt: Date.now()}))
+
+          // resolve(docRef)
+        })
+        .catch(error => console.warn("Error adding document: ", error) )
+    ))
 
 
+  });
+
+
+// ----------------------------------------------------
+//
+// ----------------------------------------------------
 export function assignUserToFriend(friend) {
 
   // console.log('assign user')
 
 
   return (dispatch, getState) => {
+    console.log('assignUserToFriend',friend)
     const user = getState().user
       // ok now that we have the user id, lets update the friend object
       friendsRef.doc(friend.id).update({uid:friend.found.uid, found: null, searchResults: 'Found and connected',})

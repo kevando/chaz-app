@@ -8,7 +8,7 @@ import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-na
 import Dashboard from '../../routes/Dashboard';
 import RecInput from '../../routes/RecInput';
 // import Walkthrough from '../../routes/Walkthrough';
-import ConfirmRecommendation from '../../routes/ConfirmRecommendation';
+
 import { CloseButton, BackButton, ProfileButton, DashboardRightButton } from '../../components/Nav';
 import RecView from '../../routes/RecView';
 import FriendView from '../../routes/FriendView';

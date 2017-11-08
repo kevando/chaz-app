@@ -27,6 +27,12 @@ const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress }) =>
         )})
       }
 
+      {
+        _.map(givenRecs,(rec,i) => {return (
+          <Card given skinny key={i} rec={rec} />
+        )})
+      }
+
         {!friend.uid && friend.invitedAt &&
           <View style={{marginHorizontal: 20}}>
           <Label center>Any minute...</Label>
@@ -40,7 +46,7 @@ const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress }) =>
 
       </ScrollView>
       { friend.uid && <Button text="Send a Recommendation" onPress={onGiveRecPress} /> }
-      { !friend.uid && !app.isAnon && !friend.invitedAt &&<Button bgcolor="pink" text="Invite" onPress={()=>Actions.push('InviteModal',{friend})} /> }
+      { !friend.uid && !app.isAnon && !friend.invitedAt &&<Button bgcolor="pink" text={`Recommend chaz to ${friend.name}`} onPress={()=>Actions.push('InviteModal',{friend})} /> }
       { !friend.uid && !app.isAnon && friend.invitedAt && <Button bgcolor="pink" text="Invited" onPress={()=>Actions.push('InviteModal',{friend})} /> }
     </View>
   );

@@ -95,7 +95,7 @@ class InputTitle extends Component {
 
     // this._saveSuccessPreAnimation()
 
-    this.props.addFriend(this.props.friendName)
+    this.props.addFriend({name:this.props.friendName})
       .then(friend => this.props.setFriend(friend))
       .then(friend => this._saveRec() )
       .catch(error => console.warn('add friend redux error',error))
@@ -190,13 +190,14 @@ class InputTitle extends Component {
   }
 
   _getTitleText = () => {
-    const { walkthrough, category, unfinished, user} = this.props
+    const { walkthrough, unfinished, user} = this.props
     let titleText = 'what????'
-
-    if(walkthrough && !unfinished.title)  titleText = `What ${category}?`;
-    if(!walkthrough && !unfinished.title)  titleText = `What?`;
+    console.log(walkthrough)
+    console.log(unfinished)
+    if(walkthrough && !unfinished.title && unfinished.category)  titleText = `What ${unfinished.category}?`;
+    if(!walkthrough && !unfinished.title && !unfinished.category)  titleText = `What?`;
     if(unfinished.title) titleText = `Who told you?`;
-    if(unfinished.from == user.uid) titleText = `What are you recommending?`;
+    if(unfinished.from && unfinished.from.uid == user.uid) titleText = `What are you recommending?`;
 
     return titleText
   }
@@ -261,7 +262,7 @@ class InputTitle extends Component {
         <Animatable.View ref="BUTTON">
           {!unfinished.title && this.props.title !== '' && !unfinished.from && <Button text="Next" onPress={this.props.onNextPress} />}
           {unfinished.title && this.props.friendName !== '' && <Button text="Save" onPress={this._onSavePress} /> }
-          {!unfinished.title && this.props.title !== '' && unfinished.from &&  <Button text={`Send to ${unfinished.to_name}`} onPress={this._sendRec} /> }
+          {!unfinished.title && this.props.title !== '' && unfinished.from &&  <Button text={`Send to ${unfinished.to.name}`} onPress={this._sendRec} /> }
         </Animatable.View>
 
         <KeyboardSpacer />
