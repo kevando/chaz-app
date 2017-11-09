@@ -11,7 +11,7 @@ export default styles = StyleSheet.create({
   },
   scrollContainer: {
     paddingHorizontal: MARGIN_LEFT,
-    // paddingTop: 30,
+    marginTop: 30,
     paddingBottom:200,
     marginBottom:0,
     // backgroundColor: 'yellow'

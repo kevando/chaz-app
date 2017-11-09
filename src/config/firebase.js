@@ -75,6 +75,7 @@ export function addFirestoreListeners(uid) {
                 myRecs.push({...doc.data(),id: doc.id});
 
           })
+          console.log('myRecs',myRecs)
           const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
           dispatch({type: t.REFRESH_MY_RECS, myRecs: _.orderBy(myRecsWithFriendData,['createdAt'],['desc']) })
       })

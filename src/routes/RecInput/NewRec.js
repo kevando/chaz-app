@@ -77,9 +77,9 @@ const config = {
 };
 const animationConfig = { // On Route Load
   CONTAINER: {delay: 0,   duration: 200, animation: "fadeInBackground"},
-  TITLE:     {delay: 100, duration: 200, animation: "fadeInUp"},
+  TITLE:     {delay: 100, duration: 100, animation: "fadeIn"},
   CARD:      {delay: 0, duration: 200, animation: "fadeInUp"},
-  CLOSE:     {delay: 100, duration: 200, animation: "fadeInUp"},
+  CLOSE:     {delay: 100, duration: 100, animation: "fadeIn"},
 }
 
 class InputTitle extends Component {

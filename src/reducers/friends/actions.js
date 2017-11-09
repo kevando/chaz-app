@@ -78,12 +78,29 @@ export function sendInvite(friend, phoneNumber) {
 }
 
 
-export function updateFriend(friend,data) {
+// ----------------------------------------------------
+//   Combine friends. called when users connect
+// ----------------------------------------------------
+
+export function deleteFriend(friend) {
   return dispatch => {
-    friendsRef.doc(friend.id).update(data)
+    friendsRef.doc(friend.id).delete(friend.id)
       .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) );
   }
 }
+
+export const updateFriend = (friend,data) => (dispatch, getState) =>
+
+  new Promise(function(resolve,reject) {
+      console.log(friend)
+      console.log(data)
+
+    friendsRef.doc(friend.id).update(data)
+      .then(friend => resolve(friend))
+      .catch(error =>  resolve(error) );
+
+  }) // Promise
+
 
 
 // ----------------------------------------------------
@@ -153,11 +170,13 @@ export function assignFriendToUser(newFriend) {
   // they may or may not already be there,
   // adding THIS user as a new friend with friendship pending and deal w it later
 
+  // changing this to remove friend obj
   return (dispatch, getState) => {
     console.log('assignFriendToUser',newFriend)
 
     friendsRef.add({
       owner: newFriend.uid,
+      uid: getState().user.uid,
       displayName: getState().user.displayName,
       friendshipStatus: 'pending',
       phoneNumber: getState().user.phoneNumber,

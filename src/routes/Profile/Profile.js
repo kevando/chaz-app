@@ -1,9 +1,10 @@
 import React from 'react';
-import { View ,Text, TextInput, Button } from 'react-native';
+import { View ,Text, TextInput, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
-
+import Icon from 'react-native-vector-icons/Feather'
 import { Label } from '../../components/Generic';
-// import { FriendCard } from '../../components/Friend';
+import { colors, text } from '../../config/styles';
+import { Actions } from 'react-native-router-flux';
 
 import * as Animatable from 'react-native-animatable'
 
@@ -29,9 +30,9 @@ const Profile = (props) => {
   return (
     <View style={styles.container}>
 
-
+    <View style={styles.headerContainer}>
       <Text style={styles.title} onPress={onLogoutPress}>{user.displayName}</Text>
-
+    </View>
 
       { friends.length == 0 &&
         <View>
@@ -43,16 +44,23 @@ const Profile = (props) => {
       }
 
       { friends.length == 1 &&
-        <Label center title>You have 1 friend.</Label>
+        <Label title>You have 1 friend.</Label>
       }
 
       { friends.length > 1 &&
-        <Label center title>You have {friends.length} friends.</Label>
+        <Label title>You have {friends.length} friends.</Label>
       }
 
       {
         _.map(friends,(friend,i) => {
-          return <Label center key={i}>{friend.name} {friend.uid && '(online)'}</Label>
+          return (
+            <TouchableOpacity key={i} onPress={()=>Actions.push('FriendView',{friend})}>
+            <View style={styles.friendRowItem} >
+              <Icon name='user' size={19} color={friend.uid ? colors.pink : colors.lightWhite}/>
+              <Text style={styles.friendText} >{friend.name || friend.displayName+ ' (Pending)'}</Text>
+            </View>
+            </TouchableOpacity>
+          )
         })
       }
 

@@ -52,7 +52,7 @@ export default function recs(recommendations = initialState, action = {}) {
         ...recommendations,
         unfinished: {
           ...recommendations.unfinished,
-          friend: action.friend,
+          // friend: action.friend,
           from: action.friend, // not always tho
         }
       }

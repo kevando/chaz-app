@@ -1,9 +1,6 @@
 import { StyleSheet, Dimensions} from 'react-native';
 import { colors, text } from '../../config/styles';
 
-const BUTTON_WIDTH = 250;
-const MARGIN_HORIZONTAL = (window.width - BUTTON_WIDTH) / 2;
-
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -17,12 +14,29 @@ export default styles = StyleSheet.create({
     // backgroundColor: colors.grey,
   },
   //
-  // inputContainer: {
-  //   // backgroundColor: 'yellow',
-  //   margin: 10,
-  //   padding: 2,
-  // },
+  headerContainer: {
+    backgroundColor: colors.lightWhite,
+    // margin: 10,
+    // padding: 2,
+    paddingVertical: 20,
+  },
+  friendRowItem: {
+    backgroundColor: colors.lightWhite,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    margin: 1,
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    alignItems: 'center'
+  },
+  friendText: {
+    ...text,
+    fontSize: 22,
+    paddingLeft: 10,
+    // paddingVertical: 25,
 
+    color: colors.white
+  },
   title: {
     ...text,
     textAlign: 'center',

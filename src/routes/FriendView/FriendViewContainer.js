@@ -28,6 +28,29 @@ class FriendViewContainer extends Component {
     )
   }
 
+  _combineFriend = (friend) => {
+    // console.warn('FRIEND',friend)
+    if(!friend) {
+      // then create a brand new friend
+      // which simple means adding a name, and removing pending status
+      const friendData = {phoneNumber: this.props.friend.phoneNumber,name: this.props.friend.displayName, friendshipStatus: 'accepted'}
+      this.props.updateFriend(this.props.friend,friendData)
+      Actions.pop()
+
+    } else {
+      // console.warn('updateFriend',this.props.friend)
+      // user already existed as a friend,
+      // so pretty much delete this friend object,
+      // and assign uid to existing friend
+
+      const friendData = {uid: this.props.friend.uid, phoneNumber: this.props.friend.phoneNumber}
+      this.props.updateFriend(friend,friendData)
+        .then(console.log('updated?'))
+      this.props.deleteFriend(this.props.friend)
+      Actions.pop()
+    }
+  }
+
   render() {
     // console.log('FriendViewContainer',this.props)
 
@@ -36,7 +59,9 @@ class FriendViewContainer extends Component {
     return (
       <FriendView
         givenRecs={this.props.givenRecs}
+        combineFriend={this._combineFriend}
         friend={this.props.friend}
+        friends={this.props.friends}
         myRecs={this.props.myRecs}
         onKeyPress={this._onKeyPress}
         user={this.props.user}

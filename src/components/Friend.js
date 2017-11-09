@@ -82,11 +82,11 @@ const headerStyles = StyleSheet.create({
     borderBottomColor: colors.newBlue,
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: colors.blueBG,
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 1,
-    shadowRadius: 5,
-    zIndex:999
+    // shadowColor: colors.blueBG,
+    // shadowOffset: { width: 0, height: 10 },
+    // shadowOpacity: 1,
+    // shadowRadius: 5,
+    // zIndex:999
   },
   textContainer: {
     backgroundColor: colors.newBlue,

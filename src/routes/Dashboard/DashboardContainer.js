@@ -21,14 +21,14 @@ class DashboardContainer extends Component {
 
   componentDidMount() {
     // TMP!!
-    console.log('dash mounted',this.props)
+    // console.log('dash mounted',this.props)
     if(this.props.myRecs.length == 1)
       this._throwParty()
     // Actions.push('NewRecLightbox')
     // Actions.push('Profile')
     // Actions.push('Reminders')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[1]})
+    // Actions.push('FriendView',{friend: this.props.friends[0]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
 
   }

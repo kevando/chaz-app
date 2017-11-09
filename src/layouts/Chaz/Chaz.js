@@ -35,7 +35,7 @@ class Chaz extends Component {
   }
 
   componentDidMount() {
-    console.log('chaz.js mounted')
+    // console.log('chaz.js mounted')
   }
 
   componentWillReceiveProps(nextProps) {

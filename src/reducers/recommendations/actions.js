@@ -61,14 +61,6 @@ export const setFriend = (friend) => (dispatch, getState) =>
 // ----------------------------------------------------
 
 
-
-
-// // given
-// export function setRecTo(uid) {
-//   return { type: SET_REC_TO, uid }
-// }
-//
-
 // ----------------------------------------------------
 //   Save new rec to fire store
 // ----------------------------------------------------

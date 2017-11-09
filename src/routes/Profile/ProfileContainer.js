@@ -10,14 +10,7 @@ class ProfileContainer extends Component {
     this._onLogoutPress = this._onLogoutPress.bind(this)
   }
 
-  // componentWillReceiveProps({user}) {
-  //   if(!user.uid){ // User signed out!
-  //     // this.setState({status: 'User Created!'})
-  //     setTimeout(() => {
-  //       Actions.reset('MainStack')
-  //     }, 1000);
-  //   }
-  // }
+
   _onLogoutPress() {
 
     Alert.alert(
