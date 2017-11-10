@@ -5,7 +5,7 @@ export default styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    // paddingTop: 5,
+    paddingTop: 5,
     backgroundColor: colors.blueBG,
   },
   greetingContainer: {

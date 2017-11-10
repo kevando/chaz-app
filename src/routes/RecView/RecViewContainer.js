@@ -16,8 +16,9 @@ class RecViewContainer extends Component {
 
   }
   componentWillReceiveProps({recLive}) {
-    // console.log('new perops came in', recLive)
-    this.setState({rec: recLive})
+    // if live rec not found, dont set it
+    recLive && this.setState({rec: recLive})
+
   }
   _saveRec = () => {
     this.props.updateRecommendation(this.state.rec)
@@ -36,7 +37,7 @@ class RecViewContainer extends Component {
   }
   _deleteRecommendation = () => {
     const { deleteRecommendation, rec } = this.props
-    deleteRecommendation(rec) // redux and firestore
+    deleteRecommendation(rec)
     Actions.pop()
   }
 
@@ -45,16 +46,38 @@ class RecViewContainer extends Component {
     assignUserToFriend(rec, username) // i think we should know for sure if this user exists
   }
 
+  _acceptInvitation = () => {
+    // this should turn out to be similar to accepting any ol rec
+    const { rec, user, updateFriendData, addFriend, acceptInvitationRedux } = this.props
+
+    console.warn('accept invite')
+
+    addFriend({name: rec.from.displayName,uid: rec.from.uid})
+      .then(friend => {
+        console.warn('added friend',friend)
+        acceptInvitationRedux(rec,friend)
+          .then((rec) => {
+            console.warn('accepted invite', rec)
+            updateFriendData(rec.to.id,{uid: user.uid})
+              .then(console.warn('updated friend'))
+          })
+
+
+      })
+    // finally update inviters friend obj w this user's uid
+  }
+
   render() {
     console.log('RecViewContainer props',this.props)
-    
+
     // console.log('RecViewContainer state',this.state)
 
     if(!this.props.rec)  { return null }
     return (
       <RecView
         {...this.state}
-        app={this.props.app}
+        {...this.props}
+        acceptInvitation={this._acceptInvitation}
         saveRec={this._saveRec}
         onDeletePress={this._onDeletePress}
         updateRecommendation={this.props.updateRecommendation}

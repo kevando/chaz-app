@@ -10,6 +10,7 @@ const mapStateToProps = (state, props) => {
     app: state.app,
     recLive: _.find(state.recommendations.myRecs, rec => rec.id == props.rec.id),
     friends: state.friends, // needed for view refresh?
+    user: state.user,
   };
 };
 

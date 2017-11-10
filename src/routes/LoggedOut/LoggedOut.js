@@ -11,8 +11,8 @@ export default LoggedOut = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title} onPress={()=>Actions.reset('lightbox')}>Logged out</Text>
-      <Icon name="cloud-off" color='white' style={styles.cloudIcon} />
+      <Text style={styles.title} onPress={()=>Actions.reset('lightbox')}>Logged out {props.app.onboarding ? 'onboard' : 'no onboard'}</Text>
+      <Icon name="cloud-off" color='white' style={styles.cloudIcon} onPress={() => props.setAppData({onboarding:false})} />
     </View>
   );
 }

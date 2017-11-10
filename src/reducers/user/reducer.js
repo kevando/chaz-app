@@ -3,6 +3,7 @@ import * as t from '../actionTypes'
 
 const initialState = {
   uid: null,
+  displayName: '',
 };
 
 export default function user(user = initialState, action = {}) {

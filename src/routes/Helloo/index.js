@@ -5,7 +5,7 @@ import HelloContainer from './HelloContainer';
 
 import * as UserActions from '../../reducers/user/actions';
 import * as RecActions from '../../reducers/recommendations/actions';
-import * as AppActions from '../../reducers/app/actions';
+
 const mapStateToProps = (state) => {
 
   return {
@@ -19,4 +19,4 @@ const mapStateToProps = (state) => {
 
 // map dispatch to props
 
-export default connect(mapStateToProps, {...AppActions,...RecActions, ...UserActions})(HelloContainer);
+export default connect(mapStateToProps, {...RecActions, ...UserActions})(HelloContainer);

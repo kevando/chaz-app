@@ -5,12 +5,16 @@ import firebase from 'react-native-firebase'
 import { usersRef, recsRef } from '../../config/firebase'
 import { addFriend } from '../friends/actions'
 
+
 // --------------------------------
 //    SET USER DATA IN REDUX
 // --------------------------------
-export function setUserData(data) {
-  return { type: t.SET_USER_DATA, data }
-}
+export const setUserData = (data) => (dispatch, getState) =>
+  new Promise(function(resolve, reject) {
+      dispatch({ type: t.SET_USER_DATA, data })
+      resolve('first')
+      resolve('second')
+  })
 
 
 // --------------------------------

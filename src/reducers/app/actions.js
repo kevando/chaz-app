@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux';
 
 import * as t from '../actionTypes'
 
-import { listenForAuthChanges, usersRef, checkForInvitesByPhoneNumber } from '../../config/firebase'
+import { listenForAuthChanges, usersRef } from '../../config/firebase'
 import { createUserInFirestore } from '../user/actions'
 import { listenForNotifications } from '../reminders/actions'
 
@@ -17,14 +17,12 @@ import { listenForNotifications } from '../reminders/actions'
 export function initializeApp() {
   return (dispatch, getState) => {
     const app = getState().app
-    const user = getState().user
+    // const user = getState().user
 
-
-    //
     // // Kick everything off
     dispatch(listenForAuthChanges())
     dispatch(listenForNotifications())
-    //
+
     if(!app.token)
       dispatch(setToken())
 
@@ -33,10 +31,11 @@ export function initializeApp() {
   }
 }
 
-
+// --------------------------------
+//    SET APP DATA
+// --------------------------------
 export function setAppData(data) {
   return (dispatch, getState) => {
-
     dispatch({type: t.SET_APP_DATA, data })
   }
 }
@@ -73,8 +72,6 @@ export function verifyPhone(phoneNumber) {
     dispatch({type: t.SIGN_IN_ATTEMPT })
     dispatch(shouldAppSignIn(phoneNumber)) // find out if this is a returning user
 
-
-
     const formatedNumber = `+1${phoneNumber}`
 
     firebase.auth().verifyPhoneNumber(formatedNumber)
@@ -100,19 +97,12 @@ export function confirmCode(codeInput) {
 
     const credential = firebase.auth.PhoneAuthProvider.credential(app.verificationId, codeInput)
 
-    // user might be new or returning (likely the user is new)
-    // If we try to link the user with the credential and it doesnt work,
-    // then we cannot use that credential again
-
-    // So lets query the user list and see if we find that phone number
-
-
     if(app.shouldSignIn)
       dispatch(signIn(credential))
     else
       dispatch(linkUser(credential))
 
-    dispatch(checkForInvitesByPhoneNumber(user.phoneNumber)) // see if anyone invited this user
+    // dispatch(checkForInvitesByPhoneNumber(user.phoneNumber)) // see if anyone invited this user
   }
 }
 

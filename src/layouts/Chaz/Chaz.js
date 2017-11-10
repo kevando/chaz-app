@@ -21,6 +21,11 @@ import Invite from '../../routes/Invite';
 import Reminders from '../../routes/Reminders';
 import Boilerplate from '../../routes/Boilerplate';
 
+import Hello from '../../routes/Hello';
+import Invites from '../../routes/Invites';
+import GetStarted from '../../routes/GetStarted';
+import Inbox from '../../routes/Inbox';
+
 const AppToasts = () => { return (<Text>dude</Text>)}
 
 
@@ -47,12 +52,12 @@ class Chaz extends Component {
   }
 
   _shouldToastDisplay = (nextProps) => {
-    const { status, error } = this.props.app
-    // if(nextProps.app.status != status)
-    //   this._renderToast(nextProps.app.status,'green')
-
-    if(nextProps.app.error != error)
-      this._renderToast(nextProps.app.error.message,'red')
+    // const { status, error } = this.props.app
+    // // if(nextProps.app.status != status)
+    // //   this._renderToast(nextProps.app.status,'green')
+    //
+    // if(nextProps.app.error != error)
+    //   this._renderToast(nextProps.app.error.message,'red')
   }
 
   _renderToast = (message, color) => {
@@ -78,93 +83,68 @@ class Chaz extends Component {
 
 
   render() {
-    // console.log('Chaz.js Rendered',this.props.user)
-    const { showOnboarding, isAuthenticated, app, user } = this.props
-    const { isReady } = this.state
-
-    // console.log('chaz',this.props)
-    const navBorderColor = showOnboarding ? colors.blueBG : colors.newBlue
+    // console.warn('Chaz.js Rendered onboarding: ',this.props.onboarding)
+    const { isAuthenticated, } = this.props
+    onboarding = true
+    const navBorderColor = onboarding ? colors.blueBG : colors.newBlue
 
     // PROD Animate screen loading
+    // const { isReady } = this.state
     // if (!isReady || !isAuthenticated)
       // return <Loading updateState={this.updateState} />;
 
+      // if(onboarding == true) {
+      //   // console.warn('return onboarding')
+      //   return <Onboarding />
+      // } else {
+      //   // console.warn('return app')
+        return (
+
+          <Router navigationBarStyle={[navigationBarStyle,{borderTopColor: navBorderColor}]} titleStyle={titleStyle}>
+            <Overlay key="overlay">
+              <Modal key="root" hideNavBar={true}>
+                  <Lightbox key="lightbox">
+                  <Stack key="myStack"  hideBackImage back >
+
+                    <Scene key='Hello' component={Hello} title='' hideNavBar={false} />
+                    <Scene key='GetStarted' component={GetStarted} title='' hideNavBar={false} />
+
+                    <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
+                    <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                    <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} navigationBarStyle={[navigationBarStyle,{backgroundColor: navBorderColor, borderTopColor: navBorderColor}]} />
+                    <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                    <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                    <Scene key='Inbox' component={Inbox} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                    <Scene key='Invites' component={Invites} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                    <Scene key='LoggedOut' component={LoggedOut} title='' hideNavBar={false}  />
+                    <Scene key='Reminders' component={Reminders} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                    <Scene key='Settings' component={Boilerplate} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  </Stack>
 
 
-    return (
+                  <Scene key='NewRecLightbox' component={RecInput} title='' hideNavBar={true}  />
+                  <Scene key='FirstRec' component={RecInput} title='' hideNavBar={false}  />
 
-      <Router navigationBarStyle={[navigationBarStyle,{borderTopColor: navBorderColor}]} titleStyle={titleStyle}>
-        <Overlay key="overlay">
-          <Modal key="root" hideNavBar={true}>
-            <Lightbox key="lightbox">
-              <Stack key="myStack"  hideBackImage back >
-                <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
-                <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-                <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} navigationBarStyle={[navigationBarStyle,{backgroundColor: navBorderColor, borderTopColor: navBorderColor}]} />
-                <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-                <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-                <Scene key='LoggedOut' component={LoggedOut} title='' hideNavBar={false}  />
-                <Scene key='Reminders' component={Reminders} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-                <Scene key='Settings' component={Boilerplate} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-              </Stack>
+                  </Lightbox>
+                  <Scene key='NewRecLightboxModal' component={RecInput} title='' />
 
+                  <Stack key="InviteModall"  back hideNavBar={false}>
 
-              <Scene key='NewRecLightbox' component={RecInput} title='' hideNavBar={true}  />
+                  <Scene key='InviteScenee' component={Invite} title='' renderBackButton={() => <CloseButton />} />
+                  </Stack>
+
+                  <Scene key='InviteModal' hideNavBar={false} back component={Invite} title='' renderBackButton={() => <CloseButton />} />
+                </Modal>
+              </Overlay>
+            </Router>
+        )
+      // }
 
 
-              </Lightbox>
-              <Scene key='NewRecLightboxModal' component={RecInput} title='' />
 
-              <Stack key="InviteModall"  back hideNavBar={false}>
 
-              <Scene key='InviteScenee' component={Invite} title='' renderBackButton={() => <CloseButton />} />
-              </Stack>
-
-<Scene key='InviteModal' hideNavBar={false} back component={Invite} title='' renderBackButton={() => <CloseButton />} />
-            </Modal>
-          </Overlay>
-        </Router>
-    )
   }
-  // render_og() {
-  //   const { showOnboarding, isAuthenticated, myRecsCount, user } = this.props
-  //   const { isReady } = this.state
-  //
-  //   // PROD Animate screen loading
-  //   if (!isReady || !isAuthenticated)
-  //     return <Loading updateState={this.updateState} />;
-  //
-  //   // DEV
-  //   // if (!isAuthenticated)
-  //   //   return null
-  //
-  //   return (
-  //
-  //     <Router navigationBarStyle={navigationBarStyle} titleStyle={titleStyle}>
-  //       <Modal key="root" hideNavBar={true}>
-  //         <Stack key="MainStack" initial={true} hideBackImage back>
-  //           <Scene key='Dashboard' component={Dashboard} title='' hideNavBar={showOnboarding} initial={!showOnboarding} renderRightButton={() => <ProfileButton myRecsCount={myRecsCount} user={user} />}/>
-  //           <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-  //           <Scene key='FriendView'  component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-  //           <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-  //           <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-  //         </Stack>
-  //         <Stack key="InputStack" back backTitle="Close" hideBackImage  backButtonTextStyle={{ color:'white' }}  >
-  //           <Scene key='InputTitle' component={InputTitle} title='' hideNavBar={false} renderBackButton={() => <CloseButton />} />
-  //           <Scene key='InputFriend' component={InputFriend} title='' hideNavBar={false} renderBackButton={() => <BackButton />}/>
-  //           <Scene key='ConfirmRecommendation'  component={ConfirmRecommendation} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-  //         </Stack>
-  //
-  //         <Stack key="EditTitle"  >
-  //           <Scene key='EditTitleScene' back component={InputTitle} title='Editing' hideNavBar={false} renderBackButton={() => <CloseButton />} />
-  //         </Stack>
-  //
-  //         <Scene key='LoggedOut' component={LoggedOut} title='LoggedOut' hideNavBar={false}  />
-  //       </Modal>
-  //
-  //       </Router>
-  //   )
-  // }
+
 
 }
 

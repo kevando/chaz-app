@@ -35,9 +35,13 @@ class RegisterContainer extends Component {
 
 
   }
-  // componentDidMount(){
-  //   console.log('MOUNT')
-  // }
+  componentDidMount(){
+    console.log('MOUNT')
+    if(this.props.user.phoneNumber) {
+      this.setState({phoneNumber: this.props.user.phoneNumber, isPhoneValid: true})
+    }
+    //
+  }
   componentWillReceiveProps({app}) {
     if(app.error !== this.props.app.error) {
       console.warn('set err')

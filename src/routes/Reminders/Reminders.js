@@ -3,7 +3,7 @@ import { View , ScrollView, Text, TextInput, Button } from 'react-native';
 import _ from 'lodash';
 import EnableNotifications from '../../components/EnableNotifications'
 import { Label, Title } from '../../components/Generic';
-import Card  from '../../components/Card/Rec';
+
 import * as Animatable from 'react-native-animatable'
 import moment from 'moment'
 import styles from './styles';

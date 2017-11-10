@@ -11,11 +11,12 @@ const initialState = {
   signInAttempts: 0,
   invites: [],
   devMode: false,
+  onboarding: true,
 };
 
 
 export default function app(app = initialState, action = {}) {
-
+  // console.log(action)
   switch (action.type) {
 
     // -------------------------------------------
@@ -46,6 +47,7 @@ export default function app(app = initialState, action = {}) {
         linked: true,
         activeStep: 3,
         isAnon: action.user.providerData.length == 0 ? true : false,
+        onboarding: false,
       }
     // -------------------------------------------
     case t.SET_NOTIFICATION_PERMISSION:
@@ -125,6 +127,7 @@ export default function app(app = initialState, action = {}) {
 
     // -------------------------------------------
     case t.SET_APP_DATA:
+    // console.warn(action.data)
       return {
         ...app,
         ...action.data,

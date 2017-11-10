@@ -22,10 +22,19 @@ class FriendViewContainer extends Component {
   }
 
   _onGiveRecPress = () => {
+
     const { initNewRec, friend, user } = this.props
-    initNewRec({to: {uid: friend.uid, name: friend.name, id: friend.id},from:{uid: user.uid, displayName: user.displayName}}).then(
-      Actions.push('NewRecLightbox')
-    )
+
+    const initalRecData = {
+      from: {uid: user.uid, displayName: user.displayName},
+      to: {uid: friend.uid, name: friend.name, id: friend.id},
+      type: 'remote',
+      status: 'open',
+      // category: 'app',
+      // title: 'chaz',
+    }
+    Actions.push('NewRecLightbox', {initalRecData})
+
   }
 
   _combineFriend = (friend) => {
@@ -58,17 +67,13 @@ class FriendViewContainer extends Component {
 
     return (
       <FriendView
-        givenRecs={this.props.givenRecs}
+        {...this.state}
+        {...this.props}
+
         combineFriend={this._combineFriend}
-        friend={this.props.friend}
-        friends={this.props.friends}
-        myRecs={this.props.myRecs}
         onKeyPress={this._onKeyPress}
-        user={this.props.user}
         sendInvite={this._sendInvite}
         onGiveRecPress={this._onGiveRecPress}
-        {...this.state}
-        app={this.props.app}
       />
     );
   }

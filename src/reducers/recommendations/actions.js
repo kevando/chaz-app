@@ -1,45 +1,46 @@
 import firebase from 'react-native-firebase';
-// var uuid = require('react-native-uuid');
-import {
-  SET_TITLE,
-  // SET_FRIEND_ID,
-  SAVE_RECOMMENDATION_SUCCESS,
-  SET_REMINDER,
-  DELETE_RECOMMENDATION,
-  SET_STATUS,
-  SET_FILTER,
-  SET_GRADE,
-  UPDATE_RECOMMENDATION,
-  REFRESH_MY_RECS,
-  REFRESH_GIVEN_RECS,
-  SET_REC_TO,
-  INIT_REC,
-} from '../actionTypes';
-
 import * as t from '../actionTypes';
 
-import { recsRef, usersRef, messagesRef } from '../../config/firebase'
+import { recsRef, usersRef, messagesRef, addMessage } from '../../config/firebase'
 
+// ----------------------------------------------------
+//    SET INITIAL REC DATA
+// ----------------------------------------------------
 
-export const testPromise = () => (dispatch, getState) =>
-
-  new Promise(function(resolve, reject) {
-    console.log('tt')
-    dispatch({
-      type: 'SET_SAVING',
-      saving: true
-    });
-  });
 export const initNewRec = (payload) => (dispatch) =>
   new Promise(function(resolve,reject) {
-    dispatch({ type: INIT_REC, payload })
-    resolve()
+    let cb = dispatch({ type: t.INIT_REC, payload })
+    resolve(cb)
   })
 
 
 export function setTitle(title) {
-  return { type: SET_TITLE, title }
+  return { type: t.SET_TITLE, title }
 }
+
+
+// ----------------------------------------------------
+//    SEARCH FOR OPEN REC INVITES
+//    HelloContainer,
+// ----------------------------------------------------
+
+export const fetchInvites = (This,That) => (dispatch, getState) =>
+  new Promise(function(resolve, reject) {
+    let myInvites = []
+    // let q = name ? ["to.name", "==", name.toLowerCase()] : ["to.phoneNumber", "==", phoneNumber]
+
+    recsRef.where("status", "==", "open").where(This, "==", That).get().then(querySnapshot => {
+    // recsRef.where("status", "==", "open").where("to.name", "==", name.toLowerCase()).get().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+        // console.warn('found an invite!!!')
+          myInvites.push({...doc.data(),id: doc.id})
+          // recsRef.doc(doc.id).update({status: 'accepted', acceptedAt: Date.now()}) // close this invite otherwise it can get triggered again
+        })
+        resolve(myInvites)
+      })
+  })
+
+
 
 // ----------------------------------------------------
 //   Save new friend to firestore
@@ -67,52 +68,59 @@ export const setFriend = (friend) => (dispatch, getState) =>
 export const saveRec = () => (dispatch, getState) =>
 
   new Promise(function(resolve,reject) {
-    console.log('saveRec')
+    // console.log('saveRec')
     const unfinished = getState().recommendations.unfinished
     const user = getState().user
 
-    const newRec = {...unfinished, status: 'new', createdBy: user.uid }
+    const newRec = {...unfinished, createdBy: user.uid }
 
     recsRef.add(newRec)
       .then(docRef => {
-        console.log('newRec saved')
+        // console.log('newRec saved')
         if(unfinished.from.uid) { // then I am saving a rec FROM a live user, notify them
-          addMessage(unfinished.from.uid,`Hey dingbat, ${user.displayName} saved something to their chaz with your name on it`) // disabled for now @todo
+          addMessage(unfinished.from.uid,`Hey dingbat, ${user.displayName} just saved something to their chaz with your name on it`) // disabled for now @todo
         }
-        if(unfinished.to_name) { // then I am saving a rec TO a live user, notify them
+        if(unfinished.to.uid) { // then I am saving a rec TO a live user, notify them
           // @todo bad code. bad way to organize rec data
-          addMessage(unfinished.to,`Incoming message. ** Front Page News ** ${user.displayName} sent you something...`) // disabled for now @todo
+          addMessage(unfinished.to.uid,`** Incoming transmission ** Front Page News ** ${user.displayName} just sent you a recommendation...`) // disabled for now @todo
         }
 
-        // dispatch({ type: t.SAVE_RECOMMENDATION_SUCCESS}) // might cause issue
         resolve(newRec)
       })
       .catch(error => console.warn("Error adding document: ", error) )
   }) // Promise
 
 
-// // ----------------------------------------------------
 
-function addMessage(uid,body) {
+// ----------------------------------------------------
+//   ACCEPT INVITAIOTIN
+// might beover kill for its own fucntion
+// ----------------------------------------------------
+export const acceptInvitationRedux = (rec,friend) => (dispatch, getState) =>
 
-  usersRef.doc(uid).get().then(function(user) {
-    if (user.exists) {
-        // console.log("user data:", user.data());
-        var token = user.data().token
-        var payload = {
-          notification: {
-            // title: 'new rec given to you',
-            body
-          }
-        }
-        messagesRef.add({token,payload})
-    } else {
-        console.warn("No such user to send message to");
-    }
-})
+  new Promise(function(resolve,reject) {
+    const user = getState().user
+    console.log('rec',rec)
+    console.log('friued',friend)
 
-}
-
+    recsRef.doc(rec.id).update({
+      to: {
+        ...rec.to,
+        uid: user.uid,
+      },
+      from: {
+        ...rec.from,
+        ...friend,
+      },
+      status: 'accepted',
+      acceptedAt: Date.now(),
+    })
+      .then(docRef => {
+        const updatedRec = {...docRef.data(),id: docRef.id}
+        resolve(updatedRec)
+    })
+    .catch(error => reject(error))
+  }) // Promise
 
 
 export function updateRecommendation(rec) {

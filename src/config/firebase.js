@@ -13,7 +13,7 @@ export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 export const messagesRef = firebase.firestore().collection(`${env}_messages`)
 
 import { assignUserToFriend } from '../reducers/friends/actions'
-
+import { setAppData } from '../reducers/app/actions'
 
 // --------------------------------
 //    AUTH LISTENER
@@ -71,7 +71,7 @@ export function addFirestoreListeners(uid) {
       .onSnapshot(querySnapshot => {
           myRecs = []
           querySnapshot.forEach(doc => {
-              if(doc.data().status != "open")
+              // if(doc.data().status != "open")
                 myRecs.push({...doc.data(),id: doc.id});
 
           })
@@ -92,40 +92,44 @@ export function addFirestoreListeners(uid) {
             dispatch({type: t.REFRESH_GIVEN_RECS, givenRecs: givenRecsWithFriendData})
         });
 
-
+        // not the best place for this..
+        // but if I fetch recs, make sure onboarding is not set
+        // console.warn(myRecs.length)
+        if(myRecs.length > 0)
+          dispatch(setAppData({onboarding: false}))
       }
 }
 
 
-
-// --------------------------------
-//    CHECK IF USER WAS INVITED
-// --------------------------------
-
-export function checkForInvitesByPhoneNumber(phoneNumber) {
-  return (dispatch, getState) => {
-    console.log('check for invites')
-    let myInvites = []
-
-    recsRef
-      .where("type", "==", "invite")
-      .where("status", "==", "open")
-      .where("to.phoneNumber", "==", phoneNumber)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          myInvites.push({...doc.data(),id: doc.id})
-          recsRef.doc(doc.id).update({status: 'accepted', acceptedAt: Date.now()}) // close this invite otherwise it can get triggered again
-        })
-        if(myInvites.length > 0){
-          console.log('hey we found some invites!')
-          dispatch({type: t.SET_USER_DATA, data: {myInvites} })
-          dispatch(connectUsers(myInvites)) // add as friends
-        }
-      })
-  }
-}
-
+//
+// // --------------------------------
+// //    CHECK IF USER WAS INVITED
+// // --------------------------------
+//
+// export function checkForInvitesByPhoneNumber(phoneNumber) {
+//   return (dispatch, getState) => {
+//     console.log('check for invites')
+//     let myInvites = []
+//
+//     recsRef
+//       .where("type", "==", "invite")
+//       .where("status", "==", "open")
+//       .where("to.phoneNumber", "==", phoneNumber)
+//       .get()
+//       .then(querySnapshot => {
+//         querySnapshot.forEach(doc => {
+//           myInvites.push({...doc.data(),id: doc.id})
+//           recsRef.doc(doc.id).update({status: 'accepted', acceptedAt: Date.now()}) // close this invite otherwise it can get triggered again
+//         })
+//         if(myInvites.length > 0){
+//           console.log('hey we found some invites!')
+//           dispatch({type: t.SET_USER_DATA, data: {myInvites} })
+//           dispatch(connectUsers(myInvites)) // add as friends
+//         }
+//       })
+//   }
+// }
+//
 
 
 // ----------------------------------------------------------------
@@ -170,7 +174,11 @@ function assignInvitedUserToFriend(invite) {
 }
 
 
-function addMessage(uid,body) {
+// ----------------------------------------------------
+//   Sends a notification
+// ----------------------------------------------------
+
+export function addMessage(uid,body) {
 
   usersRef.doc(uid).get().then(function(user) {
     if (user.exists) {

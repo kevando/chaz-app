@@ -11,4 +11,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(LoggedOut);
+export default connect(mapStateToProps, AppActions)(LoggedOut);

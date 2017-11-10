@@ -25,14 +25,12 @@ export default function recs(recommendations = initialState, action = {}) {
   //     }
   // -------------------------------------------
   case t.INIT_REC:
-  // console.warn('a',action.payload)
+  
     return {
       ...recommendations,
       unfinished: {
-        ...action.payload, // contains to/from
-        status: 'unfinished',
+        ...action.payload,
         createdAt: Date.now(),
-
       }
     }
     // -------------------------------------------

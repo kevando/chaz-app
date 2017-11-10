@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
-// import _ from 'lodash';
-// import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
-// import KeyboardSpacer from 'react-native-keyboard-spacer';
 import { Button, Label } from './Generic';
-// import styles from './styles';
+
 import { colors, text } from '../config/styles'
-// import * as Animatable from 'react-native-animatable';
-// import { Actions } from 'react-native-router-flux';
 
 
 
@@ -24,7 +19,7 @@ export class PhoneInput extends Component {
 
   render() {
     // console.log('input',this.props)
-    const { phoneNumber, errorMessage, inputProps } = this.props
+    const { onTextChange, phoneNumber, errorMessage, inputProps } = this.props
 
     return (
       <View style={styles.container}>
@@ -34,7 +29,7 @@ export class PhoneInput extends Component {
           multiline={false}
           style={styles.inputPhone}
           placeholderTextColor="#aaa"
-          onChangeText={value => this._onChange(value)}
+          onChangeText={value => onTextChange(value)}
           placeholder={'Phone number'}
           value={phoneNumber}
           {...inputProps}
@@ -74,3 +69,38 @@ const styles = StyleSheet.create({
 
   },
 })
+
+
+export class PhoneInput_og extends Component {
+
+
+  _onChange = (phoneNumber) => {
+    const { updateState } = this.props
+    updateState({
+      phoneNumber,
+      validPhoneNumber: phoneNumber.length == 10,
+    })
+  }
+
+  render() {
+    // console.log('input',this.props)
+    const { phoneNumber, errorMessage, inputProps } = this.props
+
+    return (
+      <View style={styles.container}>
+        <TextInput
+          autoFocus={false}
+          keyboardType='phone-pad'
+          multiline={false}
+          style={styles.inputPhone}
+          placeholderTextColor="#aaa"
+          onChangeText={value => this._onChange(value)}
+          placeholder={'Phone number'}
+          value={phoneNumber}
+          {...inputProps}
+        />
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      </View>
+    )
+  }
+}

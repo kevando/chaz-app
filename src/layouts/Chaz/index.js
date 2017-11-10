@@ -6,11 +6,8 @@ import * as Actions from '../../reducers/app/actions';
 
 const mapStateToProps = (state) => {
   return {
-    app: state.app,
+    // onboarding: state.app.onboarding,
     isAuthenticated: state.app.isAuthenticated,
-    // user: state.user, // when this shit changes, chaz.js rerenders the whole shabang
-    showOnboarding: false,//state.recommendations.myRecs.length == 0,
-    // unfinished: state.recommendations.unfinished,
   };
 };
 

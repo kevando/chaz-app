@@ -10,7 +10,7 @@ import { Label, Button } from '../../components/Generic/';
 import Icon from 'react-native-vector-icons/Feather'
 import { colors, text } from '../../config/styles';
 
-const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress, friends, combineFriend }) => {
+const FriendView = ({ friend, app, friendRecs, user, onGiveRecPress, friends, combineFriend }) => {
 
 // var filterFriends = _.filter(friends, friend =>  friend.name)
 
@@ -22,16 +22,11 @@ const FriendView = ({ friend, app, myRecs, givenRecs, user, onGiveRecPress, frie
 
 
       {
-        _.map(myRecs,(rec,i) => {return (
-          <Card skinny key={i} rec={rec} />
+        _.map(friendRecs,(rec,i) => {return (
+          <Card skinny key={i} rec={rec} given={rec.from.uid == user.uid} />
         )})
       }
 
-      {
-        _.map(givenRecs,(rec,i) => {return (
-          <Card given skinny key={i} rec={rec} />
-        )})
-      }
 
         {!friend.uid && friend.invitedAt &&
           <View style={{marginHorizontal: 20}}>

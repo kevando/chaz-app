@@ -6,18 +6,16 @@ import * as RecActions from '../../reducers/recommendations/actions';
 import _ from 'lodash'
 
 const mapStateToProps = (state, props) => {
-  // console.log('map props',props)
+  let friendRecs = state.recommendations.myRecs.concat(state.recommendations.givenRecs)
+  friendRecs = _.filter(friendRecs,rec => rec.from.id == props.friend.id || rec.to.id == props.friend.id)
+  friendRecs = _.orderBy(friendRecs,['createdAt'],['desc'])
+  // const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
   return {
     app: state.app,
     user: state.user,
-    myRecs: _.filter(state.recommendations.myRecs,rec => rec.from.id == props.friend.id),
-    givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.to.id == props.friend.id),
-    // givenRecs: _.filter(state.recommendations.givenRecs,rec => rec.to == props.friend.uid),
-
-    // Doing it this way so that friends listener fires new changes to the UI
-    // apperanrly we can have more than 1 friend here :)
     friend: _.find(state.friends,(f) => f.id === props.friend.id),
     friends: state.friends,
+    friendRecs,
   };
 };
 

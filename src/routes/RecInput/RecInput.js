@@ -111,11 +111,13 @@ class InputTitle extends Component {
   }
 
   _saveRec = () => {
-
     this._saveSuccessPreAnimation()
     this.props.saveRecRedux()
       .then(rec => {
-        this.refs.CONTAINER.fadeBackground(200).then(Actions.pop)
+        this.refs.CONTAINER.fadeBackground(200).then(()=> {
+          this.props.setAppData({onboarding: false})
+          Actions.replace('Dashboard')
+        })
         //now the rec is totally saved, fade the bg and pop
         this.refs.CLOSE.fadeOutUp(200)
 
@@ -206,7 +208,7 @@ class InputTitle extends Component {
   render() {
 
     // console.log('render newRec STATE',this.state)
-    // console.log('render newRec PROPS',this.props)
+    console.log('render newRec PROPS',this.props)
 
     const { updateState, renderButton, placeholderText, onFriendPress, friends, unfinished, setTitle, walkthrough, category, inputHeight } = this.props;
 

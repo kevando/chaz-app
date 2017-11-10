@@ -1,5 +1,5 @@
 import React from 'react';
-import { View ,Text, TextInput, TouchableOpacity } from 'react-native';
+import { View ,Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import _ from 'lodash';
 import Icon from 'react-native-vector-icons/Feather'
 import { Label } from '../../components/Generic';
@@ -28,10 +28,11 @@ const Profile = (props) => {
   const { onLogoutPress, user, friends, givenRecs, onlineFriends } = props;
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
 
     <View style={styles.headerContainer}>
       <Text style={styles.title} onPress={onLogoutPress}>{user.displayName}</Text>
+      <Text style={styles.title}>{user.phoneNumber}</Text>
     </View>
 
       { friends.length == 0 &&
@@ -67,7 +68,7 @@ const Profile = (props) => {
 
 
 
-    </View>
+    </ScrollView>
   );
 }
 

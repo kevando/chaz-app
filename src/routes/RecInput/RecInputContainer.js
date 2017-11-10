@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import { Button } from '../../components/Generic';
 import * as Animatable from 'react-native-animatable';
-import NewRec from './NewRec';
+import RecInput from './RecInput';
 import { Actions } from 'react-native-router-flux';
 
-class InputTitleContainer extends Component {
+class RecInputContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -19,9 +19,21 @@ class InputTitleContainer extends Component {
 
       updateState: (state) => this.setState(state),
       friends: this.props.friends.reverse(),
-
+      ready: false,
     }
   }
+
+  componentWillMount() {
+    // check for initial data
+    console.log(this.props)
+    const { initNewRec, initalRecData } = this.props
+    initNewRec(initalRecData)
+      .then(r => {
+        // console.log('r',r)
+        this.setState({ready: true})
+      })
+  }
+
   componentDidMount() {
     const { rec, unfinished, user } = this.props;
     // this.props.initNewRec({to: user.uid}) // tmp?
@@ -64,11 +76,12 @@ class InputTitleContainer extends Component {
 
 
   render() {
-    // console.log(this.props)
+    if(!this.state.ready) { return null } // or maybe some loading
 
     return (
-      <NewRec
+      <RecInput
         {...this.state}
+        setAppData={this.props.setAppData}
         walkthrough={this.props.walkthrough}
         category={this.props.category}
         unfinished={this.props.unfinished}
@@ -87,4 +100,4 @@ class InputTitleContainer extends Component {
 
 }
 
-export default InputTitleContainer;
+export default RecInputContainer;

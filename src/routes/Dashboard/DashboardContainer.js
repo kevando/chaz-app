@@ -12,6 +12,11 @@ class DashboardContainer extends Component {
   // }
   componentWillMount() {
     this.state = {activeFilter: 'Everything'};
+
+
+    // this.props.onboarding && Actions.replace('GetStarted')
+
+    this.props.onboarding && Actions.replace('Hello')
   }
 
   // componentWillReceiveProps({recommendations}) {}
@@ -21,15 +26,22 @@ class DashboardContainer extends Component {
 
   componentDidMount() {
     // TMP!!
-    // console.log('dash mounted',this.props)
+    console.log('dash mounted',this.props)
     if(this.props.myRecs.length == 1)
       this._throwParty()
     // Actions.push('NewRecLightbox')
     // Actions.push('Profile')
-    // Actions.push('Reminders')
+    Actions.push('Inbox')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
+    // Actions.push('RecView',{rec: this.props.givenRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[0]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
+
+
+    // tmp testing
+    // this.props.fetchInvites("to.phoneNumber",this.props.user.phoneNumber).then((myInvites) => {
+    //   Actions.push('RecView',{rec: myInvites[0]} )
+    // })
 
   }
 
@@ -53,26 +65,13 @@ class DashboardContainer extends Component {
 
 
   _onNewRecPress = () => {
-    // this.chain().then(Actions.push('NewRecLightbox'))
-    const { initNewRec, user } = this.props
-    initNewRec({to: {uid: user.uid, displayName: user.displayName}}).then(
-      Actions.push('NewRecLightbox')
-    )
-  }
-
-  _onBrandNewRecPress = (category) => {
-    const { initNewRec, user } = this.props
-    initNewRec({to: {uid: user.uid, displayName: user.displayName}, category}).then(
-      Actions.push('NewRecLightbox',{walkthrough: true})
-    )
-
-  }
-
-  _onStartWithChaz = (friendName) => {
-    const { initNewRec, user } = this.props
-    initNewRec({to: {uid: user.uid, displayName: user.displayName}, from:{name: friendName},category: 'app', title: 'chaz'}).then(
-      Actions.push('NewRecLightbox',{walkthrough: true})
-    )
+    const { user, initNewRec } = this.props
+    const initalRecData = {
+      to: {uid: user.uid, displayName: user.displayName},
+      // category: 'app',
+      // title: 'chaz',
+    }
+    Actions.push('NewRecLightbox', {initalRecData})
   }
 
   _confettiComponent = () => {
@@ -86,22 +85,10 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    // console.log('Dash',this.props.recommendations)
+    console.log('Dash',this.props)
     // return null
-    const { showOnboarding } = this.props;
+    // const { showOnboarding } = this.props;
 
-    // console.warn(this.props.user.name)
-    if(showOnboarding) {
-    // if(false) {
-      return (
-        <Hello
-          {...this.props}
-          {...this.state}
-          onNewRecPress={this._onBrandNewRecPress}
-          startWithChaz={this._onStartWithChaz}
-        />
-      )
-    } else {
       return (
 
         <Dashboard
@@ -109,11 +96,10 @@ class DashboardContainer extends Component {
           {...this.state}
           onNewRecPress={this._onNewRecPress}
           changeActiveFilter={this._changeActiveFilter}
-          onNewGivenRecPress={() => Actions.push('InputStack',{given: true})}
           Confetti={this._confettiComponent}
         />
       )
-    }
+
   }
 }
 

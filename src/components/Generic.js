@@ -2,16 +2,54 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Progress from 'react-native-progress';
 // import styles from './styles';
-import { colors, text } from '../../config/styles';
+import { colors, text } from '../config/styles';
 import * as Animatable from 'react-native-animatable';
 
 // FancyButton = Animatable.createAnimatableComponent(Button);
 
 
 // ---------------------------------------
-//  Label
+//  TITLE
 // ---------------------------------------
 
+export const Title = (props) => {
+  const styles = [
+    titleStyles.text,
+    props.card && titleStyles.card,
+    // props.center && {textAlign: 'center',marginVertical: 20,paddingHorizontal: 40,},
+    // props.title && {fontSize: 20,fontWeight: '600'},
+    // props.large && {fontSize: 20,fontWeight: '700'},
+  ]
+  return (
+    <Text style={styles}>{props.children}</Text>
+  )
+}
+
+const titleStyles = StyleSheet.create({
+
+  text: {
+    ...text,
+    color: 'white',
+    fontSize: 36,
+    fontWeight: '400',
+    // lineHeight:20,
+    // marginTop:15,
+    marginHorizontal: 12,
+    // marginRight: 12,
+    // backgroundColor: colors.lightWhite,
+    height: 40,
+  },
+  card: {
+    fontSize: 20,
+    fontWeight: '700'
+  }
+
+});
+
+
+// ---------------------------------------
+//  Label
+// ---------------------------------------
 
 export const Label = (props) => {
   const styles = [
@@ -38,7 +76,6 @@ const labelStyles = StyleSheet.create({
     // marginRight: 12,
   },
 
-
 });
 
 
@@ -46,10 +83,7 @@ const labelStyles = StyleSheet.create({
 //  Button
 // ---------------------------------------
 
-export const Button = (props) => {
-
-  // Defaults
-  const { text, onPress, color, bgcolor, rounded, animated, ghost, center } = props;
+export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost, center, fat }) => {
 
   const styles = StyleSheet.create({
 
@@ -85,12 +119,20 @@ export const Button = (props) => {
       color: color || 'white',
       textAlign: center ? 'center' : 'left',
       // backgroundColor:'green'
+    },
+    fat: {
+      marginVertical: 20,
+      marginHorizontal: 30,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
     }
   })
 
+
+
   let ButtonContainer = (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} >
-      <View style={[styles.container,ghost && styles.ghost]}>
+      <View style={[styles.container,ghost && styles.ghost,fat && styles.fat]}>
         <Text style={styles.text}>
           {text}
         </Text>

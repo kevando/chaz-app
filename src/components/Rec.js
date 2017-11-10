@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import { colors, text } from '../config/styles';
 import { CategoryIcon, CategoryPicker, Category,CategoryPickerEditing } from './Category';
 import * as Friend from './Friend';
-// import * as Rec from './Generic/Rec'
+import {Label} from './Generic'
 import { Divider, Button } from './Generic'
 import { Reminder } from './Reminder'
 import { SetReminderIcon  } from './SetReminder'
@@ -43,8 +43,14 @@ class GenericCard extends Component {
 render() {
   // console.log('card props',this.props)
   const { rec } = this.props;
+  let extraStyles = {
+    accepted: {
+      borderColor: colors.grey,
+      borderWidth: 2,
+    }
+  }
   return (
-    <View style={cardStyles.container}>
+    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted]}>
       <View style={cardStyles.headerContainer}>
         <View style={cardStyles.friendContainer}>
           <Friend.Name friend={rec.friend} />
@@ -54,6 +60,7 @@ render() {
           {rec.friend.invitedAt && !rec.friend.uid && <Icon name="mail" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
           {moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
           {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
+          {rec.type == 'invite' && <Icon size={17} color={colors.purple} name="navigation"/>}
 
         </View>
       </View>
@@ -71,17 +78,50 @@ render() {
   // console.log(this.props)
   const { rec, given } = this.props;
   return (
-    <View style={cardStyles.container}>
+    <View>
+    <Text style={cardStyles.dateText}>{moment(rec.createdAt).fromNow()}</Text>
+    <View style={[cardStyles.container,{backgroundColor: rec.status == 'open' ? 'rgba(255,255,255,0.5)' : 'white' } ]} >
       <View style={cardStyles.headerContainer}>
         <View style={cardStyles.friendContainer}>
-          <Text style={cardStyles.dateText}>
-          {moment(rec.createdAt).fromNow()}
-          {given ? ' (Given)' : ' (Received)'}
+          <Text style={cardStyles.headerText}>
+            {rec.type == 'invite'  && rec.status == 'accepted' && '... invited you'}
+            {given && 'You sent'}
+            {!given  && 'You saved'}
+
           </Text>
         </View>
       </View>
       <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
-        <CategoryIcon rec={rec} size={25} color={"yellow"}/>
+        {
+          rec.type == 'invite' ?
+          <Icon size={25} color={"purple"} name="navigation"/> :
+          <CategoryIcon rec={rec} size={25} color={"yellow"}/>
+        }
+
+        <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
+
+        </View>
+    </View>
+    </View>
+    )
+  }
+}
+
+class InvitationCard extends Component {
+
+render() {
+  // console.log(this.props)
+  const { rec } = this.props;
+  return (
+    <View style={cardStyles.container}>
+      <View style={cardStyles.headerContainer}>
+        <View style={cardStyles.friendContainer}>
+          <Text style={cardStyles.dateText}>Invitation to: {rec.to.name}</Text>
+          <Text style={cardStyles.dateText}>Status: {rec.status}</Text>
+        </View>
+      </View>
+      <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
+        <Icon size={25} color={"purple"} name="navigation" />
         <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
         </View>
     </View>
@@ -139,9 +179,20 @@ const cardStyles = StyleSheet.create({
   dateText: {
     ...text,
     fontSize: 12,
+    color: colors.white,
+    fontWeight: '300',
+    marginTop: 20,
+    marginLeft: 10,
+
+  },
+  headerText: {
+    ...text,
+    fontSize: 12,
     color: colors.darkGrey,
-    fontWeight: '200',
-  }
+    fontWeight: '300',
+    // marginTop: 20,
+    // marginLeft: 10,
+}
 
 });
 
@@ -157,7 +208,7 @@ export class Card extends Component {
 
   render() {
     // console.log(this.props)
-    const { rec, listItem, skinny, given } = this.props;
+    const { rec, user, listItem, skinny, given, invitation } = this.props;
 
     if(listItem) { // Dashboard
       return (
@@ -171,6 +222,12 @@ export class Card extends Component {
           <SkinnyCard given={given} rec={rec} />
         </TouchableOpacity>
       )
+    } else if(invitation) {  // FriendView
+      return (
+        <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
+          <InvitationCard rec={rec} user={user} />
+        </TouchableOpacity>
+      )
     } else {
       return null
     }
@@ -182,6 +239,83 @@ export class Card extends Component {
 // //  Card detail aka RecView also edits
 // // ---------------------------------------
 //
+const InvitationDetail = (props) => {
+
+
+  if(!props.rec) { return null}
+  const { user, rec, acceptInvitation, updateRec, updateState, isEditing, onDelete, updateRecommendation, app, setRecReminder } = props
+
+  return (
+    <View style={{flex: 1}}>
+      <View style={[cardStyles.container]}>
+
+          <View style={cardStyles.headerContainer}>
+            <View style={cardStyles.friendContainer}>
+              <Text style={cardStyles.dateText}>
+                {rec.from.name} {rec.from.displayName}
+                <Icon name="navigation" size={25} color="purple"/>
+                {rec.to.name} {rec.to.displayName}
+              </Text>
+            </View>
+
+          </View>
+          <View style={cardStyles.bodyContainer}>
+          {
+            isEditing ?
+              <InputRecTitle title={rec.title} updateRec={updateRec} updateState={updateState} /> :
+              <Title rec={rec} />
+          }
+
+          </View>
+          <Divider />
+
+          {
+            rec.category && !isEditing &&
+              <Category rec={rec} />
+          }
+
+          {
+            rec.category && isEditing &&
+              <CategoryPickerEditing category={rec.category} updateRec={updateRec} />
+          }
+
+          {
+            !rec.category &&
+              <View>
+                <Text>What is this?</Text>
+                <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
+              </View>
+          }
+
+
+
+          {rec.reminder &&
+            <Reminder rec={rec} />
+        }
+
+
+
+        </View>
+        <Label>CreatedAt: {moment(rec.createdAt).fromNow()}</Label>
+        <Label>InvitedAt: {moment(rec.invitedAt).fromNow()}</Label>
+        <Label>Sent to: {rec.to.phoneNumber}</Label>
+
+        {
+          rec.to.phoneNumber == user.phoneNumber && rec.status == 'open' &&
+            <View>
+              <Label>This is YOUR invitation to chaz</Label>
+              <Text onPress={acceptInvitation}>ACCEPT</Text>
+            </View>
+        }
+
+        </View>
+
+
+
+  );
+
+}
+
 
 //
 export class CardDetail extends Component {
@@ -191,6 +325,10 @@ render() {
   // console.log(this.props)
   // i guess this can get called w new rec
   if(!this.props.rec) { return null}
+
+  // tmp maybe
+  if(this.props.rec.type == 'invite') {return <InvitationDetail {...this.props} /> }
+
   const { rec, updateRec, updateState, isEditing, onDelete, updateRecommendation, app, setRecReminder } = this.props;
   return (
     <View style={{flex: 1}}>
@@ -229,6 +367,7 @@ render() {
                 <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
               </View>
           }
+
 
 
           {rec.reminder &&

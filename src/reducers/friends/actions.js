@@ -3,7 +3,7 @@ import { text } from 'react-native-communications'; // might not want this in re
 
 import * as t from '../actionTypes'
 
-import { recsRef, friendsRef, usersRef, messagesRef} from '../../config/firebase'
+import { recsRef, friendsRef, usersRef, addMessage } from '../../config/firebase'
 import { initNewRec } from '../recommendations/actions'
 
 // ----------------------------------------------------
@@ -23,6 +23,22 @@ export const addFriend = ({name,uid}) => (dispatch, getState) =>
     }
 
     friendsRef.add(friend)
+      .then(docRef => {
+        friend.id = docRef.id
+        resolve(friend)
+    })
+    .catch(error => reject(error))
+  }) // Promise
+
+
+// ----------------------------------------------------
+//   UPDATE FRIEND
+// ----------------------------------------------------
+export const updateFriendData = (friend, data) => (dispatch, getState) =>
+
+  new Promise(function(resolve,reject) {
+
+    friendsRef.doc(friend.id).update({...data})
       .then(docRef => {
         friend.id = docRef.id
         resolve(friend)
@@ -185,22 +201,22 @@ export function assignFriendToUser(newFriend) {
   }
 }
 // ----------------------------------------------------
-
-function addMessage(uid,body) {
-  usersRef.doc(uid).get().then(function(user) {
-    if (user.exists) {
-        // console.log("user data:", user.data());
-        var token = user.data().token
-        var payload = {
-          notification: {
-            // title: 'new rec given to you',
-            body,
-          }
-        }
-        messagesRef.add({token,payload})
-    } else {
-        console.warn("No such user!");
-    }
-})
-
-}
+//
+// function addMessage(uid,body) {
+//   usersRef.doc(uid).get().then(function(user) {
+//     if (user.exists) {
+//         // console.log("user data:", user.data());
+//         var token = user.data().token
+//         var payload = {
+//           notification: {
+//             // title: 'new rec given to you',
+//             body,
+//           }
+//         }
+//         messagesRef.add({token,payload})
+//     } else {
+//         console.warn("No such user!");
+//     }
+// })
+//
+// }

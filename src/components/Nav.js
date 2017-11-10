@@ -115,7 +115,11 @@ const TEST_ANIMATIONS = [
 
 ]
 
-const NavButton = ({onPress,icon,color,size=25}) => {
+// ----------------------------
+//  NAV BUTTON
+// ----------------------------
+
+const NavButton = ({onPress,icon,color=colors.lightWhite,size=25}) => {
   return (
     <TouchableOpacity onPress={onPress} style={{padding:5,backgroundColor:'transparent'}}>
       <Icon
@@ -130,7 +134,7 @@ class DashboardButtonContainer extends Component {
 
 
 render() {
-  const { app, myRecs, user, reminders } = this.props;
+  const { app, myRecs, user, reminders, openRecs } = this.props;
 
   // user.providerData.length > 0 && console.warn('we are a real user, bitchin')
   // console.warn(app.notificationPermission)
@@ -210,7 +214,7 @@ render() {
     )
 
   }
-  if(reminders.newRemoteNotifications && reminders.newRemoteNotifications.length > 0) {
+  if(openRecs.length > 0) {
 
     // INVITE THE USER TO SIGN UP
     buttonIcons.push (
@@ -220,6 +224,15 @@ render() {
         icon="inbox"
         color={colors.lightWhite}
       />
+    )
+  }
+
+  // -----------------------------------------
+  // INVITATIONS
+
+  if(true) {
+    buttonIcons.push (
+      <NavButton onPress={Actions.Invites} icon="navigation"/>
     )
   }
 
@@ -240,6 +253,7 @@ render() {
 const mapStateToProps = (state) => {
   return {
     app: state.app,
+    openRecs: _.filter(state.recommendations.myRecs,rec => rec.status == "open"),
     myRecs: state.recommendations.myRecs,
     user: state.user,
     reminders: state.reminders,

@@ -64,9 +64,9 @@ render() {
   // console.warn(unfinished.to.name)
   return (
 
-        <Animatable.View ref="CONTAINER" style={[styles.container,{minHeight: 200, margin:15}]} >
+        <Animatable.View ref="CONTAINER" style={[styles.container,{minHeight: unfinished.title ? 0: 200, margin:15}]} >
 
-        {unfinished.to.name && <Friend.Name friend={{name:unfinished.to.name}} /> }
+        {unfinished.to && unfinished.to.name && <Text>To: <Friend.Name friend={{name:unfinished.to.name}} /></Text> }
 
         {unfinished.title && !unfinished.to.name &&
         <Animatable.View style={styles.headerContainer} animation={{from:{height:0},to:{height:25}}} duration={500} delay={200} >
@@ -82,7 +82,7 @@ render() {
               autoCorrect={false}
               placeholderTextColor="#aaa"
               multiline={false}
-              autoFocus={true}
+              autoFocus={!unfinished.walkthrough}
               editable={this.props.hideKeyboard != 'yes now'}
               style={styles.inputFriend}
               onChangeText={(friendName) => updateState({friendName})}
