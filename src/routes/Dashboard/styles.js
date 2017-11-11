@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions} from 'react-native';
-import { colors, text, MARGIN_HORIZONTAL } from '../../config/styles';
+import { colors, text, MARGIN_LEFT } from '../../config/styles';
 
 
 export default styles = StyleSheet.create({
@@ -8,25 +8,9 @@ export default styles = StyleSheet.create({
     paddingTop: 0,
     backgroundColor: colors.blueBG,
   },
-  titleContainer: {
-    // marginLeft: MARGIN_HORIZONTAL+10,
-    // backgroundColor: 'yellow',
-    marginTop: 10,
-  },
+
   scrollView: {
     paddingHorizontal: 10,
-  },
-  recommendationsTitle: {
-    ...text,
-    color: 'white',
-    fontSize: 30,
-    fontWeight: '700',
-    letterSpacing:0.5,
-    marginBottom: 20,
-    paddingLeft: 10,
-    // textShadowColor: 'red',
-    // textShadowOffset: {width: 10, height: 10},
-    // textShadowRadius: 20
   },
   paragraph: {
     ...text,

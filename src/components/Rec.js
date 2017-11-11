@@ -57,7 +57,7 @@ render() {
         </View>
         <View style={cardStyles.iconContainer}>
           {moment().diff(rec.createdAt) < 200000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
-          {rec.friend.invitedAt && !rec.friend.uid && <Icon name="mail" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
+          {rec.friend.invitedAt && !rec.friend.uid && <Icon name="navigation" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
           {moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
           {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
           {rec.type == 'invite' && <Icon size={17} color={colors.purple} name="navigation"/>}
@@ -116,8 +116,7 @@ render() {
     <View style={cardStyles.container}>
       <View style={cardStyles.headerContainer}>
         <View style={cardStyles.friendContainer}>
-          <Text style={cardStyles.dateText}>Invitation to: {rec.to.name}</Text>
-          <Text style={cardStyles.dateText}>Status: {rec.status}</Text>
+          <Text style={cardStyles.headerText}>{rec.status} invitation to: {rec.to.name}</Text>
         </View>
       </View>
       <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
@@ -127,6 +126,30 @@ render() {
     </View>
     )
   }
+}
+
+class OpenCard extends Component {
+
+  render() {
+    // console.log(this.props)
+    const { rec, acceptOpenRec } = this.props;
+    return (
+      <View style={cardStyles.container}>
+        <View style={cardStyles.headerContainer}>
+          <View style={cardStyles.friendContainer}>
+            <Text style={cardStyles.headerText}>{rec.from.name || rec.from.displayName } sent you</Text>
+          </View>
+        </View>
+        <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
+          <CategoryIcon rec={rec} size={25} color={"yellow"}/>
+          <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
+          </View>
+          <View style={{width: 100, margin: 10}}>
+            <Button rounded text="Accept" bgcolor="orange" onPress={acceptOpenRec}/>
+            </View>
+      </View>
+      )
+    }
 }
 
 const cardStyles = StyleSheet.create({
@@ -208,7 +231,7 @@ export class Card extends Component {
 
   render() {
     // console.log(this.props)
-    const { rec, user, listItem, skinny, given, invitation } = this.props;
+    const { rec, user, listItem, skinny, given, invitation, open } = this.props;
 
     if(listItem) { // Dashboard
       return (
@@ -228,6 +251,12 @@ export class Card extends Component {
           <InvitationCard rec={rec} user={user} />
         </TouchableOpacity>
       )
+    } else if(open) {  // Inbox
+      return (
+        <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
+          <OpenCard rec={rec} user={user} acceptOpenRec={()=>this.props.acceptOpenRec(rec)} />
+        </TouchableOpacity>
+      )
     } else {
       return null
     }
@@ -245,66 +274,42 @@ const InvitationDetail = (props) => {
   if(!props.rec) { return null}
   const { user, rec, acceptInvitation, updateRec, updateState, isEditing, onDelete, updateRecommendation, app, setRecReminder } = props
 
+  const given = user.uid == rec.from.uid
+
   return (
     <View style={{flex: 1}}>
       <View style={[cardStyles.container]}>
 
           <View style={cardStyles.headerContainer}>
             <View style={cardStyles.friendContainer}>
-              <Text style={cardStyles.dateText}>
-                {rec.from.name} {rec.from.displayName}
-                <Icon name="navigation" size={25} color="purple"/>
-                {rec.to.name} {rec.to.displayName}
+              <Text style={cardStyles.headerText}>
+                {given ? `You invited ${rec.to.name || rec.to.displayName}` : `${rec.from.name || rec.from.displayName} invited you`}
               </Text>
             </View>
 
           </View>
+
           <View style={cardStyles.bodyContainer}>
-          {
-            isEditing ?
-              <InputRecTitle title={rec.title} updateRec={updateRec} updateState={updateState} /> :
-              <Title rec={rec} />
-          }
-
+            <Icon name="navigation" size={30} color={colors.purple} style={{marginRight: 10,marginTop: 5,}}/>
+            <Title rec={rec} />
           </View>
-          <Divider />
-
-          {
-            rec.category && !isEditing &&
-              <Category rec={rec} />
-          }
-
-          {
-            rec.category && isEditing &&
-              <CategoryPickerEditing category={rec.category} updateRec={updateRec} />
-          }
-
-          {
-            !rec.category &&
-              <View>
-                <Text>What is this?</Text>
-                <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
-              </View>
-          }
-
-
-
-          {rec.reminder &&
-            <Reminder rec={rec} />
-        }
 
 
 
         </View>
-        <Label>CreatedAt: {moment(rec.createdAt).fromNow()}</Label>
-        <Label>InvitedAt: {moment(rec.invitedAt).fromNow()}</Label>
-        <Label>Sent to: {rec.to.phoneNumber}</Label>
+
 
         {
-          rec.to.phoneNumber == user.phoneNumber && rec.status == 'open' &&
+          user && rec.to.phoneNumber == user.phoneNumber && rec.status == 'open' &&
             <View>
-              <Label>This is YOUR invitation to chaz</Label>
-              <Text onPress={acceptInvitation}>ACCEPT</Text>
+              <Button rounded fat bgcolor="pink" onPress={acceptInvitation} text="Accept Invitation" />
+            </View>
+        }
+
+        {
+          user && rec.to.phoneNumber == user.phoneNumber && rec.status == 'accepted' &&
+            <View>
+              <Button rounded fat bgcolor="green" onPress={() => Actions.replace('Dashboard')} text="Go to Dashboard" />
             </View>
         }
 
@@ -315,6 +320,10 @@ const InvitationDetail = (props) => {
   );
 
 }
+
+// <Label>CreatedAt: {moment(rec.createdAt).fromNow()}</Label>
+// <Label>InvitedAt: {moment(rec.invitedAt).fromNow()}</Label>
+// <Label>Sent to: {rec.to.phoneNumber} </Label>
 
 
 //

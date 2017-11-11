@@ -1,4 +1,5 @@
 import firebase from 'react-native-firebase';
+import _ from 'lodash'
 import * as t from '../actionTypes';
 
 import { recsRef, usersRef, messagesRef, addMessage } from '../../config/firebase'
@@ -9,7 +10,9 @@ import { recsRef, usersRef, messagesRef, addMessage } from '../../config/firebas
 
 export const initNewRec = (payload) => (dispatch) =>
   new Promise(function(resolve,reject) {
+    console.log('initnewRec',payload)
     let cb = dispatch({ type: t.INIT_REC, payload })
+    console.log('initNewq ')
     resolve(cb)
   })
 
@@ -46,8 +49,10 @@ export const fetchInvites = (This,That) => (dispatch, getState) =>
 //   Save new friend to firestore
 // ----------------------------------------------------
 
-
-// new
+// @todo
+// Need to also check if friend.uid exists
+// then i also need to add MY friend id
+// But really, this indicates that my data is not set up very well
 export const setFriend = (friend) => (dispatch, getState) =>
 
   new Promise(function(resolve, reject) {
@@ -59,7 +64,25 @@ export const setFriend = (friend) => (dispatch, getState) =>
     resolve(dude) // testing how to return dispatches
   });
 
+
+
 // ----------------------------------------------------
+//   SAVE NEW DATA TO UNFINISHED REC
+// ----------------------------------------------------
+
+
+// new
+export const setUnfinishedData = (data) => (dispatch, getState) =>
+
+  new Promise(function(resolve, reject) {
+
+    let dude = dispatch({
+      type: t.SET_UNFINISHED_DATA,
+      data,
+    });
+    resolve(dude) // testing how to return dispatches
+  });
+
 
 
 // ----------------------------------------------------
@@ -103,6 +126,7 @@ export const acceptInvitationRedux = (rec,friend) => (dispatch, getState) =>
     console.log('rec',rec)
     console.log('friued',friend)
 
+    // Update Invitaiton Doc
     recsRef.doc(rec.id).update({
       to: {
         ...rec.to,
@@ -116,16 +140,58 @@ export const acceptInvitationRedux = (rec,friend) => (dispatch, getState) =>
       acceptedAt: Date.now(),
     })
       .then(docRef => {
-        const updatedRec = {...docRef.data(),id: docRef.id}
-        resolve(updatedRec)
+        // const updatedRec = {...docRef.data(),id: docRef.id}
+        // resolve(updatedRec)
     })
     .catch(error => reject(error))
+
+    // Now go find all other recs where this user might be on and update them
+    recsRef.where("from.id", "==", rec.to.id).get()
+      .then(querySnapshot => {
+        console.log('Found some recs to update bitch?')
+        querySnapshot.forEach(doc => {
+
+          console.log('Found some recs to update bitch!',doc.id)
+          // console.log('Found some recs to update bitch!',user.uid)
+          recsRef.doc(doc.id).update({"from.uid" : user.uid, "to.id": friend.id})
+            .then(r=> resolve(rec)) // expects the rec to return
+            .catch(e=> console.log(e))
+
+        })
+      })
+
   }) // Promise
 
 
+
+// ----------------------------------------------------
+//   ACCEPT ONLY OL REC
+// ----------------------------------------------------
+
+export const acceptRec = (rec) => (dispatch, getState) =>
+// add friend id to from
+// set status to accepted
+  new Promise(function(resolve,reject) {
+    const user = getState().user
+    const friend = _.find(getState().friends,f => f.uid == rec.from.uid)
+
+    console.log('friend',friend)
+    if(!friend){return reject('no friend found')}
+
+    // Update Rec Doc
+    recsRef.doc(rec.id).update({
+      status: 'accepted',
+      "from.id" : friend.id,
+      acceptedAt: Date.now(),
+    }).then(resolve)
+
+
+  }) // Promise
+
+
+
 export function updateRecommendation(rec) {
-  // DEV
-  // return { type: UPDATE_RECOMMENDATION, rec }
+  console.log('updateRecommendation',rec)
 
   return(dispatch,getState) => {
     rec.updatedAt = Date.now()

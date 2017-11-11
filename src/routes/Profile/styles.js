@@ -4,27 +4,20 @@ import { colors, text } from '../../config/styles';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 5,
-    backgroundColor: colors.blueBG,
+    backgroundColor: colors.newBlue,
   },
-  signoutButton: {
-    fontSize: 8,
-
-    color: colors.lightGrey,
-    // backgroundColor: colors.grey,
-  },
-  //
   headerContainer: {
-    backgroundColor: colors.lightWhite,
+    backgroundColor: colors.blueBG,
     // margin: 10,
     // padding: 2,
     paddingVertical: 20,
   },
   friendRowItem: {
-    backgroundColor: colors.lightWhite,
+    backgroundColor: colors.white,
+    borderRadius: 7,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    margin: 1,
+    marginVertical: 6,
     flexDirection: 'row',
     marginHorizontal: 20,
     alignItems: 'center'
@@ -35,18 +28,24 @@ export default styles = StyleSheet.create({
     paddingLeft: 10,
     // paddingVertical: 25,
 
-    color: colors.white
+    color: colors.darkGrey
   },
   title: {
     ...text,
     textAlign: 'center',
     fontSize: 30,
-    paddingLeft: 15,
-    paddingVertical: 25,
-    // height: 50,
-    // borderColor: colors.lightGrey,
-    // borderWidth: 1,
+    // paddingLeft: 15,
+    paddingVertical: 10,
     color: colors.white
   },
+  subTitle: {
+    ...text,
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '300',
+    // paddingLeft: 15,
+    paddingVertical: 10,
+    color: colors.white
+  }
 
 });

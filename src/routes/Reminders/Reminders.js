@@ -24,60 +24,6 @@ const Reminders = (props) => {
         </View>
       }
 
-      {
-        reminders.localReminders.length > 0 &&
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>Follow Up Reminders</Text>
-          {
-            _.map(reminders.localReminders, (reminder,i) => {
-              return (
-                <View key={i} style={styles.row}>
-                <Label>Recommendation: {moment(reminder.fire_date).fromNow()}</Label>
-                </View>
-              )
-            })
-          }
-
-        </View>
-      }
-
-      {
-        reminders.newRemoteNotifications.length > 0 &&
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>Inbox</Text>
-          {
-            _.map(reminders.remoteNotifications, (notif,i) => {
-              return (
-                <View key={i} style={styles.row}>
-                <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
-                <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
-                </View>
-              )
-            })
-          }
-        </View>
-      }
-
-      {
-        reminders.remoteNotifications.length > 0 &&
-        <View style={styles.wrapper}>
-          <Text style={styles.title}>All Messages</Text>
-          {
-            _.map(reminders.remoteNotifications, (notif,i) => {
-              return (
-                <View key={i} style={styles.row}>
-                <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
-                <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
-                </View>
-              )
-            })
-          }
-        </View>
-      }
-
-
-
-
 
 
 
@@ -86,3 +32,59 @@ const Reminders = (props) => {
 }
 
 export default Reminders;
+
+      // 
+      //
+      // {
+      //   reminders.localReminders.length > 0 &&
+      //   <View style={styles.wrapper}>
+      //     <Text style={styles.title}>Follow Up Reminders</Text>
+      //     {
+      //       _.map(reminders.localReminders, (reminder,i) => {
+      //         return (
+      //           <View key={i} style={styles.row}>
+      //           <Label>Recommendation: {moment(reminder.fire_date).fromNow()}</Label>
+      //           </View>
+      //         )
+      //       })
+      //     }
+      //
+      //   </View>
+      // }
+      //
+      // {
+      //   reminders.newRemoteNotifications.length > 0 &&
+      //   <View style={styles.wrapper}>
+      //     <Text style={styles.title}>Inbox</Text>
+      //     {
+      //       _.map(reminders.remoteNotifications, (notif,i) => {
+      //         return (
+      //           <View key={i} style={styles.row}>
+      //           <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
+      //           <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
+      //           </View>
+      //         )
+      //       })
+      //     }
+      //   </View>
+      // }
+      //
+      // {
+      //   reminders.remoteNotifications.length > 0 &&
+      //   <View style={styles.wrapper}>
+      //     <Text style={styles.title}>All Messages</Text>
+      //     {
+      //       _.map(reminders.remoteNotifications, (notif,i) => {
+      //         return (
+      //           <View key={i} style={styles.row}>
+      //           <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
+      //           <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
+      //           </View>
+      //         )
+      //       })
+      //     }
+      //   </View>
+      // }
+      //
+      //
+      //

@@ -9,8 +9,8 @@ import styles from './styles';
 import { Button } from '../../components/Generic'
 //
 
-const RecView = ({ rec, user, acceptInvitation, reco, app, isEditing, updateRec, updateState, saveRec, onDeletePress, updateRecommendation,onAssignPress, setRecReminder }) => {
-
+const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updateState, saveRec, onDeletePress, updateRecommendation,onAssignPress, setRecReminder }) => {
+  // console.warn(user.uid)
   return (
     <View style={{flex:1}}>
     <ScrollView style={styles.container}>

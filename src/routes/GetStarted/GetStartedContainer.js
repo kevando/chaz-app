@@ -18,22 +18,26 @@ class GetStartedContainer extends Component {
       showCard: true,
       showPhoneInput: false,
       phoneInput: '',
-      phoneValid: false,
+      validPhoneNumber: false,
       friendName: '',
-      onChangeText: (nameInput) => this.setState({nameInput}),
+      onTextChange: (state) => this.setState(state),
       // "to.name", "==", name.toLowerCase()
       updateState: (state) => this.setState(state),
-      myInvites: null,
+
+      // might pass in invites from HelloContainer
+      myInvites: this.props.initialInvites,
 
 
     }
   }
 
 
-  _onYesPress = () => {
+  _onYesPress = (from) => {
     const { user, initNewRec } = this.props
+    console.log('am i called?')
     const initalRecData = {
       to: {uid: user.uid, displayName: user.displayName},
+      from,
       category: 'app',
       title: 'chaz',
       walkthrough: true,
@@ -49,7 +53,7 @@ class GetStartedContainer extends Component {
 
   _onNextPress = () => {
     // Search invites to see if we can find anything by the inviter name
-    const { fetchInvites } = this.props
+    const { fetchInvites, setAppData } = this.props
     const { friendName } = this.state
 
     Keyboard.dismiss()
@@ -57,13 +61,15 @@ class GetStartedContainer extends Component {
         // Search for invites
         fetchInvites("from.displayName",friendName)
           .then(myInvites => {
-            // console.warn('invites',myInvites)
+            // console.log('invites',myInvites)
             this.setState({myInvites})
+            setAppData({myInvites}) // so activation page has the invites
             // if no invites, ask the user to enter their phone#
 
           })
 
   }
+
   _onSearchForPhonePress = () => {
     Keyboard.dismiss()
     const { fetchInvites, setUserData } = this.props
@@ -73,8 +79,9 @@ class GetStartedContainer extends Component {
     // Search for invites
     fetchInvites("to.phoneNumber",phoneNumber)
       .then(myInvites => {
-        console.warn('invites',myInvites)
+        // console.warn('invites',myInvites)
         this.setState({myInvites,phoneSearched: true})
+        setAppData({myInvites}) // so activation page has the invites
         // if no invites, ask the user to enter their phone#
         if(myInvites.length == 0) {
           // just bring user directly to register
@@ -86,12 +93,40 @@ class GetStartedContainer extends Component {
     _goToRegister = (phoneNumber) => {
     // Excellent, now pull up the real invite
     // and ask them to register
-    this.props.setUserData({phoneNumber})
-      .then(Actions.push('Register'))
+      const { setUserData, saveRec, addFriend, setUnfinishedData } = this.props
+      setUserData({phoneNumber})
+      addFriend({name:this.state.friendName}).then(friend => {
+        setUnfinishedData({from: {id: friend.id, name: friend.name}}).then(() => {
+          saveRec()
+          // Actions.push('Register')
+          Actions.replace('Register') // preventing user from going back to creating duplicate first recs
+        })
+      })
+  }
+  _onAcceptInvitePress = () => {
+    // found the invite by either to.name, from.displayName, or to.phoneNumber
+    // Register, but do not create a rec
+
+    const { setUserData, user } = this.props
+    const { myInvites } = this.state
+
+    if(!myInvites || myInvites.length == 0){
+      alert('SOMETHING BAD HAPPENED NO INVITE TO ACCEPT')
+      return
+    }
+
+    if(!user.displayName){
+      alert('NO DISPOKLA NAME SET')
+      return
+    }
+    // console.warn('ACCPTED')
+    setUserData({phoneNumber: myInvites[0].to.phoneNumber})
+      .then(()=> Actions.push('Register'))
+
   }
 
   render() {
-    // console.log(this.props.user)
+    // console.log('GS',this.props)
     // const { question, nameSaved } = this.state
     const { user } = this.props
 
@@ -103,6 +138,7 @@ class GetStartedContainer extends Component {
         onNextPress={this._onNextPress}
         goToRegister={this._goToRegister}
         onSearchForPhonePress={this._onSearchForPhonePress}
+        onAcceptInvitePress={this._onAcceptInvitePress}
         />
     )
     }

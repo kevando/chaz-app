@@ -45,6 +45,7 @@ export function addFirestoreListeners(uid) {
     let myFriends = getState().friends // this might be empty
     let myRecs = getState().recommendations.myRecs
     let givenRecs = getState().recommendations.givenRecs
+    let user = getState().user
     // console.log('myFriends',myFriends)
 
     // MY FRIENDS
@@ -76,6 +77,7 @@ export function addFirestoreListeners(uid) {
 
           })
           console.log('myRecs',myRecs)
+          console.log('myRecs',myFriends)
           const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
           dispatch({type: t.REFRESH_MY_RECS, myRecs: _.orderBy(myRecsWithFriendData,['createdAt'],['desc']) })
       })
@@ -92,9 +94,28 @@ export function addFirestoreListeners(uid) {
             dispatch({type: t.REFRESH_GIVEN_RECS, givenRecs: givenRecsWithFriendData})
         });
 
+
+      // NOT A LISTENER BUT CHECK FOR CHAZ INVITES
+      recsRef
+        .where("to.phoneNumber", "==", user.phoneNumber)
+        .where('type','==','invite')
+        .where('status','==','open')
+        .get()
+        .then(querySnapshot => {
+            var myInvites = [];
+            querySnapshot.forEach(doc => {
+                myInvites.push({...doc.data(),id: doc.id});
+            })
+            // TODO join w friend data
+            // const givenRecsWithFriendData =  _.map(givenRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.to.id) || {} } })
+            console.log('SETAPP DATA?',myInvites)
+            dispatch({type: t.SET_APP_DATA, data: {myInvites} })
+        });
+
         // not the best place for this..
         // but if I fetch recs, make sure onboarding is not set
         // console.warn(myRecs.length)
+        // console.warn(getState().app.onboarding)
         if(myRecs.length > 0)
           dispatch(setAppData({onboarding: false}))
       }
@@ -193,7 +214,7 @@ export function addMessage(uid,body) {
         messagesRef.add({token,payload})
           .catch(error=>console.warn(error.message))
     } else {
-        console.warn("No such user!");
+        console.log("No such user to send message to");
     }
 })
 

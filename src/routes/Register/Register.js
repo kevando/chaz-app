@@ -88,7 +88,7 @@ export const CodeInput = (props) => {
 
 export const Confirmation = (props) => {
 
-  const { getCode, user } = props
+  const { getCode, user, app } = props
 
   return (
     <View style={styles.container}>
@@ -99,18 +99,20 @@ export const Confirmation = (props) => {
         </Animatable.View>
 
         {
-          user.myInvites && user.myInvites.length > 0 &&
+          app.myInvites && app.myInvites.length > 0 &&
 
           <View style={styles.invitationsContainer}>
             <Label center >You were invited by:</Label>
             {
-              _.map(user.myInvites,(invite,i) => {return (<Label key={i} center>{invite.from.displayName}</Label>)})
+              _.map(app.myInvites,(invite,i) => {return (<Label key={i} center>{invite.from.displayName}</Label>)})
             }
           </View>
         }
 
-</View>
-        <Button text="Back to Dashboard" onPress={()=> Actions.reset('lightbox')} />
+      </View>
+      {app.myInvites && app.myInvites.length > 0 ?
+        <Button text="Accept Invitation" onPress={()=> Actions.replace('RecView', {rec: app.myInvites[0] }) } /> :
+        <Button text="Go to Dashboard" onPress={()=> Actions.reset('lightbox')} /> }
     </View>
   )
 }

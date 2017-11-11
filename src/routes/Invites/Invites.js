@@ -19,7 +19,7 @@ console.log(invitations)
   return (
     <View style={styles.container}>
     <ScrollView>
-      <Title>Invitation (all given)</Title>
+      <Title>Invitations</Title>
 
       {
         _.map(invitations, (invitation,i) => {

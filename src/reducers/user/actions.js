@@ -58,14 +58,14 @@ export function checkForInvitesByName(name) {
 // --------------------------------
 //    CREATE USER IN FIRESTORE
 // --------------------------------
-
-export function createUserInFirestore() {
-  return (dispatch, getState) => {
+export const createUserInFirestore = () => (dispatch, getState) =>
+  new Promise(function(resolve, reject) {
 
     const user = getState().user
     const app = getState().app
 
-    if(!user.displayName) {console.warn('user.displayName is null')}
+    if(!user.displayName) {alert('!user.displayName');return reject('user.displayName is null')}
+    if(!app.token) {alert('!app.token');return reject('!app.token')}
 
     const initialData = {
       uid: user.uid,
@@ -77,5 +77,4 @@ export function createUserInFirestore() {
 
     usersRef.doc(user.uid).set(initialData)
       .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) )
-  }
-}
+  })

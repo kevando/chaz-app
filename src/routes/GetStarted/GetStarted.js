@@ -13,17 +13,25 @@ class GetStarted extends Component {
 
   _getTitleText = () => {
     let text = 'wha?'
-    const { showCard } = this.props
-    text = !showCard && 'Did someone tell you about chaz?'
-    text =  showCard  && 'Who told you about chaz?'
+    const { showCard, friendName, myInvites, showPhoneInput, unfinished } = this.props
+
+    if(showCard && !unfinished.from ) { text = 'Who told you about chaz?' }
+    if(showCard && unfinished.from ) { text = `Did ${unfinished.from.displayName} tell you about chaz?` }
+    if(friendName && myInvites && !showPhoneInput) { text = `Is ${friendName} on chaz?`}
+    if(showPhoneInput) { text = 'Enter your phone number'}
+    if(friendName && myInvites && myInvites.length > 0 ) { text = `Did ${myInvites[0].from.displayName} tell you?`}
+
 
     return text
   }
 
   render() {
-      console.log(this.props)
 
-    const { myInvites, onYesPress, updateState, unfinished, friendName, phoneSearched, showCard, goToRegister, onNextPress, onPhoneNumberYesPress, showPhoneInput, phoneNumber, onSearchForPhonePress } = this.props
+
+    const { myInvites, onYesPress, onAcceptInvitePress, updateState, unfinished, friendName, phoneSearched, onTextChange, showCard, goToRegister, onNextPress, onPhoneNumberYesPress, showPhoneInput, phoneNumber, onSearchForPhonePress } = this.props
+
+
+    // console.warn(myInvites)
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" hidden={true} />
@@ -31,9 +39,10 @@ class GetStarted extends Component {
       <View style={styles.container}>
         <Title card>{this._getTitleText()}</Title>
 
-        <View>
+        <View style={{backgroundColor:'transparent'}}>
         {showCard && <Unfinished {...this.props} />}
         </View>
+
 
         { // Who told you about chaz?
           showCard && !myInvites && friendName != '' &&
@@ -42,11 +51,9 @@ class GetStarted extends Component {
           </View>
         }
 
-
         { // couldnt find invite by name, try searching by your phone?
           myInvites && myInvites.length == 0 && !showPhoneInput &&
           <View>
-            <Title>Is {friendName} on chaz?</Title>
             <Button bgcolor='green' rounded fat animated text="Yes" onPress={()=>updateState({showPhoneInput: true})} />
             <Button bgcolor='red' rounded fat animated text="No" onPress={()=>alert('add ur phone# do it')} />
           </View>
@@ -54,17 +61,18 @@ class GetStarted extends Component {
 
         { // Search for invites by phone
           showPhoneInput &&
-          <View>
-            <Title>Add your phone number</Title>
-            <PhoneInput phoneNumber={phoneNumber} onTextChange={(phoneNumber) => updateState({phoneNumber}) }/>
+          <View style={{marginTop: -20}}>
+            <PhoneInput phoneNumber={phoneNumber} onTextChange={(state) => onTextChange(state) }/>
+            <View style={{marginTop: -20}}>
             <Button bgcolor='green' rounded fat animated text="Search" onPress={onSearchForPhonePress} />
+            </View>
           </View>
         }
 
 
 
         { // Found an invite with this users phoneNumber on it
-          myInvites && myInvites.length > 0 && !showPhoneInput &&
+          myInvites && myInvites.length > 0 && !showPhoneInput && false &&
           <View>
           <Text>Is this your phone#? {myInvites[0].to.phoneNumber}?</Text>
           <Button bgcolor='green' rounded fat animated text="YES" onPress={()=>goToRegister(myInvites[0].to.phoneNumber)} />
@@ -74,8 +82,8 @@ class GetStarted extends Component {
         }
 
         {
-          // Found a invite by nam e
-          myInvites && myInvites.length > 0 && showPhoneInput && 
+          // Found a invite by display name
+          myInvites && myInvites.length > 0 && false &&
           <View>
           <Title card>We found an invite for you</Title>
           <Button bgcolor='green' rounded fat animated text="Awesome, activate and accept invite" onPress={()=>goToRegister(myInvites[0].to.phoneNumber)} />
@@ -84,9 +92,20 @@ class GetStarted extends Component {
 
         }
 
+        {
+          showCard && unfinished.from && false && 
+            <Button bgcolor='green' rounded fat animated text="Yes, accept the invite" onPress={onAcceptInvitePress} />
+        }
+
+        {
+          showCard &&  myInvites && myInvites.length > 0 &&
+            <Button bgcolor='pink' rounded fat animated text="Yep, Accept Invite" onPress={onAcceptInvitePress} />
+        }
+
 
               {!showCard &&
                 <View>
+                <Title card>Did someone tell you about chaz?</Title>
               <Button bgcolor='green' rounded fat animated text="YES" onPress={onYesPress} />
               <Button bgcolor='red' rounded fat animated text="NO" onPress={()=>alert('dont lie')} />
               </View>

@@ -92,11 +92,16 @@ class RegisterContainer extends Component {
     const { app, user } = this.props
     const { isPhoneVerified, isCodeConfirmed, errorMessage } = this.state
 
+    if(!user.displayName) {alert('NO DISPLAY NAME')}
     let Content = null
 
 
+
+
+    // if(!app.isAnon) {alert('app not anon');return}
+
     if(!app.isAnon)
-        Content =  <Confirmation user={user} />
+        Content =  <Confirmation user={user} app={app} />
 
     else if(app.activeStep == 1 || !app.activeStep) {
       Content = <PhoneInput getCode={this._getCode} {...this.state} {...this.props} />
@@ -105,7 +110,7 @@ class RegisterContainer extends Component {
       Content = <CodeInput confirmCode={this._confirmCode} resetPhoneNumber={this.props.resetPhoneNumber} app={this.props.app} {...this.state} />
 
     } else if(app.activeStep == 3 || !app.isAnon) {
-      Content =  <Confirmation user={user} />
+      Content =  <Confirmation user={user} app={app} />
     }
 
     // Content =  <Confirmation user={user} />

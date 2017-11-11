@@ -77,9 +77,9 @@ const headerStyles = StyleSheet.create({
     // height: 150,
     marginBottom: 0,
     paddingBottom: 0,
-    backgroundColor: colors.newBlue,
+    backgroundColor: colors.blueBG,
     borderBottomWidth: 0,
-    borderBottomColor: colors.newBlue,
+    borderBottomColor: colors.blueBG,
     justifyContent: 'center',
     alignItems: 'center',
     // shadowColor: colors.blueBG,
@@ -89,7 +89,7 @@ const headerStyles = StyleSheet.create({
     // zIndex:999
   },
   textContainer: {
-    backgroundColor: colors.newBlue,
+    backgroundColor: colors.blueBG,
     width,
     marginTop: 0,
     paddingTop: 10,

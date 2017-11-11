@@ -98,9 +98,9 @@ const styles = StyleSheet.create({
 // --------------------------------
 
 const TEST_ANIMATIONS = [
-  {animation: "tada", iterationCount: 'infinite', duration: 2000, },
-  {animation: "jello", iterationCount: 'infinite', duration: 2000,color: colors.yellow},
-  {animation: "rubberBand", iterationCount: 'infinite', duration: 2000,color: colors.lightWhite},
+  {animation: "tada", iterationCount: 'infinite', duration: 5000, color: colors.yellow },
+  // {animation: "jello", iterationCount: 'infinite', duration: 2000,color: colors.yellow},
+  // {animation: "rubberBand", iterationCount: 'infinite', duration: 2000,color: colors.lightWhite},
 
   // {animation: "swing", iterationCount: 'infinite', duration: 2000,color: 'white'},
   // {animation: "pulse", iterationCount: 'infinite', duration: 200,color: 'green'},
@@ -134,7 +134,7 @@ class DashboardButtonContainer extends Component {
 
 
 render() {
-  const { app, myRecs, user, reminders, openRecs } = this.props;
+  const { app, myRecs, user, reminders, openRecs, openInvitations } = this.props;
 
   // user.providerData.length > 0 && console.warn('we are a real user, bitchin')
   // console.warn(app.notificationPermission)
@@ -144,10 +144,10 @@ render() {
   let buttonIcons = []
 
   // TEST ICONS
-  // _.forEach(TEST_ANIMATIONS, config => buttonIcons.push(<Animatable.View {...config}><Icon name="upload-cloud" size={25} style={[styles.navIcon,{ color: config.color,marginTop: StatusBar.hidden ? -10 : 0,}]} /></Animatable.View>))
+  // _.forEach(TEST_ANIMATIONS, config => buttonIcons.push(<Animatable.View {...config}><Icon name="inbox" size={25} style={[styles.navIcon,{ color: config.color,marginTop: StatusBar.hidden ? -10 : 0,}]} /></Animatable.View>))
 
 
-  if(app.notificationPermission != "authorized" && myRecs.length > 0) {
+  if(app.notificationPermission != "authorized" && !app.isAnon) {
     // STEP 1
     buttonIcons.push(
       <Animatable.View animation="swing" iterationCount={'infinite'} duration={2000}>
@@ -191,7 +191,7 @@ render() {
       </Animatable.View>
     )
   }
-  if(myRecs.length > 0 && app.notificationPermission == "authorized" && !app.isAnon) {
+  if(app.notificationPermission == "authorized" && !app.isAnon) {
 
     // INVITE THE USER TO SIGN UP
     buttonIcons.push (
@@ -203,7 +203,7 @@ render() {
       />
     )
   }
-  if(myRecs.length > 0 && !app.isAnon) {
+  if(!app.isAnon) {
     // LET USER ACCESS THEIR ACCOUNT
     buttonIcons.push (
       <NavButton
@@ -214,25 +214,25 @@ render() {
     )
 
   }
+
+  // ---------------------
+  //    INBOX
+  // ---------------------
   if(openRecs.length > 0) {
-
-    // INVITE THE USER TO SIGN UP
     buttonIcons.push (
-
-      <NavButton
-        onPress={()=> Actions.push('Reminders')}
-        icon="inbox"
-        color={colors.lightWhite}
-      />
-    )
+      <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
+        <NavButton onPress={()=> Actions.push('Inbox')} icon="inbox" color={colors.yellow} />
+      </Animatable.View>)
   }
 
   // -----------------------------------------
   // INVITATIONS
 
-  if(true) {
+  if(openInvitations.length > 0) {
     buttonIcons.push (
-      <NavButton onPress={Actions.Invites} icon="navigation"/>
+
+        <NavButton onPress={Actions.Invites} icon="navigation" color={colors.yellow}/>
+
     )
   }
 
@@ -240,7 +240,7 @@ render() {
   app.devMode && buttonIcons.push (<NavButton onPress={()=> Actions.push('Settings')} icon="settings" color={colors.lightWhite} />)
 
   return (
-    <View style={{flexDirection: 'row', marginRight: 12,marginTop: 8}}>
+    <View style={{flexDirection: 'row', marginRight: 12,marginTop: 1}}>
       {_.map(buttonIcons,(icon,i) => <View style={styles.navIconContainer} key={i}>{icon}</View>)}
     </View>
   )
@@ -254,6 +254,7 @@ const mapStateToProps = (state) => {
   return {
     app: state.app,
     openRecs: _.filter(state.recommendations.myRecs,rec => rec.status == "open"),
+    openInvitations: _.filter(state.recommendations.givenRecs,rec => rec.status == "open"),
     myRecs: state.recommendations.myRecs,
     user: state.user,
     reminders: state.reminders,

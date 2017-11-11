@@ -25,15 +25,15 @@ const GivenRecs = ({givenRecs}) => {
 
 const Profile = (props) => {
   // console.log(props)
-  const { onLogoutPress, user, friends, givenRecs, onlineFriends } = props;
+  const { onLogoutPress, user, friends, givenRecs, onlineFriends, formatedNumber } = props;
 
   return (
     <ScrollView style={styles.container}>
 
-    <View style={styles.headerContainer}>
-      <Text style={styles.title} onPress={onLogoutPress}>{user.displayName}</Text>
-      <Text style={styles.title}>{user.phoneNumber}</Text>
-    </View>
+      <View style={styles.headerContainer}>
+        <Text style={styles.title} onPress={onLogoutPress}>{user.displayName}</Text>
+        <Text style={styles.subTitle}>{formatedNumber}</Text>
+      </View>
 
       { friends.length == 0 &&
         <View>
@@ -57,7 +57,7 @@ const Profile = (props) => {
           return (
             <TouchableOpacity key={i} onPress={()=>Actions.push('FriendView',{friend})}>
             <View style={styles.friendRowItem} >
-              <Icon name='user' size={19} color={friend.uid ? colors.pink : colors.lightWhite}/>
+              <Icon name='user' size={19} color={friend.uid ? colors.pink : colors.darkGrey}/>
               <Text style={styles.friendText} >{friend.name || friend.displayName+ ' (Pending)'}</Text>
             </View>
             </TouchableOpacity>

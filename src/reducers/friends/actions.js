@@ -37,10 +37,12 @@ export const addFriend = ({name,uid}) => (dispatch, getState) =>
 export const updateFriendData = (friend, data) => (dispatch, getState) =>
 
   new Promise(function(resolve,reject) {
-
+    console.log('updateFriendData',friend)
+    console.log('updateFriendData',data)
     friendsRef.doc(friend.id).update({...data})
       .then(docRef => {
-        friend.id = docRef.id
+        console.log('friend updated',docRef)
+        // friend.id = docRef.id
         resolve(friend)
     })
     .catch(error => reject(error))
@@ -80,6 +82,11 @@ export function searchUsers(friend,phoneNumber) {
   }
 }
 
+// ----------------------------------------------------
+//   SEND INVITE
+//   InviteContainer,
+// ----------------------------------------------------
+
 export function sendInvite(friend, phoneNumber) {
 
   return (dispatch, getState) => {
@@ -89,7 +96,7 @@ export function sendInvite(friend, phoneNumber) {
     dispatch(createInvite(user,friendWithPhone))
 
     // now open imessage
-    text(phoneNumber, 'Hey, check out this new app called chaz http://chaz.co/i')
+    // text(phoneNumber, 'Hey, check out this new app called chaz http://chaz.co/i')
   }
 }
 
@@ -108,8 +115,8 @@ export function deleteFriend(friend) {
 export const updateFriend = (friend,data) => (dispatch, getState) =>
 
   new Promise(function(resolve,reject) {
-      console.log(friend)
-      console.log(data)
+      console.log('updateFriend',friend)
+      console.log('updateFriend',data)
 
     friendsRef.doc(friend.id).update(data)
       .then(friend => resolve(friend))
@@ -120,8 +127,9 @@ export const updateFriend = (friend,data) => (dispatch, getState) =>
 
 
 // ----------------------------------------------------
-//   Add new rec thats an invite and update the user object
+//   CREATE INVITE REC
 // ----------------------------------------------------
+
 export const createInvite = (user,friend) => (dispatch, getState) =>
 
   new Promise(function(resolve, reject) {
@@ -129,7 +137,7 @@ export const createInvite = (user,friend) => (dispatch, getState) =>
     console.log('invite',user)
     const recInvite = {
       from: {uid: user.uid, displayName: user.displayName},
-      to: friend,
+      to: {id: friend.id,name: friend.name, phoneNumber: friend.phoneNumber},
       status: 'open',
       type: 'invite',
       invitedAt: Date.now(),
@@ -138,16 +146,19 @@ export const createInvite = (user,friend) => (dispatch, getState) =>
       title: 'chaz',
       createdBy: user.uid
     }
-    dispatch(initNewRec(recInvite).then(
+    console.log('recInvite',recInvite)
+    dispatch(initNewRec(recInvite)).then( () => {
+
       recsRef.add(recInvite)
         .then(docRef => {
+          console.log('rec added')
           // Then update friend with recInvite data
           dispatch(updateFriend(friend,{recInviteId: docRef.id, searchResults: 'invitation sent',phoneNumber: friend.phoneNumber,invitedAt: Date.now()}))
 
           // resolve(docRef)
         })
         .catch(error => console.warn("Error adding document: ", error) )
-    ))
+    })
 
 
   });

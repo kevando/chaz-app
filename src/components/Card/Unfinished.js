@@ -29,7 +29,7 @@ class Unfinished extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
+      title: this.props.unfinished.title || '',
 
       rec: this.props.unfinished,
     }
@@ -73,20 +73,36 @@ render() {
 
 
           <View style={styles.friendContainer}>
-          {unfinished.title && !unfinished.to.name &&
+
+          {unfinished.title && !unfinished.to.name && unfinished.walkthrough &&
             <TextInput
               placeholder='friend name'
               ref={ c => this._titleFriend = c }
               autoCapitalize="none"
-              value={friendName}
+              value={(unfinished.walkthrough && unfinished.from.displayName) ? unfinished.from.displayName : friendName}
               autoCorrect={false}
               placeholderTextColor="#aaa"
               multiline={false}
-              autoFocus={!unfinished.walkthrough}
+              autoFocus={unfinished.walkthrough}
               editable={this.props.hideKeyboard != 'yes now'}
               style={styles.inputFriend}
               onChangeText={(friendName) => updateState({friendName})}
             /> }
+
+            {unfinished.title && !unfinished.to.name && !unfinished.walkthrough && 
+              <TextInput
+                placeholder='friend name'
+                ref={ c => this._titleFriend = c }
+                autoCapitalize="none"
+                value={friendName}
+                autoCorrect={false}
+                placeholderTextColor="#aaa"
+                multiline={false}
+                autoFocus={true}
+                editable={this.props.hideKeyboard != 'yes now'}
+                style={styles.inputFriend}
+                onChangeText={(friendName) => updateState({friendName})}
+              /> }
 
 
           </View>
@@ -99,12 +115,34 @@ render() {
 
 
         <View style={[styles.bodyContainer]}>
-        {!unfinished.title ?
+
+        {
+          unfinished.walkthrough && // ONBOARDING
           <TextInput
             placeholder='Type here...'
             ref={ c => this._titleInput = c }
             autoCapitalize="none"
-            value={title}
+            value={unfinished.walkthrough ? unfinished.title : title}
+            autoCorrect={false}
+            autoFocus={!unfinished.walkthrough && !title}
+            placeholderTextColor="#bbb"
+            multiline={true}
+            style={styles.inputTitle}
+            autoGrow={true}
+            maxHeight={200}
+            isEditable={!unfinished.walkthrough && !title}
+
+            onChangeText={(title) => updateState({title})}
+
+          />
+        }
+        {
+          !unfinished.walkthrough && // NORMAL
+          <TextInput
+            placeholder='Type here...'
+            ref={ c => this._titleInput = c }
+            autoCapitalize="none"
+            value={unfinished.walkthrough ? unfinished.title : title}
             autoCorrect={false}
             autoFocus={true}
             placeholderTextColor="#bbb"
@@ -112,13 +150,16 @@ render() {
             style={styles.inputTitle}
             autoGrow={true}
             maxHeight={200}
+            isEditable={true}
 
             onChangeText={(title) => updateState({title})}
 
-          /> :
-
-          <Rec.Title rec={unfinished} />
+          />
         }
+
+
+
+
           </View>
 
         <View>

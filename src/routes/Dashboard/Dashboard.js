@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ScrollView, StatusBar ,Text} from 'react-native';
 import _ from 'lodash';
-import { Button } from '../../components/Generic';
+import { Button, Title } from '../../components/Generic';
 import { Card } from '../../components/Rec'
 import Filter from '../../components/Nav/Filter';
 
@@ -23,10 +23,7 @@ const Dashboard = (props) => {
       <StatusBar barStyle="light-content" hidden={false} />
         <Confetti />
         <ScrollView style={styles.scrollView}>
-
-          <View style={styles.titleContainer}>
-            <Text style={styles.recommendationsTitle}>Recommendations</Text>
-          </View>
+          <Title>Recommendations</Title>
 
         {myRecs.length > 16 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
 

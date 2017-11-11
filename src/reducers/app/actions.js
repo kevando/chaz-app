@@ -23,6 +23,7 @@ export function initializeApp() {
     dispatch(listenForAuthChanges())
     dispatch(listenForNotifications())
 
+    // console.warn('init app',app)
     if(!app.token)
       dispatch(setToken())
 
@@ -47,7 +48,7 @@ function setToken() {
   return (dispatch, getState) => {
       firebase.messaging().getToken().then(token => {
         if(token !== getState().app.token) {
-          // console.warn('Local token is different than fcm getToken()')
+          console.log('setting app token')
           dispatch({type: t.SET_TOKEN, token})
         }
       })
@@ -94,6 +95,8 @@ export function confirmCode(codeInput) {
 
     const user = getState().user
     const app = getState().app
+    console.log('user in confirm code')
+    if(!user.displayName) {alert('ASDFSADF'); return}
 
     const credential = firebase.auth.PhoneAuthProvider.credential(app.verificationId, codeInput)
 
@@ -109,10 +112,10 @@ export function confirmCode(codeInput) {
 
 function linkUser(credential) {
   return (dispatch, getState) => {
-    console.log('linkUser')
+    // console.log('linkUser')
     firebase.auth().currentUser.linkWithCredential(credential)
       .then((firebaseUser) => {
-        console.log('linkedUser')
+        // console.log('linkedUser')
         dispatch({ type: t.USERS_LINKED, user: firebaseUser })
         dispatch(createUserInFirestore())
     }, function(error) {
@@ -123,13 +126,8 @@ function linkUser(credential) {
 // This function works
 function signIn(credential) {
   return (dispatch, getState) => {
-
     firebase.auth().signInWithCredential(credential)
-      .then(function (handleResolve) {
-        // Auth handler will fire and take care of everything else
-      }).catch(function (error) {
-        dispatch({type: t.SET_APP_ERROR, error})
-      });
+      .catch(error => dispatch({type: t.SET_APP_ERROR, error}))
   }
 }
 
@@ -166,22 +164,6 @@ function shouldAppSignIn(phoneNumber) {
 export function resetPhoneNumber(phoneNumber) {
   return (dispatch, getState) => {
     dispatch({type: t.RESET_PHONE })
-  }
-}
-
-// --------------------------------
-//    SIGN OUT
-// --------------------------------
-
-export function signOut() {
-  return dispatch => {
-
-    firebase.auth().signOut().then(() => {
-      dispatch({type: t.USER_SIGNED_OUT})
-      dispatch({type: 'PURGE_DATA'}) // resets state to undefined
-      Actions.replace('LoggedOut')
-    })
-    .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
   }
 }
 
@@ -225,5 +207,23 @@ function updateUser(data) {
       firebase.firestore().collection("users").doc(user.uid).update(data)
         .catch(error =>  dispatch({type: t.SET_APP_ERROR, error}) )
     }
+  }
+}
+
+
+
+// --------------------------------
+//    SIGN OUT
+// --------------------------------
+
+export function signOut() {
+  return dispatch => {
+
+    firebase.auth().signOut().then(() => {
+      dispatch({type: t.USER_SIGNED_OUT})
+      dispatch({type: 'PURGE_DATA'}) // resets state to undefined
+      // Actions.replace('LoggedOut')
+    })
+    .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
   }
 }

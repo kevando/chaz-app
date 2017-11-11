@@ -5,7 +5,7 @@ export default styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    // paddingTop: 5,
+    // paddingLeft: MARGIN_LEFT,
     backgroundColor: colors.blueBG,
     // justifyContent: 'flex-start'
   },

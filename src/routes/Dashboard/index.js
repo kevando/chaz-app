@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
     myRecs: _.filter(state.recommendations.myRecs,rec => rec.status != "open"),
     givenRecs: state.recommendations.givenRecs,
     friends: state.friends, // mostly for testing
-    // app: state.app,
+    myInvites: state.app.myInvites,
     onboarding: state.app.onboarding,
     user: state.user,
     // recommendations: state.recommendations

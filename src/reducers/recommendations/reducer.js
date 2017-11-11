@@ -25,7 +25,7 @@ export default function recs(recommendations = initialState, action = {}) {
   //     }
   // -------------------------------------------
   case t.INIT_REC:
-  
+
     return {
       ...recommendations,
       unfinished: {
@@ -52,6 +52,16 @@ export default function recs(recommendations = initialState, action = {}) {
           ...recommendations.unfinished,
           // friend: action.friend,
           from: action.friend, // not always tho
+        }
+      }
+
+    // -------------------------------------------
+    case t.SET_UNFINISHED_DATA:
+      return {
+        ...recommendations,
+        unfinished: {
+          ...recommendations.unfinished,
+          ...action.data
         }
       }
 

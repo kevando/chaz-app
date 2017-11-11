@@ -18,7 +18,7 @@ const PhoneNumberSearch = (props) => {
   <View style={styles.container}>
     <Label center large>Find {props.friend.name}</Label>
     <Label center>Enter {props.friend.name}'s phone number.</Label>
-    <PhoneInput {...props} />
+    <PhoneInput {...props} phoneNumber={props.phoneNumber}  onTextChange={(state) => props.updateState(state)} />
 
     </View>
   )
@@ -70,7 +70,7 @@ const Invite = (props) => {
       <Label center large>{friend.name} has chaz!</Label>
         <Label center>{friend.phoneNumber} is correct and this person is on chaz.</Label>
         <Label center>Connecting will notify them</Label>
-
+        <TouchableOpacity onPress={()=>updateFriend(friend,{searchResults: null})}><Label center>OR try a different number</Label></TouchableOpacity>
       </View>
     )
   }

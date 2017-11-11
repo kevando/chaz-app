@@ -15,13 +15,22 @@ class RecViewContainer extends Component {
     }
 
   }
-  componentWillReceiveProps({recLive}) {
+  componentDidMount() {
+    const { recLive, rec } = this.props
     // if live rec not found, dont set it
-    recLive && this.setState({rec: recLive})
+    this.setState({rec: recLive || rec})
+    // console.warn('recLive',recLive)
+  }
+  componentWillReceiveProps({recLive, rec}) {
+    // if live rec not found, dont set it
+    this.setState({rec: recLive || rec})
+    // console.warn('recLive',recLive)
 
   }
   _saveRec = () => {
-    this.props.updateRecommendation(this.state.rec)
+    let newRec = this.state.rec // might not be the right way to clone object
+    delete newRec.friend // dont add this to firebase
+    this.props.updateRecommendation(newRec)
     this.setState({isEditing: false})
   }
 
@@ -50,16 +59,20 @@ class RecViewContainer extends Component {
     // this should turn out to be similar to accepting any ol rec
     const { rec, user, updateFriendData, addFriend, acceptInvitationRedux } = this.props
 
-    console.warn('accept invite')
+    console.log('accept invite')
 
     addFriend({name: rec.from.displayName,uid: rec.from.uid})
       .then(friend => {
-        console.warn('added friend',friend)
+        console.log('added friend',friend)
         acceptInvitationRedux(rec,friend)
           .then((rec) => {
-            console.warn('accepted invite', rec)
-            updateFriendData(rec.to.id,{uid: user.uid})
-              .then(console.warn('updated friend'))
+            // console.warn('accepted invite', rec)
+            updateFriendData(rec.to,{uid: user.uid}).
+              then(()=> {
+                // and finally redirect user
+                Actions.replace('Dashboard')
+              })
+              // .then(console.warn('updated friend'))
           })
 
 
@@ -68,7 +81,7 @@ class RecViewContainer extends Component {
   }
 
   render() {
-    console.log('RecViewContainer props',this.props)
+    // console.log('RecViewContainer props',this.props)
 
     // console.log('RecViewContainer state',this.state)
 
@@ -76,7 +89,8 @@ class RecViewContainer extends Component {
     return (
       <RecView
         {...this.state}
-        {...this.props}
+        app={this.props.app}
+        user={this.props.user}
         acceptInvitation={this._acceptInvitation}
         saveRec={this._saveRec}
         onDeletePress={this._onDeletePress}

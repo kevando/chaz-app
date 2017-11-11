@@ -30,18 +30,22 @@ const titleStyles = StyleSheet.create({
   text: {
     ...text,
     color: 'white',
-    fontSize: 36,
-    fontWeight: '400',
-    // lineHeight:20,
-    // marginTop:15,
-    marginHorizontal: 12,
-    // marginRight: 12,
+    fontSize: 30,
+    fontWeight: '700',
+    letterSpacing:0.5,
+    marginBottom: 20,
+    paddingLeft: 0,
+    marginHorizontal: 0,
     // backgroundColor: colors.lightWhite,
-    height: 40,
+    height: 50,
+    lineHeight: 60,
   },
   card: {
     fontSize: 20,
-    fontWeight: '700'
+    fontWeight: '700',
+    paddingLeft: 20,
+    marginBottom: 0,
+    lineHeight: 60, // float near bottom
   }
 
 });

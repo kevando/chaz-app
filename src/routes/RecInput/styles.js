@@ -64,9 +64,10 @@ export default styles = StyleSheet.create({
      justifyContent: 'center',
    },
    friendTouchable: {
-    //  backgroundColor: colors.yellow,
+     backgroundColor: colors.lightWhite,
      margin: 5,
-     padding: 5,
+     paddingVertical: 5,
+     paddingHorizontal: 10,
      borderColor: colors.lightGrey,
      borderWidth: 1,
      borderRadius: 5,

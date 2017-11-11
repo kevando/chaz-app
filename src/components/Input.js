@@ -10,15 +10,16 @@ export class PhoneInput extends Component {
 
 
   _onChange = (phoneNumber) => {
-    const { updateState } = this.props
-    updateState({
+    const { onTextChange } = this.props
+    onTextChange({
       phoneNumber,
+      phoneInput: phoneNumber,
       validPhoneNumber: phoneNumber.length == 10,
     })
   }
 
   render() {
-    // console.log('input',this.props)
+    console.log('input',this.props)
     const { onTextChange, phoneNumber, errorMessage, inputProps } = this.props
 
     return (
@@ -29,7 +30,7 @@ export class PhoneInput extends Component {
           multiline={false}
           style={styles.inputPhone}
           placeholderTextColor="#aaa"
-          onChangeText={value => onTextChange(value)}
+          onChangeText={phoneNumber => this._onChange(phoneNumber)}
           placeholder={'Phone number'}
           value={phoneNumber}
           {...inputProps}

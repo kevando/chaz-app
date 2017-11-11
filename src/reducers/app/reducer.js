@@ -9,14 +9,19 @@ const initialState = {
   notificationPermission: null,
   // isAnon: true,
   signInAttempts: 0,
-  invites: [],
+  // invites: [],
   devMode: false,
   onboarding: true,
 };
 
 
 export default function app(app = initialState, action = {}) {
-  // console.log(action)
+  // console.log(app)
+  // console.log('APP reducer',app)
+  if(!app.token) {
+    console.log('NO FUCKING APP TOKEN',app)
+    // alert('somehow I LOST THE FUCKING TOKEN')
+  }
   switch (action.type) {
 
     // -------------------------------------------
@@ -127,7 +132,6 @@ export default function app(app = initialState, action = {}) {
 
     // -------------------------------------------
     case t.SET_APP_DATA:
-    // console.warn(action.data)
       return {
         ...app,
         ...action.data,

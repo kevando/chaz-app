@@ -14,12 +14,17 @@ class InboxContainer extends Component {
     // this.props.clearNewRemoteMessages()
   }
 
+  _acceptOpenRec = (rec) => {
+    this.props.acceptRec(rec)
+  }
 
   render() {
+    // console.log(this.props)
       return (
         <Inbox
           {...this.props}
           {...this.state}
+          acceptOpenRec={this._acceptOpenRec}
         />
       )
   }

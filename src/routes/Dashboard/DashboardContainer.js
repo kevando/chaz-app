@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StatusBar ,Text} from 'react-native';
 import Dashboard from './Dashboard';
-import Hello from '../Hello'
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
 import Confetti from 'react-native-confetti';
+
 
 class DashboardContainer extends Component {
   // constructor(props) {
@@ -13,10 +13,18 @@ class DashboardContainer extends Component {
   componentWillMount() {
     this.state = {activeFilter: 'Everything'};
 
+    const { myInvites, onboarding } = this.props
 
+    // DEV
     // this.props.onboarding && Actions.replace('GetStarted')
 
-    this.props.onboarding && Actions.replace('Hello')
+    // PROD
+    onboarding && Actions.replace('Hello')
+
+    // User signed in and needs to accept their invite
+
+    // myInvites && myInvites.length > 0 && !onboarding &&
+    //   Actions.replace('RecView', {rec: myInvites[0] })
   }
 
   // componentWillReceiveProps({recommendations}) {}
@@ -31,10 +39,10 @@ class DashboardContainer extends Component {
       this._throwParty()
     // Actions.push('NewRecLightbox')
     // Actions.push('Profile')
-    Actions.push('Inbox')
+    // Actions.push('Invites')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    // Actions.push('RecView',{rec: this.props.givenRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[0]})
+    Actions.push('RecView',{rec: this.props.givenRecs[0]})
+    // Actions.push('FriendView',{friend: this.props.friends[1]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
 
 
@@ -85,7 +93,7 @@ class DashboardContainer extends Component {
   }
 
   render() {
-    console.log('Dash',this.props)
+    // console.log('Dash',this.props)
     // return null
     // const { showOnboarding } = this.props;
 
