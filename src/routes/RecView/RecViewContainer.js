@@ -11,7 +11,7 @@ class RecViewContainer extends Component {
       isEditing: false,
       rec: props.rec,
       updateState: (state) => this.setState(state),
-      updateRec: (recData) => this.setState({rec: {...this.state.rec, ...recData }}),
+      // updateRec: (recData) => this.setState({rec: {...this.state.rec, ...recData }}),
     }
 
   }
@@ -30,7 +30,7 @@ class RecViewContainer extends Component {
   _saveRec = () => {
     let newRec = this.state.rec // might not be the right way to clone object
     delete newRec.friend // dont add this to firebase
-    this.props.updateRecommendation(newRec)
+    this.props.updateRec(newRec.id,{...newRec}) // probly not the best
     this.setState({isEditing: false})
   }
 
@@ -94,7 +94,7 @@ class RecViewContainer extends Component {
         acceptInvitation={this._acceptInvitation}
         saveRec={this._saveRec}
         onDeletePress={this._onDeletePress}
-        updateRecommendation={this.props.updateRecommendation}
+        updateRec={this.props.updateRec}
         onAssignPress={this._onAssignPress}
         setRecReminder={this.props.setRecReminder}
       />

@@ -272,7 +272,7 @@ const InvitationDetail = (props) => {
 
 
   if(!props.rec) { return null}
-  const { user, rec, acceptInvitation, updateRec, updateState, isEditing, onDelete, updateRecommendation, app, setRecReminder } = props
+  const { user, rec, acceptInvitation, updateRec, updateState, isEditing, onDelete, app, setRecReminder } = props
 
   const given = user.uid == rec.from.uid
 
@@ -338,7 +338,7 @@ render() {
   // tmp maybe
   if(this.props.rec.type == 'invite') {return <InvitationDetail {...this.props} /> }
 
-  const { rec, updateRec, updateState, isEditing, onDelete, updateRecommendation, app, setRecReminder } = this.props;
+  const { rec, updateRec, updateState, isEditing, onDelete, app, setRecReminder } = this.props;
   return (
     <View style={{flex: 1}}>
         <View style={[cardStyles.container]}>
@@ -352,7 +352,7 @@ render() {
           <View style={cardStyles.bodyContainer}>
           {
             isEditing ?
-              <InputRecTitle title={rec.title} updateRec={updateRec} updateState={updateState} /> :
+              <InputRecTitle rec={rec} updateState={updateState} /> :
               <Title rec={rec} />
           }
 
@@ -366,7 +366,7 @@ render() {
 
           {
             rec.category && isEditing &&
-              <CategoryPickerEditing category={rec.category} updateRec={updateRec} />
+              <CategoryPickerEditing category={rec.category} updateRec={updateRec} rec={rec}/>
           }
 
           {
@@ -390,7 +390,7 @@ render() {
         <View style={cardStyles.optionsContainer} >
           <Icon name="trash" color="white" style={cardStyles.optionIcon} onPress={onDelete} />
           <Icon name="edit" color="white" style={cardStyles.optionIcon} onPress={()=>updateState({isEditing: true})} />
-          <SetReminderIcon rec={rec} updateRecommendation={updateRecommendation} app={app} setRecReminder={setRecReminder} />
+          <SetReminderIcon rec={rec} updateRec={updateRec} app={app} setRecReminder={setRecReminder} />
         </View> }
 
         </View>
@@ -414,25 +414,21 @@ export class InputRecTitle extends Component {
 
 render() {
   // console.log(this.props)
-  const { updateRec, updateState, title } = this.props;
+  const { updateState, rec } = this.props;
   return (
 
           <TextInput
             placeholder='Type here...'
             ref={ c => this._titleInput = c }
             autoCapitalize="none"
-            value={title}
+            value={rec.title}
             autoCorrect={false}
             autoFocus={false}
             placeholderTextColor="#bbb"
             multiline={true}
             style={inputStyles.inputTitle}
-            onChangeText={(title) => updateRec({title})}
-            onLayout={(event) => {
-              var {x, y, width, height} = event.nativeEvent.layout;
-              // console.log('input height',height)
-              updateState({inputHeight: height})
-            }}
+            onChangeText={(title) => updateState({rec: {...rec,title}} ) }
+
           />
   );
 }

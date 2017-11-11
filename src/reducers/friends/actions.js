@@ -93,10 +93,14 @@ export function sendInvite(friend, phoneNumber) {
     const user = getState().user
 
     const friendWithPhone = {...friend,phoneNumber}
+
+    if(!phoneNumber) {
+      return alert('no pghone')
+    }
     dispatch(createInvite(user,friendWithPhone))
 
     // now open imessage
-    // text(phoneNumber, 'Hey, check out this new app called chaz http://chaz.co/i')
+    text(phoneNumber, 'Hey, check out this new app called chaz')
   }
 }
 

@@ -41,7 +41,7 @@ class DashboardContainer extends Component {
     // Actions.push('Profile')
     // Actions.push('Invites')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    Actions.push('RecView',{rec: this.props.givenRecs[0]})
+    // Actions.push('RecView',{rec: this.props.givenRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[1]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
 

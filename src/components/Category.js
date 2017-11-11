@@ -78,7 +78,7 @@ class CategoryPickerComponent extends Component {
     if(rec) {
       // We are updating a rec
       const newRec = {...rec, category}
-      this.props.dispatch(RecActions.updateRecommendation(newRec))
+      this.props.dispatch(RecActions.updateRec(rec.id,{category}))
     } else {
       // this is a new rec so we need to run the callback fn too
       // this.props.dispatch(RecActions.setCategory(category))
@@ -242,19 +242,16 @@ class CategoryPickerComponentEditing extends Component {
 
     if(category) {
       // We are changing it
-      updateRec({category: updatedCategory}) // right now this is the recView state
-      // const newRec = {...rec, category}
-      // this.props.dispatch(RecActions.updateRecommendation(newRec))
+      // RecActions.updateRec(rec.id,{category: updatedCategory}) // right now this is the recView state
+      this.props.dispatch(RecActions.updateRec(rec.id,{category: updatedCategory}))
     } else {
       // we are adding a new category
-      // this.props.dispatch(RecActions.setCategory(category))
-      // callback(category)
     }
 
     if(saveImmediately) {
       // From details page and no cat existed
-      const updatedRec = {...rec, category: updatedCategory}
-      this.props.dispatch(RecActions.updateRecommendation(updatedRec))
+
+      this.props.dispatch(RecActions.updateRec(rec.id,{category: updatedCategory}))
       // Bug doesnt refresh UI
 
     }

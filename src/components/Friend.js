@@ -13,7 +13,7 @@ import { colors, text, width } from '../config/styles';
 
 
 export const Name = ({friend, onPress, small, large}) => {
-  if(!friend) { console.warn('no friend data'); return null; }
+  if(!friend) { console.log('no friend data, usually happens when updating rec'); return null; }
 
   // const fontSize = small ? 10 : large ? 30 : 29
 

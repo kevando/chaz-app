@@ -190,15 +190,17 @@ export const acceptRec = (rec) => (dispatch, getState) =>
 
 
 
-export function updateRecommendation(rec) {
-  console.log('updateRecommendation',rec)
+// ----------------------------------------------------
+//   UPDATE REC
+// ----------------------------------------------------
 
-  return(dispatch,getState) => {
-    rec.updatedAt = Date.now()
-    recsRef.doc(rec.id).update(rec)
-    // dispatch({ type: UPDATE_RECOMMENDATION, rec })
-  }
-}
+export const updateRec = (id,data) => (dispatch, getState) =>
+
+  new Promise(function(resolve,reject) {
+    recsRef.doc(id).update( {...data, updatedAt: Date.now() } )
+      .then(r => resolve('Successfully updated rec'))
+      .catch(e => reject('Could not updated rec',e.message))
+  })
 
 export function setReminder(recId,reminderDate) {
   return { type: SET_REMINDER, recId, reminderDate }

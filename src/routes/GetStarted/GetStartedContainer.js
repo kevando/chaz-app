@@ -72,7 +72,7 @@ class GetStartedContainer extends Component {
 
   _onSearchForPhonePress = () => {
     Keyboard.dismiss()
-    const { fetchInvites, setUserData } = this.props
+    const { fetchInvites, setUserData, setAppData } = this.props
     const { phoneNumber } = this.state
 
     setUserData({phoneNumber})

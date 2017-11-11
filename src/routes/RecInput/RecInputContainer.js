@@ -46,19 +46,6 @@ class RecInputContainer extends Component {
   }
 
 
-  // onNextPress() {
-  //
-  //   const { setTitle, rec, updateRecommendation } = this.props;
-  //
-  //   if(rec) {// if Editing..
-  //     rec.title = this.state.title
-  //     updateRecommendation(rec);
-  //     Actions.pop()
-  //   } else {
-  //     setTitle(this.state.title)
-  //     // Actions.push(this.state.nextRoute)
-  //   }
-  // }
   _setTitle = () => {
 
     this.props.setTitle(this.state.title)

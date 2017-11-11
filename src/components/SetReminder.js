@@ -42,13 +42,13 @@ export class SetReminderIcon extends Component {
 
     }
     _setReminder(reminderDateInMinutes) {
-      const { updateRecommendation, rec, setRecReminder } = this.props;
-      !rec.friend.name && console.warn('no friend name!!')
+      const { updateRec, rec, setRecReminder } = this.props;
+      // !rec.friend.name && console.warn('no friend name!!')
       setRecReminder(reminderDateInMinutes, rec)
         .then(reminderTimestamp => {
           // console.warn(reminderTimestamp)
           rec.reminder = reminderTimestamp
-          updateRecommendation(rec);
+          updateRec(rec.id,{reminder: reminderTimestamp});
         })
 
     }

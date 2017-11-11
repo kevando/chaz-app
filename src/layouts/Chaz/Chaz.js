@@ -39,59 +39,27 @@ class Chaz extends Component {
     this.props.initializeApp() // redux
   }
 
-  componentDidMount() {
-    // console.log('chaz.js mounted')
-  }
+  // componentDidMount() {}
+  // componentWillReceiveProps(nextProps) {}
+  // componentWillUpdate() {}
 
-  componentWillReceiveProps(nextProps) {
-    this._shouldToastDisplay(nextProps)
-  }
-
-  componentWillUpdate() {
-    // LayoutAnimation.linear(); // set the fade
-  }
-
-  _shouldToastDisplay = (nextProps) => {
-    // const { status, error } = this.props.app
-    // // if(nextProps.app.status != status)
-    // //   this._renderToast(nextProps.app.status,'green')
-    //
-    // if(nextProps.app.error != error)
-    //   this._renderToast(nextProps.app.error.message,'red')
-  }
-
-  _renderToast = (message, color) => {
-
-    // const OFFSET = this.state.visibleToasts * 60
-    // this.setState({visibleToasts: ++this.state.visibleToasts})
-    //
-    // let toast = Toast.show(message, {
-    //     // duration: 14000,
-    //     duration: 2000,//Toast.durations.SHORT,
-    //     position: Toast.positions.TOP + OFFSET,
-    //     backgroundColor: color,
-    //     onHidden: () => {
-    //         this.setState({visibleToasts: --this.state.visibleToasts})
-    //     }
-    // });
-  }
 
   updateState = (state) => {
     this.setState(state)
   }
 
-
-
   render() {
-    // console.warn('Chaz.js Rendered onboarding: ',this.props.onboarding)
-    const { isAuthenticated, } = this.props
+
+    const { isAuthenticated } = this.props
+    const { isReady } = this.state
+
     onboarding = true
     const navBorderColor = onboarding ? colors.blueBG : colors.newBlue
 
     // PROD Animate screen loading
-    // const { isReady } = this.state
-    // if (!isReady || !isAuthenticated)
-      // return <Loading updateState={this.updateState} />;
+
+    if (!isReady || !isAuthenticated)
+      return <Loading updateState={this.updateState} />;
 
       // if(onboarding == true) {
       //   // console.warn('return onboarding')

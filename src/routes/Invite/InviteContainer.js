@@ -26,6 +26,11 @@ class InviteContainer extends Component {
   _sendInvite = () => {
     const { sendInvite, friend } = this.props
     const { phoneNumber } = this.state
+
+    if(!phoneNumber){
+      alert('no phon')
+      return
+    }
     sendInvite(friend, phoneNumber)
     // update the UI
     this.setState({invitation: 'sending'})
