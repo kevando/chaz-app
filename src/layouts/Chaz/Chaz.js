@@ -61,6 +61,8 @@ class Chaz extends Component {
     if (!isReady || !isAuthenticated)
       return <Loading updateState={this.updateState} />;
 
+    
+
       // if(onboarding == true) {
       //   // console.warn('return onboarding')
       //   return <Onboarding />

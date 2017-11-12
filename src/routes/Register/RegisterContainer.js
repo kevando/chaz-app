@@ -96,6 +96,9 @@ class RegisterContainer extends Component {
     let Content = null
 
 
+    if(!this.props.app.token){
+      console.warn(' no fucking app token')
+    }
 
 
     // if(!app.isAnon) {alert('app not anon');return}

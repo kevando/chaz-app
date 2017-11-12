@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
   return {
     // onboarding: state.app.onboarding,
     isAuthenticated: state.app.isAuthenticated,
+    // appToken: state.app.token,
   };
 };
 

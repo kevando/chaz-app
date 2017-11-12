@@ -118,6 +118,8 @@ export function addFirestoreListeners(uid) {
         // console.warn(getState().app.onboarding)
         if(myRecs.length > 0)
           dispatch(setAppData({onboarding: false}))
+        // else
+          // dispatch(setAppData({onboarding: true}))
       }
 }
 

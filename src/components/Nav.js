@@ -147,7 +147,7 @@ render() {
   // _.forEach(TEST_ANIMATIONS, config => buttonIcons.push(<Animatable.View {...config}><Icon name="inbox" size={25} style={[styles.navIcon,{ color: config.color,marginTop: StatusBar.hidden ? -10 : 0,}]} /></Animatable.View>))
 
 
-  if(app.notificationPermission != "authorized" && !app.isAnon) {
+  if(app.notificationPermission != "authorized" && myRecs.length > 0 ) {
     // STEP 1
     buttonIcons.push(
       <Animatable.View animation="swing" iterationCount={'infinite'} duration={2000}>

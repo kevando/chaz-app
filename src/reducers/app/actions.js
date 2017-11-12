@@ -23,9 +23,14 @@ export function initializeApp() {
     dispatch(listenForAuthChanges())
     dispatch(listenForNotifications())
 
-    // console.warn('init app',app)
-    if(!app.token)
+    console.log('init app',app)
+    if(!app.token) {
+      console.warn('setting token in initApp')
       dispatch(setToken())
+    } else {
+      console.warn('not setting token cause I got it')
+    }
+
 
     if(!app.notificationPermission)
       dispatch(checkNotificationPermission())
@@ -44,16 +49,15 @@ export function setAppData(data) {
 //    GET FCM TOKEN
 // --------------------------------
 
-function setToken() {
-  return (dispatch, getState) => {
-      firebase.messaging().getToken().then(token => {
-        if(token !== getState().app.token) {
-          console.log('setting app token')
-          dispatch({type: t.SET_TOKEN, token})
-        }
-      })
-  }
-}
+export const setToken = () => (dispatch, getState) =>
+  new Promise (function(resolve, reject) {
+    firebase.messaging().getToken().then(token => {
+      dispatch({type: t.SET_TOKEN, token})
+      resolve(token)
+    })
+  })
+
+
 // In case things get out of whack
 export function refreshServerToken() {
   return (dispatch, getState) => {
@@ -112,11 +116,12 @@ export function confirmCode(codeInput) {
 
 function linkUser(credential) {
   return (dispatch, getState) => {
-    // console.log('linkUser')
+    console.warn('linkUser')
     firebase.auth().currentUser.linkWithCredential(credential)
       .then((firebaseUser) => {
         // console.log('linkedUser')
         dispatch({ type: t.USERS_LINKED, user: firebaseUser })
+
         dispatch(createUserInFirestore())
     }, function(error) {
       dispatch({type: t.SET_APP_ERROR, error})
@@ -222,7 +227,8 @@ export function signOut() {
     firebase.auth().signOut().then(() => {
       dispatch({type: t.USER_SIGNED_OUT})
       dispatch({type: 'PURGE_DATA'}) // resets state to undefined
-      // Actions.replace('LoggedOut')
+      // might not be needed but this is fucking annoying
+      dispatch(setToken())
     })
     .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
   }

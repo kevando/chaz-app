@@ -32,6 +32,7 @@ class GetStartedContainer extends Component {
   }
 
 
+
   _onYesPress = (from) => {
     const { user, initNewRec } = this.props
     console.log('am i called?')
@@ -129,6 +130,10 @@ class GetStartedContainer extends Component {
     // console.log('GS',this.props)
     // const { question, nameSaved } = this.state
     const { user } = this.props
+
+    if(!this.props.app.token){
+      console.warn(' no fucking app token')
+    }
 
     return (
       <GetStarted

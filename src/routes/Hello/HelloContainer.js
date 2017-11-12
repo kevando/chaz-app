@@ -1,5 +1,5 @@
   import React, { Component } from 'react';
-import { View, StatusBar ,Text, TextInput, ScrollView} from 'react-native';
+import { View, StatusBar ,Text, TextInput, ScrollView, AlertIOS} from 'react-native';
 import Hello from './Hello'
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
@@ -22,9 +22,17 @@ class HelloContainer extends Component {
       question: null,
     }
   }
-  componentWillMount(){
-    // Mostly a DEV scenario
-    // if(!this.props.app.isAnon) {this.props.signOut()}
+  componentDidMount() {
+    if(!this.props.app.isAnon) {
+      // Something bad happened to allow this
+      AlertIOS.alert(
+        'Woah!!!', 'Looks like maybe you reinstalled the app',
+        [
+          {text: 'Log Out', onPress: () => this.props.signOut(), },
+          {text: 'Cancel', style: 'cancel'},
+        ]
+      )
+    }
   }
 
   _onSaveNamePress = () => {

@@ -19,7 +19,7 @@ export class PhoneInput extends Component {
   }
 
   render() {
-    console.log('input',this.props)
+    // console.log('input',this.props)
     const { onTextChange, phoneNumber, errorMessage, inputProps } = this.props
 
     return (

@@ -4,7 +4,7 @@ import firebase from 'react-native-firebase'
 
 import { usersRef, recsRef } from '../../config/firebase'
 import { addFriend } from '../friends/actions'
-
+import { setToken } from '../app/actions'
 
 // --------------------------------
 //    SET USER DATA IN REDUX
@@ -60,16 +60,27 @@ export function checkForInvitesByName(name) {
 // --------------------------------
 export const createUserInFirestore = () => (dispatch, getState) =>
   new Promise(function(resolve, reject) {
-
+    // console.warn('creating user')
     const user = getState().user
-    const app = getState().app
-
+    let token = getState().app.token
+    // console.warn('creating user 2')
     if(!user.displayName) {alert('!user.displayName');return reject('user.displayName is null')}
-    if(!app.token) {alert('!app.token');return reject('!app.token')}
+    // console.warn('creating user 3')
+    if(!token) {
+      token = setToken()
+      alert('!app.token wow still happens')
+    }
+    // console.warn('creating user 4')
+
+    if(!token) {
+      alert('aaaand grabbing token still failed')
+    }
+
+    // console.warn('creating user 5')
 
     const initialData = {
       uid: user.uid,
-      token: app.token,
+      token: token,
       phoneNumber: user.phoneNumber,
       linkedAt: Date.now(),
       displayName: user.displayName,
