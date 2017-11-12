@@ -19,12 +19,12 @@ console.log(invitations)
   return (
     <View style={styles.container}>
     <ScrollView>
-      <Title>Invitations</Title>
+      <Title>Outbox</Title>
 
       {
         _.map(invitations, (invitation,i) => {
           return (
-            <Card invitation rec={invitation} key={i} />
+            <Card sent rec={invitation} key={i} />
           )
         })
       }

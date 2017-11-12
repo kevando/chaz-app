@@ -23,8 +23,8 @@ export const PhoneInput = (props) => {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
 
-      <Text style={styles.title} onPress={props.registerAsTest}>Activate chaz</Text>
-      <Text style={styles.text} onPress={props.loginAsTest}>Enjoy all the benefits of an activated chaz account by verifying your phone number</Text>
+      <Text style={styles.title}>Activate chaz</Text>
+      <Text style={styles.text}>Enjoy all the benefits of an activated chaz account by verifying your phone number</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -63,7 +63,7 @@ export const CodeInput = (props) => {
 
       <Text style={styles.title}>Enter Code:</Text>
       <Text style={styles.text}>{app.shouldSignIn && 'Welcome back'}</Text>
-      <Text style={styles.text} onPress={resetPhoneNumber}>{app.signInAttemps > 0 && 'Get new code'}</Text>
+      {!verificationCode && <Animatable.Text delay={5000} animation="fadeIn" style={styles.text} onPress={resetPhoneNumber}>{app.signInAttemps > 0 ? 'Get new code' : 'Try a new number'}</Animatable.Text>}
 
       <View style={styles.inputContainer}>
         <TextInput

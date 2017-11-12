@@ -23,12 +23,12 @@ export function initializeApp() {
     dispatch(listenForAuthChanges())
     dispatch(listenForNotifications())
 
-    console.log('init app',app)
+    // console.log('init app',app)
     if(!app.token) {
-      console.warn('setting token in initApp')
+      // console.warn('setting token in initApp')
       dispatch(setToken())
     } else {
-      console.warn('not setting token cause I got it')
+      // console.warn('not setting token cause I got it')
     }
 
 
@@ -116,7 +116,7 @@ export function confirmCode(codeInput) {
 
 function linkUser(credential) {
   return (dispatch, getState) => {
-    console.warn('linkUser')
+    // console.warn('linkUser')
     firebase.auth().currentUser.linkWithCredential(credential)
       .then((firebaseUser) => {
         // console.log('linkedUser')

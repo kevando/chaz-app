@@ -44,7 +44,7 @@ class RegisterContainer extends Component {
   }
   componentWillReceiveProps({app}) {
     if(app.error !== this.props.app.error) {
-      console.warn('set err')
+      // console.warn('set err')
       this.setState({errorMessage: app.error.message})
     }
   }

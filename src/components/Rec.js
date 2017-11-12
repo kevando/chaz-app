@@ -128,6 +128,27 @@ render() {
   }
 }
 
+class SentCard extends Component {
+
+render() {
+  // console.log(this.props)
+  const { rec } = this.props;
+  return (
+    <View style={cardStyles.container}>
+      <View style={cardStyles.headerContainer}>
+        <View style={cardStyles.friendContainer}>
+          <Text style={cardStyles.headerText}>You sent this recommendation to {rec.to.name || rec.to.displayName}</Text>
+        </View>
+      </View>
+      <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
+        <Icon size={25} color={rec.status == 'accepted' ? 'green' : 'pink'} name={rec.status == 'accepted' ? 'check' : rec.type == 'invite' ? 'navigation' : 'file'} />
+        <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
+        </View>
+    </View>
+    )
+  }
+}
+
 class OpenCard extends Component {
 
   render() {
@@ -231,7 +252,7 @@ export class Card extends Component {
 
   render() {
     // console.log(this.props)
-    const { rec, user, listItem, skinny, given, invitation, open } = this.props;
+    const { rec, user, listItem, skinny, given, invitation, open, sent} = this.props;
 
     if(listItem) { // Dashboard
       return (
@@ -257,6 +278,13 @@ export class Card extends Component {
           <OpenCard rec={rec} user={user} acceptOpenRec={()=>this.props.acceptOpenRec(rec)} />
         </TouchableOpacity>
       )
+    } else if(sent) {  // Invites
+      return (
+        <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
+          <SentCard rec={rec} user={user} />
+        </TouchableOpacity>
+      )
+
     } else {
       return null
     }

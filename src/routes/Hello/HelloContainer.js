@@ -1,5 +1,5 @@
   import React, { Component } from 'react';
-import { View, StatusBar ,Text, TextInput, ScrollView, AlertIOS} from 'react-native';
+import { View, StatusBar ,Text, TextInput, ScrollView, AlertIOS, Alert} from 'react-native';
 import Hello from './Hello'
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
@@ -27,13 +27,17 @@ class HelloContainer extends Component {
       // Something bad happened to allow this
       AlertIOS.alert(
         'Woah!!!', 'Looks like maybe you reinstalled the app',
-        [
-          {text: 'Log Out', onPress: () => this.props.signOut(), },
-          {text: 'Cancel', style: 'cancel'},
-        ]
+        this._dialogOptions
       )
     }
   }
+
+  _dialogOptions = [
+
+      {text: 'Log Out', onPress: () => this.props.signOut(), },
+      {text: 'Okayy'},
+    
+  ]
 
   _onSaveNamePress = () => {
     const { setUserData, fetchInvites, saveDisplayName } = this.props
@@ -42,14 +46,15 @@ class HelloContainer extends Component {
     saveDisplayName(nameInput)
     setUserData({displayName: nameInput})
       .then(myInvites => {
-
         // Search for invites
         fetchInvites("to.name",nameInput.toLowerCase())
           .then(myInvites => {
             // console.warn('invites',myInvites)
             this.setState({myInvites})
-          })
-      })
+
+          }).catch(e => Alert.alert('Error fetching invites',e, this._dialogOptions))
+
+      }).catch(e => Alert.alert('Error saving user data',e, this._dialogOptions))
       // .then(r => console.warn(r))
   }
   _onGetStartedPress = () => {

@@ -92,32 +92,9 @@ const styles = StyleSheet.create({
 });
 
 
-
-// --------------------------------
-// Dashboard Right button
-// --------------------------------
-
-const TEST_ANIMATIONS = [
-  {animation: "tada", iterationCount: 'infinite', duration: 5000, color: colors.yellow },
-  // {animation: "jello", iterationCount: 'infinite', duration: 2000,color: colors.yellow},
-  // {animation: "rubberBand", iterationCount: 'infinite', duration: 2000,color: colors.lightWhite},
-
-  // {animation: "swing", iterationCount: 'infinite', duration: 2000,color: 'white'},
-  // {animation: "pulse", iterationCount: 'infinite', duration: 200,color: 'green'},
-  // {animation: "flash", iterationCount: 'infinite', duration: 9000,color: 'orange'},
-
-  // intense
-  // {animation: "shake", iterationCount: 'infinite', duration: 2000},
-  // {animation: "wobble", iterationCount: 'infinite', duration: 2000},
-
-  // {animation: "slideInDown", iterationCount: 'infinite', duration: 2000,color: 'red',direction: 'alternate'},
-  // {animation: "zoomIn", iterationCount: 'infinite', duration: 2000,color: 'red',direction: 'alternate'},
-
-]
-
-// ----------------------------
-//  NAV BUTTON
-// ----------------------------
+// --------------------------------------------------------
+//      NAV BUTTONS
+// --------------------------------------------------------
 
 const NavButton = ({onPress,icon,color=colors.lightWhite,size=25}) => {
   return (
@@ -130,21 +107,16 @@ const NavButton = ({onPress,icon,color=colors.lightWhite,size=25}) => {
   )
 }
 
+ // --------------------------------------------------------
 class DashboardButtonContainer extends Component {
 
 
 render() {
   const { app, myRecs, user, reminders, openRecs, openInvitations } = this.props;
 
-  // user.providerData.length > 0 && console.warn('we are a real user, bitchin')
-  // console.warn(app.notificationPermission)
-  // console.warn(app.isAnon)
 
   // this should turn out to be pretty much the onboarding steps
   let buttonIcons = []
-
-  // TEST ICONS
-  // _.forEach(TEST_ANIMATIONS, config => buttonIcons.push(<Animatable.View {...config}><Icon name="inbox" size={25} style={[styles.navIcon,{ color: config.color,marginTop: StatusBar.hidden ? -10 : 0,}]} /></Animatable.View>))
 
 
   if(app.notificationPermission != "authorized" && myRecs.length > 0 ) {
@@ -177,20 +149,15 @@ render() {
     )
   }
 
+  // INVITE THE USER TO SIGN UP
   if(myRecs.length > 0 && app.notificationPermission == "authorized" && app.isAnon) {
-
-    // INVITE THE USER TO SIGN UP
     buttonIcons.push (
       <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
-      <NavButton
-        onPress={()=> Actions.push('Register')}
-        icon="zap"
-        color={colors.yellow}
-
-      />
+        <NavButton onPress={()=> Actions.push('Register')} icon="zap" color={colors.yellow} />
       </Animatable.View>
     )
   }
+
   if(app.notificationPermission == "authorized" && !app.isAnon) {
 
     // INVITE THE USER TO SIGN UP
@@ -203,16 +170,14 @@ render() {
       />
     )
   }
-  if(!app.isAnon) {
-    // LET USER ACCESS THEIR ACCOUNT
-    buttonIcons.push (
-      <NavButton
-        onPress={()=> Actions.push('Profile')}
-        icon="user"
-        color={colors.lightWhite}
-      />
-    )
 
+  // ---------------------
+  //    PROFILE
+  // ---------------------
+  if(!app.isAnon) {
+    buttonIcons.push (
+      <NavButton onPress={()=> Actions.push('Profile')} icon="user" />
+    )
   }
 
   // ---------------------
@@ -266,3 +231,27 @@ function mapDispatchToProps(dispatch) {
 }
 
 export const DashboardRightButton = connect(mapStateToProps, mapDispatchToProps)(DashboardButtonContainer);
+
+//
+//
+// const TEST_ANIMATIONS = [
+//   {animation: "tada", iterationCount: 'infinite', duration: 5000, color: colors.yellow },
+//   // {animation: "jello", iterationCount: 'infinite', duration: 2000,color: colors.yellow},
+//   // {animation: "rubberBand", iterationCount: 'infinite', duration: 2000,color: colors.lightWhite},
+//
+//   // {animation: "swing", iterationCount: 'infinite', duration: 2000,color: 'white'},
+//   // {animation: "pulse", iterationCount: 'infinite', duration: 200,color: 'green'},
+//   // {animation: "flash", iterationCount: 'infinite', duration: 9000,color: 'orange'},
+//
+//   // intense
+//   // {animation: "shake", iterationCount: 'infinite', duration: 2000},
+//   // {animation: "wobble", iterationCount: 'infinite', duration: 2000},
+//
+//   // {animation: "slideInDown", iterationCount: 'infinite', duration: 2000,color: 'red',direction: 'alternate'},
+//   // {animation: "zoomIn", iterationCount: 'infinite', duration: 2000,color: 'red',direction: 'alternate'},
+//
+// ]
+//
+//
+//   // TEST ICONS
+//   // _.forEach(TEST_ANIMATIONS, config => buttonIcons.push(<Animatable.View {...config}><Icon name="inbox" size={25} style={[styles.navIcon,{ color: config.color,marginTop: StatusBar.hidden ? -10 : 0,}]} /></Animatable.View>))

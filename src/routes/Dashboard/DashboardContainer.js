@@ -7,19 +7,19 @@ import Confetti from 'react-native-confetti';
 
 
 class DashboardContainer extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+
+
   componentWillMount() {
     this.state = {activeFilter: 'Everything'};
 
-    const { myInvites, onboarding } = this.props
+    const { myInvites, onboarding, myRecs, app } = this.props
 
     // DEV
     // this.props.onboarding && Actions.replace('GetStarted')
 
     // PROD
-    onboarding && Actions.replace('Hello')
+    if((onboarding) || (myRecs.length == 0 & app.isAnon))
+      Actions.replace('Hello')
 
     // User signed in and needs to accept their invite
 

@@ -17,8 +17,8 @@ class GetStarted extends Component {
 
     if(showCard && !unfinished.from ) { text = 'Who told you about chaz?' }
     if(showCard && unfinished.from ) { text = `Did ${unfinished.from.displayName} tell you about chaz?` }
-    if(friendName && myInvites && !showPhoneInput) { text = `Is ${friendName} on chaz?`}
-    if(showPhoneInput) { text = 'Enter your phone number'}
+    if(friendName && myInvites && !showPhoneInput) { text = `Does ${friendName} already have chaz?`}
+    if(showPhoneInput) { text = 'What\'s your phone number'}
     if(friendName && myInvites && myInvites.length > 0 ) { text = `Did ${myInvites[0].from.displayName} tell you?`}
 
 
@@ -55,7 +55,7 @@ class GetStarted extends Component {
           myInvites && myInvites.length == 0 && !showPhoneInput &&
           <View>
             <Button bgcolor='green' rounded fat animated text="Yes" onPress={()=>updateState({showPhoneInput: true})} />
-            <Button bgcolor='red' rounded fat animated text="No" onPress={()=>alert('add ur phone# do it')} />
+            <Button bgcolor='red' rounded fat animated text="No" onPress={()=>alert('Are you sure about that?')} />
           </View>
         }
 
@@ -93,7 +93,7 @@ class GetStarted extends Component {
         }
 
         {
-          showCard && unfinished.from && false && 
+          showCard && unfinished.from && false &&
             <Button bgcolor='green' rounded fat animated text="Yes, accept the invite" onPress={onAcceptInvitePress} />
         }
 

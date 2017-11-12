@@ -13,7 +13,6 @@ export const setUserData = (data) => (dispatch, getState) =>
   new Promise(function(resolve, reject) {
       dispatch({ type: t.SET_USER_DATA, data })
       resolve('first')
-      resolve('second')
   })
 
 

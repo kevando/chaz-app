@@ -61,7 +61,7 @@ class Chaz extends Component {
     if (!isReady || !isAuthenticated)
       return <Loading updateState={this.updateState} />;
 
-    
+
 
       // if(onboarding == true) {
       //   // console.warn('return onboarding')
@@ -97,6 +97,7 @@ class Chaz extends Component {
 
                   </Lightbox>
                   <Scene key='NewRecLightboxModal' component={RecInput} title='' />
+                  <Scene key='RegisterModal' component={Register} title='' hideNavBar={false} />
 
                   <Stack key="InviteModall"  back hideNavBar={false}>
 

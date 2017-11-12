@@ -40,7 +40,7 @@ export const fetchInvites = (This,That) => (dispatch, getState) =>
           // recsRef.doc(doc.id).update({status: 'accepted', acceptedAt: Date.now()}) // close this invite otherwise it can get triggered again
         })
         resolve(myInvites)
-      })
+      }).catch(e => reject(e))
   })
 
 
@@ -122,11 +122,10 @@ export const saveRec = () => (dispatch, getState) =>
 export const acceptInvitationRedux = (rec,friend) => (dispatch, getState) =>
 
   new Promise(function(resolve,reject) {
+    console.warn('accepting invite')
     const user = getState().user
-    console.log('rec',rec)
-    console.log('friued',friend)
 
-    // Update Invitaiton Doc
+    // // Update Invitaiton Doc
     recsRef.doc(rec.id).update({
       to: {
         ...rec.to,
@@ -140,8 +139,7 @@ export const acceptInvitationRedux = (rec,friend) => (dispatch, getState) =>
       acceptedAt: Date.now(),
     })
       .then(docRef => {
-        // const updatedRec = {...docRef.data(),id: docRef.id}
-        // resolve(updatedRec)
+        addMessage(rec.from.uid,`Hey jimbo jones, ${rec.to.name || rec.to.displayName} just accepted your chaz invite`)
     })
     .catch(error => reject(error))
 
@@ -172,6 +170,7 @@ export const acceptRec = (rec) => (dispatch, getState) =>
 // add friend id to from
 // set status to accepted
   new Promise(function(resolve,reject) {
+    // console.warn('accept Rec')
     const user = getState().user
     const friend = _.find(getState().friends,f => f.uid == rec.from.uid)
 
@@ -183,7 +182,10 @@ export const acceptRec = (rec) => (dispatch, getState) =>
       status: 'accepted',
       "from.id" : friend.id,
       acceptedAt: Date.now(),
-    }).then(resolve)
+    }).then(r=> {
+      addMessage(rec.from.uid,`Hey Buddy, ${rec.to.name || rec.to.displayName} just accepted your chaz rec`)
+      resolve()
+    })
 
 
   }) // Promise

@@ -16,7 +16,7 @@ const mapStateToProps = (state) => {
     myInvites: state.app.myInvites,
     onboarding: state.app.onboarding,
     user: state.user,
-    // recommendations: state.recommendations
+    app: state.app,
   };
 };
 

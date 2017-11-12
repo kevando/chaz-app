@@ -100,9 +100,11 @@ class GetStartedContainer extends Component {
         setUnfinishedData({from: {id: friend.id, name: friend.name}}).then(() => {
           saveRec()
           // Actions.push('Register')
-          Actions.replace('Register') // preventing user from going back to creating duplicate first recs
-        })
-      })
+          Actions.push('RegisterModal') // preventing user from going back to creating duplicate first recs
+
+        }).catch(e => Alert.alert('Error adding friend',e))
+
+      }).catch(e => Alert.alert('Error adding friend',e))
   }
   _onAcceptInvitePress = () => {
     // found the invite by either to.name, from.displayName, or to.phoneNumber
