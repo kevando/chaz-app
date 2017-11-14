@@ -10,21 +10,21 @@ class ProfileContainer extends Component {
 
   }
 
-
-  _onLogoutPress = () => {
-
-    AlertIOS.prompt(
-      'Developer Options', 'Option to change display name',
-      [
-        {text: 'Update Name', onPress: (text) => this.props.saveDisplayName(text) },
-        {text: 'Log Out', onPress: () => this.props.signOut(), },
-        {text: 'Refresh Token', onPress: () => this.props.refreshServerToken(), },
-        {text: 'Turn Dev Mode On', onPress: () => this.props.setAppData({devMode: true}), },
-        {text: 'Turn Dev Mode Off', onPress: () => this.props.setAppData({devMode: false}), },
-        {text: 'Cancel', style: 'cancel'},
-      ]
-    )
-  }
+  //
+  // _onLogoutPress = () => {
+  //
+  //   AlertIOS.prompt(
+  //     'Developer Options', 'Option to change display name',
+  //     [
+  //       {text: 'Update Name', onPress: (text) => this.props.saveDisplayName(text) },
+  //       {text: 'Log Out', onPress: () => this.props.signOut(), },
+  //       {text: 'Refresh Token', onPress: () => this.props.refreshServerToken(), },
+  //       {text: 'Turn Dev Mode On', onPress: () => this.props.setAppData({devMode: true}), },
+  //       {text: 'Turn Dev Mode Off', onPress: () => this.props.setAppData({devMode: false}), },
+  //       {text: 'Cancel', style: 'cancel'},
+  //     ]
+  //   )
+  // }
   _formatPhoneNumber(s) {
     var s2 = (""+s).replace(/\D/g, '');
     var m = s2.match(/^(\d{3})(\d{3})(\d{4})$/);
@@ -36,7 +36,6 @@ class ProfileContainer extends Component {
       return (
         <Profile
           formatedNumber={this._formatPhoneNumber(this.props.user.phoneNumber)}
-          onLogoutPress={this._onLogoutPress}
           user={this.props.user}
           friends={this.props.friends}
           givenRecs={this.props.givenRecs}

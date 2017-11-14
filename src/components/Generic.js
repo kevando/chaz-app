@@ -13,9 +13,13 @@ import * as Animatable from 'react-native-animatable';
 // ---------------------------------------
 
 export const Title = (props) => {
+  const { black, center, sub } = props
   const styles = [
     titleStyles.text,
     props.card && titleStyles.card,
+    black && {color: colors.black},
+    center && {textAlign: 'center'},
+    sub && {fontSize: 15, fontWeight: '300', height: 30,lineHeight: 20},
     // props.center && {textAlign: 'center',marginVertical: 20,paddingHorizontal: 40,},
     // props.title && {fontSize: 20,fontWeight: '600'},
     // props.large && {fontSize: 20,fontWeight: '700'},
@@ -95,9 +99,10 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
     {
       backgroundColor: bgcolor ? colors[bgcolor] : colors.green,
       borderColor: bgcolor ? colors[bgcolor] : colors.green,
-      borderRadius: rounded ? 40 : 0,
+      borderRadius: 0,
       borderWidth: 10,
-      // backgroundColor:'blue'
+      paddingVertical: 10,
+      paddingHorizontal: 20,
     },
     ghost: {
       // color: 'white',
@@ -115,10 +120,9 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       fontWeight: '500',
       // ^^^^ ...text not working for some reason
       margin: 0,
-      fontSize: rounded ? 15 : 17,
+      fontSize: rounded ? 13 :17,
       borderWidth: 0,
-      paddingVertical: rounded ? 3 : 10,
-      paddingHorizontal: rounded ? 10 : 20,
+
       margin: 0,
       color: color || 'white',
       textAlign: center ? 'center' : 'left',
@@ -129,6 +133,12 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       marginHorizontal: 30,
       paddingVertical: 10,
       paddingHorizontal: 20,
+    },
+    rounded: {
+      marginRight: 10,
+      borderRadius: 20,
+      paddingHorizontal: 10,
+      paddingVertical: 0,
     }
   })
 
@@ -136,7 +146,7 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
 
   let ButtonContainer = (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} >
-      <View style={[styles.container,ghost && styles.ghost,fat && styles.fat]}>
+      <View style={[styles.container,ghost && styles.ghost,fat && styles.fat, rounded && styles.rounded]}>
         <Text style={styles.text}>
           {text}
         </Text>

@@ -25,6 +25,8 @@ import Hello from '../../routes/Hello';
 import Invites from '../../routes/Invites';
 import GetStarted from '../../routes/GetStarted';
 import Inbox from '../../routes/Inbox';
+import GodView from '../../routes/GodView';
+import Debug from '../../routes/Debug';
 
 import RNShakeEvent from 'react-native-shake-event';
 
@@ -40,9 +42,7 @@ class Chaz extends Component {
   componentWillMount() {
     this.props.initializeApp() // redux
 
-    RNShakeEvent.addEventListener('shake', () => {
-      this._showDebugOptions()
-    });
+    RNShakeEvent.addEventListener('shake', () => Actions.DebugLightbox );
 
   }
 
@@ -55,20 +55,7 @@ class Chaz extends Component {
     this.setState(state)
   }
 
-  _showDebugOptions = () => {
 
-    AlertIOS.prompt(
-      'Developer Options', 'Option to change display name',
-      [
-        {text: 'Update Name', onPress: (text) => this.props.saveDisplayName(text) },
-        {text: 'Log Out', onPress: () => this.props.signOut(), },
-        {text: 'Refresh Token', onPress: () => this.props.refreshServerToken(), },
-        {text: 'Turn Dev Mode On', onPress: () => this.props.setAppData({devMode: true}), },
-        {text: 'Turn Dev Mode Off', onPress: () => this.props.setAppData({devMode: false}), },
-        {text: 'Cancel', style: 'cancel'},
-      ]
-    )
-  }
 
   render() {
 
@@ -80,8 +67,8 @@ class Chaz extends Component {
 
     // PROD Animate screen loading
 
-    if (!isReady || !isAuthenticated)
-      return <Loading updateState={this.updateState} />;
+    // if (!isReady || !isAuthenticated)
+      // return <Loading updateState={this.updateState} />;
 
 
 
@@ -111,11 +98,14 @@ class Chaz extends Component {
                     <Scene key='LoggedOut' component={LoggedOut} title='' hideNavBar={false}  />
                     <Scene key='Reminders' component={Reminders} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                     <Scene key='Settings' component={Boilerplate} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                    <Scene key='GodView' component={GodView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   </Stack>
 
 
                   <Scene key='NewRecLightbox' component={RecInput} title='' hideNavBar={true}  />
                   <Scene key='FirstRec' component={RecInput} title='' hideNavBar={false}  />
+
+                  <Scene key='DebugLightbox' component={Debug} title='' hideNavBar={false}  />
 
                   </Lightbox>
                   <Scene key='NewRecLightboxModal' component={RecInput} title='' />

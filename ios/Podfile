@@ -15,11 +15,11 @@ target 'Chaz' do
   pod 'Firebase/Auth'
   pod 'Firebase/Crash'
   pod 'Firebase/Database'
-  # pod 'Firebase/DynamicLinks'
+  pod 'Firebase/DynamicLinks'
   # pod 'Firebase/Performance'
   pod 'Firebase/Firestore'
   pod 'Firebase/Messaging'
-  # pod 'Firebase/RemoteConfig'
+  pod 'Firebase/RemoteConfig'
   # pod 'Firebase/Storage'
 
   # Adding 10/30/2017 for progress animations

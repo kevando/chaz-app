@@ -1,76 +1,50 @@
 import React from 'react';
+import { View, Text, TextInput, Button, StatusBar, Keyboard, ScrollView, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
-
-
+import Icon from 'react-native-vector-icons/Feather'
+import { Title } from '../../components/Generic'
 
 import styles from './styles';
 
-const Debug = (props) => {
+const Debug = ({user, app, onClose, refreshServerToken, signOut, changeNamePopup}) => {
 
-  return(<View><Text>dude</Text></View>)
+  return(
+    <View style={styles.container}>
+      <Icon onPress={onClose} name="x" size={25} style={styles.closeButton} />
 
-  // const { recommendations, onPurgePress, app, onFeedbackPress, notificationPermission } = props;
-  //
-  // return (
-  //   <Container>
-  //     <Content>
-  //       <List>
-  //
-  //         <ListItem itemDivider style={styles.headerr}>
-  //           <Text>Application Info</Text>
-  //         </ListItem>
-  //
-  //         <ListItem iconLeft>
-  //           <Icon name="ios-phone-portrait" />
-  //           <Text>Device</Text>
-  //           <Text note>{app.deviceName}</Text>
-  //         </ListItem>
-  //
-  //         <ListItem iconLeft>
-  //           <Icon name="ios-phone-portrait" />
-  //           <Text>Version</Text>
-  //           <Text note>{app.version}</Text>
-  //         </ListItem>
-  //
-  //         <ListItem iconLeft>
-  //           <Icon name="ios-phone-portrait" />
-  //           <Text>Notifications</Text>
-  //           <Text note>{app.notificationPermission}</Text>
-  //         </ListItem>
-  //
-  //
-  //         <ListItem itemDivider style={styles.headerr}>
-  //           <Text>Application Data</Text>
-  //         </ListItem>
-  //
-  //
-  //         <ListItem iconLeft>
-  //           <Icon name="ios-settings-outline" style={{ color: '#0A69FE' }} />
-  //           <Text>Recommendations</Text>
-  //           <Badge style={{ backgroundColor: '#8C97B5' }}>{recommendations.length}</Badge>
-  //         </ListItem>
-  //
-  //         <ListItem iconLeft>
-  //           <Icon name="ios-alert" style={{ color: '#8C97B5' }} />
-  //           <Text>Purge Data</Text>
-  //           <Button danger onPress={onPurgePress}>Purge Data</Button>
-  //         </ListItem>
-  //
-  //         <ListItem itemDivider style={styles.headerr}>
-  //           <Text>Support</Text>
-  //         </ListItem>
-  //
-  //         <ListItem iconLeft>
-  //           <Icon name="ios-mail" />
-  //           <Text>Send Feedback</Text>
-  //           <Button info onPress={onFeedbackPress}>Send Mail</Button>
-  //         </ListItem>
-  //
-  //       </List>
-  //
-  //     </Content>
-  // </Container>
-  // );
+      <ScrollView style={styles.contentWrapper}>
+
+        <Title black center>Debug Settings</Title>
+        <Title black center sub>{user.uid}</Title>
+
+        <Button onPress={refreshServerToken} title="Refresh Server Token" />
+        <Button onPress={signOut} title="Sign Out" />
+        <Button onPress={changeNamePopup} title="Change Name" />
+
+        {
+          _.map(user,(field,key ) => {return (
+            <View style={styles.row} key={key}>
+              <Text style={styles.keyText}>{key}:</Text>
+              <Text style={styles.fieldText}>{JSON.stringify(field)}</Text>
+            </View>
+          )})
+        }
+
+        {
+          _.map(app,(field,key ) => {
+            if(key != 'error') { return (
+              <View style={styles.row} key={key}>
+                <Text style={styles.keyText}>{key}:</Text>
+                <Text style={styles.fieldText}>{JSON.stringify(field)}</Text>
+              </View>
+          )}})
+        }
+
+      </ScrollView>
+
+    </View>
+  )
+
 }
 
 export default Debug;

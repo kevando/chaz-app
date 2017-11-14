@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet  } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+// import Emoji from 'react-native-emoji'
+// var Emoji = require('react-native-emoji');
 import _ from 'lodash'
 import { colors, text, width, MARGIN_LEFT } from '../config/styles';
 
@@ -10,28 +12,34 @@ import { connect } from 'react-redux';
 
 export const Categories = {
   // "uncategorized" : {icon: "file-text", title: "Uncategorized"},
-  "movie" : {icon: "film", title: "Movie", verb:'watch'},
-  "tv" : {icon: "tv", title: "TV Series", verb:'watch'},
-  "book" : {icon: "book", title: "Book", verb:'read'},
-  "music" : {icon: "music", title: "Music", verb: 'listen to'},
-  "podcast" : {icon: "mic", title: "Podcast", verb:'listen to'},
-  "documentary" : {icon: "video", title: "Documentary", verb: 'watch'},
-  "internet" : {icon: "link", title: "Website", verb: 'look into'},
-  "app" : {icon: "speaker", title: "App", verb: 'download'},
-  "other" : {icon: "file", title: "Other", verb: 'look into'},
+  "movie" : {icon: "film", title: "Movie", verb:'watch', emoji: '🎬'},
+  "tv" : {icon: "tv", title: "TV Series", verb:'watch', emoji: '📺'},
+  "book" : {icon: "book", title: "Book", verb:'read',emoji: '📖'},
+  "music" : {icon: "music", title: "Music", verb: 'listen to',emoji: '🎵'},
+  "podcast" : {icon: "mic", title: "Podcast", verb:'listen to',emoji: '📻'},
+  "documentary" : {icon: "video", title: "Documentary", verb: 'watch',emoji: '📽️'},
+  "internet" : {icon: "link", title: "Website", verb: 'look into',emoji: '🔗'},
+  "app" : {icon: "speaker", title: "App", verb: 'download',emoji: '📱'},
+  "other" : {icon: "file", title: "Other", verb: 'look into',emoji: '📄'},
 }
 
 
 // ---------------------------------------
-//  Icon
+//    ICON (now emoji)
 // ---------------------------------------
 
 export const CategoryIcon = ({rec, category, size=25, color="purple"}) => {
 
-  const icon = !rec ? Categories[category].icon : rec.category ? Categories[rec.category].icon : 'file-text'
-  var iconColor = colors[color]
+  const emoji = !rec ? Categories[category].emoji : rec.category ? Categories[rec.category].emoji : '📃'
+  // var iconColor = colors[color]
+  const styles = {
+    fontSize: size,
+  }
+  return <Text style={styles} >{emoji}</Text>
 
-  return <Icon name={icon} size={size} color={iconColor} />
+  // Old icon code
+  // const icon = !rec ? Categories[category].icon : rec.category ? Categories[rec.category].icon : 'file-text'
+  // return <Icon name={icon} size={size} color={iconColor} />
 }
 
 
@@ -59,7 +67,7 @@ export const Category = ({rec, size=18, color="yellow"}) => {
 
   return (
     <View style={styles.container} >
-      <Icon name={icon} size={size} color={iconColor} />
+      <CategoryIcon rec={rec} size={size} />
       <Text style={styles.categoryText}>{categoryTitle}</Text>
     </View>
   )

@@ -9,7 +9,7 @@ import * as Animatable from 'react-native-animatable'
 import moment from 'moment'
 import styles from './styles';
 
-const Inbox = ({openRecs, myInvites, acceptOpenRec}) => {
+const Inbox = ({inbox, openRecs, myInvites, acceptOpenRec}) => {
 
 
   return (
@@ -18,16 +18,11 @@ const Inbox = ({openRecs, myInvites, acceptOpenRec}) => {
       <Title>Inbox</Title>
 
       {
-        _.map(myInvites,(rec,i)=> {
-          return (<Card invitation rec={rec} key={i} />)
+        _.map(inbox,(rec,i)=> {
+          return (<Card inbox rec={rec} key={i} acceptOpenRec={acceptOpenRec}/>)
         })
       }
 
-      {
-        _.map(openRecs,(rec,i)=> {
-          return (<Card open rec={rec} key={i} acceptOpenRec={acceptOpenRec} />)
-        })
-      }
 
 
 

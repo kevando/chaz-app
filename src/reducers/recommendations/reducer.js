@@ -9,7 +9,10 @@ const initialState =
     list: [ ],
     myRecs: [],
     givenRecs: [],
-    filter: 'all'
+    filter: 'all',
+    inbox: [],
+    outbox: [],
+    openRecs: [],
   };
 
 export default function recs(recommendations = initialState, action = {}) {
@@ -98,19 +101,6 @@ export default function recs(recommendations = initialState, action = {}) {
       }
 
     // -------------------------------------------
-    // case t.DELETE_RECOMMENDATION:
-    //
-    //   var newList = _.filter(recommendations.list, function(rec) {
-    //     return rec.id != action.rec.id;
-    //   });
-    //
-    //   return {
-    //     ...recommendations,
-    //     list: newList,
-    //   }
-    //   // return recommendations
-
-    // -------------------------------------------
     case t.SET_STATUS:
 
       var newList = _.map(recommendations.list, function(rec) {
@@ -142,23 +132,6 @@ export default function recs(recommendations = initialState, action = {}) {
         list: newList,
       }
 
-    // -------------------------------------------
-    // Take recs from firestore and add them here
-    // case t.SYNC_USER_RECS:
-    //   // console.log('userrecs',action.userRecs)
-    //   // console.log('list',recommendations.list)
-    //   // var newList = _.map(, function(rec) {
-    //   //   return rec.id === action.recId ? {...rec,grade: action.grade} : rec;
-    //   // });
-    //   var newList = _.merge(action.userRecs,recommendations.list)
-    //
-    //   // console.log('newList',newList)
-    //
-    //   return {
-    //     ...recommendations,
-    //     list: newList,
-    //   }
-
       // -------------------------------------------
       // right now this pulls from a listener on the appInitialized fn
       case t.REFRESH_MY_RECS:
@@ -177,12 +150,20 @@ export default function recs(recommendations = initialState, action = {}) {
           // list: action.myRecs,
           givenRecs: action.givenRecs,
         }
-
-      case t.SET_USER_DATA:
+      // -------------------------------------------
+      // right now this pulls from a listener on the appInitialized fn
+      case t.REFRESH_INBOX:
         return {
           ...recommendations,
-          ...action.data,
+          inbox: action.inbox,
+          openRecs: action.openRecs,
         }
+
+      // case t.SET_USER_DATA:
+      //   return {
+      //     ...recommendations,
+      //     ...action.data,
+      //   }
 
     // -------------------------------------------
     default:

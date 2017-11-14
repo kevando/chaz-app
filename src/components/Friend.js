@@ -12,10 +12,8 @@ import { colors, text, width } from '../config/styles';
 // ---------------------------------------
 
 
-export const Name = ({friend, onPress, small, large}) => {
+export const Name = ({friend, onPress, fontSize=18 }) => {
   if(!friend) { console.log('no friend data, usually happens when updating rec'); return null; }
-
-  // const fontSize = small ? 10 : large ? 30 : 29
 
   const textStyles = [
     ...text,
@@ -24,13 +22,13 @@ export const Name = ({friend, onPress, small, large}) => {
     // props.title && {fontSize: 20,fontWeight: '600'}
 
     {
-      fontSize: 18,
+      fontSize,
       color: friend.uid ? colors.pink : colors.grey,
       fontWeight: '600',
     }
 
   ]
-  let friendName = <Text style={textStyles}>{friend.name}</Text>
+  let friendName = <Text style={textStyles}>{friend.name || friend.displayName}</Text>
 
 
   if(onPress) {

@@ -4,6 +4,8 @@ import * as t from '../reducers/actionTypes'
 
 
 const env = process.env.NODE_ENV;
+// const env = 'production'
+
 const dataVersion = 'v1'
 const PREFIX = env + '_' + dataVersion + '_'
 
@@ -45,6 +47,7 @@ export function addFirestoreListeners(uid) {
     let myFriends = getState().friends // this might be empty
     let myRecs = getState().recommendations.myRecs
     let givenRecs = getState().recommendations.givenRecs
+    let inbox = getState().recommendations.inbox
     let user = getState().user
     // console.log('myFriends',myFriends)
 
@@ -94,6 +97,31 @@ export function addFirestoreListeners(uid) {
             dispatch({type: t.REFRESH_GIVEN_RECS, givenRecs: givenRecsWithFriendData})
         });
 
+      // MY INBOX
+      // Might be overkill to create a new listener, but it helps me think
+      // A user's inbox includes:
+      // remote recs
+      // recs with their phone#
+      // friend requests?
+      // // actions include accepting recs,
+
+      recsRef
+        .where("to.uid", "==", uid)
+        .where("type", "==", "remote")
+        .onSnapshot(querySnapshot => {
+            inbox = []
+            openRecs = []
+            querySnapshot.forEach(doc => {
+              inbox.push({...doc.data(),id: doc.id});
+              if(doc.data().status == "open")
+                openRecs.push({...doc.data(),id: doc.id}); // used to determine inbox status
+            })
+            const inboxWithFriendData =  _.map(inbox, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
+            dispatch({type: t.REFRESH_INBOX, openRecs: openRecs, inbox: _.orderBy(inboxWithFriendData,['createdAt'],['desc']) })
+        })
+
+
+      // -- END INBOX
 
       // NOT A LISTENER BUT CHECK FOR CHAZ INVITES
       recsRef
@@ -123,6 +151,9 @@ export function addFirestoreListeners(uid) {
       }
 }
 
+function joinFriendData() {
+
+}
 
 //
 // // --------------------------------

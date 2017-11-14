@@ -10,6 +10,7 @@ class DashboardContainer extends Component {
 
 
   componentWillMount() {
+    // console.warn('warned')
     this.state = {activeFilter: 'Everything'};
 
     const { myInvites, onboarding, myRecs, app } = this.props
@@ -38,8 +39,8 @@ class DashboardContainer extends Component {
     if(this.props.myRecs.length == 1)
       this._throwParty()
     // Actions.push('NewRecLightbox')
-    // Actions.push('Profile')
-    // Actions.push('Invites')
+    // Actions.push('Inbox')
+    // Actions.push('GodView')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('RecView',{rec: this.props.givenRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[1]})

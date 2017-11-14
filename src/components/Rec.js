@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import { Actions} from 'react-native-router-flux';
@@ -173,6 +173,93 @@ class OpenCard extends Component {
     }
 }
 
+
+
+export class CardGodView extends Component {
+
+render() {
+  // console.log('card props',this.props)
+  const { rec } = this.props;
+  let extraStyles = {
+    accepted: {
+      borderColor: colors.grey,
+      borderWidth: 2,
+    }
+  }
+  return (
+    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted]}>
+      <View style={cardStyles.headerContainer}>
+        <View style={[cardStyles.friendContainer,{flex: 3}]}>
+          <Text style={cardStyles.dateText}>{moment(rec.createdAt).fromNow()}&nbsp;
+          <Friend.Name friend={rec.from} fontSize={12} />
+           &nbsp;&nbsp;&nbsp;&nbsp;---->
+          </Text>
+        </View>
+        <View style={cardStyles.iconContainer}>
+          <Friend.Name friend={rec.to} fontSize={12} />
+        </View>
+      </View>
+      <View style={cardStyles.bodyContainer}>
+          <Title rec={rec} />
+        </View>
+    </View>
+    )
+  }
+}
+
+
+class InboxCard extends Component {
+
+render() {
+  // console.log('card props',this.props)
+  const { rec, acceptOpenRec } = this.props;
+  let extraStyles = {
+    accepted: {
+      borderColor: colors.grey,
+      borderWidth: 2,
+    }
+  }
+  return (
+    <View style={{marginBottom: 50}}>
+    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted]}>
+      <View style={cardStyles.headerContainer}>
+        <View style={cardStyles.friendContainer}>
+          <Text style={{fontSize: 13, fontWeight: '200', color: colors.grey}}>
+          <Friend.Name friend={rec.friend} />
+          &nbsp;&nbsp;Recommended
+          </Text>
+        </View>
+        <View style={cardStyles.iconContainer} >
+        {rec.status == 'accepted' && <Icon name="check" size={20} color="green" />}
+        </View>
+      </View>
+      <View style={cardStyles.bodyContainer}>
+        <View style={{width: 50}}>
+          <CategoryIcon rec={rec} size={30} />
+        </View>
+        <View style={{}}>
+          <Title rec={rec} />
+        </View>
+
+
+
+      </View>
+
+    </View>
+
+    {rec.status == "open" &&
+    <View style={cardStyles.optionsContainer}>
+    <Button rounded bgcolor="green" text="Accept" onPress={()=>acceptOpenRec(rec)} />
+    <Button rounded bgcolor="orange" text="I seen't it" onPress={()=>Alert.alert('Coming Soon',' This feature is not yet implemented')}/>
+    </View>
+  }
+
+
+    </View>
+    )
+  }
+}
+
 const cardStyles = StyleSheet.create({
   container: {
     borderWidth: 1,
@@ -213,6 +300,7 @@ const cardStyles = StyleSheet.create({
     // borderWidth: 1,
     flexDirection: 'row',
     paddingHorizontal: 10,
+    paddingVertical: 10,
   },
   optionIcon: {
     padding: 5,
@@ -222,11 +310,11 @@ const cardStyles = StyleSheet.create({
   },
   dateText: {
     ...text,
-    fontSize: 12,
-    color: colors.white,
+    fontSize: 10,
+    color: colors.darkGrey,
     fontWeight: '300',
-    marginTop: 20,
-    marginLeft: 10,
+    // marginTop: 20,
+    // marginLeft: 10,
 
   },
   headerText: {
@@ -252,7 +340,7 @@ export class Card extends Component {
 
   render() {
     // console.log(this.props)
-    const { rec, user, listItem, skinny, given, invitation, open, sent} = this.props;
+    const { rec, user, listItem, skinny, given, invitation, open, sent, inbox} = this.props;
 
     if(listItem) { // Dashboard
       return (
@@ -282,6 +370,14 @@ export class Card extends Component {
       return (
         <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
           <SentCard rec={rec} user={user} />
+        </TouchableOpacity>
+      )
+
+    } else if(inbox) {  // Invites
+      // console.warn('asfd')
+      return (
+        <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
+          <InboxCard rec={rec} user={user} acceptOpenRec={this.props.acceptOpenRec} />
         </TouchableOpacity>
       )
 

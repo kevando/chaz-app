@@ -163,7 +163,8 @@ export const acceptInvitationRedux = (rec,friend) => (dispatch, getState) =>
 
 
 // ----------------------------------------------------
-//   ACCEPT ONLY OL REC
+//   ACCEPT "OPEN" REC
+//    i forgot what open means
 // ----------------------------------------------------
 
 export const acceptRec = (rec) => (dispatch, getState) =>
@@ -249,3 +250,25 @@ export function assignUserToRecs(user,friend) {
   //
 
 }
+
+
+// ----------------------------------------------------
+//    FETCH RECS FROM FIRESTORE
+// ----------------------------------------------------
+
+export const fetchAllRecs = (params) => (dispatch) =>
+  new Promise(function(resolve,reject) {
+    recsRef
+      .get()
+      .then(snap => {
+        let allRecs = []
+        snap.forEach(doc => allRecs.push(doc.data()))
+        console.log('allRecs',allRecs)
+        resolve(allRecs)
+      })
+      .catch( e => reject('some fetch error', e))
+
+    // let cb = dispatch({ type: t.INIT_REC, payload })
+    // console.log('initNewq ')
+    // resolve(cb)
+  })

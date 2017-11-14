@@ -20,9 +20,6 @@ class App extends Component {
       return null; // Do nothing until store is loaded
     }
 
-    // console.log('index.js Loaded, and state is ready',this.state)
-
-
    return (
      <Provider store={this.state.store}>
        <Chaz />

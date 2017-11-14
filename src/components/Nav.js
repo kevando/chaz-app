@@ -62,6 +62,147 @@ export class ProfileButton extends Component {
 }
 
 
+
+
+// --------------------------------------------------------
+//      NAV BUTTON
+// --------------------------------------------------------
+
+const NavButton = ({onPress,icon,color=colors.lightWhite,size=25}) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={{padding:5,backgroundColor:'transparent'}}>
+      <Icon
+        name={icon}
+        size={size}
+        style={[styles.navIcon,{color: color, marginTop: StatusBar.hidden ? -10 : 0,}]} />
+    </TouchableOpacity>
+  )
+}
+
+ // --------------------------------------------------------
+class DashboardButtonContainer extends Component {
+
+
+render() {
+  const { app, myRecs, user, reminders, openRecs, openInvitations, inbox } = this.props;
+
+  const debug = app.devMode
+  const god = user.displayName = 'kevo'
+  // this should turn out to be pretty much the onboarding steps
+  let buttonIcons = []
+
+
+  // ---------------------
+  //    NOTIFICATIONS
+  // ---------------------
+  if(debug || app.notificationPermission != "authorized" && myRecs.length > 0 ) {
+    buttonIcons.push(
+      <Animatable.View animation="swing" iterationCount={'infinite'} duration={2000}>
+        <NavButton onPress={Actions.Reminders} name="bell" size={25} />
+      </Animatable.View>
+    )
+  }
+
+  // ---------------------
+  //    REGISTER
+  // ---------------------
+  if(debug || myRecs.length > 0 && app.notificationPermission == "authorized" && app.isAnon) {
+    buttonIcons.push (
+      <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
+        <NavButton onPress={()=> Actions.push('Register')} icon="zap" color={colors.yellow} />
+      </Animatable.View>
+    )
+  }
+
+  // ---------------------
+  //    ACTIVATED
+  // ---------------------
+  if(debug || app.notificationPermission == "authorized" && !app.isAnon) {
+
+    // INVITE THE USER TO SIGN UP
+    buttonIcons.push (
+      <NavButton onPress={Actions.Register} icon="heart" color={colors.lightWhite} />
+    )
+  }
+
+  // ---------------------
+  //    PROFILE
+  // ---------------------
+  if(debug || !app.isAnon) {
+    buttonIcons.push (
+      <NavButton onPress={Actions.Profile} icon="user" />
+    )
+  }
+
+  // ---------------------
+  //    INBOX
+  // ---------------------
+  if(debug || inbox.length > 0 && openRecs.length > 0) {
+    buttonIcons.push (
+      <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
+        <NavButton onPress={()=> Actions.push('Inbox')} icon="inbox" color={colors.yellow} />
+      </Animatable.View>)
+  } else if (debug || inbox.length > 0) {
+    buttonIcons.push (
+        <NavButton onPress={()=> Actions.push('Inbox')} icon="inbox" color={colors.lightWhite} />)
+  }
+
+
+  // ---------------------
+  // INVITATIONS
+  // ---------------------
+  if(debug || openInvitations.length > 0) {
+    buttonIcons.push (
+      <NavButton onPress={Actions.Invites} icon="navigation" color={colors.yellow}/>
+    )
+  }
+
+  // ---------------------
+  // DEBUG SETTINGS
+  // ---------------------
+  if( debug || app.devMode) {
+    buttonIcons.push (<NavButton onPress={()=> Actions.push('Settings')} icon="settings" color={colors.lightWhite} />)
+  }
+
+  // ---------------------
+  // GOD VIEW
+  // ---------------------
+  if( debug || god) {
+    buttonIcons.push (<NavButton onPress={Actions.GodView} icon="gitlab" color={colors.white} />)
+  }
+
+
+  return (
+    <View style={{flexDirection: 'row', marginRight: 12,marginTop: 1}}>
+      {_.map(buttonIcons,(icon,i) => <View style={styles.navIconContainer} key={i}>{icon}</View>)}
+    </View>
+  )
+
+}
+
+};
+
+
+const mapStateToProps = (state) => {
+  return {
+    app: state.app,
+    // openRecs: _.filter(state.recommendations.myRecs,rec => rec.status == "open"),
+    openRecs: state.recommendations.openRecs,
+    openInvitations: _.filter(state.recommendations.givenRecs,rec => rec.status == "open"),
+    myRecs: state.recommendations.myRecs,
+    inbox: state.recommendations.inbox,
+    user: state.user,
+    reminders: state.reminders,
+  };
+};
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({}, dispatch)
+}
+
+export const DashboardRightButton = connect(mapStateToProps, mapDispatchToProps)(DashboardButtonContainer);
+
+
 const ICON_CONTAINER = 35
 const styles = StyleSheet.create({
 
@@ -92,145 +233,6 @@ const styles = StyleSheet.create({
 });
 
 
-// --------------------------------------------------------
-//      NAV BUTTONS
-// --------------------------------------------------------
-
-const NavButton = ({onPress,icon,color=colors.lightWhite,size=25}) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={{padding:5,backgroundColor:'transparent'}}>
-      <Icon
-        name={icon}
-        size={size}
-        style={[styles.navIcon,{color: color, marginTop: StatusBar.hidden ? -10 : 0,}]} />
-    </TouchableOpacity>
-  )
-}
-
- // --------------------------------------------------------
-class DashboardButtonContainer extends Component {
-
-
-render() {
-  const { app, myRecs, user, reminders, openRecs, openInvitations } = this.props;
-
-
-  // this should turn out to be pretty much the onboarding steps
-  let buttonIcons = []
-
-
-  if(app.notificationPermission != "authorized" && myRecs.length > 0 ) {
-    // STEP 1
-    buttonIcons.push(
-      <Animatable.View animation="swing" iterationCount={'infinite'} duration={2000}>
-
-      <Icon
-        onPress={Actions.Reminders}
-        name={"bell"}
-        size={25}
-        color={colors.yellow}
-        style={[styles.navIcon,{color: colors.yellow, marginTop: StatusBar.hidden ? -10 : 0,}]}
-      />
-
-      </Animatable.View>
-    )
-  }
-  if(app.notificationPermission == "authorized" && reminders.localReminders.length > 0 ) {
-    // STEP 1
-    buttonIcons.push(
-      <Icon
-        onPress={Actions.Reminders}
-        name={"bell"}
-        size={22}
-        style={[styles.navIcon,{color: colors.lightWhite, marginTop: StatusBar.hidden ? -10 : 0,}]}
-      />
-
-
-    )
-  }
-
-  // INVITE THE USER TO SIGN UP
-  if(myRecs.length > 0 && app.notificationPermission == "authorized" && app.isAnon) {
-    buttonIcons.push (
-      <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
-        <NavButton onPress={()=> Actions.push('Register')} icon="zap" color={colors.yellow} />
-      </Animatable.View>
-    )
-  }
-
-  if(app.notificationPermission == "authorized" && !app.isAnon) {
-
-    // INVITE THE USER TO SIGN UP
-    buttonIcons.push (
-
-      <NavButton
-        onPress={()=> Actions.push('Register')}
-        icon="heart"
-        color={colors.lightWhite}
-      />
-    )
-  }
-
-  // ---------------------
-  //    PROFILE
-  // ---------------------
-  if(!app.isAnon) {
-    buttonIcons.push (
-      <NavButton onPress={()=> Actions.push('Profile')} icon="user" />
-    )
-  }
-
-  // ---------------------
-  //    INBOX
-  // ---------------------
-  if(openRecs.length > 0) {
-    buttonIcons.push (
-      <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
-        <NavButton onPress={()=> Actions.push('Inbox')} icon="inbox" color={colors.yellow} />
-      </Animatable.View>)
-  }
-
-  // -----------------------------------------
-  // INVITATIONS
-
-  if(openInvitations.length > 0) {
-    buttonIcons.push (
-
-        <NavButton onPress={Actions.Invites} icon="navigation" color={colors.yellow}/>
-
-    )
-  }
-
-  // SETTINGS FOR DEV MODE
-  app.devMode && buttonIcons.push (<NavButton onPress={()=> Actions.push('Settings')} icon="settings" color={colors.lightWhite} />)
-
-  return (
-    <View style={{flexDirection: 'row', marginRight: 12,marginTop: 1}}>
-      {_.map(buttonIcons,(icon,i) => <View style={styles.navIconContainer} key={i}>{icon}</View>)}
-    </View>
-  )
-
-}
-
-};
-
-
-const mapStateToProps = (state) => {
-  return {
-    app: state.app,
-    openRecs: _.filter(state.recommendations.myRecs,rec => rec.status == "open"),
-    openInvitations: _.filter(state.recommendations.givenRecs,rec => rec.status == "open"),
-    myRecs: state.recommendations.myRecs,
-    user: state.user,
-    reminders: state.reminders,
-  };
-};
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch)
-}
-
-export const DashboardRightButton = connect(mapStateToProps, mapDispatchToProps)(DashboardButtonContainer);
 
 //
 //

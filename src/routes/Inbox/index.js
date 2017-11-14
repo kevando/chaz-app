@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
   return {
     // notificationPermission: state.app.notificationPermission,
     myInvites: state.app.myInvites,
+    inbox: state.recommendations.inbox,
     openRecs: _.filter(state.recommendations.myRecs,rec => rec.status == "open")
   };
 };

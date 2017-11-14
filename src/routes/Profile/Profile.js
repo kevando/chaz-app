@@ -25,13 +25,13 @@ const GivenRecs = ({givenRecs}) => {
 
 const Profile = (props) => {
   // console.log(props)
-  const { onLogoutPress, user, friends, givenRecs, onlineFriends, formatedNumber } = props;
+  const { user, friends, givenRecs, onlineFriends, formatedNumber } = props;
 
   return (
     <ScrollView style={styles.container}>
 
       <View style={styles.headerContainer}>
-        <Text style={styles.title} onPress={onLogoutPress}>{user.displayName}</Text>
+        <Text style={styles.title}>{user.displayName}</Text>
         <Text style={styles.subTitle}>{formatedNumber}</Text>
       </View>
 
