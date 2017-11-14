@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, LayoutAnimation } from 'react-native'
+import { View, Text, LayoutAnimation, AlertIOS } from 'react-native'
 import { navigationBarStyle, titleStyle, colors } from '../../config/styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-native-router-flux';
@@ -26,6 +26,8 @@ import Invites from '../../routes/Invites';
 import GetStarted from '../../routes/GetStarted';
 import Inbox from '../../routes/Inbox';
 
+import RNShakeEvent from 'react-native-shake-event';
+
 const AppToasts = () => { return (<Text>dude</Text>)}
 
 
@@ -37,6 +39,11 @@ class Chaz extends Component {
   }
   componentWillMount() {
     this.props.initializeApp() // redux
+
+    RNShakeEvent.addEventListener('shake', () => {
+      this._showDebugOptions()
+    });
+
   }
 
   // componentDidMount() {}
@@ -46,6 +53,21 @@ class Chaz extends Component {
 
   updateState = (state) => {
     this.setState(state)
+  }
+
+  _showDebugOptions = () => {
+
+    AlertIOS.prompt(
+      'Developer Options', 'Option to change display name',
+      [
+        {text: 'Update Name', onPress: (text) => this.props.saveDisplayName(text) },
+        {text: 'Log Out', onPress: () => this.props.signOut(), },
+        {text: 'Refresh Token', onPress: () => this.props.refreshServerToken(), },
+        {text: 'Turn Dev Mode On', onPress: () => this.props.setAppData({devMode: true}), },
+        {text: 'Turn Dev Mode Off', onPress: () => this.props.setAppData({devMode: false}), },
+        {text: 'Cancel', style: 'cancel'},
+      ]
+    )
   }
 
   render() {

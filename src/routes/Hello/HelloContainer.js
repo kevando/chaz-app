@@ -25,10 +25,10 @@ class HelloContainer extends Component {
   componentDidMount() {
     if(!this.props.app.isAnon) {
       // Something bad happened to allow this
-      AlertIOS.alert(
-        'Woah!!!', 'Looks like maybe you reinstalled the app',
-        this._dialogOptions
-      )
+      // AlertIOS.alert(
+      //   'Woah!!!', 'Looks like maybe you reinstalled the app',
+      //   this._dialogOptions
+      // )
     }
   }
 
@@ -36,7 +36,7 @@ class HelloContainer extends Component {
 
       {text: 'Log Out', onPress: () => this.props.signOut(), },
       {text: 'Okayy'},
-    
+
   ]
 
   _onSaveNamePress = () => {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Chaz from './Chaz';
 import * as Actions from '../../reducers/app/actions';
+import * as UserActions from '../../reducers/user/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -13,7 +14,7 @@ const mapStateToProps = (state) => {
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch)
+  return bindActionCreators({...Actions, ...UserActions}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chaz);

@@ -3685,6 +3685,12 @@ react-native-router-flux@^4.0.0-beta.22:
     react-native-button "^2.0.0"
     react-navigation "^1.0.0-beta.13"
 
+react-native-shake-event@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-shake-event/-/react-native-shake-event-4.0.1.tgz#b167e844b711eff50d44d029537fbb228b2ac6b2"
+  dependencies:
+    invariant "^2.2.2"
+
 react-native-swipe-gestures@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-swipe-gestures/-/react-native-swipe-gestures-1.0.2.tgz#914e1a72a94bc55b322b4622a01103ab879296dd"
