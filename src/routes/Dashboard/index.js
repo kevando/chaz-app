@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash'
 import DashboardContainer from './DashboardContainer';
 
-// import * as AppActions from '../../reducers/app/actions';
+import {setAppData, signOut} from '../../reducers/app/actions';
 import * as RecActions from '../../reducers/recommendations/actions';
 
 const mapStateToProps = (state) => {
@@ -22,4 +22,4 @@ const mapStateToProps = (state) => {
 
 // map dispatch to props
 
-export default connect(mapStateToProps, {...RecActions})(DashboardContainer);
+export default connect(mapStateToProps, {...RecActions, setAppData, signOut})(DashboardContainer);

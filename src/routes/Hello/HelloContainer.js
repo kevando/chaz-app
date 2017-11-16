@@ -17,68 +17,58 @@ class HelloContainer extends Component {
     super(props)
     this.state = {
       nameInput: '',
-      myInvites: null,
+      showWelcome: false,
       onChangeText: (nameInput) => this.setState({nameInput}),
       question: null,
-    }
-  }
-  componentDidMount() {
-    if(!this.props.app.isAnon) {
-      // Something bad happened to allow this
-      // AlertIOS.alert(
-      //   'Woah!!!', 'Looks like maybe you reinstalled the app',
-      //   this._dialogOptions
-      // )
+      // nameInputAnimation: 'fadeIn',
     }
   }
 
-  _dialogOptions = [
-
-      {text: 'Log Out', onPress: () => this.props.signOut(), },
-      {text: 'Okayy'},
-
-  ]
+  _logout = () => {
+    AlertIOS.alert(
+      'Log out?', 'Yes, something went wrong and I want to re-start the onboarding',
+      [{text: 'Log Out', onPress: this._signout, },
+      {text: 'Cancel'}]
+    )
+  }
+  _signout = () => {
+    this.setState({showWelcome: false})
+    this.props.signOut()
+  }
 
   _onSaveNamePress = () => {
+    // this.setState({nameInputAnimation: 'fadeOut'})
     const { setUserData, fetchInvites, saveDisplayName } = this.props
     const { nameInput } = this.state
 
     saveDisplayName(nameInput)
-    setUserData({displayName: nameInput})
-      .then(myInvites => {
-        // Search for invites
-        fetchInvites("to.name",nameInput.toLowerCase())
-          .then(myInvites => {
-            // console.warn('invites',myInvites)
-            this.setState({myInvites})
-
-          }).catch(e => Alert.alert('Error fetching invites',e, this._dialogOptions))
-
-      }).catch(e => Alert.alert('Error saving user data',e, this._dialogOptions))
+    setUserData({displayName: nameInput, nameInput: ''})
+    // not running the invite check here anymore
+      // .then(myInvites => {
+      //   // Search for invites
+      //   fetchInvites("to.name",nameInput.toLowerCase())
+      //     .then(myInvites => {
+      //       // console.warn('invites',myInvites)
+      //       this.setState({myInvites})
+      //
+      //     }).catch(e => Alert.alert('Error fetching invites',e, this._dialogOptions))
+      //
+      // }).catch(e => Alert.alert('Error saving user data',e, this._dialogOptions))
       // .then(r => console.warn(r))
   }
-  _onGetStartedPress = () => {
-    this.setState({question: 'Did anyone tell you about chaz?'})
 
+  _onGetStarted = () => {
+    Actions.push('FirstRec')
+    // Actions.push('lightbox')
+    // this.props.setAppData({onboarding: false})
   }
-  _onYesPress = () => {
-    const { user, initNewRec } = this.props
-    const { myInvites } = this.state
-    let from = myInvites && myInvites.length > 0 && myInvites[0].from
-    console.log('myIn',myInvites)
-    console.log(from)
-    const initalRecData = {
-      to: {uid: user.uid, displayName: user.displayName},
-      from,
-      category: 'app',
-      title: 'chaz',
-      walkthrough: true,
-    }
-    initNewRec(initalRecData).then(()=> {
-      Actions.push('GetStarted',{initialInvites: myInvites.length ? myInvites : null})
-    })
 
+  _setInitialFeeling = (feeling) => {
+    // Component handled some animations, but not very well
 
+    // Now navigate to the next prompt
+    this.props.setUserData({initialFeeling: feeling})
+    this.setState({showWelcome: true})
   }
 
 
@@ -88,9 +78,11 @@ class HelloContainer extends Component {
       <Hello
         {...this.state}
         {...this.props}
+        logout={this._logout}
         onSaveNamePress={this._onSaveNamePress}
-        onGetStartedPress={this._onGetStartedPress}
+        onGetStarted={this._onGetStarted}
         onYesPress={this._onYesPress}
+        onFeelingPress={this._setInitialFeeling}
         />
       )
     }

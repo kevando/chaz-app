@@ -15,7 +15,7 @@ export default function user(user = initialState, action = {}) {
       return {
         ...user,
         uid: action.user.uid,
-        displayName: action.user.displayName || 'NO NAME',
+        displayName: action.user.displayName,
         providerData: action.user.providerData,
       }
 

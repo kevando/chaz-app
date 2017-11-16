@@ -5,7 +5,7 @@ import { Button, Title } from '../../components/Generic';
 import { Card } from '../../components/Rec'
 import Filter from '../../components/Nav/Filter';
 
-import { OnboardingCard } from '../../components/Card/Onboarding'
+import * as Onboarding from '../../components/Onboarding'
 import styles from './styles';
 import firebase from 'react-native-firebase'
 
@@ -21,9 +21,11 @@ const Dashboard = (props) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" hidden={false} />
-        <Confetti />
-        <ScrollView style={styles.scrollView}>
-          <Title>Recommendations</Title>
+      <Confetti />
+      <ScrollView style={styles.scrollView}>
+        <Title>Recommendations</Title>
+
+        <Onboarding.NoRecs {...props} />
 
         {myRecs.length > 16 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
 
@@ -36,7 +38,6 @@ const Dashboard = (props) => {
         })
       }
 
-      <OnboardingCard />
 
       </ScrollView>
 

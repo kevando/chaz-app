@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Alert, Image  } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 const Permissions = require('react-native-permissions')
-import firebase from 'react-native-firebase'
+// import firebase from 'react-native-firebase'
 import { colors } from '../config/styles';
 import { Button } from './Generic'
 import { checkNotificationPermission, requestNotificationPermission } from '../reducers/app/actions';
@@ -18,19 +18,12 @@ class EnableNotificationsContainer extends Component {
     if(!notificationPermission) {
       checkNotificationPermission()
     }
-
+    // console.warn(notificationPermission)
   }
+
   _requestPermission = () => {
     const { requestNotificationPermission } = this.props;
     requestNotificationPermission()
-
-    // firebase.messaging().requestPermissions()
-    //   .then((response)=> {
-    //     console.warn('response: ',response)
-    //     // setNotificationPermission('authorized')
-    //   })
-    //   .catch((error)=>console.warn('notification permission rejected',error));
-
   }
 
   _alertForNotificationPermission = () => {
@@ -49,7 +42,7 @@ class EnableNotificationsContainer extends Component {
   }
 
 render() {
-  console.log()
+
   const { button, wrapper } = this.props;
 
   if(button) {
@@ -86,7 +79,7 @@ export const OrangeButton = ({onPress}) => {
 
   return (
     <View style={{marginTop:20}}>
-      <Button rounded bgcolor="orange" text="Enable Notifications" onPress={onPress} />
+      <Button rounded fat bgcolor="orange" text="Enable Notifications" onPress={onPress} />
     </View>
   )
 

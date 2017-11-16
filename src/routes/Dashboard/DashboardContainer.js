@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StatusBar ,Text} from 'react-native';
+import { Alert } from 'react-native';
 import Dashboard from './Dashboard';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
@@ -19,13 +19,9 @@ class DashboardContainer extends Component {
     // this.props.onboarding && Actions.replace('GetStarted')
 
     // PROD
-    if((onboarding) || (myRecs.length == 0 & app.isAnon))
-      Actions.replace('Hello')
+    // if((onboarding) || (myRecs.length == 0 & app.isAnon))
+      // Actions.replace('Hello')
 
-    // User signed in and needs to accept their invite
-
-    // myInvites && myInvites.length > 0 && !onboarding &&
-    //   Actions.replace('RecView', {rec: myInvites[0] })
   }
 
   // componentWillReceiveProps({recommendations}) {}
@@ -35,9 +31,11 @@ class DashboardContainer extends Component {
 
   componentDidMount() {
     // TMP!!
-    console.log('dash mounted',this.props)
-    if(this.props.myRecs.length == 1)
-      this._throwParty()
+    // console.log('dash mounted',this.props)
+    // if(this.props.myRecs.length == 1)
+    //   this._throwParty()
+
+
     // Actions.push('NewRecLightbox')
     // Actions.push('Inbox')
     // Actions.push('GodView')
@@ -92,6 +90,12 @@ class DashboardContainer extends Component {
         timeout={100}
       />)
   }
+  _goToOnboarding = () => {
+      Alert.alert('Are you sure?',`You will sign out of this account.`,
+      [{text:'Nevermind'},{text:'Sign Out', onPress: this.props.signOut.then(Actions.Hello)}])
+    // this.props.setAppData({onboarding: true})
+    //
+  }
 
   render() {
     // console.log('Dash',this.props)
@@ -106,6 +110,7 @@ class DashboardContainer extends Component {
           onNewRecPress={this._onNewRecPress}
           changeActiveFilter={this._changeActiveFilter}
           Confetti={this._confettiComponent}
+          goToOnboarding={this._goToOnboarding}
         />
       )
 

@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/Feather'
 NameInput = Animatable.createAnimatableComponent(TextInput);
 
 
-const Hello = (props) => {
+const FirstRec = (props) => {
 
 
 
@@ -23,13 +23,16 @@ const Hello = (props) => {
       <View style={styles.contentContainer}>
 
         <Onboarding.Name {...props} />
-        <Onboarding.FeelingQuestion {...props} />
-        <Onboarding.WelcomeMessage {...props} />
+        <Onboarding.TitleInput {...props} />
+        <Onboarding.FriendInput {...props} />
+        <Onboarding.CategoryInput {...props} />
+        <Onboarding.SetReminder {...props} />
+        <Onboarding.Confirmation {...props} />
 
       </View>
 
 
-        <Onboarding.HelloButton {...props} />
+        <Onboarding.FirstRecButton {...props} />
         <KeyboardSpacer />
 
       </View>
@@ -38,4 +41,4 @@ const Hello = (props) => {
 
 }
 
-export default Hello;
+export default FirstRec;

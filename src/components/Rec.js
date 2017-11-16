@@ -260,6 +260,41 @@ render() {
   }
 }
 
+// ---------------------------------------
+//  FINAL STEP OF ONBOARDING
+// ---------------------------------------
+
+export class ConfirmationCard extends Component {
+
+render() {
+  // console.log('card props',this.props)
+  const { rec } = this.props;
+
+
+  return (
+    <View style={[cardStyles.container,{flex: 0}]}>
+      <View style={cardStyles.headerContainer}>
+        <View style={cardStyles.friendContainer}>
+          <Friend.Name friend={rec.from} />
+        </View>
+        <View style={cardStyles.iconContainer}>
+          {moment().diff(rec.createdAt) < 200000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
+
+          {moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
+          {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
+          {rec.type == 'invite' && <Icon size={17} color={colors.purple} name="navigation"/>}
+
+        </View>
+      </View>
+      <View style={cardStyles.bodyContainer}>
+          <Title rec={rec} />
+        </View>
+    </View>
+    )
+  }
+}
+
+
 const cardStyles = StyleSheet.create({
   container: {
     borderWidth: 1,

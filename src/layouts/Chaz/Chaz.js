@@ -3,7 +3,7 @@ import { View, Text, LayoutAnimation, AlertIOS } from 'react-native'
 import { navigationBarStyle, titleStyle, colors } from '../../config/styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-native-router-flux';
-// import Toast from 'react-native-root-toast';
+import RNShakeEvent from 'react-native-shake-event';
 
 import Dashboard from '../../routes/Dashboard';
 import RecInput from '../../routes/RecInput';
@@ -22,28 +22,30 @@ import Reminders from '../../routes/Reminders';
 import Boilerplate from '../../routes/Boilerplate';
 
 import Hello from '../../routes/Hello';
+import FirstRec from '../../routes/FirstRec';
+import FirstRecConfirmation from '../../routes/FirstRecConfirmation';
+
 import Invites from '../../routes/Invites';
 import GetStarted from '../../routes/GetStarted';
 import Inbox from '../../routes/Inbox';
 import GodView from '../../routes/GodView';
 import Debug from '../../routes/Debug';
 
-import RNShakeEvent from 'react-native-shake-event';
-
-const AppToasts = () => { return (<Text>dude</Text>)}
-
 
 
 class Chaz extends Component {
   constructor(props) {
     super(props)
-    this.state = { visibleToasts: 0, isReady: false, }
+    this.state = { isReady: false, layout: 'loading'}
   }
+
   componentWillMount() {
-    this.props.initializeApp() // redux
 
+    // set up redux
+    this.props.initializeApp()
+
+    // Allow debug menu
     RNShakeEvent.addEventListener('shake', () => Actions.DebugLightbox );
-
   }
 
   // componentDidMount() {}
@@ -59,24 +61,76 @@ class Chaz extends Component {
 
   render() {
 
-    const { isAuthenticated } = this.props
-    const { isReady } = this.state
+    const { isAuthenticated, onboarding } = this.props
+    const { isReady, layout } = this.state
 
-    onboarding = true
+    // onboarding = true
     const navBorderColor = onboarding ? colors.blueBG : colors.newBlue
 
-    // PROD Animate screen loading
-
-    // if (!isReady || !isAuthenticated)
-      // return <Loading updateState={this.updateState} />;
 
 
+    // if (!isAuthenticated || !isReady)
+      // return <Loading updateState={this.updateState} />
 
-      // if(onboarding == true) {
-      //   // console.warn('return onboarding')
-      //   return <Onboarding />
-      // } else {
-      //   // console.warn('return app')
+
+      return (
+
+        <Router navigationBarStyle={[navigationBarStyle,{borderTopColor: navBorderColor}]} titleStyle={titleStyle}>
+          <Overlay key="overlay">
+            <Modal key="root" hideNavBar={true}>
+
+              <Stack key="OnboardingStack"  hideBackImage back initial={onboarding} hideNavBar={true} >
+                <Scene key='FirstRecConfirmation' component={FirstRecConfirmation} />
+                <Scene key='FirstRec' component={FirstRec} />
+                <Scene key='Hello' component={Hello} initial={true} />
+              </Stack>
+
+              <Lightbox key="lightbox" initial={!onboarding}>
+                <Stack key="myStack"  hideBackImage back >
+                  <Scene key='Dashboard' component={Dashboard} initial={true} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
+                  <Scene key='Helloooo' component={Hello} title='' hideNavBar={false} />
+                  <Scene key='GetStarted' component={GetStarted} title='' hideNavBar={false} />
+
+                  <Scene key='Dashboard' component={Dashboard} initial={true} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
+                  <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} navigationBarStyle={[navigationBarStyle,{backgroundColor: navBorderColor, borderTopColor: navBorderColor}]} />
+                  <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='Inbox' component={Inbox} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='Invites' component={Invites} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='LoggedOut' component={LoggedOut} title='' hideNavBar={false}  />
+                  <Scene key='Reminders' component={Reminders} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='Settings' component={Boilerplate} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='GodView' component={GodView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
+                </Stack>
+
+
+                <Scene key='NewRecLightbox' component={RecInput} title='' hideNavBar={true}  />
+                <Scene key='FirstRec' component={RecInput} title='' hideNavBar={false}  />
+
+                <Scene key='DebugLightbox' component={Debug} title='' hideNavBar={false}  />
+
+                </Lightbox>
+                <Scene key='NewRecLightboxModal' component={RecInput} title='' />
+                <Scene key='RegisterModal' component={Register} title='' hideNavBar={false} />
+
+                <Stack key="InviteModall"  back hideNavBar={false}>
+
+                <Scene key='InviteScenee' component={Invite} title='' renderBackButton={() => <CloseButton />} />
+                </Stack>
+
+                <Scene key='InviteModal' hideNavBar={false} back component={Invite} title='' renderBackButton={() => <CloseButton />} />
+              </Modal>
+            </Overlay>
+          </Router>
+      )
+
+
+
+
+
+
+
         return (
 
           <Router navigationBarStyle={[navigationBarStyle,{borderTopColor: navBorderColor}]} titleStyle={titleStyle}>

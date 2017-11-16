@@ -1,9 +1,9 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash'
-import HelloContainer from './HelloContainer';
+import FirstRecConfirmationContainer from './FirstRecConfirmationContainer';
 
-import * as UserActions from '../../reducers/user/actions';
+import * as FriendActions from '../../reducers/friends/actions';
 import * as RecActions from '../../reducers/recommendations/actions';
 import * as AppActions from '../../reducers/app/actions';
 const mapStateToProps = (state) => {
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     friends: state.friends,
     unfinished: state.recommendations.unfinished,
     app: state.app,
-    // showOnboarding: state.recommendations.myRecs.length == 0,
+    notificationPermission: state.app.notificationPermission,
     user: state.user,
     feelings: state.feelings,
   };
@@ -20,4 +20,4 @@ const mapStateToProps = (state) => {
 
 // map dispatch to props
 
-export default connect(mapStateToProps, {...AppActions,...RecActions, ...UserActions})(HelloContainer);
+export default connect(mapStateToProps, {...AppActions,...RecActions, ...FriendActions})(FirstRecConfirmationContainer);

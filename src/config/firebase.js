@@ -13,6 +13,7 @@ export const recsRef = firebase.firestore().collection(`${PREFIX}recommendations
 export const friendsRef = firebase.firestore().collection(`${PREFIX}friends`)
 export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 export const messagesRef = firebase.firestore().collection(`${env}_messages`)
+export const feelingsRef = firebase.firestore().collection(`feelings`)
 
 import { assignUserToFriend } from '../reducers/friends/actions'
 import { setAppData } from '../reducers/app/actions'

@@ -5,6 +5,7 @@ import recommendations from './recommendations/reducer';
 import reminders from './reminders/reducer';
 import friends from './friends/reducer';
 import app from './app/reducer';
+import feelings from './feelings/reducer';
 
 const reducers = {
   user,
@@ -12,6 +13,7 @@ const reducers = {
   reminders,
   friends,
   app,
+  feelings,
 };
 
 const appReducer = combineReducers(reducers);

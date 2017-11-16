@@ -34,18 +34,48 @@ export default styles = StyleSheet.create({
     borderColor: 'rgba(255,255,255,0)',
   },
 
-  inputName: {
+  inputTitle: {
     // backgroundColor: 'rgba(255,255,255,0.2)',
     ...text,
-    flex: 1,
-    fontSize: 35,
+    // flex: 1,
+    fontSize: 30,
 
-    height: 39,
+    height: 45,
     borderBottomWidth: 3,
-    borderBottomColor: 'rgba(255,255,255,0.4)',
+    borderBottomColor: 'rgba(255,255,255,0.8)',
     paddingLeft: 3,
-    marginLeft: 0,
+    marginRight: 50,
     color: 'rgba(255,255,255,0.8)',
+    // backgroundColor: colors.lightWhite
+  },
+  inputFriend: {
+    // backgroundColor: 'rgba(255,255,255,0.2)',
+    ...text,
+    // flex: 1,
+    fontSize: 30,
+
+    height: 45,
+    borderBottomWidth: 3,
+    borderBottomColor: 'rgba(255,255,255,0.8)',
+    paddingLeft: 3,
+    marginRight: 50,
+    marginTop: 30,
+    color: 'rgba(255,255,255,0.8)',
+    // backgroundColor: colors.lightWhite
+  },
+  titleText: {
+    // backgroundColor: 'rgba(255,255,255,0.2)',
+    ...text,
+    // flex: 1,
+    fontSize: 30,
+
+    // height: 45,
+    // borderBottomWidth: 3,
+    // borderBottomColor: 'rgba(255,255,255,0.8)',
+    // paddingLeft: 3,
+    // marginRight: 50,
+    color: 'rgba(255,255,255,0.99)',
+    // backgroundColor: colors.lightWhite
   },
 
   subTitle: {
@@ -139,6 +169,55 @@ export default styles = StyleSheet.create({
     // borderWidth: 3,
     // borderColor: 'rgba(255,255,255,0)',
   },
+
+  timerClockEmoji: {
+    fontSize: 60,
+
+  },
+  reminderOptionsContainer: {
+    // backgroundColor: colors.lightWhite,
+    marginTop: 30,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+  },
+  reminderOptionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center', // v
+    // backgroundColor: colors.lightWhite,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    marginVertical: 6,
+
+  },
+
+  reminderOptionIcon: {
+    fontSize: 30,
+    opacity: 0.9,
+    padding: 5,
+
+  },
+  reminderOptionIconSelected: {
+
+    opacity: 0.9,
+    textShadowColor: colors.darkGrey,
+    textShadowOffset: {width: 3, height: -2},
+    textShadowRadius: 6,
+    // backgroundColor: 'yellow',
+  },
+
+  reminderOptionText: {
+    ...text,
+    color: colors.white,
+    fontSize: 25,
+    fontWeight: '400',
+    marginLeft: 10,
+
+  },
+  reminderOptionTextSelected: {
+    fontWeight: '500',
+  }
+
+
 
 
 });

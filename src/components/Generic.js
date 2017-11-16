@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import * as Progress from 'react-native-progress';
 // import styles from './styles';
-import { colors, text } from '../config/styles';
+import { colors, text, width } from '../config/styles';
 import * as Animatable from 'react-native-animatable';
 
 // FancyButton = Animatable.createAnimatableComponent(Button);
@@ -100,7 +100,7 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       backgroundColor: bgcolor ? colors[bgcolor] : colors.green,
       borderColor: bgcolor ? colors[bgcolor] : colors.green,
       borderRadius: 0,
-      borderWidth: 10,
+      borderWidth: 1,
       paddingVertical: 10,
       paddingHorizontal: 20,
     },
@@ -109,12 +109,9 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       borderWidth: 1,
       borderColor: 'white',
       backgroundColor: 'transparent',
-      marginBottom: 50,
-      paddingHorizontal: 50,
-    },
 
-    text:
-    {
+    },
+    text: {
       fontFamily: 'System',
       letterSpacing: 0.5,
       fontWeight: '500',
@@ -130,23 +127,32 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
     },
     fat: {
       marginVertical: 20,
-      marginHorizontal: 30,
-      paddingVertical: 10,
-      paddingHorizontal: 20,
+      marginHorizontal: 20,
+      paddingVertical: 20,
+      paddingHorizontal: 30,
+      borderRadius: 40,
     },
     rounded: {
-      marginRight: 10,
+
       borderRadius: 20,
       paddingHorizontal: 10,
       paddingVertical: 0,
-    }
+
+    },
   })
 
+  let buttonStyles = [
+    styles.container,
+    ghost && styles.ghost,
+    rounded && styles.rounded,
+    fat && styles.fat,
+
+  ]
 
 
   let ButtonContainer = (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} >
-      <View style={[styles.container,ghost && styles.ghost,fat && styles.fat, rounded && styles.rounded]}>
+      <View style={buttonStyles}>
         <Text style={styles.text}>
           {text}
         </Text>

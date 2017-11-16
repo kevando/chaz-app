@@ -7,9 +7,8 @@ import * as UserActions from '../../reducers/user/actions';
 
 const mapStateToProps = (state) => {
   return {
-    // onboarding: state.app.onboarding,
+    onboarding: state.app.onboarding,
     isAuthenticated: state.app.isAuthenticated,
-    // appToken: state.app.token,
   };
 };
 

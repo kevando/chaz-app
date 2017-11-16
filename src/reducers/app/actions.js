@@ -7,8 +7,11 @@ import * as t from '../actionTypes'
 import { listenForAuthChanges, usersRef } from '../../config/firebase'
 import { createUserInFirestore } from '../user/actions'
 import { listenForNotifications } from '../reminders/actions'
+import { fetchFeelings } from '../feelings/actions'
 
+export { signOut } from '../auth/actions'
 
+// export signOut
 
 // --------------------------------
 //    INIT APP
@@ -19,9 +22,10 @@ export function initializeApp() {
     const app = getState().app
     // const user = getState().user
 
-    // // Kick everything off
+    // // Kick off firestore stuff
     dispatch(listenForAuthChanges())
     dispatch(listenForNotifications())
+    dispatch(fetchFeelings())
 
     // console.log('init app',app)
     if(!app.token) {
@@ -220,16 +224,17 @@ function updateUser(data) {
 // --------------------------------
 //    SIGN OUT
 // --------------------------------
-
-export function signOut() {
-  return dispatch => {
-
-    firebase.auth().signOut().then(() => {
-      dispatch({type: t.USER_SIGNED_OUT})
-      dispatch({type: 'PURGE_DATA'}) // resets state to undefined
-      // might not be needed but this is fucking annoying
-      dispatch(setToken())
-    })
-    .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
-  }
-}
+//
+// export function signOut() {
+//   return dispatch => {
+//     console.warn('sign oout')
+//
+//     firebase.auth().signOut().then(() => {
+//       dispatch({type: t.USER_SIGNED_OUT})
+//       dispatch({type: 'PURGE_DATA'}) // resets state to undefined
+//       // might not be needed but this is fucking annoying
+//       dispatch(setToken())
+//     })
+//     .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
+//   }
+// }
