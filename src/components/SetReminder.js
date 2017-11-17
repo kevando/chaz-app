@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import firebase from 'react-native-firebase'
 import { colors, text } from '../config/styles';
-
+import * as Animatable from 'react-native-animatable'
 import { Button } from './Generic'
 
 
@@ -58,13 +58,15 @@ export class SetReminderIcon extends Component {
       // firebase.messaging().getScheduledLocalNotifications().then(notif=>console.log(notif));
       // if(!this.state.showCard) { return null
 
-      const { rec, app } = this.props;
+      const { rec, app, color=colors.yellow } = this.props;
 
       if(app.notificationPermission != 'authorized') { return null }
 
 
       return (
-        <Icon style={styles.optionIcon} onPress={this._onSetReminderPress} name="bell" color="white" />
+        <Animatable.View animation="swing" iterationCount={'infinite'} duration={2000}>
+          <Icon style={styles.optionIcon} onPress={this._onSetReminderPress} name="bell" color={color} />
+          </Animatable.View>
       )
 
       // rec.reminder && moment(rec.reminder).isAfter() &&

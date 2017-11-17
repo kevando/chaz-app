@@ -43,10 +43,10 @@ class EnableNotificationsContainer extends Component {
 
 render() {
 
-  const { button, wrapper } = this.props;
+  const { button, wrapper, text="Enable Notifications" } = this.props;
 
   if(button) {
-    return <OrangeButton onPress={this._alertForNotificationPermission} />
+    return <OrangeButton text={text} onPress={this._alertForNotificationPermission} />
   }
   if(wrapper) {
     return (
@@ -75,11 +75,11 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(EnableNotificationsContainer);
 
 
-export const OrangeButton = ({onPress}) => {
+export const OrangeButton = ({onPress, text}) => {
 
   return (
     <View style={{marginTop:20}}>
-      <Button rounded fat bgcolor="orange" text="Enable Notifications" onPress={onPress} />
+      <Button rounded fat bgcolor="orange" text={text} onPress={onPress} />
     </View>
   )
 

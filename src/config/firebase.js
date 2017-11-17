@@ -25,9 +25,9 @@ import { setAppData } from '../reducers/app/actions'
 
 export function listenForAuthChanges() {
   return (dispatch, getState) => {
-    console.log('listenForAuthChanges')
+    // console.log('listenForAuthChanges')
     firebase.auth().onAuthStateChanged(function(user) {
-      console.log('onAuthStateChanged',user)
+      // console.log('onAuthStateChanged',user)
       if (user) {
         dispatch({ type: t.USER_IS_AUTHENTICATED, user })
         // Note: this may become an issue if user is without internet
@@ -144,11 +144,13 @@ export function addFirestoreListeners(uid) {
         // not the best place for this..
         // but if I fetch recs, make sure onboarding is not set
         // console.warn(myRecs.length)
-        // console.warn(getState().app.onboarding)
+        // console.warn(myRecs.length)
+        // dispatch(setAppData({onboarding: true}))
+
         if(myRecs.length > 0)
           dispatch(setAppData({onboarding: false}))
         // else
-          // dispatch(setAppData({onboarding: true}))
+        //   dispatch(setAppData({onboarding: true}))
       }
 }
 

@@ -19,7 +19,7 @@ export default function app(app = initialState, action = {}) {
   // console.log(app)
   // console.log('APP reducer',app)
   if(!app.token) {
-    console.log('NO FUCKING APP TOKEN',app)
+    // console.log('NO FUCKING APP TOKEN',action)
     // alert('somehow I LOST THE FUCKING TOKEN')
   }
   switch (action.type) {

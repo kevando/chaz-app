@@ -2,20 +2,15 @@ import * as t from '../actionTypes';
 import firebase from 'react-native-firebase'
 import moment from 'moment'
 import {Categories} from '../../components/Category'
-// export function Increment() {
-//   return { type: INCREMENT }
-// }
-//
-// export function Decrement() {
-//   return { type: DECREMENT }
-// }
+
+const messaging = firebase.messaging()
 
 export const setRecReminder = (reminderDateInMinutes,rec) => (dispatch) =>
   new Promise((resolve, reject) => {
 
     const reminderTimestamp = Date.now() + (reminderDateInMinutes * 60 * 1000);
 
-    firebase.messaging().scheduleLocalNotification({
+    messaging.scheduleLocalNotification({
       title:'Reminder',
       show_in_foreground: true,
       // friend: rec.friend,
@@ -34,8 +29,10 @@ export const setRecReminder = (reminderDateInMinutes,rec) => (dispatch) =>
 export const getScheduledReminders = () => (dispatch) =>
   new Promise((resolve, reject) => {
 
-    firebase.messaging().getScheduledLocalNotifications()
+    messaging.getScheduledLocalNotifications()
       .then(notif=>{
+        console.warn('notif')
+        console.log(notif)
         resolve(notif)
       })
 
@@ -50,18 +47,18 @@ export const getScheduledReminders = () => (dispatch) =>
   export function listenForNotifications() {
     return dispatch => {
 
-      const messaging = firebase.messaging()
+
 
       // pull notifs into redux
-      firebase.messaging().getScheduledLocalNotifications()
-        .then(localReminders=>{
+      messaging.getScheduledLocalNotifications()
+        .then(localReminders => {
           dispatch({type: t.PUSH_LOCAL_REMINDERS, localReminders})
         })
 
 
         // do somrtghing on a notification
       messaging.onMessage( (notification) => {
-        // console.warn('onMessage!!', notification)
+        console.warn('onMessage!!', notification)
         if(!notification.local_notification)
           dispatch({type: t.ADD_REMOTE_REMINDER, notification: {...notification, receivedAt: Date.now()}})
       })
@@ -70,7 +67,7 @@ export const getScheduledReminders = () => (dispatch) =>
       // this is bugging right now per github issues threads
 
       messaging.getInitialNotification().then(notif=>{
-        // console.log(notif)
+        console.log('initial notif',notif)
         if(!notif) {
 
           // turning this off cause its annoying

@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions} from 'react-native';
-import { colors, text } from '../../config/styles';
+import { colors, text, width } from '../../config/styles';
 
 const BUTTON_WIDTH = 250;
 const MARGIN_HORIZONTAL = (window.width - BUTTON_WIDTH) / 2;
@@ -7,19 +7,30 @@ const MARGIN_HORIZONTAL = (window.width - BUTTON_WIDTH) / 2;
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 5,
-    backgroundColor: colors.blueBG,
+    // paddingTop: 5,
+    // backgroundColor: colors.blueBG,
   },
 
   contentContainer: {
     flex: 1,
-    paddingTop: 5,
+    // paddingTop: 5,
     // backgroundColor: colors.green,
+    alignItems: 'center'
   },
   buttonContainer: {
     margin: 0,
     padding: 0,
     // backgroundColor: colors.grey,
+  },
+  zapIconsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 50,
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  zapIcon: {
+    margin: 15,
   },
 
   title: {
@@ -54,7 +65,7 @@ export default styles = StyleSheet.create({
   inputContainer: {
     // backgroundColor: 'yellow',
     marginTop: 50,
-    marginHorizontal: 50,
+    // marginHorizontal: 0,
     padding: 2,
   },
 
@@ -68,7 +79,7 @@ export default styles = StyleSheet.create({
   },
   inputPhone: {
     ...text,
-    fontSize: 30,
+    fontSize: 35,
     paddingLeft: 15,
     paddingTop: 5,
     height: 50,
@@ -76,18 +87,22 @@ export default styles = StyleSheet.create({
     color: colors.darkGrey,
     borderWidth: 1,
     backgroundColor: 'white',
-    letterSpacing: 13,
+    letterSpacing: 44,
+    width: 300,
+    maxWidth: width-30,
 
   },
   inputCode: {
     ...text,
-    fontSize: 20,
+    fontSize: 30,
     paddingLeft: 15,
     paddingTop: 5,
-    height: 50,
+    height: 70,
     borderColor: colors.lightGrey,
     borderWidth: 1,
     backgroundColor: 'white',
+    width: 200,
+    maxWidth: width-30,
   },
 
   invitationsContainer: {

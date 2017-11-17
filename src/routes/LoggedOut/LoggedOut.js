@@ -4,19 +4,18 @@ import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/Feather';
 // import * as Animatable from 'react-native-animatable';
 import { colors, text } from '../../config/styles';
+import RNRestart from 'react-native-restart'; // Import package from node modules
+
 
 export default LoggedOut = (props) => {
 
-  // const { user, app } = props
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title} onPress={()=>Actions.reset('lightbox')}>Logged out {props.app.onboarding ? 'onboard' : 'no onboard'}</Text>
-      <Icon name="cloud-off" color='white' style={styles.cloudIcon} onPress={() => props.setAppData({onboarding:false})} />
+      <Text style={styles.title} >Logged Out</Text>
+      <Icon name="power" color='white' style={styles.cloudIcon} onPress={() => RNRestart.Restart() } />
     </View>
   );
 }
-
 
 
 const styles = StyleSheet.create({

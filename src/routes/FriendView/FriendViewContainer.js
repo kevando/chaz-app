@@ -59,6 +59,16 @@ class FriendViewContainer extends Component {
       Actions.pop()
     }
   }
+  _editNamePrompt = () => {
+    const { friend, updateFriendData, } = this.props
+    AlertIOS.prompt(
+      'Change Friend\'s name', null,
+      [
+        {text:'Cancel'},
+        {text: 'Save Changes',onPress: (name) => updateFriendData(friend,{name})}
+      ]
+    )
+  }
 
   render() {
     // console.log('FriendViewContainer',this.props)
@@ -74,6 +84,7 @@ class FriendViewContainer extends Component {
         onKeyPress={this._onKeyPress}
         sendInvite={this._sendInvite}
         onGiveRecPress={this._onGiveRecPress}
+        onNamePress={this._editNamePrompt}
       />
     );
   }

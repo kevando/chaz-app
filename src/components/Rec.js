@@ -49,6 +49,7 @@ render() {
       borderWidth: 2,
     }
   }
+
   return (
     <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted]}>
       <View style={cardStyles.headerContainer}>
@@ -58,7 +59,8 @@ render() {
         <View style={cardStyles.iconContainer}>
           {moment().diff(rec.createdAt) < 200000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
           {rec.friend.invitedAt && !rec.friend.uid && <Icon name="navigation" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
-          {moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
+          { moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
+          { moment().diff(rec.reminder) > 0 && rec.reminder && <Icon name="alert-triangle" size={17} color={"red"} style={{paddingRight:5, opacity: 0.5}}/>}
           {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
           {rec.type == 'invite' && <Icon size={17} color={colors.purple} name="navigation"/>}
 
@@ -301,7 +303,7 @@ const cardStyles = StyleSheet.create({
     borderColor: colors.borderColor,
     borderRadius: 10,
     padding: 15,
-    margin: 5,
+    marginVertical: 5,
     backgroundColor: 'white',
     flex: 1,
   },
@@ -549,7 +551,9 @@ render() {
         <View style={cardStyles.optionsContainer} >
           <Icon name="trash" color="white" style={cardStyles.optionIcon} onPress={onDelete} />
           <Icon name="edit" color="white" style={cardStyles.optionIcon} onPress={()=>updateState({isEditing: true})} />
-          <SetReminderIcon rec={rec} updateRec={updateRec} app={app} setRecReminder={setRecReminder} />
+          {!rec.reminder && <SetReminderIcon rec={rec} updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
+          {rec.reminder && moment().diff(rec.reminder) > 0 && <SetReminderIcon rec={rec} color="red" updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
+
         </View> }
 
         </View>

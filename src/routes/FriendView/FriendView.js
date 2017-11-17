@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, StatusBar, TextInput } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, TextInput } from 'react-native';
 import _ from 'lodash'
 import { Actions } from 'react-native-router-flux'
 import styles from './styles';
@@ -10,13 +10,13 @@ import { Label, Button } from '../../components/Generic/';
 import Icon from 'react-native-vector-icons/Feather'
 import { colors, text } from '../../config/styles';
 
-const FriendView = ({ friend, app, friendRecs, user, onGiveRecPress, friends, combineFriend }) => {
+const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress, friends, combineFriend }) => {
 
 // var filterFriends = _.filter(friends, friend =>  friend.name)
 
   return (
     <View style={styles.container}>
-      <Friend.Header friend={friend} />
+      <TouchableOpacity onPress={onNamePress}><Friend.Header friend={friend} /></TouchableOpacity>
       <ScrollView style={styles.scrollContainer}>
 
 

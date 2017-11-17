@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { View, Text, LayoutAnimation, AlertIOS } from 'react-native'
-import { navigationBarStyle, titleStyle, colors } from '../../config/styles';
+import { navigationBarStyle, titleStyle, colors, sceneStyle } from '../../config/styles';
 import { StackNavigator, TabNavigator, NavigationActions } from 'react-navigation';
 import { Scene, Router, Actions, Modal, Stack, Lightbox, Overlay} from 'react-native-router-flux';
 import RNShakeEvent from 'react-native-shake-event';
@@ -31,6 +31,7 @@ import Inbox from '../../routes/Inbox';
 import GodView from '../../routes/GodView';
 import Debug from '../../routes/Debug';
 
+import FindInvite from '../../routes/FindInvite';
 
 
 class Chaz extends Component {
@@ -68,16 +69,18 @@ class Chaz extends Component {
     const navBorderColor = onboarding ? colors.blueBG : colors.newBlue
 
 
-
+    // PROD
     // if (!isAuthenticated || !isReady)
       // return <Loading updateState={this.updateState} />
 
 
       return (
 
-        <Router navigationBarStyle={[navigationBarStyle,{borderTopColor: navBorderColor}]} titleStyle={titleStyle}>
+        <Router sceneStyle={sceneStyle} navigationBarStyle={[navigationBarStyle,{borderTopColor: navBorderColor}]} titleStyle={titleStyle}>
           <Overlay key="overlay">
             <Modal key="root" hideNavBar={true}>
+
+            <Scene key='LoggedOut' component={LoggedOut} title='' hideNavBar={false}  />
 
               <Stack key="OnboardingStack"  hideBackImage back initial={onboarding} hideNavBar={true} >
                 <Scene key='FirstRecConfirmation' component={FirstRecConfirmation} />
@@ -86,19 +89,19 @@ class Chaz extends Component {
               </Stack>
 
               <Lightbox key="lightbox" initial={!onboarding}>
-                <Stack key="myStack"  hideBackImage back >
-                  <Scene key='Dashboard' component={Dashboard} initial={true} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
-                  <Scene key='Helloooo' component={Hello} title='' hideNavBar={false} />
-                  <Scene key='GetStarted' component={GetStarted} title='' hideNavBar={false} />
+                <Stack key="myStack" navTransparent hideBackImage back >
+                  <Scene key='Dashboard'  component={Dashboard} initial={true} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
 
-                  <Scene key='Dashboard' component={Dashboard} initial={true} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
+
+
                   <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   <Scene key='FriendView' component={FriendView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} navigationBarStyle={[navigationBarStyle,{backgroundColor: navBorderColor, borderTopColor: navBorderColor}]} />
+                  <Scene key='FindInvite' component={FindInvite} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   <Scene key='Register' component={Register} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   <Scene key='Profile' component={Profile} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   <Scene key='Inbox' component={Inbox} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   <Scene key='Invites' component={Invites} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
-                  <Scene key='LoggedOut' component={LoggedOut} title='' hideNavBar={false}  />
+
                   <Scene key='Reminders' component={Reminders} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   <Scene key='Settings' component={Boilerplate} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />
                   <Scene key='GodView' component={GodView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />

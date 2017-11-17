@@ -11,6 +11,8 @@ export const width = window.width;
 export const height = window.height;
 
 export const MARGIN_LEFT = 20
+export const STATUS_BAR_HEIGHT = 22
+export const NAV_BAR_HEIGHT = 45
 
 // ------------------------------
 // Colors
@@ -76,7 +78,7 @@ export const hearts = {
 
 export const text = {
   fontSize: 30,
-
+  backgroundColor: 'transparent',
   fontFamily: 'System',
   color: colors.black,
   letterSpacing: 0.5,
@@ -87,12 +89,17 @@ export const text = {
 // Navigation
 
 export const navigationBarStyle = {
-  backgroundColor: colors.blueBG,
+  backgroundColor: 'transparent',
   borderBottomWidth: 0,
   borderTopWidth: 22,
   borderTopColor: colors.newBlue,
+  // borderBottomColor: colors.newBlue,
 }
 
 export const titleStyle = {
   color: 'white'
+}
+
+export const sceneStyle = {
+  backgroundColor: colors.blueBG,
 }

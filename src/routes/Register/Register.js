@@ -2,8 +2,9 @@ import React from 'react';
 import { View, Text, TextInput, Image } from 'react-native';
 import _ from 'lodash';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/Feather'
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import { Button, Label } from '../../components/Generic';
+import { Button, Label, Container } from '../../components/Generic';
 import styles from './styles';
 import { colors } from '../../config/styles'
 import * as Animatable from 'react-native-animatable';
@@ -13,7 +14,7 @@ import { Actions } from 'react-native-router-flux';
 
 export const PhoneInput = (props) => {
 
-  const { getCode, phoneNumber, fadeOut, updateState, updateInput, isPhoneValid, verifyingPhone, phoneRef, app } = props
+  const { user, getCode, phoneNumber, fadeOut, updateState, updateInput, isPhoneValid, verifyingPhone, phoneRef, app } = props
 
   // if(fadeOut) {
   //   this._phoneRef.bounce(800)//.then((endState) => console.log(endState.finished ? 'bounce finished' : 'bounce cancelled'));
@@ -23,8 +24,8 @@ export const PhoneInput = (props) => {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
 
-      <Text style={styles.title}>Activate chaz</Text>
-      <Text style={styles.text}>Enjoy all the benefits of an activated chaz account by verifying your phone number</Text>
+
+      <Text style={styles.text}>{user.displayName}, activate your account by confirming your phone number, and you can connect with your friends directly on chaz.</Text>
 
       <View style={styles.inputContainer}>
         <TextInput
@@ -94,9 +95,7 @@ export const Confirmation = (props) => {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Activated!</Text>
-        <Animatable.View animation="bounceIn" delay={400} style={{alignItems: 'center'}}>
-          <AwesomeIcon name="heart" size={160} color={colors.yellow} />
-        </Animatable.View>
+
 
         {
           app.myInvites && app.myInvites.length > 0 &&

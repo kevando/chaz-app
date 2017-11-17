@@ -6,6 +6,8 @@ import { PhoneInput, CodeInput, Confirmation } from './Register';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
 import styles from './styles';
+import Icon from 'react-native-vector-icons/Feather'
+import { colors } from '../../config/styles'
 
 class RegisterContainer extends Component {
 
@@ -86,11 +88,11 @@ class RegisterContainer extends Component {
 
 
   render() {
-    // console.log('RegisterContainer props',this.props)
+    console.log('RegisterContainer props',this.props)
 
 
     const { app, user } = this.props
-    const { isPhoneVerified, isCodeConfirmed, errorMessage } = this.state
+    const { isPhoneVerified, isCodeConfirmed, errorMessage, isPhoneValid, isCodeValid } = this.state
 
     if(!user.displayName) {alert('NO DISPLAY NAME')}
     let Content = null
@@ -120,6 +122,13 @@ class RegisterContainer extends Component {
 
     return (
       <View style={styles.container}>
+
+        <View style={styles.zapIconsContainer}>
+          <Icon name="zap" size={50} color={isPhoneValid && (app.activeStep == 1 || !app.activeStep) ? colors.white : (!app.activeStep || app.activeStep == 1) ? colors.lightWhite : colors.yellow} style={styles.zapIcon}/>
+          <Icon name="zap" size={50} color={isCodeValid ? colors.white : (app.activeStep > 2 || !app.isAnon) ? colors.yellow : colors.lightWhite} style={styles.zapIcon}/>
+          <Icon name="zap" size={50} color={(app.activeStep >=3 || !app.isAnon) ? colors.yellow : colors.lightWhite} style={styles.zapIcon}/>
+        </View>
+
         {errorMessage != '' && <Text style={styles.errorText}>{errorMessage}</Text>}
         {Content}
       </View>

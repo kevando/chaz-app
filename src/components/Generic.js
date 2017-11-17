@@ -1,11 +1,51 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import * as Progress from 'react-native-progress';
 // import styles from './styles';
-import { colors, text, width } from '../config/styles';
+import { colors, text, width,MARGIN_LEFT, NAV_BAR_HEIGHT, STATUS_BAR_HEIGHT } from '../config/styles';
 import * as Animatable from 'react-native-animatable';
 
 // FancyButton = Animatable.createAnimatableComponent(Button);
+
+
+
+// ---------------------------------------
+//  CONTAINER
+// ---------------------------------------
+
+export const Container = (props) => {
+  // const { black, center, sub } = props
+  const styles = [
+    containerStyles.container,
+    // props.card && titleStyles.card,
+    // black && {color: colors.black},
+    // center && {textAlign: 'center'},
+    // sub && {fontSize: 15, fontWeight: '300', height: 30,lineHeight: 20},
+
+    {
+      borderTopWidth: STATUS_BAR_HEIGHT,
+      borderColor: StatusBar.hidden ? 'red' : colors.newBlue,
+      paddingHorizontal: MARGIN_LEFT,
+    }
+  ]
+  return (
+    <View style={styles}>
+
+      {props.children}
+
+    </View>
+  )
+}
+
+const containerStyles = StyleSheet.create({
+
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent'
+  },
+
+
+});
 
 
 // ---------------------------------------
@@ -13,16 +53,16 @@ import * as Animatable from 'react-native-animatable';
 // ---------------------------------------
 
 export const Title = (props) => {
-  const { black, center, sub } = props
+  const { black, center, sub, header, question } = props
   const styles = [
     titleStyles.text,
     props.card && titleStyles.card,
     black && {color: colors.black},
     center && {textAlign: 'center'},
     sub && {fontSize: 15, fontWeight: '300', height: 30,lineHeight: 20},
-    // props.center && {textAlign: 'center',marginVertical: 20,paddingHorizontal: 40,},
-    // props.title && {fontSize: 20,fontWeight: '600'},
-    // props.large && {fontSize: 20,fontWeight: '700'},
+
+    header && {marginTop: 50},
+    question && {fontSize: 22},
   ]
   return (
     <Text style={styles}>{props.children}</Text>
@@ -36,13 +76,16 @@ const titleStyles = StyleSheet.create({
     color: 'white',
     fontSize: 30,
     fontWeight: '700',
-    letterSpacing:0.5,
-    marginBottom: 20,
-    paddingLeft: 0,
-    marginHorizontal: 0,
+    letterSpacing: 0.5,
+    marginBottom: 0,
+    // paddingLeft: MARGIN_LEFT,
+    // marginHorizontal: 10,
     // backgroundColor: colors.lightWhite,
-    height: 50,
-    lineHeight: 60,
+    // marginTop: STATUS_BAR_HEIGHT+NAV_BAR_HEIGHT,
+    height: NAV_BAR_HEIGHT,
+    lineHeight: NAV_BAR_HEIGHT,
+    marginLeft: 5
+
   },
   card: {
     fontSize: 20,
@@ -101,7 +144,7 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       borderColor: bgcolor ? colors[bgcolor] : colors.green,
       borderRadius: 0,
       borderWidth: 1,
-      paddingVertical: 10,
+      paddingVertical: 15,
       paddingHorizontal: 20,
     },
     ghost: {
@@ -109,7 +152,6 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       borderWidth: 1,
       borderColor: 'white',
       backgroundColor: 'transparent',
-
     },
     text: {
       fontFamily: 'System',
@@ -119,7 +161,6 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       margin: 0,
       fontSize: rounded ? 13 :17,
       borderWidth: 0,
-
       margin: 0,
       color: color || 'white',
       textAlign: center ? 'center' : 'left',

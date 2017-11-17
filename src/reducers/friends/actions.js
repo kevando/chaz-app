@@ -37,11 +37,11 @@ export const addFriend = ({name,uid}) => (dispatch, getState) =>
 export const updateFriendData = (friend, data) => (dispatch, getState) =>
 
   new Promise(function(resolve,reject) {
-    console.log('updateFriendData',friend)
-    console.log('updateFriendData',data)
+    // console.log('updateFriendData',friend)
+    // console.log('updateFriendData',data)
     friendsRef.doc(friend.id).update({...data})
       .then(docRef => {
-        console.log('friend updated',docRef)
+        // console.log('friend updated',docRef)
         // friend.id = docRef.id
         resolve(friend)
     })

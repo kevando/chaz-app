@@ -11,8 +11,6 @@ import { fetchFeelings } from '../feelings/actions'
 
 export { signOut } from '../auth/actions'
 
-// export signOut
-
 // --------------------------------
 //    INIT APP
 // --------------------------------
@@ -23,13 +21,14 @@ export function initializeApp() {
     // const user = getState().user
 
     // // Kick off firestore stuff
+    dispatch(fetchFeelings())
     dispatch(listenForAuthChanges())
     dispatch(listenForNotifications())
-    dispatch(fetchFeelings())
 
-    // console.log('init app',app)
+
+
     if(!app.token) {
-      // console.warn('setting token in initApp')
+
       dispatch(setToken())
     } else {
       // console.warn('not setting token cause I got it')
@@ -218,23 +217,3 @@ function updateUser(data) {
     }
   }
 }
-
-
-
-// --------------------------------
-//    SIGN OUT
-// --------------------------------
-//
-// export function signOut() {
-//   return dispatch => {
-//     console.warn('sign oout')
-//
-//     firebase.auth().signOut().then(() => {
-//       dispatch({type: t.USER_SIGNED_OUT})
-//       dispatch({type: 'PURGE_DATA'}) // resets state to undefined
-//       // might not be needed but this is fucking annoying
-//       dispatch(setToken())
-//     })
-//     .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  );
-//   }
-// }

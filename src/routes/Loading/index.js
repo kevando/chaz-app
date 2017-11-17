@@ -6,23 +6,12 @@ import { colors, text } from '../../config/styles';
 
 class Loading extends React.Component {
 
-  _heartFadeOut = () => {
 
-    // const delay = 1400
-    //
-    // setTimeout(() => {
-    //
-    //   this.refs.heartView.zoomOut(1000)
-    //     .then((endState) => {
-    //       console.log(endState.finished ? 'bounce finished' : 'bounce cancelled')
-    //       // alert('fadeout done')
-    //       this.props.updateState({isReady:true})
-    //     })
-    // },delay)
-
-
-  }
-
+  // componentDidMount() {
+  //   const { onboarding, setAppData } = this.props
+  //   if(onboarding)
+  //     setAppData({onboarding: true})
+  // }
 
   render() {
 
@@ -94,18 +83,21 @@ const styles = StyleSheet.create({
 
 
 
-
-// import { bindActionCreators } from 'redux';
-// import { connect } from 'react-redux';
 //
-// import LoggedOut from './LoggedOut';
-// import * as AppActions from '../../reducers/app/actions';
 //
-// const mapStateToProps = (state) => {
-//   return {
-//     user: state.user,
-//     app: state.app,
-//   };
-// };
+// _heartFadeOut = () => {
 //
-// export default connect(mapStateToProps, null)(LoggedOut);
+//   // const delay = 1400
+//   //
+//   // setTimeout(() => {
+//   //
+//   //   this.refs.heartView.zoomOut(1000)
+//   //     .then((endState) => {
+//   //       console.log(endState.finished ? 'bounce finished' : 'bounce cancelled')
+//   //       // alert('fadeout done')
+//   //       this.props.updateState({isReady:true})
+//   //     })
+//   // },delay)
+//
+//
+// }

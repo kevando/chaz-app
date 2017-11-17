@@ -3,7 +3,7 @@ import { View , ScrollView, Text, TextInput, Button } from 'react-native';
 import _ from 'lodash';
 import EnableNotifications from '../../components/EnableNotifications'
 import { Label, Title } from '../../components/Generic';
-
+import Icon from 'react-native-vector-icons/Feather'
 import * as Animatable from 'react-native-animatable'
 import moment from 'moment'
 import styles from './styles';
@@ -13,11 +13,18 @@ const Reminders = (props) => {
   const { notificationPermission, reminders } = props;
   console.log(reminders)
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
+
+    {
+      notificationPermission == 'authorized' &&
+      <Animatable.View animation="bounceIn" duration={1000} delay={400} style={styles.checkIconContainer} >
+        <Icon name="check-circle" size={90} color="white" />
+        </Animatable.View>
+      }
 
       {
         notificationPermission != 'authorized' &&
-        <View style={{paddingHorizontal: 30}}>
+        <View style={{}}>
           <Text style={styles.title}>Follow Up</Text>
           <Label>Allow chaz to remind you about recommendations that you save. No spam</Label>
           <EnableNotifications button />
@@ -27,64 +34,8 @@ const Reminders = (props) => {
 
 
 
-    </ScrollView>
+    </View>
   );
 }
 
 export default Reminders;
-
-      // 
-      //
-      // {
-      //   reminders.localReminders.length > 0 &&
-      //   <View style={styles.wrapper}>
-      //     <Text style={styles.title}>Follow Up Reminders</Text>
-      //     {
-      //       _.map(reminders.localReminders, (reminder,i) => {
-      //         return (
-      //           <View key={i} style={styles.row}>
-      //           <Label>Recommendation: {moment(reminder.fire_date).fromNow()}</Label>
-      //           </View>
-      //         )
-      //       })
-      //     }
-      //
-      //   </View>
-      // }
-      //
-      // {
-      //   reminders.newRemoteNotifications.length > 0 &&
-      //   <View style={styles.wrapper}>
-      //     <Text style={styles.title}>Inbox</Text>
-      //     {
-      //       _.map(reminders.remoteNotifications, (notif,i) => {
-      //         return (
-      //           <View key={i} style={styles.row}>
-      //           <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
-      //           <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
-      //           </View>
-      //         )
-      //       })
-      //     }
-      //   </View>
-      // }
-      //
-      // {
-      //   reminders.remoteNotifications.length > 0 &&
-      //   <View style={styles.wrapper}>
-      //     <Text style={styles.title}>All Messages</Text>
-      //     {
-      //       _.map(reminders.remoteNotifications, (notif,i) => {
-      //         return (
-      //           <View key={i} style={styles.row}>
-      //           <Label>{notif.notification && notif.notification.body } ({moment(notif.receivedAt).fromNow()})</Label>
-      //           <Label>{notif.aps && notif.aps.alert } ({moment(notif.receivedAt).fromNow()})</Label>
-      //           </View>
-      //         )
-      //       })
-      //     }
-      //   </View>
-      // }
-      //
-      //
-      //

@@ -19,40 +19,63 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     // borderWidth: 2,
     // borderColor: 'red',
-    // paddingRight: width/10,
+    paddingRight: 70,
     // paddingLeft: 10,
-    // backgroundColor: 'rgba(255,0,255,0.2)',
-    // flex: 1,
   },
 
-  greetingText: {
+  questionText: {
     ...text,
-
     color: 'white',
     fontSize: 35,
-    height: 39,
+    // height: 39,
     lineHeight: 39,
     paddingVertical: 0,
-    borderWidth: 3,
-    borderColor: 'rgba(255,255,255,0)',
-    // backgroundColor: 'rgba(255,255,255,0.2)',
+    // borderWidth: 3,
+    // borderColor: 'rgba(255,255,255,0)',
   },
 
   inputName: {
     // backgroundColor: 'rgba(255,255,255,0.2)',
     ...text,
-    flex: 1,
-    fontSize: 35,
+    // flex: 1,
+    fontSize: 30,
 
-    height: 39,
+    height: 45,
     borderBottomWidth: 3,
-    borderBottomColor: 'rgba(255,255,255,0.4)',
+    borderBottomColor: 'rgba(255,255,255,0.8)',
     paddingLeft: 3,
-    marginLeft: 0,
+    marginRight: 50,
     color: 'rgba(255,255,255,0.8)',
-    // alignItems: 'flex-start',
-    // justifyContent: 'flex-start',
-    maxWidth: 200,
+    // backgroundColor: colors.lightWhite
+  },
+  inputFriend: {
+    // backgroundColor: 'rgba(255,255,255,0.2)',
+    ...text,
+    // flex: 1,
+    fontSize: 30,
+
+    height: 45,
+    borderBottomWidth: 3,
+    borderBottomColor: 'rgba(255,255,255,0.8)',
+    paddingLeft: 3,
+    marginRight: 50,
+    marginTop: 30,
+    color: 'rgba(255,255,255,0.8)',
+    // backgroundColor: colors.lightWhite
+  },
+  titleText: {
+    // backgroundColor: 'rgba(255,255,255,0.2)',
+    ...text,
+    // flex: 1,
+    fontSize: 30,
+
+    // height: 45,
+    // borderBottomWidth: 3,
+    // borderBottomColor: 'rgba(255,255,255,0.8)',
+    // paddingLeft: 3,
+    // marginRight: 50,
+    color: 'rgba(255,255,255,0.99)',
+    // backgroundColor: colors.lightWhite
   },
 
   subTitle: {
@@ -105,7 +128,6 @@ export default styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '300',
     paddingVertical: 0,
-
   },
   feelingOptionsContainer: {
     // backgroundColor: colors.lightWhite,
@@ -147,6 +169,55 @@ export default styles = StyleSheet.create({
     // borderWidth: 3,
     // borderColor: 'rgba(255,255,255,0)',
   },
+
+  timerClockEmoji: {
+    fontSize: 60,
+
+  },
+  reminderOptionsContainer: {
+    // backgroundColor: colors.lightWhite,
+    marginTop: 30,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+  },
+  reminderOptionContainer: {
+    flexDirection: 'row',
+    alignItems: 'center', // v
+    // backgroundColor: colors.lightWhite,
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    marginVertical: 6,
+
+  },
+
+  reminderOptionIcon: {
+    fontSize: 30,
+    opacity: 0.9,
+    padding: 5,
+
+  },
+  reminderOptionIconSelected: {
+
+    opacity: 0.9,
+    textShadowColor: colors.darkGrey,
+    textShadowOffset: {width: 3, height: -2},
+    textShadowRadius: 6,
+    // backgroundColor: 'yellow',
+  },
+
+  reminderOptionText: {
+    ...text,
+    color: colors.white,
+    fontSize: 25,
+    fontWeight: '400',
+    marginLeft: 10,
+
+  },
+  reminderOptionTextSelected: {
+    fontWeight: '500',
+  }
+
+
 
 
 });

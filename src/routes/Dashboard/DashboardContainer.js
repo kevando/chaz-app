@@ -30,26 +30,16 @@ class DashboardContainer extends Component {
 
 
   componentDidMount() {
-    // TMP!!
-    // console.log('dash mounted',this.props)
-    // if(this.props.myRecs.length == 1)
-    //   this._throwParty()
-
-
+    // const { onboarding, setAppData } = this.props
+    // // if(onboarding)
+    //   // setAppData({onboarding: true})
     // Actions.push('NewRecLightbox')
     // Actions.push('Inbox')
-    // Actions.push('GodView')
+    // Actions.push('Register')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('RecView',{rec: this.props.givenRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[1]})
+    Actions.push('FriendView',{friend: this.props.friends[0]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
-
-
-    // tmp testing
-    // this.props.fetchInvites("to.phoneNumber",this.props.user.phoneNumber).then((myInvites) => {
-    //   Actions.push('RecView',{rec: myInvites[0]} )
-    // })
-
   }
 
 
@@ -92,9 +82,11 @@ class DashboardContainer extends Component {
   }
   _goToOnboarding = () => {
       Alert.alert('Are you sure?',`You will sign out of this account.`,
-      [{text:'Nevermind'},{text:'Sign Out', onPress: this.props.signOut.then(Actions.Hello)}])
-    // this.props.setAppData({onboarding: true})
-    //
+      [
+        { text:'Nevermind' },
+        { text:'Sign Out', onPress: this.props.signOut }
+      ])
+
   }
 
   render() {

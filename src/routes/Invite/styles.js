@@ -17,5 +17,15 @@ export default styles = StyleSheet.create({
     padding: 5,
   },
 
+  stepsIconsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  stepIcon: {
+    margin: 15,
+  },
 
 });

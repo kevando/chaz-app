@@ -9,7 +9,7 @@ import { Button } from '../../components/Generic';
 import { CategoryPicker } from '../../components/Category';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import * as Animatable from 'react-native-animatable';
-
+// import Confetti from 'react-native-confetti';
 
 class FirstRecContainer extends Component {
 
@@ -21,6 +21,7 @@ class FirstRecContainer extends Component {
       updateState: (state) => this.setState(state),
     }
   }
+
 
   _onSaveTitlePress = () => {
     const { initNewRec, user } = this.props
@@ -37,30 +38,21 @@ class FirstRecContainer extends Component {
     const { friendInput } = this.state
 
     addFriend({name: friendInput}).then(friend => {
-      // console.warn(friend)
       setUnfinishedData({from: {id: friend.id, name: friend.name}})
     })
   }
 
-  _onGetStarted = () => {
-    // Actions.push('FirstRec')
-    // alert('go to first rec')
-    Actions.push('lightbox')
-    this.props.setAppData({onboarding: false})
-
-  }
-
   _onNoThanksPress = () => {
-    Alert.alert('chaz Reminders','You will have another chance to enable this. We strongly encourage it.',
-    [{text:'Fine, I will do it now'},{text:'Proceed', onPress: ()=> Actions.push('Confirmation')}])
+    Actions.FirstRecConfirmation()
+    // Alert.alert('chaz','You will have another chance to enable this. We strongly encourage it.',
+    // [{text:'Okay, Okay', onPress: ()=> Actions.push('FirstRecConfirmation')}])
   }
 
   _onSetReminderPress = (selectedOption) => {
-    Alert.alert('Reminder Saved!',`You will receive an app notification in a ${selectedOption}`,
-    [{text:'I want to change it'},{text:'Lets continue', onPress: ()=> Actions.push('Confirmation')}])
+    Actions.push('FirstRecConfirmation')
+    // Alert.alert('Reminder Saved!',`You will receive an app notification in a ${selectedOption}`,
+    // [{text:'I want to change it'},{text:'Lets continue', onPress: ()=> Actions.push('FirstRecConfirmation')}])
   }
-
-
 
   render() {
 
@@ -72,7 +64,6 @@ class FirstRecContainer extends Component {
         onSaveFriendPress={this._onSaveFriendPress}
         onNoThanksPress={this._onNoThanksPress}
         onSetReminderPress={this._onSetReminderPress}
-
         />
       )
     }

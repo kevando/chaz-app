@@ -24,14 +24,17 @@ class InviteContainer extends Component {
 
 
   _sendInvite = () => {
+    // alert('sdfasdfs')
+    // return
     const { sendInvite, friend } = this.props
     const { phoneNumber } = this.state
-
-    if(!phoneNumber){
+    // console.warn(phoneNumber)
+    const phoneNum = phoneNumber || friend.phoneNumber
+    if(!phoneNum){
       alert('no phon')
       return
     }
-    sendInvite(friend, phoneNumber)
+    sendInvite(friend, phoneNum)
     // update the UI
     this.setState({invitation: 'sending'})
   }
@@ -46,7 +49,7 @@ class InviteContainer extends Component {
 
         friend={this.props.friend}
         user={this.props.user}
-        sendInvite={this._sendInvite}
+        sendInvitePress={this._sendInvite}
         app={this.props.app}
         searchUsers={() => this.props.searchUsers(this.props.friend,this.state.phoneNumber)}
         sendInvite={() => this.props.sendInvite(this.props.friend,this.state.phoneNumber)}

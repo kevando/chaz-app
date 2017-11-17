@@ -43,18 +43,7 @@ class HelloContainer extends Component {
 
     saveDisplayName(nameInput)
     setUserData({displayName: nameInput, nameInput: ''})
-    // not running the invite check here anymore
-      // .then(myInvites => {
-      //   // Search for invites
-      //   fetchInvites("to.name",nameInput.toLowerCase())
-      //     .then(myInvites => {
-      //       // console.warn('invites',myInvites)
-      //       this.setState({myInvites})
-      //
-      //     }).catch(e => Alert.alert('Error fetching invites',e, this._dialogOptions))
-      //
-      // }).catch(e => Alert.alert('Error saving user data',e, this._dialogOptions))
-      // .then(r => console.warn(r))
+
   }
 
   _onGetStarted = () => {
@@ -73,7 +62,7 @@ class HelloContainer extends Component {
 
 
   render() {
-
+    console.log('Hello',this.props)
     return (
       <Hello
         {...this.state}

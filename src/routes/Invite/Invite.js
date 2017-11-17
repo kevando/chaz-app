@@ -4,6 +4,7 @@ import _ from 'lodash'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Feather'
+import { colors } from '../../config/styles'
 import styles from './styles';
 import { UserCard, FindUserCard, RecCard } from '../../components/Card/FriendView'
 import { Card } from '../../components/Rec'
@@ -17,6 +18,11 @@ const PhoneNumberSearch = (props) => {
   return (
   <View style={styles.container}>
     <Label center large>Find {props.friend.name}</Label>
+    <View style={styles.stepsIconsContainer}>
+      <Icon name="phone" size={50} color={props.validPhoneNumber ? colors.white : colors.lightWhite} style={styles.stepIcon}/>
+      <Icon name="navigation" size={50} color={colors.lightWhite} style={styles.stepIcon}/>
+      <Icon name="users" size={50} color={colors.lightWhite} style={styles.stepIcon}/>
+    </View>
     <Label center>Enter {props.friend.name}'s phone number.</Label>
     <PhoneInput {...props} phoneNumber={props.phoneNumber}  onTextChange={(state) => props.updateState(state)} />
 
@@ -26,7 +32,7 @@ const PhoneNumberSearch = (props) => {
 
 const Invite = (props) => {
 
-  const { friend, app, invitation, updateState, updateFriend, searchUsers, phoneNumber, userFound, user,assignFriend, validPhoneNumber, sendInvite } = props
+  const { friend, app, invitation, updateState, updateFriend, searchUsers, phoneNumber, userFound, user,assignFriend, validPhoneNumber, sendInvitePress } = props
 
   let UserFound = () => {
     return (
@@ -50,6 +56,11 @@ const Invite = (props) => {
     return (
     <View style={styles.container}>
       <Label center large>Invitation Sent</Label>
+      <View style={styles.stepsIconsContainer}>
+        <Icon onPress={()=>updateFriend(friend,{searchResults: null})} name="phone" size={50} color={colors.yellow} style={styles.stepIcon}/>
+        <Icon name="navigation" size={50} color={colors.yellow} style={styles.stepIcon}/>
+        <Icon name="users" size={50} color={colors.white} style={styles.stepIcon}/>
+      </View>
         <Label center>You invited this {friend.name}. Nice. Lets hope {friend.name} accepts.</Label>
       </View>
     )
@@ -59,8 +70,12 @@ const Invite = (props) => {
     return (
     <View style={styles.container}>
       <Label center large>Send Invite</Label>
+      <View style={styles.stepsIconsContainer}>
+        <Icon onPress={()=>updateFriend(friend,{searchResults: null})} name="phone" size={50} color={colors.yellow} style={styles.stepIcon}/>
+        <Icon name="navigation" size={50} color={colors.white} style={styles.stepIcon}/>
+        <Icon name="users" size={50} color={colors.lightWhite} style={styles.stepIcon}/>
+      </View>
         <Label center>Lets send a text to {friend.phoneNumber}</Label>
-        <TouchableOpacity onPress={()=>updateFriend(friend,{searchResults: null})}><Label center>OR try a different number</Label></TouchableOpacity>
       </View>
     )
   }
@@ -68,6 +83,11 @@ const Invite = (props) => {
     return (
     <View style={styles.container}>
       <Label center large>{friend.name} has chaz!</Label>
+      <View style={styles.stepsIconsContainer}>
+        <Icon name="phone" size={50} color={colors.yellow} style={styles.stepIcon}/>
+        <Icon name="navigation" size={50} color={colors.yellow} style={styles.stepIcon}/>
+        <Icon name="users" size={50} color={colors.yellow} style={styles.stepIcon}/>
+      </View>
         <Label center>{friend.phoneNumber} is correct and this person is on chaz.</Label>
         <Label center>Connecting will notify them</Label>
         <TouchableOpacity onPress={()=>updateFriend(friend,{searchResults: null})}><Label center>OR try a different number</Label></TouchableOpacity>
@@ -81,8 +101,9 @@ const Invite = (props) => {
     <View style={styles.container}>
       <TouchableOpacity onPress={Actions.pop} style={styles.closeButton}>
         <Icon name="x" size={25} color="white"/>
-
       </TouchableOpacity>
+
+
 
       {
         friend.uid ?
@@ -100,7 +121,7 @@ const Invite = (props) => {
 
       {
         friend.searchResults == 'no user found' ?
-            <Button bgcolor="pink" text="Yes lets send an invite" onPress={sendInvite} />
+            <Button bgcolor="pink" text="Yes lets send an invite" onPress={sendInvitePress} />
             : friend.searchResults == 'user found' ?
               <Button bgcolor="pink" text="Connect!" onPress={assignFriend} />
               : !friend.searchResults && validPhoneNumber ?

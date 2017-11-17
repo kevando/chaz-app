@@ -5,12 +5,14 @@ import { colors, text, MARGIN_LEFT } from '../../config/styles';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0,
-    backgroundColor: colors.blueBG,
+    // backgroundColor: 'orange',
+    // backgroundColor: colors.blueBG,
   },
 
   scrollView: {
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
+    // backgroundColor: 'red',
+    // marginTop: 50,
   },
   paragraph: {
     ...text,

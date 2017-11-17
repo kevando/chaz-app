@@ -2107,6 +2107,10 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
+install@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.10.1.tgz#1c7b53c8dd7335ef534c2648de28f599df1bdd97"
+
 invariant@^2.0.0, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
@@ -3647,6 +3651,10 @@ react-native-progress@^3.4.0:
 react-native-push-notification@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.0.1.tgz#0e23db302d03bb4a3f28dc072dcaf2a9a1178ed8"
+
+react-native-restart@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-restart/-/react-native-restart-0.0.4.tgz#e742c2f9833592214147bb39321d2cd5d172ad8c"
 
 react-native-root-siblings@^1.2.1:
   version "1.2.1"

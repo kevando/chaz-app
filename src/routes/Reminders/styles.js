@@ -33,5 +33,12 @@ export default styles = StyleSheet.create({
     marginBottom: 30,
     padding: 5,
   },
+  checkIconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    // paddingTop: 40,
+    // backgroundColor: 'yellow',
+    height: 150,
+  },
 
 });

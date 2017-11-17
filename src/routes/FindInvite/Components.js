@@ -14,6 +14,20 @@ import EnableNotifications from '../../components/EnableNotifications';
 
 const DELAY = 300
 const DURATION = 300
+
+// --------------------------------------------------
+//    NAME
+// --------------------------------------------------
+
+export const Zap = (props) => {
+
+  return (
+    <Animatable.View style={styles.greetingContainer} animation="fadeIn" delay={DELAY} duration={DURATION}>
+      <Text style={styles.greetingText} onPress={props.logout}>{props.user.displayName},</Text>
+    </Animatable.View>
+    );
+}
+
 // --------------------------------------------------
 //    NAME
 // --------------------------------------------------
@@ -228,7 +242,7 @@ export class SetReminder extends Component {
 //    BUTTON
 // --------------------------------------------------
 
-export const FirstRecButton = (props) => {
+export const FindInviteButton = (props) => {
 
 
   if(props.titleInput != '' && !props.unfinished.title) {

@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase';
-
+import { Actions } from 'react-native-router-flux';
 import * as t from '../actionTypes'
-
+import { initializeApp } from '../app/actions'
 const Auth = firebase.auth()
 
 
@@ -9,16 +9,14 @@ const Auth = firebase.auth()
 //    SIGN OUT
 // --------------------------------
 
-export const signOut = () => dispatch =>
-  new Promise((resolve,reject) =>
+export function signOut(redirect) {
+  return (dispatch, getState) => {
+    console.log('SIGN OUT')
     Auth.signOut().then(() => {
       dispatch({type: t.USER_SIGNED_OUT})
       dispatch({type: 'PURGE_DATA'}) // resets state to undefined
-
-      // might not be needed but this is fucking annoying
-      // removing this fn call since migrating this to own action file
-      // dispatch(setToken())
+      Actions.replace('LoggedOut')
+      // initializeApp()
     })
-    .catch(error =>  dispatch({type: t.SET_APP_ERROR, error })  )
-  )
-      
+  }
+}

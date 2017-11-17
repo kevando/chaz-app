@@ -2,7 +2,7 @@ import React from 'react';
 import { View ,Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
 import Icon from 'react-native-vector-icons/Feather'
-import { Title } from '../../components/Generic';
+import { Title, Container } from '../../components/Generic';
 import { Card } from '../../components/Rec';
 import { colors, text } from '../../config/styles';
 import { Actions } from 'react-native-router-flux';
@@ -17,9 +17,9 @@ const Invites = ({invitations}) => {
 console.log(invitations)
 
   return (
-    <View style={styles.container}>
+    <Container>
     <ScrollView>
-      <Title>Outbox</Title>
+      <Title header>Outbox</Title>
 
       {
         _.map(invitations, (invitation,i) => {
@@ -29,7 +29,7 @@ console.log(invitations)
         })
       }
 </ScrollView>
-    </View>
+    </Container>
   );
 }
 

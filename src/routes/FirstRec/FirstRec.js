@@ -19,6 +19,7 @@ const FirstRec = (props) => {
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
+      
 
       <View style={styles.contentContainer}>
 
@@ -27,7 +28,6 @@ const FirstRec = (props) => {
         <Onboarding.FriendInput {...props} />
         <Onboarding.CategoryInput {...props} />
         <Onboarding.SetReminder {...props} />
-        <Onboarding.Confirmation {...props} />
 
       </View>
 

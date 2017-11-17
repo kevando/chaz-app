@@ -6,7 +6,7 @@ import EnableNotifications from '../../components/EnableNotifications'
 
 import { CardDetail } from '../../components/Rec'
 import styles from './styles';
-import { Button } from '../../components/Generic'
+import { Button, Title } from '../../components/Generic'
 //
 
 const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updateState, saveRec, onDeletePress ,onAssignPress, setRecReminder }) => {
@@ -14,7 +14,7 @@ const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updat
   return (
     <View style={{flex:1}}>
     <ScrollView style={styles.container}>
-
+    <Title />
 
     {
       isEditing &&
@@ -28,14 +28,10 @@ const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updat
     }
 
 
-      {
-        app.notificationPermission != 'authorized' &&
-          <EnableNotifications button />
-      }
-
-
-
-
+    {
+      app.notificationPermission != 'authorized' &&
+        <EnableNotifications button />
+    }
 
     </ScrollView>
     { isEditing &&

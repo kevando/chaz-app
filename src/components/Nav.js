@@ -10,8 +10,10 @@ import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable'
 import EnableNotifications from './EnableNotifications'
 
+
 // --------------------------------
-// Close Button for InputTitle
+//  Close Button for InputTitle
+// --------------------------------
 
 export class CloseButton extends Component {
 
@@ -26,10 +28,21 @@ export class CloseButton extends Component {
   }
 }
 
+// --------------------------------
+//  BACK BUTTON
+// --------------------------------
+
 export class BackButton extends Component {
+
+  _goBack = () => {
+    Actions.pop()
+  }
+
   render() {
     return (
-      <Icon onPress={Actions.pop} name="arrow-left" size={25} style={[styles.buttonIcon,{marginTop: StatusBar.hidden ? -10 : 0,}]}/>
+      <TouchableOpacity onPress={this._goBack} style={[styles.buttonContainer,{marginLeft: 15}]}>
+        <Icon name="arrow-left" size={30} style={[styles.buttonIcon,]}/>
+      </TouchableOpacity>
     )
   }
 }
@@ -87,7 +100,7 @@ render() {
   const { app, myRecs, user, reminders, openRecs, openInvitations, inbox } = this.props;
 
   const debug = app.devMode
-  const god = user.displayName = 'kevo'
+  const god = user.displayName == 'kevo'
   // this should turn out to be pretty much the onboarding steps
   let buttonIcons = []
 
@@ -98,7 +111,7 @@ render() {
   if(debug || app.notificationPermission != "authorized" && myRecs.length > 0 ) {
     buttonIcons.push(
       <Animatable.View animation="swing" iterationCount={'infinite'} duration={2000}>
-        <NavButton onPress={Actions.Reminders} name="bell" size={25} />
+        <NavButton onPress={Actions.Reminders} icon="bell" size={25} color={colors.yellow} />
       </Animatable.View>
     )
   }
@@ -173,7 +186,7 @@ render() {
 
 
   return (
-    <View style={{flexDirection: 'row', marginRight: 12,marginTop: 1}}>
+    <View style={{flexDirection: 'row', marginRight: 12,marginTop: 10}}>
       {_.map(buttonIcons,(icon,i) => <View style={styles.navIconContainer} key={i}>{icon}</View>)}
     </View>
   )
@@ -206,12 +219,23 @@ export const DashboardRightButton = connect(mapStateToProps, mapDispatchToProps)
 const ICON_CONTAINER = 35
 const styles = StyleSheet.create({
 
+  buttonContainer: {
+    height: ICON_CONTAINER,
+    width: ICON_CONTAINER,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    marginTop: 10,
+    // borderWidth: 1,
+    // borderColor: 'blue',
+    // borderRadius: 30,
+    // backgroundColor: 'blue',
+    overflow: 'hidden',
+  },
+
   buttonIcon: {
     color: 'white',
-    // backgroundColor: 'yellow',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-
+    // backgroundColor: 'blue',
   },
   navIconContainer: {
     height: ICON_CONTAINER,
@@ -221,7 +245,7 @@ const styles = StyleSheet.create({
     // borderColor: 'white',
     // borderWidth: 1,
     marginHorizontal: 4,
-    marginTop: -5
+    marginTop: 10
   },
   navIcon: {
     // flex: 1,
