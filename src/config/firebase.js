@@ -82,10 +82,11 @@ export function addFirestoreListeners(uid) {
                 myRecs.push({...doc.data(),id: doc.id});
 
           })
-          console.log('myRecs',myRecs)
-          console.log('myRecs',myFriends)
+          // console.log('myRecs',myRecs)
+          // console.log('myRecs',myFriends)
           const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
           dispatch({type: t.REFRESH_MY_RECS, myRecs: _.orderBy(myRecsWithFriendData,['createdAt'],['desc']) })
+          dispatch({type: t.REFRESH_MY_QUEUE, myQueue: _.filter(myRecsWithFriendData, rec => { return rec.reminder }) })
       })
 
       // GIVEN RECS

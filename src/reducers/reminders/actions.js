@@ -1,7 +1,7 @@
 import * as t from '../actionTypes';
 import firebase from 'react-native-firebase'
 import moment from 'moment'
-import {Categories} from '../../components/Category'
+
 
 const messaging = firebase.messaging()
 
@@ -17,7 +17,7 @@ export const setRecReminder = (reminderDateInMinutes,rec) => (dispatch) =>
       // recTitle: rec.title,
       fire_date: new Date(reminderTimestamp),      //RN's converter is used, accept epoch time and whatever that converter supports
       id: 'rec_'+rec.id,    //REQUIRED! this is what you use to lookup and delete notification. In android notification with same ID will override each other
-      body: `${moment(rec.createdAt).fromNow()} ${rec.friend.name} recommended ${rec.title}. Did you ${Categories[rec.category].verb} out?`,
+      body: `${moment(rec.createdAt).fromNow()} ${rec.friend.name} recommended ${rec.title}. Did you check this out?`,
     })
     resolve(reminderTimestamp)
   })

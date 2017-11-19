@@ -3,7 +3,7 @@ import {View, Text, Button, Keyboard, StyleSheet,StatusBar, ScrollView } from 'r
 import { colors, text } from '../../config/styles';
 import { Actions} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Feather';
-import { Categories } from '../../components/Category'
+
 import _ from 'lodash'
 
 // --------------------------------
@@ -24,18 +24,19 @@ export default class Filter extends Component {
   }
 
   render() {
+    return null
     const { changeActiveFilter, activeFilter } = this.props
-    return (
-      <ScrollView style={styles.container} horizontal>
-        <Text onPress={()=> changeActiveFilter('Everything')} style={[styles.filterItem,this._getFilterStyle('Everything')]}>Everything</Text>
-        {
-          _.map(Categories, (category,key) => {
-            return <Text key={key} onPress={()=> changeActiveFilter(category.title)} style={[styles.filterItem,this._getFilterStyle(category.title)]}>{category.title}</Text>
-          })
-        }
-
-      </ScrollView>
-    )
+    // return (
+    //   <ScrollView style={styles.container} horizontal>
+    //     <Text onPress={()=> changeActiveFilter('Everything')} style={[styles.filterItem,this._getFilterStyle('Everything')]}>Everything</Text>
+    //     {
+    //       _.map(Categories, (category,key) => {
+    //         return <Text key={key} onPress={()=> changeActiveFilter(category.title)} style={[styles.filterItem,this._getFilterStyle(category.title)]}>{category.title}</Text>
+    //       })
+    //     }
+    //
+    //   </ScrollView>
+    // )
   }
 }
 //

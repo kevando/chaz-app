@@ -12,19 +12,6 @@ import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 
 
-export const Categories = {
-  // "uncategorized" : {icon: "file-text", title: "Uncategorized"},
-  "movie" : {icon: "film", title: "Movie", verb:'watch', emoji: '🎬'},
-  "tv" : {icon: "tv", title: "TV Series", verb:'watch', emoji: '📺'},
-  "book" : {icon: "book", title: "Book", verb:'read',emoji: '📖'},
-  "music" : {icon: "music", title: "Music", verb: 'listen to',emoji: '🎵'},
-  "podcast" : {icon: "mic", title: "Podcast", verb:'listen to',emoji: '📻'},
-  "documentary" : {icon: "video", title: "Documentary", verb: 'watch',emoji: '📽️'},
-  "internet" : {icon: "link", title: "Website", verb: 'look into',emoji: '🔗'},
-  "app" : {icon: "speaker", title: "App", verb: 'download',emoji: '📱'},
-  "other" : {icon: "file", title: "Other", verb: 'look into',emoji: '📄'},
-}
-
 
 
 // ---------------------------------------
@@ -44,7 +31,7 @@ export const CategoryEmoji = ({category, categories, size=25 }) => {
   return <Text style={styles} >{emoji}</Text>
 
   // Old icon code
-  // const icon = !rec ? Categories[category].icon : rec.category ? Categories[rec.category].icon : 'file-text'
+  
   // return <Icon name={icon} size={size} color={iconColor} />
 }
 

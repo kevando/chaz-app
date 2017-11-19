@@ -30,6 +30,7 @@ import GetStarted from '../../routes/GetStarted';
 import Inbox from '../../routes/Inbox';
 import GodView from '../../routes/GodView';
 import Debug from '../../routes/Debug';
+import Queue from '../../routes/Queue';
 
 import FindInvite from '../../routes/FindInvite';
 
@@ -90,8 +91,8 @@ class Chaz extends Component {
 
               <Lightbox key="lightbox" initial={!onboarding}>
                 <Stack key="myStack" navTransparent hideBackImage back >
-                  <Scene key='Dashboard'  component={Dashboard} initial={true} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
-
+                  <Scene key='Dashboard'  component={Dashboard} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
+                  <Scene key='Queue'  component={Queue} hideNavBar={false} renderBackButton={() => <BackButton />} />
 
 
                   <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />

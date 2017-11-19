@@ -540,7 +540,7 @@ render() {
           </View>
 
           <Divider />
-          <View style={{flex: 1,alignItems: 'flex-end', flexDirection: 'row'}}>
+          <View style={{flex: 1,}}>
 
           {
             rec.category && !isEditing ?

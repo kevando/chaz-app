@@ -13,6 +13,7 @@ const initialState =
     inbox: [],
     outbox: [],
     openRecs: [],
+    myQueue: [],
   };
 
 export default function recs(recommendations = initialState, action = {}) {
@@ -139,6 +140,15 @@ export default function recs(recommendations = initialState, action = {}) {
           ...recommendations,
           // list: action.myRecs,
           myRecs: action.myRecs,
+        }
+
+      // -------------------------------------------
+
+      case t.REFRESH_MY_QUEUE:
+        return {
+          ...recommendations,
+          // list: action.myRecs,
+          myQueue: action.myQueue,
         }
 
       // -------------------------------------------

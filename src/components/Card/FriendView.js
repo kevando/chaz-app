@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import _ from 'lodash'
 import { Actions} from 'react-native-router-flux';
-import { Categories } from '../../components/Category';
+
 import { Label, Button } from '../../components/Generic/';
 
 import { colors } from '../../config/styles';

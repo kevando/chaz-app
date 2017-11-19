@@ -97,7 +97,7 @@ class DashboardButtonContainer extends Component {
 
 
 render() {
-  const { app, myRecs, user, reminders, openRecs, openInvitations, inbox } = this.props;
+  const { app, myRecs, myQueue, user, reminders, openRecs, openInvitations, inbox } = this.props;
 
   const debug = app.devMode
   const god = user.displayName == 'kevo'
@@ -135,6 +135,17 @@ render() {
     // INVITE THE USER TO SIGN UP
     buttonIcons.push (
       <NavButton onPress={Actions.Register} icon="heart" color={colors.lightWhite} />
+    )
+  }
+
+  // ---------------------
+  //    QUEUE
+  // ---------------------
+  if(debug || myQueue.length > 0) {
+
+    // INVITE THE USER TO SIGN UP
+    buttonIcons.push (
+      <NavButton onPress={Actions.Queue} icon="printer" color={colors.lightWhite} />
     )
   }
 
@@ -203,6 +214,7 @@ const mapStateToProps = (state) => {
     openRecs: state.recommendations.openRecs,
     openInvitations: _.filter(state.recommendations.givenRecs,rec => rec.status == "open"),
     myRecs: state.recommendations.myRecs,
+    myQueue: state.recommendations.myQueue,
     inbox: state.recommendations.inbox,
     user: state.user,
     reminders: state.reminders,

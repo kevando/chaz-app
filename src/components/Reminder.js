@@ -25,7 +25,7 @@ export const Reminder = ({rec, size=18, color="yellow"}) => {
       marginLeft: 8,
     }
   }
-  // const icon = rec.category ? Categories[rec.category].icon : 'file-text'
+  
   const iconColor = colors.orange
   const reminderText = moment(rec.reminder).fromNow()
 
