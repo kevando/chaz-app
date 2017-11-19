@@ -222,14 +222,14 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
 // ---------------------------------------
 
 
-export const Divider = (props) => {
+export const Divider = ({color='#eee'}) => {
   const dividerStyles = [
     // styles.label,
     {
-      flex: 1,
-      backgroundColor: '#ddd',
+      // flex: 1,
+      backgroundColor: color,
       padding: 0,
-      height: 2,
+      height: 1,
       marginVertical: 20,
     }
   ]

@@ -5,7 +5,7 @@ import moment from 'moment';
 import { Actions} from 'react-native-router-flux';
 import * as Animatable from 'react-native-animatable';
 import { colors, text } from '../config/styles';
-import { CategoryIcon, CategoryPicker, Category,CategoryPickerEditing } from './Category';
+import { CategoryEmoji, CategoryPicker, Category,CategoryPickerEditing, EmptyCategory } from './Category';
 import * as Friend from './Friend';
 import {Label} from './Generic'
 import { Divider, Button } from './Generic'
@@ -42,7 +42,7 @@ class GenericCard extends Component {
 
 render() {
   // console.log('card props',this.props)
-  const { rec } = this.props;
+  const { rec, totalRecs } = this.props;
   let extraStyles = {
     accepted: {
       borderColor: colors.grey,
@@ -50,24 +50,30 @@ render() {
     }
   }
 
+  // resize based on content
+  const titleFontSize   = totalRecs > 10 ? 16 : 30
+  const friendFontSize  = totalRecs > 10 ? 14 : 18
+  const headerHeight    = totalRecs > 10 ? 20 : 25
+  const paddingV        = totalRecs > 10 ? 10 : 15
+
   return (
-    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted]}>
-      <View style={cardStyles.headerContainer}>
+    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted,{paddingVertical: paddingV}]}>
+      <View style={[cardStyles.headerContainer,{height: headerHeight}]}>
         <View style={cardStyles.friendContainer}>
-          <Friend.Name friend={rec.friend} />
+          <Friend.Name friend={rec.friend} fontSize={friendFontSize} />
         </View>
         <View style={cardStyles.iconContainer}>
           {moment().diff(rec.createdAt) < 200000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
           {rec.friend.invitedAt && !rec.friend.uid && <Icon name="navigation" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
           { moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
           { moment().diff(rec.reminder) > 0 && rec.reminder && <Icon name="alert-triangle" size={17} color={"red"} style={{paddingRight:5, opacity: 0.5}}/>}
-          {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
+          {rec.category ? <CategoryEmoji category={rec.category} size={17} /> : <EmptyCategory size={12} delay={2000} iterationCount='infinite' animation="jello" />}
           {rec.type == 'invite' && <Icon size={17} color={colors.purple} name="navigation"/>}
 
         </View>
       </View>
       <View style={cardStyles.bodyContainer}>
-          <Title rec={rec} />
+          <Title rec={rec} styles={{fontSize:titleFontSize}} />
         </View>
     </View>
     )
@@ -97,7 +103,7 @@ render() {
         {
           rec.type == 'invite' ?
           <Icon size={25} color={"purple"} name="navigation"/> :
-          <CategoryIcon rec={rec} size={25} color={"yellow"}/>
+          <CategoryEmoji category={rec.category} size={25} />
         }
 
         <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
@@ -164,7 +170,7 @@ class OpenCard extends Component {
           </View>
         </View>
         <View style={[cardStyles.bodyContainer,{alignItems: 'center'}]}>
-          <CategoryIcon rec={rec} size={25} color={"yellow"}/>
+          <CategoryEmoji category={rec.category} size={25} />
           <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
           </View>
           <View style={{width: 100, margin: 10}}>
@@ -222,7 +228,7 @@ render() {
     }
   }
   return (
-    <View style={{marginBottom: 50}}>
+    <View style={{marginBottom: 30}}>
     <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted]}>
       <View style={cardStyles.headerContainer}>
         <View style={cardStyles.friendContainer}>
@@ -237,10 +243,10 @@ render() {
       </View>
       <View style={cardStyles.bodyContainer}>
         <View style={{width: 50}}>
-          <CategoryIcon rec={rec} size={30} />
+          <CategoryEmoji category={rec.category} size={30} />
         </View>
         <View style={{}}>
-          <Title rec={rec} />
+          <Title rec={rec} styles={{fontSize: 22, maxWidth: 260}}/>
         </View>
 
 
@@ -283,7 +289,7 @@ render() {
           {moment().diff(rec.createdAt) < 200000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
 
           {moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
-          {rec.category && <CategoryIcon rec={rec} size={17} color={"yellow"}/>}
+          {rec.category && <CategoryEmoji category={rec.category} size={17} />}
           {rec.type == 'invite' && <Icon size={17} color={colors.purple} name="navigation"/>}
 
         </View>
@@ -302,10 +308,11 @@ const cardStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.borderColor,
     borderRadius: 10,
-    padding: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 15,
     marginVertical: 5,
     backgroundColor: 'white',
-    flex: 1,
+    flex: 4,
   },
   headerContainer: {
     // backgroundColor: 'yellow',
@@ -336,8 +343,20 @@ const cardStyles = StyleSheet.create({
     // borderColor: 'white',
     // borderWidth: 1,
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     paddingVertical: 10,
+    justifyContent: 'flex-start',
+    flex: 1,
+    // backgroundColor: 'red'
+  },
+  categoryPickerContainer: {
+
+    flexDirection: 'row',
+    // paddingHorizontal: 20,
+    paddingVertical: 10,
+    justifyContent: 'flex-start',
+    flex: 3,
+    // backgroundColor: 'orange'
   },
   optionIcon: {
     padding: 5,
@@ -382,7 +401,7 @@ export class Card extends Component {
     if(listItem) { // Dashboard
       return (
         <TouchableOpacity onPress={this._onCardPress} activeOpacity={0.9}>
-          <GenericCard rec={rec} />
+          <GenericCard rec={rec} totalRecs={this.props.totalRecs}/>
         </TouchableOpacity>
       )
     } else if(skinny) {  // FriendView
@@ -501,12 +520,13 @@ render() {
 
   const { rec, updateRec, updateState, isEditing, onDelete, app, setRecReminder } = this.props;
   return (
-    <View style={{flex: 1}}>
-        <View style={[cardStyles.container]}>
+    <View style={{flex: 1,}}>
+
+        <View style={[cardStyles.container, {marginHorizontal: 20}]}>
 
           <View style={cardStyles.headerContainer}>
             <View style={cardStyles.friendContainer}>
-              <Friend.Name friend={rec.friend} onPress={() => Actions.push('FriendView',{friend: rec.friend})} />
+              <Friend.Name fontSize={24} friend={rec.friend} onPress={() => Actions.push('FriendView',{friend: rec.friend})} />
             </View>
 
           </View>
@@ -518,35 +538,26 @@ render() {
           }
 
           </View>
+
           <Divider />
+          <View style={{flex: 1,alignItems: 'flex-end', flexDirection: 'row'}}>
 
           {
-            rec.category && !isEditing &&
-              <Category rec={rec} />
+            rec.category && !isEditing ?
+              <Category category={rec.category} />
+              :
+              <EmptyCategory size={30} delay={2000} iterationCount={1} animation="rubberBand" />
           }
-
-          {
-            rec.category && isEditing &&
-              <CategoryPickerEditing category={rec.category} updateRec={updateRec} rec={rec}/>
-          }
-
-          {
-            !rec.category &&
-              <View>
-                <Text>What is this?</Text>
-                <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
-              </View>
-          }
-
 
 
           {rec.reminder &&
             <Reminder rec={rec} />
         }
-
+</View>
 
 
         </View>
+
         {!isEditing &&
         <View style={cardStyles.optionsContainer} >
           <Icon name="trash" color="white" style={cardStyles.optionIcon} onPress={onDelete} />
@@ -555,6 +566,22 @@ render() {
           {rec.reminder && moment().diff(rec.reminder) > 0 && <SetReminderIcon rec={rec} color="red" updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
 
         </View> }
+
+        <View style={cardStyles.categoryPickerContainer}>
+        {
+          rec.category != null && isEditing &&
+            <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
+        }
+
+
+        {
+          !rec.category &&
+            <View>
+              <Text style={{...text, color: 'white', fontSize:22, marginLeft: 20}}>Pick a category</Text>
+              <CategoryPickerEditing rec={rec} updateRec={updateRec} saveImmediately />
+            </View>
+        }
+        </View>
 
         </View>
 
@@ -607,90 +634,3 @@ const inputStyles = StyleSheet.create({
     flex:1,
   },
 })
-
-
-
-  // inputTitle: {
-  //   ...text,
-  //   flex:1,
-  // },
-  // inputFriend: {
-  //   ...text,
-  //   fontSize: 20,
-  //   color: colors.pink,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: colors.borderColor,
-  // },
-  //
-  // recText: {
-  //   ...text,
-  //   fontSize: 19,
-  //   fontWeight: '400',
-  //   color: colors.black,
-  // },
-  //
-  // friendText: {
-  //   fontSize: 10,
-  //   color: colors.darkGrey,
-  //   lineHeight: 17,
-  //   fontWeight: '100'
-  //   // backgroundColor:'blue',
-  //
-  // },
-  //
-  // bold: {
-  //   fontWeight: '700',
-  //   // color: colors.darkGrey
-  // },
-  //
-  //
-  // // searching for user
-  // inputContainer: {
-  //   // flex: 1,
-  //   // width: TEXT_WIDTH,// might need to change this
-  // },
-  // input: {
-  //   ...text,
-  //   fontSize: 20,
-  //   paddingLeft: 0,
-  //   paddingTop: 5,
-  //   height: 50,
-  //   // borderColor: colors.lightGrey,
-  //   borderBottomWidth: 0,
-  //   // backgroundColor: 'yellow',
-  // },
-  //
-  // label: {
-  //   ...text,
-  //   color: colors.darkGrey,
-  //   fontSize: 14,
-  //   fontWeight: '400',
-  //   lineHeight:20,
-  //   // marginTop:25,
-  //   marginLeft: 12,
-  //   paddingRight: 10,
-  // },
-  //
-  // backgroundShadow: {
-  //   borderColor: '#aaa',
-  //   shadowColor: '#555',
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 3
-  //   },
-  //   shadowRadius: 15,
-  //   shadowOpacity: 1.0
-  // },
-  //
-  // translucentBackground: {
-  //   backgroundColor: 'rgba(255,255,255,0.9)',
-  //
-  //   borderColor: 'purple',
-  //   shadowColor: '#aaa',
-  //   shadowOffset: {
-  //     width: 3,
-  //     height: 3
-  //   },
-  //   shadowRadius: 5,
-  //   shadowOpacity: 0.7,
-  // }

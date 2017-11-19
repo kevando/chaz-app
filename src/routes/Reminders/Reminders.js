@@ -2,7 +2,7 @@ import React from 'react';
 import { View , ScrollView, Text, TextInput, Button } from 'react-native';
 import _ from 'lodash';
 import EnableNotifications from '../../components/EnableNotifications'
-import { Label, Title } from '../../components/Generic';
+import { Label, Title, Container } from '../../components/Generic';
 import Icon from 'react-native-vector-icons/Feather'
 import * as Animatable from 'react-native-animatable'
 import moment from 'moment'
@@ -13,7 +13,8 @@ const Reminders = (props) => {
   const { notificationPermission, reminders } = props;
   console.log(reminders)
   return (
-    <View style={styles.container}>
+    <Container>
+      <Title header>Follow Up</Title>
 
     {
       notificationPermission == 'authorized' &&
@@ -25,7 +26,7 @@ const Reminders = (props) => {
       {
         notificationPermission != 'authorized' &&
         <View style={{}}>
-          <Text style={styles.title}>Follow Up</Text>
+
           <Label>Allow chaz to remind you about recommendations that you save. No spam</Label>
           <EnableNotifications button />
         </View>
@@ -34,7 +35,7 @@ const Reminders = (props) => {
 
 
 
-    </View>
+    </Container>
   );
 }
 

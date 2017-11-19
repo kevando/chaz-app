@@ -56,7 +56,7 @@ export const ADD_REMOTE_REMINDER = 'ADD_REMOTE_REMINDER'
 
 
 export const FETCH_FEELINGS_SUCCESS = 'FETCH_FEELINGS_SUCCESS'
-
+export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS'
 // Test initial data
 // const Recs = [
 //   {

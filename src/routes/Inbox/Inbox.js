@@ -2,7 +2,7 @@ import React from 'react';
 import { View , ScrollView, Text, TextInput, Button } from 'react-native';
 import _ from 'lodash';
 import EnableNotifications from '../../components/EnableNotifications'
-import { Label, Title } from '../../components/Generic';
+import { Label, Title, Container } from '../../components/Generic';
 import { Card } from '../../components/Rec';
 
 import * as Animatable from 'react-native-animatable'
@@ -13,9 +13,10 @@ const Inbox = ({inbox, openRecs, myInvites, acceptOpenRec}) => {
 
 
   return (
+    <Container>
     <ScrollView style={styles.container}>
 
-      <Title>Inbox</Title>
+      <Title header>Inbox</Title>
 
       {
         _.map(inbox,(rec,i)=> {
@@ -28,6 +29,7 @@ const Inbox = ({inbox, openRecs, myInvites, acceptOpenRec}) => {
 
 
     </ScrollView>
+    </Container>
   );
 }
 

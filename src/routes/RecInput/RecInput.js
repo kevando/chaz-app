@@ -8,7 +8,7 @@ import styles from './styles';
 import * as Animatable from 'react-native-animatable'
 import Unfinished from '../../components/Card/Unfinished'
 import { Button } from '../../components/Generic';
-import { CategoryIcon } from '../../components/Category';
+// import { CategoryEmoji } from '../../components/Category';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { colors } from '../../config/styles'
 

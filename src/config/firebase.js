@@ -13,7 +13,9 @@ export const recsRef = firebase.firestore().collection(`${PREFIX}recommendations
 export const friendsRef = firebase.firestore().collection(`${PREFIX}friends`)
 export const usersRef = firebase.firestore().collection(`${PREFIX}users`)
 export const messagesRef = firebase.firestore().collection(`${env}_messages`)
+
 export const feelingsRef = firebase.firestore().collection(`feelings`)
+export const categoriesRef = firebase.firestore().collection(`categories`)
 
 import { assignUserToFriend } from '../reducers/friends/actions'
 import { setAppData } from '../reducers/app/actions'
@@ -141,16 +143,7 @@ export function addFirestoreListeners(uid) {
             dispatch({type: t.SET_APP_DATA, data: {myInvites} })
         });
 
-        // not the best place for this..
-        // but if I fetch recs, make sure onboarding is not set
-        // console.warn(myRecs.length)
-        // console.warn(myRecs.length)
-        // dispatch(setAppData({onboarding: true}))
 
-        if(myRecs.length > 0)
-          dispatch(setAppData({onboarding: false}))
-        // else
-        //   dispatch(setAppData({onboarding: true}))
       }
 }
 

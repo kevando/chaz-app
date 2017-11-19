@@ -18,7 +18,7 @@ console.log(invitations)
 
   return (
     <Container>
-    <ScrollView>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <Title header>Outbox</Title>
 
       {

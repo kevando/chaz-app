@@ -57,8 +57,8 @@ const Profile = (props) => {
           return (
             <TouchableOpacity key={i} onPress={()=>Actions.push('FriendView',{friend})}>
             <View style={styles.friendRowItem} >
-              <Icon name='user' size={19} color={friend.uid ? colors.pink : colors.darkGrey}/>
-              <Text style={styles.friendText} >{friend.name || friend.displayName+ ' (Pending)'}</Text>
+
+              <Text style={styles.friendText} >{friend.uid ? '🤠' : '😊'} {friend.name || friend.displayName+ ' (Pending)'}</Text>
             </View>
             </TouchableOpacity>
           )

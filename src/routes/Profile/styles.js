@@ -4,7 +4,8 @@ import { colors, text } from '../../config/styles';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.newBlue,
+    // backgroundColor: colors.newBlue,
+    paddingTop: 40,
   },
   headerContainer: {
     backgroundColor: colors.blueBG,
@@ -16,7 +17,7 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 7,
     paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingHorizontal: 5,
     marginVertical: 6,
     flexDirection: 'row',
     marginHorizontal: 20,

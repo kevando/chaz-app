@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet  } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, ScrollView  } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 // import Emoji from 'react-native-emoji'
 // var Emoji = require('react-native-emoji');
@@ -8,6 +8,8 @@ import { colors, text, width, MARGIN_LEFT } from '../config/styles';
 
 import * as RecActions from '../reducers/recommendations/actions';
 import { connect } from 'react-redux';
+
+import * as Animatable from 'react-native-animatable';
 
 
 export const Categories = {
@@ -24,14 +26,18 @@ export const Categories = {
 }
 
 
+
 // ---------------------------------------
-//    ICON (now emoji)
+//    EMOJI
 // ---------------------------------------
 
-export const CategoryIcon = ({rec, category, size=25, color="purple"}) => {
+export const CategoryEmoji = ({category, categories, size=25 }) => {
+  // console.warn(category)
+  // return null
 
-  const emoji = !rec ? Categories[category].emoji : rec.category ? Categories[rec.category].emoji : '📃'
-  // var iconColor = colors[color]
+
+  const emoji = category.emoji || '❓'
+
   const styles = {
     fontSize: size,
   }
@@ -43,11 +49,12 @@ export const CategoryIcon = ({rec, category, size=25, color="purple"}) => {
 }
 
 
+
 // ---------------------------------------
 //  Display on Card Detail
 // ---------------------------------------
 
-export const Category = ({rec, size=18, color="yellow"}) => {
+export const Category = ({category, size=18, color="yellow"}) => {
   const styles = {
     container: {
       flex: 1,
@@ -61,13 +68,13 @@ export const Category = ({rec, size=18, color="yellow"}) => {
       marginLeft: 8,
     }
   }
-  const icon = rec.category ? Categories[rec.category].icon : 'file-text'
-  const iconColor = colors[color]
-  const categoryTitle = rec.category ? Categories[rec.category].title : 'Unknown'
+  // const icon = rec.category ? Categories[rec.category].icon : 'file-text'
+  // const iconColor = colors[color]
+  const categoryTitle = category.title || ''
 
   return (
     <View style={styles.container} >
-      <CategoryIcon rec={rec} size={size} />
+      <CategoryEmoji category={category} size={size} />
       <Text style={styles.categoryText}>{categoryTitle}</Text>
     </View>
   )
@@ -97,6 +104,8 @@ class CategoryPickerComponent extends Component {
 
 
   render() {
+    // console.warn('wtf')
+    // alert('bals')
     const { onCategoryPress } = this.props;
 
     // const ICON_CONTAINER = width / 6
@@ -206,17 +215,18 @@ class CategoryPickerComponent extends Component {
     }
 
     // !rec means we are adding a new rec
+    console.warn('wtf')
 
     return (
-      <View style={styles.container}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollViewContainer}>
         {
           _.map(Categories, (Category,category) => {
             return (
               <View style={styles.iconContainer} key={category} >
               <TouchableOpacity style={styles.touchContainer} onPress={() => this._onCategoryPress(category)}>
-              <View style={styles.iconCircle}>
+                <View style={[styles.iconCircle,{backgroundColor: category == c ? colors.turquoise : colors.white, borderColor: category == c ? colors.turquoise : colors.white}]}>
 
-                  <CategoryIcon category={category} size={20} color="white" />
+                  <CategoryIcon category={category} size={20} />
 
               </View>
               <View style={styles.textContainer}>
@@ -228,7 +238,7 @@ class CategoryPickerComponent extends Component {
           })
         }
 
-      </View>
+      </ScrollView>
     );
   }
 
@@ -269,48 +279,56 @@ class CategoryPickerComponentEditing extends Component {
 
   render() {
 
+    const {category, rec, categories} = this.props
 
+    // console.warn(rec.category)
+    // console.log(this.props)
     return (
-      <View style={styles.container}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scrollViewContainer}>
         {
-          _.map(Categories, (Category,category) => {
+          _.map(categories, (c,key) => {
             return (
-              <View style={styles.iconContainer} key={category} >
-              <TouchableOpacity style={styles.touchContainer} onPress={() => this._onCategoryPress(category)}>
-              <View style={styles.iconCircle}>
-
-                  <CategoryIcon category={category} size={20} color="white" />
-
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={[styles.categoryText,{color: this.props.category == category ? colors.yellow : 'grey'}]}>{Category.title}</Text>
+              <View style={styles.iconContainer} key={key} >
+              <TouchableOpacity activeOpacity={1.0} style={styles.touchContainer} onPress={() => this._onCategoryPress(c)}>
+                <View style={[styles.iconCircle,{backgroundColor: rec.category.title == c.title ? colors.turquoise : colors.white, borderColor: rec.category == c ? colors.turquoise : colors.white}]}>
+                  <CategoryEmoji category={c} categories={categories} size={20} />
                 </View>
+
               </TouchableOpacity>
               </View>
             )
           })
         }
 
-      </View>
+      </ScrollView>
     );
   }
 
 };
 
-export const CategoryPickerEditing = connect()(CategoryPickerComponentEditing)
+const mapStateToProps = (state) => {
+
+  return {
+    categories: state.categories,
+  };
+};
+
+
+export const CategoryPickerEditing = connect(mapStateToProps, null)(CategoryPickerComponentEditing)
 
 const ICON_CONTAINER = 70 //width / 6
 const ICON_WIDTH = 50//ICON_CONTAINER - 10
 
 const styles = StyleSheet.create ({
-  container: {
+  scrollViewContainer: {
     flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    borderWidth: 0,
-    borderColor: 'white',
+    marginLeft: 0,
+    // flexWrap: 'wrap',
+    // borderWidth: 0,
+    // borderColor: 'white',
     // alignItems: 'center',
-    justifyContent: 'space-between', // v
+    // justifyContent: 'space-between', // v
     // backgroundColor: 'red',
 
   },
@@ -338,8 +356,8 @@ const styles = StyleSheet.create ({
 
     margin: 0,
     padding: 0,
-    backgroundColor: colors.yellow,
-    borderColor: colors.yellow,
+    backgroundColor: colors.white,
+    borderColor: colors.white,
     borderWidth: 4,
     height: ICON_WIDTH,
     width: ICON_WIDTH,
@@ -350,3 +368,15 @@ const styles = StyleSheet.create ({
     fontSize: 8
   }
 })
+
+
+
+export const EmptyCategory = ({size=30, iterationCount=3, delay=100, animation="rubberBand"}) => {
+
+
+  return  (
+  <Animatable.View animation={animation} duration={1000} delay={delay} iterationCount={iterationCount} style={{width: size, height: size, backgroundColor: colors.white, borderRadius: size, borderColor: colors.turquoise, borderWidth: 2 }} />
+
+)
+
+}

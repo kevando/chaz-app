@@ -13,7 +13,7 @@ const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updat
   // console.warn(user.uid)
   return (
     <View style={{flex:1}}>
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
     <Title />
 
     {
@@ -33,7 +33,7 @@ const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updat
         <EnableNotifications button />
     }
 
-    </ScrollView>
+    </View>
     { isEditing &&
       <Button text="Save" onPress={saveRec} />
     }

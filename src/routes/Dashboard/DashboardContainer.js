@@ -3,25 +3,13 @@ import { Alert } from 'react-native';
 import Dashboard from './Dashboard';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash'
-import Confetti from 'react-native-confetti';
+
 
 
 class DashboardContainer extends Component {
 
-
   componentWillMount() {
-    // console.warn('warned')
     this.state = {activeFilter: 'Everything'};
-
-    const { myInvites, onboarding, myRecs, app } = this.props
-
-    // DEV
-    // this.props.onboarding && Actions.replace('GetStarted')
-
-    // PROD
-    // if((onboarding) || (myRecs.length == 0 & app.isAnon))
-      // Actions.replace('Hello')
-
   }
 
   // componentWillReceiveProps({recommendations}) {}
@@ -36,24 +24,12 @@ class DashboardContainer extends Component {
     // Actions.push('NewRecLightbox')
     // Actions.push('Inbox')
     // Actions.push('Register')
-    // Actions.push('RecView',{rec: this.props.myRecs[0]})
+    Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('RecView',{rec: this.props.givenRecs[0]})
-    Actions.push('FriendView',{friend: this.props.friends[0]})
+    // Actions.push('FriendView',{friend: this.props.friends[0]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
   }
 
-
-  componentWillUnmount () {
-    this._confettiView && this._confettiView.stopConfetti();
-  }
-
-  _throwParty = () => {
-    if(this._confettiView) {
-      // console.warn('_confettiView')
-       this._confettiView.startConfetti()
-       setTimeout(()=> this._confettiView && this._confettiView.stopConfetti(),2000)
-    }
-  }
 
   _changeActiveFilter = (activeFilter) => {
     this.setState({activeFilter})
@@ -101,7 +77,7 @@ class DashboardContainer extends Component {
           {...this.state}
           onNewRecPress={this._onNewRecPress}
           changeActiveFilter={this._changeActiveFilter}
-          Confetti={this._confettiComponent}
+
           goToOnboarding={this._goToOnboarding}
         />
       )

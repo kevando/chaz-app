@@ -8,6 +8,7 @@ import { listenForAuthChanges, usersRef } from '../../config/firebase'
 import { createUserInFirestore } from '../user/actions'
 import { listenForNotifications } from '../reminders/actions'
 import { fetchFeelings } from '../feelings/actions'
+import { fetchCategories } from '../categories/actions'
 
 export { signOut } from '../auth/actions'
 
@@ -20,8 +21,13 @@ export function initializeApp() {
     const app = getState().app
     // const user = getState().user
 
+    // Double check if we should load the onboarding or not
+    if(getState().recommendations.myRecs.length > 0)
+      dispatch(setAppData({onboarding: false}))
+
     // // Kick off firestore stuff
     dispatch(fetchFeelings())
+    dispatch(fetchCategories())
     dispatch(listenForAuthChanges())
     dispatch(listenForNotifications())
 

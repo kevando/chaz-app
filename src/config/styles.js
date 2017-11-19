@@ -62,6 +62,8 @@ export const colors = {
 
   lightWhite: 'rgba(255,255,255,0.5)',
 
+  turquoise: '#2CECAC',
+
 };
 
 export const hearts = {

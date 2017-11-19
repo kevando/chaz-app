@@ -7,9 +7,7 @@ const MARGIN_HORIZONTAL = (window.width - BUTTON_WIDTH) / 2;
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'white',
-    // backgroundColor: colors.blueBG,
-    paddingHorizontal: 20,
+
     paddingTop: 60,
   },
 

@@ -12,11 +12,12 @@ import { colors, text, width } from '../config/styles';
 // ---------------------------------------
 
 
-export const Name = ({friend, onPress, fontSize=18 }) => {
+export const Name = ({friend, onPress, fontSize=18, }) => {
   if(!friend) { console.log('no friend data, usually happens when updating rec'); return null; }
 
   const textStyles = [
     ...text,
+
 
     // props.center && {textAlign: 'center',marginVertical: 20,paddingHorizontal: 40,},
     // props.title && {fontSize: 20,fontWeight: '600'}

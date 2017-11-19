@@ -8,7 +8,7 @@ import KeyboardSpacer from 'react-native-keyboard-spacer';
 
 import { colors } from '../../config/styles';
 import styles from './styles';
-import { CategoryIcon } from '../../components/Category';
+
 import { Button } from '../../components/Generic';
 import * as Rec from '../../components/Rec'
 import * as Friend from '../../components/Friend';
@@ -89,7 +89,7 @@ render() {
               onChangeText={(friendName) => updateState({friendName})}
             /> }
 
-            {unfinished.title && !unfinished.to.name && !unfinished.walkthrough && 
+            {unfinished.title && !unfinished.to.name && !unfinished.walkthrough &&
               <TextInput
                 placeholder='friend name'
                 ref={ c => this._titleFriend = c }

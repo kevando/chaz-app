@@ -17,24 +17,23 @@ const Dashboard = (props) => {
 
   const filteredRecs = myRecs// TMP UI!! activeFilter === 'Everything' ? myRecs : _.filter(myRecs, function(rec) { return rec.category.title == activeFilter; });
 
-
   return (
     <View style={{flex: 1}}>
     <Container>
       <StatusBar barStyle="light-content" hidden={false} />
       {myRecs.length == 1 && <Party partySize='big' delay={1000} />}
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <Title header>chaz</Title>
 
         <Onboarding.NoRecs {...props} />
 
-        {myRecs.length > 16 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
+        {myRecs.length > 46 && <Filter activeFilter={activeFilter} changeActiveFilter={changeActiveFilter} />}
 
 
       {
         _.map(filteredRecs,function(rec,i) {
           return(
-            <Card rec={rec} key={i} listItem />
+            <Card rec={rec} key={i} listItem totalRecs={myRecs.length} />
           )
         })
       }
