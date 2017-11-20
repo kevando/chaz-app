@@ -3,51 +3,49 @@ import { colors, text, MARGIN_LEFT } from '../../config/styles';
 
 
 export default styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.blueBG,
-    paddingTop: 50,
 
-  },
+
   scrollContainer: {
-    paddingHorizontal: MARGIN_LEFT,
-    marginTop: 30,
-    paddingBottom:200,
+    // paddingHorizontal: MARGIN_LEFT,
+    // marginTop: 30,
+    // paddingBottom:200,
     marginBottom:0,
     // backgroundColor: 'yellow'
   },
-  title: {
-    ...text,
-    color: colors.black,
-    fontSize: 30,
-    paddingTop:20,
-    paddingBottom: 0,
-    fontWeight: '400',
-    letterSpacing:4,
-    paddingLeft: 17,
+
+  tableContainer: {
+    flex: 1,
+    // backgroundColor: colors.lightWhite,
+    marginBottom: 30,
 
   },
-  paragraph: {
-    ...text,
-    color: colors.black,
-    fontSize: 22,
-    fontWeight: '300',
-    lineHeight:30,
-    marginTop:25,
-    paddingLeft: 20,
-    paddingRight: 10,
-  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    // backgroundColor: colors.lightWhite,
 
-
-  label: {
-    ...text,
-    color: colors.darkGrey,
-    fontSize: 14,
-    fontWeight: '400',
-    lineHeight:20,
-    marginTop:25,
-    marginLeft: 12,
-    paddingRight: 10,
   },
+  colLeft: {
+    flex: 5,
+    // backgroundColor: colors.lightWhite,
+  },
+  colRight: {
+    flex: 1,
+    // backgroundColor: colors.lightWhite,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
+  friendEmoji: {
+    fontSize: 25,
+    marginBottom: 5,
+    // marginRight: -15,
+  },
+  valueText: {
+    ...text,
+    fontSize: 17,
+    fontWeight: '200',
+    color: colors.white,
+    paddingVertical: 3
+  }
 
 });

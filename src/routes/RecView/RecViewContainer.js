@@ -79,6 +79,11 @@ class RecViewContainer extends Component {
       })
     // finally update inviters friend obj w this user's uid
   }
+  _setGrade = (grade, message) => {
+    const { rec, setGrade } = this.props
+
+    setGrade(rec, grade, message)
+  }
 
   render() {
     // console.log('RecViewContainer props',this.props)
@@ -96,6 +101,7 @@ class RecViewContainer extends Component {
         updateRec={this.props.updateRec}
         onAssignPress={this._onAssignPress}
         setRecReminder={this.props.setRecReminder}
+        setGrade={this._setGrade}
       />
     );
   }

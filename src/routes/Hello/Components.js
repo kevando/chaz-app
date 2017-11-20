@@ -135,9 +135,9 @@ export const WelcomeMessage = (props) => {
 export const HelloButton = (props) => {
 
 
-  if(props.nameInput != '' && !props.user.displayName && props.feelings.length > 0) {
+  if(props.nameInput != '' && !props.user.displayName) {
     return (
-      <Button animated text="Yep. That's my name" onPress={props.onSaveNamePress} />
+      <Button animated text={`Yep. That\'s my name${props.feelings.length == 0 ? '!' : '.'}`} onPress={props.onSaveNamePress} />
     )
   } else if(props.user.initialFeeling || props.showWelcome) {
     return (

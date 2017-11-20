@@ -2,7 +2,8 @@ import firebase from 'react-native-firebase';
 import _ from 'lodash'
 import * as t from '../actionTypes';
 
-import { recsRef, usersRef, messagesRef, addMessage } from '../../config/firebase'
+import { recsRef, usersRef, messagesRef, addMessage, friendsRef, db } from '../../config/firebase'
+
 
 // ----------------------------------------------------
 //    SET INITIAL REC DATA
@@ -64,6 +65,35 @@ export const setFriend = (friend) => (dispatch, getState) =>
     resolve(dude) // testing how to return dispatches
   });
 
+
+
+  // ----------------------------------------------------
+  //    SET GRADE
+  // ----------------------------------------------------
+
+  export const setGrade = (rec,value,message) => (dispatch) =>
+    new Promise(function(resolve,reject) {
+      // console.warn(grade)
+      // console.warn(message)
+      // Update score in rec,
+      // Then update friend object
+      // active? addMessage,
+      const grade = { value, message }
+
+      // Grab friend ref
+      const friendRef = friendsRef.doc(rec.from.id)
+      if(!rec.from.id){console.warn('!rec.from.id')}
+
+      // console.log('f',rec.friend)
+      const gradeCount = (rec.friend.gradeCount || 0) + 1
+      const gradeTotal = (rec.friend.gradeTotal || 0) + value
+      recsRef.doc(rec.id).update({grade}).then( () => {
+        // Update the friend
+        friendRef.update({gradeTotal, gradeCount})
+        if(rec.from.uid) { addMessage(rec.from.uid,`Well look what we have here. Someone just graded one of your recommendations.`); }
+      }).catch(error => console.warn('er: ',error))
+      resolve()
+    })
 
 
 // ----------------------------------------------------
@@ -226,9 +256,7 @@ export function setFilter(filter) {
   return { type: SET_FILTER, filter }
 }
 
-export function setGrade(recId,grade) {
-  return { type: SET_GRADE, recId, grade }
-}
+
 
 // Once a user is matched to a friend, update all existing recs that have that friend
 // with the new user in the from field

@@ -18,6 +18,7 @@ class DashboardContainer extends Component {
 
 
   componentDidMount() {
+    // console.warn(this.props.user.uid)
     // const { onboarding, setAppData } = this.props
     // // if(onboarding)
     //   // setAppData({onboarding: true})
@@ -26,7 +27,7 @@ class DashboardContainer extends Component {
     // Actions.push('Queue')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('RecView',{rec: this.props.givenRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[0]})
+    // Actions.push('FriendView',{friend: this.props.friends[2]})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
   }
 

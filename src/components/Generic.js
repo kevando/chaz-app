@@ -84,7 +84,7 @@ const titleStyles = StyleSheet.create({
     // marginTop: STATUS_BAR_HEIGHT+NAV_BAR_HEIGHT,
     height: NAV_BAR_HEIGHT,
     lineHeight: NAV_BAR_HEIGHT,
-    marginLeft: 5
+    // marginLeft: 5
 
   },
   card: {

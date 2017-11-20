@@ -9,7 +9,7 @@ import styles from './styles';
 import { Button, Title } from '../../components/Generic'
 //
 
-const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updateState, saveRec, onDeletePress ,onAssignPress, setRecReminder }) => {
+const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, setGrade, updateState, saveRec, onDeletePress ,onAssignPress, setRecReminder }) => {
   // console.warn(user.uid)
   return (
     <View style={{flex:1}}>
@@ -23,8 +23,8 @@ const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, updat
 
     {
       isEditing ?
-        <CardDetail isEditing rec={rec} updateRec={updateRec} updateState={updateState} saveRec={saveRec} /> :
-        <CardDetail user={user} acceptInvitation={acceptInvitation} setRecReminder={setRecReminder} updateState={updateState} rec={rec} onDelete={onDeletePress} updateRec={updateRec} app={app} />
+        <CardDetail isEditing rec={rec} updateRec={updateRec} updateState={updateState} saveRec={saveRec}  /> :
+        <CardDetail user={user} setGrade={setGrade} acceptInvitation={acceptInvitation} setRecReminder={setRecReminder} updateState={updateState} rec={rec} onDelete={onDeletePress} updateRec={updateRec} app={app} />
     }
 
 

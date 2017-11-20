@@ -4,7 +4,7 @@ import _ from 'lodash';
 // import * as Animatable from 'react-native-animatable'
 // import moment from 'moment'
 import styles from './styles';
-import { Title } from '../../components/Generic'
+import { Title, Container } from '../../components/Generic'
 import { CardGodView } from '../../components/Rec'
 
 const GodView = (props) => {
@@ -12,8 +12,9 @@ const GodView = (props) => {
   const { allRecs } = props
 
   return (
-    <ScrollView style={styles.container}>
-      <Title>Everything</Title>
+    <Container>
+      <ScrollView style={styles.container}>
+      <Title header>Everything</Title>
       {
         _.map(props.allRecs,(rec,i ) => {return (
           <CardGodView generic rec={rec} key={i} />
@@ -21,10 +22,8 @@ const GodView = (props) => {
       }
 
 
-
-
-
-    </ScrollView>
+      </ScrollView>
+    </Container>
   );
 }
 

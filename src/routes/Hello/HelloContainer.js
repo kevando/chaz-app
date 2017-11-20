@@ -38,11 +38,17 @@ class HelloContainer extends Component {
 
   _onSaveNamePress = () => {
     // this.setState({nameInputAnimation: 'fadeOut'})
-    const { setUserData, fetchInvites, saveDisplayName } = this.props
+    const { setUserData, fetchInvites, saveDisplayName, feelings } = this.props
     const { nameInput } = this.state
 
     saveDisplayName(nameInput)
     setUserData({displayName: nameInput, nameInput: ''})
+
+    // This is error management, feeling should always fcuking load but they dont
+    // for some dman fucking reason
+    if(feelings.length == 0) {
+      this._setInitialFeeling('error')
+    }
 
   }
 

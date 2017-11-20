@@ -23,7 +23,7 @@ export const CategoryEmoji = ({category, categories, size=25 }) => {
   // return null
 
 
-  const emoji = category.emoji || '❓'
+  const emoji = category && category.emoji || '❓'
 
   const styles = {
     fontSize: size,
@@ -31,7 +31,7 @@ export const CategoryEmoji = ({category, categories, size=25 }) => {
   return <Text style={styles} >{emoji}</Text>
 
   // Old icon code
-  
+
   // return <Icon name={icon} size={size} color={iconColor} />
 }
 
@@ -277,7 +277,7 @@ class CategoryPickerComponentEditing extends Component {
             return (
               <View style={styles.iconContainer} key={key} >
               <TouchableOpacity activeOpacity={1.0} style={styles.touchContainer} onPress={() => this._onCategoryPress(c)}>
-                <View style={[styles.iconCircle,{backgroundColor: rec.category.title == c.title ? colors.turquoise : colors.white, borderColor: rec.category == c ? colors.turquoise : colors.white}]}>
+                <View style={[styles.iconCircle,{backgroundColor: rec.category && rec.category.title == c.title ? colors.turquoise : colors.white, borderColor: rec.category == c ? colors.turquoise : colors.white}]}>
                   <CategoryEmoji category={c} categories={categories} size={20} />
                 </View>
 

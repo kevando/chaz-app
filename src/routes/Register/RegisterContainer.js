@@ -73,6 +73,7 @@ class RegisterContainer extends Component {
     this.setState({verifyingPhone: true})
 
     verifyPhone(phoneNumber)
+    // console.warn('what?')
 
   }
 
@@ -125,7 +126,7 @@ class RegisterContainer extends Component {
 
         <View style={styles.zapIconsContainer}>
           <Icon name="zap" size={50} color={isPhoneValid && (app.activeStep == 1 || !app.activeStep) ? colors.white : (!app.activeStep || app.activeStep == 1) ? colors.lightWhite : colors.yellow} style={styles.zapIcon}/>
-          <Icon name="zap" size={50} color={isCodeValid ? colors.white : (app.activeStep > 2 || !app.isAnon) ? colors.yellow : colors.lightWhite} style={styles.zapIcon}/>
+          <Icon name="zap" size={50} color={(isCodeValid && app.isAnon) ? colors.white : (app.activeStep > 2 || !app.isAnon) ? colors.yellow : colors.lightWhite} style={styles.zapIcon}/>
           <Icon name="zap" size={50} color={(app.activeStep >=3 || !app.isAnon) ? colors.yellow : colors.lightWhite} style={styles.zapIcon}/>
         </View>
 

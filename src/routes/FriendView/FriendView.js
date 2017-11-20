@@ -6,18 +6,51 @@ import styles from './styles';
 import { UserCard, FindUserCard, RecCard } from '../../components/Card/FriendView'
 import { Card } from '../../components/Rec'
 import * as Friend from '../../components/Friend'
-import { Label, Button } from '../../components/Generic/';
+import { Label, Button, Title, Container } from '../../components/Generic/';
 import Icon from 'react-native-vector-icons/Feather'
 import { colors, text } from '../../config/styles';
 
 const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress, friends, combineFriend }) => {
 
-// var filterFriends = _.filter(friends, friend =>  friend.name)
+  let friendScore = 'NA'
+  if(friend.gradeCount && friend.gradeTotal) {
+    friendScore = '' + friend.gradeTotal + '/'  + friend.gradeCount
+  }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={onNamePress}><Friend.Header friend={friend} /></TouchableOpacity>
-      <ScrollView style={styles.scrollContainer}>
+    <View style={{flex: 1}}>
+    <Container>
+
+      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+
+        <View style={styles.tableContainer}>
+          <View style={[styles.row,{marginBottom: 20}]}>
+            <View style={styles.colLeft}>
+              <TouchableOpacity onPress={onNamePress}><Title header>{friend.name}</Title></TouchableOpacity>
+            </View>
+            <View style={styles.colRight}>
+              <Text style={[styles.friendEmoji]}>{friend.uid ? '🤠' : '😊'}</Text>
+            </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.colLeft}>
+              <Text style={[styles.valueText]}>Recommendations</Text>
+            </View>
+            <View style={styles.colRight}>
+              <Text style={[styles.valueText]}>{friendRecs.length}</Text>
+            </View>
+          </View>
+          <View style={styles.row}>
+            <View style={styles.colLeft}>
+              <Text style={[styles.valueText]}>Score</Text>
+            </View>
+            <View style={styles.colRight}>
+              <Text style={[styles.valueText]}>{friendScore}</Text>
+            </View>
+          </View>
+
+        </View>
 
 
 
@@ -35,7 +68,7 @@ const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress
           </View>
         }
 
-        {friend.displayName && // pending friendship
+        {friend.displayName && friend.frienshipStatus == 'pending' &&// pending friendship
           <View style={{marginHorizontal: 20}}>
           <Label center title>{friend.displayName} connected with you</Label>
           <Label center>Merge with existing friend?</Label>
@@ -61,9 +94,11 @@ const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress
 
 
       </ScrollView>
-      { friend.uid && friend.friendshipStatus != 'pending' && <Button text="Send a Recommendation" onPress={onGiveRecPress} /> }
-      { !friend.uid && !app.isAnon && !friend.invitedAt &&<Button bgcolor="pink" text={`Recommend chaz to ${friend.name}`} onPress={()=>Actions.push('InviteModal',{friend})} /> }
-      { !friend.uid && !app.isAnon && friend.invitedAt && <Button bgcolor="pink" text="Invited" onPress={()=>Actions.push('InviteModal',{friend})} /> }
+
+    </Container>
+    { friend.uid && friend.friendshipStatus != 'pending' && <Button text="Send a Recommendation" onPress={onGiveRecPress} /> }
+    { !friend.uid && !app.isAnon && !friend.invitedAt &&<Button bgcolor="pink" text={`Recommend chaz to ${friend.name}`} onPress={()=>Actions.push('InviteModal',{friend})} /> }
+    { !friend.uid && !app.isAnon && friend.invitedAt && <Button bgcolor="pink" text="Invited" onPress={()=>Actions.push('InviteModal',{friend})} /> }
     </View>
   );
 }

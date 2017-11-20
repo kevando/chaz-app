@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
+import _ from 'lodash'
 import { Actions} from 'react-native-router-flux';
 import * as Animatable from 'react-native-animatable';
 import { colors, text } from '../config/styles';
@@ -11,7 +12,9 @@ import {Label} from './Generic'
 import { Divider, Button } from './Generic'
 import { Reminder } from './Reminder'
 import { SetReminderIcon  } from './SetReminder'
-
+import GradeSelector from './Grade/Selector'
+import Hearts from './Grade/Hearts'
+import Stars from './Grade/Stars'
 
 
 // ---------------------------------------
@@ -45,8 +48,8 @@ render() {
   const { rec, totalRecs } = this.props;
   let extraStyles = {
     accepted: {
-      borderColor: colors.grey,
-      borderWidth: 2,
+      borderColor: 'yellow',//'rgba(255,255,255,0.5)',
+      borderWidth: 1,
     }
   }
 
@@ -57,7 +60,7 @@ render() {
   const paddingV        = totalRecs > 10 ? 10 : 15
 
   return (
-    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted,{paddingVertical: paddingV}]}>
+    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted,{paddingVertical: paddingV, backgroundColor: rec.grade ? '#121212' : 'white'}]}>
       <View style={[cardStyles.headerContainer,{height: headerHeight}]}>
         <View style={cardStyles.friendContainer}>
           <Friend.Name friend={rec.friend} fontSize={friendFontSize} />
@@ -73,8 +76,11 @@ render() {
         </View>
       </View>
       <View style={cardStyles.bodyContainer}>
-          <Title rec={rec} styles={{fontSize:titleFontSize}} />
+          <Title rec={rec} styles={{fontSize:titleFontSize, color: rec.grade ? 'white' : 'black'}} />
+
         </View>
+
+        <Stars rec={rec} style={{marginTop:5,fontSize: 25}}/>
     </View>
     )
   }
@@ -82,20 +88,23 @@ render() {
 
 class SkinnyCard extends Component {
 
-render() {
+
+
+
+  render() {
   // console.log(this.props)
   const { rec, given } = this.props;
   return (
     <View>
-    <Text style={cardStyles.dateText}>{moment(rec.createdAt).fromNow()}</Text>
-    <View style={[cardStyles.container,{backgroundColor: rec.status == 'open' ? 'rgba(255,255,255,0.5)' : 'white' } ]} >
+
+    <View style={[cardStyles.container,{backgroundColor: rec.status == 'open' ? 'rgba(255,255,255,0.8)' : 'white' } ]} >
       <View style={cardStyles.headerContainer}>
         <View style={cardStyles.friendContainer}>
           <Text style={cardStyles.headerText}>
             {rec.type == 'invite'  && rec.status == 'accepted' && '... invited you'}
             {given && 'You sent'}
             {!given  && 'You saved'}
-
+            {` (${rec.status})`}
           </Text>
         </View>
       </View>
@@ -109,7 +118,11 @@ render() {
         <Title rec={rec} styles={{fontSize: 20, marginLeft: 10}} />
 
         </View>
+
+        <Hearts rec={rec} />
+
     </View>
+
     </View>
     )
   }
@@ -233,7 +246,7 @@ render() {
       <View style={cardStyles.headerContainer}>
         <View style={cardStyles.friendContainer}>
           <Text style={{fontSize: 13, fontWeight: '200', color: colors.grey}}>
-          <Friend.Name friend={rec.friend} />
+          <Friend.Name friend={rec.from} />
           &nbsp;&nbsp;Recommended
           </Text>
         </View>
@@ -305,8 +318,8 @@ render() {
 
 const cardStyles = StyleSheet.create({
   container: {
-    borderWidth: 1,
-    borderColor: colors.borderColor,
+    // borderWidth: 1,
+    // borderColor: colors.borderColor,
     borderRadius: 10,
     paddingHorizontal: 15,
     paddingVertical: 15,
@@ -457,7 +470,7 @@ const InvitationDetail = (props) => {
   const given = user.uid == rec.from.uid
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{minHeight: 200,marginHorizontal: 20}}>
       <View style={[cardStyles.container]}>
 
           <View style={cardStyles.headerContainer}>
@@ -511,17 +524,17 @@ export class CardDetail extends Component {
 
 render() {
 
-  // console.log(this.props)
-  // i guess this can get called w new rec
-  if(!this.props.rec) { return null}
+  const { rec, updateRec, updateState, isEditing, onDelete, app, setRecReminder, setGrade } = this.props;
+
+  if(!rec) { return null}
 
   // tmp maybe
-  if(this.props.rec.type == 'invite') {return <InvitationDetail {...this.props} /> }
+  if(rec.type == 'invite') {return <InvitationDetail {...this.props} /> }
 
-  const { rec, updateRec, updateState, isEditing, onDelete, app, setRecReminder } = this.props;
+
   return (
     <View style={{flex: 1,}}>
-
+      <Stars rec={rec} style={{marginLeft: 20, fontSize: 30,letterSpacing: 10}} />
         <View style={[cardStyles.container, {marginHorizontal: 20}]}>
 
           <View style={cardStyles.headerContainer}>
@@ -562,9 +575,9 @@ render() {
         <View style={cardStyles.optionsContainer} >
           <Icon name="trash" color="white" style={cardStyles.optionIcon} onPress={onDelete} />
           <Icon name="edit" color="white" style={cardStyles.optionIcon} onPress={()=>updateState({isEditing: true})} />
-          {!rec.reminder && <SetReminderIcon rec={rec} updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
-          {rec.reminder && moment().diff(rec.reminder) > 0 && <SetReminderIcon rec={rec} color="red" updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
-
+          {!rec.grade && !rec.reminder && <SetReminderIcon rec={rec} updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
+          {rec.reminder && !rec.grade && moment().diff(rec.reminder) > 0 && <SetReminderIcon rec={rec} color="red" updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
+          {!rec.grade && rec.category && <GradeSelector setGrade={setGrade} />}
         </View> }
 
         <View style={cardStyles.categoryPickerContainer}>

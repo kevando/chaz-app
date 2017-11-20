@@ -130,11 +130,24 @@ render() {
   // ---------------------
   //    ACTIVATED
   // ---------------------
-  if(debug || app.notificationPermission == "authorized" && !app.isAnon) {
+  if(debug || app.notificationPermission == "authorized" && !app.isAnon && app.myInvites.length == 0) {
 
     // INVITE THE USER TO SIGN UP
     buttonIcons.push (
       <NavButton onPress={Actions.Register} icon="heart" color={colors.lightWhite} />
+    )
+  }
+
+  // ---------------------
+  //    INVITE PENDING
+  // ---------------------
+  if(debug || app.notificationPermission == "authorized" && !app.isAnon && app.myInvites.length > 0) {
+
+    // INVITE THE USER TO SIGN UP
+    buttonIcons.push (
+      <Animatable.View animation="tada" iterationCount={'infinite'} duration={3000}>
+        <NavButton onPress={Actions.Register} icon="heart" color={colors.yellow} />
+      </Animatable.View>
     )
   }
 

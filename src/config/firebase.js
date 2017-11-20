@@ -2,6 +2,7 @@ import firebase from 'react-native-firebase'
 import _ from 'lodash'
 import * as t from '../reducers/actionTypes'
 
+export const db = firebase.firestore()
 
 const env = process.env.NODE_ENV;
 // const env = 'production'
@@ -86,7 +87,7 @@ export function addFirestoreListeners(uid) {
           // console.log('myRecs',myFriends)
           const myRecsWithFriendData =  _.map(myRecs, rec => {return {...rec,friend: _.find(myFriends,friend => friend.id === rec.from.id) || {} } })
           dispatch({type: t.REFRESH_MY_RECS, myRecs: _.orderBy(myRecsWithFriendData,['createdAt'],['desc']) })
-          dispatch({type: t.REFRESH_MY_QUEUE, myQueue: _.filter(myRecsWithFriendData, rec => { return rec.reminder }) })
+          dispatch({type: t.REFRESH_MY_QUEUE, myQueue: _.filter(myRecsWithFriendData, rec => { return rec.reminder && !rec.grade }) })
       })
 
       // GIVEN RECS
@@ -132,8 +133,8 @@ export function addFirestoreListeners(uid) {
         .where("to.phoneNumber", "==", user.phoneNumber)
         .where('type','==','invite')
         .where('status','==','open')
-        .get()
-        .then(querySnapshot => {
+        
+        .onSnapshot(querySnapshot => {
             var myInvites = [];
             querySnapshot.forEach(doc => {
                 myInvites.push({...doc.data(),id: doc.id});

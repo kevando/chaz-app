@@ -94,7 +94,7 @@ export const Confirmation = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>Activated!</Text>
+        <Text style={styles.title}>chaz is Activated!</Text>
 
 
         {
@@ -110,7 +110,7 @@ export const Confirmation = (props) => {
 
       </View>
       {app.myInvites && app.myInvites.length > 0 ?
-        <Button text="Accept Invitation" onPress={()=> Actions.replace('RecView', {rec: app.myInvites[0] }) } /> :
+        <Button rounded fat text="Accept Invitation" onPress={()=> Actions.replace('RecView', {rec: app.myInvites[0] }) } /> :
         <Button text="Go to Dashboard" onPress={()=> Actions.reset('lightbox')} /> }
     </View>
   )

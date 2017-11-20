@@ -34,7 +34,7 @@ exports.listenForDevMessages = functions.firestore
 ENV = 'production_'
 // -----------------------------------
 
-exports.listenForDevMessages = functions.firestore
+exports.listenForProdMessages = functions.firestore
   .document(ENV+'messages/{messageId}')
   .onCreate(event => {
 

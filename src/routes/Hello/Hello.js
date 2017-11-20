@@ -9,7 +9,7 @@ import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Feather'
 
 
-NameInput = Animatable.createAnimatableComponent(TextInput);
+// NameInput = Animatable.createAnimatableComponent(TextInput);
 
 
 const Hello = (props) => {

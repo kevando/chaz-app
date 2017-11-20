@@ -82,14 +82,17 @@ export function refreshServerToken() {
 
 export function verifyPhone(phoneNumber) {
   return (dispatch, getState) => {
-
+    // console.warn('verifyPhone',phoneNumber)
     dispatch({type: t.SIGN_IN_ATTEMPT })
     dispatch(shouldAppSignIn(phoneNumber)) // find out if this is a returning user
+
+    // console.warn('verifyPhone',phoneNumber)
 
     const formatedNumber = `+1${phoneNumber}`
 
     firebase.auth().verifyPhoneNumber(formatedNumber)
       .then(phoneAuthSnapshot => {
+        // console.warn('a',phoneAuthSnapshot)
         const { verificationId } = phoneAuthSnapshot;
         dispatch({type: t.SIGN_IN_CONFIRM_RESULT, verificationId, formatedNumber })
         dispatch({type: t.SET_USER_DATA, data: {phoneNumber: phoneNumber} })
@@ -160,6 +163,7 @@ function shouldAppSignIn(phoneNumber) {
         querySnapshot.forEach(function(doc) {
           userFound = doc
         });
+        // console.warn('shouldAppSignIn',userFound)
 
         if(userFound !== false)
           dispatch({type: t.APP_SHOULD_SIGN_IN})

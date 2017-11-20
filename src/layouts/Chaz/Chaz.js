@@ -71,8 +71,8 @@ class Chaz extends Component {
 
 
     // PROD
-    // if (!isAuthenticated || !isReady)
-      // return <Loading updateState={this.updateState} />
+    if (!isAuthenticated || !isReady)
+      return <Loading updateState={this.updateState} />
 
 
       return (
