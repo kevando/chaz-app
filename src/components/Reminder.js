@@ -22,17 +22,17 @@ export const Reminder = ({rec, size=18, color="yellow"}) => {
       ...text,
       fontSize: 16,
       color: colors.grey,
-      marginLeft: 8,
+      marginLeft: 0,
     }
   }
-  
+
   const iconColor = colors.orange
   const reminderText = moment(rec.reminder).fromNow()
 
   return (
     <View style={styles.container} >
-      <Icon name={'clock'} size={size} color={iconColor} />
-      <Text style={styles.reminderText}>Follow up {reminderText}</Text>
+
+      <Text style={styles.reminderText}>🕧 Follow up {reminderText}</Text>
     </View>
   )
 }

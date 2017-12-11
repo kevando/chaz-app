@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Feather';
 // import firebase from 'react-native-firebase'
 import { colors, text } from '../../config/styles';
 import * as Animatable from 'react-native-animatable'
-// import { Button } from './Generic'
+import { Button } from '../Generic'
 
 
 
@@ -62,3 +62,43 @@ const styles = StyleSheet.create({
 });
 
 export default GradeSelector
+
+
+
+export class GradeSelectorButton extends Component {
+
+    _onHeartPress = () => {
+
+      const { rec, setGrade } = this.props;
+
+        AlertIOS.prompt(
+          'What did you think?',
+          'Select a grade, along with an optional message',
+          [
+            {text: '💙', onPress: (text) => setGrade(1,text)},
+            {text: '💙💙', onPress: (text) => setGrade(2,text)},
+            {text: '💙💙💙', onPress: (text) => setGrade(3,text)},
+            {text: '💙💙💙💙', onPress: (text) => setGrade(4,text)},
+            {text: '💙💙💙💙💙', onPress: (text) => setGrade(5,text)},
+            {text: 'Nevermind', onPress: () => console.log('forget it'), style: 'cancel'},
+          ]
+        );
+
+
+    }
+
+
+    render() {
+
+      const { rec } = this.props;
+
+
+      return (
+        <Button rounded bgcolor="green" text="Yes" small onPress={this._onHeartPress} />
+
+      )
+
+
+    }
+
+};

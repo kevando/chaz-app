@@ -102,3 +102,63 @@ const styles = StyleSheet.create({
   },
 
 });
+
+
+
+
+export class SetReminderButton extends Component {
+
+    constructor(props){
+      super(props)
+      this.state = { showCard: false }
+      // this._setReminder = this._setReminder.bind(this)
+      this._onSetReminderPress = this._onSetReminderPress.bind(this)
+    }
+
+    _onSetReminderPress() {
+
+      const { rec } = this.props;
+
+        Alert.alert(
+          'Set a new reminder',
+          'Remind me to follow up in:',
+          [
+            {text: 'In one minute', onPress: this._setReminder.bind(this,1)},
+            {text: 'In 5 minutes', onPress: this._setReminder.bind(this,5)},
+            {text: 'In 20 minutes', onPress: this._setReminder.bind(this,20)},
+            {text: 'Tomorrow', onPress: this._setReminder.bind(this,1440)},
+            {text: 'In a few days', onPress: this._setReminder.bind(this,4320)},
+            {text: 'In a couple weeks', onPress: this._setReminder.bind(this,21600)},
+            {text: 'In a month or so', onPress: this._setReminder.bind(this,43200)},
+            {text: 'Nevermind', onPress: () => console.log('forget it'), style: 'cancel'},
+          ]
+        );
+
+
+    }
+    _setReminder(reminderDateInMinutes) {
+      const { updateRec, rec, setRecReminder } = this.props;
+      // !rec.friend.name && console.warn('no friend name!!')
+      setRecReminder(reminderDateInMinutes, rec)
+        .then(reminderTimestamp => {
+          // console.warn(reminderTimestamp)
+          rec.reminder = reminderTimestamp
+          updateRec(rec.id,{reminder: reminderTimestamp});
+        })
+
+    }
+
+    render() {
+
+      const { rec, app, color=colors.yellow } = this.props;
+
+      if(app.notificationPermission != 'authorized') { return null }
+
+
+      return (
+        <Button rounded bgcolor="orange" text="Not Yet" small onPress={this._onSetReminderPress} />
+      )
+
+    }
+
+};

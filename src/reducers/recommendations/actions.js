@@ -129,7 +129,7 @@ export const saveRec = () => (dispatch, getState) =>
 
     recsRef.add(newRec)
       .then(docRef => {
-        // console.log('newRec saved')
+        firebase.analytics().logEvent('rec_saved', {newRec})
         if(unfinished.from.uid) { // then I am saving a rec FROM a live user, notify them
           addMessage(unfinished.from.uid,`Hey dingbat, ${user.displayName} just saved something to their chaz with your name on it`) // disabled for now @todo
         }

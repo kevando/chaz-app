@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, ScrollView, StatusBar } from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer'
+import moment from 'moment'
+import * as Animatable from 'react-native-animatable'
 // import { SetReminderButton  } from '../../components/SetReminder'
 import EnableNotifications from '../../components/EnableNotifications'
 
@@ -20,6 +22,8 @@ const RecView = ({ rec, user, acceptInvitation, app, isEditing, updateRec, setGr
       isEditing &&
         <Text style={{color: 'white',marginLeft: 10}} onPress={()=>updateState({isEditing: false})}>Cancel</Text>
     }
+
+
 
     {
       isEditing ?

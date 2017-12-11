@@ -4,8 +4,8 @@ import * as t from '../reducers/actionTypes'
 
 export const db = firebase.firestore()
 
-const env = process.env.NODE_ENV;
-// const env = 'production'
+// const env = process.env.NODE_ENV;
+const env = 'production'
 
 const dataVersion = 'v1'
 const PREFIX = env + '_' + dataVersion + '_'
@@ -32,11 +32,13 @@ export function listenForAuthChanges() {
     firebase.auth().onAuthStateChanged(function(user) {
       // console.log('onAuthStateChanged',user)
       if (user) {
+        firebase.analytics().logEvent('app_opened_with_user', {uid: user.uid})
         dispatch({ type: t.USER_IS_AUTHENTICATED, user })
         // Note: this may become an issue if user is without internet
         dispatch(addFirestoreListeners(user.uid))
       } else {
         // BRAND NEW USER OPENING APP FOR FIRST TIME
+        firebase.analytics().logEvent('app_opened_first_time')
         firebase.auth().signInAnonymously()
         // console.warn('signInAnonymously')
       }
@@ -133,7 +135,7 @@ export function addFirestoreListeners(uid) {
         .where("to.phoneNumber", "==", user.phoneNumber)
         .where('type','==','invite')
         .where('status','==','open')
-        
+
         .onSnapshot(querySnapshot => {
             var myInvites = [];
             querySnapshot.forEach(doc => {

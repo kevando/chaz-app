@@ -12,12 +12,15 @@ import { fetchCategories } from '../categories/actions'
 
 export { signOut } from '../auth/actions'
 
+
+
 // --------------------------------
 //    INIT APP
 // --------------------------------
 
 export function initializeApp() {
   return (dispatch, getState) => {
+    // firebase.analytics().logEvent('App Initialized')
     const app = getState().app
     // const user = getState().user
 

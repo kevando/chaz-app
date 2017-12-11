@@ -134,7 +134,7 @@ const labelStyles = StyleSheet.create({
 //  Button
 // ---------------------------------------
 
-export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost, center, fat }) => {
+export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost, center, fat, small }) => {
 
   const styles = StyleSheet.create({
 
@@ -179,7 +179,11 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
       paddingHorizontal: 10,
       paddingVertical: 0,
 
+
     },
+    small: {
+      height: 20
+    }
   })
 
   let buttonStyles = [
@@ -187,12 +191,12 @@ export const Button = ({ text, onPress, color, bgcolor, rounded, animated, ghost
     ghost && styles.ghost,
     rounded && styles.rounded,
     fat && styles.fat,
-
+    small && styles.small,
   ]
 
 
   let ButtonContainer = (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.8} >
+    <TouchableOpacity onPress={onPress} activeOpacity={0.95} >
       <View style={buttonStyles}>
         <Text style={styles.text}>
           {text}

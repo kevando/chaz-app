@@ -11,8 +11,9 @@ import { setToken } from '../app/actions'
 // --------------------------------
 export const setUserData = (data) => (dispatch, getState) =>
   new Promise(function(resolve, reject) {
-      dispatch({ type: t.SET_USER_DATA, data })
-      resolve('first')
+    // firebase.analytics().setUserProperty('user_display_name', displayName)
+    dispatch({ type: t.SET_USER_DATA, data })
+    resolve('first')
   })
 
 
@@ -24,6 +25,7 @@ export const saveDisplayName = (displayName) => (dispatch, getState) =>
     firebase.auth().currentUser.updateProfile({displayName})
       .then(response =>  {
         dispatch({type: t.SET_USER_DATA, data: {displayName}}) // because authchange doesnt fire
+        firebase.analytics().setUserProperty('user_display_name', displayName)
         resolve(response)
       })
       .catch(error =>  reject(error)  )

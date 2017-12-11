@@ -11,8 +11,8 @@ import * as Friend from './Friend';
 import {Label} from './Generic'
 import { Divider, Button } from './Generic'
 import { Reminder } from './Reminder'
-import { SetReminderIcon  } from './SetReminder'
-import GradeSelector from './Grade/Selector'
+import { SetReminderIcon, SetReminderButton  } from './SetReminder'
+import GradeSelector, { GradeSelectorButton } from './Grade/Selector'
 import Hearts from './Grade/Hearts'
 import Stars from './Grade/Stars'
 
@@ -68,8 +68,8 @@ render() {
         <View style={cardStyles.iconContainer}>
           {moment().diff(rec.createdAt) < 200000 && <Animatable.View animation="fadeOut" delay={2000}><Icon name="square" size={17} color={"green"} style={{paddingRight:5}}/></Animatable.View>}
           {rec.friend.invitedAt && !rec.friend.uid && <Icon name="navigation" size={17} color={colors.pink} style={{paddingRight:5, opacity: 0.5}}/>}
-          { moment().diff(rec.reminder) < 0 && rec.reminder && <Icon name="clock" size={17} color={"grey"} style={{paddingRight:5, opacity: 0.5}}/>}
-          { moment().diff(rec.reminder) > 0 && rec.reminder && <Icon name="alert-triangle" size={17} color={"red"} style={{paddingRight:5, opacity: 0.5}}/>}
+          { moment().diff(rec.reminder) < 0 && rec.reminder && <Animatable.Text  style={{fontSize:18,marginHorizontal:3,}}>🕧</Animatable.Text>}
+          { moment().diff(rec.reminder) > 0 && rec.reminder && <Animatable.Text animation="tada" iterationCount='infinite' style={{fontSize:18,marginHorizontal:3,}}>⏰</Animatable.Text>}
           {rec.category ? <CategoryEmoji category={rec.category} size={17} /> : <EmptyCategory size={12} delay={2000} iterationCount='infinite' animation="jello" />}
           {rec.type == 'invite' && <Icon size={17} color={colors.purple} name="navigation"/>}
 
@@ -534,6 +534,25 @@ render() {
 
   return (
     <View style={{flex: 1,}}>
+    {
+      moment().diff(rec.reminder) > 0 &&
+      <View style={[ {marginBottom: 20}]}>
+      <View>
+        <Text style={{fontSize: 25, marginBottom: 15, color: 'white', marginLeft: 20}}>
+        <Animatable.Text animation="tada" iterationCount='infinite' style={{fontSize:28,marginHorizontal:3,}}>⏰</Animatable.Text>
+        Did you {rec.category.verb} it yet?
+        </Text>
+        </View>
+        <View>
+        <View style={cardStyles.optionsContainer}>
+        <GradeSelectorButton setGrade={setGrade} />
+        <SetReminderButton rec={rec} color="red" text="Not yet" updateRec={updateRec} app={app} setRecReminder={setRecReminder} />
+
+        </View>
+        </View>
+      </View>
+    }
+
       <Stars rec={rec} style={{marginLeft: 20, fontSize: 30,letterSpacing: 10}} />
         <View style={[cardStyles.container, {marginHorizontal: 20}]}>
 
@@ -576,8 +595,7 @@ render() {
           <Icon name="trash" color="white" style={cardStyles.optionIcon} onPress={onDelete} />
           <Icon name="edit" color="white" style={cardStyles.optionIcon} onPress={()=>updateState({isEditing: true})} />
           {!rec.grade && !rec.reminder && <SetReminderIcon rec={rec} updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
-          {rec.reminder && !rec.grade && moment().diff(rec.reminder) > 0 && <SetReminderIcon rec={rec} color="red" updateRec={updateRec} app={app} setRecReminder={setRecReminder} />}
-          {!rec.grade && rec.category && <GradeSelector setGrade={setGrade} />}
+
         </View> }
 
         <View style={cardStyles.categoryPickerContainer}>
