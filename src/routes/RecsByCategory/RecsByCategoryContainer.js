@@ -22,11 +22,13 @@ class RecsByCategoryContainer extends Component {
     let recsByCategory = {}
     let categories = []
 
-    const uniqueCategorRecs = _.uniqBy(myRecs,'category.id')
+    const uniqueCategorRecs = _.uniqBy(_.filter(myRecs,r => r.category),'category.id')
 
     _.forEach(uniqueCategorRecs, rec => {
       if(!rec.category) {return} // uncategorized
-      recsByCategory[rec.category.title] = _.filter(myRecs, r => r.category.id == rec.category.id)
+
+
+      recsByCategory[rec.category.title] = _.filter(_.filter(myRecs,r => r.category), r => r.category.id == rec.category.id)
 
     })
 
