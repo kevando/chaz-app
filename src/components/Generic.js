@@ -53,9 +53,10 @@ const containerStyles = StyleSheet.create({
 // ---------------------------------------
 
 export const Title = (props) => {
-  const { black, center, sub, header, question } = props
+  const { black, center, sub, header, question, fontSize=30 } = props
   const styles = [
     titleStyles.text,
+    {fontSize},
     props.card && titleStyles.card,
     black && {color: colors.black},
     center && {textAlign: 'center'},
@@ -74,7 +75,7 @@ const titleStyles = StyleSheet.create({
   text: {
     ...text,
     color: 'white',
-    fontSize: 30,
+    // fontSize: 30,
     fontWeight: '700',
     letterSpacing: 0.5,
     marginBottom: 0,

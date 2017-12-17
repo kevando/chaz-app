@@ -67,33 +67,32 @@ export const setFriend = (friend) => (dispatch, getState) =>
 
 
 
-  // ----------------------------------------------------
-  //    SET GRADE
-  // ----------------------------------------------------
+// ----------------------------------------------------
+//    SET GRADE
+// ----------------------------------------------------
 
-  export const setGrade = (rec,value,message) => (dispatch) =>
-    new Promise(function(resolve,reject) {
-      // console.warn(grade)
-      // console.warn(message)
-      // Update score in rec,
-      // Then update friend object
-      // active? addMessage,
-      const grade = { value, message }
+export const setGrade = (rec,value,message) => (dispatch) =>
+  new Promise(function(resolve,reject) {
 
-      // Grab friend ref
-      const friendRef = friendsRef.doc(rec.from.id)
-      if(!rec.from.id){console.warn('!rec.from.id')}
+    // Update score in rec,
+    // Then update friend object
+    // active? addMessage,
+    const grade = { value, message }
 
-      // console.log('f',rec.friend)
-      const gradeCount = (rec.friend.gradeCount || 0) + 1
-      const gradeTotal = (rec.friend.gradeTotal || 0) + value
-      recsRef.doc(rec.id).update({grade}).then( () => {
-        // Update the friend
-        friendRef.update({gradeTotal, gradeCount})
-        if(rec.from.uid) { addMessage(rec.from.uid,`Well look what we have here. Someone just graded one of your recommendations.`); }
-      }).catch(error => console.warn('er: ',error))
-      resolve()
-    })
+    // Grab friend ref
+    const friendRef = friendsRef.doc(rec.from.id)
+    if(!rec.from.id){console.warn('!rec.from.id')}
+
+    const gradeCount = (rec.friend.gradeCount || 0) + 1
+    const gradeTotal = (rec.friend.gradeTotal || 0) + value
+
+    recsRef.doc(rec.id).update({grade, reminder: null}).then( () => {
+      // Update the friend
+      friendRef.update({gradeTotal, gradeCount})
+      if(rec.from.uid) { addMessage(rec.from.uid,`Well look what we have here. Someone just graded one of your recommendations.`); }
+    }).catch(error => console.warn('er: ',error))
+    resolve()
+  })
 
 
 // ----------------------------------------------------

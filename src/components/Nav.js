@@ -163,6 +163,17 @@ render() {
   }
 
   // ---------------------
+  //    CATEGORIES LIST
+  // ---------------------
+  if(debug || myRecs.length > 6) {
+
+    // INVITE THE USER TO SIGN UP
+    buttonIcons.push (
+      <NavButton onPress={Actions.RecsByCategory} icon="layers" color={colors.lightWhite} />
+    )
+  }
+
+  // ---------------------
   //    PROFILE
   // ---------------------
   if(debug || !app.isAnon) {

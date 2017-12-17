@@ -24,7 +24,7 @@ class DashboardContainer extends Component {
     //   // setAppData({onboarding: true})
     // Actions.push('NewRecLightbox')
     // Actions.push('Inbox')
-    // Actions.push('Queue')
+    // Actions.push('RecsByCategory')
     // Actions.push('RecView',{rec: this.props.myRecs[0]})
     // Actions.push('RecView',{rec: this.props.givenRecs[0]})
     // Actions.push('FriendView',{friend: this.props.friends[2]})

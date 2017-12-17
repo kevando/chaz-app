@@ -33,6 +33,7 @@ import Debug from '../../routes/Debug';
 import Queue from '../../routes/Queue';
 
 import FindInvite from '../../routes/FindInvite';
+import RecsByCategory from '../../routes/RecsByCategory'
 
 
 class Chaz extends Component {
@@ -93,6 +94,7 @@ class Chaz extends Component {
                 <Stack key="myStack" navTransparent hideBackImage back >
                   <Scene key='Dashboard'  component={Dashboard} title='' hideNavBar={false} initial={true} renderRightButton={() => <DashboardRightButton />}/>
                   <Scene key='Queue'  component={Queue} hideNavBar={false} renderBackButton={() => <BackButton />} />
+                  <Scene key='RecsByCategory'  component={RecsByCategory} hideNavBar={false} renderBackButton={() => <BackButton />} />
 
 
                   <Scene key='RecView' component={RecView} title='' hideNavBar={false} renderBackButton={() => <BackButton />} />

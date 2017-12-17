@@ -13,11 +13,11 @@ class Hearts extends Component {
   }
 
   render() {
-    const { rec } = this.props;
+    const { rec, style } = this.props;
 
     if(!rec.grade) { return null; }
 
-    return <Text>{this._renderHearts(rec.grade.value)}</Text>
+    return <Text style={{...style}}>{this._renderHearts(rec.grade.value)}</Text>
   }
 
 };

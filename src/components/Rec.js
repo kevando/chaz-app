@@ -14,7 +14,7 @@ import { Reminder } from './Reminder'
 import { SetReminderIcon, SetReminderButton  } from './SetReminder'
 import GradeSelector, { GradeSelectorButton } from './Grade/Selector'
 import Hearts from './Grade/Hearts'
-import Stars from './Grade/Stars'
+
 
 
 // ---------------------------------------
@@ -60,7 +60,7 @@ render() {
   const paddingV        = totalRecs > 10 ? 10 : 15
 
   return (
-    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted,{paddingVertical: paddingV, backgroundColor: rec.grade ? '#121212' : 'white'}]}>
+    <View style={[cardStyles.container,rec.status == 'accepted' && extraStyles.accepted,{paddingVertical: paddingV,}]}>
       <View style={[cardStyles.headerContainer,{height: headerHeight}]}>
         <View style={cardStyles.friendContainer}>
           <Friend.Name friend={rec.friend} fontSize={friendFontSize} />
@@ -76,11 +76,11 @@ render() {
         </View>
       </View>
       <View style={cardStyles.bodyContainer}>
-          <Title rec={rec} styles={{fontSize:titleFontSize, color: rec.grade ? 'white' : 'black'}} />
+          <Title rec={rec} styles={{fontSize:titleFontSize, }} />
 
         </View>
 
-        <Stars rec={rec} style={{marginTop:5,fontSize: 25}}/>
+        <Hearts rec={rec} style={{marginTop:5,fontSize: 25}}/>
     </View>
     )
   }
@@ -553,7 +553,7 @@ render() {
       </View>
     }
 
-      <Stars rec={rec} style={{marginLeft: 20, fontSize: 30,letterSpacing: 10}} />
+
         <View style={[cardStyles.container, {marginHorizontal: 20}]}>
 
           <View style={cardStyles.headerContainer}>
@@ -584,6 +584,13 @@ render() {
 
           {rec.reminder &&
             <Reminder rec={rec} />
+        }
+        {
+          rec.grade &&
+            <View>
+              <Hearts rec={rec} style={{marginLeft: 0, fontSize: 25,letterSpacing: 10}} />
+              <Text>{rec.grade.message}</Text>
+            </View>
         }
 </View>
 
