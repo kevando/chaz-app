@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>707490627994-o97v0bdke0ihosc8q5rspm4mod09t07u.apps.googleusercontent.com</string>
+	<string>707490627994-n24rqocl02rga6e9nt1l3otnr1gb0ncb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.707490627994-o97v0bdke0ihosc8q5rspm4mod09t07u</string>
+	<string>com.googleusercontent.apps.707490627994-n24rqocl02rga6e9nt1l3otnr1gb0ncb</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBnu5D8i99xKRHC6ks4DWDuDx3YWq9PN0U</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.kevaid.chaz</string>
+	<string>com.kevaid.chaz.dev</string>
 	<key>PROJECT_ID</key>
 	<string>chaz-app-eecb5</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:707490627994:ios:efaa759fa61ccc73</string>
+	<string>1:707490627994:ios:bf5df1faca3c20b9</string>
 	<key>DATABASE_URL</key>
 	<string>https://chaz-app-eecb5.firebaseio.com</string>
 </dict>

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>CHAZ</string>
+	<string>chaz</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -25,7 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.707490627994-n24rqocl02rga6e9nt1l3otnr1gb0ncb</string>
+				<string>com.googleusercontent.apps.707490627994-o97v0bdke0ihosc8q5rspm4mod09t07u</string>
 			</array>
 		</dict>
 	</array>

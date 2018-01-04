@@ -134,7 +134,7 @@ class GetStartedContainer extends Component {
     const { user } = this.props
 
     if(!this.props.app.token){
-      console.warn(' no fucking app token')
+      console.warn(' no fucking app token',this.props)
     }
 
     return (
