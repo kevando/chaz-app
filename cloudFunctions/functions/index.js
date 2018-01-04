@@ -17,7 +17,7 @@ exports.listenForDevMessages = functions.firestore
 
     var message = event.data.data();
 
-    return admin.messaging().sendToDevice(message.token, message.payload).then(response => {
+    return admin.messaging().sendToDevice(message.token, message.payload,message.options).then(response => {
 
       // Save response to message
       return event.data.ref.set({
@@ -40,7 +40,7 @@ exports.listenForProdMessages = functions.firestore
 
     var message = event.data.data();
 
-    return admin.messaging().sendToDevice(message.token, message.payload).then(response => {
+    return admin.messaging().sendToDevice(message.token, message.payload,message.options).then(response => {
 
       // Save response to message
       return event.data.ref.set({

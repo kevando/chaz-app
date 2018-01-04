@@ -5,12 +5,17 @@ import RecViewContainer from './RecViewContainer';
 import * as RecActions from '../../reducers/recommendations/actions';
 import * as FriendActions from '../../reducers/friends/actions';
 import { setRecReminder } from '../../reducers/reminders/actions'
-const mapStateToProps = (state, props) => {
+
+const mapStateToProps = ({app, recommendations,friends,user}, props) => {
+
+  // incoming rec may be of either, in the future this might matter which one
+  const rec = _.find(recommendations.myRecs, r => r.id == props.recId) || _.find(recommendations.givenRecs, r => r.id == props.recId)
+
   return {
-    app: state.app,
-    recLive: _.find(state.recommendations.myRecs, rec => rec.id == props.rec.id),
-    friends: state.friends, // needed for view refresh?
-    user: state.user,
+    app,
+    rec,
+    friends, // needed for view refresh?
+    user,
   };
 };
 

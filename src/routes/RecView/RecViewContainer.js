@@ -16,14 +16,14 @@ class RecViewContainer extends Component {
 
   }
   componentDidMount() {
-    const { recLive, rec } = this.props
+    // const { recLive, rec } = this.props
     // if live rec not found, dont set it
-    this.setState({rec: recLive || rec})
+    // this.setState({rec: recLive || rec})
     // console.warn('recLive',recLive)
   }
-  componentWillReceiveProps({recLive, rec}) {
+  componentWillReceiveProps({rec}) {
     // if live rec not found, dont set it
-    this.setState({rec: recLive || rec})
+    this.setState({rec})
     // console.warn('recLive',recLive)
 
   }

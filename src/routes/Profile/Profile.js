@@ -55,7 +55,7 @@ const Profile = (props) => {
       {
         _.map(friends,(friend,i) => {
           return (
-            <TouchableOpacity key={i} onPress={()=>Actions.push('FriendView',{friend})}>
+            <TouchableOpacity key={i} onPress={()=>Actions.push('FriendView',{friendId: friend.id})}>
             <View style={styles.friendRowItem} >
 
               <Text style={styles.friendText} >{friend.uid ? '🤠' : '😊'} {friend.name || friend.displayName+ ' (Pending)'}</Text>

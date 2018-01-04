@@ -26,7 +26,7 @@ const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress
         <View style={styles.tableContainer}>
           <View style={[styles.row,{marginBottom: 20}]}>
             <View style={styles.colLeft}>
-              <TouchableOpacity onPress={onNamePress}><Title header>{friend.name}</Title></TouchableOpacity>
+              <TouchableOpacity onPress={onNamePress}><Title header>{friend.name || friend.displayName}</Title></TouchableOpacity>
             </View>
             <View style={styles.colRight}>
               <Text style={[styles.friendEmoji]}>{friend.uid ? '🤠' : '😊'}</Text>
@@ -68,9 +68,9 @@ const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress
           </View>
         }
 
-        {friend.displayName && friend.frienshipStatus == 'pending' &&// pending friendship
+        {friend.displayName && friend.friendshipStatus == 'pending' &&// pending friendship
           <View style={{marginHorizontal: 20}}>
-          <Label center title>{friend.displayName} connected with you</Label>
+          <Label center title>{friend.displayName} connected with you!</Label>
           <Label center>Merge with existing friend?</Label>
 
           {
@@ -78,7 +78,7 @@ const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress
             _.map(friends,(f,i) => {
               if(f.id != friend.id) {
                 return (
-                  <View style={styles.friendRowItem} key={i}>
+                  <View style={[styles.friendRowItem,{backgroundColor: 'white', padding: 5, margin: 5}]} key={i}>
                     <Text onPress={()=>combineFriend(f)} style={styles.friendText} >{f.name || f.displayName+ ' (Pending)'}</Text>
                   </View>
                 )
@@ -86,8 +86,10 @@ const FriendView = ({ onNamePress, friend, app, friendRecs, user, onGiveRecPress
             })
           }
 
-
+          <View style={[styles.friendRowItem,{backgroundColor: '#ddd', padding: 5, margin: 5}]} key={i}>
           <Text onPress={()=>combineFriend()}>No, just add this friend</Text>
+          </View>
+
           </View>
         }
 

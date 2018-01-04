@@ -23,11 +23,11 @@ class DashboardContainer extends Component {
     // // if(onboarding)
     //   // setAppData({onboarding: true})
     // Actions.push('NewRecLightbox')
-    // Actions.push('Inbox')
+    // Actions.push('Profile')
     // Actions.push('RecsByCategory')
-    // Actions.push('RecView',{rec: this.props.myRecs[0]})
-    // Actions.push('RecView',{rec: this.props.givenRecs[0]})
-    // Actions.push('FriendView',{friend: this.props.friends[2]})
+    // Actions.push('RecView',{recId: this.props.myRecs[0].id})
+
+    Actions.push('FriendView',{friendId: this.props.friends[2].id})
     // Actions.push('InviteModal',{friend: this.props.friends[0]})
   }
 

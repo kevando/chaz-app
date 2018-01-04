@@ -404,7 +404,8 @@ const cardStyles = StyleSheet.create({
 export class Card extends Component {
 
   _onCardPress = () => {
-    Actions.push('RecView',{rec: this.props.rec})
+    Actions.push('RecView',{recId: this.props.rec.id})
+    // alert(this.props.rec.id)
   }
 
   render() {
@@ -558,7 +559,7 @@ render() {
 
           <View style={cardStyles.headerContainer}>
             <View style={cardStyles.friendContainer}>
-              <Friend.Name fontSize={24} friend={rec.friend} onPress={() => Actions.push('FriendView',{friend: rec.friend})} />
+              <Friend.Name fontSize={24} friend={rec.friend} onPress={() => Actions.push('FriendView',{friendId: rec.friend.id})} />
             </View>
 
           </View>

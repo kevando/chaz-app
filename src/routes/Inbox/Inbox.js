@@ -14,21 +14,17 @@ const Inbox = ({inbox, openRecs, myInvites, acceptOpenRec}) => {
 
   return (
     <Container>
-    <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
-      <Title header>Inbox</Title>
+        <Title header>Inbox</Title>
 
-      {
-        _.map(inbox,(rec,i)=> {
-          return (<Card inbox rec={rec} key={i} acceptOpenRec={acceptOpenRec}/>)
-        })
-      }
+        {
+          _.map(inbox,(rec,i)=> {
+            return (<Card inbox rec={rec} key={i} acceptOpenRec={acceptOpenRec}/>)
+          })
+        }
 
-
-
-
-
-    </ScrollView>
+      </ScrollView>
     </Container>
   );
 }

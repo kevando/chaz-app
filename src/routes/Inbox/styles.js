@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
     flex: 1,
     paddingTop: 5,
     backgroundColor: colors.blueBG,
-    paddingHorizontal: MARGIN_LEFT,
+    // paddingHorizontal: MARGIN_LEFT,
   },
 
 

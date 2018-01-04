@@ -232,7 +232,7 @@ function assignInvitedUserToFriend(invite) {
 //   Sends a notification
 // ----------------------------------------------------
 
-export function addMessage(uid,body) {
+export function addMessage(uid,body,options={}) {
 
   usersRef.doc(uid).get().then(function(user) {
     if (user.exists) {
@@ -241,10 +241,10 @@ export function addMessage(uid,body) {
         var payload = {
           notification: {
             // title: 'new rec given to you',
-            body: body
-          }
+            body: body,
+          },
         }
-        messagesRef.add({token,payload})
+        messagesRef.add({token,payload,options})
           .catch(error=>console.warn(error.message))
     } else {
         console.log("No such user to send message to");

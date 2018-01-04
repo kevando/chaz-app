@@ -184,7 +184,7 @@ export function assignUserToFriend(friend) {
 
         // @todo
         // this should probably eventually become its own firebase function listener
-        .then( () =>  addMessage(friend.found.uid,`Hey Dingo, ${user.displayName} just added you on chaz`) )
+        .then( () =>  addMessage(friend.found.uid,`🤠<br>Hey Dingo, \n${user.displayName} just added you on chaz`) )
 
         // Now we also want to connect this user to their new friend
         // Maybe that user doesnt want this, but for now we are forcing it

@@ -134,7 +134,7 @@ export const saveRec = () => (dispatch, getState) =>
         }
         if(unfinished.to.uid) { // then I am saving a rec TO a live user, notify them
           // @todo bad code. bad way to organize rec data
-          addMessage(unfinished.to.uid,`** Incoming transmission ** Front Page News ** ${user.displayName} just sent you a recommendation...`) // disabled for now @todo
+          addMessage(unfinished.to.uid,`Hey Dingbat \n${user.displayName} just sent you a recommendation.`,{recId: docRef.id}) // disabled for now @todo
         }
 
         resolve(newRec)
@@ -213,7 +213,7 @@ export const acceptRec = (rec) => (dispatch, getState) =>
       "from.id" : friend.id,
       acceptedAt: Date.now(),
     }).then(r=> {
-      addMessage(rec.from.uid,`Hey Buddy, ${rec.to.name || rec.to.displayName} just accepted your chaz rec`)
+      addMessage(rec.from.uid,`⛳️\n${rec.to.name || rec.to.displayName} saved your recommendation.`)
       resolve()
     })
 
