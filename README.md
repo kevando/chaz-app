@@ -1,20 +1,14 @@
 # chaz
-chaz is a mobile app for saving recommendations. Sign up for the beta test at [chaz.co](http://chaz.co)
+chaz helps you remember.
 
+Visit [chaz.co](http://chaz.co) for the latest experience.
 
-### Latest Release
-1.0 went into extenal testing in November
+## About this Repo
 
-[Full Release History]
+`/react-native` 
 
-[Full Release History]: <https://github.com/kevando/chaz/blob/master/documentation/RELEASES.md>
+[chaz is a mobile app that you can find in iTunes](https://itunes.apple.com/us/app/chaz-recommendations/id1234092253?mt=8) and that code can be eventually found in 
 
+`/appengine` 
 
-### Vision
-I hope users of chaz experience an increase in their capacity to understand her fellow human. If you have any ideas how to measure this (is it empathy?) I am interested from hearing about you.
-
-
- -Kevando
-
-### Technology
-Chaz is built using react-native and meteor.
+this is the code for the website
